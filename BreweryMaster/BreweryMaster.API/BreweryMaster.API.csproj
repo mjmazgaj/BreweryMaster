@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\Internal\Order\" />
+    <Folder Include="Controllers\Internal\Production\" />
+    <Folder Include="Controllers\Internal\Raport\" />
+    <Folder Include="Controllers\Internal\Wiki\" />
+    <Folder Include="Controllers\Internal\Work\" />
+    <Folder Include="Helpers\Order\" />
+    <Folder Include="Helpers\Production\" />
+    <Folder Include="Helpers\Raport\" />
+    <Folder Include="Helpers\User\" />
+    <Folder Include="Helpers\Wiki\" />
+    <Folder Include="Helpers\Work\" />
+    <Folder Include="Models\Order\" />
+    <Folder Include="Models\Production\" />
+    <Folder Include="Models\Raport\" />
+    <Folder Include="Models\User\" />
+    <Folder Include="Models\Wiki\" />
+    <Folder Include="Models\Work\" />
+    <Folder Include="Services\Order\" />
+    <Folder Include="Services\Production\" />
+    <Folder Include="Services\Raport\" />
+    <Folder Include="Services\User\" />
+    <Folder Include="Services\Wiki\" />
+    <Folder Include="Services\Work\" />
+  </ItemGroup>
+
+</Project>
