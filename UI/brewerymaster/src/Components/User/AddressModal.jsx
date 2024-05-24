@@ -22,6 +22,58 @@ const AddressModal = ({
   setEditStreet,
   handleUpdate
 }) => {
+
+  const inputs = [
+    {
+      id: 1,
+      name: "Apartment Number",
+      value: editApartamentNumber,
+      setState: setEditApartamentNumber,
+    },
+    {
+      id: 2,
+      name: "City",
+      value: editCity,
+      setState: setEditCity,
+    },
+    {
+      id: 3,
+      name: "Commune",
+      value: editCommune,
+      setState: setEditCommune,
+    },
+    {
+      id: 4,
+      name: "House Number",
+      value: editHouseNumber,
+      setState: setEditHouseNumber,
+    },
+    {
+      id: 5,
+      name: "Postal Code",
+      value: editPostalCode,
+      setState: setEditPostalCode,
+    },
+    {
+      id: 6,
+      name: "Region",
+      value: editRegion,
+      setState: setEditRegion,
+    },
+    {
+      id: 7,
+      name: "Street",
+      value: editStreet,
+      setState: setEditStreet,
+    },
+    {
+      id: 8,
+      name: "Country",
+      value: editCountry,
+      setState: setEditCountry,
+    }
+  ]
+
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -29,86 +81,21 @@ const AddressModal = ({
       </Modal.Header>
       <Modal.Body>
         <Container>
-          <Row>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Apartment Number"
-                value={editApartamentNumber}
-                onChange={(e) => setEditApartamentNumber(e.target.value)}
-              />
-            </Col>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="City"
-                value={editCity}
-                onChange={(e) => setEditCity(e.target.value)}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Commune"
-                value={editCommune}
-                onChange={(e) => setEditCommune(e.target.value)}
-              />
-            </Col>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Country"
-                value={editCountry}
-                onChange={(e) => setEditCountry(e.target.value)}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="House Number"
-                value={editHouseNumber}
-                onChange={(e) => setEditHouseNumber(e.target.value)}
-              />
-            </Col>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Postal Code"
-                value={editPostalCode}
-                onChange={(e) => setEditPostalCode(e.target.value)}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Region"
-                value={editRegion}
-                onChange={(e) => setEditRegion(e.target.value)}
-              />
-            </Col>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Street"
-                value={editStreet}
-                onChange={(e) => setEditStreet(e.target.value)}
-              />
-            </Col>
-          </Row>
+          {
+            inputs.map((input) => (
+              <Col>
+                <label>{input.name}</label>
+                <input
+                  key={input.id}
+                  type="text"
+                  className="form-control"
+                  placeholder={input.name}
+                  value={input.value}
+                  onChange={(e) => input.setState(e.target.value)}
+                />
+              </Col>
+            ))
+          }
         </Container>
       </Modal.Body>
       <Modal.Footer>
