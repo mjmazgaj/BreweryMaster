@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
+import Kanban from './Components/Kanban/Kanban';
+
 import Register from './Components/General/Register';
 import Login from './Components/General/Login';
 import Dashboard from './Components/Authorization/Dashboard';
@@ -25,6 +28,7 @@ const App = () => {
         <Routes>
           <Route path="/register" element={<Register/>} />
           <Route path="/login" element={<Login/>} />
+          <Route path="/kanban" element={<Kanban/>} />
           <Route path="/dashboard" element={<Authorize component={Dashboard} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>}></Route>
         </Routes>
           {isAuthenticated && <LogoutButton setIsAuthenticated={setIsAuthenticated} />}
