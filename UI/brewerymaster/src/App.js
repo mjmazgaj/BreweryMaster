@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Login from './Components/General/Login';
+import LogoutButton from './Components/General/LogoutButton'
 
-function App() {
+const App = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  
+  useEffect(() => {
+    const token = sessionStorage.getItem('token');
+    if (token) {
+      setIsAuthenticated(true); 
+    }
+    else {
+      setIsAuthenticated(false);
+    }
+  }, []);
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <Routes>
+          <Route path="/login" element={<Login/>} />
+        </Routes>
+          {isAuthenticated && <LogoutButton setIsAuthenticated={setIsAuthenticated} />}
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
