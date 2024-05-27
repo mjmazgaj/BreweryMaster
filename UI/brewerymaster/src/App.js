@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Register from './Components/General/Register';
 import Login from './Components/General/Login';
 import Dashboard from './Components/Authorization/Dashboard';
 import Authorize from './Components/Authorization/Authorize';
@@ -22,6 +23,7 @@ const App = () => {
     <Router>
       <div>
         <Routes>
+          <Route path="/register" element={<Register/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/dashboard" element={<Authorize component={Dashboard} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>}></Route>
         </Routes>
