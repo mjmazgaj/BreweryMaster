@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace BreweryMaster.API.Migrations
+namespace BreweryMaster.API.Migrations.User
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20240523154435_init")]
-    partial class init
+    [Migration("20240524135822_UserDb")]
+    partial class UserDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

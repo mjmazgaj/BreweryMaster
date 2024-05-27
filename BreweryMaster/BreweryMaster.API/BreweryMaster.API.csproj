@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.5">
@@ -31,7 +32,6 @@
     <Folder Include="Models\Order\" />
     <Folder Include="Models\Production\" />
     <Folder Include="Models\Raport\" />
-    <Folder Include="Models\User\" />
     <Folder Include="Models\Wiki\" />
     <Folder Include="Models\Work\" />
     <Folder Include="Services\Order\" />
