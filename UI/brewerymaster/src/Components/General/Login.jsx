@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { login } from '../Authorization/AuthService';
 import { useNavigate } from 'react-router-dom';
+import { Form, Button, Col, Row } from 'react-bootstrap';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -22,26 +25,40 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <div>
-        <label>Email:</label>
-        <input
+  <Form onSubmit={handleLogin}>
+    <h1>Zaloguj się:</h1>
+    <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
+      <Form.Label column sm="2">
+        Email
+      </Form.Label>
+      <Col sm="10">
+        <Form.Control
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          placeholder="Wprowadź email"
         />
-      </div>
-      <div>
-        <label>Hasło:</label>
-        <input
+      </Col>
+    </Form.Group>
+
+    <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+      <Form.Label column sm="2">
+        Hasło
+      </Form.Label>
+      <Col sm="10">
+        <Form.Control
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          placeholder="Wprowadź hasło"
         />
-      </div>
-      <button type="submit">Zaloguj</button>
-      {errorMessage && <p>{errorMessage}</p>}
-    </form>
+      </Col>
+    </Form.Group>
+
+    <Button type="submit">Zaloguj</Button>
+
+    {errorMessage && <p className="text-danger">{errorMessage}</p>}
+  </Form>
   );
 };
 
