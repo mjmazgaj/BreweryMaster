@@ -4,7 +4,6 @@ import api from '../General/api'
 async function getAddress(id) {
   try {
     const response = await api.get(`/api/address/${id}`);
-    console.log('Response data:', response.data);
   } catch (error) {
     console.error('Error fetching address:', error);
   }
