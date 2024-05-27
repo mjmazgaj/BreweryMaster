@@ -10,7 +10,6 @@ namespace BreweryMaster.API.Models.User
 
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Client> Clients { get; set; }
-        public DbSet<Employee> Empoyees { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<Employee> Employees { get; set; }
     }
 }
