@@ -1,5 +1,11 @@
+import Home from './Components/Basic/Home';
+import Navigation from './Components/Basic/Navigation';
+
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+
+import './App.css';
+import Address from './Components/User/Address';
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Kanban from './Components/Kanban/Kanban';
 
@@ -23,17 +29,23 @@ const App = () => {
   }, []);
   
   return (
-    <Router>
-      <div>
-        <Routes>
-          <Route path="/register" element={<Register/>} />
+    <>
+      <Navigation />
+      <Router>
+        <div className="App">
+          <Routes>
+            <Route exact path="/" element={<Home/>} />
+            <Route exact path="/Address" element={<Address/>} />
+            <Route path="*" element={<Navigate to ="/"/>} />
+                      <Route path="/register" element={<Register/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/kanban" element={<Kanban/>} />
           <Route path="/dashboard" element={<Authorize component={Dashboard} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>}></Route>
-        </Routes>
-          {isAuthenticated && <LogoutButton setIsAuthenticated={setIsAuthenticated} />}
-      </div>
-    </Router>
+          </Routes>
+                    {isAuthenticated && <LogoutButton setIsAuthenticated={setIsAuthenticated} />}
+        </div>
+      </Router>
+    </>
   );
 };
 
