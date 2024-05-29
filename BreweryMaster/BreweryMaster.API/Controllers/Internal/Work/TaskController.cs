@@ -5,6 +5,7 @@ using BreweryMaster.API.Models.Work;
 using BreweryMaster.API.Validators;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace apiDoReacta.Controllers
 {
@@ -25,7 +26,7 @@ namespace apiDoReacta.Controllers
         [ProducesResponseType(typeof(IEnumerable<KanbanTaskDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<IEnumerable<KanbanTaskDto>>> GetKanbanTaskesByOwnerId(int ownerId)
+        public async Task<ActionResult<Dictionary<string, BreweryMaster.API.Models.Work.Column>>> GetKanbanTaskesByOwnerId(int ownerId)
         {
             if (_workDbContext.KanbanTasks == null)
                 return NotFound();
@@ -40,7 +41,18 @@ namespace apiDoReacta.Controllers
 
             var result = tasks.Select(x => KanbanTaskMapper.ToDto(x, ownerName));
 
-            return Ok(result);
+            var columnsDictionary = tasks
+               .GroupBy(t => t.Status)
+               .ToDictionary(
+                   g => Enum.GetName(typeof(BreweryMaster.API.Models.Work.TaskStatus), g.Key),
+                   g => new BreweryMaster.API.Models.Work.Column
+                   {
+                       Title = $"Status {g.Key}",
+                       Status = g.Key,
+                       Items = g.ToList()
+                   });
+
+            return Ok(columnsDictionary);
         }
 
         [HttpGet]
