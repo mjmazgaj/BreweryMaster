@@ -13,7 +13,7 @@ import Address from './Components/User/Address/Address';
 import Client from './Components/User/Client/Client';
 import Employee from './Components/User/Employee/Employee';
 
-import Kanban from './Components/Kanban/Kanban';
+import Kanban from './Components/Work/Kanban/Kanban';
 
 import Dashboard from './Components/Authorization/Dashboard';
 
