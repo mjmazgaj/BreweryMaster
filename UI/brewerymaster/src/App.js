@@ -4,7 +4,7 @@ import Navigation from './Components/Basic/Navigation';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 
 import './App.css';
-import Address from './Components/User/Address';
+import Address from './Components/User/Address/Address';
 import React, { useState, useEffect } from 'react';
 
 import Kanban from './Components/Kanban/Kanban';

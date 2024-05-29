@@ -2,7 +2,7 @@ import './../../App.css'
 
 function Home() {
   return (
-    <div>Siemano</div>
+    <div>Home</div>
   );
 }
 
