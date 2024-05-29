@@ -4,14 +4,19 @@ import Navigation from './Components/Basic/Navigation';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 
 import './App.css';
-import Address from './Components/User/Address/Address';
 import React, { useState, useEffect } from 'react';
-
-import Kanban from './Components/Kanban/Kanban';
 
 import Register from './Components/General/Register';
 import Login from './Components/General/Login';
+
+import Address from './Components/User/Address/Address';
+import Client from './Components/User/Client/Client';
+import Employee from './Components/User/Employee/Employee';
+
+import Kanban from './Components/Kanban/Kanban';
+
 import Dashboard from './Components/Authorization/Dashboard';
+
 import Authorize from './Components/Authorization/Authorize';
 import LogoutButton from './Components/General/LogoutButton'
 
@@ -35,14 +40,20 @@ const App = () => {
         <div className="App">
           <Routes>
             <Route exact path="/" element={<Home/>} />
-            <Route exact path="/Address" element={<Address/>} />
             <Route path="*" element={<Navigate to ="/"/>} />
-                      <Route path="/register" element={<Register/>} />
-          <Route path="/login" element={<Login/>} />
-          <Route path="/kanban" element={<Kanban/>} />
-          <Route path="/dashboard" element={<Authorize component={Dashboard} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>}></Route>
-          </Routes>
-                    {isAuthenticated && <LogoutButton setIsAuthenticated={setIsAuthenticated} />}
+
+            <Route path="/register" element={<Register/>} />
+            <Route path="/login" element={<Login/>} />
+            
+            <Route exact path="/Address" element={<Address/>} />
+            <Route exact path="/Client" element={<Client/>} />
+            <Route exact path="/Employee" element={<Employee/>} />
+            
+            <Route path="/kanban" element={<Kanban/>} />
+            <Route path="/dashboard" element={<Authorize component={Dashboard} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>}></Route>
+           </Routes>
+
+           {isAuthenticated && <LogoutButton setIsAuthenticated={setIsAuthenticated} />}
         </div>
       </Router>
     </>
