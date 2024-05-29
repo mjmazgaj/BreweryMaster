@@ -4,10 +4,12 @@ import KanbanBoard from './KanbanBoard';
 import './kanban.css';
 
 import {updateStatus, fetchDataByOwnerId} from './api';
+import KanbanModal from './KanbanModal';
 
 const Kanban = () => {
   const [columns, setColumns] = useState(null);
   const [tasks, setTasks] = useState([]);
+  const [showModal, setShowModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
 useEffect(() => {
@@ -50,12 +52,24 @@ useEffect(() => {
     }
   };
 
+  const handleAdd = async (e) => {
+    e.preventDefault();
+    setShowModal(true);
+  };
+
+  const handleClose = async (e) => {
+    e.preventDefault();
+    setShowModal(false);
+  };
+
   return (
     <>
       {columns ? (
         <>
           <KanbanBoard columns={columns} setColumns={setColumns} />
+          <KanbanModal show={showModal} setShow={setShowModal} handleClose={handleClose}/>
           <Button onClick={handleSave} variant="primary">Zapisz</Button>
+          <Button onClick={handleAdd} variant="primary">Dodaj</Button>
         </>
       ) : (
         <p>Loading...</p>

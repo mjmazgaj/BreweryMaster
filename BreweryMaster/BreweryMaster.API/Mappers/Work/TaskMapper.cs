@@ -11,6 +11,7 @@ namespace BreweryMaster.API.Mappers
                 ID = KanbanTask.ID,
                 Title = KanbanTask.Title,
                 Summary = KanbanTask.Summary,
+                Status = KanbanTask.Status,
                 DueDate = KanbanTask.DueDate,
                 OwnerId = KanbanTask.OwnerId,
                 OrderId = KanbanTask.OrderId,
@@ -25,6 +26,7 @@ namespace BreweryMaster.API.Mappers
                 ID = KanbanTaskDto.ID,
                 Title = KanbanTaskDto.Title,
                 Summary = KanbanTaskDto.Summary,
+                Status = KanbanTaskDto.Status,
                 DueDate = KanbanTaskDto.DueDate,
                 OwnerId = KanbanTaskDto.OwnerId,
                 OrderId = KanbanTaskDto.OrderId

@@ -17,6 +17,8 @@ const TaskCard = ({ item, index }) => {
     console.log(`detail ${id}`);
   };
 
+  console.log(item)
+
   return (
     <Draggable key={item.id} draggableId={`${item.id}`} index={index}>
       {(provided) => (
@@ -34,12 +36,13 @@ const TaskCard = ({ item, index }) => {
               </div>
             </div>
           <div className='task-information'>
-            <p>{item.Task}</p>
-            <p>{item.Owner}</p>
+            <p>{item.title}</p>
+            <p>{item.ownerName}</p>
+            <p>{item.summary}</p>
             <div className="task-information-secondary-details">
               <p>
                 <span>
-                  {new Date(item.DueDate).toLocaleDateString('en-us', {
+                  {new Date(item.dueDate).toLocaleDateString('en-us', {
                     month: 'short',
                     day: '2-digit',
                   })}

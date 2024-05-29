@@ -47,7 +47,7 @@ namespace apiDoReacta.Controllers
                     status => Enum.GetName(typeof(BreweryMaster.API.Models.Work.TaskStatus), status),
                     status =>
                     {
-                        var tasksForStatus = tasks.Where(t => (BreweryMaster.API.Models.Work.TaskStatus)t.Status == status).ToList();
+                        var tasksForStatus = result.Where(t => (BreweryMaster.API.Models.Work.TaskStatus)t.Status == status).ToList();
                         return new BreweryMaster.API.Models.Work.Column
                         {
                             Title = $"Status {status}",
