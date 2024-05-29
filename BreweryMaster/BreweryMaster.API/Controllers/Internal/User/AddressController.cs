@@ -72,7 +72,7 @@ namespace apiDoReacta.Controllers
         [ProducesResponseType(typeof(Address), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Address>> EditAddress([MinIntValidation] int id, [FromBody] Address address)
+        public async Task<ActionResult<Address>> EditAddress(int id, [FromBody] Address address)
         {
             if (id != address.ID)
                 return BadRequest();
