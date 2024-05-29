@@ -155,6 +155,33 @@ namespace apiDoReacta.Controllers
             return Ok();
         }
 
+        [HttpPut]
+        [Route("EditStatus")]
+        [ProducesResponseType(typeof(KanbanTask), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<KanbanTask>> EditKanbanTaskStatus([FromBody] List<KanbanTaskStatusSaveRequest> request)
+        {
+            foreach (var item in request)
+            {
+                var task = await _workDbContext.KanbanTasks.FirstOrDefaultAsync(x => x.ID == item.ID);
+
+                if (task != null)
+                    task.Status = item.Status;
+            }
+
+            try
+            {
+                await _workDbContext.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
+
+            return Ok();
+        }
+
         [HttpDelete]
         [Route("{id:int}")]
         [ProducesResponseType(typeof(KanbanTask), StatusCodes.Status200OK)]

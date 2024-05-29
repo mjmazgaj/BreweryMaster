@@ -32,6 +32,12 @@ export const updateData = (id, data) => {
     .catch((error) => console.log(error));
 };
 
+export const updateStatus = (data) => {
+  return axios.put(`${apiurl}/EditStatus`, data)
+    .then((result) => result.data)
+    .catch((error) => console.log(error));
+};
+
 export const deleteData = (id) => {
   return axios.delete(`${apiurl}/${id}`)
     .then((result) => result.status === 200)
