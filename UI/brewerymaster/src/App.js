@@ -15,8 +15,6 @@ import Employee from './Components/User/Employee/Employee';
 
 import Kanban from './Components/Work/Kanban/Kanban';
 
-import Dashboard from './Components/Authorization/Dashboard';
-
 import Authorize from './Components/Authorization/Authorize';
 import LogoutButton from './Components/General/LogoutButton'
 
@@ -35,7 +33,7 @@ const App = () => {
   
   return (
     <>
-      <Navigation />
+      <Navigation isAuthenticated={isAuthenticated}/>
       <Router>
         <div className="App">
           <Routes>
@@ -49,8 +47,7 @@ const App = () => {
             <Route exact path="/Client" element={<Client/>} />
             <Route exact path="/Employee" element={<Employee/>} />
             
-            <Route path="/kanban" element={<Kanban/>} />
-            <Route path="/dashboard" element={<Authorize component={Dashboard} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>}></Route>
+            <Route path="/kanban" element={<Authorize component={Kanban} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>}></Route>
            </Routes>
 
            {isAuthenticated && <LogoutButton setIsAuthenticated={setIsAuthenticated} />}

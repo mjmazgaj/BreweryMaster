@@ -3,6 +3,7 @@ using BreweryMaster.API.Mappers;
 using BreweryMaster.API.Models.User;
 using BreweryMaster.API.Models.Work;
 using BreweryMaster.API.Validators;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -22,6 +23,7 @@ namespace apiDoReacta.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [Route("ByOwnerId")]
         [ProducesResponseType(typeof(IEnumerable<KanbanTaskDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]

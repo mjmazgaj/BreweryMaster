@@ -1,45 +1,43 @@
-import axios from 'axios';
-
-const apiurl = "https://localhost:7289/api/Task";
+import api from '../../General/api';
 
 export const fetchDataByOwnerId = (id) => {
-  return axios.get(`${apiurl}/ByOwnerId?ownerId=${id}`)
+  return api.get(`api/task/ByOwnerId?ownerId=${id}`)
     .then((result) => result.data)
     .catch((error) => console.log(error));
 };
 
 export const fetchDataByOrderId = (id) => {
-  return axios.get(`${apiurl}/ByOrderId/${id}`)
+  return api.get(`api/task/ByOrderId/${id}`)
     .then((result) => result.data)
     .catch((error) => console.log(error));
 };
 
 export const fetchDataById = (id) => {
-  return axios.get(`${apiurl}/${id}`)
+  return api.get(`api/task/${id}`)
     .then((result) => result.data)
     .catch((error) => console.log(error));
 };
 
 export const addData = (data) => {
-  return axios.post(`${apiurl}`, data)
+  return api.post(`api/task`, data)
     .then((result) => result.data)
     .catch((error) => console.log(error));
 };
 
 export const updateData = (id, data) => {
-  return axios.put(`${apiurl}/${id}`, data)
+  return api.put(`api/task/${id}`, data)
     .then((result) => result.data)
     .catch((error) => console.log(error));
 };
 
 export const updateStatus = (data) => {
-  return axios.put(`${apiurl}/EditStatus`, data)
+  return api.put(`api/task/EditStatus`, data)
     .then((result) => result.data)
     .catch((error) => console.log(error));
 };
 
 export const deleteData = (id) => {
-  return axios.delete(`${apiurl}/${id}`)
+  return api.delete(`api/task/${id}`)
     .then((result) => result.status === 200)
     .catch((error) => console.log(error));
 };

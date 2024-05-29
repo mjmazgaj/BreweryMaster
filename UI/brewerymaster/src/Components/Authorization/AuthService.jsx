@@ -57,6 +57,6 @@ export const updateUserInfo = async (data) => {
 };
 
 export const logout = async () => {
-  await api.post('/logout');
+  await api.post('/user/logout');
   sessionStorage.removeItem('token');
 };

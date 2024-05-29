@@ -1,7 +1,7 @@
 import {Container, Nav, Navbar, NavDropdown} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function Navigation() {
+function Navigation(isAuthenticated) {
   return (
       <Navbar bg="dark" data-bs-theme="dark">
         <Container>
