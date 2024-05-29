@@ -3,27 +3,21 @@ import Button from 'react-bootstrap/Button';
 import KanbanBoard from './KanbanBoard';
 import './kanban.css';
 
+import {fetchDataByOwnerId} from './api';
+
 const Kanban = () => {
   const [columns, setColumns] = useState(null);
   const [tasks, setTasks] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
 
-  useEffect(() => {
-    const fetchColumns = async () => {
-      try {
-        const response = await fetch('https://localhost:7289/api/Task/ByOwnerId?ownerId=1');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        setColumns(data);
-      } catch (error) {
-        setErrorMessage(error.message || 'Failed to fetch columns. Please try again.');
-      }
-    };
-
-    fetchColumns();
-  }, []);
+useEffect(() => {
+  const getData = () => {
+    fetchDataByOwnerId(1)
+    .then((result) => setColumns(result))
+    .catch((error) => console.log(error));
+  };
+  getData()
+}, [])
 
   useEffect(() => {
     if (columns) {
