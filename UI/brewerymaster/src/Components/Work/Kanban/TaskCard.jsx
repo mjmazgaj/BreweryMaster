@@ -18,7 +18,7 @@ const TaskCard = ({ item, index }) => {
   };
 
   return (
-    <Draggable key={item.id} draggableId={item.id} index={index}>
+    <Draggable key={item.id} draggableId={`${item.id}`} index={index}>
       {(provided) => (
         <div className='task'
           ref={provided.innerRef}

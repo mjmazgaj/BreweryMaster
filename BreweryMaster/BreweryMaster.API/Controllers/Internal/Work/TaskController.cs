@@ -41,16 +41,20 @@ namespace apiDoReacta.Controllers
 
             var result = tasks.Select(x => KanbanTaskMapper.ToDto(x, ownerName));
 
-            var columnsDictionary = tasks
-               .GroupBy(t => t.Status)
-               .ToDictionary(
-                   g => Enum.GetName(typeof(BreweryMaster.API.Models.Work.TaskStatus), g.Key),
-                   g => new BreweryMaster.API.Models.Work.Column
-                   {
-                       Title = $"Status {g.Key}",
-                       Status = g.Key,
-                       Items = g.ToList()
-                   });
+            var columnsDictionary = Enum.GetValues(typeof(BreweryMaster.API.Models.Work.TaskStatus))
+                .Cast<BreweryMaster.API.Models.Work.TaskStatus>()
+                .ToDictionary(
+                    status => Enum.GetName(typeof(BreweryMaster.API.Models.Work.TaskStatus), status),
+                    status =>
+                    {
+                        var tasksForStatus = tasks.Where(t => (BreweryMaster.API.Models.Work.TaskStatus)t.Status == status).ToList();
+                        return new BreweryMaster.API.Models.Work.Column
+                        {
+                            Title = $"Status {status}",
+                            Status = (int)status,
+                            Items = tasksForStatus
+                        };
+                    });
 
             return Ok(columnsDictionary);
         }
@@ -112,6 +116,7 @@ namespace apiDoReacta.Controllers
             {
                 Title = kanbanTask.Title,
                 Summary = kanbanTask.Summary,
+                Status = kanbanTask.Status,
                 DueDate = kanbanTask.DueDate,
                 OwnerId = kanbanTask.OwnerId,
                 OrderId = kanbanTask.OrderId

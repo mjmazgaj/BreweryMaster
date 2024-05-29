@@ -1,24 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import { columnsFromBackend } from './KanbanData';
-
 import Button from 'react-bootstrap/Button';
-
-import {save} from './KanbanService'
-
 import KanbanBoard from './KanbanBoard';
-
-import "./kanban.css"
+import './kanban.css';
 
 const Kanban = () => {
-  const [columns, setColumns] = useState(columnsFromBackend);
+  const [columns, setColumns] = useState(null);
   const [tasks, setTasks] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
 
-  useEffect(() =>{
-    if(columns){
+  useEffect(() => {
+    const fetchColumns = async () => {
+      try {
+        const response = await fetch('https://localhost:7289/api/Task/ByOwnerId?ownerId=1');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setColumns(data);
+      } catch (error) {
+        setErrorMessage(error.message || 'Failed to fetch columns. Please try again.');
+      }
+    };
+
+    fetchColumns();
+  }, []);
+
+  useEffect(() => {
+    if (columns) {
       const resultList = [];
 
-        for (const key in columns) {
+      for (const key in columns) {
         if (columns.hasOwnProperty(key)) {
           const obj = columns[key];
           const status = obj.status;
@@ -32,7 +43,7 @@ const Kanban = () => {
         }
       }
 
-      setTasks(resultList)
+      setTasks(resultList);
     }
   }, [columns]);
 
@@ -40,7 +51,7 @@ const Kanban = () => {
     e.preventDefault();
     try {
       // await save({ tasks });
-      console.log(tasks)
+      console.log(tasks);
     } catch (error) {
       setErrorMessage(error.response?.data?.message || 'Zapisanie nie powiodło się. Spróbuj ponownie.');
     }
@@ -48,8 +59,14 @@ const Kanban = () => {
 
   return (
     <>
-      <KanbanBoard columns={columns} setColumns={setColumns}/>
-      <Button onClick={handleSave} variant="primary">Zapisz</Button>
+      {columns ? (
+        <>
+          <KanbanBoard columns={columns} setColumns={setColumns} />
+          <Button onClick={handleSave} variant="primary">Zapisz</Button>
+        </>
+      ) : (
+        <p>Loading...</p>
+      )}
       {errorMessage && <p className="text-danger">{errorMessage}</p>}
     </>
   );
