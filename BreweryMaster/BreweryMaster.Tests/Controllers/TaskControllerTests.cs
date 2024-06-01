@@ -22,15 +22,17 @@ namespace BreweryMaster.Tests.Controllers
         {
             // Arrange
             int ownerId = 1;
-            var tasks = new List<KanbanTask> { new KanbanTask(), new KanbanTask() };
-            _mockTaskService.Setup(service => service.GetKanbanTasksByOwnerIdAsync(ownerId)).ReturnsAsync(tasks);
+            var columns = new Dictionary<string, Column>();
+            columns.Add("key1", new Column { });
+            columns.Add("key2", new Column { });
+            _mockTaskService.Setup(service => service.GetKanbanTasksByOwnerIdAsync(ownerId)).ReturnsAsync(columns);
 
             // Act
             var result = await _controller.GetKanbanTasksByOwnerId(ownerId);
 
             // Assert
             var okResult = Assert.IsType<OkObjectResult>(result.Result);
-            var returnTasks = Assert.IsType<List<KanbanTask>>(okResult.Value);
+            var returnTasks = Assert.IsType<Dictionary<string, Column>>(okResult.Value);
             Assert.Equal(2, returnTasks.Count);
         }
 

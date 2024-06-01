@@ -1,4 +1,6 @@
-﻿using BreweryMaster.API.Models.User;
+﻿using BreweryMaster.API.Helpers.User;
+using BreweryMaster.API.Mappers;
+using BreweryMaster.API.Models.User;
 using BreweryMaster.API.Models.Work;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -10,15 +12,42 @@ namespace BreweryMaster.API.Services
     public class TaskService : ITaskService
     {
         private readonly WorkDbContext _context;
+        private readonly UserContext _userContext;
 
-        public TaskService(WorkDbContext context)
+        public TaskService(WorkDbContext context, UserContext userContext)
         {
             _context = context;
+            _userContext = userContext;
         }
 
-        public async Task<IEnumerable<KanbanTask>> GetKanbanTasksByOwnerIdAsync(int ownerId)
+        public async Task<Dictionary<string, Column>> GetKanbanTasksByOwnerIdAsync(int ownerId)
         {
-            return await _context.KanbanTasks.Where(x => x.OwnerId == ownerId).ToListAsync();
+            var tasks = await _context.KanbanTasks.Where(x => x.OwnerId == ownerId).ToListAsync();
+            var owner = await _userContext.Employees.FirstOrDefaultAsync(x => x.ID == ownerId);
+
+            var ownerName = string.Empty;
+
+            if (owner != null)
+                ownerName = UserHelper.GetFullName(owner.Forename, owner.Surname);
+
+            var result = tasks.Select(x => KanbanTaskMapper.ToDto(x, ownerName));
+
+            var columnsDictionary = Enum.GetValues(typeof(Models.Work.TaskStatus))
+                .Cast<BreweryMaster.API.Models.Work.TaskStatus>()
+                .ToDictionary(
+                    status => Enum.GetName(typeof(Models.Work.TaskStatus), status),
+                    status =>
+                    {
+                        var tasksForStatus = result.Where(t => (Models.Work.TaskStatus)t.Status == status).ToList();
+                        return new Column
+                        {
+                            Title = $"Status {status}",
+                            Status = (int)status,
+                            Items = tasksForStatus
+                        };
+                    });
+
+            return columnsDictionary;
         }
 
         public async Task<IEnumerable<KanbanTask>> GetKanbanTasksByOrderIdAsync(int orderId)
