@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
-namespace apiDoReacta.Controllers
+namespace BreweryMaster.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]

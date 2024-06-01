@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
-namespace apiDoReacta.Controllers
+namespace BreweryMaster.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

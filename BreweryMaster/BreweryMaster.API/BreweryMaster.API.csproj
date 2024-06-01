@@ -39,7 +39,6 @@
     <Folder Include="Services\Order\" />
     <Folder Include="Services\Production\" />
     <Folder Include="Services\Raport\" />
-    <Folder Include="Services\User\" />
     <Folder Include="Services\Wiki\" />
     <Folder Include="Services\Work\" />
   </ItemGroup>
