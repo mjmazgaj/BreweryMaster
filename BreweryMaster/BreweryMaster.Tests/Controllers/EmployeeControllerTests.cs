@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
+namespace BreweryMaster.Tests.Controllers;
 public class EmployeeControllerTests
 {
     private readonly Mock<IEmployeeService> _mockEmployeeService;

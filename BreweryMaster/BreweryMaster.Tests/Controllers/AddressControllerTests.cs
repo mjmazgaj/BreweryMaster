@@ -3,6 +3,8 @@ using BreweryMaster.API.Models.User;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 
+namespace BreweryMaster.Tests.Controllers;
+
 public class AddressControllerTests
 {
     private readonly Mock<IAddressService> _mockAddressService;

@@ -3,6 +3,7 @@ using BreweryMaster.API.Models.User;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 
+namespace BreweryMaster.Tests.Controllers;
 public class ClientControllerTests
 {
     private readonly Mock<IClientService> _mockClientService;
