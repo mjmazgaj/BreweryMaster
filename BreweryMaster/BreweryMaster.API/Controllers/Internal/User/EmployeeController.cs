@@ -1,7 +1,7 @@
 ﻿using BreweryMaster.API.Models.User;
+using BreweryMaster.API.Services;
 using BreweryMaster.API.Validators;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace BreweryMaster.API.Controllers
 {
@@ -9,10 +9,11 @@ namespace BreweryMaster.API.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
-        private readonly UserContext _userContext;
-        public EmployeeController(UserContext userContext)
+        private readonly IEmployeeService _employeeService;
+
+        public EmployeeController(IEmployeeService employeeService)
         {
-            _userContext = userContext;
+            _employeeService = employeeService;
         }
 
         [HttpGet]
@@ -21,9 +22,10 @@ namespace BreweryMaster.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
         {
-            if (_userContext.Employees == null)
+            var employees = await _employeeService.GetEmployeesAsync();
+            if (employees == null)
                 return NotFound();
-            return await _userContext.Employees.ToListAsync();
+            return Ok(employees);
         }
 
         [HttpGet]
@@ -33,15 +35,12 @@ namespace BreweryMaster.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Employee>> GetEmployeeById([MinIntValidation] int id)
         {
-            if (_userContext.Employees == null)
-                return NotFound();
-
-            var employee = await _userContext.Employees.FirstOrDefaultAsync(x => x.ID == id);
+            var employee = await _employeeService.GetEmployeeByIdAsync(id);
 
             if (employee == null)
                 return NotFound();
 
-            return employee;
+            return Ok(employee);
         }
 
         [HttpPost]
@@ -49,20 +48,8 @@ namespace BreweryMaster.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<Employee>> CreateEmployee([FromBody] Employee employee)
         {
-            var employeeToCreate = new Employee()
-            {
-                UserId = employee.UserId,
-                Forename = employee.Forename,
-                Surname = employee.Surname,
-                Address = employee.Address,
-                PhoneNumber = employee.PhoneNumber,
-                Email = employee.Email,
-            };
-
-            _userContext.Employees.Add(employeeToCreate);
-            await _userContext.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetEmployeeById), new { id = employeeToCreate.ID }, employeeToCreate);
+            var createdEmployee = await _employeeService.CreateEmployeeAsync(employee);
+            return CreatedAtAction(nameof(GetEmployeeById), new { id = createdEmployee.ID }, createdEmployee);
         }
 
         [HttpPut]
@@ -70,24 +57,10 @@ namespace BreweryMaster.API.Controllers
         [ProducesResponseType(typeof(Employee), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Employee>> EditEmployee([MinIntValidation] int id, [FromBody] Employee employee)
+        public async Task<ActionResult> EditEmployee(int id, [FromBody] Employee employee)
         {
-            if (id != employee.ID)
-                return BadRequest();
-
-            _userContext.Entry(employee).State = EntityState.Modified;
-
-            try
-            {
-                await _userContext.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProductExists(id))
-                    return NotFound();
-                else
-                    throw;
-            }
+            if (!await _employeeService.EditEmployeeAsync(id, employee))
+                return NotFound();
 
             return Ok();
         }
@@ -97,26 +70,12 @@ namespace BreweryMaster.API.Controllers
         [ProducesResponseType(typeof(Employee), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Employee>> DeleteEmployeeById([MinIntValidation] int id)
+        public async Task<ActionResult> DeleteEmployeeById([MinIntValidation] int id)
         {
-            if (_userContext.Employees == null)
+            if (!await _employeeService.DeleteEmployeeByIdAsync(id))
                 return NotFound();
-
-            var employee = await _userContext.Employees.FirstOrDefaultAsync(x => x.ID == id);
-
-            if (employee == null)
-                return NotFound();
-
-            _userContext.Employees.Remove(employee);
-            await _userContext.SaveChangesAsync();
 
             return Ok();
         }
-
-        private bool ProductExists(int id)
-        {
-            return _userContext.Employees.Any(x => x.ID == id);
-        }
-
     }
 }
