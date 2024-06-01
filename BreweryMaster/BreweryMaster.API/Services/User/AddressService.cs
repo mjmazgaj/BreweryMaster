@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BreweryMaster.API.Services
 {
-    public class AddressService
+    public class AddressService : IAddressService
     {
         private readonly UserContext _context;
 

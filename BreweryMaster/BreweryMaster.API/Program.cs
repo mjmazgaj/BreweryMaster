@@ -10,7 +10,8 @@ builder.Services.AddDbContext<UserContext>(options => options.UseSqlServer(build
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("BreweryMaster")));
 builder.Services.AddDbContext<WorkDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("BreweryMaster")));
 
-builder.Services.AddScoped<AddressService>();
+builder.Services.AddScoped<IAddressService,AddressService>();
+builder.Services.AddScoped<IClientService, ClientService>();
 
 builder.Services.AddAuthentication()
                 .AddBearerToken(IdentityConstants.BearerScheme);
