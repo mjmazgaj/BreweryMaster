@@ -1,6 +1,5 @@
 using BreweryMaster.API.Models.User;
 using BreweryMaster.API.Services;
-using BreweryMaster.API.Services.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,7 +13,7 @@ builder.Services.AddDbContext<WorkDbContext>(options => options.UseSqlServer(bui
 builder.Services.AddScoped<IAddressService,AddressService>();
 builder.Services.AddScoped<IClientService, ClientService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
-builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ITaskService, TaskService>();
 
 builder.Services.AddAuthentication()
                 .AddBearerToken(IdentityConstants.BearerScheme);

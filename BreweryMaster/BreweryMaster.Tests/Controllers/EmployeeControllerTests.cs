@@ -2,9 +2,6 @@
 using BreweryMaster.API.Models.User;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Xunit;
 
 namespace BreweryMaster.Tests.Controllers;
 public class EmployeeControllerTests
