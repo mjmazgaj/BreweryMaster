@@ -18,29 +18,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\Internal\Order\" />
-    <Folder Include="Controllers\Internal\Production\" />
-    <Folder Include="Controllers\Internal\Raport\" />
-    <Folder Include="Controllers\Internal\Wiki\" />
-    <Folder Include="Helpers\Order\" />
-    <Folder Include="Helpers\Production\" />
-    <Folder Include="Helpers\Raport\" />
-    <Folder Include="Helpers\Wiki\" />
-    <Folder Include="Helpers\Work\" />
-    <Folder Include="Mappers\Order\" />
-    <Folder Include="Mappers\Production\" />
-    <Folder Include="Mappers\Raport\" />
-    <Folder Include="Mappers\User\" />
-    <Folder Include="Mappers\Wiki\" />
-    <Folder Include="Models\Order\" />
-    <Folder Include="Models\Production\" />
-    <Folder Include="Models\Raport\" />
-    <Folder Include="Models\Wiki\" />
-    <Folder Include="Services\Order\" />
-    <Folder Include="Services\Production\" />
-    <Folder Include="Services\Raport\" />
-    <Folder Include="Services\Wiki\" />
-    <Folder Include="Services\Work\" />
+    <Folder Include="Info\" />
+    <Folder Include="Log\" />
+    <Folder Include="Wiki\" />
+    <Folder Include="Raport\" />
+    <Folder Include="Recipe\" />
+    <Folder Include="Work\" />
+    <Folder Include="Order\" />
+    <Folder Include="User\" />
   </ItemGroup>
 
 </Project>
