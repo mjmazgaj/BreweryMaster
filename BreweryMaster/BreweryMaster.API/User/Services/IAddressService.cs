@@ -1,4 +1,4 @@
-﻿using BreweryMaster.API.Models.User;
+﻿using BreweryMaster.API.User.Models;
 
 public interface IAddressService
 {

@@ -1,4 +1,4 @@
-﻿namespace BreweryMaster.API.Helpers.User
+﻿namespace BreweryMaster.API.User.Helpers
 {
     static public class UserHelper
     {

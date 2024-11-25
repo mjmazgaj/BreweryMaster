@@ -1,8 +1,7 @@
-﻿using BreweryMaster.API.Models.User;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace BreweryMaster.API.Models.User
+namespace BreweryMaster.API.User.Models
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

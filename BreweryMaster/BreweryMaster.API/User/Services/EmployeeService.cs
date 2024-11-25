@@ -1,10 +1,10 @@
-﻿using BreweryMaster.API.Models.User;
+﻿using BreweryMaster.API.User.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BreweryMaster.API.Services
+namespace BreweryMaster.API.User.Services
 {
     public class EmployeeService : IEmployeeService
     {

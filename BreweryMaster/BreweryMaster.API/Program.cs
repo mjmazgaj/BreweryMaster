@@ -1,5 +1,7 @@
 using BreweryMaster.API.Models.User;
 using BreweryMaster.API.Services;
+using BreweryMaster.API.User.Models;
+using BreweryMaster.API.User.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,7 +1,7 @@
-﻿using BreweryMaster.API.Models.User;
+﻿using BreweryMaster.API.User.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace BreweryMaster.API.Services
+namespace BreweryMaster.API.User.Services
 {
     public class ClientService : IClientService
     {

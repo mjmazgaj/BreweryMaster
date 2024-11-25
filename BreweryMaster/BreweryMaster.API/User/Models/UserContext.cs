@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace BreweryMaster.API.Models.User
+namespace BreweryMaster.API.User.Models
 {
     public class UserContext : DbContext
     {

@@ -1,5 +1,5 @@
-﻿using BreweryMaster.API.Controllers;
-using BreweryMaster.API.Models.User;
+﻿using BreweryMaster.API.User.Controllers;
+using BreweryMaster.API.User.Models;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 

@@ -1,10 +1,10 @@
-﻿using BreweryMaster.API.Models.User;
+﻿using BreweryMaster.API.User.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
-namespace BreweryMaster.API.Controllers
+namespace BreweryMaster.API.User.Controllers
 {
     [Route("[controller]")]
     [ApiController]

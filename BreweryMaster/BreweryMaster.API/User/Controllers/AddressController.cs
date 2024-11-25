@@ -1,9 +1,9 @@
-﻿using BreweryMaster.API.Models.User;
-using BreweryMaster.API.Services;
+﻿using BreweryMaster.API.Services;
 using BreweryMaster.API.Shared.Validators;
+using BreweryMaster.API.User.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BreweryMaster.API.Controllers
+namespace BreweryMaster.API.User.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
