@@ -1,6 +1,6 @@
 ﻿using BreweryMaster.API.Models.User;
 using BreweryMaster.API.Services;
-using BreweryMaster.API.Validators;
+using BreweryMaster.API.Shared.Validators;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BreweryMaster.API.Controllers

@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BreweryMaster.API.Validators
+namespace BreweryMaster.API.Shared.Validators
 {
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter)]
     public class MinIntValidationAttribute : ValidationAttribute
     {
         public MinIntValidationAttribute(int min = 1, bool isNullAllowed = false)
         {
-            this.MinInt = min;
-            this.IsNullAllowed = isNullAllowed;
+            MinInt = min;
+            IsNullAllowed = isNullAllowed;
         }
 
         private int MinInt { get; }
@@ -16,8 +16,8 @@ namespace BreweryMaster.API.Validators
 
         public override bool IsValid(object? value)
         {
-            return (value == null && IsNullAllowed)
-                    || (value != null && (int)value >= MinInt);
+            return value == null && IsNullAllowed
+                    || value != null && (int)value >= MinInt;
         }
     }
 }
