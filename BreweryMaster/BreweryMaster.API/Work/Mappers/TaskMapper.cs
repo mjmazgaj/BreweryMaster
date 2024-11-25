@@ -1,6 +1,7 @@
-﻿using BreweryMaster.API.Models.Work;
+﻿using BreweryMaster.API.Work.Models;
+using BreweryMaster.API.Work.Models.Dtos;
 
-namespace BreweryMaster.API.Mappers
+namespace BreweryMaster.API.Work.Mappers
 {
     public static class KanbanTaskMapper
     {

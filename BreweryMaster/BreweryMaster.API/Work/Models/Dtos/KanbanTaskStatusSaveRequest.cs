@@ -1,4 +1,4 @@
-﻿namespace BreweryMaster.API.Models.Work
+﻿namespace BreweryMaster.API.Work.Models.Dtos
 {
     public class KanbanTaskStatusSaveRequest
     {

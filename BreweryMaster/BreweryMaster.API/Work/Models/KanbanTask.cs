@@ -1,6 +1,6 @@
-﻿namespace BreweryMaster.API.Models.Work
+﻿namespace BreweryMaster.API.Work.Models
 {
-    public class KanbanTaskDto
+    public class KanbanTask
     {
         public int ID { get; set; }
         public string Title { get; set; } = string.Empty;
@@ -9,6 +9,5 @@
         public DateTime DueDate { get; set; }
         public int OwnerId { get; set; }
         public int OrderId { get; set; }
-        public string OwnerName { get; set; } = string.Empty;
     }
 }

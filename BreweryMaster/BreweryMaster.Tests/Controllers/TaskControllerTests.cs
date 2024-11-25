@@ -1,6 +1,7 @@
-﻿using BreweryMaster.API.Controllers;
-using BreweryMaster.API.Models.Work;
-using BreweryMaster.API.Services;
+﻿using BreweryMaster.API.Work.Controllers;
+using BreweryMaster.API.Work.Models;
+using BreweryMaster.API.Work.Models.Dtos;
+using BreweryMaster.API.Work.Services;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 

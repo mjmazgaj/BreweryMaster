@@ -1,7 +1,6 @@
-﻿using BreweryMaster.API.Models.Work;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace BreweryMaster.API.Models.User
+namespace BreweryMaster.API.Work.Models
 {
     public class WorkDbContext : DbContext
     {

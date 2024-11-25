@@ -1,7 +1,7 @@
-using BreweryMaster.API.Models.User;
-using BreweryMaster.API.Services;
 using BreweryMaster.API.User.Models;
 using BreweryMaster.API.User.Services;
+using BreweryMaster.API.Work.Models;
+using BreweryMaster.API.Work.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -42,7 +42,6 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddCors();
 
 var app = builder.Build();
 

@@ -1,5 +1,4 @@
-﻿using BreweryMaster.API.Services;
-using BreweryMaster.API.Shared.Validators;
+﻿using BreweryMaster.API.Shared.Validators;
 using BreweryMaster.API.User.Models;
 using Microsoft.AspNetCore.Mvc;
 
