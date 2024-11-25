@@ -1,4 +1,5 @@
-﻿using BreweryMaster.API.User.Models;
+﻿using BreweryMaster.API.Shared;
+using BreweryMaster.API.User.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,9 @@ namespace BreweryMaster.API.User.Services
 {
     public class EmployeeService : IEmployeeService
     {
-        private readonly UserContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public EmployeeService(UserContext context)
+        public EmployeeService(ApplicationDbContext context)
         {
             _context = context;
         }

@@ -1,4 +1,5 @@
-﻿using BreweryMaster.API.User.Helpers;
+﻿using BreweryMaster.API.Shared;
+using BreweryMaster.API.User.Helpers;
 using BreweryMaster.API.User.Models;
 using BreweryMaster.API.Work.Mappers;
 using BreweryMaster.API.Work.Models;
@@ -13,18 +14,18 @@ namespace BreweryMaster.API.Work.Services
     public class TaskService : ITaskService
     {
         private readonly WorkDbContext _context;
-        private readonly UserContext _userContext;
+        private readonly ApplicationDbContext _applicationDbContext;
 
-        public TaskService(WorkDbContext context, UserContext userContext)
+        public TaskService(WorkDbContext context, ApplicationDbContext applicationDbContext)
         {
             _context = context;
-            _userContext = userContext;
+            _applicationDbContext = applicationDbContext;
         }
 
         public async Task<Dictionary<string, Column>> GetKanbanTasksByOwnerIdAsync(int ownerId)
         {
             var tasks = await _context.KanbanTasks.Where(x => x.OwnerId == ownerId).ToListAsync();
-            var owner = await _userContext.Employees.FirstOrDefaultAsync(x => x.ID == ownerId);
+            var owner = await _applicationDbContext.Employees.FirstOrDefaultAsync(x => x.ID == ownerId);
 
             var ownerName = string.Empty;
 

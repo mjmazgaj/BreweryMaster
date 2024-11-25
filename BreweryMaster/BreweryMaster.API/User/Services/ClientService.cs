@@ -1,13 +1,14 @@
-﻿using BreweryMaster.API.User.Models;
+﻿using BreweryMaster.API.Shared;
+using BreweryMaster.API.User.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BreweryMaster.API.User.Services
 {
     public class ClientService : IClientService
     {
-        private readonly UserContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public ClientService(UserContext context)
+        public ClientService(ApplicationDbContext context)
         {
             _context = context;
         }
