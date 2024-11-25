@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace BreweryMaster.API.Shared
+namespace BreweryMaster.API.Shared.Models
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

@@ -1,4 +1,4 @@
-using BreweryMaster.API.Shared;
+using BreweryMaster.API.Shared.Models;
 using BreweryMaster.API.User.Models;
 using BreweryMaster.API.User.Services;
 using BreweryMaster.API.Work.Models;
