@@ -12,7 +12,7 @@ namespace BreweryMaster.API.Shared.Models
         {
         }
         public DbSet<Address> Addresses { get; set; }
-        public DbSet<ProspectClient> Clients { get; set; }
+        public DbSet<ProspectClient> ProspectClients { get; set; }
         public DbSet<Employee> Employees { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
