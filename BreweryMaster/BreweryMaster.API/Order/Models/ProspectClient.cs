@@ -1,6 +1,6 @@
-﻿namespace BreweryMaster.API.User.Models
+﻿namespace BreweryMaster.API.Order.Models
 {
-    public class Client
+    public class ProspectClient
     {
         public int ID { get; set; }
         public string Forename { get; set; } = string.Empty;

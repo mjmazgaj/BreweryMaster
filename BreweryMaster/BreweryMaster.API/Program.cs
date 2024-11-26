@@ -14,7 +14,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 builder.Services.AddDbContext<WorkDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("BreweryMaster")));
 
 builder.Services.AddScoped<IAddressService,AddressService>();
-builder.Services.AddScoped<IClientService, ClientService>();
+builder.Services.AddScoped<IProspectClientService, ProspectClientService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<ITaskService, TaskService>();
 

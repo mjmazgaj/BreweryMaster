@@ -24,7 +24,6 @@
     <Folder Include="Wiki\" />
     <Folder Include="Raport\" />
     <Folder Include="Recipe\" />
-    <Folder Include="Order\" />
   </ItemGroup>
 
 </Project>

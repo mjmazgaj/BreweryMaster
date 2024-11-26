@@ -4,28 +4,28 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BreweryMaster.API.Order.Services
 {
-    public class ClientService : IClientService
+    public class ProspectClientService : IProspectClientService
     {
         private readonly ApplicationDbContext _context;
 
-        public ClientService(ApplicationDbContext context)
+        public ProspectClientService(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public async Task<IEnumerable<Client>> GetClientsAsync()
+        public async Task<IEnumerable<ProspectClient>> GetProspectClientsAsync()
         {
             return await _context.Clients.ToListAsync();
         }
 
-        public async Task<Client> GetClientByIdAsync(int id)
+        public async Task<ProspectClient> GetProspectClientByIdAsync(int id)
         {
             return await _context.Clients.FirstOrDefaultAsync(x => x.ID == id);
         }
 
-        public async Task<Client> CreateClientAsync(Client client)
+        public async Task<ProspectClient> CreateProspectClientAsync(ProspectClient client)
         {
-            var clientToCreate = new Client()
+            var clientToCreate = new ProspectClient()
             {
                 Forename = client.Forename,
                 Surname = client.Surname,
@@ -43,7 +43,7 @@ namespace BreweryMaster.API.Order.Services
             return clientToCreate;
         }
 
-        public async Task<bool> EditClientAsync(int id, Client client)
+        public async Task<bool> EditProspectClientAsync(int id, ProspectClient client)
         {
             if (id != client.ID)
                 return false;
@@ -56,7 +56,7 @@ namespace BreweryMaster.API.Order.Services
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ClientExists(id))
+                if (!ProspectClientExists(id))
                     return false;
                 else
                     throw;
@@ -65,7 +65,7 @@ namespace BreweryMaster.API.Order.Services
             return true;
         }
 
-        public async Task<bool> DeleteClientByIdAsync(int id)
+        public async Task<bool> DeleteProspectClientByIdAsync(int id)
         {
             var client = await _context.Clients.FirstOrDefaultAsync(x => x.ID == id);
 
@@ -78,7 +78,7 @@ namespace BreweryMaster.API.Order.Services
             return true;
         }
 
-        private bool ClientExists(int id)
+        private bool ProspectClientExists(int id)
         {
             return _context.Clients.Any(x => x.ID == id);
         }
