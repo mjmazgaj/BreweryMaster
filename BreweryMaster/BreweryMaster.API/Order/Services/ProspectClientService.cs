@@ -23,18 +23,13 @@ namespace BreweryMaster.API.Order.Services
             return await _context.Clients.FirstOrDefaultAsync(x => x.ID == id);
         }
 
-        public async Task<ProspectClient> CreateProspectClientAsync(ProspectClient client)
+        public async Task<ProspectClient> CreateProspectClientAsync(ProspectClientRequest request)
         {
             var clientToCreate = new ProspectClient()
             {
-                Forename = client.Forename,
-                Surname = client.Surname,
-                CompanyName = client.CompanyName,
-                NIP = client.NIP,
-                AddressId = client.AddressId,
-                DeliveryAddressId = client.DeliveryAddressId,
-                PhoneNumber = client.PhoneNumber,
-                Email = client.Email
+                Forename = request.Forename,
+                PhoneNumber = request.PhoneNumber,
+                Email = request.Email!,
             };
 
             _context.Clients.Add(clientToCreate);

@@ -77,11 +77,12 @@ public class ClientControllerTests
     public async Task CreateProspectClient_ReturnsCreatedAtAction_WithCreatedClient()
     {
         // Arrange
-        var client = new ProspectClient { ID = 1 };
-        _mockClientService.Setup(service => service.CreateProspectClientAsync(client)).ReturnsAsync(client);
+        var clientRequest = new ProspectClientRequest { Forename = "test", Email = "test@test.test" };
+        var client = new ProspectClient { Forename = "test", Email = "test@test.test" };
+        _mockClientService.Setup(service => service.CreateProspectClientAsync(clientRequest)).ReturnsAsync(client);
 
         // Act
-        var result = await _controller.CreateProspectClient(client);
+        var result = await _controller.CreateProspectClient(clientRequest);
 
         // Assert
         var createdAtActionResult = Assert.IsType<CreatedAtActionResult>(result.Result);

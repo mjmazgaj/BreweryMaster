@@ -1,5 +1,8 @@
-﻿using BreweryMaster.API.Order.Models;
+﻿using Azure.Core;
+using BreweryMaster.API.Order.Models;
 using BreweryMaster.API.Shared.Validators;
+using BreweryMaster.API.User.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BreweryMaster.API.Order.Controllers
@@ -45,9 +48,12 @@ namespace BreweryMaster.API.Order.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(ProspectClient), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<ProspectClient>> CreateProspectClient([FromBody] ProspectClient client)
+        public async Task<ActionResult<ProspectClient>> CreateProspectClient([FromBody] ProspectClientRequest request)
         {
-            var createdClient = await _clientService.CreateProspectClientAsync(client);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var createdClient = await _clientService.CreateProspectClientAsync(request);
             return CreatedAtAction(nameof(GetProspectClientById), new { id = createdClient.ID }, createdClient);
         }
 
