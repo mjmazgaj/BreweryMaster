@@ -15,12 +15,12 @@ namespace BreweryMaster.API.Order.Services
 
         public async Task<IEnumerable<ProspectClient>> GetProspectClientsAsync()
         {
-            return await _context.Clients.ToListAsync();
+            return await _context.ProspectClients.ToListAsync();
         }
 
         public async Task<ProspectClient> GetProspectClientByIdAsync(int id)
         {
-            return await _context.Clients.FirstOrDefaultAsync(x => x.ID == id);
+            return await _context.ProspectClients.FirstOrDefaultAsync(x => x.ID == id);
         }
 
         public async Task<ProspectClient> CreateProspectClientAsync(ProspectClientRequest request)
@@ -29,10 +29,10 @@ namespace BreweryMaster.API.Order.Services
             {
                 Forename = request.Forename,
                 PhoneNumber = request.PhoneNumber,
-                Email = request.Email!,
+                Email = request.Email,
             };
 
-            _context.Clients.Add(clientToCreate);
+            _context.ProspectClients.Add(clientToCreate);
             await _context.SaveChangesAsync();
 
             return clientToCreate;
@@ -62,12 +62,12 @@ namespace BreweryMaster.API.Order.Services
 
         public async Task<bool> DeleteProspectClientByIdAsync(int id)
         {
-            var client = await _context.Clients.FirstOrDefaultAsync(x => x.ID == id);
+            var client = await _context.ProspectClients.FirstOrDefaultAsync(x => x.ID == id);
 
             if (client == null)
                 return false;
 
-            _context.Clients.Remove(client);
+            _context.ProspectClients.Remove(client);
             await _context.SaveChangesAsync();
 
             return true;
@@ -75,7 +75,7 @@ namespace BreweryMaster.API.Order.Services
 
         private bool ProspectClientExists(int id)
         {
-            return _context.Clients.Any(x => x.ID == id);
+            return _context.ProspectClients.Any(x => x.ID == id);
         }
     }
 }

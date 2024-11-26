@@ -6,6 +6,7 @@ namespace BreweryMaster.API.Order.Models
     {
         [Required]
         public string? Forename { get; set; }
+        [Required]
         [Phone]
         public string? PhoneNumber { get; set; }
         [Required]
