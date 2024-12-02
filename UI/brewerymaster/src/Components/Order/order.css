@@ -48,7 +48,7 @@ form input {
     margin-bottom: 1rem;
     display: flex;
     justify-content: flex-end;
-    align-items: center;
+    align-items: flex-end;
 }
 
 .form-label_checkPrice{
@@ -57,8 +57,9 @@ form input {
 }
 
 #checkPrice_result{
-    margin: auto 1rem;
-width: 200px;
+    margin-bottom: 0;
+    margin-left: 1rem;
+    width: 200px;
 }
 
 .contact-details{

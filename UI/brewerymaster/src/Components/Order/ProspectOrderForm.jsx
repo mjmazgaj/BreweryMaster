@@ -1,21 +1,53 @@
 import { React, useState, useEffect } from "react";
-import { Row, Col, Button, Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { fetchDetails } from "./api";
 import ProspectOrderDropDown from "./ProspectOrderDropDown";
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import './order.css';
+import { addData, checkPrice } from './api';
 
-const ProspectOrderForm = ({
-  selectedBeer,
-  selectedContainer,
-  setForename,
-  setPhoneNumber,
-  setEmail,
-  setSelectedBeer,
-  setSelectedContainer,
-  setCapacity,
-  handleSave,
-  handleCheckPrice,
-}) => {
+const ProspectOrderForm = () => {  
+  const [forename, setForename] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [selectedBeer, setSelectedBeer] = useState("");
+  const [selectedContainer, setSelectedContainer] = useState("");
+  const [capacity, setCapacity] = useState("");
+
   const [details, setDetails] = useState([]);
+  const [estimatedPrice, setEstimatedPrice] = useState("");
+
+  const handleSave = () => {
+    const newData = {
+      forename,
+      phoneNumber,
+      email,
+      selectedBeer,
+      selectedContainer,
+      capacity,
+    };
+
+    addData(newData)
+      .then(() => {
+        clear();
+        toast.success("Order has been registered");
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const clear = () => {
+    setForename("");
+    setPhoneNumber("");
+    setEmail("");
+  };
+
+  const handleCheckPrice = () => {
+    checkPrice(selectedBeer, selectedContainer, capacity)
+      .then((result) => setEstimatedPrice(result))
+      .catch((error) => console.log(error));
+  };
 
   useEffect(() => {
     getDetails();
@@ -69,8 +101,10 @@ const ProspectOrderForm = ({
           </Form.Label>
           <Form.Control
             id="checkPrice_result"
-            readOnly="true"
+            readOnly={true}
             placeholder="Check Price"
+            type="number"
+            value={estimatedPrice}
           />
         </div>
       </div>

@@ -13,6 +13,7 @@ import Address from './Components/User/Address/Address';
 import Client from './Components/User/Client/Client';
 import Employee from './Components/User/Employee/Employee';
 
+import Order from './Components/Order/Order';
 import ProspectOrder from './Components/Order/ProspectOrder';
 
 import Kanban from './Components/Work/Kanban/Kanban';
@@ -46,6 +47,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
 
             <Route exact path="/ProspectOrder" element={<ProspectOrder />} />
+            <Route exact path="/Order" element={<Order />} />
             <Route exact path="/Address" element={<Address />} />
             <Route exact path="/Client" element={<Client />} />
             <Route exact path="/Employee" element={<Employee />} />

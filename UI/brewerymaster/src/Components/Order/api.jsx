@@ -9,8 +9,6 @@ export const fetchData = () => {
 };
 
 export const checkPrice = (beerType, containerType, capacity) => {
-console.log(beerType, containerType, capacity)
-
   return axios.get(`${apiurl}/Price?BeerType=${beerType}&ContainerType=${containerType}&Capacity=${capacity}`)
     .then((result) => result.data)
     .catch((error) => console.log(error));
