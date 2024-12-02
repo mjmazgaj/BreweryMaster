@@ -1,5 +1,6 @@
 ﻿using BreweryMaster.API.Order.Controllers;
 using BreweryMaster.API.Order.Models;
+using BreweryMaster.API.Order.Models.ProspectOrder;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 
@@ -7,7 +8,7 @@ namespace BreweryMaster.Tests.Controllers;
 public class ClientControllerTests
 {
     private readonly Mock<IProspectClientService> _mockClientService;
-    private readonly ProspectClientController _controller;
+    private readonly ProspectOrderController _controller;
 
     public ClientControllerTests()
     {

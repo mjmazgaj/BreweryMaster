@@ -1,7 +1,9 @@
-﻿using BreweryMaster.API.Order.Models;
+﻿using BreweryMaster.API.Order.Models.ProspectOrder;
 
 public interface IProspectClientService
 {
+    ProspectOrderDetails GetProspectOrderDetails();
+    decimal GetEstimatedPrice(PriceEstimationRequest request);
     Task<IEnumerable<ProspectClient>> GetProspectClientsAsync();
     Task<ProspectClient> GetProspectClientByIdAsync(int id);
     Task<ProspectClient> CreateProspectClientAsync(ProspectClientRequest client);

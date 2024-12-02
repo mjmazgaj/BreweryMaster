@@ -1,4 +1,4 @@
-﻿namespace BreweryMaster.API.Order.Models
+﻿namespace BreweryMaster.API.Order.Models.ProspectOrder
 {
     public class ProspectClient
     {

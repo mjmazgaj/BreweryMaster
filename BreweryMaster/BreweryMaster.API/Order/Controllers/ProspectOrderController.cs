@@ -1,21 +1,45 @@
-﻿using Azure.Core;
-using BreweryMaster.API.Order.Models;
+﻿using BreweryMaster.API.Order.Models.ProspectOrder;
+using BreweryMaster.API.Order.Models.Settings;
 using BreweryMaster.API.Shared.Validators;
-using BreweryMaster.API.User.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace BreweryMaster.API.Order.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProspectClientController : ControllerBase
+    public class ProspectOrderController : ControllerBase
     {
         private readonly IProspectClientService _clientService;
+        private readonly OrderSettings _settings;
 
-        public ProspectClientController(IProspectClientService clientService)
+        public ProspectOrderController(IProspectClientService clientService, IOptions<OrderSettings> options)
         {
             _clientService = clientService;
+            _settings = options.Value;
+        }
+
+        [HttpGet]
+        [Route("Price")]
+        [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<decimal> GetEstimatedPrice([FromQuery] PriceEstimationRequest request)
+        {
+            return _clientService.GetEstimatedPrice(request);
+        }
+
+        [HttpGet]
+        [Route("Details")]
+        [ProducesResponseType(typeof(ProspectOrderDetails), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<ProspectOrderDetails> GetProspectOrderDetails()
+        {
+            var prospectOrderDetails = _clientService.GetProspectOrderDetails();
+            if (prospectOrderDetails == null)
+                return NotFound();
+            return Ok(prospectOrderDetails);
         }
 
         [HttpGet]
@@ -81,6 +105,13 @@ namespace BreweryMaster.API.Order.Controllers
                 return NotFound();
 
             return Ok();
+        }
+
+        [HttpGet]
+        [Route("testowo")]
+        public ActionResult Testowo()
+        {
+            return Ok(_settings);
         }
     }
 }

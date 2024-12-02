@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BreweryMaster.API.Order.Models
+namespace BreweryMaster.API.Order.Models.ProspectOrder
 {
     public class ProspectClientRequest
     {
@@ -12,5 +12,11 @@ namespace BreweryMaster.API.Order.Models
         [Required]
         [EmailAddress]
         public string? Email { get; set; }
+        [Required]
+        public string? SelectedBeer { get; set; }
+        [Required]
+        public string? SelectedContainer { get; set; }
+        [Required]
+        public int Capacity { get; set; }
     }
 }

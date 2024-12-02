@@ -13,6 +13,8 @@ import Address from './Components/User/Address/Address';
 import Client from './Components/User/Client/Client';
 import Employee from './Components/User/Employee/Employee';
 
+import ProspectOrder from './Components/Order/ProspectOrder';
+
 import Kanban from './Components/Work/Kanban/Kanban';
 
 import Authorize from './Components/Authorization/Authorize';
@@ -33,24 +35,36 @@ const App = () => {
   
   return (
     <>
-      <Navigation isAuthenticated={isAuthenticated}/>
+      <Navigation isAuthenticated={isAuthenticated} />
       <Router>
         <div className="App">
           <Routes>
-            <Route exact path="/" element={<Home/>} />
-            <Route path="*" element={<Navigate to ="/"/>} />
+            <Route exact path="/" element={<Home />} />
+            <Route path="*" element={<Navigate to="/" />} />
 
-            <Route path="/register" element={<Register/>} />
-            <Route path="/login" element={<Login/>} />
-            
-            <Route exact path="/Address" element={<Address/>} />
-            <Route exact path="/Client" element={<Client/>} />
-            <Route exact path="/Employee" element={<Employee/>} />
-            
-            <Route path="/kanban" element={<Authorize component={Kanban} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>}></Route>
-           </Routes>
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
 
-           {isAuthenticated && <LogoutButton setIsAuthenticated={setIsAuthenticated} />}
+            <Route exact path="/ProspectOrder" element={<ProspectOrder />} />
+            <Route exact path="/Address" element={<Address />} />
+            <Route exact path="/Client" element={<Client />} />
+            <Route exact path="/Employee" element={<Employee />} />
+
+            <Route
+              path="/kanban"
+              element={
+                <Authorize
+                  component={Kanban}
+                  isAuthenticated={isAuthenticated}
+                  setIsAuthenticated={setIsAuthenticated}
+                />
+              }
+            ></Route>
+          </Routes>
+
+          {isAuthenticated && (
+            <LogoutButton setIsAuthenticated={setIsAuthenticated} />
+          )}
         </div>
       </Router>
     </>

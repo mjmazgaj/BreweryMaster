@@ -38,12 +38,3 @@
     transform: rotate(360deg);
   }
 }
-
-.App form {
-  margin-bottom: 50px;
-}
-
-.App form input {
-  min-width: 300px;
-  margin: 10px 0;
-}

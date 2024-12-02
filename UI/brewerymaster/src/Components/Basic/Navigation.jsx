@@ -7,7 +7,9 @@ function Navigation(isAuthenticated) {
         <Container>
           <Navbar.Brand href="/">Navbar</Navbar.Brand>
           <Nav className="me-auto">      
-            <Nav.Link href="/Kanban">Kanban</Nav.Link>      
+            <Nav.Link href="/Kanban">Kanban</Nav.Link>
+            <Nav.Link href="/ProspectOrder">Order</Nav.Link>
+            
             <NavDropdown title="User" id="navbarScrollingDropdown">
               <NavDropdown.Item href="/Client">Client</NavDropdown.Item>
               <NavDropdown.Item href="/Address">Address</NavDropdown.Item>

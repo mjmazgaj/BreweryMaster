@@ -1,16 +1,40 @@
-﻿using BreweryMaster.API.Order.Models;
+﻿using BreweryMaster.API.Order.Models.ProspectOrder;
+using BreweryMaster.API.Order.Models.Settings;
 using BreweryMaster.API.Shared.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace BreweryMaster.API.Order.Services
 {
     public class ProspectClientService : IProspectClientService
     {
         private readonly ApplicationDbContext _context;
+        private readonly OrderSettings _settings;
 
-        public ProspectClientService(ApplicationDbContext context)
+        public ProspectClientService(ApplicationDbContext context, IOptions<OrderSettings> options)
         {
             _context = context;
+            _settings = options.Value;
+        }
+        public ProspectOrderDetails GetProspectOrderDetails()
+        {
+            return new ProspectOrderDetails()
+            {
+                BeerTypes = Enum.GetNames(typeof(BeerType)),
+                ContainerTypes = Enum.GetNames(typeof(ContainerType))
+            };
+        }
+        public decimal GetEstimatedPrice(PriceEstimationRequest request)
+        {
+            var beerType = _settings.BeerPrices.FirstOrDefault(x=> x.BeerType.ToString() == request.BeerType);
+            var containerType = _settings.ContainerPrices.FirstOrDefault(x => x.ContainerType.ToString() == request.ContainerType);
+
+            var numberOfContainers = request.Capacity / containerType.Capacity;
+
+            var beerPrice = request.Capacity * beerType.EstimatedPrice;
+            var containerPrice = numberOfContainers * containerType.EstimatedPrice;
+
+            return Math.Round((beerPrice + containerPrice)/100,0)*100;
         }
 
         public async Task<IEnumerable<ProspectClient>> GetProspectClientsAsync()

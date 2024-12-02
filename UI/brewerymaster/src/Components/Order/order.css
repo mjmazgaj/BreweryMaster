@@ -1,0 +1,66 @@
+
+
+.background-details{
+    z-index: -1000;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+}
+  
+.background-details img{
+  height: 40rem;
+}
+  
+.background-details_left-image{
+    width: fit-content;
+    height: fit-content;
+}
+  
+.background-details_right-image{
+    width: fit-content;
+    height: fit-content;
+}
+
+form {
+  margin-bottom: 50px;
+  border: 1rem solid rgb(33, 37, 41);
+  border-radius: 1rem;
+  padding: 2rem 4rem;
+  margin: auto 15%;
+}
+
+form input {
+  min-width: 300px;
+  margin: 10px 0;
+}
+  .order-details{
+    margin-bottom: 1rem;
+}
+
+.checkprice_container{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.form-label_checkPrice{
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+#checkPrice_result{
+    margin: auto 1rem;
+width: 200px;
+}
+
+.contact-details{
+margin-top: 2rem;
+}

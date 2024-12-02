@@ -1,4 +1,4 @@
-﻿using BreweryMaster.API.Order.Models;
+﻿using BreweryMaster.API.Order.Models.ProspectOrder;
 using BreweryMaster.API.User.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

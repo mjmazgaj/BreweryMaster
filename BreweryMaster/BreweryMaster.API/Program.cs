@@ -1,3 +1,4 @@
+using BreweryMaster.API.Order.Models.Settings;
 using BreweryMaster.API.Order.Services;
 using BreweryMaster.API.Shared.Models;
 using BreweryMaster.API.User.Models;
@@ -6,10 +7,14 @@ using BreweryMaster.API.Work.Models;
 using BreweryMaster.API.Work.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.Configure<OrderSettings>(builder.Configuration.GetSection(nameof(OrderSettings)));
+
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("BreweryMaster")));
 builder.Services.AddDbContext<WorkDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("BreweryMaster")));
 
