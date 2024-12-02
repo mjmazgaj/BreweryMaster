@@ -78,7 +78,7 @@ public class ClientControllerTests
     public async Task CreateProspectClient_ReturnsCreatedAtAction_WithCreatedClient()
     {
         // Arrange
-        var clientRequest = new ProspectClientRequest { Forename = "test", Email = "test@test.test" };
+        var clientRequest = new ProspectOrderRequest { Forename = "test", Email = "test@test.test" };
         var client = new ProspectClient { Forename = "test", Email = "test@test.test" };
         _mockClientService.Setup(service => service.CreateProspectClientAsync(clientRequest)).ReturnsAsync(client);
 

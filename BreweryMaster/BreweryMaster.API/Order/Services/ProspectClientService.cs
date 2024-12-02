@@ -16,26 +16,6 @@ namespace BreweryMaster.API.Order.Services
             _context = context;
             _settings = options.Value;
         }
-        public ProspectOrderDetails GetProspectOrderDetails()
-        {
-            return new ProspectOrderDetails()
-            {
-                BeerTypes = Enum.GetNames(typeof(BeerType)),
-                ContainerTypes = Enum.GetNames(typeof(ContainerType))
-            };
-        }
-        public decimal GetEstimatedPrice(PriceEstimationRequest request)
-        {
-            var beerType = _settings.BeerPrices.FirstOrDefault(x=> x.BeerType.ToString() == request.BeerType);
-            var containerType = _settings.ContainerPrices.FirstOrDefault(x => x.ContainerType.ToString() == request.ContainerType);
-
-            var numberOfContainers = request.Capacity / containerType.Capacity;
-
-            var beerPrice = request.Capacity * beerType.EstimatedPrice;
-            var containerPrice = numberOfContainers * containerType.EstimatedPrice;
-
-            return Math.Round((beerPrice + containerPrice)/100,0)*100;
-        }
 
         public async Task<IEnumerable<ProspectClient>> GetProspectClientsAsync()
         {

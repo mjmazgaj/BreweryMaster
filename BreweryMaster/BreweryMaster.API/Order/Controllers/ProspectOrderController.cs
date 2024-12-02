@@ -10,12 +10,12 @@ namespace BreweryMaster.API.Order.Controllers
     [ApiController]
     public class ProspectOrderController : ControllerBase
     {
-        private readonly IProspectClientService _clientService;
+        private readonly IProspectOrderService _prospectOrderService;
         private readonly OrderSettings _settings;
 
-        public ProspectOrderController(IProspectClientService clientService, IOptions<OrderSettings> options)
+        public ProspectOrderController(IProspectOrderService orderService, IOptions<OrderSettings> options)
         {
-            _clientService = clientService;
+            _prospectOrderService = orderService;
             _settings = options.Value;
         }
 
@@ -26,7 +26,7 @@ namespace BreweryMaster.API.Order.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<decimal> GetEstimatedPrice([FromQuery] PriceEstimationRequest request)
         {
-            return _clientService.GetEstimatedPrice(request);
+            return _prospectOrderService.GetEstimatedPrice(request);
         }
 
         [HttpGet]
@@ -36,59 +36,59 @@ namespace BreweryMaster.API.Order.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<ProspectOrderDetails> GetProspectOrderDetails()
         {
-            var prospectOrderDetails = _clientService.GetProspectOrderDetails();
+            var prospectOrderDetails = _prospectOrderService.GetProspectOrderDetails();
             if (prospectOrderDetails == null)
                 return NotFound();
             return Ok(prospectOrderDetails);
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<ProspectClient>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<ProspectOrder>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<IEnumerable<ProspectClient>>> GetProspectClients()
+        public async Task<ActionResult<IEnumerable<ProspectOrder>>> GetProspectOrders()
         {
-            var clients = await _clientService.GetProspectClientsAsync();
-            if (clients == null)
+            var orders = await _prospectOrderService.GetProspectOrdersAsync();
+            if (orders == null)
                 return NotFound();
-            return Ok(clients);
+            return Ok(orders);
         }
 
         [HttpGet]
         [Route("{id:int}")]
-        [ProducesResponseType(typeof(ProspectClient), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProspectOrder), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ProspectClient>> GetProspectClientById([MinIntValidation] int id)
+        public async Task<ActionResult<ProspectOrder>> GetProspectOrderById([MinIntValidation] int id)
         {
-            var client = await _clientService.GetProspectClientByIdAsync(id);
+            var order = await _prospectOrderService.GetProspectOrderByIdAsync(id);
 
-            if (client == null)
+            if (order == null)
                 return NotFound();
 
-            return Ok(client);
+            return Ok(order);
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(ProspectClient), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ProspectOrder), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<ProspectClient>> CreateProspectClient([FromBody] ProspectClientRequest request)
+        public async Task<ActionResult<ProspectOrder>> CreateProspectOrder([FromBody] ProspectOrderRequest request)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var createdClient = await _clientService.CreateProspectClientAsync(request);
-            return CreatedAtAction(nameof(GetProspectClientById), new { id = createdClient.ID }, createdClient);
+            var createdOrder = await _prospectOrderService.CreateProspectOrderAsync(request);
+            return CreatedAtAction(nameof(GetProspectOrderById), new { id = createdOrder.ID }, createdOrder);
         }
 
         [HttpPut]
         [Route("{id:int}")]
-        [ProducesResponseType(typeof(ProspectClient), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProspectOrder), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> EditProspectClient(int id, [FromBody] ProspectClient client)
+        public async Task<ActionResult> EditProspectOrder(int id, [FromBody] ProspectOrder order)
         {
-            if (!await _clientService.EditProspectClientAsync(id, client))
+            if (!await _prospectOrderService.EditProspectOrderAsync(id, order))
                 return NotFound();
 
             return Ok();
@@ -96,12 +96,12 @@ namespace BreweryMaster.API.Order.Controllers
 
         [HttpDelete]
         [Route("{id:int}")]
-        [ProducesResponseType(typeof(ProspectClient), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProspectOrder), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> DeleteProspectClientById([MinIntValidation] int id)
+        public async Task<ActionResult> DeleteProspectOrderById([MinIntValidation] int id)
         {
-            if (!await _clientService.DeleteProspectClientByIdAsync(id))
+            if (!await _prospectOrderService.DeleteProspectOrderByIdAsync(id))
                 return NotFound();
 
             return Ok();

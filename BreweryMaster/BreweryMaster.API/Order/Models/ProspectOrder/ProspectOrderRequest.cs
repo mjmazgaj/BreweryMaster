@@ -2,7 +2,7 @@
 
 namespace BreweryMaster.API.Order.Models.ProspectOrder
 {
-    public class ProspectClientRequest
+    public class ProspectOrderRequest
     {
         [Required]
         public string? Forename { get; set; }
@@ -12,5 +12,13 @@ namespace BreweryMaster.API.Order.Models.ProspectOrder
         [Required]
         [EmailAddress]
         public string? Email { get; set; }
+        [Required]
+        public string? SelectedBeer { get; set; }
+        [Required]
+        public string? SelectedContainer { get; set; }
+        [Required]
+        public int Capacity { get; set; }
+        [Required]
+        public DateOnly OrderCompletionDate { get; set; }
     }
 }
