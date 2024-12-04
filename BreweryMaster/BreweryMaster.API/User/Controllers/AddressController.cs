@@ -51,7 +51,7 @@ namespace BreweryMaster.API.User.Controllers
         public async Task<ActionResult<Address>> CreateAddress([FromBody] Address address)
         {
             var createdAddress = await _addressService.CreateAddressAsync(address);
-            return CreatedAtAction(nameof(GetAddressById), new { id = createdAddress.ID }, createdAddress);
+            return CreatedAtAction(nameof(GetAddressById), new { id = createdAddress.Id }, createdAddress);
         }
 
         [HttpPut]

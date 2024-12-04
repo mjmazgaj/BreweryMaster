@@ -24,7 +24,7 @@ namespace BreweryMaster.API.Order.Services
 
         public async Task<ProspectClient> GetProspectClientByIdAsync(int id)
         {
-            return await _context.ProspectClients.FirstOrDefaultAsync(x => x.ID == id);
+            return await _context.ProspectClients.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<ProspectClient> CreateProspectClientAsync(ProspectClientRequest request)
@@ -44,7 +44,7 @@ namespace BreweryMaster.API.Order.Services
 
         public async Task<bool> EditProspectClientAsync(int id, ProspectClient client)
         {
-            if (id != client.ID)
+            if (id != client.Id)
                 return false;
 
             _context.Entry(client).State = EntityState.Modified;
@@ -66,7 +66,7 @@ namespace BreweryMaster.API.Order.Services
 
         public async Task<bool> DeleteProspectClientByIdAsync(int id)
         {
-            var client = await _context.ProspectClients.FirstOrDefaultAsync(x => x.ID == id);
+            var client = await _context.ProspectClients.FirstOrDefaultAsync(x => x.Id == id);
 
             if (client == null)
                 return false;
@@ -79,7 +79,7 @@ namespace BreweryMaster.API.Order.Services
 
         private bool ProspectClientExists(int id)
         {
-            return _context.ProspectClients.Any(x => x.ID == id);
+            return _context.ProspectClients.Any(x => x.Id == id);
         }
     }
 }

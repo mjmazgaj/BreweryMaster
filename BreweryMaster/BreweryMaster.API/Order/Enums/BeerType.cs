@@ -1,4 +1,4 @@
-﻿namespace BreweryMaster.API.Order.Models.ProspectOrder
+﻿namespace BreweryMaster.API.Order.Enums
 {
     public enum BeerType
     {

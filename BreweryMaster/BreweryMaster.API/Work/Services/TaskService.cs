@@ -25,7 +25,7 @@ namespace BreweryMaster.API.Work.Services
         public async Task<Dictionary<string, Column>> GetKanbanTasksByOwnerIdAsync(int ownerId)
         {
             var tasks = await _context.KanbanTasks.Where(x => x.OwnerId == ownerId).ToListAsync();
-            var owner = await _applicationDbContext.Employees.FirstOrDefaultAsync(x => x.ID == ownerId);
+            var owner = await _applicationDbContext.Employees.FirstOrDefaultAsync(x => x.Id == ownerId);
 
             var ownerName = string.Empty;
 
@@ -59,7 +59,7 @@ namespace BreweryMaster.API.Work.Services
 
         public async Task<KanbanTask> GetKanbanTaskByIdAsync(int id)
         {
-            return await _context.KanbanTasks.FirstOrDefaultAsync(x => x.ID == id);
+            return await _context.KanbanTasks.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<KanbanTask> CreateKanbanTaskAsync(KanbanTask kanbanTask)
@@ -71,7 +71,7 @@ namespace BreweryMaster.API.Work.Services
 
         public async Task<bool> EditKanbanTaskAsync(int id, KanbanTask kanbanTask)
         {
-            if (id != kanbanTask.ID)
+            if (id != kanbanTask.Id)
                 return false;
 
             _context.Entry(kanbanTask).State = EntityState.Modified;
@@ -95,7 +95,7 @@ namespace BreweryMaster.API.Work.Services
         {
             foreach (var item in request)
             {
-                var task = await _context.KanbanTasks.FirstOrDefaultAsync(x => x.ID == item.ID);
+                var task = await _context.KanbanTasks.FirstOrDefaultAsync(x => x.Id == item.Id);
 
                 if (task != null)
                     task.Status = item.Status;
@@ -115,7 +115,7 @@ namespace BreweryMaster.API.Work.Services
 
         public async Task<bool> DeleteKanbanTaskByIdAsync(int id)
         {
-            var kanbanTask = await _context.KanbanTasks.FirstOrDefaultAsync(x => x.ID == id);
+            var kanbanTask = await _context.KanbanTasks.FirstOrDefaultAsync(x => x.Id == id);
 
             if (kanbanTask == null)
                 return false;
@@ -128,7 +128,7 @@ namespace BreweryMaster.API.Work.Services
 
         private bool KanbanTaskExists(int id)
         {
-            return _context.KanbanTasks.Any(x => x.ID == id);
+            return _context.KanbanTasks.Any(x => x.Id == id);
         }
     }
 }

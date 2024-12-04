@@ -1,5 +1,5 @@
 ﻿using BreweryMaster.API.Order.Enums;
-using BreweryMaster.API.Order.Models.ProspectOrder;
+using BreweryMaster.API.Order.Models.Order;
 using BreweryMaster.API.Order.Models.Settings;
 using BreweryMaster.API.Shared.Models;
 using Microsoft.EntityFrameworkCore;
@@ -7,25 +7,17 @@ using Microsoft.Extensions.Options;
 
 namespace BreweryMaster.API.Order.Services
 {
-    public class ProspectOrderService : IProspectOrderService
+    public class OrderService : IOrderService
     {
         private readonly ApplicationDbContext _context;
         private readonly OrderSettings _settings;
 
-        public ProspectOrderService(ApplicationDbContext context, IOptions<OrderSettings> options)
+        public OrderService(ApplicationDbContext context, IOptions<OrderSettings> options)
         {
             _context = context;
             _settings = options.Value;
         }
-        public ProspectOrderDetails GetProspectOrderDetails()
-        {
-            return new ProspectOrderDetails()
-            {
-                BeerTypes = Enum.GetNames(typeof(BeerType)),
-                ContainerTypes = Enum.GetNames(typeof(ContainerType))
-            };
-        }
-        public decimal GetEstimatedPrice(ProspectPriceEstimationRequest request)
+        public decimal GetPrice(PriceEstimationRequest request)
         {
             var beerType = _settings.BeerPrices.FirstOrDefault(x=> x.BeerType.ToString() == request.BeerType);
             var containerType = _settings.ContainerPrices.FirstOrDefault(x => x.ContainerType.ToString() == request.ContainerType);
@@ -38,30 +30,30 @@ namespace BreweryMaster.API.Order.Services
             return Math.Round((beerPrice + containerPrice)/100,0)*100;
         }
 
-        public async Task<IEnumerable<ProspectOrder>> GetProspectOrdersAsync()
+        public async Task<IEnumerable<Order.Models.Order.Order>> GetOrdersAsync()
         {
-            return await _context.ProspectOrders.ToListAsync();
+            return await _context.Orders.ToListAsync();
         }
 
-        public async Task<ProspectOrder> GetProspectOrderByIdAsync(int id)
+        public async Task<Order.Models.Order.Order> GetOrderByIdAsync(int id)
         {
-            return await _context.ProspectOrders.FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Orders.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<ProspectOrder> CreateProspectOrderAsync(ProspectOrderRequest request)
+        public async Task<Order.Models.Order.Order> CreateOrderAsync(OrderRequest request)
         {
-            var clientToCreate = new ProspectOrder()
+            var clientToCreate = new Order.Models.Order.Order()
             {
                 TargetDate = request.TargetDate
             };
 
-            _context.ProspectOrders.Add(clientToCreate);
+            _context.Orders.Add(clientToCreate);
             await _context.SaveChangesAsync();
 
             return clientToCreate;
         }
 
-        public async Task<bool> EditProspectOrderAsync(int id, ProspectOrder order)
+        public async Task<bool> EditOrderAsync(int id, Order.Models.Order.Order order)
         {
             if (id != order.Id)
                 return false;
@@ -74,7 +66,7 @@ namespace BreweryMaster.API.Order.Services
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProspectOrdersExists(id))
+                if (!OrdersExists(id))
                     return false;
                 else
                     throw;
@@ -83,22 +75,22 @@ namespace BreweryMaster.API.Order.Services
             return true;
         }
 
-        public async Task<bool> DeleteProspectOrderByIdAsync(int id)
+        public async Task<bool> DeleteOrderByIdAsync(int id)
         {
-            var order = await _context.ProspectOrders.FirstOrDefaultAsync(x => x.Id == id);
+            var order = await _context.Orders.FirstOrDefaultAsync(x => x.Id == id);
 
             if (order == null)
                 return false;
 
-            _context.ProspectOrders.Remove(order);
+            _context.Orders.Remove(order);
             await _context.SaveChangesAsync();
 
             return true;
         }
 
-        private bool ProspectOrdersExists(int id)
+        private bool OrdersExists(int id)
         {
-            return _context.ProspectOrders.Any(x => x.Id == id);
+            return _context.Orders.Any(x => x.Id == id);
         }
     }
 }

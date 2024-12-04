@@ -49,7 +49,7 @@ public class AddressControllerTests
     public async Task GetAddressById_ReturnsOkResult_WithAddress()
     {
         // Arrange
-        var address = new Address { ID = 1 };
+        var address = new Address { Id = 1 };
         _mockAddressService.Setup(service => service.GetAddressByIdAsync(1)).ReturnsAsync(address);
 
         // Act
@@ -58,7 +58,7 @@ public class AddressControllerTests
         // Assert
         var okResult = Assert.IsType<OkObjectResult>(result.Result);
         var returnAddress = Assert.IsType<Address>(okResult.Value);
-        Assert.Equal(1, returnAddress.ID);
+        Assert.Equal(1, returnAddress.Id);
     }
 
     [Fact]
@@ -78,7 +78,7 @@ public class AddressControllerTests
     public async Task CreateAddress_ReturnsCreatedAtAction_WithCreatedAddress()
     {
         // Arrange
-        var address = new Address { ID = 1 };
+        var address = new Address { Id = 1 };
         _mockAddressService.Setup(service => service.CreateAddressAsync(address)).ReturnsAsync(address);
 
         // Act
@@ -87,14 +87,14 @@ public class AddressControllerTests
         // Assert
         var createdAtActionResult = Assert.IsType<CreatedAtActionResult>(result.Result);
         var returnAddress = Assert.IsType<Address>(createdAtActionResult.Value);
-        Assert.Equal(1, returnAddress.ID);
+        Assert.Equal(1, returnAddress.Id);
     }
 
     [Fact]
     public async Task EditAddress_ReturnsOk_WhenAddressIsEdited()
     {
         // Arrange
-        var address = new Address { ID = 1 };
+        var address = new Address { Id = 1 };
         _mockAddressService.Setup(service => service.EditAddressAsync(1, address)).ReturnsAsync(true);
 
         // Act
@@ -108,7 +108,7 @@ public class AddressControllerTests
     public async Task EditAddress_ReturnsNotFound_WhenAddressDoesNotExist()
     {
         // Arrange
-        var address = new Address { ID = 1 };
+        var address = new Address { Id = 1 };
         _mockAddressService.Setup(service => service.EditAddressAsync(1, address)).ReturnsAsync(false);
 
         // Act

@@ -70,7 +70,7 @@ namespace BreweryMaster.API.Work.Controllers
         public async Task<ActionResult<KanbanTask>> CreateKanbanTask([FromBody] KanbanTask kanbanTask)
         {
             var createdTask = await _taskService.CreateKanbanTaskAsync(kanbanTask);
-            return CreatedAtAction(nameof(GetKanbanTaskById), new { id = createdTask.ID }, createdTask);
+            return CreatedAtAction(nameof(GetKanbanTaskById), new { id = createdTask.Id }, createdTask);
         }
 
         [HttpPut]

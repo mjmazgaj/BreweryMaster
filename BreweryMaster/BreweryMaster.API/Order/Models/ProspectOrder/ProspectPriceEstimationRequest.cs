@@ -2,7 +2,7 @@
 
 namespace BreweryMaster.API.Order.Models.ProspectOrder
 {
-    public class PriceEstimationRequest
+    public class ProspectPriceEstimationRequest
     {
         [Required]
         public string? BeerType { get; set; }

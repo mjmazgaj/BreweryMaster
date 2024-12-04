@@ -1,19 +1,22 @@
 ﻿using BreweryMaster.API.Order.Controllers;
-using BreweryMaster.API.Order.Models;
 using BreweryMaster.API.Order.Models.ProspectOrder;
+using BreweryMaster.API.Order.Models.Settings;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Moq;
 
 namespace BreweryMaster.Tests.Controllers;
 public class ClientControllerTests
 {
     private readonly Mock<IProspectClientService> _mockClientService;
-    private readonly ProspectOrderController _controller;
+    private readonly Mock<IOptions<OrderSettings>> _mockOptions;
+    private readonly ProspectClientController _controller;
 
     public ClientControllerTests()
     {
         _mockClientService = new Mock<IProspectClientService>();
-        _controller = new ProspectClientController(_mockClientService.Object);
+        _mockOptions = new Mock<IOptions<OrderSettings>>();
+        _controller = new ProspectClientController(_mockClientService.Object, _mockOptions.Object);
     }
 
     [Fact]
@@ -49,7 +52,7 @@ public class ClientControllerTests
     public async Task GetProspectClientById_ReturnsOkResult_WithClient()
     {
         // Arrange
-        var client = new ProspectClient { ID = 1 };
+        var client = new ProspectClient { Id = 1 };
         _mockClientService.Setup(service => service.GetProspectClientByIdAsync(1)).ReturnsAsync(client);
 
         // Act
@@ -58,7 +61,7 @@ public class ClientControllerTests
         // Assert
         var okResult = Assert.IsType<OkObjectResult>(result.Result);
         var returnClient = Assert.IsType<ProspectClient>(okResult.Value);
-        Assert.Equal(1, returnClient.ID);
+        Assert.Equal(1, returnClient.Id);
     }
 
     [Fact]
@@ -78,7 +81,7 @@ public class ClientControllerTests
     public async Task CreateProspectClient_ReturnsCreatedAtAction_WithCreatedClient()
     {
         // Arrange
-        var clientRequest = new ProspectOrderRequest { Forename = "test", Email = "test@test.test" };
+        var clientRequest = new ProspectClientRequest { Forename = "test", Email = "test@test.test" };
         var client = new ProspectClient { Forename = "test", Email = "test@test.test" };
         _mockClientService.Setup(service => service.CreateProspectClientAsync(clientRequest)).ReturnsAsync(client);
 
@@ -88,14 +91,14 @@ public class ClientControllerTests
         // Assert
         var createdAtActionResult = Assert.IsType<CreatedAtActionResult>(result.Result);
         var returnClient = Assert.IsType<ProspectClient>(createdAtActionResult.Value);
-        Assert.Equal(1, returnClient.ID);
+        Assert.Equal(1, returnClient.Id);
     }
 
     [Fact]
     public async Task EditProspectClient_ReturnsOk_WhenClientIsEdited()
     {
         // Arrange
-        var client = new ProspectClient { ID = 1 };
+        var client = new ProspectClient { Id = 1 };
         _mockClientService.Setup(service => service.EditProspectClientAsync(1, client)).ReturnsAsync(true);
 
         // Act
@@ -109,7 +112,7 @@ public class ClientControllerTests
     public async Task EditProspectClient_ReturnsNotFound_WhenClientDoesNotExist()
     {
         // Arrange
-        var client = new ProspectClient { ID = 1 };
+        var client = new ProspectClient { Id = 1 };
         _mockClientService.Setup(service => service.EditProspectClientAsync(1, client)).ReturnsAsync(false);
 
         // Act

@@ -24,7 +24,7 @@ namespace BreweryMaster.API.Order.Controllers
         [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<decimal> GetEstimatedPrice([FromQuery] PriceEstimationRequest request)
+        public ActionResult<decimal> GetEstimatedPrice([FromQuery] ProspectPriceEstimationRequest request)
         {
             return _prospectOrderService.GetEstimatedPrice(request);
         }
@@ -78,7 +78,7 @@ namespace BreweryMaster.API.Order.Controllers
                 return BadRequest(ModelState);
 
             var createdOrder = await _prospectOrderService.CreateProspectOrderAsync(request);
-            return CreatedAtAction(nameof(GetProspectOrderById), new { id = createdOrder.ID }, createdOrder);
+            return CreatedAtAction(nameof(GetProspectOrderById), new { id = createdOrder.Id }, createdOrder);
         }
 
         [HttpPut]

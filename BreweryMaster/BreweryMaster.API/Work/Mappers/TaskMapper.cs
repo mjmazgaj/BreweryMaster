@@ -9,7 +9,7 @@ namespace BreweryMaster.API.Work.Mappers
         {
             return new KanbanTaskDto
             {
-                ID = KanbanTask.ID,
+                Id = KanbanTask.Id,
                 Title = KanbanTask.Title,
                 Summary = KanbanTask.Summary,
                 Status = KanbanTask.Status,
@@ -24,7 +24,7 @@ namespace BreweryMaster.API.Work.Mappers
         {
             return new KanbanTask
             {
-                ID = KanbanTaskDto.ID,
+                Id = KanbanTaskDto.Id,
                 Title = KanbanTaskDto.Title,
                 Summary = KanbanTaskDto.Summary,
                 Status = KanbanTaskDto.Status,

@@ -20,7 +20,7 @@ namespace BreweryMaster.API.User.Services
 
         public async Task<Address> GetAddressByIdAsync(int id)
         {
-            return await _context.Addresses.FirstOrDefaultAsync(x => x.ID == id);
+            return await _context.Addresses.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<Address> CreateAddressAsync(Address address)
@@ -45,7 +45,7 @@ namespace BreweryMaster.API.User.Services
 
         public async Task<bool> EditAddressAsync(int id, Address address)
         {
-            if (id != address.ID)
+            if (id != address.Id)
                 return false;
 
             _context.Entry(address).State = EntityState.Modified;
@@ -67,7 +67,7 @@ namespace BreweryMaster.API.User.Services
 
         public async Task<bool> DeleteAddressByIdAsync(int id)
         {
-            var address = await _context.Addresses.FirstOrDefaultAsync(x => x.ID == id);
+            var address = await _context.Addresses.FirstOrDefaultAsync(x => x.Id == id);
 
             if (address == null)
                 return false;
@@ -80,7 +80,7 @@ namespace BreweryMaster.API.User.Services
 
         private bool AddressExists(int id)
         {
-            return _context.Addresses.Any(x => x.ID == id);
+            return _context.Addresses.Any(x => x.Id == id);
         }
     }
 }

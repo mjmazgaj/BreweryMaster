@@ -12,6 +12,7 @@ namespace BreweryMaster.API.Shared.Models
         {
         }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<Order.Models.Order.Order> Orders { get; set; }
         public DbSet<ProspectClient> ProspectClients { get; set; }
         public DbSet<ProspectOrder> ProspectOrders { get; set; }
         public DbSet<Employee> Employees { get; set; }

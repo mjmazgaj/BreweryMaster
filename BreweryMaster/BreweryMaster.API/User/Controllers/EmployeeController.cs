@@ -48,7 +48,7 @@ namespace BreweryMaster.API.User.Controllers
         public async Task<ActionResult<Employee>> CreateEmployee([FromBody] Employee employee)
         {
             var createdEmployee = await _employeeService.CreateEmployeeAsync(employee);
-            return CreatedAtAction(nameof(GetEmployeeById), new { id = createdEmployee.ID }, createdEmployee);
+            return CreatedAtAction(nameof(GetEmployeeById), new { id = createdEmployee.Id }, createdEmployee);
         }
 
         [HttpPut]

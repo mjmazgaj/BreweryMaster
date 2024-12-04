@@ -23,7 +23,7 @@ namespace BreweryMaster.API.User.Services
 
         public async Task<Employee> GetEmployeeByIdAsync(int id)
         {
-            return await _context.Employees.FirstOrDefaultAsync(x => x.ID == id);
+            return await _context.Employees.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<Employee> CreateEmployeeAsync(Employee employee)
@@ -46,7 +46,7 @@ namespace BreweryMaster.API.User.Services
 
         public async Task<bool> EditEmployeeAsync(int id, Employee employee)
         {
-            if (id != employee.ID)
+            if (id != employee.Id)
                 return false;
 
             _context.Entry(employee).State = EntityState.Modified;
@@ -68,7 +68,7 @@ namespace BreweryMaster.API.User.Services
 
         public async Task<bool> DeleteEmployeeByIdAsync(int id)
         {
-            var employee = await _context.Employees.FirstOrDefaultAsync(x => x.ID == id);
+            var employee = await _context.Employees.FirstOrDefaultAsync(x => x.Id == id);
 
             if (employee == null)
                 return false;
@@ -81,7 +81,7 @@ namespace BreweryMaster.API.User.Services
 
         private bool EmployeeExists(int id)
         {
-            return _context.Employees.Any(x => x.ID == id);
+            return _context.Employees.Any(x => x.Id == id);
         }
     }
 }

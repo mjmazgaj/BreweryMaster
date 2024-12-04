@@ -1,4 +1,4 @@
-﻿using BreweryMaster.API.Order.Models.ProspectOrder;
+﻿using BreweryMaster.API.Order.Enums;
 
 namespace BreweryMaster.API.Order.Models.Settings
 {

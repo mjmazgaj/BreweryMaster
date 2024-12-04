@@ -84,7 +84,7 @@ namespace BreweryMaster.Tests.Controllers
             // Assert
             var createdAtActionResult = Assert.IsType<CreatedAtActionResult>(result.Result);
             Assert.Equal(nameof(TaskController.GetKanbanTaskById), createdAtActionResult.ActionName);
-            Assert.Equal(kanbanTask.ID, createdAtActionResult.RouteValues["id"]);
+            Assert.Equal(kanbanTask.Id, createdAtActionResult.RouteValues["id"]);
             Assert.Equal(kanbanTask, createdAtActionResult.Value);
         }
 

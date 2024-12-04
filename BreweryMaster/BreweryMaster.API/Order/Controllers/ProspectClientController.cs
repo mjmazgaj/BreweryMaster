@@ -55,7 +55,7 @@ namespace BreweryMaster.API.Order.Controllers
                 return BadRequest(ModelState);
 
             var createdClient = await _clientService.CreateProspectClientAsync(request);
-            return CreatedAtAction(nameof(GetProspectClientById), new { id = createdClient.ID }, createdClient);
+            return CreatedAtAction(nameof(GetProspectClientById), new { id = createdClient.Id }, createdClient);
         }
 
         [HttpPut]

@@ -2,7 +2,7 @@
 {
     public class KanbanTaskDto
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Title { get; set; } = string.Empty;
         public string Summary { get; set; } = string.Empty;
         public int Status { get; set; }
