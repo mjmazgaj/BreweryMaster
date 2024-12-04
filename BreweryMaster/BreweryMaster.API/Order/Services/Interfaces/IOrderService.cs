@@ -1,4 +1,4 @@
-﻿using BreweryMaster.API.Order.Models.Order;
+﻿using BreweryMaster.API.OrderModule.Models;
 
 public interface IOrderService
 {

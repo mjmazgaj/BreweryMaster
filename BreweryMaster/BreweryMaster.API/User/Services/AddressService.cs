@@ -1,8 +1,8 @@
-﻿using BreweryMaster.API.Shared.Models;
-using BreweryMaster.API.User.Models;
+﻿using BreweryMaster.API.SharedModule.Models;
+using BreweryMaster.API.UserModule.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace BreweryMaster.API.User.Services
+namespace BreweryMaster.API.UserModule.Services
 {
     public class AddressService : IAddressService
     {

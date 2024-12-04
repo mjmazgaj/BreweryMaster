@@ -1,4 +1,4 @@
-﻿using BreweryMaster.API.User.Models;
+﻿using BreweryMaster.API.UserModule.Models;
 
 public interface IEmployeeService
 {

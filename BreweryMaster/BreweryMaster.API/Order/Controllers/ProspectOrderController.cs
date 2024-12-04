@@ -1,10 +1,10 @@
-﻿using BreweryMaster.API.Order.Models.ProspectOrder;
-using BreweryMaster.API.Order.Models.Settings;
-using BreweryMaster.API.Shared.Validators;
+﻿using BreweryMaster.API.OrderModule.Models;
+using BreweryMaster.API.OrderModule.Models;
+using BreweryMaster.API.SharedModule.Validators;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
-namespace BreweryMaster.API.Order.Controllers
+namespace BreweryMaster.API.OrderModule.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

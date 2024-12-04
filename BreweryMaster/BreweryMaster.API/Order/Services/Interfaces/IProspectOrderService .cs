@@ -1,4 +1,4 @@
-﻿using BreweryMaster.API.Order.Models.ProspectOrder;
+﻿using BreweryMaster.API.OrderModule.Models;
 
 public interface IProspectOrderService
 {

@@ -1,6 +1,6 @@
-﻿using BreweryMaster.API.Order.Enums;
+﻿using BreweryMaster.API.OrderModule.Enums;
 
-namespace BreweryMaster.API.Order.Models.Order
+namespace BreweryMaster.API.OrderModule.Models
 {
     public class Order
     {

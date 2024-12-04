@@ -1,7 +1,7 @@
-﻿using BreweryMaster.API.Order.Enums;
+﻿using BreweryMaster.API.OrderModule.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace BreweryMaster.API.Order.Models.Order
+namespace BreweryMaster.API.OrderModule.Models
 {
     public class OrderRequest
     {

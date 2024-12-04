@@ -1,4 +1,4 @@
-﻿namespace BreweryMaster.API.Order.Enums
+﻿namespace BreweryMaster.API.OrderModule.Enums
 {
     public enum BeerType
     {

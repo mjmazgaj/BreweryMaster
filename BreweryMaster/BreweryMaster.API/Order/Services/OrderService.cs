@@ -1,11 +1,9 @@
-﻿using BreweryMaster.API.Order.Enums;
-using BreweryMaster.API.Order.Models.Order;
-using BreweryMaster.API.Order.Models.Settings;
-using BreweryMaster.API.Shared.Models;
+﻿using BreweryMaster.API.OrderModule.Models;
+using BreweryMaster.API.SharedModule.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
-namespace BreweryMaster.API.Order.Services
+namespace BreweryMaster.API.OrderModule.Services
 {
     public class OrderService : IOrderService
     {
@@ -30,19 +28,19 @@ namespace BreweryMaster.API.Order.Services
             return Math.Round((beerPrice + containerPrice)/100,0)*100;
         }
 
-        public async Task<IEnumerable<Order.Models.Order.Order>> GetOrdersAsync()
+        public async Task<IEnumerable<Models.Order>> GetOrdersAsync()
         {
             return await _context.Orders.ToListAsync();
         }
 
-        public async Task<Order.Models.Order.Order> GetOrderByIdAsync(int id)
+        public async Task<Order> GetOrderByIdAsync(int id)
         {
             return await _context.Orders.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<Order.Models.Order.Order> CreateOrderAsync(OrderRequest request)
+        public async Task<Models.Order> CreateOrderAsync(OrderRequest request)
         {
-            var clientToCreate = new Order.Models.Order.Order()
+            var clientToCreate = new Order()
             {
                 TargetDate = request.TargetDate
             };
@@ -53,7 +51,7 @@ namespace BreweryMaster.API.Order.Services
             return clientToCreate;
         }
 
-        public async Task<bool> EditOrderAsync(int id, Order.Models.Order.Order order)
+        public async Task<bool> EditOrderAsync(int id, Order order)
         {
             if (id != order.Id)
                 return false;

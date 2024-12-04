@@ -1,9 +1,9 @@
-﻿using BreweryMaster.API.Work.Models;
-using BreweryMaster.API.Work.Models.Dtos;
+﻿using BreweryMaster.API.WorkModule.Models;
+using BreweryMaster.API.WorkModule.Models.Dtos;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BreweryMaster.API.Work.Services
+namespace BreweryMaster.API.WorkModule.Services
 {
     public interface ITaskService
     {

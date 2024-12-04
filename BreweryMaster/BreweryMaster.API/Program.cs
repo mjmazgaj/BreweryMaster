@@ -1,10 +1,10 @@
-using BreweryMaster.API.Order.Models.Settings;
-using BreweryMaster.API.Order.Services;
-using BreweryMaster.API.Shared.Models;
-using BreweryMaster.API.User.Models;
-using BreweryMaster.API.User.Services;
-using BreweryMaster.API.Work.Models;
-using BreweryMaster.API.Work.Services;
+using BreweryMaster.API.OrderModule.Models;
+using BreweryMaster.API.OrderModule.Services;
+using BreweryMaster.API.SharedModule.Models;
+using BreweryMaster.API.UserModule.Models;
+using BreweryMaster.API.UserModule.Services;
+using BreweryMaster.API.WorkModule.Models;
+using BreweryMaster.API.WorkModule.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

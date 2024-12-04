@@ -1,6 +1,6 @@
-﻿using BreweryMaster.API.Work.Models.Dtos;
+﻿using BreweryMaster.API.WorkModule.Models.Dtos;
 
-namespace BreweryMaster.API.Work.Models
+namespace BreweryMaster.API.WorkModule.Models
 {
     public class Column
     {

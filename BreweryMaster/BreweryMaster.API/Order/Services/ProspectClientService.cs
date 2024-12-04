@@ -1,10 +1,10 @@
-﻿using BreweryMaster.API.Order.Models.ProspectOrder;
-using BreweryMaster.API.Order.Models.Settings;
-using BreweryMaster.API.Shared.Models;
+﻿using BreweryMaster.API.OrderModule.Models;
+using BreweryMaster.API.OrderModule.Models;
+using BreweryMaster.API.SharedModule.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
-namespace BreweryMaster.API.Order.Services
+namespace BreweryMaster.API.OrderModule.Services
 {
     public class ProspectClientService : IProspectClientService
     {

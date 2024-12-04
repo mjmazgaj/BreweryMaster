@@ -1,6 +1,6 @@
-﻿using BreweryMaster.API.Work.Models;
-using BreweryMaster.API.Work.Models.Dtos;
-using BreweryMaster.API.Work.Services;
+﻿using BreweryMaster.API.WorkModule.Models;
+using BreweryMaster.API.WorkModule.Models.Dtos;
+using BreweryMaster.API.WorkModule.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BreweryMaster.API.Work.Controllers
+namespace BreweryMaster.API.WorkModule.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

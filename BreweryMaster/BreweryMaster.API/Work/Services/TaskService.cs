@@ -1,15 +1,15 @@
-﻿using BreweryMaster.API.Shared.Models;
-using BreweryMaster.API.User.Helpers;
-using BreweryMaster.API.User.Models;
-using BreweryMaster.API.Work.Mappers;
-using BreweryMaster.API.Work.Models;
-using BreweryMaster.API.Work.Models.Dtos;
+﻿using BreweryMaster.API.SharedModule.Models;
+using BreweryMaster.API.UserModule.Helpers;
+using BreweryMaster.API.UserModule.Models;
+using BreweryMaster.API.WorkModule.Mappers;
+using BreweryMaster.API.WorkModule.Models;
+using BreweryMaster.API.WorkModule.Models.Dtos;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BreweryMaster.API.Work.Services
+namespace BreweryMaster.API.WorkModule.Services
 {
     public class TaskService : ITaskService
     {

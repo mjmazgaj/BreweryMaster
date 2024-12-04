@@ -1,4 +1,4 @@
-﻿namespace BreweryMaster.API.Order.Models.Settings
+﻿namespace BreweryMaster.API.OrderModule.Models
 {
     public class OrderSettings
     {

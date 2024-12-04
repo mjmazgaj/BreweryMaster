@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace BreweryMaster.API.User.Models
+namespace BreweryMaster.API.UserModule.Models
 {
     public class ApplicationUser : IdentityUser
     {

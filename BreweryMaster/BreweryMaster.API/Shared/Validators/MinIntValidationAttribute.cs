@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BreweryMaster.API.Shared.Validators
+namespace BreweryMaster.API.SharedModule.Validators
 {
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter)]
     public class MinIntValidationAttribute : ValidationAttribute

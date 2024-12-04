@@ -1,6 +1,6 @@
-﻿using BreweryMaster.API.Order.Controllers;
-using BreweryMaster.API.Order.Models.ProspectOrder;
-using BreweryMaster.API.Order.Models.Settings;
+﻿using BreweryMaster.API.OrderModule.Controllers;
+using BreweryMaster.API.OrderModule.Models;
+using BreweryMaster.API.OrderModule.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Moq;

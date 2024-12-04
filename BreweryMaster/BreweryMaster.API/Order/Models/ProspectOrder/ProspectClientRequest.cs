@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BreweryMaster.API.Order.Models.ProspectOrder
+namespace BreweryMaster.API.OrderModule.Models
 {
     public class ProspectClientRequest
     {

@@ -1,4 +1,4 @@
-﻿namespace BreweryMaster.API.Work.Models.Dtos
+﻿namespace BreweryMaster.API.WorkModule.Models.Dtos
 {
     public class KanbanTaskDto
     {
