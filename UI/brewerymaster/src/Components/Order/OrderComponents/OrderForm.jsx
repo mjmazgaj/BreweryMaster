@@ -8,7 +8,7 @@ import CompanyClientDetails from './CompanyClientDetails'
 import IndividualClientDetails from './IndividualClientDetails'
 import Contact from './../../Shared/Contact'
 
-const OrderForm = () => {  
+const OrderForm = ({currentStep, setCurrentStep}) => {  
 
   const [contactData, setContactData] = useState({
     phoneNumber: "",
@@ -42,7 +42,6 @@ const OrderForm = () => {
         clear();
         toast.success('Order has been added');
       })
-      .catch((error) => console.log(error));
   };
   
   const clear = () => {
@@ -60,27 +59,47 @@ const OrderForm = () => {
     });
   };
 
-  const [currentStep, setCurrentStep] = useState(0);
 
   const steps = [
-    <Address
-      addressId={addressId}
-      deliveryAddressId={deliveryAddressId}
-      setAddressId={setAddressId}
-      setDeliveryAddressId={setDeliveryAddressId}
-    />,
-    <Contact contactData={contactData} setContactData={setContactData} />,
-    <IndividualClientDetails
-      forename={forename}
-      surname={surname}
-      setForename={setForename}
-      setSurname={setSurname}
-    />,
-    <CompanyClientDetails
-      companyClientDetailsData={companyClientDetailsData}
-      setCompanyClientDetailsData={setCompanyClientDetailsData}
-    />
+    {
+      name: "Address",
+      component: (
+        <Address
+          addressId={addressId}
+          deliveryAddressId={deliveryAddressId}
+          setAddressId={setAddressId}
+          setDeliveryAddressId={setDeliveryAddressId}
+        />
+      ),
+    },
+    {
+      name: "Contact",
+      component: (
+        <Contact contactData={contactData} setContactData={setContactData} />
+      ),
+    },
+    {
+      name: "IndividualClientDetails",
+      component: (
+        <IndividualClientDetails
+          forename={forename}
+          surname={surname}
+          setForename={setForename}
+          setSurname={setSurname}
+        />
+      ),
+    },
+    {
+      name: "CompanyClientDetails",
+      component: (
+        <CompanyClientDetails
+          companyClientDetailsData={companyClientDetailsData}
+          setCompanyClientDetailsData={setCompanyClientDetailsData}
+        />
+      ),
+    },
   ];
+
   const nextStep = () => {
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1);
@@ -95,34 +114,32 @@ const OrderForm = () => {
 
   return (
     <form className="order-form">
-      <div>{steps[currentStep]}</div>
+      <h2>{steps[currentStep].name}</h2>
+      <div>{steps[currentStep].component}</div>
       <div style={{ marginTop: "20px" }}>
-      <button
-  onClick={(e) => {
-    e.preventDefault();
-    prevStep();
-  }}
-  disabled={currentStep === 0}
->
-  Wstecz
-</button>
-<button
-  onClick={(e) => {
-    e.preventDefault();
-    nextStep();
-  }}
-  disabled={currentStep === steps.length - 1}
->
-  Dalej
-</button>
+        <Button
+          onClick={(e) => {
+            e.preventDefault();
+            prevStep();
+          }}
+          disabled={currentStep === 0}
+        >
+          Wstecz
+        </Button>
+        <Button
+          onClick={(e) => {
+            e.preventDefault();
+            nextStep();
+          }}
+          disabled={currentStep === steps.length - 1}
+        >
+          Dalej
+        </Button>
       </div>
-      <Row>
-        <Col key="submit">
-          <Button className="btn btn-primary" onClick={handleSave}>
-            Submit
-          </Button>
-        </Col>
-      </Row>
+      {(currentStep === steps.length - 1) ? 
+      <Button className="btn btn-primary" onClick={handleSave}>
+        Submit
+      </Button>:null}
     </form>
   );
 };
