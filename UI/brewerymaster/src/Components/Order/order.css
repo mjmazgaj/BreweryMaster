@@ -1,5 +1,9 @@
 
-
+form input {
+    min-width: 300px;
+    margin: 10px 0;
+  }
+  
 .background-details{
     z-index: -1000;
     position: fixed;
@@ -27,6 +31,7 @@
     height: fit-content;
 }
 
+
 .prospectorder-form {
   margin-bottom: 50px;
   border: 1rem solid rgb(33, 37, 41);
@@ -35,16 +40,7 @@
   margin: auto 15%;
 }
 
-form input {
-  min-width: 300px;
-  margin: 10px 0;
-}
-
-.order-details{
-    margin-bottom: 1rem;
-}
-
-.checkprice_container{
+.prospectorder-checkprice_container{
     margin-top: 1rem;
     margin-bottom: 1rem;
     display: flex;
@@ -52,19 +48,27 @@ form input {
     align-items: flex-end;
 }
 
-.form-label_checkPrice{
+.prospectorder-checkPrice_label{
     padding-left: 1rem;
     padding-right: 1rem;
 }
 
-#checkPrice_result{
+.prospectorder-checkPrice_result{
     margin-bottom: 0;
     margin-left: 1rem;
     width: 200px;
 }
 
-.contact-details{
-margin-top: 2rem;
+.prospectorder-details{
+    margin-bottom: 1rem;
+}
+
+.prospectorder-contact-details{
+    margin-top: 2rem;
+}
+
+.order_container{
+    margin: auto 15%;
 }
 
 .order-steps {
@@ -76,3 +80,13 @@ margin-top: 2rem;
 .order-steps_dots{
     margin: 0 0.5rem;
 }
+
+.order-steps_buttons{
+    margin-top: 2rem;
+}
+
+.order-companyValidatior_checkbox .form-check-input {
+    min-width: 1rem;
+    width: 5rem;
+    height: 2rem;
+  }

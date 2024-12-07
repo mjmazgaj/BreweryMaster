@@ -2,11 +2,17 @@ import React from 'react';
 import { Form } from "react-bootstrap";
 
 const Address = ({
-  addressId,
-  deliveryAddressId,
-  setAddressId,
-  setDeliveryAddressId,
+  addressData,
+  setAddressData
 }) => {
+
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    setAddressData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
+  };
   
   return (
     <div className="form-address">
@@ -15,16 +21,16 @@ const Address = ({
         id="addressId"
         type="text"
         placeholder="Enter Address Id"
-        value={addressId}
-        onChange={(e) => setAddressId(e.target.value)}
+        value={addressData.addressId}
+        onChange={handleInputChange}
       />
       <Form.Label>Delivery Address</Form.Label>
       <Form.Control
         id="deliveryAddressId"
         type="text"
         placeholder="Enter Delivery Address Id"
-        value={deliveryAddressId}
-        onChange={(e) => setDeliveryAddressId(e.target.value)}
+        value={addressData.deliveryAddressId}
+        onChange={handleInputChange}
       />
     </div>
   );

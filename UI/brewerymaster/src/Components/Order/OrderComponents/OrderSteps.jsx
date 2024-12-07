@@ -13,7 +13,7 @@ import {
   BsThreeDots 
 } from "react-icons/bs";
 
-const OrderSteps = ({ currentStep }) => {
+const OrderSteps = ({ currentStep, amountOfSteps }) => {
   const stepIcons = [
     <Bs1Circle size={30} />,
     <Bs2Circle size={30} />,
@@ -29,14 +29,17 @@ const OrderSteps = ({ currentStep }) => {
   ];
 
   const showSteps = () => {
-    return stepIcons.map((icon, index) => (
-      <div>
-        <span key={index}>
-          {index <= currentStep ? stepFilledIcons[index] : icon}
-        </span>
-          {index < stepFilledIcons.length - 1 ? <BsThreeDots size={30} className="order-steps_dots"/> : null}
-      </div>
-    ));
+    return stepIcons.map((icon, index) => {
+      if (index >= amountOfSteps) return null;
+      return (
+        <div key={index}>
+          <span>{index <= currentStep ? stepFilledIcons[index] : icon}</span>
+          {index < stepFilledIcons.length - 1 && index < amountOfSteps - 1 ? (
+            <BsThreeDots size={30} className="order-steps_dots" />
+          ) : null}
+        </div>
+      );
+    });
   };
 
   return <div className="order-steps">{showSteps()}</div>;

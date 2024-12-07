@@ -9,7 +9,6 @@ import '../order.css';
 import { addData, checkPrice } from '../api';
 
 import Contact from '../../Shared/Contact'
-import Protected from "../../Shared/Protected";
 
 const ProspectOrderForm = () => {  
 
@@ -54,7 +53,8 @@ const ProspectOrderForm = () => {
   };
 
   const handleCheckPrice = () => {
-    checkPrice(selectedBeer, selectedContainer, capacity);
+    checkPrice(selectedBeer, selectedContainer, capacity)
+    .then((result) => setEstimatedPrice(result));
   };
 
   useEffect(() => {
@@ -63,7 +63,7 @@ const ProspectOrderForm = () => {
 
   return (
     <form className="prospectorder-form">
-      <div className="order-details">
+      <div className="prospectorder-details">
         <h3>Order</h3>
         <p>Please enter your order details</p>
 
@@ -89,7 +89,7 @@ const ProspectOrderForm = () => {
           setSelectedOption={setSelectedContainer}
         />
       </div>
-      <div className="checkprice_container">
+      <div className="prospectorder-checkprice_container">
         <Button
           id="checkPrice"
           className="btn btn-secondary"
@@ -98,11 +98,11 @@ const ProspectOrderForm = () => {
           CheckPrice
         </Button>
         <div>
-          <Form.Label className="form-label_checkPrice">
+          <Form.Label className="prospectorder-checkPrice_label">
             Estimated Price:
           </Form.Label>
           <Form.Control
-            id="checkPrice_result"
+            className="prospectorder-checkPrice_result"
             readOnly={true}
             placeholder="Check Price"
             type="number"
@@ -111,7 +111,7 @@ const ProspectOrderForm = () => {
         </div>
       </div>
 
-      <div className="contact-details">
+      <div className="prospectorder-contact-details">
         <h3>Contact</h3>
         <p>Please enter your contact details</p>
         <Form.Label>Forename</Form.Label>

@@ -1,8 +1,10 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
 
-const CompanyClientDetails = ({ companyClientDetailsData, setCompanyClientDetailsData }) => {
-
+const CompanyClientDetails = ({
+  companyClientDetailsData,
+  setCompanyClientDetailsData,
+}) => {
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setCompanyClientDetailsData((prevData) => ({

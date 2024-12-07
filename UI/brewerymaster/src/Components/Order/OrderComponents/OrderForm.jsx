@@ -1,14 +1,14 @@
 import React, {useState} from "react";
-import { Row, Col, Button } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { addData } from '../api';
 
 import Address from './Address'
-import CompanyClientDetails from './CompanyClientDetails'
-import IndividualClientDetails from './IndividualClientDetails'
+import ClientDetails from './ClientDetails'
 import Contact from './../../Shared/Contact'
+import OrderSteps from './OrderSteps';
 
-const OrderForm = ({currentStep, setCurrentStep}) => {  
+const OrderForm = () => {  
 
   const [contactData, setContactData] = useState({
     phoneNumber: "",
@@ -19,20 +19,28 @@ const OrderForm = ({currentStep, setCurrentStep}) => {
     companyName: "",
     nip: "",
   });
+  
+  const [individualClientDetailsData, setIndividualClientDetailsData] = useState({
+    forename: "",
+    surname: "",
+  });
+  
+  const [addressData, setAddressData] = useState({
+    addressId: "",
+    deliveryAddressId: "",
+  });
 
-  const[forename, setForename] = useState('');
-  const[surname, setSurname] = useState('');
-  const[addressId, setAddressId] = useState('');
-  const[deliveryAddressId, setDeliveryAddressId] = useState('');
+  const[isCompany, setIsCompany] = useState(false);
+  const [currentStep, setCurrentStep] = useState(0);
 
   const handleSave = () => {
     const newData = {
-      forename,
-      surname,
-      companyName : companyClientDetailsData.forename,
-      nip : companyClientDetailsData.surname,
-      addressId,
-      deliveryAddressId,
+      forename : individualClientDetailsData.forename,
+      surname : individualClientDetailsData.surname,
+      companyName : companyClientDetailsData.companyName,
+      nip : companyClientDetailsData.nip,
+      addressId : addressData.addressId,
+      deliveryAddressId : addressData.deliveryAddressId,
       phoneNumber : contactData.phoneNumber,
       email : contactData.email,
     };
@@ -49,10 +57,14 @@ const OrderForm = ({currentStep, setCurrentStep}) => {
       companyName: "",
       nip: "",
     });
-    setForename("");
-    setSurname("");
-    setAddressId("");
-    setDeliveryAddressId("");
+    setIndividualClientDetailsData({
+      forename: "",
+      surname: "",
+    });
+    setAddressData({
+      addressId: "",
+      deliveryAddressId: "",
+    });
     setContactData({
       phoneNumber: "",
       email: "",
@@ -65,10 +77,8 @@ const OrderForm = ({currentStep, setCurrentStep}) => {
       name: "Address",
       component: (
         <Address
-          addressId={addressId}
-          deliveryAddressId={deliveryAddressId}
-          setAddressId={setAddressId}
-          setDeliveryAddressId={setDeliveryAddressId}
+          addressData={addressData}
+          setAddressData={setAddressData}
         />
       ),
     },
@@ -79,25 +89,17 @@ const OrderForm = ({currentStep, setCurrentStep}) => {
       ),
     },
     {
-      name: "IndividualClientDetails",
+      name: "ClientDetails",
       component: (
-        <IndividualClientDetails
-          forename={forename}
-          surname={surname}
-          setForename={setForename}
-          setSurname={setSurname}
-        />
-      ),
-    },
-    {
-      name: "CompanyClientDetails",
-      component: (
-        <CompanyClientDetails
+        <ClientDetails
+          individualClientDetailsData={individualClientDetailsData}
+          setIndividualClientDetailsData={setIndividualClientDetailsData}
           companyClientDetailsData={companyClientDetailsData}
           setCompanyClientDetailsData={setCompanyClientDetailsData}
+          isCompany={isCompany}
         />
       ),
-    },
+    }
   ];
 
   const nextStep = () => {
@@ -112,11 +114,15 @@ const OrderForm = ({currentStep, setCurrentStep}) => {
     }
   };
 
+  const handleSwichIsCompany = () =>{
+    setIsCompany((prev) => !prev);
+  }
+
   return (
     <form className="order-form">
-      <h2>{steps[currentStep].name}</h2>
-      <div>{steps[currentStep].component}</div>
-      <div style={{ marginTop: "20px" }}>
+      <OrderSteps currentStep={currentStep} amountOfSteps={steps.length} />
+
+      <div className="order-steps_buttons">
         <Button
           onClick={(e) => {
             e.preventDefault();
@@ -124,7 +130,7 @@ const OrderForm = ({currentStep, setCurrentStep}) => {
           }}
           disabled={currentStep === 0}
         >
-          Wstecz
+          Back
         </Button>
         <Button
           onClick={(e) => {
@@ -133,13 +139,28 @@ const OrderForm = ({currentStep, setCurrentStep}) => {
           }}
           disabled={currentStep === steps.length - 1}
         >
-          Dalej
+          Next
         </Button>
       </div>
-      {(currentStep === steps.length - 1) ? 
-      <Button className="btn btn-primary" onClick={handleSave}>
-        Submit
-      </Button>:null}
+      <h2>{steps[currentStep].name}</h2>
+      {currentStep === 2 ? (
+        <div className="order-companyValidatior">
+          <Form.Label>Do you want order as a company?</Form.Label>
+          <Form.Check
+            type="switch"
+            className="order-companyValidatior_checkbox"
+            value={isCompany}
+            onClick={handleSwichIsCompany}
+          />
+        </div>
+      ) : null}
+      <div>{steps[currentStep].component}</div>
+
+      {currentStep === steps.length - 1 ? (
+        <Button className="btn btn-primary" onClick={handleSave}>
+          Submit
+        </Button>
+      ) : null}
     </form>
   );
 };
