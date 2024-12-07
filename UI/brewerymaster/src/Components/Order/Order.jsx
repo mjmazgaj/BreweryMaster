@@ -7,7 +7,6 @@ import OrderForm from './OrderComponents/OrderForm';
 
 const Order = () => {
 
-
     return (
         <div className="order_container">
           <ToastContainer />

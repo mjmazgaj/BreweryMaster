@@ -30,7 +30,6 @@ const OrderForm = () => {
     deliveryAddressId: "",
   });
 
-  const[isCompany, setIsCompany] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
 
   const handleSave = () => {
@@ -71,7 +70,6 @@ const OrderForm = () => {
     });
   };
 
-
   const steps = [
     {
       name: "Address",
@@ -96,64 +94,41 @@ const OrderForm = () => {
           setIndividualClientDetailsData={setIndividualClientDetailsData}
           companyClientDetailsData={companyClientDetailsData}
           setCompanyClientDetailsData={setCompanyClientDetailsData}
-          isCompany={isCompany}
         />
       ),
     }
   ];
 
-  const nextStep = () => {
+  const handleNextStep = (e) => {
+    e.preventDefault();
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1);
     }
   };
 
-  const prevStep = () => {
+  const handlePrevStep = (e) => {
+    e.preventDefault();
     if (currentStep > 0) {
       setCurrentStep(currentStep - 1);
     }
   };
-
-  const handleSwichIsCompany = () =>{
-    setIsCompany((prev) => !prev);
-  }
 
   return (
     <form className="order-form">
       <OrderSteps currentStep={currentStep} amountOfSteps={steps.length} />
 
       <div className="order-steps_buttons">
-        <Button
-          onClick={(e) => {
-            e.preventDefault();
-            prevStep();
-          }}
-          disabled={currentStep === 0}
-        >
+        <Button onClick={handlePrevStep} disabled={currentStep === 0}>
           Back
         </Button>
         <Button
-          onClick={(e) => {
-            e.preventDefault();
-            nextStep();
-          }}
+          onClick={handleNextStep}
           disabled={currentStep === steps.length - 1}
         >
           Next
         </Button>
       </div>
       <h2>{steps[currentStep].name}</h2>
-      {currentStep === 2 ? (
-        <div className="order-companyValidatior">
-          <Form.Label>Do you want order as a company?</Form.Label>
-          <Form.Check
-            type="switch"
-            className="order-companyValidatior_checkbox"
-            value={isCompany}
-            onClick={handleSwichIsCompany}
-          />
-        </div>
-      ) : null}
       <div>{steps[currentStep].component}</div>
 
       {currentStep === steps.length - 1 ? (
