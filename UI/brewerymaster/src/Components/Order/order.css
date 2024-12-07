@@ -27,7 +27,7 @@
     height: fit-content;
 }
 
-form {
+.prospectorder-form {
   margin-bottom: 50px;
   border: 1rem solid rgb(33, 37, 41);
   border-radius: 1rem;
@@ -39,7 +39,8 @@ form input {
   min-width: 300px;
   margin: 10px 0;
 }
-  .order-details{
+
+.order-details{
     margin-bottom: 1rem;
 }
 
@@ -64,4 +65,8 @@ form input {
 
 .contact-details{
 margin-top: 2rem;
+}
+
+.order-form {
+
 }

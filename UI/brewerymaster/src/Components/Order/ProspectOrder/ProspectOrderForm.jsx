@@ -1,17 +1,25 @@
 import { React, useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
-import { fetchDetails } from "./api";
+import { fetchDetails } from "../api";
 import ProspectOrderDropDown from "./ProspectOrderDropDown";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import './order.css';
-import { addData, checkPrice } from './api';
+import '../order.css';
+import { addData, checkPrice } from '../api';
+
+import Contact from '../../Shared/Contact'
+import Protected from "../../Shared/Protected";
 
 const ProspectOrderForm = () => {  
+
+  
+  const [contactData, setContactData] = useState({
+    phoneNumber: "",
+    email: "",
+  });
+
   const [forename, setForename] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [email, setEmail] = useState("");
   const [selectedBeer, setSelectedBeer] = useState("");
   const [selectedContainer, setSelectedContainer] = useState("");
   const [capacity, setCapacity] = useState("");
@@ -22,8 +30,8 @@ const ProspectOrderForm = () => {
   const handleSave = () => {
     const newData = {
       forename,
-      phoneNumber,
-      email,
+      phoneNumber : contactData.phoneNumber,
+      email : contactData.email,
       selectedBeer,
       selectedContainer,
       capacity,
@@ -39,28 +47,22 @@ const ProspectOrderForm = () => {
 
   const clear = () => {
     setForename("");
-    setPhoneNumber("");
-    setEmail("");
+    setContactData({
+      phoneNumber: "",
+      email: "",
+    });
   };
 
   const handleCheckPrice = () => {
-    checkPrice(selectedBeer, selectedContainer, capacity)
-      .then((result) => setEstimatedPrice(result))
-      .catch((error) => console.log(error));
+    checkPrice(selectedBeer, selectedContainer, capacity);
   };
 
   useEffect(() => {
-    getDetails();
+    fetchDetails(setDetails);
   }, []);
 
-  const getDetails = () => {
-    fetchDetails()
-      .then((result) => setDetails(result))
-      .catch((error) => console.log(error));
-  };
-
   return (
-    <form>
+    <form className="prospectorder-form">
       <div className="order-details">
         <h3>Order</h3>
         <p>Please enter your order details</p>
@@ -119,20 +121,7 @@ const ProspectOrderForm = () => {
           placeholder="Enter Forename"
           onChange={(e) => setForename(e.target.value)}
         />
-        <Form.Label>PhoneNumber</Form.Label>
-        <Form.Control
-          id="phoneNumber"
-          type="text"
-          placeholder="Enter PhoneNumber"
-          onChange={(e) => setPhoneNumber(e.target.value)}
-        />
-        <Form.Label>Email</Form.Label>
-        <Form.Control
-          id="email"
-          type="text"
-          placeholder="Enter Email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        <Contact contactData={contactData} setContactData={setContactData}/>
       </div>
       <Button id="submit" className="btn btn-secondary" onClick={handleSave}>
         Submit

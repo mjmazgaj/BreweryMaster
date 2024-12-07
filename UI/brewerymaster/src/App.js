@@ -8,13 +8,14 @@ import React, { useState, useEffect } from 'react';
 
 import Register from './Components/General/Register';
 import Login from './Components/General/Login';
+import Error from './Components/Shared/Error';
 
 import Address from './Components/User/Address/Address';
 import Client from './Components/User/Client/Client';
 import Employee from './Components/User/Employee/Employee';
 
 import Order from './Components/Order/Order';
-import ProspectOrder from './Components/Order/ProspectOrder';
+import ProspectOrder from './Components/Order/ProspectOrder/ProspectOrder';
 
 import Kanban from './Components/Work/Kanban/Kanban';
 
@@ -45,6 +46,7 @@ const App = () => {
 
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/error" element={<Error />} />
 
             <Route exact path="/ProspectOrder" element={<ProspectOrder />} />
             <Route exact path="/Order" element={<Order />} />
