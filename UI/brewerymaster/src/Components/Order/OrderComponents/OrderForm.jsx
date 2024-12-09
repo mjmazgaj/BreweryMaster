@@ -1,12 +1,13 @@
 import React, {useState} from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
+import Button from 'react-bootstrap/Button';
 import { toast } from "react-toastify";
 import { addData } from '../api';
 
 import Address from './Address'
 import ClientDetails from './ClientDetails'
 import Contact from './../../Shared/Contact'
-import OrderSteps from './OrderSteps';
+import MenuSteps from '../../Shared/MenuSteps';
 
 const OrderForm = () => {  
 
@@ -99,44 +100,19 @@ const OrderForm = () => {
     }
   ];
 
-  const handleNextStep = (e) => {
-    e.preventDefault();
-    if (currentStep < steps.length - 1) {
-      setCurrentStep(currentStep + 1);
-    }
-  };
-
-  const handlePrevStep = (e) => {
-    e.preventDefault();
-    if (currentStep > 0) {
-      setCurrentStep(currentStep - 1);
-    }
-  };
-
   return (
-    <form className="order-form">
-      <OrderSteps currentStep={currentStep} amountOfSteps={steps.length} />
+    <Form className="order-form">
+      <MenuSteps currentStep={currentStep} setCurrentStep={setCurrentStep} amountOfSteps={steps.length} />
 
-      <div className="order-steps_buttons">
-        <Button onClick={handlePrevStep} disabled={currentStep === 0}>
-          Back
-        </Button>
-        <Button
-          onClick={handleNextStep}
-          disabled={currentStep === steps.length - 1}
-        >
-          Next
-        </Button>
-      </div>
       <h2>{steps[currentStep].name}</h2>
       <div>{steps[currentStep].component}</div>
 
       {currentStep === steps.length - 1 ? (
-        <Button className="btn btn-primary" onClick={handleSave}>
+        <Button variant="dark" onClick={handleSave}>
           Submit
         </Button>
       ) : null}
-    </form>
+    </Form>
   );
 };
 

@@ -5,18 +5,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import '../order.css';
 
 import ProspectOrderForm from "./ProspectOrderForm";
+import BackgroundDetails from "../../Shared/BackgroundDetails";
 
 const ProspectOrder = () => { 
     return (
       <Fragment>
-        <div className="background-details">
-          <div className="left-image">
-            <img src="./glass.png" alt="" />
-          </div>
-          <div className="right-image">
-            <img src="./bottle.png" alt="" />
-          </div>
-        </div>
+        <BackgroundDetails />
         <ToastContainer />
         <div className="form-container">
           <ProspectOrderForm/>

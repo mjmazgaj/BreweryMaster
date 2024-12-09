@@ -1,0 +1,51 @@
+
+.menu-steps__container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+    flex-direction: column;
+}
+
+.menu-steps_dots{
+    margin: 0 0.5rem;
+}
+
+.menu-steps__dots{
+    display: flex;
+    justify-content: center;
+}
+
+.menu-steps_buttons{
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+
+.background-details{
+    z-index: -1000;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+}
+  
+.background-details img{
+  height: 40rem;
+}
+  
+.background-details_left-image{
+    width: fit-content;
+    height: fit-content;
+}
+  
+.background-details_right-image{
+    width: fit-content;
+    height: fit-content;
+}

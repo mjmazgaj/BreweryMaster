@@ -3,33 +3,6 @@ form input {
     min-width: 300px;
     margin: 10px 0;
   }
-  
-.background-details{
-    z-index: -1000;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center; 
-}
-  
-.background-details img{
-  height: 40rem;
-}
-  
-.background-details_left-image{
-    width: fit-content;
-    height: fit-content;
-}
-  
-.background-details_right-image{
-    width: fit-content;
-    height: fit-content;
-}
 
 
 .prospectorder-form {
@@ -71,22 +44,13 @@ form input {
     margin: auto 15%;
 }
 
-.order-steps {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 1rem;
-}
-
-.order-steps_dots{
-    margin: 0 0.5rem;
-}
-
-.order-steps_buttons{
-    margin-top: 2rem;
-}
-
 .order-companyValidatior_checkbox .form-check-input {
     min-width: 1rem;
     width: 5rem;
     height: 2rem;
+  }
+  
+  .order-companyValidatior_checkbox :checked {
+    background-color: black;
+    border-color: black;
   }
