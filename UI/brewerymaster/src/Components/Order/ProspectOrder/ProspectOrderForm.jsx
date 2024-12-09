@@ -1,7 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
-import { fetchDetails } from "../api";
-import ProspectOrderDropDown from "./ProspectOrderDropDown";
+import ProspectOrderDetails from "./ProspectOrderDetails";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -17,22 +16,24 @@ const ProspectOrderForm = () => {
     email: "",
   });
 
+  const [prospectOrderData, setProspectOrderData] = useState({
+    selectedContainer: "",
+    selectedBeer: "",
+    capacity: "",
+  });
+
   const [forename, setForename] = useState("");
-  const [selectedBeer, setSelectedBeer] = useState("");
-  const [selectedContainer, setSelectedContainer] = useState("");
-  const [capacity, setCapacity] = useState("");
 
-  const [details, setDetails] = useState([]);
   const [estimatedPrice, setEstimatedPrice] = useState("");
-
+  
   const handleSave = () => {
     const newData = {
       forename,
       phoneNumber : contactData.phoneNumber,
       email : contactData.email,
-      selectedBeer,
-      selectedContainer,
-      capacity,
+      selectedBeer : prospectOrderData.selectedBeer,
+      selectedContainer : prospectOrderData.selectedContainer,
+      capacity : prospectOrderData.capacity,
     };
 
     addData(newData)
@@ -52,42 +53,16 @@ const ProspectOrderForm = () => {
   };
 
   const handleCheckPrice = () => {
-    checkPrice(selectedBeer, selectedContainer, capacity)
+    checkPrice(prospectOrderData.selectedBeer, prospectOrderData.selectedContainer, prospectOrderData.capacity)
     .then((result) => setEstimatedPrice(result));
   };
 
-  useEffect(() => {
-    fetchDetails(setDetails);
-  }, []);
-
   return (
     <form className="prospectorder-form">
-      <div className="prospectorder-details">
-        <h3>Order</h3>
-        <p>Please enter your order details</p>
-
-        <Form.Label>Capacity</Form.Label>
-        <Form.Control
-          id="capacity"
-          type="number"
-          placeholder="Enter capacity"
-          onChange={(e) => setCapacity(e.target.value)}
-        />
-        <Form.Label>Beer type</Form.Label>
-        <ProspectOrderDropDown
-          id="beer-types"
-          data={details["beerTypes"]}
-          selectedOption={selectedBeer}
-          setSelectedOption={setSelectedBeer}
-        />
-        <Form.Label>Container type</Form.Label>
-        <ProspectOrderDropDown
-          id="container-types"
-          data={details["containerTypes"]}
-          selectedOption={selectedContainer}
-          setSelectedOption={setSelectedContainer}
-        />
-      </div>
+      <ProspectOrderDetails
+        setProspectOrderData={setProspectOrderData}
+        prospectOrderData={prospectOrderData}
+      />
       <div className="prospectorder-checkprice_container">
         <Button
           id="checkPrice"
@@ -120,7 +95,7 @@ const ProspectOrderForm = () => {
           placeholder="Enter Forename"
           onChange={(e) => setForename(e.target.value)}
         />
-        <Contact contactData={contactData} setContactData={setContactData}/>
+        <Contact contactData={contactData} setContactData={setContactData} />
       </div>
       <Button id="submit" className="btn btn-secondary" onClick={handleSave}>
         Submit
