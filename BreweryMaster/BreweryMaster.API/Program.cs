@@ -18,10 +18,11 @@ builder.Services.Configure<OrderSettings>(builder.Configuration.GetSection(nameo
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("BreweryMaster")));
 builder.Services.AddDbContext<WorkDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("BreweryMaster")));
 
-builder.Services.AddScoped<IAddressService,AddressService>();
+builder.Services.AddScoped<IAddressService, AddressService>();
 builder.Services.AddScoped<IProspectClientService, ProspectClientService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<ITaskService, TaskService>();
+builder.Services.AddScoped<IProspectOrderService, ProspectOrderService>();
 
 builder.Services.AddAuthentication()
                 .AddBearerToken(IdentityConstants.BearerScheme);
