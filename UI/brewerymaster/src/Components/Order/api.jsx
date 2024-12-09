@@ -20,9 +20,9 @@ export const fetchSettings = () => {
     .catch((error) => console.log(error));
 };
 
-export const fetchDetails = () => {
+export const fetchDetails = (setDetails) => {
   return axios.get(`${apiurl}/Details`)
-    .then((result) => result.data)
+    .then((result) => setDetails(result.data))
     .catch((error) => console.log(error));
 };
 
