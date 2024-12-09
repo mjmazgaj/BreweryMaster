@@ -11,7 +11,6 @@ import { addData, checkPrice } from '../api';
 import Contact from '../../Shared/Contact'
 
 const ProspectOrderForm = () => {  
-
   
   const [contactData, setContactData] = useState({
     phoneNumber: "",

@@ -7,7 +7,6 @@ const ProspectOrderDropDown = ({
   selectedOption,
   setSelectedOption
 }) => {
-
   return (
     <div>
       {data && data.length > 0 ? (
