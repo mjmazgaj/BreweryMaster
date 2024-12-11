@@ -10,6 +10,7 @@ function Navigation(isAuthenticated) {
             <Nav.Link href="/Kanban">Kanban</Nav.Link>
             <Nav.Link href="/ProspectOrder">ProspectOrder</Nav.Link>
             <Nav.Link href="/Order">Order</Nav.Link>
+            <Nav.Link href="/Recipe">Recipe</Nav.Link>
             
             <NavDropdown title="User" id="navbarScrollingDropdown">
               <NavDropdown.Item href="/Client">Client</NavDropdown.Item>
