@@ -49,3 +49,7 @@
     width: fit-content;
     height: fit-content;
 }
+
+.form-dropdown{
+    margin-bottom: 1rem;
+}

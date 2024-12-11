@@ -1,14 +1,14 @@
 import {React} from 'react';
 import { Form } from 'react-bootstrap';
 
-const ProspectOrderDropDown = ({
+const DropDown = ({
   id,
   data,
   selectedOption,
   setSelectedOption
 }) => {
   return (
-    <div>
+    <div className='form-dropdown'>
       {data && data.length > 0 ? (
         <Form.Select
           id={id}
@@ -28,4 +28,4 @@ const ProspectOrderDropDown = ({
   );
 };
 
-export default ProspectOrderDropDown;
+export default DropDown;

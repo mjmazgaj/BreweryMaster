@@ -6,7 +6,8 @@ import '../order.css';
 
 import { fetchDetails } from "../api";
 
-import ProspectOrderDropDown from "./ProspectOrderDropDown";
+import DropDown from "../../Shared/DropDown";
+import ProspectOrderCheckPrice from "./ProspectOrderCheckPrice";
 
 const ProspectOrderDetails = ({prospectOrderData, setProspectOrderData}) => { 
   const handleInputChange = (key, value) => {
@@ -23,10 +24,8 @@ const ProspectOrderDetails = ({prospectOrderData, setProspectOrderData}) => {
   }, []);
 
   return (
-      <Fragment>
-          
+    <Fragment>
       <div className="prospectorder-details">
-        <h3>Order</h3>
         <p>Please enter your order details</p>
 
         <Form.Label>Capacity</Form.Label>
@@ -37,21 +36,27 @@ const ProspectOrderDetails = ({prospectOrderData, setProspectOrderData}) => {
           onChange={(e) => handleInputChange("capacity", e.target.value)}
         />
         <Form.Label>Beer type</Form.Label>
-        <ProspectOrderDropDown
+        <DropDown
           id="beer-types"
           data={details["beerTypes"] || []}
           selectedOption={prospectOrderData.selectedBeer}
-          setSelectedOption={(value) => handleInputChange("selectedBeer", value)}
+          setSelectedOption={(value) =>
+            handleInputChange("selectedBeer", value)
+          }
         />
-        <ProspectOrderDropDown
+        <Form.Label>Container type</Form.Label>
+        <DropDown
           id="container-types"
           data={details["containerTypes"] || []}
           selectedOption={prospectOrderData.selectedContainer}
-          setSelectedOption={(value) => handleInputChange("selectedContainer", value)}
+          setSelectedOption={(value) =>
+            handleInputChange("selectedContainer", value)
+          }
         />
       </div>
-      </Fragment>
-    );
+      <ProspectOrderCheckPrice prospectOrderData={prospectOrderData} />
+    </Fragment>
+  );
 }
 
 export default ProspectOrderDetails;
