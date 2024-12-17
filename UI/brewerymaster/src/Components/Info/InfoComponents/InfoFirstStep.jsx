@@ -1,6 +1,6 @@
 import React, {Fragment, useState} from "react";
 
-import IngredientsAvailable from "../../Shared/IngredientsAvailable";
+import Ingredients from "../../Shared/Ingredients";
 
 const InfoFirstStep = () => {  
   const [ingredients, setIngredients] = useState([
@@ -15,7 +15,7 @@ const InfoFirstStep = () => {
 
   return (
     <div style={{ display: "flex", padding: "20px" }}>
-      <IngredientsAvailable
+      <Ingredients
         ingredients={ingredients}
         handleAddIngredient={handleAddIngredient}
       />

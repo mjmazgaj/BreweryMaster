@@ -6,12 +6,43 @@ import { toast } from "react-toastify";
 import { addData } from '../api';
 
 import MenuSteps from '../../Shared/MenuSteps';
-import RecipeFirstStep from "./RecipeFirstStep";
+import RecipeIngredients from "./RecipeIngredients";
+import RecipeSummary from "./RecipeSummary";
 
 const RecipeForm = () => {  
 
   const [currentStep, setCurrentStep] = useState(0);
+  const [recipeSummaryData, setRecipeSummaryData] = useState({
+    blgScale: "",
+    ibuScale: "",
+    abvScale: "",
+    srmScale: "",
+    type: "",
+  });
 
+  const [batchData, setBatchData] = useState({
+    batchSize: "",
+    expectedBeerVolume: "",
+    boilTime: "",
+    evaporationRate: "",
+    wortVolume: "",
+    boilLoss: "",
+    preBoilGravity: "",
+    fermentationLoss: "",
+    dryHopLoss: "",
+  });
+
+  const [mashData, setMashData] = useState({
+    mashEfficiency: "",
+    waterToGrainRatio: "",
+    mashWaterVolume: "",
+    totalMashVolume: "",
+  });
+
+  const [boilSteps, setBoilSteps] = useState([]);
+  
+  
+  
   const handleSave = () => {
     const newData = {
     };
@@ -28,8 +59,12 @@ const RecipeForm = () => {
 
   const steps = [
     {
-      name: "test",
-      component: <RecipeFirstStep />,
+      name: "Ingredients",
+      component: <RecipeIngredients />,
+    },
+    {
+      name: "Summary",
+      component: <RecipeSummary recipeSummaryData={recipeSummaryData} setRecipeSummaryData={setRecipeSummaryData}/>,
     },
   ];
 

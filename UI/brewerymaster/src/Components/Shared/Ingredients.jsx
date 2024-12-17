@@ -1,11 +1,12 @@
 import React, {Fragment, useState} from "react";
 
-const IngredientsAvailable = ({ingredients, handleAddIngredient}) => {  
+import "./shared.css";
 
+const Ingredients = ({ingredients, handleAddIngredient}) => {  
   return (
-    <div style={{ flex: 1, marginRight: "20px" }}>
+    <div className="ingredients_container">
       <h3>Available Ingredients</h3>
-      <table border="1" width="100%">
+      <table className="ingredients_table">
         <thead>
           <tr>
             <th>Name</th>
@@ -29,4 +30,4 @@ const IngredientsAvailable = ({ingredients, handleAddIngredient}) => {
   );
 };
 
-export default IngredientsAvailable;
+export default Ingredients;

@@ -53,3 +53,8 @@
 .form-dropdown{
     margin-bottom: 1rem;
 }
+
+.ingredients_table{
+    border: 0.1rem solid;
+    width: 100%;
+}

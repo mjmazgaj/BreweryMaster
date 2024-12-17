@@ -1,11 +1,11 @@
 import React, {Fragment, useState} from "react";
 
-const IngredientsSelected = ({selectedIngredients}) => {  
+const RecipeIngredientsSelected = ({selectedIngredients}) => {  
 
   return (
-    <div style={{ flex: 1 }}>
-      <h3>Selected Ingredients</h3>
-      <table border="1" width="100%">
+    <div className="recipe-ingredients-selected_container">
+      <h3 className="recipe-ingredients-selected_title">Selected Ingredients</h3>
+      <table className="recipe-ingredients-selected_table">
         <thead>
           <tr>
             <th>Name</th>
@@ -25,4 +25,4 @@ const IngredientsSelected = ({selectedIngredients}) => {
   );
 };
 
-export default IngredientsSelected;
+export default RecipeIngredientsSelected;

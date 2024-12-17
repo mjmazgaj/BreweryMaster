@@ -1,0 +1,12 @@
+.recipe_container{
+    margin: auto 15%;
+}
+
+.recipe-ingredients-selected_table{
+    border: 0.1rem solid;
+    width: 100%;
+}
+
+.recipe-ingredients-selected_title{
+    margin-top: 1rem;
+}

@@ -1,6 +1,6 @@
 import React, {Fragment, useState} from "react";
 
-const IngredientsModal = ({modalData, handleConfirmQuantity, setModalData}) => {  
+const RecipeIngredientsModal = ({modalData, handleConfirmQuantity, setModalData}) => {  
 
   return (
     modalData && (
@@ -52,4 +52,4 @@ const IngredientsModal = ({modalData, handleConfirmQuantity, setModalData}) => {
   );
 };
 
-export default IngredientsModal;
+export default RecipeIngredientsModal;

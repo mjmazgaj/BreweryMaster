@@ -1,10 +1,10 @@
 import React, {Fragment, useState} from "react";
 
-import IngredientsAvailable from "../../Shared/IngredientsAvailable";
-import IngredientsSelected from "./IngredientsSelected";
-import IngredientsModal from "./IngredientsModal";
+import Ingredients from "../../Shared/Ingredients";
+import RecipeIngredientsSelected from "./RecipeIngredientsSelected";
+import RecipeIngredientsModal from "./RecipeIngredientsModal";
 
-const RecipeFirstStep = () => {  
+const RecipeIngredients = () => {  
   const [ingredients, setIngredients] = useState([
     { id: 1, name: 'Flour', quantity: 1000 },
     { id: 2, name: 'Sugar', quantity: 500 },
@@ -55,13 +55,13 @@ const RecipeFirstStep = () => {
   };
 
   return (
-    <div style={{ display: "flex", padding: "20px" }}>
-      <IngredientsAvailable
+    <div className="recipe-ingredients_container">
+      <Ingredients
         ingredients={ingredients}
         handleAddIngredient={handleAddIngredient}
       />
-      <IngredientsSelected selectedIngredients={selectedIngredients} />
-      <IngredientsModal
+      <RecipeIngredientsSelected selectedIngredients={selectedIngredients} />
+      <RecipeIngredientsModal
         modalData={modalData}
         handleConfirmQuantity={handleConfirmQuantity}
         setModalData={setModalData}
@@ -70,4 +70,4 @@ const RecipeFirstStep = () => {
   );
 };
 
-export default RecipeFirstStep;
+export default RecipeIngredients;
