@@ -4,7 +4,8 @@ import Ingredients from "../../Shared/Ingredients";
 import RecipeIngredientsSelected from "./RecipeIngredientsSelected";
 import RecipeIngredientsModal from "./RecipeIngredientsModal";
 
-const RecipeIngredients = () => {  
+const RecipeIngredients = () => {
+
   const [ingredients, setIngredients] = useState([
     { id: 1, name: 'Flour', quantity: 1000 },
     { id: 2, name: 'Sugar', quantity: 500 },
@@ -55,7 +56,9 @@ const RecipeIngredients = () => {
   };
 
   return (
-    <div className="recipe-ingredients_container">
+    
+    <div className="recipe-ingredients_container">   
+
       <Ingredients
         ingredients={ingredients}
         handleAddIngredient={handleAddIngredient}

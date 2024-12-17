@@ -24,6 +24,10 @@ import Kanban from './Components/Work/Kanban/Kanban';
 import Authorize from './Components/Authorization/Authorize';
 import LogoutButton from './Components/General/LogoutButton'
 
+
+import { I18nextProvider } from 'react-i18next';
+import i18n from './i18n';
+
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   
@@ -39,43 +43,45 @@ const App = () => {
   
   return (
     <>
-      <Navigation isAuthenticated={isAuthenticated} />
-      <Router>
-        <div className="App">
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route path="*" element={<Navigate to="/" />} />
+      <I18nextProvider i18n={i18n}>
+        <Navigation isAuthenticated={isAuthenticated} />
+        <Router>
+          <div className="App">
+            <Routes>
+              <Route exact path="/" element={<Home />} />
+              <Route path="*" element={<Navigate to="/" />} />
 
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/error" element={<Error />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/error" element={<Error />} />
 
-            <Route exact path="/ProspectOrder" element={<ProspectOrder />} />
-            <Route exact path="/Order" element={<Order />} />
-            <Route exact path="/Recipe" element={<Recipe />} />
-            <Route exact path="/Info" element={<Info />} />
+              <Route exact path="/ProspectOrder" element={<ProspectOrder />} />
+              <Route exact path="/Order" element={<Order />} />
+              <Route exact path="/Recipe" element={<Recipe />} />
+              <Route exact path="/Info" element={<Info />} />
 
-            <Route exact path="/Address" element={<Address />} />
-            <Route exact path="/Client" element={<Client />} />
-            <Route exact path="/Employee" element={<Employee />} />
+              <Route exact path="/Address" element={<Address />} />
+              <Route exact path="/Client" element={<Client />} />
+              <Route exact path="/Employee" element={<Employee />} />
 
-            <Route
-              path="/kanban"
-              element={
-                <Authorize
-                  component={Kanban}
-                  isAuthenticated={isAuthenticated}
-                  setIsAuthenticated={setIsAuthenticated}
-                />
-              }
-            ></Route>
-          </Routes>
+              <Route
+                path="/kanban"
+                element={
+                  <Authorize
+                    component={Kanban}
+                    isAuthenticated={isAuthenticated}
+                    setIsAuthenticated={setIsAuthenticated}
+                  />
+                }
+              ></Route>
+            </Routes>
 
-          {isAuthenticated && (
-            <LogoutButton setIsAuthenticated={setIsAuthenticated} />
-          )}
-        </div>
-      </Router>
+            {isAuthenticated && (
+              <LogoutButton setIsAuthenticated={setIsAuthenticated} />
+            )}
+          </div>
+        </Router>
+      </I18nextProvider>
     </>
   );
 };

@@ -3,13 +3,16 @@ import { Form } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import { toast } from "react-toastify";
 
+import { useTranslation } from 'react-i18next';
+
 import { addData } from '../api';
 
 import MenuSteps from '../../Shared/MenuSteps';
 import RecipeIngredients from "./RecipeIngredients";
 import RecipeSummary from "./RecipeSummary";
 
-const RecipeForm = () => {  
+const RecipeForm = () => {    
+  const { t } = useTranslation();
 
   const [currentStep, setCurrentStep] = useState(0);
   const [recipeSummaryData, setRecipeSummaryData] = useState({
@@ -59,11 +62,11 @@ const RecipeForm = () => {
 
   const steps = [
     {
-      name: "Ingredients",
+      name: t("recipe.ingredientsComponentName"),
       component: <RecipeIngredients />,
     },
     {
-      name: "Summary",
+      name: t("recipe.ingredientsSummaryName"),
       component: <RecipeSummary recipeSummaryData={recipeSummaryData} setRecipeSummaryData={setRecipeSummaryData}/>,
     },
   ];
