@@ -44,8 +44,6 @@ const RecipeForm = () => {
 
   const [boilSteps, setBoilSteps] = useState([]);
   
-  
-  
   const handleSave = () => {
     const newData = {
     };
@@ -53,7 +51,7 @@ const RecipeForm = () => {
     addData(newData)
       .then(() => {
         clear();
-        toast.success('Recipe has been added');
+        toast.success(t("toast.addSuccess"));
       })
   };
   
@@ -62,11 +60,11 @@ const RecipeForm = () => {
 
   const steps = [
     {
-      name: t("recipe.ingredientsComponentName"),
+      name: t("common.ingredients"),
       component: <RecipeIngredients />,
     },
     {
-      name: t("recipe.ingredientsSummaryName"),
+      name: t("common.summary"),
       component: <RecipeSummary recipeSummaryData={recipeSummaryData} setRecipeSummaryData={setRecipeSummaryData}/>,
     },
   ];
@@ -80,7 +78,7 @@ const RecipeForm = () => {
 
       {currentStep === steps.length - 1 ? (
         <Button variant="dark" onClick={handleSave}>
-          Submit
+          {t("common.submit")}
         </Button>
       ) : null}
     </Form>

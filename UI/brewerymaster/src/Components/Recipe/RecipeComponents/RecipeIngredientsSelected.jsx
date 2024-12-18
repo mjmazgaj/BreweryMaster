@@ -1,15 +1,18 @@
 import React, {Fragment, useState} from "react";
 
-const RecipeIngredientsSelected = ({selectedIngredients}) => {  
+import { useTranslation } from 'react-i18next';
+
+const RecipeIngredientsSelected = ({selectedIngredients}) => { 
+  const { t } = useTranslation(); 
 
   return (
     <div className="recipe-ingredients-selected_container">
-      <h3 className="recipe-ingredients-selected_title">Selected Ingredients</h3>
+      <h3 className="recipe-ingredients-selected_title">{t("recipe.ingredientsSelected")}</h3>
       <table className="recipe-ingredients-selected_table">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Quantity</th>
+            <th>{t("common.name")}</th>
+            <th>{t("common.quantity")}</th>
           </tr>
         </thead>
         <tbody>

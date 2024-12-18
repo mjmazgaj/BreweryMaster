@@ -1,6 +1,27 @@
 {
-    "recipe":{
-        "ingredientsComponentName": "Składniki",
-        "ingredientsSummaryName": "Podsumowanie"
+    "recipe": {
+        "abvScale": "Skala ABV",
+        "blgScale": "Skala BLG",
+        "ibuScale": "Skala IBU",
+        "srmScale": "Skala SRM",
+        "ingredientsSelected": "Wybrane składniki",
+        "ingredientsAvailable": "Dostępne składniki",
+        "invalidQuantity": "Nieprawidłowa ilość"
+    },
+    "toast": {
+        "addSuccess": "Element został pomyślnie dodany."
+    },
+    "common": {
+        "style": "Styl",
+        "submit": "Zatwierdź",
+        "summary": "Podsumowanie",
+        "type": "Typ",
+        "name": "Nazwa",
+        "quantity": "Ilość",
+        "ingredients": "Składniki",
+        "cancel": "Anuluj",
+        "confirm": "Potwierdź",
+        "next": "Dalej",
+        "back": "Wstecz"
     }
 }

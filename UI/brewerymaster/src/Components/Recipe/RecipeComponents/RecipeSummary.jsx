@@ -1,9 +1,14 @@
 import React, {Fragment, useState} from "react";
 import { Form } from "react-bootstrap";
+
+import { useTranslation } from 'react-i18next';
+
 const RecipeSummary = ({
   recipeSummaryData,
   setRecipeSummaryData,
 }) => {
+  const { t } = useTranslation();
+
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setRecipeSummaryData((prevData) => ({
@@ -14,7 +19,7 @@ const RecipeSummary = ({
 
   return (
     <div className="recipe-summary_container">
-      <Form.Label>BLG scale</Form.Label>
+      <Form.Label>{t("recipe.blgScale")}</Form.Label>
       <Form.Control
         id="blgScale"
         type="number"
@@ -24,7 +29,7 @@ const RecipeSummary = ({
         value={recipeSummaryData.blgScale}
         onChange={handleInputChange}
       />
-      <Form.Label>IBU scale</Form.Label>
+      <Form.Label>{t("recipe.ibuScale")}</Form.Label>
       <Form.Control
         id="ibuScale"
         type="number"
@@ -34,7 +39,7 @@ const RecipeSummary = ({
         value={recipeSummaryData.ibuScale}
         onChange={handleInputChange}
       />
-      <Form.Label>ABV scale</Form.Label>
+      <Form.Label>{t("recipe.abvScale")}</Form.Label>
       <Form.Control
         id="abvScale"
         type="number"
@@ -44,7 +49,7 @@ const RecipeSummary = ({
         value={recipeSummaryData.abvScale}
         onChange={handleInputChange}
       />
-      <Form.Label>SRM scale</Form.Label>
+      <Form.Label>{t("recipe.srmScale")}</Form.Label>
       <Form.Control
         id="srmScale"
         type="number"
@@ -54,7 +59,7 @@ const RecipeSummary = ({
         value={recipeSummaryData.srmScale}
         onChange={handleInputChange}
       />
-      <Form.Label>Type</Form.Label>
+      <Form.Label>{t("common.type")}</Form.Label>
       <Form.Control
         id="type"
         type="text"
@@ -62,7 +67,7 @@ const RecipeSummary = ({
         value={recipeSummaryData.type}
         onChange={handleInputChange}
       />
-      <Form.Label>Style</Form.Label>
+      <Form.Label>{t("common.style")}</Form.Label>
       <Form.Control
         id="style"
         type="text"

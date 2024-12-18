@@ -1,6 +1,27 @@
 {
     "recipe":{
-        "ingredientsComponentName": "Ingredients",
-        "ingredientsSummaryName": "Summary"
+        "abvScale": "ABV scale",
+        "blgScale": "BLG scale",
+        "ibuScale": "IBU scale",
+        "srmScale": "SRM scale",
+        "ingredientsSelected": "Selected Ingredients",
+        "ingredientsAvailable": "Available Ingredients",
+        "invalidQuantity":"Invalid quantity"
+    },
+    "toast":{
+        "addSuccess": "The element has been added successfully."
+    },
+    "common":{
+        "style": "Style",
+        "submit": "Submit",
+        "summary": "Summary",
+        "type": "Type",
+        "name": "Name",
+        "quantity": "Quantity",
+        "ingredients": "Ingredients",
+        "cancel": "Cancel",
+        "confirm": "Confirm",
+        "next": "Next",
+        "back": "Back"
     }
 }

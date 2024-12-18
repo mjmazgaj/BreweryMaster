@@ -1,6 +1,9 @@
 import React, {Fragment, useState} from "react";
 
+import { useTranslation } from 'react-i18next';
+
 const RecipeIngredientsModal = ({modalData, handleConfirmQuantity, setModalData}) => {  
+  const { t } = useTranslation(); 
 
   return (
     modalData && (
@@ -34,17 +37,17 @@ const RecipeIngredientsModal = ({modalData, handleConfirmQuantity, setModalData}
               if (quantity > 0 && quantity <= modalData.maxQuantity) {
                 handleConfirmQuantity(quantity);
               } else {
-                alert("Invalid quantity");
+                alert(t("recipe.invalidQuantity"));
               }
             }}
           >
-            Confirm
+            {t("common.confirm")}
           </button>
           <button
             style={{ marginLeft: "10px" }}
             onClick={() => setModalData(null)}
           >
-            Cancel
+            {t("common.cancel")}
           </button>
         </div>
       </div>

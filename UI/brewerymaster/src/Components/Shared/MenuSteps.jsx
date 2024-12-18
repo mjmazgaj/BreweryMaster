@@ -1,6 +1,8 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 
+import { useTranslation } from 'react-i18next';
+
 import "./shared.css"
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -18,6 +20,7 @@ import {
 } from "react-icons/bs";
 
 const OrderStepsMenu = ({ currentStep, setCurrentStep, amountOfSteps }) => {
+  const { t } = useTranslation();
   const stepIcons = [
     <Bs1Circle size={30} />,
     <Bs2Circle size={30} />,
@@ -70,14 +73,14 @@ const OrderStepsMenu = ({ currentStep, setCurrentStep, amountOfSteps }) => {
           onClick={handlePrevStep}
           disabled={currentStep === 0}
         >
-          Back
+          {t("common.back")}
         </Button>
         <Button
           variant="dark"
           onClick={handleNextStep}
           disabled={currentStep === amountOfSteps - 1}
         >
-          Next
+          {t("common.next")}
         </Button>
       </div>
     </div>
