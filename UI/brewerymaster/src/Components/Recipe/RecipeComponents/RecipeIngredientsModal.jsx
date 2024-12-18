@@ -41,13 +41,13 @@ const RecipeIngredientsModal = ({modalData, handleConfirmQuantity, setModalData}
               }
             }}
           >
-            {t("common.confirm")}
+            {t("button.confirm")}
           </button>
           <button
             style={{ marginLeft: "10px" }}
             onClick={() => setModalData(null)}
           >
-            {t("common.cancel")}
+            {t("button.cancel")}
           </button>
         </div>
       </div>

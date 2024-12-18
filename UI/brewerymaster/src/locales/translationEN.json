@@ -1,4 +1,22 @@
 {
+    "production":{
+        "stage":{
+    
+        }
+    },
+    "button":{
+        "submit": "Submit",
+        "cancel": "Cancel",
+        "confirm": "Confirm",
+        "next": "Next",
+        "back": "Back"
+    },
+    "common":{
+        "style": "Style",
+        "type": "Type",
+        "name": "Name",
+        "quantity": "Quantity"
+    },
     "recipe":{
         "abvScale": "ABV scale",
         "blgScale": "BLG scale",
@@ -6,22 +24,34 @@
         "srmScale": "SRM scale",
         "ingredientsSelected": "Selected Ingredients",
         "ingredientsAvailable": "Available Ingredients",
-        "invalidQuantity":"Invalid quantity"
+        "invalidQuantity":"Invalid quantity",
+        "mash":{
+            "efficiency": "Mash efficiency",
+            "waterToGrainRatio": "Water-to-grain ratio",
+            "mashWaterVolume": "Mash water volume",
+            "totalMashVolume": "Total mash volume"
+        },
+        "batch":{
+            "expectedBeerVolume": "Expected beer volume",
+            "boilingTime": "Boiling time",
+            "evaporationRate": "Evaporation rate",
+            "boiledWortVolume": "Boiled wort volume",
+            "boilingLosses": "Boiling losses",
+            "preBoilingDensity": "Pre-boiling density",
+            "fermentationLosses": "Fermentation losses",
+            "dryHoppingLosses": "Dry hopping losses"
+        },
+        "step":{
+            "basicInformation": "Basic information",
+            "fermentingIngredients": "Fermenting ingredients",
+            "hops": "Hops",
+            "yeast": "Yeast",
+            "batch": "Batch",
+            "mash": "Mash",
+            "stages": "Stages"
+        }
     },
     "toast":{
-        "addSuccess": "The element has been added successfully."
-    },
-    "common":{
-        "style": "Style",
-        "submit": "Submit",
-        "summary": "Summary",
-        "type": "Type",
-        "name": "Name",
-        "quantity": "Quantity",
-        "ingredients": "Ingredients",
-        "cancel": "Cancel",
-        "confirm": "Confirm",
-        "next": "Next",
-        "back": "Back"
+        "addSuccess": "The item has been added successfully."
     }
 }

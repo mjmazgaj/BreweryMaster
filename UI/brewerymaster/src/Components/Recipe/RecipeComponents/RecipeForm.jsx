@@ -10,12 +10,15 @@ import { addData } from '../api';
 import MenuSteps from '../../Shared/MenuSteps';
 import RecipeIngredients from "./RecipeIngredients";
 import RecipeSummary from "./RecipeSummary";
+import RecipeMash from "./RecipeMash";
+import RecipeBatch from "./RecipeBatch";
 
 const RecipeForm = () => {    
   const { t } = useTranslation();
 
   const [currentStep, setCurrentStep] = useState(0);
   const [recipeSummaryData, setRecipeSummaryData] = useState({
+    name: "",
     blgScale: "",
     ibuScale: "",
     abvScale: "",
@@ -23,7 +26,7 @@ const RecipeForm = () => {
     type: "",
   });
 
-  const [batchData, setBatchData] = useState({
+  const [recipeBatchData, setRecipeBatchData] = useState({
     batchSize: "",
     expectedBeerVolume: "",
     boilTime: "",
@@ -35,7 +38,7 @@ const RecipeForm = () => {
     dryHopLoss: "",
   });
 
-  const [mashData, setMashData] = useState({
+  const [recipeMashData, setRecipeMashData] = useState({
     mashEfficiency: "",
     waterToGrainRatio: "",
     mashWaterVolume: "",
@@ -60,12 +63,35 @@ const RecipeForm = () => {
 
   const steps = [
     {
-      name: t("common.ingredients"),
+      name: t("recipe.step.basicInformation"),
+      component: (
+        <RecipeSummary
+          recipeSummaryData={recipeSummaryData}
+          setRecipeSummaryData={setRecipeSummaryData}
+        />
+      ),
+    },
+    {
+      name: t("recipe.step.fermentingIngredients"),
       component: <RecipeIngredients />,
     },
     {
-      name: t("common.summary"),
-      component: <RecipeSummary recipeSummaryData={recipeSummaryData} setRecipeSummaryData={setRecipeSummaryData}/>,
+      name: t("recipe.step.batch"),
+      component: (
+        <RecipeBatch
+          recipeBatchData={recipeBatchData}
+          setRecipeBatchData={setRecipeBatchData}
+        />
+      ),
+    },
+    {
+      name: t("recipe.step.mash"),
+      component: (
+        <RecipeMash
+          recipeMashData={recipeMashData}
+          setRecipeMashData={setRecipeMashData}
+        />
+      ),
     },
   ];
 
@@ -78,7 +104,7 @@ const RecipeForm = () => {
 
       {currentStep === steps.length - 1 ? (
         <Button variant="dark" onClick={handleSave}>
-          {t("common.submit")}
+          {t("button.submit")}
         </Button>
       ) : null}
     </Form>

@@ -73,14 +73,14 @@ const OrderStepsMenu = ({ currentStep, setCurrentStep, amountOfSteps }) => {
           onClick={handlePrevStep}
           disabled={currentStep === 0}
         >
-          {t("common.back")}
+          {t("button.back")}
         </Button>
         <Button
           variant="dark"
           onClick={handleNextStep}
           disabled={currentStep === amountOfSteps - 1}
         >
-          {t("common.next")}
+          {t("button.next")}
         </Button>
       </div>
     </div>

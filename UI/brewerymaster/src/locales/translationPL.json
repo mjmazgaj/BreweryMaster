@@ -1,4 +1,22 @@
 {
+    "production": {
+        "stage": {
+    
+        }
+    },
+    "button": {
+        "submit": "Zatwierdź",
+        "cancel": "Anuluj",
+        "confirm": "Potwierdź",
+        "next": "Dalej",
+        "back": "Wstecz"
+    },
+    "common": {
+        "style": "Styl",
+        "type": "Typ",
+        "name": "Nazwa",
+        "quantity": "Ilość"
+    },
     "recipe": {
         "abvScale": "Skala ABV",
         "blgScale": "Skala BLG",
@@ -6,22 +24,34 @@
         "srmScale": "Skala SRM",
         "ingredientsSelected": "Wybrane składniki",
         "ingredientsAvailable": "Dostępne składniki",
-        "invalidQuantity": "Nieprawidłowa ilość"
+        "invalidQuantity": "Nieprawidłowa ilość",
+        "mash": {
+            "efficiency": "Wydajność zacierania",
+            "waterToGrainRatio": "Stosunek wody do ziarna",
+            "mashWaterVolume": "Objętość wody do zacierania",
+            "totalMashVolume": "Całkowita objętość zacieru"
+        },
+        "batch": {
+            "expectedBeerVolume": "Oczekiwana objętość gotowego piwa",
+            "boilingTime": "Czas gotowania",
+            "evaporationRate": "Szybkość odparowywania",
+            "boiledWortVolume": "Ilość gotowanej brzeczki",
+            "boilingLosses": "Straty z gotowania",
+            "preBoilingDensity": "Gęstość przed gotowaniem",
+            "fermentationLosses": "Straty z fermentacji",
+            "dryHoppingLosses": "Straty z chmielenia na zimno"
+        },
+        "step": {
+            "basicInformation": "Podstawowe informacje",
+            "fermentingIngredients": "Składniki fermentujące",
+            "hops": "Chmiel",
+            "yeast": "Drożdże",
+            "batch": "Warka",
+            "mash": "Zacieranie",
+            "stages": "Etapy"
+        }
     },
     "toast": {
         "addSuccess": "Element został pomyślnie dodany."
-    },
-    "common": {
-        "style": "Styl",
-        "submit": "Zatwierdź",
-        "summary": "Podsumowanie",
-        "type": "Typ",
-        "name": "Nazwa",
-        "quantity": "Ilość",
-        "ingredients": "Składniki",
-        "cancel": "Anuluj",
-        "confirm": "Potwierdź",
-        "next": "Dalej",
-        "back": "Wstecz"
     }
 }
