@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
-import KanbanBoard from './KanbanBoard';
+import KanbanBoard from './KanbanComponents/KanbanBoard';
 import './kanban.css';
 
 import {updateStatus, fetchDataByOwnerId} from './api';
-import KanbanModal from './KanbanModal';
+import KanbanModal from './KanbanComponents/KanbanModal';
 
 const Kanban = () => {
   const [columns, setColumns] = useState(null);

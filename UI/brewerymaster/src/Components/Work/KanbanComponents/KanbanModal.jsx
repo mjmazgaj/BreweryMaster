@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { Modal, Button, Container, Row, Col } from 'react-bootstrap';
 
-import {addData} from './api';
+import {addData} from '../api';
 
 import { useNavigate } from 'react-router-dom';
 const KanbanModal = ({

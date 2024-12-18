@@ -1,4 +1,4 @@
-import api from '../../General/api';
+import api from '../General/api';
 
 export const fetchDataByOwnerId = (id) => {
   return api.get(`api/task/ByOwnerId?ownerId=${id}`)

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import TaskCard from './TaskCard';
-import "./kanban.css"
+import "../kanban.css"
 import {handleOnDragEnd} from "./KanbanFunctions"
 
 const KanbanBoard = ({columns, setColumns}) => {

@@ -19,7 +19,7 @@ import ProspectOrder from './Components/Order/ProspectOrder/ProspectOrder';
 import Recipe from './Components/Recipe/Recipe';
 import Info from './Components/Info/Info';
 
-import Kanban from './Components/Work/Kanban/Kanban';
+import Kanban from './Components/Work/Kanban';
 
 import Authorize from './Components/Authorization/Authorize';
 import LogoutButton from './Components/General/LogoutButton'
