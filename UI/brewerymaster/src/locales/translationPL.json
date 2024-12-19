@@ -11,6 +11,9 @@
         "next": "Dalej",
         "back": "Wstecz"
     },
+    "message":{
+        "invalidinput": "Niepoprawna wartość"
+    },
     "common": {
         "style": "Styl",
         "type": "Typ",
@@ -24,7 +27,6 @@
         "srmScale": "Skala SRM",
         "ingredientsSelected": "Wybrane składniki",
         "ingredientsAvailable": "Dostępne składniki",
-        "invalidQuantity": "Nieprawidłowa ilość",
         "mash": {
             "efficiency": "Wydajność zacierania",
             "waterToGrainRatio": "Stosunek wody do ziarna",

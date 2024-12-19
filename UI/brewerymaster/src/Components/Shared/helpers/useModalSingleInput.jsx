@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-export const useRecipeModal = (modalData, handleConfirmQuantity, setModalData) => {
+export const useModalSingleInput = (modalData, handleConfirmQuantity, setModalData) => {
   const { t } = useTranslation(); 
 
   const handleConfirmOnClick = () => {

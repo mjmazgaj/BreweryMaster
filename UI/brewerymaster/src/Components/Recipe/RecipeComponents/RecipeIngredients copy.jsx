@@ -3,7 +3,7 @@ import React from "react";
 import { useTranslation } from 'react-i18next';
 
 import DynamicTable from "../../Shared/DynamicTable";
-import ModalSingleInput from "../../Shared/ModalSingleInput";
+import RecipeIngredientsModal from "./RecipeIngredientsModal";
 
 import { useRecipeIngredients } from "./helpers/useRecipeIngredients";
 
@@ -33,7 +33,7 @@ const RecipeIngredients = () => {
         data={selectedIngredients}
         handleDoubleClick={() => {}}
       />
-      <ModalSingleInput
+      <RecipeIngredientsModal
         modalData={modalData}
         handleConfirmQuantity={handleConfirmQuantity}
         setModalData={setModalData}

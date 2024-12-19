@@ -11,6 +11,9 @@
         "saveChanges": "Save Changes",
         "close": "Close"
     },
+    "message":{
+        "invalidinput": "Invalid input"
+    },
     "common": {
         "empty": "Empty",
         "style": "Style",
@@ -37,7 +40,6 @@
         "srmScale": "SRM scale",
         "ingredientsSelected": "Selected Ingredients",
         "ingredientsAvailable": "Available Ingredients",
-        "invalidQuantity": "Invalid quantity",
         "mash": {
             "efficiency": "Mash efficiency",
             "waterToGrainRatio": "Water-to-grain ratio",
