@@ -1,7 +1,4 @@
 {
-    "production": {
-        "stage": {}
-    },
     "button": {
         "submit": "Submit",
         "cancel": "Cancel",
@@ -11,11 +8,24 @@
         "saveChanges": "Save Changes",
         "close": "Close"
     },
+    "column":{
+        "empty": "Empty",
+        "form": "Form",
+        "usage": "Usage",
+        "laboratory": "Laboratory",
+        "alphaAcids": "Alpha Acids",
+        "time": "Time",
+        "type":"$t(common.type)",
+        "name":"$t(common.name)",
+        "quantity": "$t(common.quantity)",
+        "percentage":"Percentage",
+        "extraction":"Extraction",
+        "ebc": "EBC"
+    },
     "message":{
         "invalidinput": "Invalid input"
     },
     "common": {
-        "empty": "Empty",
         "style": "Style",
         "type": "Type",
         "name": "Name",
@@ -40,6 +50,10 @@
         "srmScale": "SRM scale",
         "ingredientsSelected": "Selected Ingredients",
         "ingredientsAvailable": "Available Ingredients",
+        "hopsSelected": "Selected hops",
+        "hopsAvailable": "Available hops",
+        "yeastSelected": "Selected yeast",
+        "yeastAvailable": "Available yeast",
         "mash": {
             "efficiency": "Mash efficiency",
             "waterToGrainRatio": "Water-to-grain ratio",

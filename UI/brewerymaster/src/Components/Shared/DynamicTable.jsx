@@ -1,4 +1,5 @@
 import React from "react";
+import {Table} from 'react-bootstrap';
 
 import { useTranslation } from 'react-i18next';
 import "./shared.css";
@@ -11,7 +12,7 @@ const DynamicTable = ({tableKey, tableTitle, data, handleDoubleClick}) => {
   return (
     <div className={`dynamicTable-${tableKey}_container`}>
       <h3>{tableTitle}</h3>
-      <table className="dynamicTable_table">
+      <Table striped bordered hover className="dynamicTable_table">
         <thead>
           <tr>
             {keys.map((header) => (
@@ -20,15 +21,25 @@ const DynamicTable = ({tableKey, tableTitle, data, handleDoubleClick}) => {
           </tr>
         </thead>
         <tbody>
-          {data.map((item) => (
-            <tr key={item.id} onDoubleClick={() => handleDoubleClick(item)}>
-              {keys.map((column) => (
-                <td>{item[column]}</td>
-              ))}
+          {data.length > 0 ? (
+            data.map((item) => (
+              <tr
+                className="dynamicTable_row"
+                key={item.id}
+                onDoubleClick={() => handleDoubleClick(item)}
+              >
+                {keys.map((column) => (
+                  <td>{item[column]}</td>
+                ))}
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="5">Loading...</td>
             </tr>
-          ))}
+          )}
         </tbody>
-      </table>
+      </Table>
     </div>
   );
 };

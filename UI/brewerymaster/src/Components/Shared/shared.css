@@ -75,3 +75,7 @@
     gap: 1rem;
     justify-content: center;
 }
+
+.dynamicTable_row{
+    cursor: pointer;
+}
