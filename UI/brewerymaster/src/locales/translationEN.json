@@ -18,8 +18,8 @@
         "type":"$t(common.type)",
         "name":"$t(common.name)",
         "quantity": "$t(common.quantity)",
-        "percentage":"Percentage",
-        "extraction":"Extraction",
+        "percentage": "$t(common.percentage)",
+        "extraction":"$t(common.extraction)",
         "ebc": "EBC"
     },
     "message":{
@@ -32,6 +32,8 @@
         "title": "Title",
         "summary": "Summary",
         "status": "Status",
+        "percentage": "Percentage",
+        "extraction":"Extraction",
         "quantity": "Quantity"
     },
     "kanban": {
@@ -54,6 +56,14 @@
         "hopsAvailable": "Available hops",
         "yeastSelected": "Selected yeast",
         "yeastAvailable": "Available yeast",
+        "ingredients":{
+            "type": "$t(common.title)",
+            "name": "$t(common.name)",
+            "quantity": "$t(common.quantity)",
+            "percentage": "$t(common.percentage)",
+            "extraction":"$t(common.extraction)",
+            "ebc": "EBC"
+        },
         "mash": {
             "efficiency": "Mash efficiency",
             "waterToGrainRatio": "Water-to-grain ratio",
