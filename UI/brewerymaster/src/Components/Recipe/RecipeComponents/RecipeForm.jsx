@@ -13,10 +13,17 @@ import DynamicTableSelection from "../../Shared/DynamicTableSelection";
 
 const RecipeForm = () => {    
   const { t } = useTranslation();
+  
 
   const {
     currentStep,
     setCurrentStep,
+    selectedIngredients,
+    setSelectedIngredients,
+    selectedHops,
+    setSelectedHops,
+    selectedYeast,
+    setSelectedYeast,
     recipeSummaryData,
     setRecipeSummaryData,
     recipeBatchData,
@@ -27,12 +34,99 @@ const RecipeForm = () => {
     clear,
   } = useRecipeForm();
 
-const [ingredients, setIngredients] = useState([
-    { id: 1, name: 'Flour', quantity: 1000 },
-    { id: 2, name: 'Sugar', quantity: 500 },
-    { id: 3, name: 'Butter', quantity: 250 },
+  const [ingredients, setIngredients] = useState([
+    { 
+      id: 1, 
+      type: 'Grain', 
+      name: 'Viking Pilsner malt', 
+      quantity: 3, 
+      percentage: 62.5, 
+      extraction: 82, 
+      ebc: 4 
+    },
+    { 
+      id: 2, 
+      type: 'Grain', 
+      name: 'Strzegom Monachijski typ II', 
+      quantity: 1, 
+      percentage: 20.8, 
+      extraction: 79, 
+      ebc: 22 
+    },
+    { 
+      id: 3, 
+      type: 'Grain', 
+      name: 'Strzegom Karmel 150', 
+      quantity: 0.5, 
+      percentage: 10.4, 
+      extraction: 75, 
+      ebc: 150 
+    },
+    { 
+      id: 4, 
+      type: 'Grain', 
+      name: 'Oats, Flaked', 
+      quantity: 0.3, 
+      percentage: 6.3, 
+      extraction: 80, 
+      ebc: 2 
+    }
+  ]);
+  
+  const [hops, setHops] = useState([
+    { 
+      id: 1, 
+      usage: 'Gotowanie', 
+      name: 'Citra', 
+      quantity: 25,
+      time: 60, 
+      alphaAcids: 12.0
+    },
+    { 
+      id: 2, 
+      usage: 'Gotowanie', 
+      name: 'Citra', 
+      quantity: 25, 
+      time: 15, 
+      alphaAcids: 12.0 
+    },
+    { 
+      id: 3, 
+      usage: 'Gotowanie', 
+      name: 'Citra', 
+      quantity: 25, 
+      time: 10, 
+      alphaAcids: 12.0 
+    },
+    { 
+      id: 4, 
+      usage: 'Aromat (koniec gotowania)', 
+      name: 'Citra', 
+      quantity: 25, 
+      time: 5, 
+      alphaAcids: 12.0 
+    },
+    { 
+      id: 5, 
+      usage: 'Na zimno', 
+      name: 'Citra', 
+      quantity: 50, 
+      time: 7, 
+      alphaAcids: 12.0 
+    },
   ]);
 
+  const [yeast, setYeast] = useState([
+    {
+      id: 1,
+      name: "US05",
+      type: "Ale",
+      form: "Suche",
+      quantity: 11,
+      laboratory: "Gozdawa",
+    },
+  ]);
+  
   const steps = [
     {
       key: "basicInformation",
@@ -50,13 +144,40 @@ const [ingredients, setIngredients] = useState([
       name: t("recipe.step.fermentingIngredients"),
       component: (
         <DynamicTableSelection
-          key="ingredients"
-          sourceTableKey="ingredientsAvailable"
           sourceTableTitle={t("recipe.ingredientsAvailable")}
           data={ingredients}
           setData={setIngredients}
-          targetTableKey="ingredientsAvailable"
-          targetTableTitle={t("recipe.ingredientsAvailable")}
+          targetTableTitle={t("recipe.ingredientsSelected")}
+          selectedData={selectedIngredients}
+          setSelectedData={setSelectedIngredients}
+        />
+      ),
+    },
+    {
+      key: "hops",
+      name: t("recipe.step.hops"),
+      component: (
+        <DynamicTableSelection
+          sourceTableTitle={t("recipe.hopsAvailable")}
+          data={hops}
+          setData={setHops}
+          targetTableTitle={t("recipe.hopsSelected")}
+          selectedData={selectedHops}
+          setSelectedData={setSelectedHops}
+        />
+      ),
+    },
+    {
+      key: "yeast",
+      name: t("recipe.step.yeast"),
+      component: (
+        <DynamicTableSelection
+          sourceTableTitle={t("recipe.yeastAvailable")}
+          data={yeast}
+          setData={setYeast}
+          targetTableTitle={t("recipe.yeastSelected")}
+          selectedData={selectedYeast}
+          setSelectedData={setSelectedYeast}
         />
       ),
     },

@@ -6,7 +6,7 @@ import "./shared.css";
 const DynamicTable = ({tableKey, tableTitle, data, handleDoubleClick}) => {  
   const { t } = useTranslation();
 
-  const headers = data.length > 0 ? Object.keys(data[0]).filter(x=>x !== "id") : ["empty"];
+  const keys = data.length > 0 ? Object.keys(data[0]).filter(x=>x !== "id" && x !== "maxQuantity") : ["empty"];
 
   return (
     <div className={`dynamicTable-${tableKey}_container`}>
@@ -14,19 +14,17 @@ const DynamicTable = ({tableKey, tableTitle, data, handleDoubleClick}) => {
       <table className="dynamicTable_table">
         <thead>
           <tr>
-            {headers.map((header) => (
-              <th key={header}>{t(`common.${header}`) || header}</th>
+            {keys.map((header) => (
+              <th key={header}>{t(`column.${header}`) || header}</th>
             ))}
           </tr>
         </thead>
         <tbody>
           {data.map((item) => (
-            <tr
-              key={item.id}
-              onDoubleClick={() => handleDoubleClick(item)}
-            >
-              <td>{item.name}</td>
-              <td>{item.quantity}</td>
+            <tr key={item.id} onDoubleClick={() => handleDoubleClick(item)}>
+              {keys.map((column) => (
+                <td>{item[column]}</td>
+              ))}
             </tr>
           ))}
         </tbody>

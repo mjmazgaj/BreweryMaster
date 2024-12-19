@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 import { useTranslation } from 'react-i18next';
 
@@ -7,27 +7,27 @@ import ModalSingleInput from "./ModalSingleInput";
 
 import { useDynamicTableSelection } from "./helpers/useDynamicTableSelection";
 
-const DynamicTableSelection = ({key, sourceTableKey, sourceTableTitle, data, setData, targetTableKey, targetTableTitle}) => { 
+const DynamicTableSelection = ({sourceTableTitle, data, setData, targetTableTitle, selectedData, setSelectedData}) => { 
   const { t } = useTranslation();
 
+
   const {
-    selectedData,
     handleDoubleClick,
     modalData,
     handleConfirmQuantity,
     setModalData,
-  } = useDynamicTableSelection(data, setData);
+  } = useDynamicTableSelection(data, setData, selectedData, setSelectedData);
 
   return (
-    <div className={`recipe-${key}_container`}>
+    <div className={`table-selection_container`}>
       <DynamicTable
-        tableKey={sourceTableKey}
+        tableKey="source-table"
         tableTitle={sourceTableTitle}
         data={data}
         handleDoubleClick={handleDoubleClick}
       />
       <DynamicTable
-        tableKey={targetTableKey}
+        tableKey="target-table"
         tableTitle={targetTableTitle}
         data={selectedData}
         handleDoubleClick={() => {}}

@@ -1,16 +1,10 @@
 import { useState } from "react";
 
-export const useDynamicTableSelection = (data, setData) => {
-
-  const [selectedData, setSelectedData] = useState([]);
+export const useDynamicTableSelection = (data, setData, selectedData, setSelectedData) => {
   const [modalData, setModalData] = useState(null);
-
+  
   const handleDoubleClick = (item) => {
-    setModalData({
-      id: item.id,
-      name: item.name,
-      maxQuantity: item.quantity,
-    });
+    setModalData({ ...item, maxQuantity: item.quantity });
   };
 
   const handleConfirmQuantity = (quantity) => {
@@ -36,7 +30,7 @@ export const useDynamicTableSelection = (data, setData) => {
     } else {
       updatedSelected = [
         ...selectedData,
-        { id: modalData.id, name: modalData.name, quantity },
+        { ...modalData, quantity },
       ];
     }
 
@@ -46,7 +40,6 @@ export const useDynamicTableSelection = (data, setData) => {
   };
 
   return {
-    selectedData,
     handleDoubleClick,
     modalData,
     handleConfirmQuantity,

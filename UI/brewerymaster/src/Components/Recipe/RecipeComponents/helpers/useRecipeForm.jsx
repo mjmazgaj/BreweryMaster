@@ -5,7 +5,11 @@ import { addData } from '../../api';
 import { useTranslation } from 'react-i18next';
 export const useRecipeForm = () => {
   const { t } = useTranslation();
+
   const [currentStep, setCurrentStep] = useState(0);
+  const [selectedIngredients, setSelectedIngredients] = useState([]);
+  const [selectedHops, setSelectedHops] = useState([]);
+  const [selectedYeast, setSelectedYeast] = useState([]);
 
   const [recipeSummaryData, setRecipeSummaryData] = useState({
     name: "",
@@ -41,8 +45,11 @@ export const useRecipeForm = () => {
     const newData = 
     {
       ...recipeSummaryData,
-      ...recipeMashData, 
-      ...recipeBatchData
+      ingredients: selectedIngredients,
+      hops: selectedHops,
+      yeast: selectedYeast,
+      ...recipeBatchData, 
+      ...recipeMashData,
     };
 
     addData(newData).then(() => {
@@ -61,6 +68,12 @@ export const useRecipeForm = () => {
   return {
     currentStep,
     setCurrentStep,
+    selectedIngredients,
+    setSelectedIngredients,
+    selectedHops,
+    setSelectedHops,
+    selectedYeast,
+    setSelectedYeast,
     recipeSummaryData,
     setRecipeSummaryData,
     recipeBatchData,

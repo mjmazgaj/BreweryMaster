@@ -16,6 +16,12 @@ import {
   Bs3CircleFill,
   Bs4Circle,
   Bs4CircleFill,
+  Bs5Circle,
+  Bs5CircleFill,
+  Bs6Circle,
+  Bs6CircleFill,
+  Bs7Circle,
+  Bs7CircleFill,
   BsThreeDots 
 } from "react-icons/bs";
 
@@ -26,6 +32,9 @@ const OrderStepsMenu = ({ currentStep, setCurrentStep, amountOfSteps }) => {
     <Bs2Circle size={30} />,
     <Bs3Circle size={30} />,
     <Bs4Circle size={30} />,
+    <Bs5Circle size={30} />,
+    <Bs6Circle size={30} />,
+    <Bs7Circle size={30} />,
   ];
 
   const stepFilledIcons = [
@@ -33,6 +42,9 @@ const OrderStepsMenu = ({ currentStep, setCurrentStep, amountOfSteps }) => {
     <Bs2CircleFill size={30} />,
     <Bs3CircleFill size={30} />,
     <Bs4CircleFill size={30} />,
+    <Bs5CircleFill size={30} />,
+    <Bs6CircleFill size={30} />,
+    <Bs7CircleFill size={30} />,
   ];
 
   const showSteps = () => {
