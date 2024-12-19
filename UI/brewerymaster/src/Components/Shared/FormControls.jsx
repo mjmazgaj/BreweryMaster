@@ -1,7 +1,7 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 
-const FormControl = ({ fields, data, setData }) => {
+const FormControls = ({ fields, data, setData }) => {
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -31,4 +31,4 @@ const FormControl = ({ fields, data, setData }) => {
   );
 };
 
-export default FormControl;
+export default FormControls;

@@ -2,73 +2,70 @@ import React, {useState} from 'react';
 import { Modal, Button, Container, Row, Col } from 'react-bootstrap';
 
 import {addData} from '../api';
+import { useTranslation } from 'react-i18next';
 
-import { useNavigate } from 'react-router-dom';
+import FormControl from '../../Shared/FormControls';
 const KanbanModal = ({
   show,
   setShow,
   handleClose
 }) => {
-  const [editTitle, setEditTitle] = useState([]);
-  const [editSummary, setEditSummary] = useState([]);
-  const [editStatus, setEditStatus] = useState([]);
-  const [editOwnerId, setEditOwnerId] = useState([]);
-  const [editOrderId, setEditOrderId] = useState([]);
-  const [editDueDate, setEditDueDate] = useState([]);
+
+  const { t } = useTranslation();
+  const [modalData, setModalData] = useState({
+    title: "",
+    summary: "",
+    status: "",
+    ownerId: "",
+    orderId: "",
+    dueDate: ""
+  });
 
   const [errorMessage, setErrorMessage] = useState('');
-
-  const navigate = useNavigate();
-
-  const inputs = [
+  
+  const fields = [
     {
-      id: 1,
-      name: "Title",
-      value: editTitle,
-      setState: setEditTitle,
+      id: "title",
+      label: t("kanban.title"),
+      type: "text",
     },
     {
-      id: 2,
-      name: "Summary",
-      value: editSummary,
-      setState: setEditSummary,
+      id: "summary",
+      label: t("kanban.summary"),
+      type: "text",
     },
     {
-      id: 3,
-      name: "Status",
-      value: editStatus,
-      setState: setEditStatus,
+      id: "status",
+      label: t("kanban.status"),
+      type: "number",
     },
     {
-      id: 4,
-      name: "DueDate",
-      value: editDueDate,
-      setState: setEditDueDate,
+      id: "dueDate",
+      label: t("kanban.dueDate"),
+      type: "date",
     },
     {
-      id: 5,
-      name: "OwnerId",
-      value: editOwnerId,
-      setState: setEditOwnerId,
+      id: "ownerId",
+      label: t("kanban.ownerId"),
+      type: "number",
     },
     {
-      id: 6,
-      name: "OrderId",
-      value: editOrderId,
-      setState: setEditOrderId,
-    }
-  ]
+      id: "orderId",
+      label: t("kanban.orderId"),
+      type: "number",
+    },
+  ];
 
   const handleUpdate = async (e) => {
     e.preventDefault();
 
     const task = {
-      Title: editTitle,
-      Summary: editSummary,
-      Status: editStatus,
-      DueDate: editDueDate,
-      OwnerId: editOrderId,
-      OrderId: editOwnerId
+      Title: modalData.title,
+      Summary: modalData.summary,
+      Status: modalData.status,
+      DueDate: modalData.dueDate,
+      OwnerId: modalData.ownerId,
+      OrderId: modalData.orderId,
     };
 
     try {
@@ -83,33 +80,23 @@ const KanbanModal = ({
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header>
-        <Modal.Title>Modify Address</Modal.Title>
+        <Modal.Title>{t("kanban.modalTitle")}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Container>
-          {
-            inputs.map((input) => (
-              <Col>
-                <label>{input.name}</label>
-                <input
-                  key={input.id}
-                  type="text"
-                  className="form-control"
-                  placeholder={input.name}
-                  value={input.value}
-                  onChange={(e) => input.setState(e.target.value)}
-                />
-              </Col>
-            ))
-          }
+          <FormControl
+            fields={fields}
+            data={modalData}
+            setData={setModalData}
+          />
         </Container>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
-          Close
+          {t("button.close")}
         </Button>
         <Button variant="primary" onClick={handleUpdate}>
-          Save Changes
+          {t("button.saveChanges")}
         </Button>
       </Modal.Footer>
     </Modal>

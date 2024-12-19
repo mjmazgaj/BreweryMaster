@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import { toast } from "react-toastify";
 
 import { useTranslation } from 'react-i18next';
+import {useRecipeForm} from "./helpers/useRecipeForm"
 
 import { addData } from '../api';
 
@@ -12,53 +13,30 @@ import RecipeIngredients from "./RecipeIngredients";
 import RecipeSummary from "./RecipeSummary";
 import RecipeMash from "./RecipeMash";
 import RecipeBatch from "./RecipeBatch";
+import RecipeFormFieldsProvider from "./RecipeFormProvider";
 
 const RecipeForm = () => {    
   const { t } = useTranslation();
 
-  const [currentStep, setCurrentStep] = useState(0);
-  const [recipeSummaryData, setRecipeSummaryData] = useState({
-    name: "",
-    blgScale: "",
-    ibuScale: "",
-    abvScale: "",
-    srmScale: "",
-    type: "",
-  });
-
-  const [recipeBatchData, setRecipeBatchData] = useState({
-    batchSize: "",
-    expectedBeerVolume: "",
-    boilTime: "",
-    evaporationRate: "",
-    wortVolume: "",
-    boilLoss: "",
-    preBoilGravity: "",
-    fermentationLoss: "",
-    dryHopLoss: "",
-  });
-
-  const [recipeMashData, setRecipeMashData] = useState({
-    mashEfficiency: "",
-    waterToGrainRatio: "",
-    mashWaterVolume: "",
-    totalMashVolume: "",
-  });
-
-  const [boilSteps, setBoilSteps] = useState([]);
+  const {
+    currentStep,
+    setCurrentStep,
+    recipeSummaryData,
+    setRecipeSummaryData,
+    recipeBatchData,
+    setRecipeBatchData,
+    recipeMashData,
+    setRecipeMashData,
+    clear,
+  } = useRecipeForm();
   
   const handleSave = () => {
-    const newData = {
-    };
-  
-    addData(newData)
-      .then(() => {
-        clear();
-        toast.success(t("toast.addSuccess"));
-      })
-  };
-  
-  const clear = () => {
+    const newData = {};
+
+    addData(newData).then(() => {
+      clear();
+      toast.success(t("toast.addSuccess"));
+    });
   };
 
   const steps = [

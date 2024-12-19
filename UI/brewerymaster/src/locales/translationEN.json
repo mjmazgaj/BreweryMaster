@@ -1,37 +1,49 @@
 {
-    "production":{
-        "stage":{
-    
-        }
+    "production": {
+        "stage": {}
     },
-    "button":{
+    "button": {
         "submit": "Submit",
         "cancel": "Cancel",
         "confirm": "Confirm",
         "next": "Next",
-        "back": "Back"
+        "back": "Back",
+        "saveChanges": "Save Changes",
+        "close": "Close"
     },
-    "common":{
+    "common": {
         "style": "Style",
         "type": "Type",
         "name": "Name",
+        "title": "Title",
+        "summary": "Summary",
+        "status": "Status",
         "quantity": "Quantity"
     },
-    "recipe":{
+    "kanban": {
+        "modalTitle": "Modify Task",
+        "title": "$t(common.title)",
+        "summary": "$t(common.summary)",
+        "status": "$t(common.status)",
+        "dueDate": "Due Date",
+        "ownerId": "Owner ID",
+        "orderId": "Order ID"
+    },
+    "recipe": {
         "abvScale": "ABV scale",
         "blgScale": "BLG scale",
         "ibuScale": "IBU scale",
         "srmScale": "SRM scale",
         "ingredientsSelected": "Selected Ingredients",
         "ingredientsAvailable": "Available Ingredients",
-        "invalidQuantity":"Invalid quantity",
-        "mash":{
+        "invalidQuantity": "Invalid quantity",
+        "mash": {
             "efficiency": "Mash efficiency",
             "waterToGrainRatio": "Water-to-grain ratio",
             "mashWaterVolume": "Mash water volume",
             "totalMashVolume": "Total mash volume"
         },
-        "batch":{
+        "batch": {
             "expectedBeerVolume": "Expected beer volume",
             "boilingTime": "Boiling time",
             "evaporationRate": "Evaporation rate",
@@ -41,7 +53,7 @@
             "fermentationLosses": "Fermentation losses",
             "dryHoppingLosses": "Dry hopping losses"
         },
-        "step":{
+        "step": {
             "basicInformation": "Basic information",
             "fermentingIngredients": "Fermenting ingredients",
             "hops": "Hops",
@@ -51,7 +63,7 @@
             "stages": "Stages"
         }
     },
-    "toast":{
+    "toast": {
         "addSuccess": "The item has been added successfully."
     }
 }

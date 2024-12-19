@@ -2,7 +2,8 @@ import React from "react";
 
 import { useTranslation } from 'react-i18next';
 
-import FormControl from "../../Shared/FormControl";
+import FormControls from "../../Shared/FormControls";
+import RecipeFormFieldsProvider from "./RecipeFormProvider";
 
 const RecipeSummary = ({
   recipeSummaryData,
@@ -58,7 +59,7 @@ const RecipeSummary = ({
 
   return (
     <div className="recipe-summary_container">
-    <FormControl
+    <FormControls
       fields={fields}
       data={recipeSummaryData}
       setData={setRecipeSummaryData}
