@@ -3,7 +3,7 @@ import React, {Fragment, useState} from "react";
 import { useTranslation } from 'react-i18next';
 import "./shared.css";
 
-const Ingredients = ({ingredients, handleAddIngredient}) => {  
+const Ingredients = ({ingredients, handleDoubleClick}) => {  
   const { t } = useTranslation();
   
   return (
@@ -20,8 +20,7 @@ const Ingredients = ({ingredients, handleAddIngredient}) => {
           {ingredients.map((ingredient) => (
             <tr
               key={ingredient.id}
-              onDoubleClick={() => handleAddIngredient(ingredient)}
-              style={{ cursor: "pointer" }}
+              onDoubleClick={() => handleDoubleClick(ingredient)}
             >
               <td>{ingredient.name}</td>
               <td>{ingredient.quantity}</td>

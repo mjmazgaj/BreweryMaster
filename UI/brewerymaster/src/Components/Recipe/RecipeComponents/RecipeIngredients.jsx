@@ -1,7 +1,6 @@
 import React, {Fragment, useState} from "react";
 
 import Ingredients from "../../Shared/Ingredients";
-import RecipeIngredientsSelected from "./RecipeIngredientsSelected";
 import RecipeIngredientsModal from "./RecipeIngredientsModal";
 
 const RecipeIngredients = () => {
@@ -15,7 +14,7 @@ const RecipeIngredients = () => {
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [modalData, setModalData] = useState(null);
 
-  const handleAddIngredient = (ingredient) => {
+  const handleDoubleClick = (ingredient) => {
     setModalData({
       id: ingredient.id,
       name: ingredient.name,
@@ -56,14 +55,15 @@ const RecipeIngredients = () => {
   };
 
   return (
-    
-    <div className="recipe-ingredients_container">   
-
+    <div className="recipe-ingredients_container">
       <Ingredients
         ingredients={ingredients}
-        handleAddIngredient={handleAddIngredient}
+        handleDoubleClick={handleDoubleClick}
       />
-      <RecipeIngredientsSelected selectedIngredients={selectedIngredients} />
+      <Ingredients
+        ingredients={selectedIngredients}
+        handleDoubleClick={() => {}}
+      />
       <RecipeIngredientsModal
         modalData={modalData}
         handleConfirmQuantity={handleConfirmQuantity}

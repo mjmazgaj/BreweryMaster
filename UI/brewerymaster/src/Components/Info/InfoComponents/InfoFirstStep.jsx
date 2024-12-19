@@ -9,7 +9,7 @@ const InfoFirstStep = () => {
     { id: 3, name: 'Butter', quantity: 250 },
   ]);
 
-  const handleAddIngredient = () => {
+  const handleDoubleClick = () => {
     console.log(ingredients);
   }
 
@@ -17,7 +17,7 @@ const InfoFirstStep = () => {
     <div style={{ display: "flex", padding: "20px" }}>
       <Ingredients
         ingredients={ingredients}
-        handleAddIngredient={handleAddIngredient}
+        handleDoubleClick={handleDoubleClick}
       />
     </div>
   );
