@@ -1,5 +1,5 @@
 import React from "react";
-import "./shared.css"
+import "../shared.css"
 
 import { Button, Form } from "react-bootstrap";
 

@@ -1,9 +1,9 @@
 import React from "react";
 
 import DynamicTable from "./DynamicTable";
-import ModalSingleInput from "../ModalSingleInput";
+import ModalSingleInput from "../ModalComponents/ModalSingleInput";
 
-import { useDynamicTableSelection } from "../helpers/useDynamicTableSelection";
+import { useDynamicTableSelection } from "./helpers/useDynamicTableSelection";
 
 const DynamicTableSelection = ({sourceTableTitle, data, setData, targetTableTitle, selectedData, setSelectedData}) => { 
 
