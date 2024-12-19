@@ -9,7 +9,7 @@ import recipeFormFieldsProvider from "./helpers/recipeFormFieldsProvider";
 import FormControls from "../../Shared/FormControls";
 import MenuSteps from '../../Shared/MenuSteps';
 
-import DynamicTableSelection from "../../Shared/DynamicTableSelection";
+import DynamicTableSelection from "../../Shared/TableComponents/DynamicTableSelection";
 
 const RecipeForm = () => {    
   const { t } = useTranslation();

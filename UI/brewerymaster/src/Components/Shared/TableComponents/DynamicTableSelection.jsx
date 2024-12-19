@@ -1,15 +1,11 @@
-import React, {useState} from "react";
-
-import { useTranslation } from 'react-i18next';
+import React from "react";
 
 import DynamicTable from "./DynamicTable";
-import ModalSingleInput from "./ModalSingleInput";
+import ModalSingleInput from "../ModalSingleInput";
 
-import { useDynamicTableSelection } from "./helpers/useDynamicTableSelection";
+import { useDynamicTableSelection } from "../helpers/useDynamicTableSelection";
 
 const DynamicTableSelection = ({sourceTableTitle, data, setData, targetTableTitle, selectedData, setSelectedData}) => { 
-  const { t } = useTranslation();
-
 
   const {
     handleDoubleClick,

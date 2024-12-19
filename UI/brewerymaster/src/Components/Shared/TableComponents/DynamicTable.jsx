@@ -2,7 +2,7 @@ import React from "react";
 import {Table} from 'react-bootstrap';
 
 import { useTranslation } from 'react-i18next';
-import "./shared.css";
+import "../shared.css";
 
 const DynamicTable = ({tableKey, tableTitle, data, handleDoubleClick}) => {  
   const { t } = useTranslation();
