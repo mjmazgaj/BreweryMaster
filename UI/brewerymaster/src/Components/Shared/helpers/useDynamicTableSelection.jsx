@@ -1,58 +1,52 @@
 import { useState } from "react";
 
-export const useRecipeIngredients = () => {
-  const [ingredients, setIngredients] = useState([
-    { id: 1, name: 'Flour', quantity: 1000 },
-    { id: 2, name: 'Sugar', quantity: 500 },
-    { id: 3, name: 'Butter', quantity: 250 },
-  ]);
+export const useDynamicTableSelection = (data, setData) => {
 
-  const [selectedIngredients, setSelectedIngredients] = useState([]);
+  const [selectedData, setSelectedData] = useState([]);
   const [modalData, setModalData] = useState(null);
 
-  const handleDoubleClick = (ingredient) => {
+  const handleDoubleClick = (item) => {
     setModalData({
-      id: ingredient.id,
-      name: ingredient.name,
-      maxQuantity: ingredient.quantity,
+      id: item.id,
+      name: item.name,
+      maxQuantity: item.quantity,
     });
   };
 
   const handleConfirmQuantity = (quantity) => {
     if (!modalData) return;
 
-    const updatedIngredients = ingredients.map((item) =>
+    const updatedData = data.map((item) =>
       item.id === modalData.id
         ? { ...item, quantity: item.quantity - quantity }
         : item
     );
 
-    const existingSelected = selectedIngredients.find(
+    const existingSelected = selectedData.find(
       (item) => item.id === modalData.id
     );
 
     let updatedSelected;
     if (existingSelected) {
-      updatedSelected = selectedIngredients.map((item) =>
+      updatedSelected = selectedData.map((item) =>
         item.id === modalData.id
           ? { ...item, quantity: item.quantity + quantity }
           : item
       );
     } else {
       updatedSelected = [
-        ...selectedIngredients,
+        ...selectedData,
         { id: modalData.id, name: modalData.name, quantity },
       ];
     }
 
-    setIngredients(updatedIngredients);
-    setSelectedIngredients(updatedSelected);
+    setData(updatedData);
+    setSelectedData(updatedSelected);
     setModalData(null);
   };
 
   return {
-    ingredients,
-    selectedIngredients,
+    selectedData,
     handleDoubleClick,
     modalData,
     handleConfirmQuantity,

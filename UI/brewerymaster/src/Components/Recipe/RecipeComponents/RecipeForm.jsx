@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Form } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 
@@ -9,7 +9,7 @@ import recipeFormFieldsProvider from "./helpers/recipeFormFieldsProvider";
 import FormControls from "../../Shared/FormControls";
 import MenuSteps from '../../Shared/MenuSteps';
 
-import RecipeIngredients from "./RecipeIngredients";
+import DynamicTableSelection from "../../Shared/DynamicTableSelection";
 
 const RecipeForm = () => {    
   const { t } = useTranslation();
@@ -27,6 +27,12 @@ const RecipeForm = () => {
     clear,
   } = useRecipeForm();
 
+const [ingredients, setIngredients] = useState([
+    { id: 1, name: 'Flour', quantity: 1000 },
+    { id: 2, name: 'Sugar', quantity: 500 },
+    { id: 3, name: 'Butter', quantity: 250 },
+  ]);
+
   const steps = [
     {
       key: "basicInformation",
@@ -42,7 +48,17 @@ const RecipeForm = () => {
     {
       key: "fermentingIngredients",
       name: t("recipe.step.fermentingIngredients"),
-      component: <RecipeIngredients />,
+      component: (
+        <DynamicTableSelection
+          key="ingredients"
+          sourceTableKey="ingredientsAvailable"
+          sourceTableTitle={t("recipe.ingredientsAvailable")}
+          data={ingredients}
+          setData={setIngredients}
+          targetTableKey="ingredientsAvailable"
+          targetTableTitle={t("recipe.ingredientsAvailable")}
+        />
+      ),
     },
     {
       key: "batch",
