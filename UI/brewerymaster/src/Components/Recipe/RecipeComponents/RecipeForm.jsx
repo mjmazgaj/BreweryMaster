@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 
 import { useTranslation } from 'react-i18next';
 import { useRecipeForm } from "./helpers/useRecipeForm";
-import formFieldsProvider from "./helpers/formFieldsProvider";
+import recipeFormFieldsProvider from "./helpers/recipeFormFieldsProvider";
 
 import FormControls from "../../Shared/FormControls";
 import MenuSteps from '../../Shared/MenuSteps';
@@ -33,7 +33,7 @@ const RecipeForm = () => {
       name: t("recipe.step.basicInformation"),
       component: (
         <FormControls
-          fields={formFieldsProvider(t).summaryFields}
+          fields={recipeFormFieldsProvider(t).summaryFields}
           data={recipeSummaryData}
           setData={setRecipeSummaryData}
         />
@@ -49,7 +49,7 @@ const RecipeForm = () => {
       name: t("recipe.step.batch"),
       component: (
         <FormControls
-          fields={formFieldsProvider(t).batchFields}
+          fields={recipeFormFieldsProvider(t).batchFields}
           data={recipeBatchData}
           setData={setRecipeBatchData}
         />
@@ -60,7 +60,7 @@ const RecipeForm = () => {
       name: t("recipe.step.mash"),
       component: (
         <FormControls
-          fields={formFieldsProvider(t).mashFields}
+          fields={recipeFormFieldsProvider(t).mashFields}
           data={recipeMashData}
           setData={setRecipeMashData}
         />

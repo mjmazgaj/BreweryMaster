@@ -12,6 +12,7 @@
         "close": "Close"
     },
     "common": {
+        "empty": "Empty",
         "style": "Style",
         "type": "Type",
         "name": "Name",

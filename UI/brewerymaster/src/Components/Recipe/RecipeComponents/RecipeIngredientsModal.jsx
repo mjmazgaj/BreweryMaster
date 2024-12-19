@@ -1,54 +1,34 @@
-import React, {Fragment, useState} from "react";
+import React from "react";
+import "../recipe.css"
+
+import { Button, Form } from "react-bootstrap";
 
 import { useTranslation } from 'react-i18next';
+import { useRecipeModal } from "./helpers/useRecipeModal";
 
 const RecipeIngredientsModal = ({modalData, handleConfirmQuantity, setModalData}) => {  
   const { t } = useTranslation(); 
 
+  const {
+    handleConfirmOnClick,
+    handleCancelOnClick
+  } = useRecipeModal(modalData, handleConfirmQuantity, setModalData);
+
   return (
     modalData && (
-      <div
-        style={{
-          position: "fixed",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          backgroundColor: "white",
-          padding: "20px",
-          boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.25)",
-        }}
-      >
+      <div className="recipe-ingredients-modal_container">
         <h4>Add {modalData.name}</h4>
         <p>Available: {modalData.maxQuantity}</p>
-        <input
+        <Form.Control
           type="number"
           min="1"
           max={modalData.maxQuantity}
           placeholder="Quantity"
           id="quantityInput"
         />
-        <div style={{ marginTop: "10px" }}>
-          <button
-            onClick={() => {
-              const quantity = parseInt(
-                document.getElementById("quantityInput").value,
-                10
-              );
-              if (quantity > 0 && quantity <= modalData.maxQuantity) {
-                handleConfirmQuantity(quantity);
-              } else {
-                alert(t("recipe.invalidQuantity"));
-              }
-            }}
-          >
-            {t("button.confirm")}
-          </button>
-          <button
-            style={{ marginLeft: "10px" }}
-            onClick={() => setModalData(null)}
-          >
-            {t("button.cancel")}
-          </button>
+        <div className="recipe-ingredients-modal_buttons-container">
+          <Button onClick={handleConfirmOnClick}>{t("button.confirm")}</Button>
+          <Button onClick={handleCancelOnClick}>{t("button.cancel")}</Button>
         </div>
       </div>
     )

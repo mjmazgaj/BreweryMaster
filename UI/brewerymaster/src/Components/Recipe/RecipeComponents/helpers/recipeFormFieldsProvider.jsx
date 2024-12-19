@@ -1,4 +1,4 @@
-const formFieldsProvider = (t) => ({
+const recipeFormFieldsProvider = (t) => ({
   summaryFields: [
     {
       id: "name",
@@ -126,4 +126,4 @@ const formFieldsProvider = (t) => ({
   ],
 });
 
-export default formFieldsProvider;
+export default recipeFormFieldsProvider;
