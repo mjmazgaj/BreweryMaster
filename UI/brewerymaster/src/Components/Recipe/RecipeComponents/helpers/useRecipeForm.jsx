@@ -1,6 +1,10 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
+import { addData } from '../../api';
 
+import { useTranslation } from 'react-i18next';
 export const useRecipeForm = () => {
+  const { t } = useTranslation();
   const [currentStep, setCurrentStep] = useState(0);
 
   const [recipeSummaryData, setRecipeSummaryData] = useState({
@@ -32,6 +36,20 @@ export const useRecipeForm = () => {
   });
 
   const [boilSteps, setBoilSteps] = useState([]);
+  
+  const handleSave = () => {
+    const newData = 
+    {
+      ...recipeSummaryData,
+      ...recipeMashData, 
+      ...recipeBatchData
+    };
+
+    addData(newData).then(() => {
+      clear();
+      toast.success(t("toast.addSuccess"));
+    });
+  };
 
   const clear = () => {
     setRecipeSummaryData({});
@@ -51,6 +69,7 @@ export const useRecipeForm = () => {
     setRecipeMashData,
     boilSteps,
     setBoilSteps,
+    handleSave,
     clear,
   };
 };

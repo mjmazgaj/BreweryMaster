@@ -1,4 +1,49 @@
-const RecipeFormFieldsProvider = (t) => ({
+const formFieldsProvider = (t) => ({
+  summaryFields: [
+    {
+      id: "name",
+      label: t("common.name"),
+      type: "text",
+    },
+    {
+      id: "blgScale",
+      label: t("recipe.blgScale"),
+      type: "number",
+      min: 0,
+      max: 100,
+    },
+    {
+      id: "ibuScale",
+      label: t("recipe.ibuScale"),
+      type: "number",
+      min: 0,
+      max: 1000,
+    },
+    {
+      id: "abvScale",
+      label: t("recipe.abvScale"),
+      type: "number",
+      min: 0,
+      max: 100,
+    },
+    {
+      id: "srmScale",
+      label: t("recipe.srmScale"),
+      type: "number",
+      min: 0,
+      max: 100,
+    },
+    {
+      id: "type",
+      label: t("common.type"),
+      type: "text",
+    },
+    {
+      id: "style",
+      label: t("common.style"),
+      type: "text",
+    },
+  ],
   batchFields: [
     {
       id: "expectedBeerVolume",
@@ -81,4 +126,4 @@ const RecipeFormFieldsProvider = (t) => ({
   ],
 });
 
-export default RecipeFormFieldsProvider;
+export default formFieldsProvider;

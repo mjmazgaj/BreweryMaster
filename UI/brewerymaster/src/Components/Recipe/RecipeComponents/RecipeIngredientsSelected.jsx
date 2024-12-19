@@ -2,6 +2,7 @@ import React, {Fragment, useState} from "react";
 
 import { useTranslation } from 'react-i18next';
 
+
 const RecipeIngredientsSelected = ({selectedIngredients}) => { 
   const { t } = useTranslation(); 
 

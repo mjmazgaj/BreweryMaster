@@ -1,19 +1,15 @@
-import React, {useState} from "react";
+import React from "react";
 import { Form } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
-import { toast } from "react-toastify";
 
 import { useTranslation } from 'react-i18next';
-import {useRecipeForm} from "./helpers/useRecipeForm"
+import { useRecipeForm } from "./helpers/useRecipeForm";
+import formFieldsProvider from "./helpers/formFieldsProvider";
 
-import { addData } from '../api';
-
+import FormControls from "../../Shared/FormControls";
 import MenuSteps from '../../Shared/MenuSteps';
+
 import RecipeIngredients from "./RecipeIngredients";
-import RecipeSummary from "./RecipeSummary";
-import RecipeMash from "./RecipeMash";
-import RecipeBatch from "./RecipeBatch";
-import RecipeFormFieldsProvider from "./RecipeFormProvider";
 
 const RecipeForm = () => {    
   const { t } = useTranslation();
@@ -27,47 +23,46 @@ const RecipeForm = () => {
     setRecipeBatchData,
     recipeMashData,
     setRecipeMashData,
+    handleSave,
     clear,
   } = useRecipeForm();
-  
-  const handleSave = () => {
-    const newData = {};
-
-    addData(newData).then(() => {
-      clear();
-      toast.success(t("toast.addSuccess"));
-    });
-  };
 
   const steps = [
     {
+      key: "basicInformation",
       name: t("recipe.step.basicInformation"),
       component: (
-        <RecipeSummary
-          recipeSummaryData={recipeSummaryData}
-          setRecipeSummaryData={setRecipeSummaryData}
+        <FormControls
+          fields={formFieldsProvider(t).summaryFields}
+          data={recipeSummaryData}
+          setData={setRecipeSummaryData}
         />
       ),
     },
     {
+      key: "fermentingIngredients",
       name: t("recipe.step.fermentingIngredients"),
       component: <RecipeIngredients />,
     },
     {
+      key: "batch",
       name: t("recipe.step.batch"),
       component: (
-        <RecipeBatch
-          recipeBatchData={recipeBatchData}
-          setRecipeBatchData={setRecipeBatchData}
+        <FormControls
+          fields={formFieldsProvider(t).batchFields}
+          data={recipeBatchData}
+          setData={setRecipeBatchData}
         />
       ),
     },
     {
+      key: "mash",
       name: t("recipe.step.mash"),
       component: (
-        <RecipeMash
-          recipeMashData={recipeMashData}
-          setRecipeMashData={setRecipeMashData}
+        <FormControls
+          fields={formFieldsProvider(t).mashFields}
+          data={recipeMashData}
+          setData={setRecipeMashData}
         />
       ),
     },
@@ -75,10 +70,16 @@ const RecipeForm = () => {
 
   return (
     <Form className="recipe-form">
-      <MenuSteps currentStep={currentStep} setCurrentStep={setCurrentStep} amountOfSteps={steps.length} />
+      <MenuSteps
+        currentStep={currentStep}
+        setCurrentStep={setCurrentStep}
+        amountOfSteps={steps.length}
+      />
 
       <h2>{steps[currentStep].name}</h2>
-      <div>{steps[currentStep].component}</div>
+      <div className={`"recipe-${steps[currentStep].key}_container"`}>
+        {steps[currentStep].component}
+      </div>
 
       {currentStep === steps.length - 1 ? (
         <Button variant="dark" onClick={handleSave}>
