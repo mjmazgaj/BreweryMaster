@@ -20,7 +20,7 @@ const FormControls = ({ fields, data, setData }) => {
             id={field.id}
             type={field.type}
             placeholder={field.label}
-            value={data[field.id] || ""}
+            value={data && data[field.id] || ""}
             onChange={handleInputChange}
             min={field.type === "number" ? field.min : null}
             max={field.type === "number" ? field.max : null}
