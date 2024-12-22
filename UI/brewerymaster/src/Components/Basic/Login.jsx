@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { login } from '../Authorization/AuthService';
+import { login } from './AuthService';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button, Col, Row } from 'react-bootstrap';
 
@@ -18,7 +18,6 @@ const Login = () => {
       const data = await login({ email, password });
       sessionStorage.setItem('token', data.accessToken);
       setErrorMessage('');
-      navigate('/dashboard');
     } catch (error) {
       setErrorMessage(error.response?.data?.message || 'Logowanie nie powiodło się. Spróbuj ponownie.');
     }

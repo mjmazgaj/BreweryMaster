@@ -2,15 +2,15 @@ import React, { useState} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import "./info.css"
+import "../../info.css"
 
-import DynamicTable from '../Shared/TableComponents/DynamicTable';
-import ModalUpdateItem from "../Shared/ModalComponents/ModalUpdateItem"
+import DynamicTable from '../../../Shared/TableComponents/DynamicTable';
+import ModalUpdateItem from "../../../Shared/ModalComponents/ModalUpdateItem"
 import { Button } from "react-bootstrap";
-import modalFieldsProvider from "../Shared/ModalComponents/helpers/modalFieldsProvider";
+import modalFieldsProvider from "../../../Shared/ModalComponents/helpers/modalFieldsProvider";
 
 import { useTranslation } from 'react-i18next';
-const Info = () => {
+const FermentingIngredients = () => {
   const { t } = useTranslation();
 
   const [ingredients, setIngredients] = useState([
@@ -93,4 +93,4 @@ const Info = () => {
     );
 }
 
-export default Info;
+export default FermentingIngredients;

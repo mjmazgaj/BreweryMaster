@@ -1,13 +1,13 @@
-import Home from './Components/Basic/Home';
-import Navigation from './Components/Basic/Navigation';
+import Home from './Components/Home/Home';
+import Navigation from './Components/App/Navigation';
 
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 
 import './App.css';
 import React, { useState, useEffect } from 'react';
 
-import Register from './Components/General/Register';
-import Login from './Components/General/Login';
+import Register from './Components/Basic/Register';
+import Login from './Components/Basic/Login';
 import Error from './Components/Shared/Error';
 
 import Address from './Components/User/Address/Address';
@@ -17,12 +17,12 @@ import Employee from './Components/User/Employee/Employee';
 import Order from './Components/Order/Order';
 import ProspectOrder from './Components/Order/ProspectOrder/ProspectOrder';
 import Recipe from './Components/Recipe/Recipe';
-import Info from './Components/Info/Info';
+import Ingredients from './Components/Info/Ingredients';
 
 import Kanban from './Components/Work/Kanban';
 
-import Authorize from './Components/Authorization/Authorize';
-import LogoutButton from './Components/General/LogoutButton'
+import Authorize from './Components/Basic/Authorize';
+import LogoutButton from './Components/Basic/LogoutButton'
 
 
 import { I18nextProvider } from 'react-i18next';
@@ -58,7 +58,7 @@ const App = () => {
               <Route exact path="/ProspectOrder" element={<ProspectOrder />} />
               <Route exact path="/Order" element={<Order />} />
               <Route exact path="/Recipe" element={<Recipe />} />
-              <Route exact path="/Info" element={<Info />} />
+              <Route exact path="/Ingredients" element={<Ingredients />} />
 
               <Route exact path="/Address" element={<Address />} />
               <Route exact path="/Client" element={<Client />} />

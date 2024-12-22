@@ -23,12 +23,15 @@ function Navigation(isAuthenticated) {
           <Nav.Link href="/ProspectOrder">ProspectOrder</Nav.Link>
           <Nav.Link href="/Order">Order</Nav.Link>
           <Nav.Link href="/Recipe">Recipe</Nav.Link>
-          <Nav.Link href="/Info">Info</Nav.Link>
 
           <NavDropdown title="User" id="navbarScrollingDropdown">
             <NavDropdown.Item href="/Client">Client</NavDropdown.Item>
             <NavDropdown.Item href="/Address">Address</NavDropdown.Item>
             <NavDropdown.Item href="/Employee">Employee</NavDropdown.Item>
+          </NavDropdown>
+
+          <NavDropdown title="Info" id="navbarScrollingDropdown">
+            <NavDropdown.Item href="/Ingredients">Ingredients</NavDropdown.Item>
           </NavDropdown>
         </Nav>
 

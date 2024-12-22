@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { register } from '../Authorization/AuthService';
+import { register } from './AuthService';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button, Col, Row } from 'react-bootstrap';
 
