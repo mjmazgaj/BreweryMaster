@@ -1,7 +1,7 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 
-const FormControls = ({ fields, data, setData }) => {
+const FormControls = ({ fields, data, setData, isReadOnly= false }) => {
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -21,7 +21,8 @@ const FormControls = ({ fields, data, setData }) => {
             type={field.type}
             placeholder={field.label}
             value={data && data[field.id] || ""}
-            onChange={handleInputChange}
+            onChange={isReadOnly ? null : handleInputChange}
+            readOnly={isReadOnly}
             min={field.type === "number" ? field.min : null}
             max={field.type === "number" ? field.max : null}
           />
