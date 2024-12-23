@@ -17,7 +17,7 @@ import Employee from './Components/User/Employee/Employee';
 import Order from './Components/Order/Order';
 import ProspectOrder from './Components/Order/ProspectOrder/ProspectOrder';
 import Recipe from './Components/Recipe/Recipe';
-import Ingredients from './Components/Info/Ingredients';
+import Ingredients from './Components/Info/Ingredients/Ingredients';
 
 import Kanban from './Components/Work/Kanban';
 

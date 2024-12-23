@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const apiurl = "https://localhost:7289/api/Info";
+const apiurl = "https://localhost:7289/api/FermentingIngredients";
 
 export const fetchData = () => {
   return axios.get(apiurl)
