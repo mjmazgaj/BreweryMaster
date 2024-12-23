@@ -5,7 +5,7 @@ import { Form, Button, Col, Row } from 'react-bootstrap';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const Login = () => {
+const Login = (setIsAuthenticated) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -17,6 +17,8 @@ const Login = () => {
     try {
       const data = await login({ email, password });
       sessionStorage.setItem('token', data.accessToken);
+      navigate("/kanban")
+      setIsAuthenticated(true);
       setErrorMessage('');
     } catch (error) {
       setErrorMessage(error.response?.data?.message || 'Logowanie nie powiodło się. Spróbuj ponownie.');
