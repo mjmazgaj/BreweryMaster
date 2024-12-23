@@ -11,7 +11,7 @@ export const useModalConfirmation = ({itemId, setShow, confirmationAction}) => {
 
   const confirmationCases = {
     delete: {
-      title: "Do you want to delete the item?",
+      title: "Do you want to delete the following item?",
       function: handleDelete,
     },
   };

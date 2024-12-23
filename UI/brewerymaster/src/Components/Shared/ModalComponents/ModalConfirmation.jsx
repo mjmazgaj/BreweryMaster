@@ -3,19 +3,20 @@ import { Modal, Button } from 'react-bootstrap';
 
 import { useModalConfirmation } from './helpers/useModalConfirmation';
 
-const ModalUpdateItem = ({ itemId, confirmationAction, show, setShow }) => {
+const ModalUpdateItem = ({ data, confirmationAction, show, setShow }) => {
 
   const { handleClose, confirmationObject } = useModalConfirmation(
-    {itemId, setShow, confirmationAction}
+    {data, setShow, confirmationAction}
   );
 
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>
-          {confirmationObject.title}
-        </Modal.Title>
+        <Modal.Title>{confirmationObject.title}</Modal.Title>
       </Modal.Header>
+      <Modal.Body>
+        <p>{data.name}</p>
+      </Modal.Body>
       <Modal.Footer>
         <Button variant="dark" onClick={confirmationObject.function}>
           Confirm
