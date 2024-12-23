@@ -52,7 +52,7 @@ const App = () => {
               <Route path="*" element={<Navigate to="/" />} />
 
               <Route path="/register" element={<Register />} />
-              <Route path="/login" element={<Login />} />
+              <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated}/>} />
               <Route path="/error" element={<Error />} />
 
               <Route exact path="/ProspectOrder" element={<ProspectOrder />} />
