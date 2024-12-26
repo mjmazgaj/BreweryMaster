@@ -18,9 +18,18 @@
         "type":"$t(common.type)",
         "name":"$t(common.name)",
         "quantity": "$t(common.quantity)",
+        "reserved": "$t(common.reserved)",
+        "ordered": "$t(common.ordered)",
         "percentage": "$t(common.percentage)",
         "extraction":"$t(common.extraction)",
-        "ebc": "EBC"
+        "ebc": "EBC",
+        "total": "Total",
+        "user": "User",
+        "date": "Date",
+        "describtion": "Describtion",
+        "orderedDate": "Ordered date",
+        "expectedDate": "Expected date",
+        "order": "Order"
     },
     "message":{
         "invalidinput": "Invalid input"
@@ -34,7 +43,9 @@
         "status": "Status",
         "percentage": "Percentage",
         "extraction":"Extraction",
-        "quantity": "Quantity"
+        "quantity": "Quantity",
+        "ordered": "Ordered",
+        "reserved": "Reserved"
     },
     "kanban": {
         "modalTitle": "Modify Task",

@@ -27,7 +27,7 @@ export const useModalItemAction = ({
   };
 
   const actionCases = {
-    default: {
+    summary: {
       title: `${itemName} details`,
       function: null,
     },

@@ -25,6 +25,33 @@ const ModalItemAction = ({
       itemName,
     }); 
 
+
+    const buttonsSet = {
+      "summary": (
+        <>
+          <Button variant="dark" onClick={() => setAction("edit")}>
+            Reserve
+          </Button>
+          <Button variant="dark" onClick={() => setAction("edit")}>
+            Reserve
+          </Button>
+          <Button variant="dark" onClick={() => setAction("edit")}>
+            Edit
+          </Button>
+          <Button variant="dark" onClick={handleDelete}>
+            Delete
+          </Button>
+        </>
+      ),
+      "add": (
+        <>
+          <Button variant="dark" onClick={actionObject.function}>
+            Confirm
+          </Button>
+        </>
+      ),
+    };
+
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -39,22 +66,7 @@ const ModalItemAction = ({
         />
       </Modal.Body>
       <Modal.Footer>
-        {action == "default" ? (
-          <>
-            <Button variant="dark" onClick={handleDelete}>
-              Delete
-            </Button>
-            <Button variant="dark" onClick={() => setAction("edit")}>
-              Edit
-            </Button>
-          </>
-        ) : (
-          <div>
-            <Button variant="dark" onClick={actionObject.function}>
-              Confirm
-            </Button>
-          </div>
-        )}
+        {buttonsSet[action]}
         <Button variant="dark" onClick={handleClose}>
           Close
         </Button>
