@@ -33,7 +33,7 @@ export const useModalItemAction = ({
   const actionCases = {
     default: {
       title: `${itemName} details`,
-      function: null,
+      function: () => () => {},
     },
     summary: {
       title: `${itemName} details`,
