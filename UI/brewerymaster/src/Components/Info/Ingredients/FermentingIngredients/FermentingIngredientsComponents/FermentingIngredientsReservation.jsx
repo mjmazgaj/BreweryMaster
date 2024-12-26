@@ -19,12 +19,12 @@ const FermentingIngredientsReservation = () => {
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [showItemAction, setShowItemAction] = useState(false);
   const [modalData, setModalData] = useState([]);
-  const [action, setAction] = useState("summary");
+  const [action, setAction] = useState("default");
 
   const { ingredients, ingredientsReservation, ingredientsOrdered } = dbhandler();
 
   const handleDoubleClick = (item) => {
-    setAction("summary");
+    setAction("default");
     setModalData({ ...item });
     setShowItemAction(true);
   };
