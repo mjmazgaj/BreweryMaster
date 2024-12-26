@@ -3,7 +3,7 @@ import { Modal, Button } from 'react-bootstrap';
 
 import { useModalConfirmation } from './helpers/useModalConfirmation';
 
-const ModalUpdateItem = ({ data, confirmationAction, show, setShow }) => {
+const ModalConfirmation = ({ data, confirmationAction, show, setShow }) => {
 
   const { handleClose, confirmationObject } = useModalConfirmation(
     {data, setShow, confirmationAction}
@@ -29,4 +29,4 @@ const ModalUpdateItem = ({ data, confirmationAction, show, setShow }) => {
   );
 };
 
-export default ModalUpdateItem;
+export default ModalConfirmation;
