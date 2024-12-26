@@ -15,7 +15,7 @@ const ModalConfirmation = ({ data, confirmationAction, show, setShow }) => {
         <Modal.Title>{confirmationObject.title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>{data.name}</p>
+        <p>{data ? data.name : ""}</p>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="dark" onClick={confirmationObject.function}>
