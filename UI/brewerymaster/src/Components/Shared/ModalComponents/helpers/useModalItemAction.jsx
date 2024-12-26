@@ -13,12 +13,16 @@ export const useModalItemAction = ({
     setShow(false);
   };
 
-  const handleAdd = (data) => {
+  const handleAdd = (data) => () => {
     console.log(data);
   };
   
-  const handleEdit = (data) => {
+  const handleEdit = (data) => () => {
     setShow(false);
+  };
+  
+  const handleQuantityChange = (data) => () => {
+    console.log(data);
   };
 
   const handleDelete = () => {
@@ -33,7 +37,7 @@ export const useModalItemAction = ({
     },
     summary: {
       title: `${itemName} details`,
-      function: null,
+      function: handleQuantityChange,
     },
     add: {
       title: `Add ${itemName}`,

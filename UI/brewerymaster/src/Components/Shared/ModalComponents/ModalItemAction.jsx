@@ -39,10 +39,10 @@ const ModalItemAction = ({
       ),
       "summary": (
         <>
-          <Button variant="dark" onClick={() => setAction("edit")}>
+          <Button variant="dark" onClick={actionObject.function("reserve")}>
             Reserve
           </Button>
-          <Button variant="dark" onClick={() => setAction("edit")}>
+          <Button variant="dark" onClick={actionObject.function("order")}>
             Order
           </Button>
           <Button variant="dark" onClick={() => setAction("edit")}>
@@ -56,7 +56,14 @@ const ModalItemAction = ({
       "add": (
         <>
           <Button variant="dark" onClick={actionObject.function}>
-            Confirm
+            Add
+          </Button>
+        </>
+      ),
+      "edit": (
+        <>
+          <Button variant="dark" onClick={actionObject.function}>
+            Save Changes
           </Button>
         </>
       ),
