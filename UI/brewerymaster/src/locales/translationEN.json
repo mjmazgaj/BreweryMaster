@@ -73,6 +73,8 @@
             "quantity": "$t(common.quantity)",
             "percentage": "$t(common.percentage)",
             "extraction":"$t(common.extraction)",
+            "reserveQuantity":"Reserve quantity",
+            "describtion":"describtion",
             "ebc": "EBC"
         },
         "mash": {
