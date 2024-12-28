@@ -1,5 +1,5 @@
 const modalFieldsProvider = (t) => ({
-  ingredientsModalFields: [
+  fermentingIngredientsModalFields: [
     {
       id: "type",
       label: t("recipe.ingredients.type"),

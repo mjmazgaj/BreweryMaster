@@ -45,7 +45,7 @@ const FermentingIngredientsSummary = () => {
         Add Fermenting Ingredient
       </Button>
       <ModalItemAction
-        fields={modalFieldsProvider(t).ingredientsModalFields}
+        fields={modalFieldsProvider(t).fermentingIngredientsModalFields}
         data={modalData}
         setData={setModalData}
         show={showItemAction}

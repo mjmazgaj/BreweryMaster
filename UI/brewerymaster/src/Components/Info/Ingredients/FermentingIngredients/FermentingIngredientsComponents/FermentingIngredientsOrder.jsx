@@ -45,7 +45,7 @@ const FermentingIngredientsOrder = () => {
         Add Fermenting Ingredient order
       </Button>
       <ModalItemAction
-        fields={modalFieldsProvider(t).ingredientsModalFields}
+        fields={modalFieldsProvider(t).fermentingIngredientsModalFields}
         data={modalData}
         setData={setModalData}
         show={showItemAction}
