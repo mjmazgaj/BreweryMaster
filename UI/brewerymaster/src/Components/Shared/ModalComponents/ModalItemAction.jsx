@@ -79,7 +79,7 @@ const ModalItemAction = ({
           fields={fields}
           data={data}
           setData={setData}
-          isReadOnly={action == "default" ? true : false}
+          isReadOnly={actionObject.isReadOnly}
         />
       </Modal.Body>
       <Modal.Footer>

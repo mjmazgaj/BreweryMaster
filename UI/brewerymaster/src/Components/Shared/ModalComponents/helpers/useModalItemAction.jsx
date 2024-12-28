@@ -32,20 +32,24 @@ export const useModalItemAction = ({
 
   const actionCases = {
     default: {
-      title: `${itemName} details`,
+      title: `${data ? data.name : ""} details`,
       function: () => () => {},
+      isReadOnly: true,
     },
     summary: {
-      title: `${itemName} details`,
+      title: `${data ? data.name : ""} details`,
       function: handleQuantityChange,
+      isReadOnly: true,
     },
     add: {
       title: `Add ${itemName}`,
       function: handleAdd,
+      isReadOnly: false,
     },
     edit: {
-      title: `Edit ${itemName}`,
+      title: `Edit ${data ? data.name : ""}`,
       function: handleEdit,
+      isReadOnly: false,
     },
   };
 
