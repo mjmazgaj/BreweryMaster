@@ -18,11 +18,13 @@ export const useModalItemAction = ({
   };
   
   const handleEdit = (data) => () => {
+    console.log(data);
     setShow(false);
   };
   
   const handleQuantityChange = (data) => () => {
     console.log(data);
+    setShow(false);
   };
 
   const handleDelete = () => {
