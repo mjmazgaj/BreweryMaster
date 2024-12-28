@@ -11,6 +11,7 @@ const ModalItemAction = ({
   show,
   setShow,
   setShowConfirmationModal,
+  setShowReservationModal,
   action,
   setAction,
   itemName
@@ -21,6 +22,7 @@ const ModalItemAction = ({
       data,
       setShow,
       setShowConfirmationModal,
+      setShowReservationModal,
       action,
       itemName,
     }); 

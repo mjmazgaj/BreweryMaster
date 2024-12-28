@@ -9,6 +9,7 @@ import modalFieldsProvider from "../../../../Shared/ModalComponents/helpers/moda
 
 import { useTranslation } from "react-i18next";
 import ModalConfirmation from "../../../../Shared/ModalComponents/ModalConfirmation";
+import ModalReservation from "../../../../Shared/ModalComponents/ModalReservation";
 import { dbhandler } from "../dbhandler";
 
 const FermentingIngredientsSummary = () => {
@@ -16,7 +17,9 @@ const FermentingIngredientsSummary = () => {
 
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [showItemAction, setShowItemAction] = useState(false);
+  const [showReserveModal, setShowReserveModal] = useState(false);
   const [modalData, setModalData] = useState([]);
+  const [reservationData, setReservationData] = useState([]);
   const [action, setAction] = useState("summary");
   
   const { ingredients } = dbhandler();
@@ -51,8 +54,19 @@ const FermentingIngredientsSummary = () => {
         show={showItemAction}
         setShow={setShowItemAction}
         setShowConfirmationModal={setShowConfirmationModal}
+        showReservationModal={showReserveModal}
+        setShowReservationModal={setShowReserveModal}
         action={action}
         setAction={setAction}
+        itemName="Fermenting Ingredient"
+      />
+      <ModalReservation
+        fields={modalFieldsProvider(t).reserveModalFields}
+        data={modalData}
+        setData={setModalData}
+        show={showReserveModal}
+        setShow={setShowReserveModal}
+        action="reserve"
         itemName="Fermenting Ingredient"
       />
       <ModalConfirmation
