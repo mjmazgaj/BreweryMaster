@@ -9,7 +9,7 @@ import modalFieldsProvider from "../../../../Shared/ModalComponents/helpers/moda
 
 import { useTranslation } from "react-i18next";
 import ModalConfirmation from "../../../../Shared/ModalComponents/ModalConfirmation";
-import ModalReservation from "../../../../Shared/ModalComponents/ModalReservation";
+import ModalQuantity from "../../../../Shared/ModalComponents/ModalQuantity";
 import { dbhandler } from "../dbhandler";
 
 const FermentingIngredientsSummary = () => {
@@ -59,7 +59,7 @@ const FermentingIngredientsSummary = () => {
         setAction={setItemAction}
         itemName="Fermenting Ingredient"
       />
-      <ModalReservation
+      <ModalQuantity
         fields={modalFieldsProvider(t).reserveModalFields}
         modalData={modalData}
         show={showReserveModal}

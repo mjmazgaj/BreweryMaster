@@ -15,15 +15,18 @@ export const useModalItemAction = ({
   };
 
   const handleAdd = (data) => () => {
+    console.log("Add");
     console.log(data);
   };
   
   const handleEdit = (data) => () => {
+    console.log("Add");
     console.log(data);
     setShow(false);
   };
   
   const handleQuantityChange = (data) => () => {
+    console.log("QuantityChange");
     console.log(data);
     setShow(false);
     setShowReservationModal(true);

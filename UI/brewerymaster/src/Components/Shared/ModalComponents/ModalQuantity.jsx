@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
-import { useModalReservation } from './helpers/useModalReservation';
+import { useModalQuantity } from './helpers/useModalQuantity';
 import FormControls from '../FormControls';
 
-const ModalReservation = ({
+const ModalQuantity = ({
   fields,
   modalData,
   show,
@@ -16,7 +16,7 @@ const ModalReservation = ({
 
   const { 
     handleClose,
-    actionObject } = useModalReservation({
+    actionObject } = useModalQuantity({
       reservationData,
       setReservationData,
       setShow,
@@ -57,4 +57,4 @@ const ModalReservation = ({
   );
 };
 
-export default ModalReservation;
+export default ModalQuantity;

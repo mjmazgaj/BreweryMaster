@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 
-export const useModalReservation = ({
+export const useModalQuantity = ({
   reservationData,
   setReservationData,
   setShow,
