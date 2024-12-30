@@ -19,18 +19,18 @@ const FermentingIngredientsSummary = () => {
   const [showItemAction, setShowItemAction] = useState(false);
   const [showReserveModal, setShowReserveModal] = useState(false);
   const [modalData, setModalData] = useState([]);
-  const [action, setAction] = useState("summary");
+  const [itemAction, setItemAction] = useState("summary");
   
   const { ingredients } = dbhandler();
 
   const handleDoubleClick = (item) => {
-    setAction("summary");
+    setItemAction("summary");
     setModalData({ ...item });
     setShowItemAction(true);
   };
 
   const handleAddOnClick = () => {
-    setAction("add");
+    setItemAction("add");
     setModalData(null);
     setShowItemAction(true);
   };
@@ -55,8 +55,8 @@ const FermentingIngredientsSummary = () => {
         setShowConfirmationModal={setShowConfirmationModal}
         showReservationModal={showReserveModal}
         setShowReservationModal={setShowReserveModal}
-        action={action}
-        setAction={setAction}
+        action={itemAction}
+        setAction={setItemAction}
         itemName="Fermenting Ingredient"
       />
       <ModalReservation
