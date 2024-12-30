@@ -4,10 +4,10 @@ import { Form } from "react-bootstrap";
 const FormControls = ({ fields, data, setData, isReadOnly= false }) => {
 
   const handleInputChange = (e) => {
-    const { id, value } = e.target;
+    const { id, value, type } = e.target;
     setData((prevData) => ({
       ...prevData,
-      [id]: value,
+      [id]: type === "number" ? parseFloat(value) : value,
     }));
   };
 

@@ -19,7 +19,6 @@ const FermentingIngredientsSummary = () => {
   const [showItemAction, setShowItemAction] = useState(false);
   const [showReserveModal, setShowReserveModal] = useState(false);
   const [modalData, setModalData] = useState([]);
-  const [reservationData, setReservationData] = useState([]);
   const [action, setAction] = useState("summary");
   
   const { ingredients } = dbhandler();
@@ -62,12 +61,10 @@ const FermentingIngredientsSummary = () => {
       />
       <ModalReservation
         fields={modalFieldsProvider(t).reserveModalFields}
-        data={modalData}
-        setData={setModalData}
+        modalData={modalData}
         show={showReserveModal}
         setShow={setShowReserveModal}
         action="reserve"
-        itemName="Fermenting Ingredient"
       />
       <ModalConfirmation
         data={modalData}

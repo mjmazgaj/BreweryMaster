@@ -1,25 +1,31 @@
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 export const useModalReservation = ({
-  data,
+  reservationData,
+  setReservationData,
   setShow,
   action,
-  itemName,
 }) => {
-  const { t } = useTranslation(); 
+  const { t } = useTranslation();
 
   const handleClose = () => {
     setShow(false);
   };
 
-  const handleResereve = (data) => {
+  const handleResereve = (reservationData) => {
     setShow(false);
-    console.log(data);
+    setReservationData({
+      id: 0,
+      name: "",
+      reserveQuantity: 0,
+      describtion: "",
+    });
+    console.log(reservationData);
   };
 
   const actionCases = {
     reserve: {
-      title: `${data ? data.name : ""} details`,
+      title: `${reservationData ? reservationData.name : ""} details`,
       function: handleResereve,
       isReadOnly: true,
     },
@@ -29,6 +35,6 @@ export const useModalReservation = ({
 
   return {
     handleClose,
-    actionObject
+    actionObject,
   };
 };
