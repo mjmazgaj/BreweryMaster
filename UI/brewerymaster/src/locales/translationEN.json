@@ -74,6 +74,7 @@
             "percentage": "$t(common.percentage)",
             "extraction":"$t(common.extraction)",
             "reserveQuantity":"Reserve quantity",
+            "orderQuantity":"Order quantity",
             "describtion":"describtion",
             "ebc": "EBC"
         },

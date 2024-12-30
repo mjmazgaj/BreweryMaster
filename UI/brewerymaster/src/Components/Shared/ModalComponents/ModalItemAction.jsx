@@ -11,7 +11,8 @@ const ModalItemAction = ({
   show,
   setShow,
   setShowConfirmationModal,
-  setShowReservationModal,
+  setShowQuantityModal,
+  setQuantityAction,
   action,
   setAction,
   itemName
@@ -22,7 +23,8 @@ const ModalItemAction = ({
       data,
       setShow,
       setShowConfirmationModal,
-      setShowReservationModal,
+      setShowQuantityModal,
+      setQuantityAction,
       action,
       itemName,
     }); 
@@ -41,10 +43,10 @@ const ModalItemAction = ({
       ),
       "summary": (
         <>
-          <Button variant="dark" onClick={actionObject.function(data)}>
+          <Button variant="dark" onClick={actionObject.function(data, "reserve")}>
             Reserve
           </Button>
-          <Button variant="dark" onClick={actionObject.function("order")}>
+          <Button variant="dark" onClick={actionObject.function(data, "order")}>
             Order
           </Button>
           <Button variant="dark" onClick={() => setAction("edit")}>

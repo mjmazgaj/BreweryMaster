@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 
 export const useModalQuantity = ({
-  reservationData,
-  setReservationData,
+  quantityData,
+  setQuantityData,
   setShow,
   action,
 }) => {
@@ -14,7 +14,7 @@ export const useModalQuantity = ({
   };
 
   const clear = () => {
-    setReservationData({
+    setQuantityData({
       id: 0,
       name: "",
       reserveQuantity: 0,
@@ -22,17 +22,29 @@ export const useModalQuantity = ({
     });
   }
 
-  const handleResereve = (reservationData) => {
+  const handleResereve = (quantityData) => {
     setShow(false);
     clear();
     console.log("reserve");
-    console.log(reservationData);
+    console.log(quantityData);
+  };
+
+  const handleOrder = (quantityData) => {
+    setShow(false);
+    clear();
+    console.log("order");
+    console.log(quantityData);
   };
 
   const actionCases = {
     reserve: {
-      title: `${reservationData ? reservationData.name : ""} details`,
+      title: `Reserve ${quantityData ? quantityData.name : ""}`,
       function: handleResereve,
+      isReadOnly: true,
+    },
+    order: {
+      title: `Order ${quantityData ? quantityData.name : ""}`,
+      function: handleOrder,
       isReadOnly: true,
     },
   };

@@ -12,24 +12,22 @@ const ModalQuantity = ({
   action,
 }) => {
 
-  const [reservationData, setReservationData] = useState({});
+  const [quantityData, setQuantityData] = useState({});
 
   const { 
     handleClose,
     actionObject } = useModalQuantity({
-      reservationData,
-      setReservationData,
+      quantityData,
+      setQuantityData,
       setShow,
       action,
   });
 
 
   useEffect(() => {
-    setReservationData((prevData) => ({
+    setQuantityData(() => ({
       id: modalData.id,
       name: modalData.name,
-      reserveQuantity: prevData?.reserveQuantity ?? 0,
-      describtion: prevData?.describtion ?? "",
     }));
   }, [modalData]);
 
@@ -41,12 +39,12 @@ const ModalQuantity = ({
       <Modal.Body>
         <FormControls
           fields={fields}
-          data={reservationData}
-          setData={setReservationData}
+          data={quantityData}
+          setData={setQuantityData}
         />
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="dark" onClick={() => actionObject.function(reservationData)}>
+        <Button variant="dark" onClick={() => actionObject.function(quantityData)}>
           Save Changes
         </Button>
         <Button variant="dark" onClick={handleClose}>

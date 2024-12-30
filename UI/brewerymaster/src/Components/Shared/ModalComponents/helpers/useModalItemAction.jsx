@@ -4,7 +4,8 @@ export const useModalItemAction = ({
   data,
   setShow,
   setShowConfirmationModal,
-  setShowReservationModal,
+  setShowQuantityModal,
+  setQuantityAction,
   action,
   itemName,
 }) => {
@@ -25,11 +26,12 @@ export const useModalItemAction = ({
     setShow(false);
   };
   
-  const handleQuantityChange = (data) => () => {
+  const handleQuantityChange = (data, action) => () => {
     console.log("QuantityChange");
     console.log(data);
+    setQuantityAction(action);
     setShow(false);
-    setShowReservationModal(true);
+    setShowQuantityModal(true);
   };
 
   const handleDelete = () => {
