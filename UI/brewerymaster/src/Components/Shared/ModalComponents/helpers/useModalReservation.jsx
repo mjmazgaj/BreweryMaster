@@ -10,16 +10,22 @@ export const useModalReservation = ({
 
   const handleClose = () => {
     setShow(false);
+    clear();
   };
 
-  const handleResereve = (reservationData) => {
-    setShow(false);
+  const clear = () => {
     setReservationData({
       id: 0,
       name: "",
       reserveQuantity: 0,
       describtion: "",
     });
+  }
+
+  const handleResereve = (reservationData) => {
+    setShow(false);
+    clear();
+    console.log("reserve");
     console.log(reservationData);
   };
 
