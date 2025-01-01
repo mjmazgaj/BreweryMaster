@@ -28,6 +28,7 @@ const ModalQuantity = ({
     setQuantityData(() => ({
       id: modalData.id,
       name: modalData.name,
+      reserveQuantity: isEmpty ? "" : modalData.reserveQuantity,
       orderQuantity: isEmpty ? "" : modalData.orderQuantity,
       describtion: isEmpty ? "" : modalData.describtion,
     }));

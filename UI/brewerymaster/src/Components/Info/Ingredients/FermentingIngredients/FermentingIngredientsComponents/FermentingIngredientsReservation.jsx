@@ -5,8 +5,8 @@ import "react-toastify/dist/ReactToastify.css";
 import "../../../info.css";
 
 import DynamicTable from "../../../../Shared/TableComponents/DynamicTable";
-import ModalItemAction from "../../../../Shared/ModalComponents/ModalItemAction";
-import { Button } from "react-bootstrap";
+import ModalQuantity from "../../../../Shared/ModalComponents/ModalQuantity";
+
 import modalFieldsProvider from "../../../../Shared/ModalComponents/helpers/modalFieldsProvider";
 
 import { useTranslation } from "react-i18next";
@@ -16,46 +16,38 @@ import { dbhandler } from "../dbhandler";
 const FermentingIngredientsReservation = () => {
   const { t } = useTranslation();
 
-  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
-  const [showItemAction, setShowItemAction] = useState(false);
   const [modalData, setModalData] = useState([]);
-  const [action, setAction] = useState("default");
 
-  const { ingredients, ingredientsReservation, ingredientsOrdered } = dbhandler();
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  
+  const [showQuantityModal, setShowQuantityModal] = useState(false);
+  const [quantityAction, setQuantityAction] = useState({
+        verb: "edit",
+        area: "reserve"
+      });
+
+  const { ingredientsReservation } = dbhandler();
 
   const handleDoubleClick = (item) => {
-    setAction("default");
     setModalData({ ...item });
-    setShowItemAction(true);
-  };
-
-  const handleAddOnClick = () => {
-    setAction("add");
-    setModalData(null);
-    setShowItemAction(true);
+    setShowQuantityModal(true);
   };
 
   return (
-    <div className="Info_container">
+    <div className="Fermenting-Ingredient-Reservation_container">
       <DynamicTable
         tableKey="fermentingIngredientReservation"
         tableTitle="Fermenting Ingredient reservation"
         data={ingredientsReservation}
         handleDoubleClick={handleDoubleClick}
       />
-      <Button variant="dark" onClick={handleAddOnClick}>
-        Add Fermenting Ingredient reservation
-      </Button>
-      <ModalItemAction
-        fields={modalFieldsProvider(t).fermentingIngredientsModalFields}
-        data={modalData}
-        setData={setModalData}
-        show={showItemAction}
-        setShow={setShowItemAction}
-        setShowConfirmationModal={setShowConfirmationModal}
-        action={action}
-        setAction={setAction}
-        itemName="Fermenting Ingredient"
+      <ModalQuantity
+        fields={modalFieldsProvider(t).quantityModalFields[quantityAction.area]}
+        modalData={modalData}
+        show={showQuantityModal}
+        setShow={setShowQuantityModal}
+        action={quantityAction}
+        isEmpty={false}
       />
       <ModalConfirmation
         data={modalData}
