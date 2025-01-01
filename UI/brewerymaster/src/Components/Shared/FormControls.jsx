@@ -1,8 +1,7 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 
-const FormControls = ({ fields, data, setData, isReadOnly= false }) => {
-
+const FormControls = ({ fields, data, setData, isReadOnly = false }) => {
   const handleInputChange = (e) => {
     const { id, value, type } = e.target;
     setData((prevData) => ({
@@ -11,7 +10,7 @@ const FormControls = ({ fields, data, setData, isReadOnly= false }) => {
     }));
   };
 
-  return (
+  return fields ? (
     <div className="formControl_container">
       {fields.map((field) => (
         <div key={field.id} className="form-group">
@@ -20,7 +19,7 @@ const FormControls = ({ fields, data, setData, isReadOnly= false }) => {
             id={field.id}
             type={field.type}
             placeholder={field.label}
-            value={data && data[field.id] || ""}
+            value={(data && data[field.id]) || ""}
             onChange={isReadOnly ? null : handleInputChange}
             readOnly={isReadOnly}
             min={field.type === "number" ? field.min : null}
@@ -29,6 +28,8 @@ const FormControls = ({ fields, data, setData, isReadOnly= false }) => {
         </div>
       ))}
     </div>
+  ) : (
+    <></>
   );
 };
 

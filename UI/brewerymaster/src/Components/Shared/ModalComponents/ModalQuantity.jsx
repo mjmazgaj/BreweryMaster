@@ -24,7 +24,6 @@ const ModalQuantity = ({
       action,
   });
 
-
   useEffect(() => {
     setQuantityData(() => ({
       id: modalData.id,
@@ -34,7 +33,7 @@ const ModalQuantity = ({
     }));
   }, [modalData]);
 
-  return (
+  return actionObject ? (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>{actionObject.title}</Modal.Title>
@@ -47,7 +46,10 @@ const ModalQuantity = ({
         />
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="dark" onClick={() => actionObject.function(quantityData)}>
+        <Button
+          variant="dark"
+          onClick={() => actionObject.function(quantityData)}
+        >
           Save Changes
         </Button>
         <Button variant="dark" onClick={handleClose}>
@@ -55,6 +57,8 @@ const ModalQuantity = ({
         </Button>
       </Modal.Footer>
     </Modal>
+  ) : (
+    <></>
   );
 };
 
