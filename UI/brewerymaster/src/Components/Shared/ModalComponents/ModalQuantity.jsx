@@ -10,6 +10,7 @@ const ModalQuantity = ({
   show,
   setShow,
   action,
+  isEmpty
 }) => {
 
   const [quantityData, setQuantityData] = useState({});
@@ -28,6 +29,8 @@ const ModalQuantity = ({
     setQuantityData(() => ({
       id: modalData.id,
       name: modalData.name,
+      orderQuantity: isEmpty ? "" : modalData.orderQuantity,
+      describtion: isEmpty ? "" : modalData.describtion,
     }));
   }, [modalData]);
 

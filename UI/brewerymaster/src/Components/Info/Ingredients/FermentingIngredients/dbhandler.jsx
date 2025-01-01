@@ -10,7 +10,7 @@ export const dbhandler = () => {
           ebc: 4,
           quantity: 3,
           reserved: 3,
-          ordered: 3,
+          orderQuantity: 3,
           total: 13,
         },
         {
@@ -22,7 +22,7 @@ export const dbhandler = () => {
           ebc: 22,
           quantity: 3,
           reserved: 3,
-          ordered: 3,
+          orderQuantity: 3,
           total: 13,
         },
         {
@@ -34,7 +34,7 @@ export const dbhandler = () => {
           ebc: 150,
           quantity: 3,
           reserved: 3,
-          ordered: 3,
+          orderQuantity: 3,
           total: 13,
         },
       ];
@@ -79,7 +79,7 @@ export const dbhandler = () => {
             user: "user 1",
             orderedDate: "2015-05-16",
             expectedDate: "2015-05-16",
-            ordered: 3,
+            orderQuantity: 3,
             describtion: "Viking Pilsner malt describtion"
           },
           {
@@ -92,7 +92,7 @@ export const dbhandler = () => {
             user: "ujser 1",
             orderedDate: "2015-05-16",
             expectedDate: "2015-05-16",
-            ordered: 3,
+            orderQuantity: 3,
             describtion: "Strzegom Monachijski typ II describtion"
           }
         ];

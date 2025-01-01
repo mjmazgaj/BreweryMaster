@@ -66,6 +66,7 @@ const FermentingIngredientsSummary = () => {
         show={showQuantityModal}
         setShow={setShowQuantityModal}
         action={quantityAction}
+        isEmpty={true}
       />
       <ModalConfirmation
         data={modalData}

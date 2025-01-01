@@ -40,6 +40,7 @@ const FermentingIngredientsOrder = () => {
         show={showQuantityModal}
         setShow={setShowQuantityModal}
         action={quantityAction}
+        isEmpty={false}
       />
       <ModalConfirmation
         data={modalData}
