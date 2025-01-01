@@ -4,7 +4,6 @@ import "../../../info.css";
 
 import DynamicTable from "../../../../Shared/TableComponents/DynamicTable";
 import ModalQuantity from "../../../../Shared/ModalComponents/ModalQuantity";
-import { Button } from "react-bootstrap";
 import modalFieldsProvider from "../../../../Shared/ModalComponents/helpers/modalFieldsProvider";
 
 import { useTranslation } from "react-i18next";
