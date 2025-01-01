@@ -25,7 +25,7 @@ export const useModalQuantity = ({
   const handleResereve = (quantityData) => {
     setShow(false);
     clear();
-    console.log("reserve");
+    console.log("Reserve");
     console.log(quantityData);
   };
 
@@ -37,19 +37,29 @@ export const useModalQuantity = ({
   };
 
   const actionCases = {
-    reserve: {
-      title: `Reserve ${quantityData ? quantityData.name : ""}`,
+    addreserve: {
+      title: `Add Reserve ${quantityData ? quantityData.name : ""}`,
       function: handleResereve,
       isReadOnly: true,
     },
-    order: {
-      title: `Order ${quantityData ? quantityData.name : ""}`,
+    editreserve: {
+      title: `Edit Reserve ${quantityData ? quantityData.name : ""}`,
+      function: handleResereve,
+      isReadOnly: true,
+    },
+    addorder: {
+      title: `Add Order ${quantityData ? quantityData.name : ""}`,
+      function: handleOrder,
+      isReadOnly: true,
+    },
+    editorder: {
+      title: `Edit Order ${quantityData ? quantityData.name : ""}`,
       function: handleOrder,
       isReadOnly: true,
     },
   };
 
-  let actionObject = actionCases[action];
+  let actionObject = actionCases[`${action.verb}${action.area}`];
 
   return {
     handleClose,

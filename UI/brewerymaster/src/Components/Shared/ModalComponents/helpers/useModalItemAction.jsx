@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 export const useModalItemAction = ({
   data,
@@ -9,27 +9,31 @@ export const useModalItemAction = ({
   action,
   itemName,
 }) => {
-  const { t } = useTranslation(); 
+  const { t } = useTranslation();
 
   const handleClose = () => {
     setShow(false);
   };
 
   const handleAdd = (data) => () => {
-    console.log("Add");
+    console.log("add");
     console.log(data);
   };
-  
+
   const handleEdit = (data) => () => {
-    console.log("Add");
+    console.log("add");
     console.log(data);
     setShow(false);
   };
-  
+
   const handleQuantityChange = (data, action) => () => {
     console.log("QuantityChange");
     console.log(data);
-    setQuantityAction(action);
+    setQuantityAction({
+      verb: "add",
+      area: action,
+    });
+
     setShow(false);
     setShowQuantityModal(true);
   };
@@ -67,6 +71,6 @@ export const useModalItemAction = ({
   return {
     handleClose,
     handleDelete,
-    actionObject
+    actionObject,
   };
 };

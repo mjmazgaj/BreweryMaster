@@ -15,12 +15,18 @@ import { dbhandler } from "../dbhandler";
 const FermentingIngredientsSummary = () => {
   const { t } = useTranslation();
 
-  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
-  const [showItemAction, setShowItemAction] = useState(false);
-  const [showQuantityModal, setShowQuantityModal] = useState(false);
   const [modalData, setModalData] = useState([]);
+  
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  
+  const [showItemAction, setShowItemAction] = useState(false);
   const [itemAction, setItemAction] = useState("summary");
-  const [quantityAction, setQuantityAction] = useState("reserve");
+  
+  const [showQuantityModal, setShowQuantityModal] = useState(false);
+  const [quantityAction, setQuantityAction] = useState({
+    verb: "add",
+    area: "reserve"
+  });
   
   const { ingredients } = dbhandler();
 
@@ -61,7 +67,7 @@ const FermentingIngredientsSummary = () => {
         itemName="Fermenting Ingredient"
       />
       <ModalQuantity
-        fields={modalFieldsProvider(t).quantityModalFields[quantityAction]}
+        fields={modalFieldsProvider(t).quantityModalFields[quantityAction.area]}
         modalData={modalData}
         show={showQuantityModal}
         setShow={setShowQuantityModal}
