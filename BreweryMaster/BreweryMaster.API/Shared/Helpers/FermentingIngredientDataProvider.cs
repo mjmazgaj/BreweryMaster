@@ -99,31 +99,41 @@ public static class FermentingIngredientDataProvider
             {
                 Id=1,
                 FermentingIngredientId=1,
-                UnitId=1
+                UnitId=1,
+                FermentingIngredient = null!,
+                Unit = null!
             },
             new()
             {
                 Id=2,
                 FermentingIngredientId=1,
-                UnitId=2
+                UnitId=2,
+                FermentingIngredient = null!,
+                Unit = null!
             },
             new()
             {
                 Id=3,
                 FermentingIngredientId=1,
-                UnitId=3
+                UnitId=3,
+                FermentingIngredient = null!,
+                Unit = null!
             },
             new()
             {
                 Id=4,
                 FermentingIngredientId=2,
-                UnitId=1
+                UnitId=1,
+                FermentingIngredient = null!,
+                Unit = null!
             },
             new()
             {
                 Id=5,
                 FermentingIngredientId=2,
-                UnitId=2
+                UnitId=2,
+                FermentingIngredient = null!,
+                Unit = null!
             }
         };
     }
