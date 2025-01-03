@@ -9,7 +9,7 @@ namespace BreweryMaster.API.Info.Services.Interfaces
         Task<FermentingIngredientResponse?> GetFermentingIngredientByIdAsync(int id);
         Task<IEnumerable<FermentingIngredientSummaryResponse>> GetFermentingIngredientSummary();
         Task<FermentingIngredientSummaryResponse?> GetFermentingIngredientSummaryByIdAsync(int id);
-        Task<IEnumerable<FermentingIngredientUnitResponse>> GetFermentingIngredientUnitsAsync();
+        Task<IEnumerable<FermentingIngredientUnitResponse>?> GetFermentingIngredientUnitsByIdAsync(int fermentingIngredientId);
         Task<FermentingIngredient> CreateFermentingIngredientAsync(FermentingIngredientRequest request);
         Task<bool> UpdateFermentingIngredientAsync(int id, FermentingIngredientUpdateRequest order);
         Task<bool> DeleteFermentingIngredientByIdAsync(int id);

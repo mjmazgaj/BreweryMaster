@@ -1,5 +1,6 @@
 ﻿using BreweryMaster.API.Info.Models;
 using BreweryMaster.API.Info.Services.Interfaces;
+using BreweryMaster.API.Shared.Models;
 using BreweryMaster.API.SharedModule.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -51,24 +52,6 @@ namespace BreweryMaster.API.Info.Services
             return ingredients;
         }
 
-        public async Task<IEnumerable<FermentingIngredientUnitResponse>> GetFermentingIngredientUnitsAsync()
-        {
-            var dbIngredients = await _context.FermentingIngredientUnits
-                .Include(x=>x.FermentingIngredient)
-                .Include(x=>x.Unit)
-                .Where(x => !x.IsRemoved)
-                .ToListAsync();
-
-            var ingredients = dbIngredients.Select(x => new FermentingIngredientUnitResponse()
-            {
-                Id = x.Id,
-                FermentingIngredient = x.FermentingIngredient,
-                Unit = x.Unit
-            });
-
-            return ingredients;
-        }
-
         public async Task<FermentingIngredientResponse?> GetFermentingIngredientByIdAsync(int id)
         {
             var ingredients = await GetFermentingIngredientsAsync();
@@ -78,7 +61,12 @@ namespace BreweryMaster.API.Info.Services
 
         public async Task<IEnumerable<FermentingIngredientSummaryResponse>> GetFermentingIngredientSummary()
         {
-            var ingredients = await GetFermentingIngredientUnitsAsync();
+            var ingredients = await _context.FermentingIngredientUnits
+                .Include(x => x.FermentingIngredient)
+                .Include(x => x.Unit)
+                .Where(x => !x.IsRemoved)
+                .ToListAsync();
+
             var dbIngredientTypes = await _context.FermentingIngredientTypes.ToDictionaryAsync(x => x.Id, x => x.Name);
 
             var orderedData = await _context.FermentingIngredientOrderedList.ToListAsync();
@@ -120,6 +108,22 @@ namespace BreweryMaster.API.Info.Services
         public Task<FermentingIngredientSummaryResponse?> GetFermentingIngredientSummaryByIdAsync(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<FermentingIngredientUnitResponse>?> GetFermentingIngredientUnitsByIdAsync(int fermentingIngredientId)
+        {
+            var ingredientUnits = await _context.FermentingIngredientUnits
+                .Include(x => x.FermentingIngredient)
+                .Include(x => x.Unit)
+                .Where(x => !x.IsRemoved)
+                .ToListAsync();
+
+            return ingredientUnits?.Where(x => x.FermentingIngredient.Id == fermentingIngredientId)
+                .Select(x => new FermentingIngredientUnitResponse()
+                {
+                    Id = x.Id,
+                    Unit = x.Unit.Name,
+                });
         }
 
         public async Task<bool> UpdateFermentingIngredientAsync(int id, FermentingIngredientUpdateRequest request)

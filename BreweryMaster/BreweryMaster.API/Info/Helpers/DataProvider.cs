@@ -4,7 +4,7 @@ namespace BreweryMaster.API.Info.Helpers
 {
     public static class DataProvider
     {
-        public static IEnumerable<FermentingIngredientReserved> GetReserved(IEnumerable<FermentingIngredientUnitResponse> ingredients)
+        public static IEnumerable<FermentingIngredientReserved> GetReserved(IEnumerable<FermentingIngredientUnit> ingredients)
         {
             return ingredients.Select(x => new List<FermentingIngredientReserved>() {
                 new ()
@@ -42,7 +42,7 @@ namespace BreweryMaster.API.Info.Helpers
                 }}).SelectMany(x => x);
         }
 
-        public static IEnumerable<FermentingIngredientStored> GetStored(IEnumerable<FermentingIngredientUnitResponse> ingredients)
+        public static IEnumerable<FermentingIngredientStored> GetStored(IEnumerable<FermentingIngredientUnit> ingredients)
         {
 
             return ingredients.Select(x => new List<FermentingIngredientStored>
