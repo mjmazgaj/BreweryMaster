@@ -1,6 +1,6 @@
 ﻿using BreweryMaster.API.OrderModule.Enums;
 using BreweryMaster.API.OrderModule.Models;
-using BreweryMaster.API.SharedModule.Models;
+using BreweryMaster.API.Shared.Models.DB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 

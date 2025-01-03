@@ -2,7 +2,7 @@ using BreweryMaster.API.Info.Services;
 using BreweryMaster.API.Info.Services.Interfaces;
 using BreweryMaster.API.OrderModule.Models;
 using BreweryMaster.API.OrderModule.Services;
-using BreweryMaster.API.SharedModule.Models;
+using BreweryMaster.API.Shared.Models.DB;
 using BreweryMaster.API.UserModule.Models;
 using BreweryMaster.API.UserModule.Services;
 using BreweryMaster.API.WorkModule.Models;

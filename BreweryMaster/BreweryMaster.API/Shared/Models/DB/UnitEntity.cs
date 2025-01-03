@@ -1,4 +1,4 @@
-﻿namespace BreweryMaster.API.Shared.Models
+﻿namespace BreweryMaster.API.Shared.Models.DB
 {
     public class UnitEntity
     {

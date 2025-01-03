@@ -1,11 +1,10 @@
 ﻿using BreweryMaster.API.OrderModule.Models;
-﻿using BreweryMaster.API.Info.Models;
-using BreweryMaster.API.Shared.Models;
+using BreweryMaster.API.Info.Models;
 using BreweryMaster.API.UserModule.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace BreweryMaster.API.SharedModule.Models
+namespace BreweryMaster.API.Shared.Models.DB
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

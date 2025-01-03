@@ -1,4 +1,4 @@
-﻿using BreweryMaster.API.Shared.Models;
+﻿using BreweryMaster.API.Shared.Models.DB;
 
 public static class DataProvider
 {

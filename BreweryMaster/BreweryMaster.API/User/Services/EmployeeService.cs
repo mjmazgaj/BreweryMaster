@@ -1,4 +1,4 @@
-﻿using BreweryMaster.API.SharedModule.Models;
+﻿using BreweryMaster.API.Shared.Models.DB;
 using BreweryMaster.API.UserModule.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;

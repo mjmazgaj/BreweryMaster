@@ -1,6 +1,5 @@
 ﻿using BreweryMaster.API.Info.Models;
 using BreweryMaster.API.Info.Services.Interfaces;
-using BreweryMaster.API.OrderModule.Models;
 using BreweryMaster.API.SharedModule.Validators;
 using Microsoft.AspNetCore.Mvc;
 
