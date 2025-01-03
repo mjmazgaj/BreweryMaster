@@ -18,12 +18,9 @@ namespace BreweryMaster.API.UserModule.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Employee>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
         {
             var employees = await _employeeService.GetEmployeesAsync();
-            if (employees == null)
-                return NotFound();
             return Ok(employees);
         }
 

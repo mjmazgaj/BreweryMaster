@@ -25,14 +25,9 @@ namespace BreweryMaster.API.WorkModule.Controllers
         [Authorize]
         [Route("ByOwnerId")]
         [ProducesResponseType(typeof(IEnumerable<KanbanTask>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<IEnumerable<KanbanTask>>> GetKanbanTasksByOwnerId(int ownerId)
         {
             var tasks = await _taskService.GetKanbanTasksByOwnerIdAsync(ownerId);
-
-            if (tasks == null || !tasks.Any())
-                return NotFound();
-
             return Ok(tasks);
         }
 

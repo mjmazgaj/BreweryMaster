@@ -20,12 +20,9 @@ namespace BreweryMaster.API.Info.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<FermentingIngredientResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<IEnumerable<FermentingIngredientResponse>>> GetFermentingIngredient()
         {
             var fermentingIngredients = await _fermentingIngredientService.GetFermentingIngredientsAsync();
-            if (fermentingIngredients == null)
-                return NotFound();
             return Ok(fermentingIngredients);
         }
 
@@ -33,12 +30,9 @@ namespace BreweryMaster.API.Info.Controllers
         [Route("Summary")]
         [ProducesResponseType(typeof(IEnumerable<FermentingIngredientSummaryResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<IEnumerable<FermentingIngredientSummaryResponse>>> GetFermentingIngredientSummary()
         {
             var fermentingIngredientsSummary = await _fermentingIngredientService.GetFermentingIngredientSummary();
-            if (fermentingIngredientsSummary == null)
-                return NotFound();
             return Ok(fermentingIngredientsSummary);
         }
 
@@ -61,12 +55,9 @@ namespace BreweryMaster.API.Info.Controllers
         [Route("FermentingIngredientUnit")]
         [ProducesResponseType(typeof(IEnumerable<FermentingIngredientUnitResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<IEnumerable<FermentingIngredientUnitResponse>>> GetFermentingIngredientUnit()
         {
             var fermentingIngredientsSummary = await _fermentingIngredientService.GetFermentingIngredientUnitsAsync();
-            if (fermentingIngredientsSummary == null)
-                return NotFound();
             return Ok(fermentingIngredientsSummary);
         }
 

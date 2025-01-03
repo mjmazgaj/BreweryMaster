@@ -32,19 +32,6 @@ public class EmployeeControllerTests
     }
 
     [Fact]
-    public async Task GetEmployees_ReturnsNotFound_WhenNoEmployeesExist()
-    {
-        // Arrange
-        _mockEmployeeService.Setup(service => service.GetEmployeesAsync()).ReturnsAsync((List<Employee>)null);
-
-        // Act
-        var result = await _controller.GetEmployees();
-
-        // Assert
-        Assert.IsType<NotFoundResult>(result.Result);
-    }
-
-    [Fact]
     public async Task GetEmployeeById_ReturnsOkResult_WithEmployee()
     {
         // Arrange

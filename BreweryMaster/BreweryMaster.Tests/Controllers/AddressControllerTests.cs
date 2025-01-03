@@ -33,19 +33,6 @@ public class AddressControllerTests
     }
 
     [Fact]
-    public async Task GetAddresses_ReturnsNotFound_WhenNoAddressesExist()
-    {
-        // Arrange
-        _mockAddressService.Setup(service => service.GetAddressesAsync()).ReturnsAsync((List<Address>)null);
-
-        // Act
-        var result = await _controller.GetAddresses();
-
-        // Assert
-        Assert.IsType<NotFoundResult>(result.Result);
-    }
-
-    [Fact]
     public async Task GetAddressById_ReturnsOkResult_WithAddress()
     {
         // Arrange

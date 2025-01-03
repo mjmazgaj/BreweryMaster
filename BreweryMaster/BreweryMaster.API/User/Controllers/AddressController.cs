@@ -20,13 +20,9 @@ namespace BreweryMaster.API.UserModule.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Address>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<IEnumerable<Address>>> GetAddresses()
         {
             var addresses = await _addressService.GetAddressesAsync();
-            if (addresses == null)
-                return NotFound();
-
             return Ok(addresses);
         }
 

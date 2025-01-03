@@ -21,12 +21,9 @@ namespace BreweryMaster.API.OrderModule.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Order>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<IEnumerable<Order>>> GetProspectOrders()
         {
             var clients = await _clientService.GetOrdersAsync();
-            if (clients == null)
-                return NotFound();
             return Ok(clients);
         }
 

@@ -1,6 +1,5 @@
 ﻿using BreweryMaster.API.OrderModule.Controllers;
 using BreweryMaster.API.OrderModule.Models;
-using BreweryMaster.API.OrderModule.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Moq;
@@ -33,19 +32,6 @@ public class ClientControllerTests
         var okResult = Assert.IsType<OkObjectResult>(result.Result);
         var returnClients = Assert.IsType<List<ProspectClient>>(okResult.Value);
         Assert.Equal(2, returnClients.Count);
-    }
-
-    [Fact]
-    public async Task GetClients_ReturnsNotFound_WhenNoClientsExist()
-    {
-        // Arrange
-        _mockClientService.Setup(service => service.GetProspectClientsAsync()).ReturnsAsync((List<ProspectClient>)null);
-
-        // Act
-        var result = await _controller.GetProspectClients();
-
-        // Assert
-        Assert.IsType<NotFoundResult>(result.Result);
     }
 
     [Fact]
