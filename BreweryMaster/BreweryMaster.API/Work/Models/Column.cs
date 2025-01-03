@@ -4,10 +4,9 @@ namespace BreweryMaster.API.WorkModule.Models
 {
     public class Column
     {
-        public string Title { get; set; } = string.Empty;
+        public required string Title { get; set; }
         public int Status { get; set; }
-        public IEnumerable<KanbanTaskDto> Items { get; set; }
-
+        public required IEnumerable<KanbanTaskDto> Items { get; set; }
     }
 
 }

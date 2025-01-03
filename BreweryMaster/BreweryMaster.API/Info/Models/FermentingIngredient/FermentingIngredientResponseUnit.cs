@@ -6,7 +6,7 @@ namespace BreweryMaster.API.Info.Models
     public class FermentingIngredientUnitResponse
     {
         public int Id { get; set; }
-        public FermentingIngredient FermentingIngredient { get; set; }
-        public UnitEntity Unit { get; set; }
+        public required FermentingIngredient FermentingIngredient { get; set; }
+        public required UnitEntity Unit { get; set; }
     }
 }

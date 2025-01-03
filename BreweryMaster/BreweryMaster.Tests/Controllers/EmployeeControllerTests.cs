@@ -19,7 +19,7 @@ public class EmployeeControllerTests
     public async Task GetEmployees_ReturnsOkResult_WithListOfEmployees()
     {
         // Arrange
-        var employees = new List<Employee> { new Employee(), new Employee() };
+        var employees = new List<Employee> { new Employee() { Forename = "", Surname = "" }, new Employee() { Forename = "", Surname = "" } };
         _mockEmployeeService.Setup(service => service.GetEmployeesAsync()).ReturnsAsync(employees);
 
         // Act
@@ -35,7 +35,7 @@ public class EmployeeControllerTests
     public async Task GetEmployeeById_ReturnsOkResult_WithEmployee()
     {
         // Arrange
-        var employee = new Employee { Id = 1 };
+        var employee = new Employee {Id = 1, Forename = "", Surname = "" };
         _mockEmployeeService.Setup(service => service.GetEmployeeByIdAsync(1)).ReturnsAsync(employee);
 
         // Act
@@ -64,7 +64,7 @@ public class EmployeeControllerTests
     public async Task CreateEmployee_ReturnsCreatedAtAction_WithCreatedEmployee()
     {
         // Arrange
-        var employee = new Employee { Id = 1 };
+        var employee = new Employee { Id = 1, Forename = "", Surname = "" };
         _mockEmployeeService.Setup(service => service.CreateEmployeeAsync(employee)).ReturnsAsync(employee);
 
         // Act
@@ -80,7 +80,7 @@ public class EmployeeControllerTests
     public async Task EditEmployee_ReturnsOk_WhenEmployeeIsEdited()
     {
         // Arrange
-        var employee = new Employee { Id = 1 };
+        var employee = new Employee {Id = 1, Forename = "", Surname = "" };
         _mockEmployeeService.Setup(service => service.EditEmployeeAsync(1, employee)).ReturnsAsync(true);
 
         // Act
@@ -94,7 +94,7 @@ public class EmployeeControllerTests
     public async Task EditEmployee_ReturnsNotFound_WhenEmployeeDoesNotExist()
     {
         // Arrange
-        var employee = new Employee { Id = 1 };
+        var employee = new Employee {Id = 1, Forename = "", Surname = "" };
         _mockEmployeeService.Setup(service => service.EditEmployeeAsync(1, employee)).ReturnsAsync(false);
 
         // Act

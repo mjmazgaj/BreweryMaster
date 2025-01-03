@@ -4,8 +4,8 @@
     {
         public int Id { get; set; }
         public Guid UserId { get; set; }
-        public string Forename { get; set; } = string.Empty;
-        public string Surname { get; set; } = string.Empty;
+        public required string Forename { get; set; }
+        public required string Surname { get; set; }
         public int? Address { get; set; }
         public string? PhoneNumber { get; set; }
         public string? Email { get; set; }

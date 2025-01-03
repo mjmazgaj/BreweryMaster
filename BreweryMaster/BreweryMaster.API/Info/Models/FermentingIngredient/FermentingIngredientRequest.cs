@@ -7,7 +7,7 @@ namespace BreweryMaster.API.Info.Models
     {
         public FermentingIngredientType Type { get; set; }
         [Required]
-        public string? Name { get; set; }
+        public required string Name { get; set; }
         public float Percentage { get; set; }
         public int Extraction { get; set; }
         public int EBC { get; set; }

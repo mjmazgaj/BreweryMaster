@@ -24,8 +24,8 @@ namespace BreweryMaster.Tests.Controllers
             // Arrange
             int ownerId = 1;
             var columns = new Dictionary<string, Column>();
-            columns.Add("key1", new Column { });
-            columns.Add("key2", new Column { });
+            columns.Add("key1", new Column() { Title = "" });
+            columns.Add("key2", new Column() { Title = "" });
             _mockTaskService.Setup(service => service.GetKanbanTasksByOwnerIdAsync(ownerId)).ReturnsAsync(columns);
 
             // Act
@@ -42,7 +42,7 @@ namespace BreweryMaster.Tests.Controllers
         {
             // Arrange
             int orderId = 1;
-            var tasks = new List<KanbanTask> { new KanbanTask(), new KanbanTask() };
+            var tasks = new List<KanbanTask> { new KanbanTask() { Title = ""}, new KanbanTask() { Title = "" } };
             _mockTaskService.Setup(service => service.GetKanbanTasksByOrderIdAsync(orderId)).ReturnsAsync(tasks);
 
             // Act
@@ -59,7 +59,7 @@ namespace BreweryMaster.Tests.Controllers
         {
             // Arrange
             int taskId = 1;
-            var task = new KanbanTask();
+            var task = new KanbanTask() { Title = "" };
             _mockTaskService.Setup(service => service.GetKanbanTaskByIdAsync(taskId)).ReturnsAsync(task);
 
             // Act
@@ -75,7 +75,7 @@ namespace BreweryMaster.Tests.Controllers
         public async Task CreateKanbanTask_ReturnsCreatedAtActionResult_WithCreatedTask()
         {
             // Arrange
-            var kanbanTask = new KanbanTask();
+            var kanbanTask = new KanbanTask() { Title = "" };
             _mockTaskService.Setup(service => service.CreateKanbanTaskAsync(kanbanTask)).ReturnsAsync(kanbanTask);
 
             // Act
@@ -93,7 +93,7 @@ namespace BreweryMaster.Tests.Controllers
         {
             // Arrange
             int taskId = 1;
-            var kanbanTask = new KanbanTask();
+            var kanbanTask = new KanbanTask() { Title = "" };
             _mockTaskService.Setup(service => service.EditKanbanTaskAsync(taskId, kanbanTask)).ReturnsAsync(true);
 
             // Act
@@ -108,7 +108,7 @@ namespace BreweryMaster.Tests.Controllers
         {
             // Arrange
             int taskId = 1;
-            var kanbanTask = new KanbanTask();
+            var kanbanTask = new KanbanTask() { Title = "" };
             _mockTaskService.Setup(service => service.EditKanbanTaskAsync(taskId, kanbanTask)).ReturnsAsync(false);
 
             // Act
