@@ -1,8 +1,10 @@
-import React from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import React, { useState, useEffect } from "react";
+import { Modal, Button, Form } from "react-bootstrap";
 
-import { useModalItemAction } from './helpers/useModalItemAction';
-import FormControls from '../FormControls';
+import { useModalItemAction } from "./helpers/useModalItemAction";
+import FormControls from "../FormControls";
+
+import { fetchEntity } from "../api";
 
 const ModalItemAction = ({
   fields,
@@ -15,63 +17,76 @@ const ModalItemAction = ({
   setQuantityAction,
   action,
   setAction,
-  itemName
-}) => {
+  itemName,
+}) => {  
+  const [units, setUnits] = useState([]);
 
-  const { handleClose, handleDelete, actionObject } =
-    useModalItemAction({
-      data,
-      setShow,
-      setShowConfirmationModal,
-      setShowQuantityModal,
-      setQuantityAction,
-      action,
-      itemName,
-    }); 
+  const { handleClose, handleDelete, actionObject } = useModalItemAction({
+    data,
+    setShow,
+    setShowConfirmationModal,
+    setShowQuantityModal,
+    setQuantityAction,
+    action,
+    itemName,
+    units
+  });
 
 
-    const buttonsSet = {
-      "default": (
-        <>
-          <Button variant="dark" onClick={() => setAction("edit")}>
-            Edit
-          </Button>
-          <Button variant="dark" onClick={handleDelete}>
-            Delete
-          </Button>
-        </>
-      ),
-      "summary": (
-        <>
-          <Button variant="dark" onClick={actionObject.function(data, "reserve")}>
-            Reserve
-          </Button>
-          <Button variant="dark" onClick={actionObject.function(data, "order")}>
-            Order
-          </Button>
-          <Button variant="dark" onClick={() => setAction("edit")}>
-            Edit
-          </Button>
-          <Button variant="dark" onClick={handleDelete}>
-            Delete
-          </Button>
-        </>
-      ),
-      "add": (
-        <>
-          <Button variant="dark" onClick={actionObject.function(data)}>
-            Add
-          </Button>
-        </>
-      ),
-      "edit": (
-        <>
-          <Button variant="dark" onClick={actionObject.function(data)}>
-            Save Changes
-          </Button>
-        </>
-      ),
-    };
+  const buttonsSet = {
+    default: (
+      <>
+        <Button variant="dark" onClick={() => setAction("edit")}>
+          Edit
+        </Button>
+        <Button variant="dark" onClick={handleDelete}>
+          Delete
+        </Button>
+      </>
+    ),
+    summary: (
+      <>
+        <Button variant="dark" onClick={actionObject.function(data, "reserve")}>
+          Reserve
+        </Button>
+        <Button variant="dark" onClick={actionObject.function(data, "order")}>
+          Order
+        </Button>
+        <Button variant="dark" onClick={() => setAction("edit")}>
+          Edit
+        </Button>
+        <Button variant="dark" onClick={handleDelete}>
+          Delete
+        </Button>
+      </>
+    ),
+    add: (
+      <>
+        <Button variant="dark" onClick={actionObject.function(data)}>
+          Add
+        </Button>
+      </>
+    ),
+    edit: (
+      <>
+        <Button variant="dark" onClick={actionObject.function(data)}>
+          Save Changes
+        </Button>
+      </>
+    ),
+  };
+
+  useEffect(() => {
+    fetchEntity("Unit", setUnits);
+  }, []);
+
+  const handleCheckBox = (unit) => {
+    setUnits((prevUnits) =>
+      prevUnits.map((u) =>
+        u.id === unit.id ? { ...u, isUsed: !u.isUsed } : u
+      )
+    );
+  }
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -85,6 +100,23 @@ const ModalItemAction = ({
           setData={setData}
           isReadOnly={actionObject.isReadOnly}
         />
+        {action == "add" && units ? (
+          <div className="">
+            {units.map((unit) => (
+              <div key={unit.id}>
+                <Form.Check
+                  type="switch"
+                  id={`${unit.id}`}
+                  label={unit.name}
+                  checked={unit.isUsed}
+                  onClick={() => handleCheckBox(unit)}
+                />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <></>
+        )}
       </Modal.Body>
       <Modal.Footer>
         {buttonsSet[action]}

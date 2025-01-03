@@ -8,6 +8,7 @@ export const useModalItemAction = ({
   setQuantityAction,
   action,
   itemName,
+  units
 }) => {
   const { t } = useTranslation();
 
@@ -16,8 +17,13 @@ export const useModalItemAction = ({
   };
 
   const handleAdd = (data) => () => {
+    const updatedUnits = units.map((x) => ({
+      ...x,
+      isUsed: x.isUsed ?? false,
+    }));
+
     console.log("add");
-    console.log(data);
+    console.log({...data, ...updatedUnits});
   };
 
   const handleEdit = (data) => () => {

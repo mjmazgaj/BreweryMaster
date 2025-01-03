@@ -3,6 +3,7 @@ using BreweryMaster.API.Info.Services.Interfaces;
 using BreweryMaster.API.OrderModule.Models;
 using BreweryMaster.API.OrderModule.Services;
 using BreweryMaster.API.Shared.Models.DB;
+using BreweryMaster.API.Shared.Services;
 using BreweryMaster.API.UserModule.Models;
 using BreweryMaster.API.UserModule.Services;
 using BreweryMaster.API.WorkModule.Models;
@@ -31,6 +32,7 @@ builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<ITaskService, TaskService>();
 builder.Services.AddScoped<IProspectOrderService, ProspectOrderService>();
 builder.Services.AddScoped<IFermentingIngredientService, FermentingIngredientService>();
+builder.Services.AddScoped<IEntityService, EntityService>();
 
 builder.Services.AddAuthentication()
                 .AddBearerToken(IdentityConstants.BearerScheme);
