@@ -11,8 +11,8 @@ const modalFieldsProvider = (t) => ({
       type: "text",
     },
     {
-      id: "quantity",
-      label: t("recipe.ingredients.quantity"),
+      id: "storedQuantity",
+      label: t("recipe.ingredients.storedQuantity"),
       type: "number",
     },
     {
