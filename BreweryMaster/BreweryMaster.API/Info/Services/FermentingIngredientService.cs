@@ -115,14 +115,16 @@ namespace BreweryMaster.API.Info.Services
             var ingredientUnits = await _context.FermentingIngredientUnits
                 .Include(x => x.FermentingIngredient)
                 .Include(x => x.Unit)
-                .Where(x => !x.IsRemoved)
+                .Where(x => !x.IsRemoved && x.FermentingIngredientId == fermentingIngredientId)
                 .ToListAsync();
 
-            return ingredientUnits?.Where(x => x.FermentingIngredient.Id == fermentingIngredientId)
-                .Select(x => new FermentingIngredientUnitResponse()
+            var units = await _context.Units.ToListAsync();
+
+            return units?.Select(x => new FermentingIngredientUnitResponse()
                 {
                     Id = x.Id,
-                    Unit = x.Unit.Name,
+                    Name = x.Name,
+                    isUsed = ingredientUnits.Exists(y => y.Id == x.Id)
                 });
         }
 

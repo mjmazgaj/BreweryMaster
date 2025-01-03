@@ -3,6 +3,7 @@
     public class FermentingIngredientUnitResponse
     {
         public int Id { get; set; }
-        public required string Unit { get; set; }
+        public required string Name { get; set; }
+        public bool isUsed { get; set; }
     }
 }
