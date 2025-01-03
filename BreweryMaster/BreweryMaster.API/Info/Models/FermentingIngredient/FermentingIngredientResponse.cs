@@ -10,6 +10,6 @@ namespace BreweryMaster.API.Info.Models
         public float Percentage { get; set; }
         public int Extraction { get; set; }
         public int EBC { get; set; }
-        public string Info { get; set; }
+        public string? Info { get; set; }
     }
 }

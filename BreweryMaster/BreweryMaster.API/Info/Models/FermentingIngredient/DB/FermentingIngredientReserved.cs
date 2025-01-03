@@ -1,6 +1,4 @@
-﻿using BreweryMaster.API.Shared.Enums;
-
-namespace BreweryMaster.API.Info.Models
+﻿namespace BreweryMaster.API.Info.Models
 {
     public class FermentingIngredientReserved
     {
@@ -11,6 +9,6 @@ namespace BreweryMaster.API.Info.Models
         public int UserId { get; set; }
         public DateTime ReservationDate { get; set; }
         public bool IsRemoved { get; set; } = false;
-        public string Info { get; set; }
+        public string? Info { get; set; }
     }
 }
