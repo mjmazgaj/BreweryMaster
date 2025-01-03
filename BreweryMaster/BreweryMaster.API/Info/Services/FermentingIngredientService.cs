@@ -102,12 +102,16 @@ namespace BreweryMaster.API.Info.Services
             var result = ingredients.Select(ingredient => new FermentingIngredientSummaryResponse()
             {
                 Id = ingredient.Id,
-                FermentingIngredient = ingredient.FermentingIngredient,
-                Unit = ingredient.Unit,
-                TypeName = dbIngredientTypes.ContainsKey(ingredient.FermentingIngredient.TypeId) ? dbIngredientTypes[ingredient.FermentingIngredient.TypeId] : string.Empty,
+                Type = dbIngredientTypes.ContainsKey(ingredient.FermentingIngredient.TypeId) ? dbIngredientTypes[ingredient.FermentingIngredient.TypeId] : string.Empty,
+                Name = ingredient.FermentingIngredient.Name,
+                Extraction = ingredient.FermentingIngredient.Extraction,
+                EBC = ingredient.FermentingIngredient.EBC,
+                Percentage = ingredient.FermentingIngredient.Percentage,
                 ReservedQuantity = ingredientsReserve.ContainsKey(ingredient.FermentingIngredient.Id) ? ingredientsReserve[ingredient.FermentingIngredient.Id] : 0,
                 OrderedQuantity = ingredientsOrdered.ContainsKey(ingredient.FermentingIngredient.Id) ? ingredientsOrdered[ingredient.FermentingIngredient.Id] : 0,
                 StoredQuantity = ingredientsStored.ContainsKey(ingredient.FermentingIngredient.Id) ? ingredientsStored[ingredient.FermentingIngredient.Id] : 0,
+                Unit = ingredient.Unit.Name,
+                Info = ingredient.FermentingIngredient.Info,
             });
 
             return result;
