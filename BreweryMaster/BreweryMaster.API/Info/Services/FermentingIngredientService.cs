@@ -110,21 +110,23 @@ namespace BreweryMaster.API.Info.Services
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<FermentingIngredientUnitResponse>?> GetFermentingIngredientUnitsByIdAsync(int fermentingIngredientId)
+        public async Task<IEnumerable<FermentingIngredientUnitResponse>?> GetFermentingIngredientUnitsByIdAsync(int fermentingIngredientUnitId)
         {
-            var ingredientUnits = await _context.FermentingIngredientUnits
+            var id = _context.FermentingIngredientUnits
                 .Include(x => x.FermentingIngredient)
-                .Include(x => x.Unit)
-                .Where(x => !x.IsRemoved && x.FermentingIngredientId == fermentingIngredientId)
+                .FirstOrDefault(x => x.Id == fermentingIngredientUnitId)?.FermentingIngredientId;
+
+            var ingredientUnits = await _context.FermentingIngredientUnits
+                .Where(x => !x.IsRemoved && x.FermentingIngredientId == id)
+                .Select(x => x.UnitId)
                 .ToListAsync();
 
-            var units = await _context.Units.ToListAsync();
-
-            return units?.Select(x => new FermentingIngredientUnitResponse()
+            return _context.Units
+                .Select(x => new FermentingIngredientUnitResponse()
                 {
                     Id = x.Id,
                     Name = x.Name,
-                    isUsed = ingredientUnits.Exists(y => y.Id == x.Id)
+                    isUsed = ingredientUnits.Contains(x.Id)
                 });
         }
 
