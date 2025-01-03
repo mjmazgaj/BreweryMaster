@@ -1,6 +1,5 @@
 ﻿using BreweryMaster.API.OrderModule.Enums;
 using BreweryMaster.API.OrderModule.Models;
-using BreweryMaster.API.OrderModule.Models;
 using BreweryMaster.API.SharedModule.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -43,7 +42,7 @@ namespace BreweryMaster.API.OrderModule.Services
             return await _context.ProspectOrders.ToListAsync();
         }
 
-        public async Task<ProspectOrder> GetProspectOrderByIdAsync(int id)
+        public async Task<ProspectOrder?> GetProspectOrderByIdAsync(int id)
         {
             return await _context.ProspectOrders.FirstOrDefaultAsync(x => x.Id == id);
         }

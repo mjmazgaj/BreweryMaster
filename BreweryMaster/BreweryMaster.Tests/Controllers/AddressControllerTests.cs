@@ -65,7 +65,7 @@ public class AddressControllerTests
     public async Task GetAddressById_ReturnsNotFound_WhenAddressDoesNotExist()
     {
         // Arrange
-        _mockAddressService.Setup(service => service.GetAddressByIdAsync(1)).ReturnsAsync((Address)null);
+        _mockAddressService.Setup(service => service.GetAddressByIdAsync(1)).ReturnsAsync(default(Address));
 
         // Act
         var result = await _controller.GetAddressById(1);

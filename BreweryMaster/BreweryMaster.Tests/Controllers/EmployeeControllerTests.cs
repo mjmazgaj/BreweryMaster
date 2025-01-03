@@ -64,7 +64,7 @@ public class EmployeeControllerTests
     public async Task GetEmployeeById_ReturnsNotFound_WhenEmployeeDoesNotExist()
     {
         // Arrange
-        _mockEmployeeService.Setup(service => service.GetEmployeeByIdAsync(1)).ReturnsAsync((Employee)null);
+        _mockEmployeeService.Setup(service => service.GetEmployeeByIdAsync(1)).ReturnsAsync(default(Employee));
 
         // Act
         var result = await _controller.GetEmployeeById(1);

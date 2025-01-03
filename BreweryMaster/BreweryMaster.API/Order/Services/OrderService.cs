@@ -33,7 +33,7 @@ namespace BreweryMaster.API.OrderModule.Services
             return await _context.Orders.ToListAsync();
         }
 
-        public async Task<Order> GetOrderByIdAsync(int id)
+        public async Task<Order?> GetOrderByIdAsync(int id)
         {
             return await _context.Orders.FirstOrDefaultAsync(x => x.Id == id);
         }

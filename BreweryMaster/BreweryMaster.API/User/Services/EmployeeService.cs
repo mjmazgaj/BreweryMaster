@@ -21,7 +21,7 @@ namespace BreweryMaster.API.UserModule.Services
             return await _context.Employees.ToListAsync();
         }
 
-        public async Task<Employee> GetEmployeeByIdAsync(int id)
+        public async Task<Employee?> GetEmployeeByIdAsync(int id)
         {
             return await _context.Employees.FirstOrDefaultAsync(x => x.Id == id);
         }

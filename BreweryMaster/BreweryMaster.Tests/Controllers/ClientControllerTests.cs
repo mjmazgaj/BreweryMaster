@@ -68,7 +68,7 @@ public class ClientControllerTests
     public async Task GetProspectClientById_ReturnsNotFound_WhenClientDoesNotExist()
     {
         // Arrange
-        _mockClientService.Setup(service => service.GetProspectClientByIdAsync(1)).ReturnsAsync((ProspectClient)null);
+        _mockClientService.Setup(service => service.GetProspectClientByIdAsync(1)).ReturnsAsync(default(ProspectClient));
 
         // Act
         var result = await _controller.GetProspectClientById(1);

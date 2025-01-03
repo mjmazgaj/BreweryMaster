@@ -57,7 +57,7 @@ namespace BreweryMaster.API.WorkModule.Services
             return await _context.KanbanTasks.Where(x => x.OrderId == orderId).ToListAsync();
         }
 
-        public async Task<KanbanTask> GetKanbanTaskByIdAsync(int id)
+        public async Task<KanbanTask?> GetKanbanTaskByIdAsync(int id)
         {
             return await _context.KanbanTasks.FirstOrDefaultAsync(x => x.Id == id);
         }

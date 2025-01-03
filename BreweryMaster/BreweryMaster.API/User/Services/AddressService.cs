@@ -18,7 +18,7 @@ namespace BreweryMaster.API.UserModule.Services
             return await _context.Addresses.ToListAsync();
         }
 
-        public async Task<Address> GetAddressByIdAsync(int id)
+        public async Task<Address?> GetAddressByIdAsync(int id)
         {
             return await _context.Addresses.FirstOrDefaultAsync(x => x.Id == id);
         }
