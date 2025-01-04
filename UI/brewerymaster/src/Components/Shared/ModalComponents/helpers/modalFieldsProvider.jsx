@@ -5,7 +5,7 @@ const modalFieldsProvider = (t) => ({
       label: t("recipe.ingredients.name"),
       type: "text",
       required: true,
-      feedback: t("common.validation.text"),
+      feedback: `${t("common.validation.text")} 255`,
       validation: {
         maxLength: 255,
       }
@@ -20,7 +20,7 @@ const modalFieldsProvider = (t) => ({
       label: t("recipe.ingredients.percentage"),
       type: "number",
       required: true,
-      feedback: t("common.validation.number"),
+      feedback: `${t("common.validation.number")} 0-100`,
       validation: {
         min: 0,
         max: 100,
@@ -31,7 +31,7 @@ const modalFieldsProvider = (t) => ({
       label: t("recipe.ingredients.extraction"),
       type: "number",
       required: true,
-      feedback: t("common.validation.number"),
+      feedback: `${t("common.validation.number")} 0-100`,
       validation: {
         min: 0,
         max: 100,
@@ -41,7 +41,7 @@ const modalFieldsProvider = (t) => ({
       id: "ebc",
       label: t("recipe.ingredients.ebc"),
       type: "number",
-      feedback: t("common.validation.number"),
+      feedback: `${t("common.validation.number")} 0-100`,
       validation: {
         min: 0,
         max: 100,
