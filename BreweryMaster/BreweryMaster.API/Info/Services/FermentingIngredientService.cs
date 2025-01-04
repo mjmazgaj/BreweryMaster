@@ -90,7 +90,7 @@ namespace BreweryMaster.API.Info.Services
             var result = ingredients.Select(ingredient => new FermentingIngredientSummaryResponse()
             {
                 Id = ingredient.Id,
-                Type = dbIngredientTypes.ContainsKey(ingredient.FermentingIngredient.TypeId) ? dbIngredientTypes[ingredient.FermentingIngredient.TypeId] : string.Empty,
+                Type = ingredient.FermentingIngredient.TypeId,
                 Name = ingredient.FermentingIngredient.Name,
                 Extraction = ingredient.FermentingIngredient.Extraction,
                 EBC = ingredient.FermentingIngredient.EBC,

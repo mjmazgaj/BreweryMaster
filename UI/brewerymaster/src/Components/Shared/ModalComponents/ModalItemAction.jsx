@@ -97,7 +97,7 @@ const ModalItemAction = ({
       type: value,
     }));
   };
-
+  
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -106,7 +106,7 @@ const ModalItemAction = ({
       <Modal.Body>
         {types ? (
           <DropDownIndex
-            id={1}
+            id={"modal-item-action_dropdown"}
             data={types}
             selectedOption={data.type}
             setSelectedOption={handleSelectChange}

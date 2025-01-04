@@ -9,16 +9,16 @@ const DropDownIndex = ({
   isReadOnly
 }) => {
   return (
-    <div className='form-dropdown'>
+    <div className="form-dropdown">
       {data && data.length > 0 ? (
         <Form.Select
           id={id}
-          value={selectedOption}
+          value={data[selectedOption]}
           onChange={setSelectedOption}
           disabled={isReadOnly}
         >
           {data.map((item) => (
-            <option key={item.id} value={item.name}>
+            <option key={item.id} value={item.id}>
               {item.name}
             </option>
           ))}
