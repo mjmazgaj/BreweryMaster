@@ -25,7 +25,7 @@ import {
   BsThreeDots 
 } from "react-icons/bs";
 
-const OrderStepsMenu = ({ currentStep, setCurrentStep, amountOfSteps }) => {
+const OrderStepsMenu = ({ currentStep, setCurrentStep, amountOfSteps, isValid = true }) => {
   const { t } = useTranslation();
   const stepIcons = [
     <Bs1Circle size={30} />,
@@ -63,14 +63,14 @@ const OrderStepsMenu = ({ currentStep, setCurrentStep, amountOfSteps }) => {
   
   const handleNextStep = (e) => {
     e.preventDefault();
-    if (currentStep < amountOfSteps - 1) {
+    if (currentStep < amountOfSteps - 1 && isValid) {
       setCurrentStep(currentStep + 1);
     }
   };
 
   const handlePrevStep = (e) => {
     e.preventDefault();
-    if (currentStep > 0) {
+    if (currentStep > 0 && isValid) {
       setCurrentStep(currentStep - 1);
     }
   };
@@ -83,14 +83,14 @@ const OrderStepsMenu = ({ currentStep, setCurrentStep, amountOfSteps }) => {
         <Button
           variant="dark"
           onClick={handlePrevStep}
-          disabled={currentStep === 0}
+          disabled={currentStep === 0 || !isValid}
         >
           {t("button.back")}
         </Button>
         <Button
           variant="dark"
           onClick={handleNextStep}
-          disabled={currentStep === amountOfSteps - 1}
+          disabled={currentStep === amountOfSteps - 1 || !isValid}
         >
           {t("button.next")}
         </Button>

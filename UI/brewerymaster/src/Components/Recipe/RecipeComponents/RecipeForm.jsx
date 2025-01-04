@@ -14,7 +14,7 @@ import DynamicTableSelection from "../../Shared/TableComponents/DynamicTableSele
 const RecipeForm = () => {    
   const { t } = useTranslation();
   const [isValid, setIsValid] = useState(true);
-  
+
   const {
     currentStep,
     setCurrentStep,
@@ -214,6 +214,7 @@ const RecipeForm = () => {
         currentStep={currentStep}
         setCurrentStep={setCurrentStep}
         amountOfSteps={steps.length}
+        isValid={isValid}
       />
 
       <h2>{steps[currentStep].name}</h2>
