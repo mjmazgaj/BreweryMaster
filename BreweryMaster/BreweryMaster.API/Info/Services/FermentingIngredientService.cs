@@ -130,6 +130,16 @@ namespace BreweryMaster.API.Info.Services
                 });
         }
 
+        public async Task<IEnumerable<FermentingIngredientTypeEntityResponse>> GetFermentingIngredientTypesAsync()
+        {
+            return await _context.FermentingIngredientTypes.Select(x =>
+            new FermentingIngredientTypeEntityResponse()
+            {
+                Id = x.Id,
+                Name = x.Name,
+            }).ToListAsync();
+        }
+
         public async Task<bool> UpdateFermentingIngredientAsync(int id, FermentingIngredientUpdateRequest request)
         {
             if (id != request.Id)

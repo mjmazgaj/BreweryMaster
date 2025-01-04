@@ -13,3 +13,9 @@ export const fetchUnitsById = (ingredient, setUnits, id) => {
     .then((result) => setUnits(result.data))
     .catch((error) => console.log(error));
 };
+
+export const fetchTypes = (ingredient, setTypes) => {
+  return axios.get(`${apiurl}/${ingredient}/Type`)
+    .then((result) => setTypes(result.data))
+    .catch((error) => console.log(error));
+};

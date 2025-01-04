@@ -29,7 +29,7 @@ const DynamicTable = ({tableKey, tableTitle, data, handleDoubleClick}) => {
                 onDoubleClick={() => handleDoubleClick(item)}
               >
                 {keys.map((column) => (
-                  <td>{item[column]}</td>
+                  <td key={column}>{item[column]}</td>
                 ))}
               </tr>
             ))

@@ -6,7 +6,7 @@ import DynamicTable from "../../../../Shared/TableComponents/DynamicTable";
 import ModalItemAction from "../../../../Shared/ModalComponents/ModalItemAction";
 import { Button } from "react-bootstrap";
 import modalFieldsProvider from "../../../../Shared/ModalComponents/helpers/modalFieldsProvider";
-import {fetchSummaryData} from "../../api";
+import {fetchSummaryData, fetchTypes} from "../../api";
 
 import { useTranslation } from "react-i18next";
 import ModalConfirmation from "../../../../Shared/ModalComponents/ModalConfirmation";
@@ -17,6 +17,7 @@ const FermentingIngredientsSummary = () => {
 
   const [modalData, setModalData] = useState([]);
   const [data, setData] = useState([]);
+  const [types, setTypes] = useState([]);
   
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   
@@ -56,6 +57,7 @@ const FermentingIngredientsSummary = () => {
 
     useEffect(() => {
       fetchSummaryData("FermentingIngredient", setData);
+      fetchTypes("FermentingIngredient", setTypes);
     }, []);
   
   return (
@@ -76,6 +78,7 @@ const FermentingIngredientsSummary = () => {
       <ModalItemAction
         fields={modalFieldsProvider(t).fermentingIngredientsModalFields}
         data={modalData}
+        types={types}
         setData={setModalData}
         show={showItemAction}
         setShow={setShowItemAction}

@@ -76,7 +76,7 @@
         "yeastSelected": "Selected yeast",
         "yeastAvailable": "Available yeast",
         "ingredients":{
-            "type": "$t(common.title)",
+            "type": "$t(common.type)",
             "name": "$t(common.name)",
             "quantity": "$t(common.quantity)",
             "percentage": "$t(common.percentage)",

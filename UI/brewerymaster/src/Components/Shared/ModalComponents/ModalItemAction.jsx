@@ -5,10 +5,12 @@ import { useModalItemAction } from "./helpers/useModalItemAction";
 import FormControls from "../FormControls";
 
 import { fetchEntity } from "../api";
+import DropDownIndex from "../DropDownIndex";
 
 const ModalItemAction = ({
   fields,
   data,
+  types,
   setData,
   show,
   setShow,
@@ -88,12 +90,31 @@ const ModalItemAction = ({
     );
   }
 
+  const handleSelectChange = (e) => {
+    const { value } = e.target;
+    setData((prevData) => ({
+      ...prevData,
+      type: value,
+    }));
+  };
+
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>{actionObject.title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
+        {types ? (
+          <DropDownIndex
+            id={1}
+            data={types}
+            selectedOption={data.type}
+            setSelectedOption={handleSelectChange}
+            isReadOnly={actionObject.isReadOnly}
+          />
+        ) : (
+          <></>
+        )}
         <FormControls
           fields={fields}
           data={data}
