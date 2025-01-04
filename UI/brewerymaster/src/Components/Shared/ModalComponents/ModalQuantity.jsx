@@ -13,6 +13,7 @@ const ModalQuantity = ({
   isEmpty
 }) => {
 
+  const [isValid, setIsValid] = useState(true);
   const [quantityData, setQuantityData] = useState({});
 
   const { 
@@ -44,6 +45,7 @@ const ModalQuantity = ({
           fields={fields}
           data={quantityData}
           setData={setQuantityData}
+          setIsValid={setIsValid}
         />
       </Modal.Body>
       <Modal.Footer>

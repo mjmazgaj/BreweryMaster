@@ -53,7 +53,11 @@
         "unit": "Unit",
         "info": "Info",
         "ordered": "Ordered",
-        "reserved": "Reserved"
+        "reserved": "Reserved",
+        "validation":{
+            "name":"Name should have 1-255 letters",
+            "describtion":"Describtion should have 1-255 letters"
+        }
     },
     "kanban": {
         "modalTitle": "Modify Task",
@@ -111,8 +115,16 @@
             "batch": "Batch",
             "mash": "Mash",
             "stages": "Stages"
+        },
+        "validation":{
+            "name":"$t(common.validation.name)",
+            "percentage": "Percentage should be a number in range 0-100",
+            "extraction":"Extraction should be a number in range 0-100",
+            "describtion":"$t(common.validation.describtion)",
+            "ebc": "EBC should be a number in range 0-100"
         }
     },
+
     "toast": {
         "addSuccess": "The item has been added successfully."
     }

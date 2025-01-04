@@ -20,8 +20,9 @@ const ModalItemAction = ({
   action,
   setAction,
   itemName,
-}) => {  
+}) => {
   const [units, setUnits] = useState([]);
+  const [isValid, setIsValid] = useState(true);
 
   const { handleClose, handleDelete, actionObject } = useModalItemAction({
     data,
@@ -111,6 +112,7 @@ const ModalItemAction = ({
             selectedOption={data.type}
             setSelectedOption={handleSelectChange}
             isReadOnly={actionObject.isReadOnly}
+            setIsValid={setIsValid}
           />
         ) : (
           <></>

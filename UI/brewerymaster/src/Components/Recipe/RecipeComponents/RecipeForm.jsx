@@ -13,8 +13,8 @@ import DynamicTableSelection from "../../Shared/TableComponents/DynamicTableSele
 
 const RecipeForm = () => {    
   const { t } = useTranslation();
+  const [isValid, setIsValid] = useState(true);
   
-
   const {
     currentStep,
     setCurrentStep,
@@ -136,6 +136,7 @@ const RecipeForm = () => {
           fields={recipeFormFieldsProvider(t).summaryFields}
           data={recipeSummaryData}
           setData={setRecipeSummaryData}
+          setIsValid={setIsValid}
         />
       ),
     },
@@ -189,6 +190,7 @@ const RecipeForm = () => {
           fields={recipeFormFieldsProvider(t).batchFields}
           data={recipeBatchData}
           setData={setRecipeBatchData}
+          setIsValid={setIsValid}
         />
       ),
     },
@@ -200,6 +202,7 @@ const RecipeForm = () => {
           fields={recipeFormFieldsProvider(t).mashFields}
           data={recipeMashData}
           setData={setRecipeMashData}
+          setIsValid={setIsValid}
         />
       ),
     },
