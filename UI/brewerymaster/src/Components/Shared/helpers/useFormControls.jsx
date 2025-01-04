@@ -1,26 +1,15 @@
-export const useFormControls = ({ setData, setIsValid, invalidFields, setInvalidFields }) => {
-  const validateNumber = (value, validation, id) => {
-    const isInvalid = validation
-      ? value > validation.max || value < validation.min
-      : false;
+import { useEffect } from 'react';
 
-    setInvalidFields((prev) => {
-      const updatedFields = { ...prev, [id]: isInvalid };
-      const isValidNow = !Object.values(updatedFields).some((isInvalid) => isInvalid);
-      setIsValid(isValidNow);
-      return updatedFields;
-    });
+export const useFormControls = ({ setData, setIsValid, invalidFields, setInvalidFields }) => {
+  
+  const validateNumber = (value, validation, id) => {
+    const isInvalid = validation ? value > validation.max || value < validation.min : false;
+    setInvalidFields((prev) => ({ ...prev, [id]: isInvalid }));
   };
 
   const validateText = (value, validation, id) => {
     const isInvalid = validation ? value.length > validation.maxLength : false;
-
-    setInvalidFields((prev) => {
-      const updatedFields = { ...prev, [id]: isInvalid };
-      const isValidNow = !Object.values(updatedFields).some((isInvalid) => isInvalid);
-      setIsValid(isValidNow);
-      return updatedFields;
-    });
+    setInvalidFields((prev) => ({ ...prev, [id]: isInvalid }));
   };
 
   const validation = (value, field) => {
@@ -32,12 +21,7 @@ export const useFormControls = ({ setData, setIsValid, invalidFields, setInvalid
         validateText(value, field.validation, field.id);
         break;
       default:
-        setInvalidFields((prev) => {
-          const updatedFields = { ...prev, [field.id]: false };
-          const isValidNow = !Object.values(updatedFields).some((isInvalid) => isInvalid);
-          setIsValid(isValidNow);
-          return updatedFields;
-        });
+        setInvalidFields((prev) => ({ ...prev, [field.id]: false }));
         break;
     }
   };
@@ -50,6 +34,11 @@ export const useFormControls = ({ setData, setIsValid, invalidFields, setInvalid
       [id]: type === "number" ? parseFloat(value) : value,
     }));
   };
+
+  useEffect(() => {
+    const isValidNow = !Object.values(invalidFields).some((isInvalid) => isInvalid);
+    setIsValid(isValidNow);
+  }, [invalidFields, setIsValid]);
 
   return {
     handleInputChange,
