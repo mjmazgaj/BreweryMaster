@@ -3,12 +3,24 @@ export const useFormControls = ({ setData, setIsValid, invalidFields, setInvalid
     const isInvalid = validation
       ? value > validation.max || value < validation.min
       : false;
-    setInvalidFields((prev) => ({ ...prev, [id]: isInvalid }));
+
+    setInvalidFields((prev) => {
+      const updatedFields = { ...prev, [id]: isInvalid };
+      const isValidNow = !Object.values(updatedFields).some((isInvalid) => isInvalid);
+      setIsValid(isValidNow);
+      return updatedFields;
+    });
   };
 
   const validateText = (value, validation, id) => {
     const isInvalid = validation ? value.length > validation.maxLength : false;
-    setInvalidFields((prev) => ({ ...prev, [id]: isInvalid }));
+
+    setInvalidFields((prev) => {
+      const updatedFields = { ...prev, [id]: isInvalid };
+      const isValidNow = !Object.values(updatedFields).some((isInvalid) => isInvalid);
+      setIsValid(isValidNow);
+      return updatedFields;
+    });
   };
 
   const validation = (value, field) => {
@@ -20,20 +32,23 @@ export const useFormControls = ({ setData, setIsValid, invalidFields, setInvalid
         validateText(value, field.validation, field.id);
         break;
       default:
-        setInvalidFields((prev) => ({ ...prev, [field.id]: false }));
+        setInvalidFields((prev) => {
+          const updatedFields = { ...prev, [field.id]: false };
+          const isValidNow = !Object.values(updatedFields).some((isInvalid) => isInvalid);
+          setIsValid(isValidNow);
+          return updatedFields;
+        });
         break;
     }
-
-    setIsValid(Object.values(invalidFields).some((isInvalid) => isInvalid));
   };
 
   const handleInputChange = (e, field) => {
     const { id, value, type } = e.target;
     validation(value, field);
-      setData((prevData) => ({
-        ...prevData,
-        [id]: type === "number" ? parseFloat(value) : value,
-      }));
+    setData((prevData) => ({
+      ...prevData,
+      [id]: type === "number" ? parseFloat(value) : value,
+    }));
   };
 
   return {
