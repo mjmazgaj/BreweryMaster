@@ -80,15 +80,13 @@ const ModalForm = ({
           {action == "add" && units && (
             <div className="">
               {units.map((unit) => (
-                <div key={unit.id}>
-                  <Form.Check
+                <Form.Check
                     type="switch"
                     id={`${unit.id}`}
                     label={unit.name}
                     checked={unit.isUsed}
                     onChange={() => handleCheckBox(unit)}
                   />
-                </div>
               ))}
             </div>
           )}
