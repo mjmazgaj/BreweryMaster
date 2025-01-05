@@ -6,6 +6,7 @@ namespace BreweryMaster.API.Info.Models
     {
         public int Id { get; set; }
         public int Type { get; set; }
+        public required string TypeName { get; set; }
         public required string Name { get; set; }
         public float Percentage { get; set; }
         public int Extraction { get; set; }

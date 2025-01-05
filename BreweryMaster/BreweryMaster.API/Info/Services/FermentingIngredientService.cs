@@ -91,6 +91,9 @@ namespace BreweryMaster.API.Info.Services
             {
                 Id = ingredient.Id,
                 Type = ingredient.FermentingIngredient.TypeId,
+                TypeName = dbIngredientTypes.ContainsKey(ingredient.FermentingIngredient.TypeId) ?
+                            dbIngredientTypes[ingredient.FermentingIngredient.TypeId] : 
+                            "",
                 Name = ingredient.FermentingIngredient.Name,
                 Extraction = ingredient.FermentingIngredient.Extraction,
                 EBC = ingredient.FermentingIngredient.EBC,

@@ -48,6 +48,38 @@ const modalFieldsProvider = (t) => ({
       }
     },
   ],
+  fermentingIngredientsModalReadOnlyFields: [
+    {
+      id: "typeName",
+      label: t("recipe.ingredients.type"),
+      type: "text",
+    },
+    {
+      id: "name",
+      label: t("recipe.ingredients.name"),
+      type: "text",
+    },
+    {
+      id: "storedQuantity",
+      label: t("recipe.ingredients.storedQuantity"),
+      type: "number",
+    },
+    {
+      id: "percentage",
+      label: t("recipe.ingredients.percentage"),
+      type: "number",
+    },
+    {
+      id: "extraction",
+      label: t("recipe.ingredients.extraction"),
+      type: "number",
+    },
+    {
+      id: "ebc",
+      label: t("recipe.ingredients.ebc"),
+      type: "number",
+    },
+  ],
   quantityModalFields:{
     reserve:[
       {

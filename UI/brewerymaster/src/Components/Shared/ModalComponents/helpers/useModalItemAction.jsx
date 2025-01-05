@@ -5,10 +5,10 @@ export const useModalItemAction = ({
   setShow,
   setShowConfirmationModal,
   setShowQuantityModal,
+  setShowModalForm,
+  setModalAction,
   setQuantityAction,
-  action,
-  itemName,
-  units
+  action
 }) => {
   const { t } = useTranslation();
 
@@ -16,20 +16,9 @@ export const useModalItemAction = ({
     setShow(false);
   };
 
-  const handleAdd = (data) => () => {
-    const updatedUnits = units.map((x) => ({
-      ...x,
-      isUsed: x.isUsed ?? false,
-    }));
-
-    console.log("add");
-    console.log({...data, ...updatedUnits});
-  };
-
-  const handleEdit = (data) => () => {
-    console.log("add");
-    console.log(data);
-    setShow(false);
+  const handleEdit = () => {
+    setModalAction("edit");
+    setShowModalForm(true);
   };
 
   const handleQuantityChange = (data, action) => () => {
@@ -59,17 +48,7 @@ export const useModalItemAction = ({
       title: `${data ? data.name : ""} details`,
       function: handleQuantityChange,
       isReadOnly: true,
-    },
-    add: {
-      title: `Add ${itemName}`,
-      function: handleAdd,
-      isReadOnly: false,
-    },
-    edit: {
-      title: `Edit ${data ? data.name : ""}`,
-      function: handleEdit,
-      isReadOnly: false,
-    },
+    }
   };
 
   let actionObject = actionCases[action];
@@ -77,6 +56,7 @@ export const useModalItemAction = ({
   return {
     handleClose,
     handleDelete,
+    handleEdit,
     actionObject,
   };
 };
