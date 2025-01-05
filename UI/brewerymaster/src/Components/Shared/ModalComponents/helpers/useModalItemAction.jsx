@@ -18,6 +18,7 @@ export const useModalItemAction = ({
 
   const handleEdit = () => {
     setModalAction("edit");
+    setShow(false);
     setShowModalForm(true);
   };
 

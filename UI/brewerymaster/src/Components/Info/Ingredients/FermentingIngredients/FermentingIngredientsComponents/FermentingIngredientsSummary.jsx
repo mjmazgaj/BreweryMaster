@@ -101,7 +101,7 @@ const FermentingIngredientsSummary = () => {
       <ModalForm
         fields={modalFieldsProvider(t).fermentingIngredientsModalFields}
         data={modalFormData}
-        setData={setModalData}
+        setData={setModalFormData}
         types={types}
         show={showModalForm}
         setShow={setShowModalForm}

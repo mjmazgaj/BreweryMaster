@@ -30,8 +30,15 @@ const ModalForm = ({
   });
 
   useEffect(() => {
-    fetchEntity("Unit", setUnits);
+    fetchEntity("Unit", (fetchedUnits) => {
+      const updatedUnits = fetchedUnits.map((unit) => ({
+        ...unit,
+        isUsed: unit.isUsed ?? false,
+      }));
+      setUnits(updatedUnits);
+    });
   }, []);
+
 
   const handleCheckBox = (unit) => {
     setUnits((prevUnits) =>
