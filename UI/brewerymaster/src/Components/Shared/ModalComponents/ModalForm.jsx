@@ -4,6 +4,7 @@ import { Modal, Button, Form } from "react-bootstrap";
 import { useModalForm } from "./helpers/useModalForm";
 import FormControls from "../FormControls";
 
+import { useTranslation } from "react-i18next";
 import { fetchEntity } from "../api";
 import DropDownIndex from "../DropDownIndex";
 
@@ -17,6 +18,7 @@ const ModalForm = ({
   action,
   itemName,
 }) => {
+  const { t } = useTranslation();
   const [units, setUnits] = useState([]);
   const [isValid, setIsValid] = useState(true);
 
@@ -38,7 +40,6 @@ const ModalForm = ({
       setUnits(updatedUnits);
     });
   }, []);
-
 
   const handleCheckBox = (unit) => {
     setUnits((prevUnits) =>
@@ -63,7 +64,7 @@ const ModalForm = ({
         <Modal.Body>
           {types && (
             <DropDownIndex
-              id={"modal-item-action_dropdown"}
+              id={"modal-form_dropdown"}
               data={types}
               selectedOption={data.type}
               setSelectedOption={handleSelectChange}
@@ -78,25 +79,26 @@ const ModalForm = ({
             setIsValid={setIsValid}
           />
           {action == "add" && units && (
-            <div className="">
+            <div className="modal-form_checkbox-container">
+              <h5>{t("common.selectUnits")}</h5>
               {units.map((unit) => (
                 <Form.Check
-                    type="switch"
-                    id={`${unit.id}`}
-                    label={unit.name}
-                    checked={unit.isUsed}
-                    onChange={() => handleCheckBox(unit)}
-                  />
+                  type="switch"
+                  id={`${unit.id}`}
+                  label={unit.name}
+                  checked={unit.isUsed}
+                  onChange={() => handleCheckBox(unit)}
+                />
               ))}
             </div>
           )}
         </Modal.Body>
         <Modal.Footer>
           <Button type="submit" variant="dark" disabled={!isValid}>
-            {action == "add" ? "Add" : "Save Changes"}
+            {action == "add" ? t("button.add") : t("button.saveChanges")}
           </Button>
           <Button variant="dark" onClick={handleClose}>
-            Close
+            {t("button.close")}
           </Button>
         </Modal.Footer>
       </Form>

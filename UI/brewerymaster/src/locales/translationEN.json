@@ -1,6 +1,7 @@
 {
     "button": {
         "submit": "Submit",
+        "add": "Add",
         "cancel": "Cancel",
         "confirm": "Confirm",
         "next": "Next",
@@ -16,6 +17,7 @@
         "alphaAcids": "Alpha Acids",
         "time": "Time",
         "type":"$t(common.type)",
+        "typeName":"$t(common.typeName)",
         "name":"$t(common.name)",
         "quantity": "$t(common.quantity)",
         "reservedQuantity": "$t(common.reserved)",
@@ -41,6 +43,7 @@
     "common": {
         "style": "Style",
         "type": "Type",
+        "typeName": "Type name",
         "name": "Name",
         "title": "Title",
         "summary": "Summary",
@@ -54,6 +57,7 @@
         "info": "Info",
         "ordered": "Ordered",
         "reserved": "Reserved",
+        "selectUnits":"Selects units",
         "validation":{
             "text":"Text should have less letters then:",
             "number":"Nnumber should be in range:"

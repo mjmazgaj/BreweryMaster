@@ -41,7 +41,7 @@ const FermentingIngredientsSummary = () => {
 
   const handleDoubleClick = (item) => {
     setItemAction("summary");
-    setModalItemData(removeFields(item, ["type"]));
+    setModalItemData(removeFields(item, ["typeId"]));
     setModalFormData(removeFields(item, ["typeName"]));
     setShowItemAction(true);
   };
