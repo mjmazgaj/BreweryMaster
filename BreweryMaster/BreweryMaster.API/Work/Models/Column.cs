@@ -6,7 +6,7 @@ namespace BreweryMaster.API.WorkModule.Models
     {
         public required string Title { get; set; }
         public int Status { get; set; }
-        public required IEnumerable<KanbanTaskDto> Items { get; set; }
+        public IEnumerable<KanbanTaskDto>? Items { get; set; }
     }
 
 }
