@@ -31,7 +31,7 @@ function Navigation(isAuthenticated) {
           </NavDropdown>
 
           <NavDropdown title="Info" id="navbarScrollingDropdown">
-            <NavDropdown.Item href="/Ingredients">Ingredients</NavDropdown.Item>
+            <NavDropdown.Item href="/FermentingIngredients">Fermenting Ingredients</NavDropdown.Item>
           </NavDropdown>
         </Nav>
 

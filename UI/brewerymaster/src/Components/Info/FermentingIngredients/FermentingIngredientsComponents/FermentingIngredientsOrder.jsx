@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../../../info.css";
+import "../../info.css";
 
-import DynamicTable from "../../../../Shared/TableComponents/DynamicTable";
-import ModalQuantity from "../../../../Shared/ModalComponents/ModalQuantity";
-import modalFieldsProvider from "../../../../Shared/ModalComponents/helpers/modalFieldsProvider";
+import DynamicTable from "../../../Shared/TableComponents/DynamicTable";
+import ModalQuantity from "../../../Shared/ModalComponents/ModalQuantity";
+import modalFieldsProvider from "../../../Shared/ModalComponents/helpers/modalFieldsProvider";
 
 import { useTranslation } from "react-i18next";
-import ModalConfirmation from "../../../../Shared/ModalComponents/ModalConfirmation";
+import ModalConfirmation from "../../../Shared/ModalComponents/ModalConfirmation";
 import { dbhandler } from "../dbhandler";
 
 const FermentingIngredientsOrder = () => {

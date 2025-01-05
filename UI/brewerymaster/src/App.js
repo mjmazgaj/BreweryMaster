@@ -17,7 +17,7 @@ import Employee from './Components/User/Employee/Employee';
 import Order from './Components/Order/Order';
 import ProspectOrder from './Components/Order/ProspectOrder/ProspectOrder';
 import Recipe from './Components/Recipe/Recipe';
-import Ingredients from './Components/Info/Ingredients/Ingredients';
+import FermentingIngredients from './Components/Info/FermentingIngredients/FermentingIngredients';
 
 import Kanban from './Components/Work/Kanban';
 
@@ -58,7 +58,7 @@ const App = () => {
               <Route exact path="/ProspectOrder" element={<ProspectOrder />} />
               <Route exact path="/Order" element={<Order />} />
               <Route exact path="/Recipe" element={<Recipe />} />
-              <Route exact path="/Ingredients" element={<Ingredients />} />
+              <Route exact path="/FermentingIngredients" element={<FermentingIngredients />} />
 
               <Route exact path="/Address" element={<Address />} />
               <Route exact path="/Client" element={<Client />} />

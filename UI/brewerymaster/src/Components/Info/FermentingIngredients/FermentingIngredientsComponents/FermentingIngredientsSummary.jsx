@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../../../info.css";
+import "../../info.css";
 
-import DynamicTable from "../../../../Shared/TableComponents/DynamicTable";
-import ModalItemAction from "../../../../Shared/ModalComponents/ModalItemAction";
+import DynamicTable from "../../../Shared/TableComponents/DynamicTable";
+import ModalItemAction from "../../../Shared/ModalComponents/ModalItemAction";
 import { Button } from "react-bootstrap";
-import modalFieldsProvider from "../../../../Shared/ModalComponents/helpers/modalFieldsProvider";
+import modalFieldsProvider from "../../../Shared/ModalComponents/helpers/modalFieldsProvider";
 import { fetchSummaryData, fetchTypes } from "../../api";
 
 import { useTranslation } from "react-i18next";
-import ModalConfirmation from "../../../../Shared/ModalComponents/ModalConfirmation";
-import ModalQuantity from "../../../../Shared/ModalComponents/ModalQuantity";
-import ModalForm from "../../../../Shared/ModalComponents/ModalForm";
+import ModalConfirmation from "../../../Shared/ModalComponents/ModalConfirmation";
+import ModalQuantity from "../../../Shared/ModalComponents/ModalQuantity";
+import ModalForm from "../../../Shared/ModalComponents/ModalForm";
 
-import {removeFields} from "../../../../Shared/helpers/useObjectHelper";
+import {removeFields} from "../../../Shared/helpers/useObjectHelper";
 
 const FermentingIngredientsSummary = () => {
   const { t } = useTranslation();
