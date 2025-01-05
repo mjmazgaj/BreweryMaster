@@ -35,7 +35,7 @@ const FormControls = ({
                   ? undefined
                   : (event) => handleInputChange(event, field)
               }
-              readOnly={isReadOnly}
+              disabled={isReadOnly}
               required={field.required}
               min={field.type === "number" ? field.min : null}
               max={field.type === "number" ? field.max : null}
