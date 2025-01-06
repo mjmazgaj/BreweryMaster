@@ -69,23 +69,17 @@ namespace BreweryMaster.API.Info.Services
 
             var dbIngredientTypes = await _context.FermentingIngredientTypes.ToDictionaryAsync(x => x.Id, x => x.Name);
 
-            var orderedData = await _context.FermentingIngredientOrderedList.ToListAsync();
-
-            //ToDO
-            var reservedData = Helpers.DataProvider.GetReserved(ingredients);
-            var storedData = Helpers.DataProvider.GetStored(ingredients);
-
-            var ingredientsReserve = reservedData
+            var ingredientsReserve = await _context.FermentingIngredientsReserved
                 .GroupBy(x => x.FermentingIngredientUnitId)
-                .ToDictionary(x => x.Key, x => x.Sum(y => y.ReservedQuantity));
+                .ToDictionaryAsync(x => x.Key, x => x.Sum(y => y.ReservedQuantity));
 
-            var ingredientsOrdered = orderedData
+            var ingredientsOrdered = await _context.FermentingIngredientsOrdered
                 .GroupBy(x => x.FermentingIngredientUnitId)
-                .ToDictionary(x => x.Key, x => x.Sum(y => y.OrderedQuantity));
+                .ToDictionaryAsync(x => x.Key, x => x.Sum(y => y.OrderedQuantity));
 
-            var ingredientsStored = storedData
+            var ingredientsStored = await _context.FermentingIngredientsStored
                 .GroupBy(x => x.FermentingIngredientUnitId)
-                .ToDictionary(x => x.Key, x => x.Sum(y => y.StoredQuantity));
+                .ToDictionaryAsync(x => x.Key, x => x.Sum(y => y.StoredQuantity));
 
             var result = ingredients.Select(ingredient => new FermentingIngredientSummaryResponse()
             {
@@ -98,9 +92,9 @@ namespace BreweryMaster.API.Info.Services
                 Extraction = ingredient.FermentingIngredient.Extraction,
                 EBC = ingredient.FermentingIngredient.EBC,
                 Percentage = ingredient.FermentingIngredient.Percentage,
-                ReservedQuantity = ingredientsReserve.ContainsKey(ingredient.FermentingIngredient.Id) ? ingredientsReserve[ingredient.FermentingIngredient.Id] : 0,
-                OrderedQuantity = ingredientsOrdered.ContainsKey(ingredient.FermentingIngredient.Id) ? ingredientsOrdered[ingredient.FermentingIngredient.Id] : 0,
-                StoredQuantity = ingredientsStored.ContainsKey(ingredient.FermentingIngredient.Id) ? ingredientsStored[ingredient.FermentingIngredient.Id] : 0,
+                ReservedQuantity = ingredientsReserve.ContainsKey(ingredient.Id) ? ingredientsReserve[ingredient.Id] : 0,
+                OrderedQuantity = ingredientsOrdered.ContainsKey(ingredient.Id) ? ingredientsOrdered[ingredient.Id] : 0,
+                StoredQuantity = ingredientsStored.ContainsKey(ingredient.Id) ? ingredientsStored[ingredient.Id] : 0,
                 Unit = ingredient.Unit.Name,
                 Info = ingredient.FermentingIngredient.Info,
             });

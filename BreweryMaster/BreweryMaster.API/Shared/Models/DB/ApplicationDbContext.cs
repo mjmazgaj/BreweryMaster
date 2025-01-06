@@ -23,13 +23,31 @@ namespace BreweryMaster.API.Shared.Models.DB
         public DbSet<FermentingIngredient> FermentingIngredients { get; set; }
         public DbSet<FermentingIngredientTypeEntity> FermentingIngredientTypes { get; set; }
         public DbSet<FermentingIngredientUnit> FermentingIngredientUnits { get; set; }
-        public DbSet<FermentingIngredientOrdered> FermentingIngredientOrderedList { get; set; }
+        public DbSet<FermentingIngredientOrdered> FermentingIngredientsOrdered { get; set; }
+        public DbSet<FermentingIngredientStored> FermentingIngredientsStored { get; set; }
+        public DbSet<FermentingIngredientReserved> FermentingIngredientsReserved { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
             builder.Entity<FermentingIngredientOrdered>(entity =>
+            {
+                entity.HasOne<FermentingIngredientUnit>()
+                      .WithMany()
+                      .HasForeignKey(e => e.FermentingIngredientUnitId)
+                      .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            builder.Entity<FermentingIngredientStored>(entity =>
+            {
+                entity.HasOne<FermentingIngredientUnit>()
+                      .WithMany()
+                      .HasForeignKey(e => e.FermentingIngredientUnitId)
+                      .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            builder.Entity<FermentingIngredientReserved>(entity =>
             {
                 entity.HasOne<FermentingIngredientUnit>()
                       .WithMany()
@@ -50,6 +68,8 @@ namespace BreweryMaster.API.Shared.Models.DB
             builder.Entity<FermentingIngredient>().HasData(FermentingIngredientDataProvider.GetFermentingIngredient());
             builder.Entity<FermentingIngredientUnit>().HasData(FermentingIngredientDataProvider.GetFermentingIngredientUnit());
             builder.Entity<FermentingIngredientOrdered>().HasData(FermentingIngredientDataProvider.GetFermentingIngredientOrdered());
+            builder.Entity<FermentingIngredientReserved>().HasData(FermentingIngredientDataProvider.GetFermentingIngredientReserved());
+            builder.Entity<FermentingIngredientStored>().HasData(FermentingIngredientDataProvider.GetFermentingIngredientStored());
         }
     }
 }

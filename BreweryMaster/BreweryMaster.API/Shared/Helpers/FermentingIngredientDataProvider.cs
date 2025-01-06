@@ -91,6 +91,68 @@ public static class FermentingIngredientDataProvider
         };
     }
 
+    public static IEnumerable<FermentingIngredientReserved> GetFermentingIngredientReserved()
+    {
+        return new List<FermentingIngredientReserved>()
+        {
+            new()
+            {
+                Id = 1,
+                FermentingIngredientUnitId = 1,
+                OrderId = 1,
+                ReservedQuantity = 4,
+                ReservationDate = DateTime.Now.AddDays(-2),
+                Info = "Fermenting Ingredient Reserved Info 1"
+            },
+            new()
+            {
+                Id = 2,
+                FermentingIngredientUnitId = 2,
+                OrderId = 1,
+                ReservedQuantity = 7,
+                ReservationDate = DateTime.Now.AddDays(-1),
+                Info = "Fermenting Ingredient Reserved Info 1"
+            },
+            new()
+            {
+                Id = 3,
+                FermentingIngredientUnitId = 1,
+                OrderId = 1,
+                ReservedQuantity = 10,
+                ReservationDate = DateTime.Now.AddDays(-3),
+                Info = "Fermenting Ingredient Reserved Info 1"
+            },
+        };
+    }
+
+    public static IEnumerable<FermentingIngredientStored> GetFermentingIngredientStored()
+    {
+        return new List<FermentingIngredientStored>()
+        {
+            new()
+            {
+                Id = 1,
+                FermentingIngredientUnitId = 2,
+                StoredQuantity = 200,
+                Info = "Fermenting Ingredient Stored Info 1"
+            },
+            new()
+            {
+                Id = 2,
+                FermentingIngredientUnitId = 2,
+                StoredQuantity = 230,
+                Info = "Fermenting Ingredient Stored Info 1"
+            },
+            new()
+            {
+                Id = 3,
+                FermentingIngredientUnitId = 1,
+                StoredQuantity = 300,
+                Info = "Fermenting Ingredient Stored Info 1"
+            },
+        };
+    }
+
     public static IEnumerable<FermentingIngredientUnit> GetFermentingIngredientUnit()
     {
         return new List<FermentingIngredientUnit>
