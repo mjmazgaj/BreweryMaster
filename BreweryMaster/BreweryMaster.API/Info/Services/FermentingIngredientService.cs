@@ -15,20 +15,46 @@ namespace BreweryMaster.API.Info.Services
         }
         public async Task<FermentingIngredient> CreateFermentingIngredientAsync(FermentingIngredientRequest request)
         {
-            var ingredientToCreate = new FermentingIngredient()
+            using var transaction = await _context.Database.BeginTransactionAsync();
+
+            try
             {
-                Name = request.Name,
-                TypeId = (int)request.Type,
-                EBC = request.EBC,
-                Extraction = request.Extraction,
-                Percentage = request.Percentage,
-                Info = request.Info,
-            };
+                var ingredientToCreate = new FermentingIngredient()
+                {
+                    Name = request.Name,
+                    TypeId = request.TypeId,
+                    Percentage = request.Percentage,
+                    Extraction = request.Extraction,
+                    EBC = request.EBC,
+                    Info = request.Info,
+                };
 
-            _context.FermentingIngredients.Add(ingredientToCreate);
-            await _context.SaveChangesAsync();
+                _context.FermentingIngredients.Add(ingredientToCreate);
+                await _context.SaveChangesAsync();
 
-            return ingredientToCreate;
+                var fermentingIngredientUnitsToCreate = request.Units
+                    .Select(x => new FermentingIngredientUnit()
+                    {
+                        FermentingIngredient = null!,
+                        FermentingIngredientId = ingredientToCreate.Id,
+                        Unit = null!,
+                        UnitId = x,
+                    });
+
+                _context.FermentingIngredientUnits.AddRange(fermentingIngredientUnitsToCreate);
+                await _context.SaveChangesAsync();
+
+                await transaction.CommitAsync();
+
+                return ingredientToCreate;
+
+            }
+            catch (Exception)
+            {
+                await transaction.RollbackAsync();
+
+                throw;
+            }
         }
 
         public async Task<IEnumerable<FermentingIngredientResponse>> GetFermentingIngredientsAsync()
