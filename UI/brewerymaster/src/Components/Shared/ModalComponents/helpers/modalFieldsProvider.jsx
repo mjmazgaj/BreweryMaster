@@ -11,11 +11,6 @@ const modalFieldsProvider = (t) => ({
       }
     },
     {
-      id: "storedQuantity",
-      label: t("recipe.ingredients.storedQuantity"),
-      type: "number",
-    },
-    {
       id: "percentage",
       label: t("recipe.ingredients.percentage"),
       type: "number",
