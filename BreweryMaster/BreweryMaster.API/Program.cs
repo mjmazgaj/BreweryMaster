@@ -4,18 +4,13 @@ using BreweryMaster.API.OrderModule.Models;
 using BreweryMaster.API.OrderModule.Services;
 using BreweryMaster.API.Shared.Models.DB;
 using BreweryMaster.API.Shared.Services;
-using BreweryMaster.API.UserModule.Models;
+using BreweryMaster.API.User.Models.DB;
 using BreweryMaster.API.UserModule.Services;
 using BreweryMaster.API.WorkModule.Models;
 using BreweryMaster.API.WorkModule.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.Filters;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 

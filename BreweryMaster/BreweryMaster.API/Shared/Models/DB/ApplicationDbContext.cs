@@ -3,6 +3,7 @@ using BreweryMaster.API.Info.Models;
 using BreweryMaster.API.UserModule.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using BreweryMaster.API.User.Models.DB;
 
 namespace BreweryMaster.API.Shared.Models.DB
 {
