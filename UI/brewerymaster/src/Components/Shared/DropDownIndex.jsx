@@ -6,23 +6,29 @@ const DropDownIndex = ({
   data,
   selectedOption,
   setSelectedOption,
-  isReadOnly
+  isReadOnly,
+  label
 }) => {
   return (
     <div className="form-dropdown">
       {data && data.length > 0 ? (
-        <Form.Select
-          id={id}
-          value={data[selectedOption]}
-          onChange={setSelectedOption}
-          disabled={isReadOnly}
-        >
-          {data.map((item) => (
-            <option key={item.id} value={item.id}>
-              {item.name}
-            </option>
-          ))}
-        </Form.Select>
+        <>
+          <Form.Label>{label}</Form.Label>
+          <Form.Select
+            id={id}
+            value={selectedOption}
+            onChange={setSelectedOption}
+            disabled={isReadOnly}
+            placeholder="xd"
+          >
+            <option key={0} value={0}></option>
+            {data.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.name}
+              </option>
+            ))}
+          </Form.Select>
+        </>
       ) : (
         <p>Loading...</p>
       )}

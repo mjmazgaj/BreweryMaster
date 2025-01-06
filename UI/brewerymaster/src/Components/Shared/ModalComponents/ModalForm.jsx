@@ -69,6 +69,7 @@ const ModalForm = ({
               selectedOption={data.type}
               setSelectedOption={handleSelectChange}
               isReadOnly={actionObject.isReadOnly}
+              label="Type"
             />
           )}
           <FormControls
