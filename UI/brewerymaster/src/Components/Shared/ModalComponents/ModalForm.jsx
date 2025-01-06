@@ -51,7 +51,7 @@ const ModalForm = ({
     const { value } = e.target;
     setData((prevData) => ({
       ...prevData,
-      type: parseInt(value),
+      typeId: parseInt(value),
     }));
   };
 
