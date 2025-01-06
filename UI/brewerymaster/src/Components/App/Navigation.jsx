@@ -25,6 +25,7 @@ function Navigation(isAuthenticated) {
           <Nav.Link href="/Recipe">Recipe</Nav.Link>
 
           <NavDropdown title="User" id="navbarScrollingDropdown">
+            <NavDropdown.Item href="/User">User</NavDropdown.Item>
             <NavDropdown.Item href="/Client">Client</NavDropdown.Item>
             <NavDropdown.Item href="/Address">Address</NavDropdown.Item>
             <NavDropdown.Item href="/Employee">Employee</NavDropdown.Item>
