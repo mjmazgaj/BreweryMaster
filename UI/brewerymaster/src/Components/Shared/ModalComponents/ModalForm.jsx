@@ -66,7 +66,7 @@ const ModalForm = ({
             <DropDownIndex
               id={"modal-form_dropdown"}
               data={types}
-              selectedOption={data.type}
+              selectedOption={data.typeId}
               setSelectedOption={handleSelectChange}
               isReadOnly={actionObject.isReadOnly}
               label="Type"

@@ -19,7 +19,6 @@ const DropDownIndex = ({
             value={selectedOption}
             onChange={setSelectedOption}
             disabled={isReadOnly}
-            placeholder="xd"
           >
             <option key={0} value={0}></option>
             {data.map((item) => (
