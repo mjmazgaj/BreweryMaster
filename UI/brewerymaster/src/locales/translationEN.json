@@ -35,6 +35,7 @@
         "describtion": "Describtion",
         "orderedDate": "Ordered date",
         "expectedDate": "Expected date",
+        "usedFor": "Used for",
         "order": "Order"
     },
     "message":{
@@ -83,6 +84,8 @@
         "hopsAvailable": "Available hops",
         "yeastSelected": "Selected yeast",
         "yeastAvailable": "Available yeast",
+        "extrasSelected": "Selected extras",
+        "extrasAvailable": "Available extras",
         "ingredients":{
             "type": "$t(common.type)",
             "name": "$t(common.name)",
@@ -116,6 +119,7 @@
             "fermentingIngredients": "Fermenting ingredients",
             "hops": "Hops",
             "yeast": "Yeast",
+            "extras": "Extras",
             "batch": "Batch",
             "mash": "Mash",
             "stages": "Stages"

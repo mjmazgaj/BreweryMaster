@@ -10,6 +10,7 @@ export const useRecipeForm = () => {
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [selectedHops, setSelectedHops] = useState([]);
   const [selectedYeast, setSelectedYeast] = useState([]);
+  const [selectedExtras, setSelectedExtras] = useState([]);
 
   const [recipeSummaryData, setRecipeSummaryData] = useState({
     name: "",
@@ -21,7 +22,6 @@ export const useRecipeForm = () => {
   });
 
   const [recipeBatchData, setRecipeBatchData] = useState({
-    batchSize: "",
     expectedBeerVolume: "",
     boilTime: "",
     evaporationRate: "",
@@ -48,6 +48,7 @@ export const useRecipeForm = () => {
       ingredients: selectedIngredients,
       hops: selectedHops,
       yeast: selectedYeast,
+      extras: selectedExtras,
       ...recipeBatchData, 
       ...recipeMashData,
     };
@@ -74,6 +75,8 @@ export const useRecipeForm = () => {
     setSelectedHops,
     selectedYeast,
     setSelectedYeast,
+    selectedExtras,
+    setSelectedExtras,
     recipeSummaryData,
     setRecipeSummaryData,
     recipeBatchData,

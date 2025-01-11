@@ -35,6 +35,7 @@ function Navigation(isAuthenticated) {
             <NavDropdown.Item href="/FermentingIngredients">Fermenting Ingredients</NavDropdown.Item>
             <NavDropdown.Item href="/FermentingIngredients">Hops</NavDropdown.Item>
             <NavDropdown.Item href="/FermentingIngredients">Yeast</NavDropdown.Item>
+            <NavDropdown.Item href="/FermentingIngredients">Extras</NavDropdown.Item>
             <NavDropdown.Item href="/FermentingIngredients">Tanks</NavDropdown.Item>
           </NavDropdown>
         </Nav>

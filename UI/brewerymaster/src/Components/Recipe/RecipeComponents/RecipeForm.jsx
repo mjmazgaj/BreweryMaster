@@ -24,6 +24,8 @@ const RecipeForm = () => {
     setSelectedHops,
     selectedYeast,
     setSelectedYeast,
+    selectedExtras,
+    setSelectedExtras,
     recipeSummaryData,
     setRecipeSummaryData,
     recipeBatchData,
@@ -126,6 +128,17 @@ const RecipeForm = () => {
       laboratory: "Gozdawa",
     },
   ]);
+
+  const [extras, setExtras] = useState([
+    {
+      id: 1,
+      type: "Klarowanie",
+      name: "Wirflock",
+      quantity: 2,
+      usedFor: "Gotowanie",
+      time: "5 min",
+    },
+  ]);
   
   const steps = [
     {
@@ -179,6 +192,20 @@ const RecipeForm = () => {
           targetTableTitle={t("recipe.yeastSelected")}
           selectedData={selectedYeast}
           setSelectedData={setSelectedYeast}
+        />
+      ),
+    },
+    {
+      key: "extras",
+      name: t("recipe.step.extras"),
+      component: (
+        <DynamicTableSelection
+          sourceTableTitle={t("recipe.extrasAvailable")}
+          data={extras}
+          setData={setExtras}
+          targetTableTitle={t("recipe.extrasSelected")}
+          selectedData={selectedExtras}
+          setSelectedData={setSelectedExtras}
         />
       ),
     },
