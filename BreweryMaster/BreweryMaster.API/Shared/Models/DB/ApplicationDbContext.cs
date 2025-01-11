@@ -4,6 +4,8 @@ using BreweryMaster.API.UserModule.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using BreweryMaster.API.User.Models.DB;
+using BreweryMaster.API.Recipe.Models.DB;
+using BreweryMaster.API.Shared.Extensions;
 
 namespace BreweryMaster.API.Shared.Models.DB
 {
@@ -27,6 +29,11 @@ namespace BreweryMaster.API.Shared.Models.DB
         public DbSet<FermentingIngredientOrdered> FermentingIngredientsOrdered { get; set; }
         public DbSet<FermentingIngredientStored> FermentingIngredientsStored { get; set; }
         public DbSet<FermentingIngredientReserved> FermentingIngredientsReserved { get; set; }
+
+        public DbSet<Recipe.Models.DB.Recipe> Recipes { get; set; }
+        public DbSet<RecipeTypeEntity> RecipeTypes { get; set; }
+        public DbSet<BeerStyleEntity> BeerStyles { get; set; }
+        public DbSet<RecipeFermentingIngredient> RecipeFermentingIngredients { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -63,6 +70,7 @@ namespace BreweryMaster.API.Shared.Models.DB
                       .HasForeignKey(e => e.TypeId)
                       .OnDelete(DeleteBehavior.Cascade);
             });
+            builder.ConfigureRecipeEntities();
 
             builder.Entity<FermentingIngredientTypeEntity>().HasData(FermentingIngredientDataProvider.GetFermentingIngredientTypeEntity());
             builder.Entity<UnitEntity>().HasData(DataProvider.GetUnitEntity());
