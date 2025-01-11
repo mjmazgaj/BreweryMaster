@@ -88,9 +88,9 @@ namespace BreweryMaster.API.Info.Services
         public async Task<IEnumerable<FermentingIngredientSummaryResponse>> GetFermentingIngredientSummary()
         {
             var ingredients = await _context.FermentingIngredientUnits
+                .Where(x => !x.IsRemoved)
                 .Include(x => x.FermentingIngredient)
                 .Include(x => x.Unit)
-                .Where(x => !x.IsRemoved)
                 .ToListAsync();
 
             var dbIngredientTypes = await _context.FermentingIngredientTypes.ToDictionaryAsync(x => x.Id, x => x.Name);
