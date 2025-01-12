@@ -2,9 +2,9 @@ import axios from 'axios';
 
 const apiurl = "https://localhost:7289/api/Recipe";
 
-export const fetchData = () => {
+export const fetchData = (setData) => {
   return axios.get(apiurl)
-    .then((result) => result.data)
+    .then((result) => setData(result.data))
     .catch((error) => console.log(error));
 };
 
