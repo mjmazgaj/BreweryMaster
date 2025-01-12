@@ -88,14 +88,6 @@ namespace BreweryMaster.API.Info.Services
 
         public async Task<IEnumerable<FermentingIngredientSummaryResponse>> GetFermentingIngredientSummary()
         {
-            var ingredients = await _context.FermentingIngredientUnits
-                .Where(x => !x.IsRemoved)
-                .Include(x => x.FermentingIngredient)
-                .Include(x => x.Unit)
-                .ToListAsync();
-
-            var dbIngredientTypes = await _context.FermentingIngredientTypes.ToDictionaryAsync(x => x.Id, x => x.Name);
-
             var ingredientsReserve = await _context.FermentingIngredientsReserved
                 .GroupBy(x => x.FermentingIngredientUnitId)
                 .ToDictionaryAsync(x => x.Key, x => x.Sum(y => y.ReservedQuantity));
@@ -108,25 +100,23 @@ namespace BreweryMaster.API.Info.Services
                 .GroupBy(x => x.FermentingIngredientUnitId)
                 .ToDictionaryAsync(x => x.Key, x => x.Sum(y => y.StoredQuantity));
 
-            var result = ingredients.Select(ingredient => new FermentingIngredientSummaryResponse()
-            {
-                Id = ingredient.Id,
-                TypeId = ingredient.FermentingIngredient.TypeId,
-                TypeName = dbIngredientTypes.ContainsKey(ingredient.FermentingIngredient.TypeId) ?
-                            dbIngredientTypes[ingredient.FermentingIngredient.TypeId] : 
-                            "",
-                Name = ingredient.FermentingIngredient.Name,
-                Extraction = ingredient.FermentingIngredient.Extraction,
-                EBC = ingredient.FermentingIngredient.EBC,
-                Percentage = ingredient.FermentingIngredient.Percentage,
-                ReservedQuantity = ingredientsReserve.ContainsKey(ingredient.Id) ? ingredientsReserve[ingredient.Id] : 0,
-                OrderedQuantity = ingredientsOrdered.ContainsKey(ingredient.Id) ? ingredientsOrdered[ingredient.Id] : 0,
-                StoredQuantity = ingredientsStored.ContainsKey(ingredient.Id) ? ingredientsStored[ingredient.Id] : 0,
-                Unit = ingredient.Unit.Name,
-                Info = ingredient.FermentingIngredient.Info,
-            });
-
-            return result;
+            return await _context.FermentingIngredientUnits
+                .Where(x => !x.IsRemoved)
+                .Select(ingredient => new FermentingIngredientSummaryResponse()
+                {
+                    Id = ingredient.Id,
+                    TypeId = ingredient.FermentingIngredient.TypeId,
+                    TypeName = ingredient.FermentingIngredient.FermentingIngredientTypeEntity.Name,
+                    Name = ingredient.FermentingIngredient.Name,
+                    Extraction = ingredient.FermentingIngredient.Extraction,
+                    EBC = ingredient.FermentingIngredient.EBC,
+                    Percentage = ingredient.FermentingIngredient.Percentage,
+                    ReservedQuantity = ingredientsReserve.ContainsKey(ingredient.Id) ? ingredientsReserve[ingredient.Id] : 0,
+                    OrderedQuantity = ingredientsOrdered.ContainsKey(ingredient.Id) ? ingredientsOrdered[ingredient.Id] : 0,
+                    StoredQuantity = ingredientsStored.ContainsKey(ingredient.Id) ? ingredientsStored[ingredient.Id] : 0,
+                    Unit = ingredient.Unit.Name,
+                    Info = ingredient.FermentingIngredient.Info,
+                }).ToListAsync();
         }
 
         public Task<FermentingIngredientSummaryResponse?> GetFermentingIngredientSummaryByIdAsync(int id)
