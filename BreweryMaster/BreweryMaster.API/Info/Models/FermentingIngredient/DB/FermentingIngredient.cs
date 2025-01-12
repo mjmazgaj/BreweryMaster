@@ -1,10 +1,14 @@
-﻿namespace BreweryMaster.API.Info.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace BreweryMaster.API.Info.Models
 {
     public class FermentingIngredient
     {
         public int Id { get; set; }
         public required string Name { get; set; }
+        [ForeignKey("FermentingIngredientTypeEntity")]
         public int TypeId { get; set; }
+        public required FermentingIngredientTypeEntity FermentingIngredientTypeEntity { get; set; }
         public float? Percentage { get; set; }
         public int? Extraction { get; set; }
         public int? EBC { get; set; }

@@ -41,7 +41,7 @@ namespace BreweryMaster.API.Shared.Models.DB
 
             builder.Entity<FermentingIngredientOrdered>(entity =>
             {
-                entity.HasOne<FermentingIngredientUnit>()
+                entity.HasOne(x => x.FermentingIngredientUnit)
                       .WithMany()
                       .HasForeignKey(e => e.FermentingIngredientUnitId)
                       .OnDelete(DeleteBehavior.Cascade);
@@ -49,7 +49,7 @@ namespace BreweryMaster.API.Shared.Models.DB
 
             builder.Entity<FermentingIngredientStored>(entity =>
             {
-                entity.HasOne<FermentingIngredientUnit>()
+                entity.HasOne(x => x.FermentingIngredientUnit)
                       .WithMany()
                       .HasForeignKey(e => e.FermentingIngredientUnitId)
                       .OnDelete(DeleteBehavior.Cascade);
@@ -57,7 +57,7 @@ namespace BreweryMaster.API.Shared.Models.DB
 
             builder.Entity<FermentingIngredientReserved>(entity =>
             {
-                entity.HasOne<FermentingIngredientUnit>()
+                entity.HasOne(x => x.FermentingIngredientUnit)
                       .WithMany()
                       .HasForeignKey(e => e.FermentingIngredientUnitId)
                       .OnDelete(DeleteBehavior.Cascade);
@@ -65,7 +65,7 @@ namespace BreweryMaster.API.Shared.Models.DB
 
             builder.Entity<FermentingIngredient>(entity =>
             {
-                entity.HasOne<FermentingIngredientTypeEntity>()
+                entity.HasOne(x => x.FermentingIngredientTypeEntity)
                       .WithMany()
                       .HasForeignKey(e => e.TypeId)
                       .OnDelete(DeleteBehavior.Cascade);

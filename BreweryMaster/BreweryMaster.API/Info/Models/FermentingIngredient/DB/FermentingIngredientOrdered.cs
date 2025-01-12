@@ -4,6 +4,7 @@
     {
         public int Id { get; set; }
         public int FermentingIngredientUnitId { get; set; }
+        public required FermentingIngredientUnit FermentingIngredientUnit { get; set; }
         public float OrderedQuantity { get; set; }
         public DateTime OrderedDate { get; set; }
         public DateTime ExpectedDate { get; set; }

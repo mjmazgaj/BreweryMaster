@@ -15,7 +15,8 @@ public static class FermentingIngredientDataProvider
                 Extraction = 82,
                 EBC = 4,
                 TypeId = 1,
-                Info = "Viking Pilsner malt test info"
+                Info = "Viking Pilsner malt test info",
+                FermentingIngredientTypeEntity = null!
             },
             new FermentingIngredient
             {
@@ -25,7 +26,8 @@ public static class FermentingIngredientDataProvider
                 Extraction = 79,
                 EBC = 22,
                 TypeId = 1,
-                Info = "Strzegom Monachijski typ II test info"
+                Info = "Strzegom Monachijski typ II test info",
+                FermentingIngredientTypeEntity = null!
             },
             new FermentingIngredient
             {
@@ -35,7 +37,8 @@ public static class FermentingIngredientDataProvider
                 Extraction = 75,
                 EBC = 150,
                 TypeId = 1,
-                Info = "Strzegom Karmel 150 test info"
+                Info = "Strzegom Karmel 150 test info",
+                FermentingIngredientTypeEntity = null!
             }
         };
     }
@@ -65,6 +68,7 @@ public static class FermentingIngredientDataProvider
             {
                 Id = 1,
                 FermentingIngredientUnitId = 1,
+                FermentingIngredientUnit = null!,
                 ExpectedDate = DateTime.Now.AddDays(3),
                 OrderedDate = DateTime.Now.AddDays(-3),
                 OrderedQuantity = 10,
@@ -74,6 +78,7 @@ public static class FermentingIngredientDataProvider
             {
                 Id = 2,
                 FermentingIngredientUnitId = 1,
+                FermentingIngredientUnit = null!,
                 ExpectedDate = DateTime.Now.AddDays(1),
                 OrderedDate = DateTime.Now.AddDays(-2),
                 OrderedQuantity = 3,
@@ -83,6 +88,7 @@ public static class FermentingIngredientDataProvider
             {
                 Id = 3,
                 FermentingIngredientUnitId = 2,
+                FermentingIngredientUnit = null!,
                 ExpectedDate = DateTime.Now.AddDays(2),
                 OrderedDate = DateTime.Now.AddDays(-4),
                 OrderedQuantity = 33,
@@ -99,6 +105,7 @@ public static class FermentingIngredientDataProvider
             {
                 Id = 1,
                 FermentingIngredientUnitId = 1,
+                FermentingIngredientUnit = null!,
                 OrderId = 1,
                 ReservedQuantity = 4,
                 ReservationDate = DateTime.Now.AddDays(-2),
@@ -108,6 +115,7 @@ public static class FermentingIngredientDataProvider
             {
                 Id = 2,
                 FermentingIngredientUnitId = 2,
+                FermentingIngredientUnit = null!,
                 OrderId = 1,
                 ReservedQuantity = 7,
                 ReservationDate = DateTime.Now.AddDays(-1),
@@ -117,6 +125,7 @@ public static class FermentingIngredientDataProvider
             {
                 Id = 3,
                 FermentingIngredientUnitId = 1,
+                FermentingIngredientUnit = null!,
                 OrderId = 1,
                 ReservedQuantity = 10,
                 ReservationDate = DateTime.Now.AddDays(-3),
@@ -133,6 +142,7 @@ public static class FermentingIngredientDataProvider
             {
                 Id = 1,
                 FermentingIngredientUnitId = 2,
+                FermentingIngredientUnit = null!,
                 StoredQuantity = 200,
                 Info = "Fermenting Ingredient Stored Info 1"
             },
@@ -140,6 +150,7 @@ public static class FermentingIngredientDataProvider
             {
                 Id = 2,
                 FermentingIngredientUnitId = 2,
+                FermentingIngredientUnit = null!,
                 StoredQuantity = 230,
                 Info = "Fermenting Ingredient Stored Info 1"
             },
@@ -147,6 +158,7 @@ public static class FermentingIngredientDataProvider
             {
                 Id = 3,
                 FermentingIngredientUnitId = 1,
+                FermentingIngredientUnit = null!,
                 StoredQuantity = 300,
                 Info = "Fermenting Ingredient Stored Info 1"
             },

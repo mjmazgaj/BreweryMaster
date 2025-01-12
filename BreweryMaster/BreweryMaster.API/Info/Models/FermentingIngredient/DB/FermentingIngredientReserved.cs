@@ -4,6 +4,7 @@
     {
         public int Id { get; set; }
         public int FermentingIngredientUnitId { get; set; }
+        public required FermentingIngredientUnit FermentingIngredientUnit { get; set; }
         public float ReservedQuantity { get; set; }
         public int? OrderId { get; set; }
         public int UserId { get; set; }
