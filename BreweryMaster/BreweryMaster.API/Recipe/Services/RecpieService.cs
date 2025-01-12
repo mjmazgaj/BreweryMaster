@@ -1,7 +1,4 @@
-﻿using BreweryMaster.API.Info.Models;
-using BreweryMaster.API.Info.Services.Interfaces;
-using BreweryMaster.API.Recipe.Models;
-using BreweryMaster.API.Recipe.Models.DB;
+﻿using BreweryMaster.API.Recipe.Models;
 using BreweryMaster.API.Recipe.Services.Interfaces;
 using BreweryMaster.API.Recipe.Services.ResponseBuilders;
 using BreweryMaster.API.Shared.Models.DB;
@@ -12,15 +9,13 @@ namespace BreweryMaster.API.Recipe.Services
     public class RecpieService : IRecipeService
     {
         private readonly ApplicationDbContext _context;
-        private readonly IFermentingIngredientService _fermentingIngredientService;
 
-        public RecpieService(ApplicationDbContext context, IFermentingIngredientService fermentingIngredientService)
+        public RecpieService(ApplicationDbContext context)
         {
             _context = context;
-            _fermentingIngredientService = fermentingIngredientService;
         }
 
-        public async Task<IEnumerable<RecipeResponse>> GetRecipesAsync()
+        public async Task<IEnumerable<RecipeDetailsResponse>> GetRecipesAsync()
         {
             var recipes = await _context.Recipes
                 .Where(x => !x.IsRemoved)

@@ -7,11 +7,11 @@ namespace BreweryMaster.API.Recipe.Services.ResponseBuilders
 {
     public class RecipeResponseBuilder
     {
-        private readonly RecipeResponse _recipeResponse;
+        private readonly RecipeDetailsResponse _recipeResponse;
 
         public RecipeResponseBuilder(string name)
         {
-            _recipeResponse = new RecipeResponse() { Name = name };
+            _recipeResponse = new RecipeDetailsResponse() { Name = name };
         }
 
         public RecipeResponseBuilder SetFieldsWithRecipe(Models.DB.Recipe recipe)
@@ -63,7 +63,7 @@ namespace BreweryMaster.API.Recipe.Services.ResponseBuilders
 
             return this;
         }
-        public RecipeResponse Build()
+        public RecipeDetailsResponse Build()
         {
             return _recipeResponse;
         }

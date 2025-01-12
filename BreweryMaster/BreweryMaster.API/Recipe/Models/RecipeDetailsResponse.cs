@@ -2,7 +2,7 @@
 
 namespace BreweryMaster.API.Recipe.Models
 {
-    public class RecipeResponse
+    public class RecipeDetailsResponse
     {
         public int Id { get; set; }
         public required string Name { get; set; }
