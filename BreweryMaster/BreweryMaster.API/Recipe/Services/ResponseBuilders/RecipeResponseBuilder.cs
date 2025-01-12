@@ -55,7 +55,7 @@ namespace BreweryMaster.API.Recipe.Services.ResponseBuilders
                     EBC = fermentingIngredient.EBC,
                     Quantity = x.Quantity,
                     Unit = x.FermentingIngredientUnit.Unit.Name,
-                    Info = fermentingIngredient.Info
+                    Info = x.Info
                 };
             }
             );

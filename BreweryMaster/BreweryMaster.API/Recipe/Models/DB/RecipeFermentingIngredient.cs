@@ -13,5 +13,6 @@ namespace BreweryMaster.API.Recipe.Models.DB
         public int FermentingIngredientUnitId { get; set; }
         public required FermentingIngredientUnit FermentingIngredientUnit { get; set; }
         public float Quantity { get; set; }
+        public string? Info { get; set; }
     }
 }

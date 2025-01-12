@@ -110,7 +110,8 @@ namespace BreweryMaster.API.Recipe.Services
                         Recipe = null!,
                         FermentingIngredientUnitId = x.Id,
                         FermentingIngredientUnit = null!,
-                        Quantity = x.Quantity
+                        Quantity = x.Quantity,
+                        Info = x.Info
                     });
 
                 if (recipeFermentingIngredientUnitsToCreate is not null)

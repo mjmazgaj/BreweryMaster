@@ -4,5 +4,6 @@
     {
         public int Id { get; set; }
         public float Quantity { get; set; }
+        public string? Info { get; set; }
     }
 }
