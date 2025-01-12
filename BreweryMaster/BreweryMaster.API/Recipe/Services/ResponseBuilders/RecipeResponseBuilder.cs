@@ -1,7 +1,6 @@
 ﻿using BreweryMaster.API.Info.Models;
 using BreweryMaster.API.Recipe.Models;
 using BreweryMaster.API.Recipe.Models.DB;
-using Microsoft.EntityFrameworkCore;
 
 namespace BreweryMaster.API.Recipe.Services.ResponseBuilders
 {

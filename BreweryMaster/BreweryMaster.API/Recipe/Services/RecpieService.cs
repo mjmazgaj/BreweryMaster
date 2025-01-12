@@ -1,4 +1,5 @@
 ﻿using BreweryMaster.API.Recipe.Models;
+using BreweryMaster.API.Recipe.Models.DB;
 using BreweryMaster.API.Recipe.Services.Interfaces;
 using BreweryMaster.API.Recipe.Services.ResponseBuilders;
 using BreweryMaster.API.Shared.Models.DB;
@@ -39,6 +40,27 @@ namespace BreweryMaster.API.Recipe.Services
                 responseBuilder.SetFermentingIngredients(recipe.FermentingIngredients, dbIngredientTypes);
 
                 return responseBuilder.Build();
+            });
+        }
+
+        public async Task<IEnumerable<RecipeResponse>> GetRecipesAsync()
+        {
+            var recipes = await _context.Recipes
+                .Where(x => !x.IsRemoved)
+                .Include(x => x.Type)
+                .Include(x => x.Style)
+                .ToListAsync();
+
+            return recipes.Select(x => new RecipeResponse()
+            {
+                Id = x.Id,
+                Name = x.Name,
+                BLGScale = x.BLGScale,
+                IBUScale = x.IBUScale,
+                ABVScale = x.ABVScale,
+                SRMScale = x.SRMScale,
+                TypeName = x.Type?.Name,
+                StyleName = x.Style?.Name,
             });
         }
 
