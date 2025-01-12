@@ -7,43 +7,43 @@ export const useRecipeForm = (isValid) => {
   const { t } = useTranslation();
 
   const [currentStep, setCurrentStep] = useState(0);
-  const [selectedIngredients, setSelectedIngredients] = useState([]);
-  const [selectedHops, setSelectedHops] = useState([]);
-  const [selectedYeast, setSelectedYeast] = useState([]);
-  const [selectedExtras, setSelectedExtras] = useState([]);
+  const [selectedIngredients, setSelectedIngredients] = useState({});
+  const [selectedHops, setSelectedHops] = useState({});
+  const [selectedYeast, setSelectedYeast] = useState({});
+  const [selectedExtras, setSelectedExtras] = useState({});
 
   const [recipeSummaryData, setRecipeSummaryData] = useState({
     name: "",
-    blgScale: "",
-    ibuScale: "",
-    abvScale: "",
-    srmScale: "",
-    type: "",
+    blgScale: null,
+    ibuScale: null,
+    abvScale: null,
+    srmScale: null,
+    type: null,
   });
 
   const [recipeBatchData, setRecipeBatchData] = useState({
-    expectedBeerVolume: "",
-    boilTime: "",
-    evaporationRate: "",
-    wortVolume: "",
-    boilLoss: "",
-    preBoilGravity: "",
-    fermentationLoss: "",
-    dryHopLoss: "",
+    expectedBeerVolume: null,
+    boilTime: null,
+    evaporationRate: null,
+    wortVolume: null,
+    boilLoss: null,
+    preBoilGravity: null,
+    fermentationLoss: null,
+    dryHopLoss: null,
   });
 
   const [recipeMashData, setRecipeMashData] = useState({
-    mashEfficiency: "",
-    waterToGrainRatio: "",
-    mashWaterVolume: "",
-    totalMashVolume: "",
+    mashEfficiency: null,
+    waterToGrainRatio: null,
+    mashWaterVolume: null,
+    totalMashVolume: null,
   });
 
   const [boilSteps, setBoilSteps] = useState([]);
   
 
   const handleFormSubmit = (event) =>{
-    if(recipeSummaryData.name || recipeSummaryData.name.length === 0)
+    if(!(recipeSummaryData || recipeSummaryData.name || recipeSummaryData.name.length === 0))
     {
       toast.error("Name is missing");
     }
@@ -66,7 +66,7 @@ export const useRecipeForm = (isValid) => {
     const newData = 
     {
       ...recipeSummaryData,
-      ingredients: selectedIngredients,
+      fermentingIngredients: selectedIngredients,
       hops: selectedHops,
       yeast: selectedYeast,
       extras: selectedExtras,
@@ -76,6 +76,7 @@ export const useRecipeForm = (isValid) => {
 
     console.log("add");
     console.log({...newData});
+    addData("recipe", newData);
     clear();
   };
 
@@ -84,6 +85,10 @@ export const useRecipeForm = (isValid) => {
     setRecipeBatchData({});
     setRecipeMashData({});
     setBoilSteps([]);
+    setSelectedIngredients({});
+    setSelectedHops({});
+    setSelectedExtras({});
+    setSelectedYeast({});
   };
 
   return {

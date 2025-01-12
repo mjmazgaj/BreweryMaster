@@ -103,15 +103,15 @@ namespace BreweryMaster.API.Recipe.Services
                 _context.Recipes.Add(recipeToCreate);
                 await _context.SaveChangesAsync();
 
-                var recipeFermentingIngredientUnitsToCreate = request.FermentingIngredientUnits?
+                var recipeFermentingIngredientUnitsToCreate = request.FermentingIngredients?
                     .Select(x => new RecipeFermentingIngredient()
                     {
                         RecipeId = recipeToCreate.Id,
                         Recipe = null!,
-                        FermentingIngredientUnitId = x.Id,
+                        FermentingIngredientUnitId = x.Key,
                         FermentingIngredientUnit = null!,
-                        Quantity = x.Quantity,
-                        Info = x.Info
+                        Quantity = x.Value.Quantity,
+                        Info = x.Value.Info
                     });
 
                 if (recipeFermentingIngredientUnitsToCreate is not null)

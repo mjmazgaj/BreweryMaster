@@ -91,7 +91,7 @@ const recipeFormFieldsProvider = (t) => ({
       }
     },
     {
-      id: "boiledWortVolume",
+      id: "wortVolume",
       label: `${t("recipe.batch.boiledWortVolume")}*`,
       type: "number",
       required: true,

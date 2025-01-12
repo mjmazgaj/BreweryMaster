@@ -14,8 +14,8 @@ export const fetchDataById = (id) => {
     .catch((error) => console.log(error));
 };
 
-export const addData = (data) => {
-  return axios.post(`${apiurl}`, data)
+export const addData = (path, data) => {
+  return axios.post(`${apiurl}/${path}`, data)
     .then((result) => result.data)
     .catch((error) => console.log(error));
 };
