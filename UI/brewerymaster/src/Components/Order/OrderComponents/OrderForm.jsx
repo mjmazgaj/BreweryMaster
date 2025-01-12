@@ -4,8 +4,6 @@ import Button from 'react-bootstrap/Button';
 import { toast } from "react-toastify";
 import { addData } from '../api';
 
-import Address from './Address'
-import ClientDetails from './ClientDetails'
 import Contact from './../../Shared/Contact'
 import MenuSteps from '../../Shared/MenuSteps';
 import Recipe from "./Recipe";
@@ -37,10 +35,6 @@ const OrderForm = () => {
 
   const handleSave = () => {
     const newData = {
-      forename : individualClientDetailsData.forename,
-      surname : individualClientDetailsData.surname,
-      companyName : companyClientDetailsData.companyName,
-      nip : companyClientDetailsData.nip,
       addressId : addressData.addressId,
       deliveryAddressId : addressData.deliveryAddressId,
       phoneNumber : contactData.phoneNumber,
@@ -84,29 +78,9 @@ const OrderForm = () => {
       ),
     },
     {
-      name: "Address",
-      component: (
-        <Address
-          addressData={addressData}
-          setAddressData={setAddressData}
-        />
-      ),
-    },
-    {
       name: "Contact",
       component: (
         <Contact contactData={contactData} setContactData={setContactData} />
-      ),
-    },
-    {
-      name: "ClientDetails",
-      component: (
-        <ClientDetails
-          individualClientDetailsData={individualClientDetailsData}
-          setIndividualClientDetailsData={setIndividualClientDetailsData}
-          companyClientDetailsData={companyClientDetailsData}
-          setCompanyClientDetailsData={setCompanyClientDetailsData}
-        />
       ),
     }
   ];
