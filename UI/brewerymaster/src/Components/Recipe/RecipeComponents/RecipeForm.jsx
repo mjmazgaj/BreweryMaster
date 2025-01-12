@@ -125,10 +125,12 @@ const RecipeForm = () => {
         <DynamicTableSelection
           sourceTableTitle={t("recipe.ingredientsAvailable")}
           data={ingredients}
-          setData={setIngredients}
-          targetTableTitle={t("recipe.ingredientsSelected")}
           selectedData={selectedIngredients}
           setSelectedData={setSelectedIngredients}
+          quantityAction={{
+            verb: "add",
+            area: "ingredient"
+          }}
         />
       ),
     },
@@ -139,10 +141,12 @@ const RecipeForm = () => {
         <DynamicTableSelection
           sourceTableTitle={t("recipe.hopsAvailable")}
           data={hops}
-          setData={setHops}
-          targetTableTitle={t("recipe.hopsSelected")}
           selectedData={selectedHops}
           setSelectedData={setSelectedHops}
+          quantityAction={{
+            verb: "add",
+            area: "ingredient"
+          }}
         />
       ),
     },
@@ -153,10 +157,12 @@ const RecipeForm = () => {
         <DynamicTableSelection
           sourceTableTitle={t("recipe.yeastAvailable")}
           data={yeast}
-          setData={setYeast}
-          targetTableTitle={t("recipe.yeastSelected")}
           selectedData={selectedYeast}
           setSelectedData={setSelectedYeast}
+          quantityAction={{
+            verb: "add",
+            area: "ingredient"
+          }}
         />
       ),
     },
@@ -167,10 +173,12 @@ const RecipeForm = () => {
         <DynamicTableSelection
           sourceTableTitle={t("recipe.extrasAvailable")}
           data={extras}
-          setData={setExtras}
-          targetTableTitle={t("recipe.extrasSelected")}
           selectedData={selectedExtras}
           setSelectedData={setSelectedExtras}
+          quantityAction={{
+            verb: "add",
+            area: "ingredient"
+          }}
         />
       ),
     },
@@ -200,9 +208,8 @@ const RecipeForm = () => {
     },
   ];
   
-  
   useEffect(() => {
-    fetchData("FermentingIngredient/Summary", setIngredients);
+    fetchData("FermentingIngredient/Unit", setIngredients);
   }, []);
 
   return (

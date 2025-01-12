@@ -1,37 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 
 import DynamicTable from "./DynamicTable";
-import ModalSingleInput from "../ModalComponents/ModalSingleInput";
 
+import { useTranslation } from 'react-i18next';
 import { useDynamicTableSelection } from "./helpers/useDynamicTableSelection";
 
-const DynamicTableSelection = ({sourceTableTitle, data, setData, targetTableTitle, selectedData, setSelectedData}) => { 
+import modalFieldsProvider from "../../Shared/ModalComponents/helpers/modalFieldsProvider";
+import ModalRecipeQuantity from "../ModalComponents/ModalRecipeQuantity";
 
-  const {
-    handleDoubleClick,
-    modalData,
-    handleConfirmQuantity,
-    setModalData,
-  } = useDynamicTableSelection(data, setData, selectedData, setSelectedData);
+const DynamicTableSelection = ({sourceTableTitle, data, selectedData, setSelectedData, quantityAction}) => { 
+
+  const { t } = useTranslation();
+  const [showQuantityModal, setShowQuantityModal] = useState(false);
+
+  const { handleDoubleClick, modalData } =
+    useDynamicTableSelection(setShowQuantityModal);
 
   return (
     <div className={`table-selection_container`}>
       <DynamicTable
         tableKey="source-table"
         tableTitle={sourceTableTitle}
-        data={data}
+        data={data.map((item)=>({...item, quantity:selectedData[item.id]?.quantity ?? 0}))}
         handleDoubleClick={handleDoubleClick}
       />
-      <DynamicTable
-        tableKey="target-table"
-        tableTitle={targetTableTitle}
-        data={selectedData}
-        handleDoubleClick={() => {}}
-      />
-      <ModalSingleInput
+      <ModalRecipeQuantity
+        fields={modalFieldsProvider(t).quantityModalFields[quantityAction.area]}
         modalData={modalData}
-        handleConfirmQuantity={handleConfirmQuantity}
-        setModalData={setModalData}
+        setSelectedData={setSelectedData}
+        show={showQuantityModal}
+        setShow={setShowQuantityModal}
+        action={quantityAction}
+        isEmpty={false}
       />
     </div>
   );

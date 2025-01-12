@@ -99,6 +99,18 @@ const modalFieldsProvider = (t) => ({
         label: t("recipe.ingredients.describtion"),
         type: "textArea",
       },
+    ],
+    ingredient:[
+      {
+        id: "quantity",
+        label: t("recipe.ingredients.quantity"),
+        type: "number",
+      },
+      {
+        id: "describtion",
+        label: t("recipe.ingredients.describtion"),
+        type: "textArea",
+      },
     ]
   },
 });
