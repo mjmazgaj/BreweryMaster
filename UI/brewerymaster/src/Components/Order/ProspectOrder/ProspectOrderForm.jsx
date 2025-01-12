@@ -7,13 +7,13 @@ import '../order.css';
 import { addData } from '../api';
 
 import ProspectOrderDetails from "./ProspectOrderDetails";
-import ProspectClientDetails from "./ProspectClientDetails";
 import MenuSteps from '../../Shared/MenuSteps';
+import ClientDetails from "./ClientDetails";
+import Contact from "../../Shared/Contact"
 
 const ProspectOrderForm = () => {  
   
   const [contactData, setContactData] = useState({
-    forename: "",
     phoneNumber: "",
     email: "",
   });
@@ -23,6 +23,18 @@ const ProspectOrderForm = () => {
     selectedBeer: "",
     capacity: "",
   });
+
+
+  const [companyClientDetailsData, setCompanyClientDetailsData] = useState({
+    companyName: "",
+    nip: "",
+  });
+  
+  const [individualClientDetailsData, setIndividualClientDetailsData] = useState({
+    forename: "",
+    surname: "",
+  });
+  const [isCompany, setIsCompany] = useState(0);
 
   const [currentStep, setCurrentStep] = useState(0);
 
@@ -34,14 +46,20 @@ const ProspectOrderForm = () => {
       selectedBeer : prospectOrderData.selectedBeer,
       selectedContainer : prospectOrderData.selectedContainer,
       capacity : prospectOrderData.capacity,
+      forename : individualClientDetailsData.forename,
+      surname : individualClientDetailsData.surname,
+      companyName : companyClientDetailsData.companyName,
+      nip : companyClientDetailsData.nip,
+      isCompany: isCompany
     };
 
-    addData(newData)
-      .then(() => {
-        clear();
-        toast.success("Order has been registered");
-      })
-      .catch((error) => console.log(error));
+    console.log(newData);
+    // addData(newData)
+    //   .then(() => {
+    //     clear();
+    //     toast.success("Order has been registered");
+    //   })
+    //   .catch((error) => console.log(error));
   };
 
   const clear = () => {
@@ -63,9 +81,22 @@ const ProspectOrderForm = () => {
       ),
     },
     {
+      name: "ClientDetails",
+      component: (
+        <ClientDetails
+          individualClientDetailsData={individualClientDetailsData}
+          setIndividualClientDetailsData={setIndividualClientDetailsData}
+          companyClientDetailsData={companyClientDetailsData}
+          setCompanyClientDetailsData={setCompanyClientDetailsData}
+          isCompany={isCompany}
+          setIsCompany={setIsCompany}
+        />
+      ),
+    },
+    {
       name: "Contact",
       component: (
-        <ProspectClientDetails
+        <Contact
           contactData={contactData}
           setContactData={setContactData}
         />
