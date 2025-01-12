@@ -43,6 +43,10 @@ export const useRecipeForm = (isValid) => {
   
 
   const handleFormSubmit = (event) =>{
+    if(recipeSummaryData.name || recipeSummaryData.name.length === 0)
+    {
+      toast.error("Name is missing");
+    }
     console.log(isValid)
     const form = event.currentTarget;
     event.preventDefault();
