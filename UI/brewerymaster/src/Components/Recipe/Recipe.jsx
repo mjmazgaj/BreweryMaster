@@ -18,7 +18,7 @@ const Recipe = () => {
   return (
     <div className="recipe_container">
       <ToastContainer />
-      <Button variant="dark" onClick={handleAddOnClick}>
+      <Button className="recipe_modeSwitchButton" variant="dark" onClick={handleAddOnClick}>
         {isAddMode ? "Show all recipes" : "Add Recipe"}
       </Button>
       {isAddMode ? <RecipeForm /> : <RecipeTable />}

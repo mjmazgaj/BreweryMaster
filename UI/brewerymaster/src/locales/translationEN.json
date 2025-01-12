@@ -36,7 +36,12 @@
         "orderedDate": "Ordered date",
         "expectedDate": "Expected date",
         "usedFor": "Used for",
-        "order": "Order"
+        "order": "Order",
+        "blgScale": "BLG scale",
+        "ibuScale": "IBU scale",
+        "abvScale":"ABV scale",
+        "srmScale":"SRM scale",
+        "styleName": "Style"
     },
     "message":{
         "invalidinput": "Invalid input"
