@@ -27,7 +27,8 @@ public static class RecipeDataProvider
                     MashEfficiency = 75,
                     WaterToGrainRatio = 3,
                     MashWaterVolume = 15.0f,
-                    TotalMashVolume = 18
+                    TotalMashVolume = 18,
+                    FermentingIngredients = null!,
                 },
                 new Recipe
                 {
@@ -50,7 +51,8 @@ public static class RecipeDataProvider
                     MashEfficiency = 70,
                     WaterToGrainRatio = 2.5f,
                     MashWaterVolume = 14.0f,
-                    TotalMashVolume = 16
+                    TotalMashVolume = 16,
+                    FermentingIngredients = null!,
                 },
                 new Recipe
                 {
@@ -73,7 +75,8 @@ public static class RecipeDataProvider
                     MashEfficiency = 80,
                     WaterToGrainRatio = 3.2f,
                     MashWaterVolume = 16.5f,
-                    TotalMashVolume = 20
+                    TotalMashVolume = 20,
+                    FermentingIngredients = null!,
                 }
             };
     }
@@ -131,24 +134,27 @@ public static class RecipeDataProvider
                 Id = 1,
                 RecipeId = 1,
                 Recipe = null!,
-                FermentingIngredientId = 1,
-                FermentingIngredient = null!,
+                FermentingIngredientUnitId = 1,
+                FermentingIngredientUnit = null!,
+                Quantity = 1.13f,
             },
             new()
             {
                 Id = 2,
                 RecipeId = 1,
                 Recipe = null!,
-                FermentingIngredientId = 2,
-                FermentingIngredient = null!,
+                FermentingIngredientUnitId = 2,
+                FermentingIngredientUnit = null!,
+                Quantity = 21.21f,
             },
             new()
             {
                 Id = 3,
                 RecipeId = 2,
                 Recipe = null!,
-                FermentingIngredientId = 1,
-                FermentingIngredient = null!,
+                FermentingIngredientUnitId = 1,
+                FermentingIngredientUnit = null!,
+                Quantity = 13.4f,
             }
         };
     }

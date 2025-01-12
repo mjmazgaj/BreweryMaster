@@ -9,8 +9,9 @@ namespace BreweryMaster.API.Recipe.Models.DB
         [ForeignKey("Recipe")]
         public int RecipeId { get; set; }
         public required Recipe Recipe { get; set; }
-        [ForeignKey("FermentingIngredient")]
-        public int FermentingIngredientId { get; set; }
-        public required FermentingIngredient FermentingIngredient { get; set; }
+        [ForeignKey("FermentingIngredientUnit")]
+        public int FermentingIngredientUnitId { get; set; }
+        public required FermentingIngredientUnit FermentingIngredientUnit { get; set; }
+        public float Quantity { get; set; }
     }
 }

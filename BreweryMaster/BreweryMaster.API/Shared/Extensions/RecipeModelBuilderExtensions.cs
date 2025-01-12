@@ -1,5 +1,4 @@
-﻿using BreweryMaster.API.Info.Models;
-using BreweryMaster.API.Recipe.Models.DB;
+﻿using BreweryMaster.API.Recipe.Models.DB;
 using Microsoft.EntityFrameworkCore;
 
 namespace BreweryMaster.API.Shared.Extensions
@@ -26,6 +25,11 @@ namespace BreweryMaster.API.Shared.Extensions
                       .WithMany()
                       .HasForeignKey(e => e.TypeId)
                       .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasMany(r => r.FermentingIngredients)
+                      .WithOne(fiu => fiu.Recipe)
+                      .HasForeignKey(fiu => fiu.RecipeId)
+                      .OnDelete(DeleteBehavior.Cascade);
             });
 
             builder.Entity<Recipe.Models.DB.Recipe>().HasData(RecipeDataProvider.GetRecpies());
@@ -34,14 +38,14 @@ namespace BreweryMaster.API.Shared.Extensions
         {
             builder.Entity<RecipeFermentingIngredient>(entity =>
             {
-                entity.HasOne(e=>e.Recipe)
-                      .WithMany()
+                entity.HasOne(e => e.Recipe)
+                      .WithMany(e => e.FermentingIngredients)
                       .HasForeignKey(e => e.RecipeId)
                       .OnDelete(DeleteBehavior.Cascade);
 
-                entity.HasOne(e=>e.FermentingIngredient)
+                entity.HasOne(e => e.FermentingIngredientUnit)
                       .WithMany()
-                      .HasForeignKey(e => e.FermentingIngredientId)
+                      .HasForeignKey(e => e.FermentingIngredientUnitId)
                       .OnDelete(DeleteBehavior.Cascade);
             });
 

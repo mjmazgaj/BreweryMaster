@@ -1,5 +1,7 @@
-﻿using BreweryMaster.API.Recipe.Models;
+﻿using BreweryMaster.API.Info.Models;
+using BreweryMaster.API.Recipe.Models;
 using BreweryMaster.API.Recipe.Models.DB;
+using Microsoft.EntityFrameworkCore;
 
 namespace BreweryMaster.API.Recipe.Services.ResponseBuilders
 {
@@ -12,7 +14,7 @@ namespace BreweryMaster.API.Recipe.Services.ResponseBuilders
             _recipeResponse = new RecipeResponse() { Name = name };
         }
 
-        public RecipeResponseBuilder SetFieldsWithResponse(Models.DB.Recipe recipe)
+        public RecipeResponseBuilder SetFieldsWithRecipe(Models.DB.Recipe recipe)
         {
             _recipeResponse.Id = recipe.Id;
             _recipeResponse.BLGScale = recipe.BLGScale;
@@ -38,11 +40,27 @@ namespace BreweryMaster.API.Recipe.Services.ResponseBuilders
 
             return this;
         }
-        public RecipeResponseBuilder SetFermentingIngredients(IEnumerable<RecipeFermentingIngredient> recipeFermentingIngredients, int recipeId)
+        public RecipeResponseBuilder SetFermentingIngredients(IEnumerable<RecipeFermentingIngredient> recipeFermentingIngredients, Dictionary<int, string> dbIngredientTypes)
         {
-            _recipeResponse.FermentingIngredients = recipeFermentingIngredients
-                    .Where(y => y.RecipeId == recipeId)
-                    .Select(y => y.FermentingIngredient);
+            _recipeResponse.FermentingIngredientUnits = recipeFermentingIngredients.Select(x =>
+            {
+                var fermentingIngredient = x.FermentingIngredientUnit.FermentingIngredient;
+                return new RecipeFermentingIngredientResponse()
+                {
+                    Id = x.Id,
+                    TypeId = fermentingIngredient.TypeId,
+                    TypeName = dbIngredientTypes.TryGetValue(fermentingIngredient.TypeId, out var typeName) ? typeName : "",
+                    Name = fermentingIngredient.Name,
+                    Percentage = fermentingIngredient.Percentage,
+                    Extraction = fermentingIngredient.Extraction,
+                    EBC = fermentingIngredient.EBC,
+                    Quantity = x.Quantity,
+                    Unit = x.FermentingIngredientUnit.Unit.Name,
+                    Info = fermentingIngredient.Info
+                };
+            }
+            );
+
             return this;
         }
         public RecipeResponse Build()

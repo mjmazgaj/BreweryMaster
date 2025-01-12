@@ -26,6 +26,6 @@ namespace BreweryMaster.API.Recipe.Models
         public float? WaterToGrainRatio { get; set; }
         public float? MashWaterVolume { get; set; }
         public float? TotalMashVolume { get; set; }
-        public IEnumerable<FermentingIngredient>? FermentingIngredients { get; set; }
+        public IEnumerable<RecipeFermentingIngredientResponse>? FermentingIngredientUnits { get; set; }
     }
 }
