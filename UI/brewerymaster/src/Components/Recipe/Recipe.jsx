@@ -11,6 +11,8 @@ import { Button } from "react-bootstrap";
 const Recipe = () => {
   const [isAddMode, setIsAddMode] = useState(false);
 
+  const [selectedRecipe, setSelectedRecipe] = useState({});
+
   const handleAddOnClick = () => {
     setIsAddMode(!isAddMode);
   };
@@ -18,10 +20,21 @@ const Recipe = () => {
   return (
     <div className="recipe_container">
       <ToastContainer />
-      <Button className="recipe_modeSwitchButton" variant="dark" onClick={handleAddOnClick}>
+      <Button
+        className="recipe_modeSwitchButton"
+        variant="dark"
+        onClick={handleAddOnClick}
+      >
         {isAddMode ? "Show all recipes" : "Add Recipe"}
       </Button>
-      {isAddMode ? <RecipeForm /> : <RecipeTable />}
+      {isAddMode ? (
+        <RecipeForm />
+      ) : (
+        <RecipeTable
+          selectedRecipe={selectedRecipe}
+          setSelectedRecipe={setSelectedRecipe}
+        />
+      )}
     </div>
   );
 }

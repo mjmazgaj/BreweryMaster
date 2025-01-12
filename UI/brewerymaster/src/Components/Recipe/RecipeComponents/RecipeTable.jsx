@@ -10,12 +10,13 @@ import {fetchData} from "../api"
 
 import DynamicTable from "../../Shared/TableComponents/DynamicTable";
 
-const RecipeTable = () => {
+const RecipeTable = ({selectedRecipe, setSelectedRecipe}) => {
 
 const [data, setData] = useState([]);
 
-const handleDoubleClick = () =>{
+const handleDoubleClick = (item) =>{
     console.log("dziala");
+    setSelectedRecipe(item);
 }
 
   useEffect(() => {
