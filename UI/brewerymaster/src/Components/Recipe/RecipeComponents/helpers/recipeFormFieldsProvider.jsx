@@ -61,8 +61,9 @@ const recipeFormFieldsProvider = (t) => ({
   batchFields: [
     {
       id: "expectedBeerVolume",
-      label: t("recipe.batch.expectedBeerVolume"),
+      label: `${t("recipe.batch.expectedBeerVolume")}*`,
       type: "number",
+      required: true,
       feedback: `${t("common.validation.number")} 0-10000`,
       validation:{
         min: 0,
@@ -91,8 +92,9 @@ const recipeFormFieldsProvider = (t) => ({
     },
     {
       id: "boiledWortVolume",
-      label: t("recipe.batch.boiledWortVolume"),
+      label: `${t("recipe.batch.boiledWortVolume")}*`,
       type: "number",
+      required: true,
       feedback: `${t("common.validation.number")} 0-10000`,
       validation:{
         min: 0,
