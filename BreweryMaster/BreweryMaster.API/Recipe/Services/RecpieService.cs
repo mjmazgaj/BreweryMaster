@@ -15,7 +15,7 @@ namespace BreweryMaster.API.Recipe.Services
             _context = context;
         }
 
-        public async Task<IEnumerable<RecipeDetailsResponse>> GetRecipesAsync()
+        public async Task<IEnumerable<RecipeDetailsResponse>> GetRecipeDetailsAsync()
         {
             var recipes = await _context.Recipes
                 .Where(x => !x.IsRemoved)
