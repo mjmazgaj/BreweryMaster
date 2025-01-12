@@ -18,11 +18,11 @@ const ModalSingleInput = ({modalData, handleConfirmQuantity, setModalData}) => {
     modalData && (
       <div className="modal-single-input_container">
           <h4>Add {modalData.name}</h4>
-          <p>Available: {modalData.maxQuantity}</p>
+          <p>Available: {modalData.totalQuantity}</p>
           <Form.Control
             type="number"
             min="1"
-            max={modalData.maxQuantity}
+            max={modalData.totalQuantity}
             placeholder="Quantity"
             id="quantityInput"
           />

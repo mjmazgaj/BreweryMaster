@@ -1,10 +1,12 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { Form } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 
 import { useTranslation } from 'react-i18next';
 import { useRecipeForm } from "./helpers/useRecipeForm";
 import recipeFormFieldsProvider from "./helpers/recipeFormFieldsProvider";
+
+import {fetchData} from "../api"
 
 import FormControls from "../../Shared/FormControls";
 import MenuSteps from '../../Shared/MenuSteps';
@@ -33,47 +35,10 @@ const RecipeForm = () => {
     recipeMashData,
     setRecipeMashData,
     handleSave,
-    clear,
-  } = useRecipeForm();
+    clear
+  } = useRecipeForm(isValid);
 
-  const [ingredients, setIngredients] = useState([
-    { 
-      id: 1, 
-      type: 'Grain', 
-      name: 'Viking Pilsner malt', 
-      quantity: 3, 
-      percentage: 62.5, 
-      extraction: 82, 
-      ebc: 4 
-    },
-    { 
-      id: 2, 
-      type: 'Grain', 
-      name: 'Strzegom Monachijski typ II', 
-      quantity: 1, 
-      percentage: 20.8, 
-      extraction: 79, 
-      ebc: 22 
-    },
-    { 
-      id: 3, 
-      type: 'Grain', 
-      name: 'Strzegom Karmel 150', 
-      quantity: 0.5, 
-      percentage: 10.4, 
-      extraction: 75, 
-      ebc: 150 
-    },
-    { 
-      id: 4, 
-      type: 'Grain', 
-      name: 'Oats, Flaked', 
-      quantity: 0.3, 
-      percentage: 6.3, 
-      extraction: 80, 
-      ebc: 2 
-    }
-  ]);
+  const [ingredients, setIngredients] = useState([]);
   
   const [hops, setHops] = useState([
     { 
@@ -234,6 +199,11 @@ const RecipeForm = () => {
       ),
     },
   ];
+  
+  
+  useEffect(() => {
+    fetchData("FermentingIngredient/Summary", setIngredients);
+  }, []);
 
   return (
     <Form className="recipe-form">
@@ -250,7 +220,7 @@ const RecipeForm = () => {
       </div>
 
       {currentStep === steps.length - 1 ? (
-        <Button variant="dark" onClick={handleSave}>
+        <Button type="submit" variant="dark" onClick={handleSave}>
           {t("button.submit")}
         </Button>
       ) : null}

@@ -2,7 +2,7 @@ const recipeFormFieldsProvider = (t) => ({
   summaryFields: [
     {
       id: "name",
-      label: t("common.name"),
+      label: `${t("common.name")}*`,
       type: "text",
       required: true,
       feedback: `${t("common.validation.text")}`

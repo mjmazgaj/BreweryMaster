@@ -1,16 +1,10 @@
 import axios from 'axios';
 
-const apiurl = "https://localhost:7289/api/Recipe";
+const apiurl = "https://localhost:7289/api";
 
-export const fetchData = (setData) => {
-  return axios.get(apiurl)
+export const fetchData = (path, setData) => {
+  return axios.get(`${apiurl}/${path}`)
     .then((result) => setData(result.data))
-    .catch((error) => console.log(error));
-};
-
-export const fetchDetails = (setDetails) => {
-  return axios.get(`${apiurl}/Details`)
-    .then((result) => setDetails(result.data))
     .catch((error) => console.log(error));
 };
 

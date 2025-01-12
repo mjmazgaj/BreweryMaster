@@ -9,7 +9,7 @@ export const useModalSingleInput = (modalData, handleConfirmQuantity, setModalDa
       document.getElementById("quantityInput").value,
       10
     );
-    if (quantity > 0 && quantity <= modalData.maxQuantity) {
+    if (quantity > 0 && quantity <= modalData.totalQuantity) {
       handleConfirmQuantity(quantity);
     } else {
       alert(t("message.invalidInput"));

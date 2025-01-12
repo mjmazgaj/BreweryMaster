@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { addData } from '../../api';
 
 import { useTranslation } from 'react-i18next';
-export const useRecipeForm = () => {
+export const useRecipeForm = (isValid) => {
   const { t } = useTranslation();
 
   const [currentStep, setCurrentStep] = useState(0);
@@ -41,7 +41,24 @@ export const useRecipeForm = () => {
 
   const [boilSteps, setBoilSteps] = useState([]);
   
-  const handleSave = () => {
+
+  const handleFormSubmit = (event) =>{
+    console.log(isValid)
+    const form = event.currentTarget;
+    event.preventDefault();
+
+    if (form.checkValidity() === false || !isValid) {
+      event.stopPropagation();
+      return false;
+    }
+
+    return true;
+  }
+
+  const handleSave = (event) => {
+    if (!handleFormSubmit(event)) {
+      return;
+    }
     const newData = 
     {
       ...recipeSummaryData,
@@ -53,10 +70,9 @@ export const useRecipeForm = () => {
       ...recipeMashData,
     };
 
-    addData(newData).then(() => {
-      clear();
-      toast.success(t("toast.addSuccess"));
-    });
+    console.log("add");
+    console.log({...newData});
+    clear();
   };
 
   const clear = () => {

@@ -14,7 +14,7 @@ namespace BreweryMaster.API.Info.Models
         public float StoredQuantity { get; set; }
         public float ReservedQuantity { get; set; }
         public float OrderedQuantity { get; set; }
-        public float TotalQuantity { get { return StoredQuantity + ReservedQuantity + OrderedQuantity; } }
+        public float TotalQuantity { get { return StoredQuantity - ReservedQuantity + OrderedQuantity; } }
         public required string Unit { get; set; }
         public string? Info { get; set; }
     }

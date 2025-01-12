@@ -4,7 +4,7 @@ export const useDynamicTableSelection = (data, setData, selectedData, setSelecte
   const [modalData, setModalData] = useState(null);
   
   const handleDoubleClick = (item) => {
-    setModalData({ ...item, maxQuantity: item.quantity });
+    setModalData({ ...item});
   };
 
   const handleConfirmQuantity = (quantity) => {
@@ -12,7 +12,11 @@ export const useDynamicTableSelection = (data, setData, selectedData, setSelecte
 
     const updatedData = data.map((item) =>
       item.id === modalData.id
-        ? { ...item, quantity: item.quantity - quantity }
+        ? { 
+          ...item, 
+          reservedQuantity: item.reservedQuantity + quantity, 
+          totalQuantity: item.totalQuantity - quantity 
+        }
         : item
     );
 
@@ -20,17 +24,23 @@ export const useDynamicTableSelection = (data, setData, selectedData, setSelecte
       (item) => item.id === modalData.id
     );
 
+    const { totalQuantity, storedQuantity, orderedQuantity, reservedQuantity,  ...selectedModalData } = modalData;
+
     let updatedSelected;
     if (existingSelected) {
       updatedSelected = selectedData.map((item) =>
-        item.id === modalData.id
-          ? { ...item, quantity: item.quantity + quantity }
+        item.id === selectedModalData.id
+          ? { 
+            ...item, 
+            reservedQuantity: item.reservedQuantity + quantity, 
+            totalQuantity: item.totalQuantity - quantity 
+          }
           : item
       );
     } else {
       updatedSelected = [
         ...selectedData,
-        { ...modalData, quantity },
+        { ...selectedModalData, quantity },
       ];
     }
 

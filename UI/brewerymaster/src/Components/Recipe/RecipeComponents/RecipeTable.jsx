@@ -19,7 +19,7 @@ const handleDoubleClick = () =>{
 }
 
   useEffect(() => {
-    fetchData(setData);
+    fetchData("Recipe", setData);
   }, []);
 
     return (
