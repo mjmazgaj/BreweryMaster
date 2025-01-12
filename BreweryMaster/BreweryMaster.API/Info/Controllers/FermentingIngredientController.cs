@@ -51,6 +51,16 @@ namespace BreweryMaster.API.Info.Controllers
         }
 
         [HttpGet]
+        [Route("Unit")]
+        [ProducesResponseType(typeof(IEnumerable<FermentingIngredientUnitResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<FermentingIngredientUnitResponse>>> GetFermentingIngredientUnit()
+        {
+            var fermentingIngredientUnit = await _fermentingIngredientService.GetFermentingIngredientUnitAsync();
+            return Ok(fermentingIngredientUnit);
+        }
+
+        [HttpGet]
         [Route("Unit/{id:int}")]
         [ProducesResponseType(typeof(IEnumerable<FermentingIngredientUnitNameResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]

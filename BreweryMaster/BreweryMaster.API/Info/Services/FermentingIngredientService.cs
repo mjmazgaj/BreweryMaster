@@ -27,6 +27,7 @@ namespace BreweryMaster.API.Info.Services
                     Extraction = request.Extraction,
                     EBC = request.EBC,
                     Info = request.Info,
+                    FermentingIngredientTypeEntity = null!
                 };
 
                 _context.FermentingIngredients.Add(ingredientToCreate);
@@ -131,6 +132,22 @@ namespace BreweryMaster.API.Info.Services
         public Task<FermentingIngredientSummaryResponse?> GetFermentingIngredientSummaryByIdAsync(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<FermentingIngredientUnitResponse>?> GetFermentingIngredientUnitAsync()
+        {
+            return await _context.FermentingIngredientUnits
+                .Select(x => new FermentingIngredientUnitResponse()
+                {
+                    Id = x.Id,
+                    TypeName = x.FermentingIngredient.FermentingIngredientTypeEntity.Name,
+                    Name = x.FermentingIngredient.Name,
+                    Extraction = x.FermentingIngredient.Extraction,
+                    EBC = x.FermentingIngredient.EBC,
+                    Percentage = x.FermentingIngredient.Percentage,
+                    Unit = x.Unit.Name,
+                    Info = x.FermentingIngredient.Info
+                }).ToListAsync();
         }
 
         public async Task<IEnumerable<FermentingIngredientUnitNameResponse>?> GetFermentingIngredientUnitNameByIdAsync(int fermentingIngredientUnitId)
