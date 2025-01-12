@@ -4,6 +4,6 @@ namespace BreweryMaster.API.Recipe.Services.Interfaces
 {
     public interface IRecipeService
     {
-        Task<IEnumerable<RecipeResponse>> GetRecipesAsync();
+        Task<IEnumerable<RecipeDetailsResponse>> GetRecipesAsync();
     }
 }

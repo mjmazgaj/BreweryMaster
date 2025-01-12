@@ -16,9 +16,9 @@ namespace BreweryMaster.API.Info.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<RecipeResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<RecipeDetailsResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<RecipeResponse>>> GetRecipes()
+        public async Task<ActionResult<IEnumerable<RecipeDetailsResponse>>> GetRecipes()
         {
             var recipes = await _recipeService.GetRecipesAsync();
             return Ok(recipes);
