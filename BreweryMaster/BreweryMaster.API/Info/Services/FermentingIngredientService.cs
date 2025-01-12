@@ -133,7 +133,7 @@ namespace BreweryMaster.API.Info.Services
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<FermentingIngredientUnitResponse>?> GetFermentingIngredientUnitsByIdAsync(int fermentingIngredientUnitId)
+        public async Task<IEnumerable<FermentingIngredientUnitNameResponse>?> GetFermentingIngredientUnitNameByIdAsync(int fermentingIngredientUnitId)
         {
             var id = _context.FermentingIngredientUnits
                 .Include(x => x.FermentingIngredient)
@@ -145,7 +145,7 @@ namespace BreweryMaster.API.Info.Services
                 .ToListAsync();
 
             return _context.Units
-                .Select(x => new FermentingIngredientUnitResponse()
+                .Select(x => new FermentingIngredientUnitNameResponse()
                 {
                     Id = x.Id,
                     Name = x.Name,
