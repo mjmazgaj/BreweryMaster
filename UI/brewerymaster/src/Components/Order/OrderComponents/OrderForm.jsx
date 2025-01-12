@@ -8,9 +8,11 @@ import Address from './Address'
 import ClientDetails from './ClientDetails'
 import Contact from './../../Shared/Contact'
 import MenuSteps from '../../Shared/MenuSteps';
+import Recipe from "./Recipe";
 
 const OrderForm = () => {  
 
+  const [selectedRecipe, setSelectedRecipe] = useState({});
   const [contactData, setContactData] = useState({
     phoneNumber: "",
     email: "",
@@ -72,6 +74,15 @@ const OrderForm = () => {
   };
 
   const steps = [
+    {
+      name: "Please select a recipe",
+      component: (
+        <Recipe
+          selectedRecipe={selectedRecipe}
+          setSelectedRecipe={setSelectedRecipe}
+        />
+      ),
+    },
     {
       name: "Address",
       component: (
