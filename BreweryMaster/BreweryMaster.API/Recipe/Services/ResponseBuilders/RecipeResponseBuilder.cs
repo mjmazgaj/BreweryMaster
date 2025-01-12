@@ -41,7 +41,7 @@ namespace BreweryMaster.API.Recipe.Services.ResponseBuilders
         }
         public RecipeResponseBuilder SetFermentingIngredients(IEnumerable<RecipeFermentingIngredient> recipeFermentingIngredients, Dictionary<int, string> dbIngredientTypes)
         {
-            _recipeResponse.FermentingIngredientUnits = recipeFermentingIngredients.Select(x =>
+            _recipeResponse.FermentingIngredients = recipeFermentingIngredients.Select(x =>
             {
                 var fermentingIngredient = x.FermentingIngredientUnit.FermentingIngredient;
                 return new RecipeFermentingIngredientResponse()

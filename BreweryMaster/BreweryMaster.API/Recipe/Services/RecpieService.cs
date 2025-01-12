@@ -1,4 +1,5 @@
-﻿using BreweryMaster.API.Recipe.Models;
+﻿using BreweryMaster.API.Info.Models;
+using BreweryMaster.API.Recipe.Models;
 using BreweryMaster.API.Recipe.Models.DB;
 using BreweryMaster.API.Recipe.Services.Interfaces;
 using BreweryMaster.API.Recipe.Services.ResponseBuilders;
@@ -62,6 +63,72 @@ namespace BreweryMaster.API.Recipe.Services
                 TypeName = x.Type?.Name,
                 StyleName = x.Style?.Name,
             });
+        }
+        public async Task<RecipeDetailsResponse?> GetRecipeDetailByIdAsync(int id)
+        {
+            var recipes = await GetRecipeDetailsAsync();
+
+            return recipes.FirstOrDefault(x => x.Id == id);
+        }
+        public async Task<RecipeDetailsResponse?> CreateRecipeDetailAsync(RecipeDetailsRequest request)
+        {
+            using var transaction = await _context.Database.BeginTransactionAsync();
+
+            try
+            {
+                var recipeToCreate = new Models.DB.Recipe()
+                {
+                    Name = request.Name,
+                    BLGScale = request.BLGScale,
+                    IBUScale = request.IBUScale,
+                    ABVScale = request.ABVScale,
+                    SRMScale = request.SRMScale,
+                    TypeId = request.TypeId,
+                    StyleId = request.StyleId,
+                    ExpectedBeerVolume = request.ExpectedBeerVolume,
+                    BoilTime = request.BoilTime,
+                    EvaporationRate = request.EvaporationRate,
+                    WortVolume = request.WortVolume,
+                    BoilLoss = request.BoilLoss,
+                    PreBoilGravity = request.PreBoilGravity,
+                    FermentationLoss = request.FermentationLoss,
+                    DryHopLoss = request.DryHopLoss,
+                    MashEfficiency = request.MashEfficiency,
+                    WaterToGrainRatio = request.WaterToGrainRatio,
+                    MashWaterVolume = request.MashWaterVolume,
+                    TotalMashVolume = request.TotalMashVolume,
+                    FermentingIngredients = null!
+                };
+
+                _context.Recipes.Add(recipeToCreate);
+                await _context.SaveChangesAsync();
+
+                var recipeFermentingIngredientUnitsToCreate = request.FermentingIngredientUnits?
+                    .Select(x => new RecipeFermentingIngredient()
+                    {
+                        RecipeId = recipeToCreate.Id,
+                        Recipe = null!,
+                        FermentingIngredientUnitId = x.Id,
+                        FermentingIngredientUnit = null!,
+                        Quantity = x.Quantity
+                    });
+
+                if (recipeFermentingIngredientUnitsToCreate is not null)
+                    _context.RecipeFermentingIngredients.AddRange(recipeFermentingIngredientUnitsToCreate);
+
+                await _context.SaveChangesAsync();
+
+                await transaction.CommitAsync();
+
+                return await GetRecipeDetailByIdAsync(recipeToCreate.Id);
+
+            }
+            catch (Exception)
+            {
+                await transaction.RollbackAsync();
+
+                throw;
+            }
         }
 
         private bool RecpieExists(int id)

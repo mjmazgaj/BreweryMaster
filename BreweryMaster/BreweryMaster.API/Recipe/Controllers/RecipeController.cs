@@ -1,5 +1,7 @@
-﻿using BreweryMaster.API.Recipe.Models;
+﻿using BreweryMaster.API.Info.Models;
+using BreweryMaster.API.Recipe.Models;
 using BreweryMaster.API.Recipe.Services.Interfaces;
+using BreweryMaster.API.SharedModule.Validators;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BreweryMaster.API.Info.Controllers
@@ -32,6 +34,33 @@ namespace BreweryMaster.API.Info.Controllers
         {
             var recipes = await _recipeService.GetRecipesAsync();
             return Ok(recipes);
+        }
+
+        [HttpGet]
+        [Route("{id:int}")]
+        [ProducesResponseType(typeof(RecipeDetailsResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<RecipeDetailsResponse>> GetRecipeDetailsById([MinIntValidation] int id)
+        {
+            var recipeDetails = await _recipeService.GetRecipeDetailByIdAsync(id);
+
+            if (recipeDetails == null)
+                return NotFound();
+
+            return Ok(recipeDetails);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(typeof(RecipeDetailsResponse), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<RecipeDetailsResponse>> CreateRecipe([FromBody] RecipeDetailsRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var createdRecipeDetails = await _recipeService.CreateRecipeDetailAsync(request);
+            return CreatedAtAction(nameof(GetRecipeDetailsById), new { id = createdRecipeDetails.Id }, createdRecipeDetails);
         }
     }
 }
