@@ -20,14 +20,26 @@ namespace BreweryMaster.API.OrderModule.Services
         {
             return new ProspectOrderDetails()
             {
-                BeerTypes = Enum.GetNames(typeof(BeerType)),
-                ContainerTypes = Enum.GetNames(typeof(ContainerType))
+                BeerTypes = Enum.GetValues(typeof(BeerType))
+                                .Cast<BeerType>()
+                                .Select(x=>new Shared.Models.EntityResponse()
+                                {
+                                    Id = (int)x + 1,
+                                    Name = x.ToString(),
+                                }),
+                ContainerTypes = Enum.GetValues(typeof(ContainerType))
+                                .Cast<ContainerType>()
+                                .Select(x => new Shared.Models.EntityResponse()
+                                {
+                                    Id = (int)x + 1,
+                                    Name = x.ToString(),
+                                }),
             };
         }
         public decimal GetEstimatedPrice(ProspectPriceEstimationRequest request)
         {
-            var beerType = _settings.BeerPrices.FirstOrDefault(x=> x.BeerType.ToString() == request.BeerType);
-            var containerType = _settings.ContainerPrices.FirstOrDefault(x => x.ContainerType.ToString() == request.ContainerType);
+            var beerType = _settings.BeerPrices.FirstOrDefault(x=> (int)x.BeerType + 1 == request.BeerType);
+            var containerType = _settings.ContainerPrices.FirstOrDefault(x => (int)x.ContainerType + 1 == request.ContainerType);
 
             var numberOfContainers = request.Capacity / containerType.Capacity;
 

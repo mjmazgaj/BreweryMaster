@@ -6,18 +6,19 @@ import '../order.css';
 
 import { fetchDetails } from "../api";
 
-import DropDown from "../../Shared/DropDown";
+import DropDownIndex from "../../Shared/DropDownIndex";
 import ProspectOrderCheckPrice from "./ProspectOrderCheckPrice";
 
 const ProspectOrderDetails = ({prospectOrderData, setProspectOrderData}) => { 
-  const handleInputChange = (key, value) => {
+  const handleInputChange = (key, e) => {
+    const { value } = e.target;
     setProspectOrderData((prevData) => ({
       ...prevData,
-      [key]: value,
+      [key]: parseInt(value),
     }));
   };
 
-  const [details, setDetails] = useState([]);
+  const [details, setDetails] = useState({});
 
   useEffect(() => {
     fetchDetails(setDetails);
@@ -27,32 +28,37 @@ const ProspectOrderDetails = ({prospectOrderData, setProspectOrderData}) => {
     <Fragment>
       <div className="prospectorder-details">
         <p>Please enter your order details</p>
-
         <Form.Label>Capacity</Form.Label>
         <Form.Control
           id="capacity"
           type="number"
           placeholder="Enter capacity"
-          onChange={(e) => handleInputChange("capacity", e.target.value)}
+          onChange={(value) => handleInputChange("capacity", value)}
         />
-        <Form.Label>Beer type</Form.Label>
-        <DropDown
-          id="beer-types"
-          data={details["beerTypes"] || []}
-          selectedOption={prospectOrderData.selectedBeer}
-          setSelectedOption={(value) =>
-            handleInputChange("selectedBeer", value)
-          }
-        />
-        <Form.Label>Container type</Form.Label>
-        <DropDown
-          id="container-types"
-          data={details["containerTypes"] || []}
-          selectedOption={prospectOrderData.selectedContainer}
-          setSelectedOption={(value) =>
-            handleInputChange("selectedContainer", value)
-          }
-        />
+        {details["beerTypes"] && (
+          <DropDownIndex
+            id={"beer-types"}
+            data={details.beerTypes}
+            selectedOption={prospectOrderData.selectedBeer}
+            setSelectedOption={(value) =>
+              handleInputChange("selectedBeer", value)
+            }
+            isReadOnly={false}
+            label="Beer type"
+          />
+        )}
+        {details["beerTypes"] && (
+          <DropDownIndex
+            id={"container-types"}
+            data={details.containerTypes}
+            selectedOption={prospectOrderData.selectedContainer}
+            setSelectedOption={(value) =>
+              handleInputChange("selectedContainer", value)
+            }
+            isReadOnly={false}
+            label="Container type"
+          />
+        )}
       </div>
       <ProspectOrderCheckPrice prospectOrderData={prospectOrderData} />
     </Fragment>
