@@ -51,7 +51,8 @@ namespace BreweryMaster.API.OrderModule.Services
         {
             var clientToCreate = new ProspectOrder()
             {
-                TargetDate = request.TargetDate
+                TargetDate = request.TargetDate,
+                ProspectClient = null!,
             };
 
             _context.ProspectOrders.Add(clientToCreate);

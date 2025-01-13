@@ -19,9 +19,9 @@ namespace BreweryMaster.API.OrderModule.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<ProspectClient>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<ProspectClientResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<ProspectClient>>> GetProspectClients()
+        public async Task<ActionResult<IEnumerable<ProspectClientResponse>>> GetProspectClients()
         {
             var clients = await _clientService.GetProspectClientsAsync();
             return Ok(clients);
@@ -29,10 +29,10 @@ namespace BreweryMaster.API.OrderModule.Controllers
 
         [HttpGet]
         [Route("{id:int}")]
-        [ProducesResponseType(typeof(ProspectClient), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProspectClientResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ProspectClient>> GetProspectClientById([MinIntValidation] int id)
+        public async Task<ActionResult<ProspectClientResponse>> GetProspectClientById([MinIntValidation] int id)
         {
             var client = await _clientService.GetProspectClientByIdAsync(id);
 
@@ -43,9 +43,9 @@ namespace BreweryMaster.API.OrderModule.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(ProspectClient), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ProspectClientResponse), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<ProspectClient>> CreateProspectClient([FromBody] ProspectClientRequest request)
+        public async Task<ActionResult<ProspectClientResponse>> CreateProspectClient([FromBody] ProspectClientRequest request)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -56,10 +56,10 @@ namespace BreweryMaster.API.OrderModule.Controllers
 
         [HttpPut]
         [Route("{id:int}")]
-        [ProducesResponseType(typeof(ProspectClient), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProspectClientResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> EditProspectClient(int id, [FromBody] ProspectClient client)
+        public async Task<ActionResult> EditProspectClient(int id, [FromBody] ProspectClientResponse client)
         {
             if (!await _clientService.EditProspectClientAsync(id, client))
                 return NotFound();
@@ -69,7 +69,7 @@ namespace BreweryMaster.API.OrderModule.Controllers
 
         [HttpDelete]
         [Route("{id:int}")]
-        [ProducesResponseType(typeof(ProspectClient), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProspectClientResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> DeleteProspectClientById([MinIntValidation] int id)

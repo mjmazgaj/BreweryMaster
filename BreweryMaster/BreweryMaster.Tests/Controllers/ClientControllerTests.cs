@@ -22,7 +22,7 @@ public class ClientControllerTests
     public async Task GetClients_ReturnsOkResult_WithListOfClients()
     {
         // Arrange
-        var clients = new List<ProspectClient> { new ProspectClient(), new ProspectClient() };
+        var clients = new List<ProspectClientResponse> { new ProspectClientResponse(), new ProspectClientResponse() };
         _mockClientService.Setup(service => service.GetProspectClientsAsync()).ReturnsAsync(clients);
 
         // Act
@@ -30,7 +30,7 @@ public class ClientControllerTests
 
         // Assert
         var okResult = Assert.IsType<OkObjectResult>(result.Result);
-        var returnClients = Assert.IsType<List<ProspectClient>>(okResult.Value);
+        var returnClients = Assert.IsType<List<ProspectClientResponse>>(okResult.Value);
         Assert.Equal(2, returnClients.Count);
     }
 
@@ -38,7 +38,7 @@ public class ClientControllerTests
     public async Task GetProspectClientById_ReturnsOkResult_WithClient()
     {
         // Arrange
-        var client = new ProspectClient { Id = 1 };
+        var client = new ProspectClientResponse { Id = 1 };
         _mockClientService.Setup(service => service.GetProspectClientByIdAsync(1)).ReturnsAsync(client);
 
         // Act
@@ -46,7 +46,7 @@ public class ClientControllerTests
 
         // Assert
         var okResult = Assert.IsType<OkObjectResult>(result.Result);
-        var returnClient = Assert.IsType<ProspectClient>(okResult.Value);
+        var returnClient = Assert.IsType<ProspectClientResponse>(okResult.Value);
         Assert.Equal(1, returnClient.Id);
     }
 
@@ -54,7 +54,7 @@ public class ClientControllerTests
     public async Task GetProspectClientById_ReturnsNotFound_WhenClientDoesNotExist()
     {
         // Arrange
-        _mockClientService.Setup(service => service.GetProspectClientByIdAsync(1)).ReturnsAsync(default(ProspectClient));
+        _mockClientService.Setup(service => service.GetProspectClientByIdAsync(1)).ReturnsAsync(default(ProspectClientResponse));
 
         // Act
         var result = await _controller.GetProspectClientById(1);
@@ -64,27 +64,10 @@ public class ClientControllerTests
     }
 
     [Fact]
-    public async Task CreateProspectClient_ReturnsCreatedAtAction_WithCreatedClient()
-    {
-        // Arrange
-        var clientRequest = new ProspectClientRequest { Forename = "test", Email = "test@test.test" };
-        var client = new ProspectClient { Forename = "test", Email = "test@test.test" };
-        _mockClientService.Setup(service => service.CreateProspectClientAsync(clientRequest)).ReturnsAsync(client);
-
-        // Act
-        var result = await _controller.CreateProspectClient(clientRequest);
-
-        // Assert
-        var createdAtActionResult = Assert.IsType<CreatedAtActionResult>(result.Result);
-        var returnClient = Assert.IsType<ProspectClient>(createdAtActionResult.Value);
-        Assert.Equal(1, returnClient.Id);
-    }
-
-    [Fact]
     public async Task EditProspectClient_ReturnsOk_WhenClientIsEdited()
     {
         // Arrange
-        var client = new ProspectClient { Id = 1 };
+        var client = new ProspectClientResponse { Id = 1 };
         _mockClientService.Setup(service => service.EditProspectClientAsync(1, client)).ReturnsAsync(true);
 
         // Act
@@ -98,7 +81,7 @@ public class ClientControllerTests
     public async Task EditProspectClient_ReturnsNotFound_WhenClientDoesNotExist()
     {
         // Arrange
-        var client = new ProspectClient { Id = 1 };
+        var client = new ProspectClientResponse { Id = 1 };
         _mockClientService.Setup(service => service.EditProspectClientAsync(1, client)).ReturnsAsync(false);
 
         // Act

@@ -2,7 +2,7 @@
 
 namespace BreweryMaster.API.OrderModule.Models
 {
-    public class ProspectOrder
+    public class ProspectOrderResponse
     {
         public int Id { get; set; }
         public int ProspectClientId { get; set; }

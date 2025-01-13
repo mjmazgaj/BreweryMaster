@@ -16,21 +16,30 @@ namespace BreweryMaster.API.OrderModule.Services
             _settings = options.Value;
         }
 
-        public async Task<IEnumerable<ProspectClient>> GetProspectClientsAsync()
+        public async Task<IEnumerable<ProspectClientResponse>> GetProspectClientsAsync()
         {
-            return await _context.ProspectClients.ToListAsync();
+            return await _context.ProspectClients.Select(x => new ProspectClientResponse()
+            {
+                Id = x.Id,
+                Email = x.Email,
+                PhoneNumber = x.PhoneNumber,
+            }).ToListAsync();
         }
 
-        public async Task<ProspectClient?> GetProspectClientByIdAsync(int id)
+        public async Task<ProspectClientResponse?> GetProspectClientByIdAsync(int id)
         {
-            return await _context.ProspectClients.FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.ProspectClients.Select(x => new ProspectClientResponse()
+            {
+                Id = x.Id,
+                Email = x.Email,
+                PhoneNumber = x.PhoneNumber,
+            }).FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<ProspectClient> CreateProspectClientAsync(ProspectClientRequest request)
         {
             var clientToCreate = new ProspectClient()
             {
-                Forename = request.Forename,
                 PhoneNumber = request.PhoneNumber,
                 Email = request.Email,
             };
@@ -41,7 +50,7 @@ namespace BreweryMaster.API.OrderModule.Services
             return clientToCreate;
         }
 
-        public async Task<bool> EditProspectClientAsync(int id, ProspectClient client)
+        public async Task<bool> EditProspectClientAsync(int id, ProspectClientResponse client)
         {
             if (id != client.Id)
                 return false;

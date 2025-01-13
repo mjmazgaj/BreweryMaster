@@ -1,6 +1,6 @@
 ﻿namespace BreweryMaster.API.OrderModule.Models
 {
-    public class ProspectClient
+    public class ProspectClientResponse
     {
         public int Id { get; set; }
         public string? Forename { get; set; }

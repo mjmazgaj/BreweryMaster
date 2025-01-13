@@ -19,6 +19,6 @@ namespace BreweryMaster.API.OrderModule.Models
         [Required]
         public int Capacity { get; set; }
         [Required]
-        public DateOnly TargetDate { get; set; }
+        public DateTime TargetDate { get; set; }
     }
 }
