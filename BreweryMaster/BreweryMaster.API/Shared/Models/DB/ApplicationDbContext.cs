@@ -38,48 +38,11 @@ namespace BreweryMaster.API.Shared.Models.DB
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.Entity<UnitEntity>().HasData(DataProvider.GetUnitEntity());
 
-            builder.Entity<FermentingIngredientOrdered>(entity =>
-            {
-                entity.HasOne(x => x.FermentingIngredientUnit)
-                      .WithMany()
-                      .HasForeignKey(e => e.FermentingIngredientUnitId)
-                      .OnDelete(DeleteBehavior.Cascade);
-            });
-
-            builder.Entity<FermentingIngredientStored>(entity =>
-            {
-                entity.HasOne(x => x.FermentingIngredientUnit)
-                      .WithMany()
-                      .HasForeignKey(e => e.FermentingIngredientUnitId)
-                      .OnDelete(DeleteBehavior.Cascade);
-            });
-
-            builder.Entity<FermentingIngredientReserved>(entity =>
-            {
-                entity.HasOne(x => x.FermentingIngredientUnit)
-                      .WithMany()
-                      .HasForeignKey(e => e.FermentingIngredientUnitId)
-                      .OnDelete(DeleteBehavior.Cascade);
-            });
-
-            builder.Entity<FermentingIngredient>(entity =>
-            {
-                entity.HasOne(x => x.FermentingIngredientTypeEntity)
-                      .WithMany()
-                      .HasForeignKey(e => e.TypeId)
-                      .OnDelete(DeleteBehavior.Cascade);
-            });
             builder.ConfigureRecipeEntities();
             builder.ConfigureProspectOrder();
-
-            builder.Entity<FermentingIngredientTypeEntity>().HasData(FermentingIngredientDataProvider.GetFermentingIngredientTypeEntity());
-            builder.Entity<UnitEntity>().HasData(DataProvider.GetUnitEntity());
-            builder.Entity<FermentingIngredient>().HasData(FermentingIngredientDataProvider.GetFermentingIngredient());
-            builder.Entity<FermentingIngredientUnit>().HasData(FermentingIngredientDataProvider.GetFermentingIngredientUnit());
-            builder.Entity<FermentingIngredientOrdered>().HasData(FermentingIngredientDataProvider.GetFermentingIngredientOrdered());
-            builder.Entity<FermentingIngredientReserved>().HasData(FermentingIngredientDataProvider.GetFermentingIngredientReserved());
-            builder.Entity<FermentingIngredientStored>().HasData(FermentingIngredientDataProvider.GetFermentingIngredientStored());
+            builder.ConfigureFermentingIngredientEntities();
         }
     }
 }
