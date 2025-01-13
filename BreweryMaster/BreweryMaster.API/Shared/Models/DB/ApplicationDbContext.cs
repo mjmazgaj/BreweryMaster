@@ -71,6 +71,7 @@ namespace BreweryMaster.API.Shared.Models.DB
                       .OnDelete(DeleteBehavior.Cascade);
             });
             builder.ConfigureRecipeEntities();
+            builder.ConfigureProspectOrder();
 
             builder.Entity<FermentingIngredientTypeEntity>().HasData(FermentingIngredientDataProvider.GetFermentingIngredientTypeEntity());
             builder.Entity<UnitEntity>().HasData(DataProvider.GetUnitEntity());
