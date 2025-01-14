@@ -15,7 +15,18 @@ namespace BreweryMaster.API.Shared.Extensions
             {
                 entity.HasOne(x => x.ProspectClient)
                       .WithMany(x=>x.Orders)
-                      .HasForeignKey(x => x.ProspectClientId);
+                      .HasForeignKey(x => x.ProspectClientId)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(x => x.BeerStyle)
+                      .WithMany()
+                      .HasForeignKey(x => x.BeerStyleId)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(x => x.Container)
+                      .WithMany()
+                      .HasForeignKey(x => x.ContainerId)
+                      .OnDelete(DeleteBehavior.Cascade);
             });
 
             builder.Entity<ProspectCompanyClient>().HasData(ProspectOrderDataProvider.GetProspectCompanyClients());
