@@ -10,6 +10,7 @@ import ProspectOrderDetails from "./ProspectOrderDetails";
 import MenuSteps from '../../Shared/MenuSteps';
 import ClientDetails from "./ClientDetails";
 import Contact from "../../Shared/Contact"
+import FormDatePicker from "../../Shared/FormDatePicker";
 
 const ProspectOrderForm = () => {  
   
@@ -34,32 +35,29 @@ const ProspectOrderForm = () => {
     forename: "",
     surname: "",
   });
-  const [isCompany, setIsCompany] = useState(0);
+  const [isCompany, setIsCompany] = useState(false);
 
   const [currentStep, setCurrentStep] = useState(0);
+  const [selectedDate, setSelectedDate] = useState(null);
 
   const handleSave = () => {
+
     const newData = {
-      forename : contactData.forename,
-      phoneNumber : contactData.phoneNumber,
-      email : contactData.email,
-      selectedBeer : prospectOrderData.selectedBeer,
-      selectedContainer : prospectOrderData.selectedContainer,
-      capacity : prospectOrderData.capacity,
-      forename : individualClientDetailsData.forename,
-      surname : individualClientDetailsData.surname,
-      companyName : companyClientDetailsData.companyName,
-      nip : companyClientDetailsData.nip,
-      isCompany: isCompany
+      forename: individualClientDetailsData.forename,
+      surname: individualClientDetailsData.surname,
+      phoneNumber: contactData.phoneNumber,
+      email: contactData.email,
+      beerStyleId: prospectOrderData.selectedBeer,
+      containerId: prospectOrderData.selectedContainer,
+      capacity: prospectOrderData.capacity,
+      companyName: companyClientDetailsData.companyName,
+      nip: companyClientDetailsData.nip,
+      targetDate: selectedDate,
+      isCompany: isCompany,
     };
 
     console.log(newData);
-    // addData(newData)
-    //   .then(() => {
-    //     clear();
-    //     toast.success("Order has been registered");
-    //   })
-    //   .catch((error) => console.log(error));
+    addData(newData);
   };
 
   const clear = () => {
@@ -99,6 +97,15 @@ const ProspectOrderForm = () => {
         <Contact
           contactData={contactData}
           setContactData={setContactData}
+        />
+      ),
+    },
+    {
+      name: "DatePicker",
+      component: (
+        <FormDatePicker
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
         />
       ),
     },

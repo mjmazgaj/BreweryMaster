@@ -5,13 +5,11 @@ namespace BreweryMaster.API.OrderModule.Models
     public class ProspectOrderRequest
     {
         [Required]
-        public string? Forename { get; set; }
-        [Required]
         [Phone]
-        public string? PhoneNumber { get; set; }
+        public required string PhoneNumber { get; set; }
         [Required]
         [EmailAddress]
-        public string? Email { get; set; }
+        public required string Email { get; set; }
         [Required]
         public int BeerStyleId { get; set; }
         [Required]
@@ -20,5 +18,12 @@ namespace BreweryMaster.API.OrderModule.Models
         public int Capacity { get; set; }
         [Required]
         public DateTime TargetDate { get; set; }
+        public string? Forename { get; set; }
+        public string? Surname { get; set; }
+        public string? CompanyName { get; set; }
+        public int NIP { get; set; }
+        [Required]
+        public bool IsCompany { get; set; }
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BreweryMaster.API.OrderModule.Enums;
 using BreweryMaster.API.OrderModule.Models;
+using BreweryMaster.API.Recipe.Models.DB;
 using BreweryMaster.API.Shared.Helpers;
 using BreweryMaster.API.Shared.Models;
 using BreweryMaster.API.Shared.Models.DB;
@@ -74,31 +75,74 @@ namespace BreweryMaster.API.OrderModule.Services
             return await _context.ProspectOrders.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<ProspectOrder> CreateProspectOrderAsync(ProspectOrderRequest request)
+        public async Task<ProspectOrder?> CreateProspectOrderAsync(ProspectOrderRequest request)
         {
-            var clientToCreate = new ProspectCompanyClient()
+
+            using var transaction = await _context.Database.BeginTransactionAsync();
+
+            try
             {
-                Id = 1,
-                CompanyName = "CompanyName",
-                Email = "email@test.pl"
-            };
 
-            var prospectToCreate = new ProspectOrder()
+                ProspectClient clientToCreate = null!;
+
+                if (request.IsCompany && !string.IsNullOrEmpty(request.CompanyName))
+                {
+                    clientToCreate = new ProspectCompanyClient()
+                    {
+                        CompanyName = request.CompanyName,
+                        Email = "email@test.pl",
+                        Nip = request.NIP,
+                        Orders = null!,
+                        PhoneNumber = request.PhoneNumber,
+                    };
+
+                    _context.ProspectClients.Add(clientToCreate);
+                    await _context.SaveChangesAsync();
+                }
+                else if (!string.IsNullOrEmpty(request.Forename) && !string.IsNullOrEmpty(request.Surname))
+                {
+                    clientToCreate = new ProspectIndyvidualClient()
+                    {
+                        Id = 1,
+                        Forename = request.Forename,
+                        Surname = request.Surname,
+                        Email = "email@test.pl",
+                        Orders = null!,
+                        PhoneNumber = request.PhoneNumber,
+                    };
+
+                    _context.ProspectClients.Add(clientToCreate);
+                    await _context.SaveChangesAsync();
+                }
+
+                if (clientToCreate is null)
+                    throw new Exception("ClientToCreate can not be null");
+
+                var orderToCreate = new ProspectOrder()
+                {
+                    TargetDate = request.TargetDate,
+                    ProspectClientId = clientToCreate.Id,
+                    ProspectClient = null!,
+                    BeerStyleId = request.BeerStyleId,
+                    BeerStyle = null!,
+                    ContainerId = request.ContainerId,
+                    Container = null!,
+                    Capacity = request.Capacity,
+                };
+
+                _context.ProspectOrders.Add(orderToCreate);
+                await _context.SaveChangesAsync();
+
+                await transaction.CommitAsync();
+
+                return await GetProspectOrderByIdAsync(orderToCreate.Id);
+            }
+            catch (Exception)
             {
-                TargetDate = request.TargetDate,
-                ProspectClientId = clientToCreate.Id,
-                ProspectClient = null!,
-                BeerStyleId = request.BeerStyleId,
-                BeerStyle = null!,
-                ContainerId = request.ContainerId,
-                Container = null!,
-                Capacity = request.Capacity,
-            };
+                await transaction.RollbackAsync();
 
-            _context.ProspectOrders.Add(prospectToCreate);
-            await _context.SaveChangesAsync();
-
-            return prospectToCreate;
+                throw;
+            }
         }
 
         public async Task<bool> EditProspectOrderAsync(int id, ProspectOrder order)
