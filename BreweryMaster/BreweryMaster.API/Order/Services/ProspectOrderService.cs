@@ -61,16 +61,29 @@ namespace BreweryMaster.API.OrderModule.Services
 
         public async Task<ProspectOrder> CreateProspectOrderAsync(ProspectOrderRequest request)
         {
-            var clientToCreate = new ProspectOrder()
+            var clientToCreate = new ProspectCompanyClient()
             {
-                TargetDate = request.TargetDate,
-                ProspectClient = null!,
+                Id = 1,
+                CompanyName = "CompanyName",
+                Email = "email@test.pl"
             };
 
-            _context.ProspectOrders.Add(clientToCreate);
+            var prospectToCreate = new ProspectOrder()
+            {
+                TargetDate = request.TargetDate,
+                ProspectClientId = clientToCreate.Id,
+                ProspectClient = null!,
+                BeerStyleId = request.BeerStyleId,
+                BeerStyle = null!,
+                ContainerId = request.ContainerId,
+                Container = null!,
+                Capacity = request.Capacity,
+            };
+
+            _context.ProspectOrders.Add(prospectToCreate);
             await _context.SaveChangesAsync();
 
-            return clientToCreate;
+            return prospectToCreate;
         }
 
         public async Task<bool> EditProspectOrderAsync(int id, ProspectOrder order)

@@ -13,9 +13,9 @@ namespace BreweryMaster.API.OrderModule.Models
         [EmailAddress]
         public string? Email { get; set; }
         [Required]
-        public string? SelectedBeer { get; set; }
+        public int BeerStyleId { get; set; }
         [Required]
-        public string? SelectedContainer { get; set; }
+        public int ContainerId { get; set; }
         [Required]
         public int Capacity { get; set; }
         [Required]

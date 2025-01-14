@@ -80,26 +80,38 @@ namespace BreweryMaster.API.Shared.Helpers
                 new()
                 {
                     Id=1,
-                    BeerTypeId = 1,
                     ProspectClient = null!,
                     ProspectClientId = 1,
+                    BeerStyleId = 1,
+                    BeerStyle = null!,
+                    ContainerId = 1,
+                    Container = null!,
                     TargetDate = DateTime.Today,
+                    Capacity = 1000,
                 },
                 new()
                 {
                     Id=2,
-                    BeerTypeId = 2,
                     ProspectClient = null!,
-                    ProspectClientId = 3,
+                    ProspectClientId = 2,
+                    BeerStyleId = 2,
+                    BeerStyle = null!,
+                    ContainerId = 3,
+                    Container = null!,
                     TargetDate = DateTime.Today,
+                    Capacity = 1400,
                 },
                 new()
                 {
                     Id=3,
-                    BeerTypeId = 2,
                     ProspectClient = null!,
-                    ProspectClientId = 2,
+                    ProspectClientId = 3,
+                    BeerStyleId = 1,
+                    BeerStyle = null!,
+                    ContainerId = 3,
+                    Container = null!,
                     TargetDate = DateTime.Today,
+                    Capacity = 3000,
                 }
             };
         }
