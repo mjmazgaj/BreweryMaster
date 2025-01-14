@@ -1,5 +1,5 @@
-﻿using BreweryMaster.API.Recipe.Models.DB;
-using BreweryMaster.API.Shared.Models.DB;
+﻿using BreweryMaster.API.Info.Models.Item;
+using BreweryMaster.API.Recipe.Models.DB;
 
 namespace BreweryMaster.API.OrderModule.Models
 {

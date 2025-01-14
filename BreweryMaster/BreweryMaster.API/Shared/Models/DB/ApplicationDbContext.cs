@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using BreweryMaster.API.User.Models.DB;
 using BreweryMaster.API.Recipe.Models.DB;
 using BreweryMaster.API.Shared.Extensions;
+using BreweryMaster.API.Info.Models.Item;
 
 namespace BreweryMaster.API.Shared.Models.DB
 {
@@ -18,6 +19,9 @@ namespace BreweryMaster.API.Shared.Models.DB
         public DbSet<Address> Addresses { get; set; }
         public DbSet<UnitEntity> Units { get; set; }
         public DbSet<Container> Containers { get; set; }
+
+        public DbSet<Info.Models.Item.ContainerPrice> ContainerPrices { get; set; }
+        public DbSet<Info.Models.Item.BeerPrice> BeerPrices { get; set; }
 
         public DbSet<Order> Orders { get; set; }
         public DbSet<ProspectClient> ProspectClients { get; set; }
@@ -41,6 +45,7 @@ namespace BreweryMaster.API.Shared.Models.DB
             base.OnModelCreating(builder);
 
             builder.ConfigureEntity();
+            builder.ConfigureItem();
             builder.ConfigureRecipeEntities();
             builder.ConfigureProspectOrder();
             builder.ConfigureFermentingIngredientEntities();
