@@ -17,6 +17,7 @@ namespace BreweryMaster.API.Shared.Models.DB
         }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<UnitEntity> Units { get; set; }
+        public DbSet<Container> Containers { get; set; }
 
         public DbSet<Order> Orders { get; set; }
         public DbSet<ProspectClient> ProspectClients { get; set; }
@@ -38,8 +39,8 @@ namespace BreweryMaster.API.Shared.Models.DB
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<UnitEntity>().HasData(DataProvider.GetUnitEntity());
 
+            builder.ConfigureEntity();
             builder.ConfigureRecipeEntities();
             builder.ConfigureProspectOrder();
             builder.ConfigureFermentingIngredientEntities();
