@@ -15,18 +15,6 @@ namespace BreweryMaster.API.OrderModule.Services
             _context = context;
             _settings = options.Value;
         }
-        public decimal GetPrice(PriceEstimationRequest request)
-        {
-            var beerType = _settings.BeerPrices.FirstOrDefault(x=> x.BeerType.ToString() == request.BeerType);
-            var containerType = _settings.ContainerPrices.FirstOrDefault(x => x.ContainerType.ToString() == request.ContainerType);
-
-            var numberOfContainers = request.Capacity / containerType.Capacity;
-
-            var beerPrice = request.Capacity * beerType.EstimatedPrice;
-            var containerPrice = numberOfContainers * containerType.EstimatedPrice;
-
-            return Math.Round((beerPrice + containerPrice)/100,0)*100;
-        }
 
         public async Task<IEnumerable<Models.Order>> GetOrdersAsync()
         {

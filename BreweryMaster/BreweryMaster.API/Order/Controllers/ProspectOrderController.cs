@@ -74,6 +74,10 @@ namespace BreweryMaster.API.OrderModule.Controllers
                 return BadRequest(ModelState);
 
             var createdOrder = await _prospectOrderService.CreateProspectOrderAsync(request);
+
+            if (createdOrder is null)
+                return UnprocessableEntity();
+
             return CreatedAtAction(nameof(GetProspectOrderById), new { id = createdOrder.Id }, createdOrder);
         }
 

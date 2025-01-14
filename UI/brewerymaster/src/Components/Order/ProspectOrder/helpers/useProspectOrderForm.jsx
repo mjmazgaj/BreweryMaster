@@ -86,7 +86,7 @@ export const useProspectOrderForm = () => {
           ),
         },
         {
-          name: "ClientDetails",
+          name: "Client Details",
           component: (
             <ClientDetails
               individualClientDetailsData={individualClientDetailsData}

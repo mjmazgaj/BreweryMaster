@@ -60,6 +60,10 @@ namespace BreweryMaster.API.Info.Controllers
                 return BadRequest(ModelState);
 
             var createdRecipeDetails = await _recipeService.CreateRecipeDetailAsync(request);
+
+            if (createdRecipeDetails == null)
+                return UnprocessableEntity();
+
             return CreatedAtAction(nameof(GetRecipeDetailsById), new { id = createdRecipeDetails.Id }, createdRecipeDetails);
         }
     }
