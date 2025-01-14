@@ -1,8 +1,10 @@
 ﻿using BreweryMaster.API.OrderModule.Enums;
 using BreweryMaster.API.OrderModule.Models;
+using BreweryMaster.API.Shared.Models;
 using BreweryMaster.API.Shared.Models.DB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using System.Linq;
 
 namespace BreweryMaster.API.OrderModule.Services
 {
@@ -16,29 +18,32 @@ namespace BreweryMaster.API.OrderModule.Services
             _context = context;
             _settings = options.Value;
         }
-        public ProspectOrderDetails GetProspectOrderDetails()
+        public async Task<ProspectOrderDetails> GetProspectOrderDetails()
         {
+            var beerStyles = await _context.BeerStyles
+                                    .Select(x => new EntityResponse()
+                                    {
+                                        Id = x.Id,
+                                        Name = x.Name
+                                    }).ToListAsync();
+
+            var containerTypes = await _context.Containers
+                                    .Include(x => x.UnitEntity)
+                                    .Select(x => new EntityResponse()
+                                    {
+                                        Id = x.Id,
+                                        Name = $"{x.ContainerName} {x.Capacity}{x.UnitEntity.Name} {x.Material}"
+                                    }).ToListAsync();
+
             return new ProspectOrderDetails()
             {
-                BeerTypes = Enum.GetValues(typeof(BeerType))
-                                .Cast<BeerType>()
-                                .Select(x=>new Shared.Models.EntityResponse()
-                                {
-                                    Id = (int)x + 1,
-                                    Name = x.ToString(),
-                                }),
-                ContainerTypes = Enum.GetValues(typeof(ContainerType))
-                                .Cast<ContainerType>()
-                                .Select(x => new Shared.Models.EntityResponse()
-                                {
-                                    Id = (int)x + 1,
-                                    Name = x.ToString(),
-                                }),
+                BeerTypes = beerStyles,
+                ContainerTypes = containerTypes,
             };
         }
         public decimal GetEstimatedPrice(ProspectPriceEstimationRequest request)
         {
-            var beerType = _settings.BeerPrices.FirstOrDefault(x=> (int)x.BeerType + 1 == request.BeerType);
+            var beerType = _settings.BeerPrices.FirstOrDefault(x => (int)x.BeerType + 1 == request.BeerType);
             var containerType = _settings.ContainerPrices.FirstOrDefault(x => (int)x.ContainerType + 1 == request.ContainerType);
 
             var numberOfContainers = request.Capacity / containerType.Capacity;
@@ -46,7 +51,7 @@ namespace BreweryMaster.API.OrderModule.Services
             var beerPrice = request.Capacity * beerType.EstimatedPrice;
             var containerPrice = numberOfContainers * containerType.EstimatedPrice;
 
-            return Math.Round((beerPrice + containerPrice)/100,0)*100;
+            return Math.Round((beerPrice + containerPrice) / 100, 0) * 100;
         }
 
         public async Task<IEnumerable<ProspectOrder>> GetProspectOrdersAsync()

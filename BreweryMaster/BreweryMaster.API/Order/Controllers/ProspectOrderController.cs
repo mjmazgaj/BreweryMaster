@@ -33,9 +33,9 @@ namespace BreweryMaster.API.OrderModule.Controllers
         [ProducesResponseType(typeof(ProspectOrderDetails), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<ProspectOrderDetails> GetProspectOrderDetails()
+        public async Task<ActionResult<ProspectOrderDetails>> GetProspectOrderDetails()
         {
-            var prospectOrderDetails = _prospectOrderService.GetProspectOrderDetails();
+            var prospectOrderDetails = await _prospectOrderService.GetProspectOrderDetails();
             if (prospectOrderDetails == null)
                 return NotFound();
             return Ok(prospectOrderDetails);

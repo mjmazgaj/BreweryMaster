@@ -2,7 +2,7 @@
 
 public interface IProspectOrderService
 {
-    ProspectOrderDetails GetProspectOrderDetails();
+    Task<ProspectOrderDetails> GetProspectOrderDetails();
     decimal GetEstimatedPrice(ProspectPriceEstimationRequest request);
     Task<IEnumerable<ProspectOrder>> GetProspectOrdersAsync();
     Task<ProspectOrder?> GetProspectOrderByIdAsync(int id);
