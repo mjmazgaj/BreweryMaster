@@ -1,5 +1,6 @@
 ﻿using BreweryMaster.API.OrderModule.Enums;
 using BreweryMaster.API.OrderModule.Models;
+using BreweryMaster.API.Shared.Helpers;
 using BreweryMaster.API.Shared.Models;
 using BreweryMaster.API.Shared.Models.DB;
 using Microsoft.EntityFrameworkCore;
@@ -41,17 +42,26 @@ namespace BreweryMaster.API.OrderModule.Services
                 ContainerTypes = containerTypes,
             };
         }
-        public decimal GetEstimatedPrice(ProspectPriceEstimationRequest request)
+        public async Task<decimal> GetEstimatedPrice(ProspectPriceEstimationRequest request)
         {
-            var beerType = _settings.BeerPrices.FirstOrDefault(x => (int)x.BeerType + 1 == request.BeerType);
-            var containerType = _settings.ContainerPrices.FirstOrDefault(x => (int)x.ContainerType + 1 == request.ContainerType);
+            var beerType = await _context.BeerPrices
+                                .FirstOrDefaultAsync(x=>x.Id ==request.BeerType);
+            var containerType = await _context.ContainerPrices
+                                .Include(x=>x.Container)
+                                    .ThenInclude(x=>x.UnitEntity)
+                                .FirstOrDefaultAsync(x => x.Id == request.ContainerType);
 
-            var numberOfContainers = request.Capacity / containerType.Capacity;
+            if (beerType is null || containerType is null)
+                throw new Exception();
 
-            var beerPrice = request.Capacity * beerType.EstimatedPrice;
-            var containerPrice = numberOfContainers * containerType.EstimatedPrice;
+            var containerCapacityInLitters = UnitHelper.ConvertToLitters(containerType!.Container.UnitEntity, containerType!.Container.Capacity);
 
-            return Math.Round((beerPrice + containerPrice) / 100, 0) * 100;
+            var numberOfContainers = request.Capacity / containerCapacityInLitters;
+
+            var beerPrice = (float)(request.Capacity * beerType.Price / 1000);
+            var containerPrice = numberOfContainers * (float)containerType.Price;
+
+            return Math.Round(Convert.ToDecimal(beerPrice + containerPrice), 0);
         }
 
         public async Task<IEnumerable<ProspectOrder>> GetProspectOrdersAsync()
