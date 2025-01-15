@@ -20,9 +20,13 @@ function Navigation(isAuthenticated) {
         <Navbar.Brand href="/">Navbar</Navbar.Brand>
         <Nav className="me-auto">
           <Nav.Link href="/Kanban">Kanban</Nav.Link>
-          <Nav.Link href="/ProspectOrder">ProspectOrder</Nav.Link>
-          <Nav.Link href="/Order">Order</Nav.Link>
           <Nav.Link href="/Recipe">Recipe</Nav.Link>
+
+          <Nav.Link href="/Order">Order</Nav.Link>
+
+          <NavDropdown title="ProspectOrder" id="navbarScrollingDropdown">
+            <Nav.Link href="/ProspectOrder">ProspectOrder</Nav.Link>
+          </NavDropdown>
 
           <NavDropdown title="User" id="navbarScrollingDropdown">
             <NavDropdown.Item href="/User">User</NavDropdown.Item>
