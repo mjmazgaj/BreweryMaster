@@ -42,9 +42,9 @@ namespace BreweryMaster.API.OrderModule.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<ProspectOrder>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<ProspectOrderResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<ProspectOrder>>> GetProspectOrders()
+        public async Task<ActionResult<IEnumerable<ProspectOrderResponse>>> GetProspectOrders()
         {
             var orders = await _prospectOrderService.GetProspectOrdersAsync();
             return Ok(orders);

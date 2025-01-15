@@ -41,6 +41,14 @@
         "ibuScale": "IBU scale",
         "abvScale":"ABV scale",
         "srmScale":"SRM scale",
+        "clientName":"Client",
+        "beerStyle":"beer style",
+        "container":"container type",
+        "capacity":"capacity",
+        "targetDate":"Expected date",
+        "email":"email",
+        "phoneNumber":"Phone number",
+        "isClosed":"Is closed",
         "styleName": "Style"
     },
     "message":{

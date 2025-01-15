@@ -14,5 +14,6 @@ namespace BreweryMaster.API.OrderModule.Models
         public required Container Container { get; set; }
         public DateTime TargetDate { get; set; }
         public int Capacity { get; set; }
+        public bool IsClosed { get; set; } = false;
     }
 }

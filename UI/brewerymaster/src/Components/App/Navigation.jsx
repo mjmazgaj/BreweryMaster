@@ -26,6 +26,7 @@ function Navigation(isAuthenticated) {
 
           <NavDropdown title="ProspectOrder" id="navbarScrollingDropdown">
             <Nav.Link href="/ProspectOrder">ProspectOrder</Nav.Link>
+            <Nav.Link href="/ProspectOrderSummary">ProspectOrderSummary</Nav.Link>
           </NavDropdown>
 
           <NavDropdown title="User" id="navbarScrollingDropdown">

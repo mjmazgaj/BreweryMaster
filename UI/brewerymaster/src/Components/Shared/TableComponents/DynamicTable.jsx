@@ -29,13 +29,17 @@ const DynamicTable = ({tableKey, tableTitle, data, handleDoubleClick}) => {
                 onDoubleClick={() => handleDoubleClick(item)}
               >
                 {keys.map((column) => (
-                  <td key={column}>{item[column]}</td>
+                  <td key={column}>
+                    {typeof item[column] === "boolean"
+                      ? <input type="checkbox" checked={item[column]}/>
+                      : item[column]}
+                  </td>
                 ))}
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan="5">Loading...</td>
+              <td colSpan="5">Table is empty</td>
             </tr>
           )}
         </tbody>

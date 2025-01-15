@@ -1,12 +1,10 @@
-﻿using BreweryMaster.API.OrderModule.Enums;
+﻿using BreweryMaster.API.OrderModule.Helpers;
 using BreweryMaster.API.OrderModule.Models;
-using BreweryMaster.API.Recipe.Models.DB;
 using BreweryMaster.API.Shared.Helpers;
 using BreweryMaster.API.Shared.Models;
 using BreweryMaster.API.Shared.Models.DB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using System.Linq;
 
 namespace BreweryMaster.API.OrderModule.Services
 {
@@ -65,9 +63,24 @@ namespace BreweryMaster.API.OrderModule.Services
             return Math.Round(Convert.ToDecimal(beerPrice + containerPrice), 0);
         }
 
-        public async Task<IEnumerable<ProspectOrder>> GetProspectOrdersAsync()
+        public async Task<IEnumerable<ProspectOrderResponse>> GetProspectOrdersAsync()
         {
-            return await _context.ProspectOrders.ToListAsync();
+            return await _context.ProspectOrders
+                                .Include(x => x.BeerStyle)
+                                .Include(x => x.ProspectClient)
+                                .Include(x => x.Container)
+                                .Select(x => new ProspectOrderResponse()
+                                {
+                                    Id = x.Id,
+                                    BeerStyle = x.BeerStyle.Name,
+                                    Capacity = x.Capacity,
+                                    Container = x.Container.ContainerName,
+                                    ClientName = x.ProspectClient.GetName(),
+                                    Email = x.ProspectClient.Email,
+                                    PhoneNumber = x.ProspectClient.PhoneNumber,
+                                    TargetDate = DateOnly.FromDateTime(x.TargetDate),
+                                    IsClosed = x.IsClosed,
+                                }).ToListAsync();
         }
 
         public async Task<ProspectOrder?> GetProspectOrderByIdAsync(int id)
