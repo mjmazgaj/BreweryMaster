@@ -86,7 +86,6 @@ const FermentingIngredientsSummary = () => {
       <ModalItemAction
         fields={modalFieldsProvider(t).fermentingIngredientsModalReadOnlyFields}
         data={modalItemData}
-        types={types}
         show={showItemAction}
         setShow={setShowItemAction}
         setShowConfirmationModal={setShowConfirmationModal}
@@ -96,7 +95,6 @@ const FermentingIngredientsSummary = () => {
         setQuantityAction={setQuantityAction}
         action={itemAction}
         setAction={setItemAction}
-        itemName="Fermenting Ingredient"
       />
       <ModalForm
         fields={modalFieldsProvider(t).fermentingIngredientsModalFields}

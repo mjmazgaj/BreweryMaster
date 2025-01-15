@@ -9,7 +9,6 @@ import { fetchEntity } from "../api";
 const ModalItemAction = ({
   fields,
   data,
-  types,
   show,
   setShow,
   setShowConfirmationModal,
@@ -19,7 +18,6 @@ const ModalItemAction = ({
   setQuantityAction,
   action,
   setAction,
-  itemName,
 }) => {
   const [units, setUnits] = useState([]);
 
