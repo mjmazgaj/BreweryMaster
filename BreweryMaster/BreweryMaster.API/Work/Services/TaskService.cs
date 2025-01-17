@@ -25,7 +25,6 @@ namespace BreweryMaster.API.WorkModule.Services
         public async Task<Dictionary<string, Column>> GetKanbanTasksByOwnerIdAsync(int ownerId)
         {
             var tasks = await _context.KanbanTasks.Where(x => x.OwnerId == ownerId).ToListAsync();
-            var owner = await _applicationDbContext.Employees.FirstOrDefaultAsync(x => x.Id == ownerId);
 
             var ownerName = string.Empty;
 

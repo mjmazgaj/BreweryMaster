@@ -6,7 +6,7 @@ using BreweryMaster.API.Recipe.Services;
 using BreweryMaster.API.Recipe.Services.Interfaces;
 using BreweryMaster.API.Shared.Models.DB;
 using BreweryMaster.API.Shared.Services;
-using BreweryMaster.API.User.Models.DB;
+using BreweryMaster.API.User.Models.Users.DB;
 using BreweryMaster.API.UserModule.Services;
 using BreweryMaster.API.WorkModule.Models;
 using BreweryMaster.API.WorkModule.Services;
@@ -25,7 +25,6 @@ builder.Services.AddDbContext<WorkDbContext>(options => options.UseSqlServer(bui
 
 builder.Services.AddScoped<IAddressService, AddressService>();
 builder.Services.AddScoped<IProspectClientService, ProspectClientService>();
-builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<ITaskService, TaskService>();
 builder.Services.AddScoped<IProspectOrderService, ProspectOrderService>();
 builder.Services.AddScoped<IFermentingIngredientService, FermentingIngredientService>();

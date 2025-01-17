@@ -33,7 +33,6 @@ function Navigation(isAuthenticated) {
             <NavDropdown.Item href="/User">User</NavDropdown.Item>
             <NavDropdown.Item href="/Client">Client</NavDropdown.Item>
             <NavDropdown.Item href="/Address">Address</NavDropdown.Item>
-            <NavDropdown.Item href="/Employee">Employee</NavDropdown.Item>
           </NavDropdown>
 
           <NavDropdown title="Info" id="navbarScrollingDropdown">

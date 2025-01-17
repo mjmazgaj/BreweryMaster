@@ -12,7 +12,6 @@ import Error from './Components/Shared/Error';
 
 import Address from './Components/User/Address/Address';
 import Client from './Components/User/Client/Client';
-import Employee from './Components/User/Employee/Employee';
 import User from './Components/User/User.jsx';
 
 import Order from './Components/Order/Order';
@@ -65,7 +64,6 @@ const App = () => {
 
               <Route exact path="/Address" element={<Address />} />
               <Route exact path="/Client" element={<Client />} />
-              <Route exact path="/Employee" element={<Employee />} />
               <Route exact path="/User" element={<User />} />
 
               <Route
