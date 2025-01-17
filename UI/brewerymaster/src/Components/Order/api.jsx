@@ -4,10 +4,7 @@ const apiurl = "https://localhost:7289/api/ProspectOrder";
 
 export const fetchData = (setData) => {
   return axios.get(apiurl)
-    .then((result) => {
-      console.log(result.data)
-      setData(result.data)
-    })
+    .then((result) => setData(result.data))
     .catch((error) => console.log(error));
 };
 
