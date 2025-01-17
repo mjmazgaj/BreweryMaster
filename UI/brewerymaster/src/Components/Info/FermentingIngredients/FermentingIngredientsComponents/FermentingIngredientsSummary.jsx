@@ -116,7 +116,8 @@ const FermentingIngredientsSummary = () => {
         isEmpty={true}
       />
       <ModalConfirmation
-        data={modalData}
+        id={modalData.id}
+        name={modalData.name}
         confirmationAction="delete"
         show={showConfirmationModal}
         setShow={setShowConfirmationModal}

@@ -1,4 +1,4 @@
-export const useModalConfirmation = ({itemId, setShow, confirmationAction}) => {
+export const useModalConfirmation = ({id, setShow, confirmationAction}) => {
 
   const handleClose = () => {
     setShow(false);
@@ -6,7 +6,7 @@ export const useModalConfirmation = ({itemId, setShow, confirmationAction}) => {
 
   const handleDelete = () => {
     setShow(false);
-    console.log(`delete ${itemId}`);
+    console.log(`delete ${id}`);
   };
 
   const confirmationCases = {

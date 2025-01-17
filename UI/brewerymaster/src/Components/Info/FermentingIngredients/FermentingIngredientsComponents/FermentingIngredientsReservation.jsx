@@ -50,7 +50,8 @@ const FermentingIngredientsReservation = () => {
         isEmpty={false}
       />
       <ModalConfirmation
-        data={modalData}
+        id={modalData.id}
+        name={modalData.name}
         confirmationAction="delete"
         show={showConfirmationModal}
         setShow={setShowConfirmationModal}

@@ -3,10 +3,10 @@ import { Modal, Button } from 'react-bootstrap';
 
 import { useModalConfirmation } from './helpers/useModalConfirmation';
 
-const ModalConfirmation = ({ data, confirmationAction, show, setShow }) => {
+const ModalConfirmation = ({ id, name, confirmationAction, show, setShow }) => {
 
   const { handleClose, confirmationObject } = useModalConfirmation(
-    {data, setShow, confirmationAction}
+    {id, setShow, confirmationAction}
   );
 
   return (
@@ -15,7 +15,7 @@ const ModalConfirmation = ({ data, confirmationAction, show, setShow }) => {
         <Modal.Title>{confirmationObject.title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>{data ? data.name : ""}</p>
+        <p>{name}</p>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="dark" onClick={confirmationObject.function}>
