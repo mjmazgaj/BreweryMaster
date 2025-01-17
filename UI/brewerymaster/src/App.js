@@ -10,7 +10,6 @@ import Register from './Components/Basic/Register';
 import Login from './Components/Basic/Login';
 import Error from './Components/Shared/Error';
 
-import Address from './Components/User/Address/Address';
 import Client from './Components/User/Client/Client';
 import User from './Components/User/User.jsx';
 
@@ -62,7 +61,6 @@ const App = () => {
               <Route exact path="/Recipe" element={<Recipe />} />
               <Route exact path="/FermentingIngredients" element={<FermentingIngredients />} />
 
-              <Route exact path="/Address" element={<Address />} />
               <Route exact path="/Client" element={<Client />} />
               <Route exact path="/User" element={<User />} />
 

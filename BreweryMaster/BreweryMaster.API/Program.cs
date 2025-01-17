@@ -7,7 +7,6 @@ using BreweryMaster.API.Recipe.Services.Interfaces;
 using BreweryMaster.API.Shared.Models.DB;
 using BreweryMaster.API.Shared.Services;
 using BreweryMaster.API.User.Models.Users.DB;
-using BreweryMaster.API.UserModule.Services;
 using BreweryMaster.API.WorkModule.Models;
 using BreweryMaster.API.WorkModule.Services;
 using Microsoft.AspNetCore.Identity;
@@ -23,7 +22,6 @@ builder.Services.Configure<OrderSettings>(builder.Configuration.GetSection(nameo
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("BreweryMaster")));
 builder.Services.AddDbContext<WorkDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("BreweryMaster")));
 
-builder.Services.AddScoped<IAddressService, AddressService>();
 builder.Services.AddScoped<IProspectClientService, ProspectClientService>();
 builder.Services.AddScoped<ITaskService, TaskService>();
 builder.Services.AddScoped<IProspectOrderService, ProspectOrderService>();

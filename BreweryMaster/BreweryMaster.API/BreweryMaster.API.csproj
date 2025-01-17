@@ -21,11 +21,9 @@
 
   <ItemGroup>
     <Folder Include="Info\Helpers\" />
-    <Folder Include="Log\" />
     <Folder Include="Recipe\Mappers\" />
     <Folder Include="User\Mappers\" />
-    <Folder Include="Wiki\" />
-    <Folder Include="Raport\" />
+    <Folder Include="User\Services\" />
   </ItemGroup>
 
 </Project>
