@@ -43,15 +43,14 @@ const ModalFormBasic = ({
     ));
 
   const renderCheckBoxes = () =>(
-    action == "add" && fields.checkBox && (
+    fields.checkBox && (
       <div className="modal-form_checkbox-container">
-        <h5>{t("common.selectUnits")}</h5>
         {fields.checkBox.map((checkBoxObject) => (
           <Form.Check
             type="switch"
             key={checkBoxObject.id}
-            id={checkBoxObject.id}
-            label={checkBoxObject.name}
+            id={checkBoxObject.name}
+            label={checkBoxObject.label}
             checked={data[checkBoxObject.name]}
             onChange={() => handleCheckBox(checkBoxObject)}
           />

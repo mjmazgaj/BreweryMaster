@@ -15,8 +15,6 @@ export const useModalFormBasic = ({
   };
   
   const handleCheckBox = (item) => {
-    console.log(item)
-    console.log(data)
     setData((prevData) =>({
       ...prevData,
       [item.name]: !prevData[item.name]
@@ -39,7 +37,7 @@ export const useModalFormBasic = ({
     const { value } = e.target;
     setData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: parseInt(value),
     }));
   };
 
