@@ -35,7 +35,7 @@ const ModalItemAction = ({
   const buttonsSet = {
     default: (
       <>
-        <Button variant="dark" onClick={() => setAction("edit")}>
+        <Button variant="dark" onClick={handleEdit}>
           Edit
         </Button>
         <Button variant="dark" onClick={handleDelete}>
