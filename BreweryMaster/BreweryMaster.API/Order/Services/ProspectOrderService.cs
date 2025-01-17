@@ -118,7 +118,6 @@ namespace BreweryMaster.API.OrderModule.Services
                 {
                     clientToCreate = new ProspectIndyvidualClient()
                     {
-                        Id = 1,
                         Forename = request.Forename,
                         Surname = request.Surname,
                         Email = "email@test.pl",
