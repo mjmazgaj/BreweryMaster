@@ -16,7 +16,6 @@ import Employee from './Components/User/Employee/Employee';
 import User from './Components/User/User.jsx';
 
 import Order from './Components/Order/Order';
-import ProspectOrder from './Components/Order/ProspectOrder/ProspectOrder';
 import Recipe from './Components/Recipe/Recipe';
 import FermentingIngredients from './Components/Info/FermentingIngredients/FermentingIngredients';
 
@@ -28,6 +27,8 @@ import LogoutButton from './Components/Basic/LogoutButton'
 
 import { I18nextProvider } from 'react-i18next';
 import i18n from './i18n';
+import ProspectOrderForm from './Components/Order/ProspectOrderForm.jsx';
+import ProspectOrderSummary from './Components/Order/ProspectOrderSummary.jsx';
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -56,7 +57,8 @@ const App = () => {
               <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated}/>} />
               <Route path="/error" element={<Error />} />
 
-              <Route exact path="/ProspectOrder" element={<ProspectOrder />} />
+              <Route exact path="/ProspectOrder" element={<ProspectOrderForm />} />
+              <Route exact path="/ProspectOrderSummary" element={<ProspectOrderSummary />} />
               <Route exact path="/Order" element={<Order />} />
               <Route exact path="/Recipe" element={<Recipe />} />
               <Route exact path="/FermentingIngredients" element={<FermentingIngredients />} />
