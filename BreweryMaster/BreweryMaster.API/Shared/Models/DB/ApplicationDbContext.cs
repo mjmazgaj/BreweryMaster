@@ -53,6 +53,7 @@ namespace BreweryMaster.API.Shared.Models.DB
         {
             base.OnModelCreating(builder);
 
+            builder.ConfigureUser();
             builder.ConfigureEntity();
             builder.ConfigureItem();
             builder.ConfigureRecipeEntities();
