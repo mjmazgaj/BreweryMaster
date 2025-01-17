@@ -67,7 +67,6 @@ const ModalFormBasic = ({
             <Modal.Title>{actionObject.title}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            {renderDropdowns()}
             <FormControls
               fields={fields.control}
               data={data}
@@ -75,6 +74,7 @@ const ModalFormBasic = ({
               isReadOnly={actionObject.isReadOnly}
               setIsValid={setIsValid}
             />
+            {renderDropdowns()}
             {renderCheckBoxes()}
           </Modal.Body>
           <Modal.Footer>
