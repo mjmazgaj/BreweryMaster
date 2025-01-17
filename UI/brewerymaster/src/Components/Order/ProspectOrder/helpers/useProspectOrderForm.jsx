@@ -108,9 +108,12 @@ export const useProspectOrderForm = () => {
           ),
         },
         {
-          name: "Complition date",
+          name: "Date",
           component: (
             <FormDatePicker
+              id="complitionDate"
+              key="complitionDate"
+              label="Expected complition date"
               selectedDate={selectedDate}
               setSelectedDate={setSelectedDate}
             />

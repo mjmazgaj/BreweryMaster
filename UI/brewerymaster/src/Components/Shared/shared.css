@@ -94,3 +94,8 @@
 .dynamicTable_row{
     cursor: pointer;
 }
+
+.datepicker_container{
+    display: flex;
+    flex-direction: column;
+}
