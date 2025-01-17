@@ -7,7 +7,7 @@ import "../shared.css";
 const DynamicTable = ({tableKey, tableTitle, data, handleDoubleClick}) => {  
   const { t } = useTranslation();
 
-  const keys = data.length > 0 ? Object.keys(data[0]).filter(x=>x !== "id" && x !== "maxQuantity" && x !== "typeId") : ["empty"];
+  const keys = data.length > 0 ? Object.keys(data[0]).filter(x=>!x.toUpperCase().includes("ID") && x !== "maxQuantity") : ["empty"];
 
   return (
     <div className={`dynamicTable-${tableKey}_container`}>
