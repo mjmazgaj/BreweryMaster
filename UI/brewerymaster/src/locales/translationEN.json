@@ -138,7 +138,12 @@
             "stages": "Stages"
         }
     },
-
+    "prospectOrder":{
+        "name":"Name",
+        "email":"Email",
+        "phoneNumber":"Phone number",
+        "capacity":"Capacity"
+    },
     "toast": {
         "addSuccess": "The item has been added successfully."
     }

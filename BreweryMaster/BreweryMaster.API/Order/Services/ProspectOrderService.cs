@@ -73,8 +73,10 @@ namespace BreweryMaster.API.OrderModule.Services
                                 {
                                     Id = x.Id,
                                     BeerStyle = x.BeerStyle.Name,
+                                    BeerStyleId = x.BeerStyleId,
                                     Capacity = x.Capacity,
                                     Container = x.Container.ContainerName,
+                                    ContainerTypeId = x.ContainerId,
                                     ClientName = x.ProspectClient.GetName(),
                                     Email = x.ProspectClient.Email,
                                     PhoneNumber = x.ProspectClient.PhoneNumber,
