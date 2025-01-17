@@ -1,5 +1,5 @@
-﻿using BreweryMaster.API.User.Models.DB;
-using BreweryMaster.API.User.Models.Users;
+﻿using BreweryMaster.API.User.Models.Users;
+using BreweryMaster.API.User.Models.Users.DB;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
