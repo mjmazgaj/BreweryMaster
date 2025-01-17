@@ -41,6 +41,14 @@ export const useModalFormBasic = ({
     }));
   };
 
+  const handleDateChange = (date, fieldName) => {
+    setData((prevData) => ({
+      ...prevData,
+      [fieldName]: date,
+    }));
+  };
+  
+
   const handleAdd = (event, data) => {
     if (!handleFormSubmit(event)) {
       return;
@@ -79,6 +87,7 @@ export const useModalFormBasic = ({
     handleClose,
     actionObject,
     handleCheckBox,
-    handleSelectChange
+    handleSelectChange,
+    handleDateChange
   };
 };

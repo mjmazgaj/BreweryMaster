@@ -31,6 +31,7 @@ export const useProspectOrderSummary = ({data,
             capacity: item.capacity,
             isClosedString: `${item.isClosed}`,
             isClosed: item.isClosed,
+            targetDate: item.targetDate
           });
     
           setFormFields({
@@ -55,13 +56,19 @@ export const useProspectOrderSummary = ({data,
                 isChecked: item.isClosed,
               },
             ],
+            datePicker:[
+              {
+                name: "targetDate",
+                label: "Expected Date",
+              },
+            ]
           });
         };
         
           useEffect(() => {
             fetchData(setData);
             fetchDetails(setDetails);
-          }, [data]);
+          }, []);
 
   return {
     handleDoubleClick

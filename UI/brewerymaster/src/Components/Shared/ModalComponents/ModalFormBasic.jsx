@@ -6,6 +6,7 @@ import FormControls from "../FormControls";
 
 import { useTranslation } from "react-i18next";
 import DropDownIndex from "../DropDownIndex";
+import FormDatePicker from "../FormDatePicker";
 
 const ModalFormBasic = ({
   fields,
@@ -19,7 +20,13 @@ const ModalFormBasic = ({
   const { t } = useTranslation();
   const [isValid, setIsValid] = useState(true);
 
-  const { handleClose, actionObject, handleCheckBox, handleSelectChange } = useModalFormBasic({
+  const {
+    handleClose,
+    actionObject,
+    handleCheckBox,
+    handleSelectChange,
+    handleDateChange,
+  } = useModalFormBasic({
     data,
     setData,
     setShow,
@@ -29,22 +36,29 @@ const ModalFormBasic = ({
   });
 
   const renderDropdowns = () =>
-    fields.dropdown &&
-    fields.dropdown.map((dropdownObject, index) => (
-      <DropDownIndex
-        key={index}
-        id={"modal-form_dropdown"}
-        data={dropdownObject.data}
-        selectedOption={data[dropdownObject.name]}
-        setSelectedOption={(e) => handleSelectChange(e, dropdownObject.name)}
-        isReadOnly={actionObject.isReadOnly}
-        label={dropdownObject.label}
-      />
-    ));
+    fields?.dropdown && (
+      <div className="modal-form_dropdown-container">
+        <hr />
+        {fields.dropdown.map((dropdownObject, index) => (
+          <DropDownIndex
+            key={index}
+            id={"modal-form_dropdown"}
+            data={dropdownObject.data}
+            selectedOption={data[dropdownObject.name]}
+            setSelectedOption={(e) =>
+              handleSelectChange(e, dropdownObject.name)
+            }
+            isReadOnly={actionObject.isReadOnly}
+            label={dropdownObject.label}
+          />
+        ))}
+      </div>
+    );
 
   const renderCheckBoxes = () =>(
-    fields.checkBox && (
+    fields?.checkBox && (
       <div className="modal-form_checkbox-container">
+        <hr />
         {fields.checkBox.map((checkBoxObject) => (
           <Form.Check
             type="switch"
@@ -58,6 +72,22 @@ const ModalFormBasic = ({
       </div>
     )
   )
+
+  const renderDatePickers = () =>
+    fields?.datePicker && (
+      <div className="modal-form_datepicker-container">
+        <hr />
+        {fields.datePicker.map((datePickerObject) => (
+          <FormDatePicker
+            key={datePickerObject.name}
+            id={`datepicker-${datePickerObject.name}`}
+            label={datePickerObject.label}
+            selectedDate={data[datePickerObject.name]}
+            setSelectedDate={(date) => handleDateChange(date, datePickerObject.name)}
+          />
+        ))}
+      </div>
+    );
   
   return (
     fields && (
@@ -76,6 +106,7 @@ const ModalFormBasic = ({
             />
             {renderDropdowns()}
             {renderCheckBoxes()}
+            {renderDatePickers()}
           </Modal.Body>
           <Modal.Footer>
             <Button type="submit" variant="dark" disabled={!isValid}>
