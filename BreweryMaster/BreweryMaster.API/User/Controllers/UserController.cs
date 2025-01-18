@@ -58,9 +58,16 @@ namespace BreweryMaster.API.UserModule.Controllers
             if (request.UserAuthInfo.Password != request.UserAuthInfo.ConfirmPassword)
                 return BadRequest(new { message = "Passwords do not match." });
 
-            var createdUser = await _userService.CreateUser(request);
+            try
+            {
+                var createdUser = await _userService.CreateUser(request);
+                return CreatedAtAction(nameof(GetUserById), new { id = createdUser.Id }, createdUser);
+            }
+            catch (Exception)
+            {
+                return UnprocessableEntity($"{request.UserAuthInfo.Email} registration faild");
+            }
 
-            return CreatedAtAction(nameof(GetUserById), new { id = createdUser.Id }, createdUser);
         }
 
         [HttpPut]
