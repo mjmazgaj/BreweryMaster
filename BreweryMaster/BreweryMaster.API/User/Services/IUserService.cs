@@ -1,7 +1,6 @@
-﻿using BreweryMaster.API.User.Models;
-using BreweryMaster.API.User.Models.Users;
+﻿using BreweryMaster.API.User.Models.Users;
 using BreweryMaster.API.User.Models.Users.DB;
-using BreweryMaster.API.UserModule.Models;
+using System.Security.Claims;
 
 namespace BreweryMaster.API.User.Services
 {
@@ -9,9 +8,9 @@ namespace BreweryMaster.API.User.Services
     {
         Task<IEnumerable<UserResponse>?> GetUsers();
         Task<UserResponse?> GetUserById(string id);
-        Task<AddressResponse?> GetAddressById(int id);
+        UserResponse GetCurrentUser(ClaimsPrincipal? user);
         Task<ApplicationUser> CreateUser(UserRegisterRequest request);
-        Address AddAddress(AddressRequest request, string userId);
-        Task<Address> CreateAddress(AddressRequest request, string userId);
+        Task<ApplicationUser> UpdateUser(UserUpdateRequest request, string userId);
+
     }
 }

@@ -1,10 +1,8 @@
-﻿using BreweryMaster.API.User.Models;
-using BreweryMaster.API.User.Models.Users;
+﻿using BreweryMaster.API.User.Models.Users;
 using BreweryMaster.API.User.Models.Users.DB;
 using BreweryMaster.API.User.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace BreweryMaster.API.UserModule.Controllers
 {
@@ -48,21 +46,6 @@ namespace BreweryMaster.API.UserModule.Controllers
             return Ok(user);
         }
 
-        [HttpGet]
-        [Route("address/{id:int}")]
-        [ProducesResponseType(typeof(AddressResponse), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<AddressResponse?>> GetAddressById(int id)
-        {
-            var address = await _userService.GetAddressById(id);
-
-            if (address == null)
-                return NotFound();
-
-            return Ok(address);
-        }
-
         [HttpPost]
         [Route("register")]
         [ProducesResponseType(typeof(UserResponse), StatusCodes.Status201Created)]
@@ -81,7 +64,7 @@ namespace BreweryMaster.API.UserModule.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update(UserUpdateRequest request)
+        public async Task<IActionResult> Update(UserUpdateRequest request, string userId)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -89,49 +72,33 @@ namespace BreweryMaster.API.UserModule.Controllers
             if (request.Password != request.ConfirmPassword)
                 return BadRequest(new { message = "Passwords do not match." });
 
-            var userToUpdate = new ApplicationUser
+            try
             {
-                UserName = request.Email,
-                Email = request.Email
-            };
-
-            var user = await _userManager.FindByIdAsync(request.Id);
-            if (user == null)
+                await _userService.UpdateUser(request, userId);
+            }
+            catch (Exception)
             {
-                return NotFound("Użytkownik nie istnieje");
+                return BadRequest("User not updated");
             }
 
-            user.Email = request.Email;
-            user.UserName = request.Email;
-
-            var result = await _userManager.UpdateAsync(user);
-            if (!result.Succeeded)
-            {
-                return BadRequest(result.Errors);
-            }
-
-            return Ok(new { message = "User updat4ed successfully." });
+            return Ok(new { message = "User updated successfully." });
         }
 
         [HttpGet]
         [Route("info")]
         public IActionResult GetInfo()
         {
-            var user = HttpContext.User;
+            var userContext = HttpContext.User;
 
-            if (user.Identity != null && user.Identity.IsAuthenticated)
+            try
             {
-                var emailClaim = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email);
-                var nameIdClaim = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
-
-                return Ok(new
-                {
-                    Id = nameIdClaim?.Value,
-                    Email = emailClaim?.Value
-                });
+                var user = _userService.GetCurrentUser(userContext);
+                return Ok(user);
             }
-
-            return Unauthorized();
+            catch (Exception)
+            {
+                return Unauthorized();
+            }
         }
 
         [HttpPost]

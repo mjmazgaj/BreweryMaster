@@ -1,26 +1,23 @@
-﻿using Azure.Core;
-using BreweryMaster.API.OrderModule.Models;
-using BreweryMaster.API.Shared.Models.DB;
-using BreweryMaster.API.User.Models;
+﻿using BreweryMaster.API.Shared.Models.DB;
 using BreweryMaster.API.User.Models.Users;
 using BreweryMaster.API.User.Models.Users.DB;
-using BreweryMaster.API.UserModule.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace BreweryMaster.API.User.Services
 {
     public class UserService : IUserService
     {
-        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
+        private readonly IAddressService _addressService;
 
-        public UserService(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
+        public UserService(UserManager<ApplicationUser> userManager, ApplicationDbContext context, IAddressService addressService)
         {
-            _signInManager = signInManager;
             _userManager = userManager;
             _context = context;
+            _addressService = addressService;
         }
 
         public async Task<IEnumerable<UserResponse>?> GetUsers()
@@ -51,29 +48,28 @@ namespace BreweryMaster.API.User.Services
             return userResponse;
         }
 
-        public async Task<AddressResponse?> GetAddressById(int id)
+        public UserResponse GetCurrentUser(ClaimsPrincipal? user)
         {
-            var address = await _context.Addresses.FirstOrDefaultAsync(x => x.Id == id);
+            if (user is null)
+                throw new Exception("user not found");
 
-            AddressResponse addressResponse = null!;
+            if (user.Identity is null)
+                throw new Exception("user identity not found");
 
-            if (address is not null)
+            if (user.Identity.IsAuthenticated == false)
+                throw new Exception("user not authenticated");
+
+            var emailClaim = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email);
+            var nameIdClaim = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+
+            if (emailClaim is null || nameIdClaim is null)
+                throw new Exception("user claims not found");
+
+            return new UserResponse()
             {
-                addressResponse = new AddressResponse()
-                {
-                    Id = address.Id,
-                    Street = address.Street,
-                    HouseNumber = address.HouseNumber,
-                    ApartamentNumber = address.ApartamentNumber,
-                    City = address.City,
-                    PostalCode = address.PostalCode,
-                    Commune = address.Commune,
-                    Region = address.Region,
-                    Country = address.Country,
-                };
+                Id = nameIdClaim.Value,
+                Email = emailClaim.Value
             };
-
-            return addressResponse;
         }
 
         public async Task<ApplicationUser> CreateUser(UserRegisterRequest request)
@@ -95,7 +91,7 @@ namespace BreweryMaster.API.User.Services
                     throw new Exception();
 
                 if (request.Address is not null)
-                    AddAddress(request.Address, userToCreate.Id);
+                    _addressService.AddAddress(request.Address, userToCreate.Id);
 
                 await _context.SaveChangesAsync();
 
@@ -115,32 +111,22 @@ namespace BreweryMaster.API.User.Services
             }
         }
 
-        public Address AddAddress(AddressRequest request, string userId)
+        public async Task<ApplicationUser> UpdateUser(UserUpdateRequest request, string userId)
         {
-            var addressToCreate = new Address
-            {
-                Street = request.Street,
-                HouseNumber = request.HouseNumber,
-                ApartamentNumber = request.ApartamentNumber,
-                City = request.City,
-                PostalCode = request.PostalCode,
-                Commune = request.Commune,
-                Region = request.Region,
-                Country = request.Country,
-                UserId = userId,
-                User = null!,
-            };
+            var user = await _userManager.FindByIdAsync(request.Id);
 
-            _context.Addresses.Add(addressToCreate);
+            if (user == null)
+                throw new Exception();
 
-            return addressToCreate;
-        }
+            user.Email = request.Email;
+            user.UserName = request.Email;
 
-        public async Task<Address> CreateAddress(AddressRequest request, string userId)
-        {
-            var addressToCreate = AddAddress(request, userId);
-            await _context.SaveChangesAsync();
-            return addressToCreate;
+            var result = await _userManager.UpdateAsync(user);
+
+            if (!result.Succeeded)
+                throw new Exception();
+
+            return user;
         }
     }
 }
