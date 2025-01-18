@@ -1,9 +1,9 @@
-﻿using BreweryMaster.API.User.Models.Users;
+﻿using BreweryMaster.API.User.Models;
+using BreweryMaster.API.User.Models.Users;
 using BreweryMaster.API.User.Models.Users.DB;
+using BreweryMaster.API.User.Services;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace BreweryMaster.API.UserModule.Controllers
@@ -14,46 +14,70 @@ namespace BreweryMaster.API.UserModule.Controllers
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IUserService _userService;
 
-        public UserController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
+        public UserController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IUserService userService)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _userService = userService;
         }
 
         [HttpGet]
-        public async Task<IEnumerable<UserResponse>> GetAllUsers()
+        [ProducesResponseType(typeof(IEnumerable<UserResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<UserResponse>?>> GetUsers()
         {
-            var users = await _userManager.Users.ToListAsync();
-            return users.Select(x => new UserResponse()
-            {
-                Id = x.Id,
-                UserName = x.NormalizedUserName
-            });
+            var users = await _userService.GetUsers();
+
+            return Ok(users);
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        [ProducesResponseType(typeof(UserResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<UserResponse?>> GetUserById(string id)
+        {
+            var user = await _userService.GetUserById(id);
+
+            if (user == null)
+                return NotFound();
+
+            return Ok(user);
+        }
+
+        [HttpGet]
+        [Route("address/{id:int}")]
+        [ProducesResponseType(typeof(AddressResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<AddressResponse?>> GetAddressById(int id)
+        {
+            var address = await _userService.GetAddressById(id);
+
+            if (address == null)
+                return NotFound();
+
+            return Ok(address);
         }
 
         [HttpPost]
         [Route("register")]
+        [ProducesResponseType(typeof(UserResponse), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Register(UserRegisterRequest request)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            if (request.Password != request.ConfirmPassword)
+            if (request.UserAuthInfo.Password != request.UserAuthInfo.ConfirmPassword)
                 return BadRequest(new { message = "Passwords do not match." });
 
-            var user = new ApplicationUser
-            {
-                UserName = request.Email,
-                Email = request.Email
-            };
+            var createdUser = await _userService.CreateUser(request);
 
-            var result = await _userManager.CreateAsync(user, request.Password);
-
-            if (!result.Succeeded)
-                return BadRequest(result.Errors);
-
-            return Ok(new { message = "User registered successfully." });
+            return CreatedAtAction(nameof(GetUserById), new { id = createdUser.Id }, createdUser);
         }
 
         [HttpPut]

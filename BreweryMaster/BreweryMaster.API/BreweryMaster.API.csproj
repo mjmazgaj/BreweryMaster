@@ -23,7 +23,6 @@
     <Folder Include="Info\Helpers\" />
     <Folder Include="Recipe\Mappers\" />
     <Folder Include="User\Mappers\" />
-    <Folder Include="User\Services\" />
   </ItemGroup>
 
 </Project>
