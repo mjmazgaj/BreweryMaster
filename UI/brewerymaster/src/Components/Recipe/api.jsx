@@ -8,8 +8,8 @@ export const fetchData = (path, setData) => {
     .catch((error) => console.log(error));
 };
 
-export const fetchDataById = (id) => {
-  return axios.get(`${apiurl}/${id}`)
+export const fetchDataById = (path, id) => {
+  return axios.get(`${apiurl}/${path}/${id}`)
     .then((result) => result.data)
     .catch((error) => console.log(error));
 };

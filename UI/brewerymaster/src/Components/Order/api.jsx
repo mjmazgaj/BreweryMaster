@@ -1,9 +1,10 @@
 import axios from 'axios';
 
-const apiurl = "https://localhost:7289/api/ProspectOrder";
+const apiurl = "https://localhost:7289/api";
 
-export const fetchData = (setData) => {
-  return axios.get(apiurl)
+export const fetchData = (path, setData) => {
+  return axios
+    .get(`${apiurl}/${path}`)
     .then((result) => setData(result.data))
     .catch((error) => console.log(error));
 };
@@ -26,8 +27,8 @@ export const fetchDetails = (setDetails) => {
     .catch((error) => console.log(error));
 };
 
-export const fetchDataById = (id) => {
-  return axios.get(`${apiurl}/${id}`)
+export const fetchDataById = (path, id) => {
+  return axios.get(`${apiurl}/${path}/${id}`)
     .then((result) => result.data)
     .catch((error) => console.log(error));
 };

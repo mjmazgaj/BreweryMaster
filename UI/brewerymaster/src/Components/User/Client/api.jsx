@@ -1,33 +1,33 @@
 import axios from 'axios';
 
-const apiurl = "https://localhost:7289/api/Client";
+const apiurl = "https://localhost:7289/api";
 
-export const fetchData = () => {
-  return axios.get(apiurl)
+export const fetchData = (path, setData) => {
+  return axios.get(`${apiurl}/${path}`)
+    .then((result) => setData(result.data))
+    .catch((error) => console.log(error));
+};
+
+export const fetchDataById = (path, id) => {
+  return axios.get(`${apiurl}/${path}/${id}`)
     .then((result) => result.data)
     .catch((error) => console.log(error));
 };
 
-export const fetchDataById = (id) => {
-  return axios.get(`${apiurl}/${id}`)
+export const addData = (path, data) => {
+  return axios.post(`${apiurl}/${path}`, data)
     .then((result) => result.data)
     .catch((error) => console.log(error));
 };
 
-export const addData = (data) => {
-  return axios.post(`${apiurl}`, data)
+export const updateData = (path, id, data) => {
+  return axios.put(`${apiurl}/${id}/${path}`, data)
     .then((result) => result.data)
     .catch((error) => console.log(error));
 };
 
-export const updateData = (id, data) => {
-  return axios.put(`${apiurl}/${id}`, data)
-    .then((result) => result.data)
-    .catch((error) => console.log(error));
-};
-
-export const deleteData = (id) => {
-  return axios.delete(`${apiurl}/${id}`)
+export const deleteData = (path, id) => {
+  return axios.delete(`${apiurl}/${id}/${path}`)
     .then((result) => result.status === 200)
     .catch((error) => console.log(error));
 };

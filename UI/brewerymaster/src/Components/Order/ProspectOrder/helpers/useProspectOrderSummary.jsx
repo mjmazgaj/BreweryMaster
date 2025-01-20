@@ -66,7 +66,7 @@ export const useProspectOrderSummary = ({data,
         };
         
           useEffect(() => {
-            fetchData(setData);
+            fetchData("ProspectOrder" ,setData);
             fetchDetails(setDetails);
           }, []);
 

@@ -36,19 +36,13 @@ const[editEmail, setEditEmail] = useState('');
 const [data, setData]  = useState([]);
 
 useEffect(()=>{
-    getData();
+  fetchData("client", setData);
 },[])
 
 
-const getData = () => {
-  fetchData()
-  .then((result) => setData(result))
-  .catch((error) => console.log(error));
-};
-
 const handleEdit = (id) => {
   setShow(true);
-  fetchDataById(id)
+  fetchDataById("client", id)
     .then((result) => {
       setEditForename(result.forename);
       setEditSurname(result.surname);
@@ -69,7 +63,7 @@ const handleDelete = (id) => {
       .then((result) => {
         if (result) {
           toast.success('Address has been deleted');
-          getData();
+          fetchData("client", setData);
         }
       })
       .catch((error) => toast.error(error));
@@ -94,7 +88,7 @@ const handleUpdate = () => {
     .then(() => {
       console.log(updatedData);
       setShow(false);
-      getData();
+      fetchData("client", setData);
       clear();
       toast.success('Client has been updated');
     })
@@ -115,7 +109,7 @@ const handleSave = () => {
 
   addData(newData)
     .then(() => {
-      getData();
+      fetchData("client", setData);
       clear();
       toast.success('Client has been added');
     })
