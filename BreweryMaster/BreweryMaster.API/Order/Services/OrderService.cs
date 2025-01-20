@@ -26,15 +26,19 @@ namespace BreweryMaster.API.OrderModule.Services
         {
             return await _context.Orders
                         .Include(x => x.Container)
+                        .Include(x => x.Recipe)
+                        .Include(x => x.User)
                         .Select(x => new OrderResponse()
                         {
                             Id = x.Id,
                             Capacity = x.Capacity,
                             UserId = x.UserId,
-                            ContainerType = x.Container.ContainerName,
+                            User = x.User.UserName,
                             ContainerId = x.Container.Id,
+                            Container = x.Container.ContainerName,
                             Price = x.Price,
                             RecipeId = x.RecipeId,
+                            Recipe = x.Recipe.Name,
                             TargetDate = x.TargetDate,
                         }).ToListAsync();
         }
@@ -48,10 +52,12 @@ namespace BreweryMaster.API.OrderModule.Services
                             Id = x.Id,
                             Capacity = x.Capacity,
                             UserId = x.UserId,
-                            ContainerType = x.Container.ContainerName,
+                            User = x.User.UserName,
                             ContainerId = x.Container.Id,
+                            Container = x.Container.ContainerName,
                             Price = x.Price,
                             RecipeId = x.RecipeId,
+                            Recipe = x.Recipe.Name,
                             TargetDate = x.TargetDate,
                         }).FirstOrDefaultAsync(x => x.Id == id);
         }

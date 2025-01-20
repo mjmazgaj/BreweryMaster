@@ -6,7 +6,7 @@ import { addData } from '../api';
 
 import Contact from './../../Shared/Contact'
 import MenuSteps from '../../Shared/MenuSteps';
-import Recipe from "./Recipe";
+import RecipeTable from "../../Recipe/RecipeComponents/RecipeTable";
 
 const OrderForm = () => {  
 
@@ -71,7 +71,7 @@ const OrderForm = () => {
     {
       name: "Please select a recipe",
       component: (
-        <Recipe
+        <RecipeTable
           selectedRecipe={selectedRecipe}
           setSelectedRecipe={setSelectedRecipe}
         />
@@ -87,11 +87,14 @@ const OrderForm = () => {
 
   return (
     <Form className="order-form">
-      <MenuSteps currentStep={currentStep} setCurrentStep={setCurrentStep} amountOfSteps={steps.length} />
+      <MenuSteps
+        currentStep={currentStep}
+        setCurrentStep={setCurrentStep}
+        amountOfSteps={steps.length}
+      />
 
       <h2>{steps[currentStep].name}</h2>
       <div>{steps[currentStep].component}</div>
-
       {currentStep === steps.length - 1 ? (
         <Button variant="dark" onClick={handleSave}>
           Submit
