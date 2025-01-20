@@ -7,6 +7,7 @@ using BreweryMaster.API.Recipe.Models.DB;
 using BreweryMaster.API.Shared.Extensions;
 using BreweryMaster.API.Info.Models.Item;
 using BreweryMaster.API.User.Models.Users.DB;
+using BreweryMaster.API.User.Models.DB;
 
 namespace BreweryMaster.API.Shared.Models.DB
 {
@@ -18,6 +19,8 @@ namespace BreweryMaster.API.Shared.Models.DB
         }
 
         //User
+        public DbSet<IndividualUser> IndividualUsers { get; set; }
+        public DbSet<CompanyUser> CompanyUsers { get; set; }
         public DbSet<Address> Addresses { get; set; }
 
         //Shared

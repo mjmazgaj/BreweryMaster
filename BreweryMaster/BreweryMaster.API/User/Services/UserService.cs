@@ -23,17 +23,39 @@ namespace BreweryMaster.API.User.Services
 
         public async Task<IEnumerable<UserResponse>?> GetUsers()
         {
-            var users = await _userManager.Users.ToListAsync();
-            return users.Select(x => new UserResponse()
+            var response = new List<UserResponse>();
+
+            var companyUsers = await _context.CompanyUsers.Include(x=>x.DeliveryAddress).ToListAsync();
+            var individualUsers = await _context.IndividualUsers.Include(x => x.DeliveryAddress).ToListAsync();
+
+            response.AddRange(companyUsers.Select(x => new UserResponse()
             {
                 Id = x.Id,
-                Email = x.Email
-            });
+                PostCode = x.DeliveryAddress?.PostalCode,
+                City = x.DeliveryAddress?.City,
+                Email = x.Email,
+                Name = x.CompanyName,
+                IsCompany = true
+            }));
+
+            response.AddRange(individualUsers.Select(x => new UserResponse()
+            {
+                Id = x.Id,
+                PostCode = x.DeliveryAddress?.PostalCode,
+                City = x.DeliveryAddress?.City,
+                Email = x.Email,
+                Name = $"{x.Surname} {x.Forename}",
+                IsCompany = false
+            }));
+
+            return response;
         }
 
         public async Task<UserResponse?> GetUserById(string id)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
+            var userList = await GetUsers();
+
+            var user = userList?.FirstOrDefault(x => x.Id == id);
 
             UserResponse userResponse = null!;
 
@@ -82,7 +104,7 @@ namespace BreweryMaster.API.User.Services
             {
                 ApplicationUser userToCreate = null!;
 
-                if(request.IsCompany)
+                if (request.IsCompany)
                 {
                     if (request.CompanyUserInfo is null)
                         throw new Exception();
