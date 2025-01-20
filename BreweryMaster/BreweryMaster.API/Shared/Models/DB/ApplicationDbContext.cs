@@ -61,6 +61,7 @@ namespace BreweryMaster.API.Shared.Models.DB
             builder.ConfigureRecipeEntities();
             builder.ConfigureProspectOrder();
             builder.ConfigureFermentingIngredientEntities();
+            builder.ConfigureOrder();
         }
     }
 }

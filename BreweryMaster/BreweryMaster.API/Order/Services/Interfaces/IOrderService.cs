@@ -1,10 +1,11 @@
 ﻿using BreweryMaster.API.OrderModule.Models;
+using System.Security.Claims;
 
 public interface IOrderService
 {
-    Task<IEnumerable<Order>> GetOrdersAsync();
-    Task<Order?> GetOrderByIdAsync(int id);
-    Task<Order> CreateOrderAsync(OrderRequest rder);
-    Task<bool> EditOrderAsync(int id, Order order);
+    Task<IEnumerable<OrderResponse>> GetOrdersAsync();
+    Task<OrderResponse?> GetOrderByIdAsync(int id);
+    Task<Order> CreateOrderAsync(OrderRequest request, ClaimsPrincipal? user);
+    Task<bool> EditOrderAsync(int id, OrderUpdateRequest request);
     Task<bool> DeleteOrderByIdAsync(int id);
 }

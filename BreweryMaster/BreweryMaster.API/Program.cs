@@ -23,6 +23,7 @@ builder.Services.Configure<OrderSettings>(builder.Configuration.GetSection(nameo
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("BreweryMaster")));
 builder.Services.AddDbContext<WorkDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("BreweryMaster")));
 
+builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAddressService, AddressService>();
 builder.Services.AddScoped<IProspectClientService, ProspectClientService>();
