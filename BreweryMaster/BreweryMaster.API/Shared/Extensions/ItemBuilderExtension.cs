@@ -1,5 +1,4 @@
 ﻿using BreweryMaster.API.Info.Models.Item;
-using BreweryMaster.API.OrderModule.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BreweryMaster.API.Shared.Extensions
@@ -16,8 +15,8 @@ namespace BreweryMaster.API.Shared.Extensions
             );
 
             builder.Entity<Container>().HasData(ItemDataProvider.GetContainers());
-            builder.Entity<Info.Models.Item.ContainerPrice>().HasData(ItemDataProvider.GetContainerPrices());
-            builder.Entity<Info.Models.Item.BeerPrice>().HasData(ItemDataProvider.GetBeerPrices());
+            builder.Entity<ContainerPrice>().HasData(ItemDataProvider.GetContainerPrices());
+            builder.Entity<BeerPrice>().HasData(ItemDataProvider.GetBeerPrices());
         }
     }
 }

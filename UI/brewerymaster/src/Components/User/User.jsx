@@ -15,7 +15,6 @@ const User = () => {
     fetchUsers(setUsers);
   }, []);
 
-
   return (
     <div>
       <h2>User</h2>
