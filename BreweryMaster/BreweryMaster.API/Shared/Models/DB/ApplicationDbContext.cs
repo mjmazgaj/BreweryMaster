@@ -7,7 +7,6 @@ using BreweryMaster.API.Recipe.Models.DB;
 using BreweryMaster.API.Shared.Extensions;
 using BreweryMaster.API.Info.Models.Item;
 using BreweryMaster.API.User.Models.Users.DB;
-using BreweryMaster.API.Shared.Helpers;
 
 namespace BreweryMaster.API.Shared.Models.DB
 {

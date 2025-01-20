@@ -4,5 +4,8 @@
     {
         public required UserRequest UserAuthInfo { get; set; }
         public AddressRequest? Address { get; set; }
+        public bool IsCompany { get;}
+        public IndividualUserRequest? IndividualUserInfo { get; set; }
+        public CompanyUserRequest? CompanyUserInfo{ get; set; }
     }
 }

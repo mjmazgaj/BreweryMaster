@@ -1,4 +1,5 @@
 ﻿using BreweryMaster.API.Shared.Models.DB;
+using BreweryMaster.API.User.Models.DB;
 using BreweryMaster.API.User.Models.Users;
 using BreweryMaster.API.User.Models.Users.DB;
 using Microsoft.AspNetCore.Identity;
@@ -79,11 +80,34 @@ namespace BreweryMaster.API.User.Services
 
             try
             {
-                var userToCreate = new ApplicationUser
+                ApplicationUser userToCreate = null!;
+
+                if(request.IsCompany)
                 {
-                    UserName = request.UserAuthInfo.Email,
-                    Email = request.UserAuthInfo.Email,
-                };
+                    if (request.CompanyUserInfo is null)
+                        throw new Exception();
+
+                    userToCreate = new CompanyUser
+                    {
+                        UserName = request.UserAuthInfo.Email,
+                        Email = request.UserAuthInfo.Email,
+                        CompanyName = request.CompanyUserInfo.CompanyName,
+                        Nip = request.CompanyUserInfo.Nip,
+                    };
+                }
+                else
+                {
+                    if (request.IndividualUserInfo is null)
+                        throw new Exception();
+
+                    userToCreate = new IndividualUser
+                    {
+                        UserName = request.UserAuthInfo.Email,
+                        Email = request.UserAuthInfo.Email,
+                        Forename = request.IndividualUserInfo.Forename,
+                        Surname = request.IndividualUserInfo.Surname,
+                    };
+                }
 
                 var result = await _userManager.CreateAsync(userToCreate, request.UserAuthInfo.Password);
 

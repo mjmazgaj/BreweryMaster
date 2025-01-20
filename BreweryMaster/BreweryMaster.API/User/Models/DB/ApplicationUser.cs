@@ -5,7 +5,7 @@ namespace BreweryMaster.API.User.Models.Users.DB
 {
     public class ApplicationUser : IdentityUser
     {
-        public Address? Address { get; set; }
+        public Address? DeliveryAddress { get; set; }
         public bool IsRemoved { get; set; } = false;
     }
 }
