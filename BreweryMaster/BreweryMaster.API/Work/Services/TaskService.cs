@@ -15,28 +15,38 @@ namespace BreweryMaster.API.WorkModule.Services
         {
             _context = context;
         }
-
         public async Task<Dictionary<string, KanbanTaskGroupResponse>> GetKanbanTasksByOwnerIdAsync(string ownerId)
         {
-            return await _context.KanbanTasks.Include(x => x.Status)
+            var groupedTasks = await _context.KanbanTasks
+                .Include(x => x.Status)
                 .Where(x => x.AssignedToId == ownerId)
                 .GroupBy(x => x.Status)
-                .ToDictionaryAsync(x => x.Key.Name, x => new KanbanTaskGroupResponse()
+                .ToListAsync();
+
+            var result = groupedTasks.ToDictionary(
+                group => group.Key.Name,
+                group => new KanbanTaskGroupResponse
                 {
-                    Title = $"Status {x.Key.Name}",
-                    Status = x.Key.Id,
-                    Items = x.ToList().Select(y => y.ToResponseModel())
+                    Title = $"Status {group.Key.Name}",
+                    Status = group.Key.Id,
+                    Items = group.Select(task => task.ToResponseModel()).ToList()
                 });
+
+            return result;
         }
 
         public async Task<IEnumerable<KanbanTaskResponse>> GetKanbanTasksByOrderIdAsync(int orderId)
         {
-            return await _context.KanbanTasks.Where(x => x.OrderId == orderId).Select(x => x.ToResponseModel()).ToListAsync();
+            var tasks = await _context.KanbanTasks.Include(x => x.Status).ToListAsync();
+
+            return tasks.Where(x => x.OrderId == orderId).Select(x => x.ToResponseModel());
         }
 
         public async Task<KanbanTaskResponse?> GetKanbanTaskByIdAsync(int id)
         {
-            return await _context.KanbanTasks.Select(x => x.ToResponseModel()).FirstOrDefaultAsync(x => x.Id == id);
+            var tasks = await _context.KanbanTasks.Include(x=>x.Status).ToListAsync();
+
+            return tasks.Select(x => x.ToResponseModel()).FirstOrDefault(x => x.Id == id);
         }
 
         public async Task<KanbanTask> CreateKanbanTaskAsync(KanbanTaskRequest kanbanTask)
