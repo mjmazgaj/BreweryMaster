@@ -52,6 +52,7 @@ namespace BreweryMaster.API.Shared.Models.DB
 
         //Work KanbanTasks
         public DbSet<KanbanTask> KanbanTasks { get; set; }
+        public DbSet<TaskStatusEntity> TaskStatusEntities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
