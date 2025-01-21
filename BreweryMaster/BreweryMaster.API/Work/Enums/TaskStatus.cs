@@ -1,4 +1,4 @@
-﻿namespace BreweryMaster.API.WorkModule.Models
+﻿namespace BreweryMaster.API.Work.Enums
 {
     public enum TaskStatus
     {

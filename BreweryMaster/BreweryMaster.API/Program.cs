@@ -21,7 +21,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<OrderSettings>(builder.Configuration.GetSection(nameof(OrderSettings)));
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("BreweryMaster")));
-builder.Services.AddDbContext<WorkDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("BreweryMaster")));
 
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IUserService, UserService>();

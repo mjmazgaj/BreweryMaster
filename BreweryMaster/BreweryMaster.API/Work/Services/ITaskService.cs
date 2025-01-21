@@ -1,18 +1,17 @@
-﻿using BreweryMaster.API.WorkModule.Models;
-using BreweryMaster.API.WorkModule.Models.Dtos;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using BreweryMaster.API.Work.Models;
+using BreweryMaster.API.Work.Models.DB;
+using BreweryMaster.API.WorkModule.Models;
 
 namespace BreweryMaster.API.WorkModule.Services
 {
     public interface ITaskService
     {
-        Task<Dictionary<string, Column>> GetKanbanTasksByOwnerIdAsync(int ownerId);
-        Task<IEnumerable<KanbanTask>> GetKanbanTasksByOrderIdAsync(int orderId);
-        Task<KanbanTask?> GetKanbanTaskByIdAsync(int id);
-        Task<KanbanTask> CreateKanbanTaskAsync(KanbanTask kanbanTask);
-        Task<bool> EditKanbanTaskAsync(int id, KanbanTask kanbanTask);
-        Task<bool> EditKanbanTaskStatusAsync(List<KanbanTaskStatusSaveRequest> request);
+        Task<Dictionary<string, KanbanTaskGroupResponse>> GetKanbanTasksByOwnerIdAsync(string ownerId);
+        Task<IEnumerable<KanbanTaskResponse>> GetKanbanTasksByOrderIdAsync(int orderId);
+        Task<KanbanTaskResponse?> GetKanbanTaskByIdAsync(int id);
+        Task<KanbanTask> CreateKanbanTaskAsync(KanbanTaskRequest kanbanTask);
+        Task<bool> EditKanbanTaskAsync(int id, KanbanTaskUpdateRequest kanbanTask);
+        Task<bool> EditKanbanTaskStatusAsync(List<KanbanTaskStatusRequest> request);
         Task<bool> DeleteKanbanTaskByIdAsync(int id);
     }
 }

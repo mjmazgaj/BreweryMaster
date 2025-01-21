@@ -8,6 +8,7 @@ using BreweryMaster.API.Shared.Extensions;
 using BreweryMaster.API.Info.Models.Item;
 using BreweryMaster.API.User.Models.Users.DB;
 using BreweryMaster.API.User.Models.DB;
+using BreweryMaster.API.Work.Models.DB;
 
 namespace BreweryMaster.API.Shared.Models.DB
 {
@@ -49,7 +50,8 @@ namespace BreweryMaster.API.Shared.Models.DB
         public DbSet<RecipeFermentingIngredient> RecipeFermentingIngredients { get; set; }
         public DbSet<RecipeTypeEntity> RecipeTypes { get; set; }
 
-        //Work
+        //Work KanbanTasks
+        public DbSet<KanbanTask> KanbanTasks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -62,6 +64,7 @@ namespace BreweryMaster.API.Shared.Models.DB
             builder.ConfigureProspectOrder();
             builder.ConfigureFermentingIngredientEntities();
             builder.ConfigureOrder();
+            builder.ConfigureKanbanTask();
         }
     }
 }

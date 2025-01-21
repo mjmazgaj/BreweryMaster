@@ -26,7 +26,7 @@ namespace BreweryMaster.API.Shared.Extensions
                       .OnDelete(DeleteBehavior.Cascade);
             });
 
-            builder.Entity<Order>().HasData(OrderDataProvider.GetOrders());
+            //builder.Entity<Order>().HasData(OrderDataProvider.GetOrders());
         }
     }
 }

@@ -1,74 +1,54 @@
 ﻿using BreweryMaster.API.Shared.Models.DB;
-using BreweryMaster.API.UserModule.Helpers;
-using BreweryMaster.API.UserModule.Models;
+using BreweryMaster.API.Work.Models;
+using BreweryMaster.API.Work.Models.DB;
 using BreweryMaster.API.WorkModule.Mappers;
 using BreweryMaster.API.WorkModule.Models;
-using BreweryMaster.API.WorkModule.Models.Dtos;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BreweryMaster.API.WorkModule.Services
 {
     public class TaskService : ITaskService
     {
-        private readonly WorkDbContext _context;
-        private readonly ApplicationDbContext _applicationDbContext;
+        private readonly ApplicationDbContext _context;
 
-        public TaskService(WorkDbContext context, ApplicationDbContext applicationDbContext)
+        public TaskService(ApplicationDbContext context)
         {
             _context = context;
-            _applicationDbContext = applicationDbContext;
         }
 
-        public async Task<Dictionary<string, Column>> GetKanbanTasksByOwnerIdAsync(int ownerId)
+        public async Task<Dictionary<string, KanbanTaskGroupResponse>> GetKanbanTasksByOwnerIdAsync(string ownerId)
         {
-            var tasks = await _context.KanbanTasks.Where(x => x.OwnerId == ownerId).ToListAsync();
-
-            var ownerName = string.Empty;
-
-            if (owner != null)
-                ownerName = UserHelper.GetFullName(owner.Forename, owner.Surname);
-
-            var result = tasks.Select(x => KanbanTaskMapper.ToDto(x, ownerName));
-
-            var columnsDictionary = Enum.GetValues(typeof(Models.TaskStatus))
-                .Cast<Models.TaskStatus>()
-                .ToDictionary(
-                    status => Enum.GetName(typeof(Models.TaskStatus), status),
-                    status =>
-                    {
-                        var tasksForStatus = result.Where(t => (Models.TaskStatus)t.Status == status).ToList();
-                        return new Column
-                        {
-                            Title = $"Status {status}",
-                            Status = (int)status,
-                            Items = tasksForStatus
-                        };
-                    });
-
-            return columnsDictionary;
+            return await _context.KanbanTasks.Include(x => x.Status)
+                .Where(x => x.AssignedToId == ownerId)
+                .GroupBy(x => x.Status)
+                .ToDictionaryAsync(x => x.Key.Name, x => new KanbanTaskGroupResponse()
+                {
+                    Title = $"Status {x.Key.Name}",
+                    Status = x.Key.Id,
+                    Items = x.ToList().Select(y => y.ToResponseModel())
+                });
         }
 
-        public async Task<IEnumerable<KanbanTask>> GetKanbanTasksByOrderIdAsync(int orderId)
+        public async Task<IEnumerable<KanbanTaskResponse>> GetKanbanTasksByOrderIdAsync(int orderId)
         {
-            return await _context.KanbanTasks.Where(x => x.OrderId == orderId).ToListAsync();
+            return await _context.KanbanTasks.Where(x => x.OrderId == orderId).Select(x => x.ToResponseModel()).ToListAsync();
         }
 
-        public async Task<KanbanTask?> GetKanbanTaskByIdAsync(int id)
+        public async Task<KanbanTaskResponse?> GetKanbanTaskByIdAsync(int id)
         {
-            return await _context.KanbanTasks.FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.KanbanTasks.Select(x => x.ToResponseModel()).FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<KanbanTask> CreateKanbanTaskAsync(KanbanTask kanbanTask)
+        public async Task<KanbanTask> CreateKanbanTaskAsync(KanbanTaskRequest kanbanTask)
         {
-            _context.KanbanTasks.Add(kanbanTask);
+            var kanbanTaskToAdd = kanbanTask.ToDBModel();
+
+            _context.KanbanTasks.Add(kanbanTaskToAdd);
             await _context.SaveChangesAsync();
-            return kanbanTask;
+            return kanbanTaskToAdd;
         }
 
-        public async Task<bool> EditKanbanTaskAsync(int id, KanbanTask kanbanTask)
+        public async Task<bool> EditKanbanTaskAsync(int id, KanbanTaskUpdateRequest kanbanTask)
         {
             if (id != kanbanTask.Id)
                 return false;
@@ -90,14 +70,14 @@ namespace BreweryMaster.API.WorkModule.Services
             return true;
         }
 
-        public async Task<bool> EditKanbanTaskStatusAsync(List<KanbanTaskStatusSaveRequest> request)
+        public async Task<bool> EditKanbanTaskStatusAsync(List<KanbanTaskStatusRequest> request)
         {
             foreach (var item in request)
             {
                 var task = await _context.KanbanTasks.FirstOrDefaultAsync(x => x.Id == item.Id);
 
                 if (task != null)
-                    task.Status = item.Status;
+                    task.StatusId = item.Status;
             }
 
             try

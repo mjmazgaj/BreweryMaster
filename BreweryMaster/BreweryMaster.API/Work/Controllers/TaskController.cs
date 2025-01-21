@@ -1,12 +1,8 @@
-﻿using BreweryMaster.API.WorkModule.Models;
-using BreweryMaster.API.WorkModule.Models.Dtos;
+﻿using BreweryMaster.API.Work.Models;
+using BreweryMaster.API.WorkModule.Models;
 using BreweryMaster.API.WorkModule.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BreweryMaster.API.WorkModule.Controllers
 {
@@ -24,8 +20,8 @@ namespace BreweryMaster.API.WorkModule.Controllers
         [HttpGet]
         [Authorize]
         [Route("ByOwnerId")]
-        [ProducesResponseType(typeof(IEnumerable<KanbanTask>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<KanbanTask>>> GetKanbanTasksByOwnerId(int ownerId)
+        [ProducesResponseType(typeof(IEnumerable<KanbanTaskResponse>), StatusCodes.Status200OK)]
+        public async Task<ActionResult<IEnumerable<KanbanTaskResponse>>> GetKanbanTasksByOwnerId(string ownerId)
         {
             var tasks = await _taskService.GetKanbanTasksByOwnerIdAsync(ownerId);
             return Ok(tasks);
@@ -33,9 +29,9 @@ namespace BreweryMaster.API.WorkModule.Controllers
 
         [HttpGet]
         [Route("ByOrderId")]
-        [ProducesResponseType(typeof(IEnumerable<KanbanTask>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<KanbanTaskResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<IEnumerable<KanbanTask>>> GetKanbanTasksByOrderId(int orderId)
+        public async Task<ActionResult<IEnumerable<KanbanTaskResponse>>> GetKanbanTasksByOrderId(int orderId)
         {
             var tasks = await _taskService.GetKanbanTasksByOrderIdAsync(orderId);
 
@@ -47,9 +43,9 @@ namespace BreweryMaster.API.WorkModule.Controllers
 
         [HttpGet]
         [Route("{id:int}")]
-        [ProducesResponseType(typeof(KanbanTask), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(KanbanTaskResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<KanbanTask>> GetKanbanTaskById(int id)
+        public async Task<ActionResult<KanbanTaskResponse>> GetKanbanTaskById(int id)
         {
             var task = await _taskService.GetKanbanTaskByIdAsync(id);
 
@@ -60,9 +56,9 @@ namespace BreweryMaster.API.WorkModule.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(KanbanTask), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(KanbanTaskResponse), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<KanbanTask>> CreateKanbanTask([FromBody] KanbanTask kanbanTask)
+        public async Task<ActionResult<KanbanTaskResponse>> CreateKanbanTask([FromBody] KanbanTaskRequest kanbanTask)
         {
             var createdTask = await _taskService.CreateKanbanTaskAsync(kanbanTask);
             return CreatedAtAction(nameof(GetKanbanTaskById), new { id = createdTask.Id }, createdTask);
@@ -73,7 +69,7 @@ namespace BreweryMaster.API.WorkModule.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> EditKanbanTask(int id, [FromBody] KanbanTask kanbanTask)
+        public async Task<ActionResult> EditKanbanTask(int id, [FromBody] KanbanTaskUpdateRequest kanbanTask)
         {
             if (!await _taskService.EditKanbanTaskAsync(id, kanbanTask))
                 return NotFound();
@@ -85,7 +81,7 @@ namespace BreweryMaster.API.WorkModule.Controllers
         [Route("EditStatus")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> EditKanbanTaskStatus([FromBody] List<KanbanTaskStatusSaveRequest> request)
+        public async Task<ActionResult> EditKanbanTaskStatus([FromBody] List<KanbanTaskStatusRequest> request)
         {
             if (!await _taskService.EditKanbanTaskStatusAsync(request))
                 return BadRequest();
