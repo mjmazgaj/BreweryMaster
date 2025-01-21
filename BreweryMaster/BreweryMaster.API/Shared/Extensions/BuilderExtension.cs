@@ -25,8 +25,6 @@ namespace BreweryMaster.API.Shared.Extensions
                       .HasForeignKey(x => x.OrderId)
                       .OnDelete(DeleteBehavior.Cascade);
             });
-
-            //builder.Entity<KanbanTask>().HasData(KanbanTaskDataProvider.GetKanbanTasks());
         }
     }
 }
