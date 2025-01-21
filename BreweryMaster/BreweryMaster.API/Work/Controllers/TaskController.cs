@@ -1,4 +1,5 @@
-﻿using BreweryMaster.API.Work.Models;
+﻿using BreweryMaster.API.OrderModule.Models;
+using BreweryMaster.API.Work.Models;
 using BreweryMaster.API.WorkModule.Models;
 using BreweryMaster.API.WorkModule.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -11,10 +12,12 @@ namespace BreweryMaster.API.WorkModule.Controllers
     public class TaskController : ControllerBase
     {
         private readonly ITaskService _taskService;
+        private readonly IOrderService _orderService;
 
-        public TaskController(ITaskService taskService)
+        public TaskController(ITaskService taskService, IOrderService orderService)
         {
             _taskService = taskService;
+            _orderService = orderService;
         }
 
         [HttpGet]
@@ -99,6 +102,44 @@ namespace BreweryMaster.API.WorkModule.Controllers
                 return NotFound();
 
             return Ok();
+        }
+
+        [HttpPost]
+        [Route("AddTestTasks")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> AddTestTasks()
+        {
+            try
+            {
+                var order = new OrderRequest()
+                {
+                    Capacity = 10,
+                    ContainerId = 1,
+                    Price = 10,
+                    RecipeId = 1,
+                    TargetDate = DateTime.Now.AddDays(2),
+                };
+
+                var createdOrder = await _orderService.CreateOrderAsync(order, HttpContext.User);
+
+                var kanbanTask = new KanbanTaskRequest()
+                {
+                    Title = "test title",
+                    Summary = "test Summary",
+                    StatusId = 1,
+                    DueDate = DateTime.Now.AddDays(3),
+                    AssignedToId = null,
+                    OrderId = createdOrder.Id,
+                };
+
+                var createdTask = await _taskService.CreateKanbanTaskAsync(kanbanTask, HttpContext.User);
+                return Ok(createdTask);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
     }
 }
