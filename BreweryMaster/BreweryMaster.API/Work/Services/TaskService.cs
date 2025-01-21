@@ -1,19 +1,22 @@
 ﻿using BreweryMaster.API.Shared.Models.DB;
+using BreweryMaster.API.User.Services;
 using BreweryMaster.API.Work.Models;
-using BreweryMaster.API.Work.Models.DB;
 using BreweryMaster.API.WorkModule.Mappers;
 using BreweryMaster.API.WorkModule.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace BreweryMaster.API.WorkModule.Services
 {
     public class TaskService : ITaskService
     {
         private readonly ApplicationDbContext _context;
+        private readonly IUserService _userService;
 
-        public TaskService(ApplicationDbContext context)
+        public TaskService(ApplicationDbContext context, IUserService userService)
         {
             _context = context;
+            _userService = userService;
         }
         public async Task<Dictionary<string, KanbanTaskGroupResponse>> GetKanbanTasksByOwnerIdAsync(string ownerId)
         {
@@ -49,13 +52,27 @@ namespace BreweryMaster.API.WorkModule.Services
             return tasks.Select(x => x.ToResponseModel()).FirstOrDefault(x => x.Id == id);
         }
 
-        public async Task<KanbanTask> CreateKanbanTaskAsync(KanbanTaskRequest kanbanTask)
+        public async Task<KanbanTaskResponse> CreateKanbanTaskAsync(KanbanTaskRequest kanbanTask, ClaimsPrincipal? user)
         {
-            var kanbanTaskToAdd = kanbanTask.ToDBModel();
+            var kanbanTaskToAdd = kanbanTask.ToDbModel();
+            var currentUser = _userService.GetCurrentUser(user);
+
+            if (currentUser is null)
+                throw new Exception();
+
+            kanbanTaskToAdd.CreatedById = currentUser.Id;
+            kanbanTaskToAdd.CreatedOn = DateTime.Now;
 
             _context.KanbanTasks.Add(kanbanTaskToAdd);
             await _context.SaveChangesAsync();
-            return kanbanTaskToAdd;
+
+            return new KanbanTaskResponse()
+            {
+                CreatedById = currentUser.Id,
+                StatusId = kanbanTaskToAdd.StatusId,
+                Status = null!,
+                Title = kanbanTaskToAdd.Title
+            };
         }
 
         public async Task<bool> EditKanbanTaskAsync(int id, KanbanTaskUpdateRequest kanbanTask)

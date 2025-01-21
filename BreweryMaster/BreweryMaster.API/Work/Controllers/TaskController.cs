@@ -60,7 +60,7 @@ namespace BreweryMaster.API.WorkModule.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<KanbanTaskResponse>> CreateKanbanTask([FromBody] KanbanTaskRequest kanbanTask)
         {
-            var createdTask = await _taskService.CreateKanbanTaskAsync(kanbanTask);
+            var createdTask = await _taskService.CreateKanbanTaskAsync(kanbanTask, HttpContext.User);
             return CreatedAtAction(nameof(GetKanbanTaskById), new { id = createdTask.Id }, createdTask);
         }
 

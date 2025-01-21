@@ -23,18 +23,17 @@ namespace BreweryMaster.API.WorkModule.Mappers
             };
         }
 
-        public static KanbanTask ToDBModel(this KanbanTaskRequest kanbanTask)
+        public static KanbanTask ToDbModel(this KanbanTaskRequest kanbanTask)
         {
             return new KanbanTask
             {
                 Title = kanbanTask.Title,
                 Summary = kanbanTask.Summary,
-                StatusId = kanbanTask.Status,
+                StatusId = kanbanTask.StatusId,
                 Status = null!,
                 DueDate = kanbanTask.DueDate,
-                CreatedById = kanbanTask.CreatedById,
+                CreatedById = string.Empty,
                 CreatedBy = null!,
-                CreatedOn = kanbanTask.CreatedOn,
                 AssignedTo = null,
                 AssignedToId = kanbanTask.AssignedToId,
                 Order = null!,
