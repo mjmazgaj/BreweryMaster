@@ -18,22 +18,42 @@ namespace BreweryMaster.API.WorkModule.Services
             _context = context;
             _userService = userService;
         }
-        public async Task<Dictionary<string, KanbanTaskGroupResponse>> GetKanbanTasksByOwnerIdAsync(string ownerId)
+        public async Task<Dictionary<string, KanbanTaskGroupResponse>> GetKanbanTasksByOwnerIdAsync(ClaimsPrincipal? user)
         {
+            var currentUser = _userService.GetCurrentUser(user);
+
+            if (currentUser is null)
+                throw new Exception();
+
+            var allStatuses = await _context.TaskStatusEntities.ToListAsync();
+
+            var result = allStatuses.ToDictionary(
+                           status => status.Name,
+                           status => new KanbanTaskGroupResponse
+                           {
+                               Title = $"Status {status.Name}",
+                               Status = status.Id,
+                               Items = new List<KanbanTaskResponse>()
+                           });
+
             var groupedTasks = await _context.KanbanTasks
                 .Include(x => x.Status)
-                .Where(x => x.AssignedToId == ownerId)
+                .Where(x => x.AssignedToId == currentUser.Id)
                 .GroupBy(x => x.Status)
                 .ToListAsync();
 
-            var result = groupedTasks.ToDictionary(
-                group => group.Key.Name,
-                group => new KanbanTaskGroupResponse
+            foreach (var group in groupedTasks)
+            {
+                if (result.ContainsKey(group.Key.Name))
                 {
-                    Title = $"Status {group.Key.Name}",
-                    Status = group.Key.Id,
-                    Items = group.Select(task => task.ToResponseModel()).ToList()
-                });
+                    result[group.Key.Name] = new KanbanTaskGroupResponse
+                    {
+                        Title = $"Status {group.Key.Name}",
+                        Status = group.Key.Id,
+                        Items = group.Select(task => task.ToResponseModel()).ToList()
+                    };
+                }
+            }
 
             return result;
         }
@@ -47,7 +67,7 @@ namespace BreweryMaster.API.WorkModule.Services
 
         public async Task<KanbanTaskResponse?> GetKanbanTaskByIdAsync(int id)
         {
-            var tasks = await _context.KanbanTasks.Include(x=>x.Status).ToListAsync();
+            var tasks = await _context.KanbanTasks.Include(x => x.Status).ToListAsync();
 
             return tasks.Select(x => x.ToResponseModel()).FirstOrDefault(x => x.Id == id);
         }

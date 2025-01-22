@@ -14,9 +14,7 @@ const Kanban = () => {
 
 useEffect(() => {
   const getData = () => {
-    fetchDataByOwnerId(1)
-      .then((result) => setColumns(result))
-      .catch((error) => console.log(error));
+    fetchDataByOwnerId(setColumns)
   };
   getData()
 }, [])

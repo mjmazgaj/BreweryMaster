@@ -24,9 +24,9 @@ namespace BreweryMaster.API.WorkModule.Controllers
         [Authorize]
         [Route("ByOwnerId")]
         [ProducesResponseType(typeof(IEnumerable<KanbanTaskResponse>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<KanbanTaskResponse>>> GetKanbanTasksByOwnerId(string ownerId)
+        public async Task<ActionResult<IEnumerable<KanbanTaskResponse>>> GetKanbanTasksByOwnerId()
         {
-            var tasks = await _taskService.GetKanbanTasksByOwnerIdAsync(ownerId);
+            var tasks = await _taskService.GetKanbanTasksByOwnerIdAsync(HttpContext.User);
             return Ok(tasks);
         }
 

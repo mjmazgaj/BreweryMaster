@@ -1,8 +1,11 @@
 import api from '../Basic/api';
 
-export const fetchDataByOwnerId = (id) => {
-  return api.get(`api/task/ByOwnerId?ownerId=${id}`)
-    .then((result) => result.data)
+export const fetchDataByOwnerId = (setData) => {
+  return api.get(`api/task/ByOwnerId`)
+    .then((result) => {
+console.log(result)
+setData(result.data)
+    })
     .catch((error) => console.log(error));
 };
 
