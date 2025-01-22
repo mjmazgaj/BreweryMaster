@@ -1,5 +1,6 @@
 ﻿using BreweryMaster.API.Info.Models.Item;
 using BreweryMaster.API.User.Models.Users.DB;
+using Microsoft.EntityFrameworkCore;
 
 namespace BreweryMaster.API.OrderModule.Models
 {
@@ -14,6 +15,7 @@ namespace BreweryMaster.API.OrderModule.Models
         public required Container Container { get; set; }
         public int ContainerId { get; set; }
         public DateTime TargetDate { get; set; }
+        [Precision(18, 2)]
         public decimal Price { get; set; }
     }
 }

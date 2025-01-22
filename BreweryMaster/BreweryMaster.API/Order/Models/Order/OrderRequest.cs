@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace BreweryMaster.API.OrderModule.Models
 {
@@ -10,6 +11,7 @@ namespace BreweryMaster.API.OrderModule.Models
         public int Capacity { get; set; }
         public int ContainerId { get; set; }
         [Required]
+        [Precision(18, 2)]
         public decimal Price { get; set; }
         [Required]
         public DateTime TargetDate { get; set; }
