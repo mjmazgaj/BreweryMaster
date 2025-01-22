@@ -116,5 +116,13 @@ namespace BreweryMaster.API.UserModule.Controllers
 
             return Ok();
         }
+
+        [HttpPost]
+        [Route("addTestUsers")]
+        public async Task<ActionResult> AddTestUsers()
+        {
+            var result = await _userService.CreateTestUsers();
+            return Ok(result);
+        }
     }
 }

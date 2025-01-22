@@ -1,6 +1,7 @@
 ﻿using BreweryMaster.API.Info.Models.Item;
 using BreweryMaster.API.Shared.Models.DB;
 using BreweryMaster.API.Work.Models.DB;
+using Microsoft.AspNetCore.Identity;
 
 public static class EntityDataProvider
 {
@@ -56,5 +57,54 @@ public static class EntityDataProvider
                     Name = "Done"
                 }
             };
+    }
+
+    public static IEnumerable<IdentityRole> GetIdentityRoles()
+    {
+        return new List<IdentityRole>()
+        {
+            new IdentityRole
+            {
+                Id = "manager",
+                Name = "manager",
+                NormalizedName = "MANAGER",
+                ConcurrencyStamp = Guid.NewGuid().ToString()
+            },
+            new IdentityRole
+            {
+                Id = "supervisor",
+                Name = "supervisor",
+                NormalizedName = "SUPERVISOR",
+                ConcurrencyStamp = Guid.NewGuid().ToString()
+            },
+            new IdentityRole
+            {
+                Id = "brewer",
+                Name = "brewer",
+                NormalizedName = "BREWER",
+                ConcurrencyStamp = Guid.NewGuid().ToString()
+            },
+            new IdentityRole
+            {
+                Id = "employee",
+                Name = "employee",
+                NormalizedName = "EMPLOYEE",
+                ConcurrencyStamp = Guid.NewGuid().ToString()
+            },
+            new IdentityRole
+            {
+                Id = "employeeNotMobile",
+                Name = "employeeNotMobile",
+                NormalizedName = "EMPLOYEENOTMOBILE",
+                ConcurrencyStamp = Guid.NewGuid().ToString()
+            },
+            new IdentityRole
+            {
+                Id = "customer",
+                Name = "customer",
+                NormalizedName = "CUSTOMER",
+                ConcurrencyStamp = Guid.NewGuid().ToString()
+            }
+        };
     }
 }

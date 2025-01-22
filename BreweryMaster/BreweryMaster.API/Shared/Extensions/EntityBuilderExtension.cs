@@ -1,5 +1,6 @@
 ﻿using BreweryMaster.API.Shared.Models.DB;
 using BreweryMaster.API.Work.Models.DB;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace BreweryMaster.API.Shared.Extensions
@@ -10,6 +11,7 @@ namespace BreweryMaster.API.Shared.Extensions
         {
             builder.Entity<UnitEntity>().HasData(EntityDataProvider.GetUnitEntity());
             builder.Entity<TaskStatusEntity>().HasData(EntityDataProvider.GetTaskStatusEntities());
+            builder.Entity<IdentityRole>().HasData(EntityDataProvider.GetIdentityRoles());
         }
     }
 }

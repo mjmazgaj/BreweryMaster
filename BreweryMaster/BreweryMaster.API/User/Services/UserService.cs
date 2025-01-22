@@ -174,5 +174,45 @@ namespace BreweryMaster.API.User.Services
 
             return user;
         }
+        public async Task<bool> CreateTestUsers()
+        {
+            var roles = await _roleManager.Roles.Select(x=>x.Id).ToListAsync();
+
+            foreach (var role in roles)
+            {
+                var userRequest = new UserRegisterRequest()
+                {
+                    UserAuthInfo = new UserRequest()
+                    {
+                        Email = $"{role}@test.test",
+                        Password = "Test123$",
+                        ConfirmPassword = "Test123$"
+                    },
+                    IndividualUserInfo = new IndividualUserRequest()
+                    {
+                        Forename = role,
+                        Surname = role
+                    }
+                };
+
+                try
+                {
+                    var createdUser = await CreateUser(userRequest);
+                    if (createdUser == null)
+                        throw new Exception();
+
+                    var result = await _userManager.AddToRoleAsync(createdUser, role);
+                    if (!result.Succeeded)
+                        throw new Exception();
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
     }
 }
