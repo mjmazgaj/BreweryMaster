@@ -1,5 +1,5 @@
 import React from 'react';
-import { logout } from './AuthService';
+import { logout } from './Endpoints';
 import { useNavigate } from 'react-router-dom';
 
 
