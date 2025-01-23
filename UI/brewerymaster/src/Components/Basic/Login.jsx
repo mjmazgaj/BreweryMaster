@@ -3,13 +3,17 @@ import { login, currentUserRoles } from './Endpoints';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button, Col, Row } from 'react-bootstrap';
 
+import { useUser } from './UserProvider';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Login = (setIsAuthenticated) => {
+  const { setUser } = useUser();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  
+
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -17,6 +21,13 @@ const Login = (setIsAuthenticated) => {
     try {
       const data = await login({ email, password });
       sessionStorage.setItem('token', data.accessToken);
+
+      const roles = await currentUserRoles();
+      setUser((prevData) => ({
+        token: data.accessToken,
+        roles: roles,
+      }));
+
       navigate("/kanban")
       setIsAuthenticated(true);
       setErrorMessage('');
