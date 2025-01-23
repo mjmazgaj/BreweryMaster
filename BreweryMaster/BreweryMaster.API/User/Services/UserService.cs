@@ -1,4 +1,6 @@
 ﻿using BreweryMaster.API.Shared.Models.DB;
+using BreweryMaster.API.User.Helpers;
+using BreweryMaster.API.User.Models;
 using BreweryMaster.API.User.Models.DB;
 using BreweryMaster.API.User.Models.Users;
 using BreweryMaster.API.User.Models.Users.DB;
@@ -11,12 +13,18 @@ namespace BreweryMaster.API.User.Services
     public class UserService : IUserService
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ApplicationDbContext _context;
         private readonly IAddressService _addressService;
 
-        public UserService(UserManager<ApplicationUser> userManager, ApplicationDbContext context, IAddressService addressService)
+        public UserService(
+            UserManager<ApplicationUser> userManager, 
+            RoleManager<IdentityRole> roleManager,
+            ApplicationDbContext context, 
+            IAddressService addressService)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
             _context = context;
             _addressService = addressService;
         }
@@ -25,7 +33,7 @@ namespace BreweryMaster.API.User.Services
         {
             var response = new List<UserResponse>();
 
-            var companyUsers = await _context.CompanyUsers.Include(x=>x.DeliveryAddress).ToListAsync();
+            var companyUsers = await _context.CompanyUsers.Include(x => x.DeliveryAddress).ToListAsync();
             var individualUsers = await _context.IndividualUsers.Include(x => x.DeliveryAddress).ToListAsync();
 
             response.AddRange(companyUsers.Select(x => new UserResponse()
@@ -93,6 +101,12 @@ namespace BreweryMaster.API.User.Services
                 Id = nameIdClaim.Value,
                 Email = emailClaim.Value
             };
+        }
+        public async Task<IEnumerable<string>> GetCurrentUserRoles(ClaimsPrincipal? user)
+        {
+            var currentUser = GetCurrentUser(user);
+
+            return await _context.UserRoles.Where(x => x.UserId == currentUser.Id).Select(x=>x.RoleId).ToListAsync();
         }
 
         public async Task<ApplicationUser> CreateUser(UserRegisterRequest request)

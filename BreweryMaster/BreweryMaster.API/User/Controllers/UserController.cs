@@ -1,6 +1,7 @@
 ﻿using BreweryMaster.API.User.Models.Users;
 using BreweryMaster.API.User.Models.Users.DB;
 using BreweryMaster.API.User.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -89,6 +90,24 @@ namespace BreweryMaster.API.UserModule.Controllers
             }
 
             return Ok(new { message = "User updated successfully." });
+        }
+
+        [HttpGet]
+        [Route("currentUserRoles")]
+        public async Task<ActionResult<IEnumerable<string>>> GetCurrentUserRoles()
+        {
+            var userContext = HttpContext.User;
+
+            try
+            {
+                var roles = await _userService.GetCurrentUserRoles(userContext);
+
+                return Ok(roles);
+            }
+            catch (Exception)
+            {
+                return Unauthorized();
+            }
         }
 
         [HttpGet]
