@@ -37,7 +37,7 @@ builder.Services.AddAuthentication()
 
 builder.Services.AddAuthorizationBuilder();
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+builder.Services.AddIdentityCore<ApplicationUser>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddApiEndpoints();
