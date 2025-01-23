@@ -176,7 +176,7 @@ namespace BreweryMaster.API.User.Services
         }
         public async Task<bool> CreateTestUsers()
         {
-            var roles = await _roleManager.Roles.Select(x=>x.Id).ToListAsync();
+            var roles = await _roleManager.Roles.ToListAsync();
 
             foreach (var role in roles)
             {
@@ -184,14 +184,14 @@ namespace BreweryMaster.API.User.Services
                 {
                     UserAuthInfo = new UserRequest()
                     {
-                        Email = $"{role}@test.test",
+                        Email = $"{role.Id}@test.test",
                         Password = "Test123$",
                         ConfirmPassword = "Test123$"
                     },
                     IndividualUserInfo = new IndividualUserRequest()
                     {
-                        Forename = role,
-                        Surname = role
+                        Forename = role.Id,
+                        Surname = role.Id
                     }
                 };
 
@@ -201,7 +201,8 @@ namespace BreweryMaster.API.User.Services
                     if (createdUser == null)
                         throw new Exception();
 
-                    var result = await _userManager.AddToRoleAsync(createdUser, role);
+                    var result = await _userManager.AddToRolesAsync(createdUser, roles.GetRoles(role.Name));
+
                     if (!result.Succeeded)
                         throw new Exception();
                 }
