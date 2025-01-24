@@ -22,11 +22,13 @@ import Kanban from './Components/Work/Kanban';
 import Authorize from './Components/Basic/Authorize';
 import LogoutButton from './Components/Basic/LogoutButton'
 
+import ProtectedRoute from './Components/Basic/ProtectedRoute'
 
 import { I18nextProvider } from 'react-i18next';
 import i18n from './i18n';
 import ProspectOrderForm from './Components/Order/ProspectOrderForm.jsx';
 import ProspectOrderSummary from './Components/Order/ProspectOrderSummary.jsx';
+import Unauthorized from './Components/Home/Unuthorized';
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -59,10 +61,18 @@ const App = () => {
               <Route exact path="/ProspectOrderSummary" element={<ProspectOrderSummary />} />
               <Route exact path="/Order" element={<Order />} />
               <Route exact path="/Recipe" element={<Recipe />} />
-              <Route exact path="/FermentingIngredients" element={<FermentingIngredients />} />
+              
+              <Route exact path="/FermentingIngredients" element={
+                <ProtectedRoute roles={['manager']}>
+                  <FermentingIngredients />
+                </ProtectedRoute>
+              }/>
 
               <Route exact path="/Client" element={<Client />} />
               <Route exact path="/User" element={<User />} />
+
+              <Route exact path="/Error" element={<Error />} />
+              <Route exact path="/Unauthorized" element={<Unauthorized />} />
 
               <Route
                 path="/kanban"

@@ -3,6 +3,8 @@ import {Button, ButtonGroup, Container, Nav, Navbar, NavDropdown} from 'react-bo
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useTranslation } from 'react-i18next';
 
+import RequireRole from '../Basic/RequireRole'
+
 function Navigation(isAuthenticated) {
   const { t, i18n } = useTranslation();
 
@@ -34,13 +36,16 @@ function Navigation(isAuthenticated) {
             <NavDropdown.Item href="/Client">Client</NavDropdown.Item>
           </NavDropdown>
 
-          <NavDropdown title="Info" id="navbarScrollingDropdown">
-            <NavDropdown.Item href="/FermentingIngredients">Fermenting Ingredients</NavDropdown.Item>
-            <NavDropdown.Item href="/FermentingIngredients">Hops</NavDropdown.Item>
-            <NavDropdown.Item href="/FermentingIngredients">Yeast</NavDropdown.Item>
-            <NavDropdown.Item href="/FermentingIngredients">Extras</NavDropdown.Item>
-            <NavDropdown.Item href="/FermentingIngredients">Tanks</NavDropdown.Item>
-          </NavDropdown>
+          <RequireRole roles={['manager']}>
+            <NavDropdown title="Info" id="navbarScrollingDropdown">
+              <NavDropdown.Item href="/FermentingIngredients">Fermenting Ingredients</NavDropdown.Item>
+              <NavDropdown.Item href="/FermentingIngredients">Hops</NavDropdown.Item>
+              <NavDropdown.Item href="/FermentingIngredients">Yeast</NavDropdown.Item>
+              <NavDropdown.Item href="/FermentingIngredients">Extras</NavDropdown.Item>
+              <NavDropdown.Item href="/FermentingIngredients">Tanks</NavDropdown.Item>
+            </NavDropdown>
+          </RequireRole>
+
         </Nav>
 
         <ButtonGroup>
