@@ -26,6 +26,22 @@
   color: white;
 }
 
+footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 4rem;
+  background-color: rgb(33, 37, 41);
+  position: absolute;
+  color: white;
+  bottom: 0;
+}
+
+.footer_text {
+  margin-bottom: 0;
+}
+
 .App-link {
   color: #61dafb;
 }
