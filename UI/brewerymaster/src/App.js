@@ -29,23 +29,14 @@ import ProspectOrderForm from './Components/Order/ProspectOrderForm.jsx';
 import ProspectOrderSummary from './Components/Order/ProspectOrderSummary.jsx';
 import Unauthorized from './Components/App/Unuthorized';
 
+import { useUser } from './Components/Security/UserProvider';
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  
-  useEffect(() => {
-    const token = sessionStorage.getItem('token');
-    if (token) {
-      setIsAuthenticated(true); 
-    }
-    else {
-      setIsAuthenticated(false);
-    }
-  }, []);
+  const { user } = useUser();
   
   return (
     <>
       <I18nextProvider i18n={i18n}>
-        <Navigation isAuthenticated={isAuthenticated} />
+        <Navigation />
         <Router>
           <div className="App">
             <Routes>
@@ -55,7 +46,7 @@ const App = () => {
               <Route path="/register" element={<Register />} />
               <Route
                 path="/login"
-                element={<Login setIsAuthenticated={setIsAuthenticated} />}
+                element={<Login />}
               />
 
               <Route
@@ -130,8 +121,8 @@ const App = () => {
               ></Route>
             </Routes>
 
-            {isAuthenticated && (
-              <LogoutButton setIsAuthenticated={setIsAuthenticated} />
+            {user.isAuthenticated && (
+              <LogoutButton />
             )}
           </div>
         </Router>

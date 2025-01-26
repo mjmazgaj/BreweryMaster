@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import RequireRole from '../Security/RequireRole'
 
-function Navigation(isAuthenticated) {
+function Navigation() {
   const { t, i18n } = useTranslation();
 
   const [currentLanguage, setCurrentLanguage] = useState("en");

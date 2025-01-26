@@ -7,7 +7,7 @@ import { useUser } from './UserProvider';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const Login = (setIsAuthenticated) => {
+const Login = () => {
   const { setUser } = useUser();
 
   const [email, setEmail] = useState('');
@@ -26,10 +26,10 @@ const Login = (setIsAuthenticated) => {
       setUser({
         token: data.accessToken,
         roles: roles,
+        isAuthenticated: data.accessToken ? true : false,
       });
 
       navigate("/kanban")
-      setIsAuthenticated(true);
       setErrorMessage("");
     } catch (error) {
       setErrorMessage(error.response?.data?.message || 'Logowanie nie powiodło się. Spróbuj ponownie.');

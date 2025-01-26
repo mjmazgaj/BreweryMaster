@@ -4,16 +4,16 @@ import { useNavigate } from 'react-router-dom';
 
 import { useUser } from './UserProvider';
 
-const LogoutButton = ({ setIsAuthenticated }) => {
+const LogoutButton = () => {
     const { setUser } = useUser();
     const navigate = useNavigate();
 
     const handleLogout = () => {
       logout();
-      setIsAuthenticated(false);
       setUser({
         token: [],
         roles: '',
+        isAuthenticated: false
       });
       navigate('/login'); 
     };
