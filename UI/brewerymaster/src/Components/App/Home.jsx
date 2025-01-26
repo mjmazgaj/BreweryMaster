@@ -41,7 +41,7 @@ function Home() {
             />
             <hr />
             <h6>Czy chcesz założyć konto?</h6>
-            <p>Wypełnij formularz, i uzyskaj dostęp do tworzenia zamówień</p>
+            <p>Zarejestruj się i uzyskaj dostęp do tworzenia zamówień</p>
             <NavigateButton
               path="/Register"
               name="Zarejestruj"
