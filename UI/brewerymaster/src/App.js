@@ -1,4 +1,4 @@
-import Home from './Components/Home/Home';
+import Home from './Components/App/Home';
 import Navigation from './Components/App/Navigation';
 
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
@@ -27,7 +27,7 @@ import { I18nextProvider } from 'react-i18next';
 import i18n from './i18n';
 import ProspectOrderForm from './Components/Order/ProspectOrderForm.jsx';
 import ProspectOrderSummary from './Components/Order/ProspectOrderSummary.jsx';
-import Unauthorized from './Components/Home/Unuthorized';
+import Unauthorized from './Components/App/Unuthorized';
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
