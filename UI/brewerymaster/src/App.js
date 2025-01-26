@@ -19,8 +19,6 @@ import FermentingIngredients from './Components/Info/FermentingIngredients/Ferme
 
 import Kanban from './Components/Work/Kanban';
 
-import LogoutButton from './Components/Security/LogoutButton'
-
 import ProtectedRoute from './Components/Security/ProtectedRoute'
 
 import { I18nextProvider } from 'react-i18next';
@@ -122,9 +120,6 @@ const App = () => {
               ></Route>
             </Routes>
 
-            {user.isAuthenticated && (
-              <LogoutButton />
-            )}
           </div>
         </Router>
         <Footer/>

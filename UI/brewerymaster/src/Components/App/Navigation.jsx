@@ -1,14 +1,34 @@
-import {useState} from 'react';
-import {Button, ButtonGroup, Container, Nav, Navbar, NavDropdown} from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { useTranslation } from 'react-i18next';
+import { useState } from "react";
+import {
+  Button,
+  ButtonGroup,
+  Container,
+  Nav,
+  Navbar,
+  NavDropdown,
+} from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { useTranslation } from "react-i18next";
 
-import RequireRole from '../Security/RequireRole'
+import { useUser } from "../Security/UserProvider";
+import { logout } from '../Security/Endpoints';
+import RequireRole from "../Security/RequireRole";
 
 function Navigation() {
+  const { user, setUser } = useUser();
   const { t, i18n } = useTranslation();
 
   const [currentLanguage, setCurrentLanguage] = useState("en");
+
+  const handleLogout = () => {
+    logout();
+    setUser({
+      token: [],
+      roles: "",
+      isAuthenticated: false,
+    });
+    window.location.href = "/login";
+  };
 
   const changeLanguage = (lng) => () => {
     i18n.changeLanguage(lng);
@@ -65,6 +85,15 @@ function Navigation() {
           </RequireRole>
         </Nav>
 
+        {user.isAuthenticated && (
+          <Button
+            style={{ marginRight: "1rem" }}
+            variant="light"
+            onClick={handleLogout}
+          >
+            Wyloguj
+          </Button>
+        )}
         <ButtonGroup>
           <Button
             onClick={changeLanguage("en")}
