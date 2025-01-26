@@ -5,7 +5,7 @@ import ClientDetails from "../ClientDetails";
 import Contact from "../../../Shared/Contact"
 import FormDatePicker from "../../../Shared/FormDatePicker";
 
-import { addData } from '../../api';
+import { addData } from '../../../Shared/api';
 
 export const useProspectOrderForm = () => {
   
@@ -49,7 +49,7 @@ export const useProspectOrderForm = () => {
           isCompany: isCompany,
         };
     
-        addData(newData);
+        addData("ProspectOrder" ,newData);
         clear();
       };
     

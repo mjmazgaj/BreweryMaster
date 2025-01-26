@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { addData } from '../../api';
+import { addData } from '../../../Shared/api';
 
 import { useTranslation } from 'react-i18next';
 export const useRecipeForm = (isValid) => {

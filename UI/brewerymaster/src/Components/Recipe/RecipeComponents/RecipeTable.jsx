@@ -6,7 +6,7 @@ import '../recipe.css';
 
 import { Button } from "react-bootstrap";
 
-import {fetchData} from "../api"
+import {fetchData} from "../../Shared/api"
 
 import DynamicTable from "../../Shared/TableComponents/DynamicTable";
 

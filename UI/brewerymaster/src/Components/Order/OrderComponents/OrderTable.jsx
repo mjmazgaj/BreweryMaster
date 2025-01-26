@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'react-toastify/dist/ReactToastify.css';
 import '../order.css';
 
-import {fetchData} from "../api"
+import {fetchData} from "../../Shared/api"
 
 import DynamicTable from "../../Shared/TableComponents/DynamicTable";
 

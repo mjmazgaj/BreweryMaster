@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { Form } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import { toast } from "react-toastify";
-import { addData } from '../api';
+import { addData } from '../../Shared/api';
 
 import Contact from './../../Shared/Contact'
 import MenuSteps from '../../Shared/MenuSteps';
@@ -41,7 +41,7 @@ const OrderForm = () => {
       email : contactData.email,
     };
   
-    addData(newData)
+    addData("Order", newData)
       .then(() => {
         clear();
         toast.success('Order has been added');

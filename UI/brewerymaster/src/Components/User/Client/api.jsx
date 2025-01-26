@@ -2,12 +2,6 @@ import axios from 'axios';
 
 const apiurl = "https://localhost:7289/api";
 
-export const fetchData = (path, setData) => {
-  return axios.get(`${apiurl}/${path}`)
-    .then((result) => setData(result.data))
-    .catch((error) => console.log(error));
-};
-
 export const fetchDataById = (path, id) => {
   return axios.get(`${apiurl}/${path}/${id}`)
     .then((result) => result.data)

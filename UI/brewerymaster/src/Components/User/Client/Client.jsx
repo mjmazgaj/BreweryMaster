@@ -2,7 +2,8 @@ import React, {useState, useEffect, Fragment} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { fetchData, fetchDataById, addData, updateData, deleteData } from './api';
+import { fetchDataById, addData, updateData, deleteData } from './api';
+import { fetchData } from '../../Shared/api';
 
 import ClientModal from './ClientModal';
 import ClientTable from './ClientTable';

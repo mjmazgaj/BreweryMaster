@@ -4,7 +4,7 @@ import DynamicTable from "../Shared/TableComponents/DynamicTable";
 
 import { useTranslation } from "react-i18next";
 
-import {fetchUsers} from "./api"
+import {fetchData} from "../Shared/api"
 
 const User = () => {
   const { t } = useTranslation();
@@ -12,7 +12,7 @@ const User = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetchUsers(setUsers);
+    fetchData("User" ,setUsers);
   }, []);
 
   return (

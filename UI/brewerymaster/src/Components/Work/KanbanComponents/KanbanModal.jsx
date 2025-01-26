@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { Modal, Button, Container, Row, Col } from 'react-bootstrap';
 
-import {addData} from '../api';
+import {addData} from '../../Shared/api';
 import { useTranslation } from 'react-i18next';
 
 import FormControl from '../../Shared/FormControls';
@@ -69,7 +69,7 @@ const KanbanModal = ({
     };
 
     try {
-      await addData(task);
+      await addData("task", task);
       setShow(false);
       window.location.reload();
     } catch (error) {
