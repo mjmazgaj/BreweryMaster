@@ -1,8 +1,10 @@
+import BackgroundDetails from '../Shared/BackgroundDetails';
 import './../../App.css'
 
 function Home() {
   return (
     <>
+      <BackgroundDetails/>
       <h1>System do zarzadzania browarem</h1>
       <h3>Zakres:</h3>
       <h4>Tablica kanbanowa</h4>
