@@ -1,76 +1,41 @@
 import React, { useState } from 'react';
-import { login, currentUserRoles } from './Endpoints';
-import { useNavigate } from 'react-router-dom';
-import { Form, Button, Col, Row } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 
-import { useUser } from './UserProvider';
-
+import { useLogin } from './helpers/useLogin';
+import securityFormFieldsProvider from './helpers/securityFormFieldsProvider';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const Login = () => {
-  const { setUser } = useUser();
+import { useTranslation } from 'react-i18next';
+import FormControls from '../Shared/FormControls'
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const Login = () => {
+
+  const { t } = useTranslation();
+  
   const [errorMessage, setErrorMessage] = useState('');
 
-  const navigate = useNavigate();
+  const [data, setData] = useState({});
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const data = await login({ email, password });
-      sessionStorage.setItem('token', data.accessToken);
-
-      const roles = await currentUserRoles();
-      setUser({
-        token: data.accessToken,
-        roles: roles,
-        isAuthenticated: data.accessToken ? true : false,
-      });
-
-      navigate("/kanban")
-      setErrorMessage("");
-    } catch (error) {
-      setErrorMessage(error.response?.data?.message || 'Logowanie nie powiodło się. Spróbuj ponownie.');
-    }
-  };
+  const [isValid, setIsValid] = useState(true);
+  const { handleLogin } = useLogin({ data, setErrorMessage });
 
   return (
-  <Form onSubmit={handleLogin}>
-    <h1>Zaloguj się:</h1>
-    <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
-      <Form.Label column sm="2">
-        Email
-      </Form.Label>
-      <Col sm="10">
-        <Form.Control
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Wprowadź email"
-        />
-      </Col>
-    </Form.Group>
+    <Form onSubmit={handleLogin}>
+      <h1>Zaloguj się:</h1>
 
-    <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-      <Form.Label column sm="2">
-        Hasło
-      </Form.Label>
-      <Col sm="10">
-        <Form.Control
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Wprowadź hasło"
-        />
-      </Col>
-    </Form.Group>
+      <FormControls
+        fields={securityFormFieldsProvider(t).loginFields}
+        data={data}
+        setData={setData}
+        setIsValid={setIsValid}
+      />
 
-    <Button type="submit">Zaloguj</Button>
+      <Button variant="dark" type="submit">
+        Zaloguj
+      </Button>
 
-    {errorMessage && <p className="text-danger">{errorMessage}</p>}
-  </Form>
+      {errorMessage && <p className="text-danger">{errorMessage}</p>}
+    </Form>
   );
 };
 
