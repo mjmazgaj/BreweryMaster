@@ -19,7 +19,6 @@ import FermentingIngredients from './Components/Info/FermentingIngredients/Ferme
 
 import Kanban from './Components/Work/Kanban';
 
-import Authorize from './Components/Basic/Authorize';
 import LogoutButton from './Components/Basic/LogoutButton'
 
 import ProtectedRoute from './Components/Basic/ProtectedRoute'
@@ -55,33 +54,43 @@ const App = () => {
 
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated}/>} />
-              <Route path="/error" element={<Error />} />
 
               <Route exact path="/ProspectOrder" element={<ProspectOrderForm />} />
               <Route exact path="/ProspectOrderSummary" element={<ProspectOrderSummary />} />
-              <Route exact path="/Order" element={<Order />} />
-              <Route exact path="/Recipe" element={<Recipe />} />
+
+              <Route exact path="/Order" element={
+                <ProtectedRoute roles={['supervisor']}>
+                  <Order />
+                </ProtectedRoute>} />
+              <Route exact path="/Recipe" element={
+                <ProtectedRoute roles={['brewer']}>
+                  <Recipe />
+                </ProtectedRoute>} />
               
               <Route exact path="/FermentingIngredients" element={
-                <ProtectedRoute roles={['manager']}>
+                <ProtectedRoute roles={['supervisor']}>
                   <FermentingIngredients />
                 </ProtectedRoute>
               }/>
 
-              <Route exact path="/Client" element={<Client />} />
-              <Route exact path="/User" element={<User />} />
+              <Route exact path="/Client" element={
+                <ProtectedRoute roles={['manager']}>
+                  <Client />
+                </ProtectedRoute>} />
+              <Route exact path="/User" element={
+                <ProtectedRoute roles={['manager']}>
+                  <User />
+                </ProtectedRoute>} />
 
               <Route exact path="/Error" element={<Error />} />
               <Route exact path="/Unauthorized" element={<Unauthorized />} />
 
               <Route
-                path="/kanban"
+                path="/Kanban"
                 element={
-                  <Authorize
-                    component={Kanban}
-                    isAuthenticated={isAuthenticated}
-                    setIsAuthenticated={setIsAuthenticated}
-                  />
+                  <ProtectedRoute roles={['employee']}>
+                  <Kanban />
+                </ProtectedRoute>
                 }
               ></Route>
             </Routes>

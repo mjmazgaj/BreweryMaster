@@ -6,9 +6,7 @@ export const UserProvider = ({ children }) => {
 
   const [user, setUser] = useState(() => {
     const savedUser = sessionStorage.getItem('user');
-    return savedUser ? JSON.parse(savedUser) : { 
-      role: []
-    };
+    return JSON.parse(savedUser);
   });
 
   useEffect(() => {

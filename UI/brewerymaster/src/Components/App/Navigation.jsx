@@ -21,22 +21,29 @@ function Navigation(isAuthenticated) {
       <Container>
         <Navbar.Brand href="/">Navbar</Navbar.Brand>
         <Nav className="me-auto">
-          <Nav.Link href="/Kanban">Kanban</Nav.Link>
-          <Nav.Link href="/Recipe">Recipe</Nav.Link>
-
-          <Nav.Link href="/Order">Order</Nav.Link>
-
-          <NavDropdown title="ProspectOrder" id="navbarScrollingDropdown">
-            <Nav.Link href="/ProspectOrder">ProspectOrder</Nav.Link>
+          
+          <RequireRole roles={['employee']}>
+            <Nav.Link href="/Kanban">Kanban</Nav.Link>
+          </RequireRole>
+          
+          <RequireRole roles={['supervisor']}>
+            <Nav.Link href="/Order">Order</Nav.Link>
             <Nav.Link href="/ProspectOrderSummary">ProspectOrderSummary</Nav.Link>
-          </NavDropdown>
-
-          <NavDropdown title="User" id="navbarScrollingDropdown">
-            <NavDropdown.Item href="/User">User</NavDropdown.Item>
-            <NavDropdown.Item href="/Client">Client</NavDropdown.Item>
-          </NavDropdown>
+          </RequireRole>
+          
+          <RequireRole>
+            <Nav.Link href="/ProspectOrder">ProspectOrder</Nav.Link>
+          </RequireRole>
 
           <RequireRole roles={['manager']}>
+            <NavDropdown title="User" id="navbarScrollingDropdown">
+              <NavDropdown.Item href="/User">User</NavDropdown.Item>
+              <NavDropdown.Item href="/Client">Client</NavDropdown.Item>
+            </NavDropdown>
+          </RequireRole>
+
+          <RequireRole roles={['brewer']}>
+            <Nav.Link href="/Recipe">Recipe</Nav.Link>
             <NavDropdown title="Info" id="navbarScrollingDropdown">
               <NavDropdown.Item href="/FermentingIngredients">Fermenting Ingredients</NavDropdown.Item>
               <NavDropdown.Item href="/FermentingIngredients">Hops</NavDropdown.Item>

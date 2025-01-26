@@ -23,10 +23,10 @@ const Login = (setIsAuthenticated) => {
       sessionStorage.setItem('token', data.accessToken);
 
       const roles = await currentUserRoles();
-      setUser((prevData) => ({
+      setUser({
         token: data.accessToken,
         roles: roles,
-      }));
+      });
 
       navigate("/kanban")
       setIsAuthenticated(true);

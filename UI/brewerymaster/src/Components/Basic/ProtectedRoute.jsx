@@ -5,7 +5,7 @@ import { useUser } from './UserProvider';
 const ProtectedRoute = ({ roles, children }) => {
   const { user } = useUser();
 
-  if(!user.roles){
+  if(!user.roles || !user.token){
     return <Navigate to="/Unauthorized" replace />;
   }
 
