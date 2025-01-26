@@ -3,7 +3,7 @@ import Navigation from './Components/App/Navigation';
 
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 
-import './App.css';
+import './Components/App/App.css';
 import React, { useState, useEffect } from 'react';
 
 import Register from './Components/Security/Register';
