@@ -3,6 +3,7 @@ import { logout } from './Endpoints';
 import { useNavigate } from 'react-router-dom';
 
 import { useUser } from './UserProvider';
+import { Button } from 'react-bootstrap';
 
 const LogoutButton = () => {
     const { setUser } = useUser();
@@ -19,7 +20,9 @@ const LogoutButton = () => {
     };
 
     return (
-      <button onClick={handleLogout}>Wyloguj</button>
+      <Button variant="dark" onClick={handleLogout}>
+        Wyloguj
+      </Button>
     );
   };
 
