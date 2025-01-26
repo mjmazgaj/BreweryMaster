@@ -30,6 +30,7 @@ import ProspectOrderSummary from './Components/Order/ProspectOrderSummary.jsx';
 import Unauthorized from './Components/App/Unuthorized';
 
 import { useUser } from './Components/Security/UserProvider';
+import Footer from './Components/App/Footer.jsx';
 const App = () => {
   const { user } = useUser();
   
@@ -126,6 +127,7 @@ const App = () => {
             )}
           </div>
         </Router>
+        <Footer/>
       </I18nextProvider>
     </>
   );
