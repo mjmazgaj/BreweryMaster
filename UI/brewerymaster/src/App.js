@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import './Components/App/App.css';
 import React from 'react';
 
-import ProtectedRoute from './Components/Security/ProtectedRoute'
+import ProtectedRoute from './Components/Security/SecurityComponents/ProtectedRoute'
 
 import { I18nextProvider } from 'react-i18next';
 import i18n from './i18n';

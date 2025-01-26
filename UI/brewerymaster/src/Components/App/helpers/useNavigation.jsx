@@ -8,7 +8,7 @@ import {
     Navbar,
   } from "react-bootstrap";
   
-import RequireRole from "../../Security/RequireRole";
+import RequireRole from "../../Security/SecurityComponents/RequireRole";
 
 import { logout } from "../../Security/Endpoints";
 
