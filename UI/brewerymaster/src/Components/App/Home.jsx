@@ -21,7 +21,7 @@ function Home() {
               variant="dark"
             />
             <hr />
-            <h6>Zainteresowany współpracą?</h6>
+            <h6>Jesteś zainteresowany współpracą?</h6>
             <p>Wypełnij formularz, a my skontaktujemy się z tobą</p>
             <NavigateButton
               path="/ProspectOrder"
@@ -40,7 +40,7 @@ function Home() {
               variant="dark"
             />
             <hr />
-            <h6>Czy chcesz założyć konto?</h6>
+            <h6>Chcesz założyć konto?</h6>
             <p>Zarejestruj się i uzyskaj dostęp do tworzenia zamówień</p>
             <NavigateButton
               path="/Register"
