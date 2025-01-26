@@ -39,7 +39,7 @@ function Navigation() {
   return (
     <Navbar bg="dark" data-bs-theme="dark">
       <Container>
-        <Navbar.Brand href="/">Navbar</Navbar.Brand>
+        <Navbar.Brand href="/">Strona główna</Navbar.Brand>
         <Nav className="me-auto">
           <RequireRole roles={["employee"]}>
             <Nav.Link href="/Kanban">Kanban</Nav.Link>
@@ -50,10 +50,6 @@ function Navigation() {
             <Nav.Link href="/ProspectOrderSummary">
               ProspectOrderSummary
             </Nav.Link>
-          </RequireRole>
-
-          <RequireRole>
-            <Nav.Link href="/ProspectOrder">ProspectOrder</Nav.Link>
           </RequireRole>
 
           <RequireRole roles={["manager"]}>
@@ -108,10 +104,6 @@ function Navigation() {
             PL
           </Button>
         </ButtonGroup>
-        <Nav>
-          <Nav.Link href="/Login">Login</Nav.Link>
-          <Nav.Link href="/Register">Register</Nav.Link>
-        </Nav>
       </Container>
     </Navbar>
   );
