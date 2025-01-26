@@ -53,34 +53,69 @@ const App = () => {
               <Route path="*" element={<Navigate to="/" />} />
 
               <Route path="/register" element={<Register />} />
-              <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated}/>} />
+              <Route
+                path="/login"
+                element={<Login setIsAuthenticated={setIsAuthenticated} />}
+              />
 
-              <Route exact path="/ProspectOrder" element={<ProspectOrderForm />} />
-              <Route exact path="/ProspectOrderSummary" element={<ProspectOrderSummary />} />
+              <Route
+                exact
+                path="/ProspectOrder"
+                element={<ProspectOrderForm />}
+              />
+              <Route
+                exact
+                path="/ProspectOrderSummary"
+                element={<ProspectOrderSummary />}
+              />
 
-              <Route exact path="/Order" element={
-                <ProtectedRoute roles={['supervisor']}>
-                  <Order />
-                </ProtectedRoute>} />
-              <Route exact path="/Recipe" element={
-                <ProtectedRoute roles={['brewer']}>
-                  <Recipe />
-                </ProtectedRoute>} />
-              
-              <Route exact path="/FermentingIngredients" element={
-                <ProtectedRoute roles={['supervisor']}>
-                  <FermentingIngredients />
-                </ProtectedRoute>
-              }/>
+              <Route
+                exact
+                path="/Order"
+                element={
+                  <ProtectedRoute roles={["supervisor"]}>
+                    <Order />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                exact
+                path="/Recipe"
+                element={
+                  <ProtectedRoute roles={["brewer"]}>
+                    <Recipe />
+                  </ProtectedRoute>
+                }
+              />
 
-              <Route exact path="/Client" element={
-                <ProtectedRoute roles={['manager']}>
-                  <Client />
-                </ProtectedRoute>} />
-              <Route exact path="/User" element={
-                <ProtectedRoute roles={['manager']}>
-                  <User />
-                </ProtectedRoute>} />
+              <Route
+                exact
+                path="/FermentingIngredients"
+                element={
+                  <ProtectedRoute roles={["supervisor"]}>
+                    <FermentingIngredients />
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                exact
+                path="/Client"
+                element={
+                  <ProtectedRoute roles={["manager"]}>
+                    <Client />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                exact
+                path="/User"
+                element={
+                  <ProtectedRoute roles={["manager"]}>
+                    <User />
+                  </ProtectedRoute>
+                }
+              />
 
               <Route exact path="/Error" element={<Error />} />
               <Route exact path="/Unauthorized" element={<Unauthorized />} />
@@ -88,9 +123,9 @@ const App = () => {
               <Route
                 path="/Kanban"
                 element={
-                  <ProtectedRoute roles={['employee']}>
-                  <Kanban />
-                </ProtectedRoute>
+                  <ProtectedRoute roles={["employee"]}>
+                    <Kanban />
+                  </ProtectedRoute>
                 }
               ></Route>
             </Routes>

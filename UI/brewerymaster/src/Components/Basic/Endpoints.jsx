@@ -16,7 +16,7 @@ export const login = async (credentials) => {
 export const logout = async () => {
 
   await api.post('api/user/logout');
-  sessionStorage.removeItem('token');
+  sessionStorage.removeItem("token");
 };
 
 export const currentUserRoles = async () => {

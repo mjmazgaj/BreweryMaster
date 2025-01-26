@@ -21,38 +21,48 @@ function Navigation(isAuthenticated) {
       <Container>
         <Navbar.Brand href="/">Navbar</Navbar.Brand>
         <Nav className="me-auto">
-          
-          <RequireRole roles={['employee']}>
+          <RequireRole roles={["employee"]}>
             <Nav.Link href="/Kanban">Kanban</Nav.Link>
           </RequireRole>
-          
-          <RequireRole roles={['supervisor']}>
+
+          <RequireRole roles={["supervisor"]}>
             <Nav.Link href="/Order">Order</Nav.Link>
-            <Nav.Link href="/ProspectOrderSummary">ProspectOrderSummary</Nav.Link>
+            <Nav.Link href="/ProspectOrderSummary">
+              ProspectOrderSummary
+            </Nav.Link>
           </RequireRole>
-          
+
           <RequireRole>
             <Nav.Link href="/ProspectOrder">ProspectOrder</Nav.Link>
           </RequireRole>
 
-          <RequireRole roles={['manager']}>
+          <RequireRole roles={["manager"]}>
             <NavDropdown title="User" id="navbarScrollingDropdown">
               <NavDropdown.Item href="/User">User</NavDropdown.Item>
               <NavDropdown.Item href="/Client">Client</NavDropdown.Item>
             </NavDropdown>
           </RequireRole>
 
-          <RequireRole roles={['brewer']}>
+          <RequireRole roles={["brewer"]}>
             <Nav.Link href="/Recipe">Recipe</Nav.Link>
             <NavDropdown title="Info" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="/FermentingIngredients">Fermenting Ingredients</NavDropdown.Item>
-              <NavDropdown.Item href="/FermentingIngredients">Hops</NavDropdown.Item>
-              <NavDropdown.Item href="/FermentingIngredients">Yeast</NavDropdown.Item>
-              <NavDropdown.Item href="/FermentingIngredients">Extras</NavDropdown.Item>
-              <NavDropdown.Item href="/FermentingIngredients">Tanks</NavDropdown.Item>
+              <NavDropdown.Item href="/FermentingIngredients">
+                Fermenting Ingredients
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/FermentingIngredients">
+                Hops
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/FermentingIngredients">
+                Yeast
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/FermentingIngredients">
+                Extras
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/FermentingIngredients">
+                Tanks
+              </NavDropdown.Item>
             </NavDropdown>
           </RequireRole>
-
         </Nav>
 
         <ButtonGroup>

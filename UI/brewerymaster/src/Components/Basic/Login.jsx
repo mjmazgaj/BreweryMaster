@@ -30,7 +30,7 @@ const Login = (setIsAuthenticated) => {
 
       navigate("/kanban")
       setIsAuthenticated(true);
-      setErrorMessage('');
+      setErrorMessage("");
     } catch (error) {
       setErrorMessage(error.response?.data?.message || 'Logowanie nie powiodło się. Spróbuj ponownie.');
     }
