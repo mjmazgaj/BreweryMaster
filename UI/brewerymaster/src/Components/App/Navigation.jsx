@@ -1,109 +1,32 @@
-import { useState } from "react";
 import {
-  Button,
-  ButtonGroup,
   Container,
   Nav,
   Navbar,
-  NavDropdown,
 } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { useTranslation } from "react-i18next";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import { useNavigation } from "./helpers/useNavigation";
 import { useUser } from "../Security/UserProvider";
-import { logout } from '../Security/Endpoints';
-import RequireRole from "../Security/RequireRole";
 
 function Navigation() {
-  const { user, setUser } = useUser();
-  const { t, i18n } = useTranslation();
+  const { user } = useUser();
 
-  const [currentLanguage, setCurrentLanguage] = useState("en");
-
-  const handleLogout = () => {
-    logout();
-    setUser({
-      token: [],
-      roles: "",
-      isAuthenticated: false,
-    });
-    window.location.href = "/login";
-  };
-
-  const changeLanguage = (lng) => () => {
-    i18n.changeLanguage(lng);
-    localStorage.setItem("language", lng);
-    setCurrentLanguage(lng);
-  };
+  const { navigationModules } = useNavigation();
 
   return (
     <Navbar bg="dark" data-bs-theme="dark">
       <Container>
-        <Navbar.Brand href="/">Strona główna</Navbar.Brand>
+        {navigationModules.homePage}
         <Nav className="me-auto">
-          <RequireRole roles={["employee"]}>
-            <Nav.Link href="/Kanban">Kanban</Nav.Link>
-          </RequireRole>
-
-          <RequireRole roles={["supervisor"]}>
-            <Nav.Link href="/Order">Order</Nav.Link>
-            <Nav.Link href="/ProspectOrderSummary">
-              ProspectOrderSummary
-            </Nav.Link>
-          </RequireRole>
-
-          <RequireRole roles={["manager"]}>
-            <NavDropdown title="User" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="/User">User</NavDropdown.Item>
-              <NavDropdown.Item href="/Client">Client</NavDropdown.Item>
-            </NavDropdown>
-          </RequireRole>
-
-          <RequireRole roles={["brewer"]}>
-            <Nav.Link href="/Recipe">Recipe</Nav.Link>
-            <NavDropdown title="Info" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="/FermentingIngredients">
-                Fermenting Ingredients
-              </NavDropdown.Item>
-              <NavDropdown.Item href="/FermentingIngredients">
-                Hops
-              </NavDropdown.Item>
-              <NavDropdown.Item href="/FermentingIngredients">
-                Yeast
-              </NavDropdown.Item>
-              <NavDropdown.Item href="/FermentingIngredients">
-                Extras
-              </NavDropdown.Item>
-              <NavDropdown.Item href="/FermentingIngredients">
-                Tanks
-              </NavDropdown.Item>
-            </NavDropdown>
-          </RequireRole>
+          {navigationModules.employee}
+          {navigationModules.supervisor}
+          {navigationModules.brewer}
+          {navigationModules.manager}
         </Nav>
 
-        {user.isAuthenticated && (
-          <Button
-            style={{ marginRight: "1rem" }}
-            variant="light"
-            onClick={handleLogout}
-          >
-            Wyloguj
-          </Button>
-        )}
-        <ButtonGroup>
-          <Button
-            onClick={changeLanguage("en")}
-            variant={currentLanguage === "en" ? "light" : "secondary"}
-          >
-            EN
-          </Button>
-          <Button
-            onClick={changeLanguage("pl")}
-            variant={currentLanguage === "pl" ? "light" : "secondary"}
-          >
-            PL
-          </Button>
-        </ButtonGroup>
+        {user?.isAuthenticated && navigationModules.logoutButton}
+        {navigationModules.languageSwitch}
       </Container>
     </Navbar>
   );
