@@ -6,8 +6,8 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import './App.css';
 import React, { useState, useEffect } from 'react';
 
-import Register from './Components/Basic/Register';
-import Login from './Components/Basic/Login';
+import Register from './Components/Security/Register';
+import Login from './Components/Security/Login';
 import Error from './Components/Shared/Error';
 
 import Client from './Components/User/Client/Client';
@@ -19,9 +19,9 @@ import FermentingIngredients from './Components/Info/FermentingIngredients/Ferme
 
 import Kanban from './Components/Work/Kanban';
 
-import LogoutButton from './Components/Basic/LogoutButton'
+import LogoutButton from './Components/Security/LogoutButton'
 
-import ProtectedRoute from './Components/Basic/ProtectedRoute'
+import ProtectedRoute from './Components/Security/ProtectedRoute'
 
 import { I18nextProvider } from 'react-i18next';
 import i18n from './i18n';

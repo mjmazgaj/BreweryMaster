@@ -1,4 +1,4 @@
-import api from '../Basic/api';
+import api from '../Security/api';
 
 export const fetchDataByOwnerId = (setData) => {
   return api.get(`api/task/ByOwnerId`)

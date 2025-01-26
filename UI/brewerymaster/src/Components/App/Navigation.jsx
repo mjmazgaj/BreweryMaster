@@ -3,7 +3,7 @@ import {Button, ButtonGroup, Container, Nav, Navbar, NavDropdown} from 'react-bo
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useTranslation } from 'react-i18next';
 
-import RequireRole from '../Basic/RequireRole'
+import RequireRole from '../Security/RequireRole'
 
 function Navigation(isAuthenticated) {
   const { t, i18n } = useTranslation();
