@@ -1,5 +1,5 @@
 import React from 'react';
-import { useUser } from './UserProvider';
+import { useUser } from '../UserProvider';
 
 const RequireRole = ({ roles, children }) => {
   const { user } = useUser();
