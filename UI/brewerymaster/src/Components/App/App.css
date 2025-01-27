@@ -1,7 +1,22 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+#root{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
 .App {
   text-align: center;
-  width: 80%;
-  margin: 50px auto;
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+  padding: 0 10rem;
+  overflow-y: auto;
 }
 
 .App-logo {
@@ -33,7 +48,7 @@ footer {
   align-items: center;
   height: 4rem;
   background-color: rgb(33, 37, 41);
-  position: absolute;
+  position: fixed;
   color: white;
   bottom: 0;
 }
