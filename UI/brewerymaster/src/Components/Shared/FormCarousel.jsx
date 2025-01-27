@@ -6,7 +6,7 @@ import "./shared.css"
 
 import MenuSteps from './MenuSteps';
 
-const FormCarousel = ({steps, handleSave}) => {
+const FormCarousel = ({steps, handleSave, isValid = true}) => {
 
   const [currentStep, setCurrentStep] = useState(0);
 
@@ -16,6 +16,7 @@ const FormCarousel = ({steps, handleSave}) => {
         currentStep={currentStep}
         setCurrentStep={setCurrentStep}
         amountOfSteps={steps.length}
+        isValid={isValid}
       />
 
       <h2>{steps[currentStep].name}</h2>

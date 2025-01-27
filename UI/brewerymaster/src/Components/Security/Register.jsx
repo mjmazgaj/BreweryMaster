@@ -1,63 +1,24 @@
-import React, { useState } from 'react';
-import { register } from './Endpoints';
-import { useNavigate } from 'react-router-dom';
-import { Form, Button, Col, Row } from 'react-bootstrap';
+import React, { useState, Fragment } from 'react';
 
+import { useRegister } from './helpers/useRegister';
+
+import { useTranslation } from 'react-i18next';
+
+import FormCarousel from '../Shared/FormCarousel'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Register = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const { t } = useTranslation();
   const [errorMessage, setErrorMessage] = useState('');
 
-  const navigate = useNavigate();
-
-  const handleRegister = async (e) => {
-    e.preventDefault();
-    try {
-      await register({ email: email, password: password });
-      setErrorMessage('');
-      navigate('/login');
-    } catch (error) {
-      setErrorMessage(error.response?.data?.message || 'Rejestracja nie powiodła się. Spróbuj ponownie.');
-    }
-  };
+  const [isValid, setIsValid] = useState(true);
+  const {handleRegister, steps} = useRegister({setErrorMessage, setIsValid});
 
   return (
-    <Form onSubmit={handleRegister}>
-      <h1>Zarejestruj się:</h1>
-      <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
-        <Form.Label column sm="2">
-          Email
-        </Form.Label>
-        <Col sm="10">
-          <Form.Control
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Wprowadź email"
-          />
-        </Col>
-      </Form.Group>
-  
-      <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-        <Form.Label column sm="2">
-          Hasło
-        </Form.Label>
-        <Col sm="10">
-          <Form.Control
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Wprowadź hasło"
-          />
-        </Col>
-      </Form.Group>
-  
-      <Button type="submit">Register</Button>
-  
+    <Fragment>
+      <FormCarousel steps={steps} handleSave={handleRegister} isValid={isValid}/>
       {errorMessage && <p className="text-danger">{errorMessage}</p>}
-    </Form>
+    </Fragment>
   );
 };
 
