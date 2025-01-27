@@ -1,6 +1,4 @@
 ﻿using BreweryMaster.API.User.Models.DB;
-using BreweryMaster.API.User.Models.Users.DB;
-using BreweryMaster.API.UserModule.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BreweryMaster.API.Shared.Extensions
@@ -13,16 +11,20 @@ namespace BreweryMaster.API.Shared.Extensions
             builder.Entity<CompanyUser>().ToTable("CompanyUser");
 
 
+            builder.Entity<IndividualUser>()
+                .HasOne(a => a.DeliveryAddress)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Cascade);
+
             builder.Entity<CompanyUser>()
                 .HasOne(a => a.InvoiceAddress)
                 .WithMany()
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<ApplicationUser>()
+            builder.Entity<CompanyUser>()
                 .HasOne(a => a.DeliveryAddress)
-                .WithOne(b => b.User)
-                .HasForeignKey<Address>(b => b.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

@@ -1,12 +1,34 @@
 ﻿using BreweryMaster.API.User.Models.Users.DB;
 using BreweryMaster.API.UserModule.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace BreweryMaster.API.User.Models.DB
 {
+    /// <summary>
+    /// Represents an company user stored in the database.
+    /// </summary>
     public class CompanyUser : ApplicationUser
     {
+        /// <summary>
+        /// The name of the company
+        /// </summary>
+        [MaxLength(255)]
         public required string CompanyName { get; set; }
+
+        /// <summary>
+        /// The tax identifier of the company
+        /// </summary>
+        [MaxLength(255)]
         public required string Nip { get; set; }
+
+        /// <summary>
+        /// The deliver address of the user
+        /// </summary>
+        public Address? DeliveryAddress { get; set; }
+
+        /// <summary>
+        /// The invoice address of the company. 
+        /// </summary>
         public Address? InvoiceAddress { get; set; }
     }
 }

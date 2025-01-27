@@ -50,8 +50,6 @@ namespace BreweryMaster.API.User.Services
                 Commune = request.Commune,
                 Region = request.Region,
                 Country = request.Country,
-                UserId = userId,
-                User = null!,
             };
 
             _context.Addresses.Add(addressToCreate);
