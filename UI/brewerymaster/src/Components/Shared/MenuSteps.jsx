@@ -25,7 +25,7 @@ import {
   BsThreeDots 
 } from "react-icons/bs";
 
-const OrderStepsMenu = ({ currentStep, setCurrentStep, amountOfSteps, isValid = true }) => {
+const MenuSteps = ({ currentStep, setCurrentStep, amountOfSteps, isValid = true }) => {
   const { t } = useTranslation();
   const stepIcons = [
     <Bs1Circle size={30} />,
@@ -99,4 +99,4 @@ const OrderStepsMenu = ({ currentStep, setCurrentStep, amountOfSteps, isValid = 
   );
 };
 
-export default OrderStepsMenu;
+export default MenuSteps;
