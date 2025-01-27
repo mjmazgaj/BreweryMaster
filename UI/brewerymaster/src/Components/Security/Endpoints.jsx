@@ -19,8 +19,8 @@ export const logout = async () => {
   sessionStorage.removeItem("token");
 };
 
-export const currentUserRoles = async () => {
-  return api.get(`api/user/currentUserRoles`)
+export const fetchInfo = async () => {
+  return api.get(`api/user/info`)
     .then((result) => result.data)
     .catch((error) => console.log(error));
 };

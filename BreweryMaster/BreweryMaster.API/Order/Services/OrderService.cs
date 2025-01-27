@@ -64,7 +64,7 @@ namespace BreweryMaster.API.OrderModule.Services
 
         public async Task<Order> CreateOrderAsync(OrderRequest request, ClaimsPrincipal? user)
         {
-            var currentUser = _userService.GetCurrentUser(user);
+            var currentUser = await _userService.GetCurrentUser(user);
 
             var clientToCreate = new Order()
             {

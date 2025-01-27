@@ -93,32 +93,14 @@ namespace BreweryMaster.API.UserModule.Controllers
         }
 
         [HttpGet]
-        [Route("currentUserRoles")]
-        public async Task<ActionResult<IEnumerable<string>>> GetCurrentUserRoles()
-        {
-            var userContext = HttpContext.User;
-
-            try
-            {
-                var roles = await _userService.GetCurrentUserRoles(userContext);
-
-                return Ok(roles);
-            }
-            catch (Exception)
-            {
-                return Unauthorized();
-            }
-        }
-
-        [HttpGet]
         [Route("info")]
-        public IActionResult GetInfo()
+        public async Task<ActionResult<UserResponse?>> GetInfo()
         {
             var userContext = HttpContext.User;
 
             try
             {
-                var user = _userService.GetCurrentUser(userContext);
+                var user = await _userService.GetCurrentUser(userContext);
                 return Ok(user);
             }
             catch (Exception)

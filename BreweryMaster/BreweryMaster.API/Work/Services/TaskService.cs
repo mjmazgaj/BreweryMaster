@@ -20,7 +20,7 @@ namespace BreweryMaster.API.WorkModule.Services
         }
         public async Task<Dictionary<string, KanbanTaskGroupResponse>> GetKanbanTasksByOwnerIdAsync(ClaimsPrincipal? user)
         {
-            var currentUser = _userService.GetCurrentUser(user);
+            var currentUser = await _userService.GetCurrentUser(user);
 
             if (currentUser is null)
                 throw new Exception();
@@ -75,7 +75,7 @@ namespace BreweryMaster.API.WorkModule.Services
         public async Task<KanbanTaskResponse> CreateKanbanTaskAsync(KanbanTaskRequest kanbanTask, ClaimsPrincipal? user)
         {
             var kanbanTaskToAdd = kanbanTask.ToDbModel();
-            var currentUser = _userService.GetCurrentUser(user);
+            var currentUser = await _userService.GetCurrentUser(user);
 
             if (currentUser is null)
                 throw new Exception();

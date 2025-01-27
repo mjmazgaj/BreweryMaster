@@ -79,7 +79,7 @@ namespace BreweryMaster.API.User.Services
             return userResponse;
         }
 
-        public UserResponse GetCurrentUser(ClaimsPrincipal? user)
+        public async Task<UserResponse> GetCurrentUser(ClaimsPrincipal? user)
         {
             if (user is null)
                 throw new Exception("user not found");
@@ -96,17 +96,14 @@ namespace BreweryMaster.API.User.Services
             if (emailClaim is null || nameIdClaim is null)
                 throw new Exception("user claims not found");
 
+            var roles =  await _context.UserRoles.Where(x => x.UserId == nameIdClaim.Value).Select(x => x.RoleId).ToListAsync();
+
             return new UserResponse()
             {
                 Id = nameIdClaim.Value,
-                Email = emailClaim.Value
+                Email = emailClaim.Value,
+                Roles = roles,
             };
-        }
-        public async Task<IEnumerable<string>> GetCurrentUserRoles(ClaimsPrincipal? user)
-        {
-            var currentUser = GetCurrentUser(user);
-
-            return await _context.UserRoles.Where(x => x.UserId == currentUser.Id).Select(x=>x.RoleId).ToListAsync();
         }
 
         public async Task<ApplicationUser> CreateUser(UserRegisterRequest request)

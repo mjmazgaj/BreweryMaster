@@ -71,11 +71,16 @@ footer {
 }
 
 .home_container {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+
+.home-guest_container{
+  width: 80%;
 }
 
 .home-guest-navigation_container {
@@ -88,8 +93,8 @@ footer {
   padding: 0 2rem;
 }
 
-.home-guest_container,
-.home-user_container {
+.home-guest_info,
+.home-user_info {
   padding: 1rem;
   flex: 1;
   max-width: 50%;

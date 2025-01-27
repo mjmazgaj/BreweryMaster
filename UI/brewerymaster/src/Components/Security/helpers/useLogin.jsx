@@ -1,5 +1,5 @@
 
-import { login, currentUserRoles } from '../Endpoints';
+import { login, currentUserRoles, fetchInfo } from '../Endpoints';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../UserProvider';
 
@@ -15,10 +15,11 @@ export const useLogin = ({data, setErrorMessage}) => {
           const loginResult = await login(data);
           sessionStorage.setItem('token', loginResult.accessToken);
     
-          const roles = await currentUserRoles();
+          const info = await fetchInfo();
           setUser({
             token: loginResult.accessToken,
-            roles: roles,
+            email: info.email,
+            roles: info.roles,
             isAuthenticated: loginResult.accessToken ? true : false,
           });
     
