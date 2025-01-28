@@ -1,4 +1,5 @@
-﻿using BreweryMaster.API.Recipe.Models.DB;
+﻿using BreweryMaster.API.Info.Models.Item;
+using BreweryMaster.API.Recipe.Models.DB;
 using Microsoft.EntityFrameworkCore;
 
 namespace BreweryMaster.API.Shared.Extensions

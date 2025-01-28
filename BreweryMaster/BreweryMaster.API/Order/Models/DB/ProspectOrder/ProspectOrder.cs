@@ -1,5 +1,4 @@
 ﻿using BreweryMaster.API.Info.Models.Item;
-using BreweryMaster.API.Recipe.Models.DB;
 
 namespace BreweryMaster.API.OrderModule.Models
 {

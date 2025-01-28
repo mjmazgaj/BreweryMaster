@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using BreweryMaster.API.Info.Models.Item;
 
 namespace BreweryMaster.API.Recipe.Models.DB
 {
