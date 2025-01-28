@@ -149,7 +149,7 @@ namespace BreweryMaster.API.Info.Services
                 .Select(x => x.UnitId)
                 .ToListAsync();
 
-            return _context.Units
+            return _context.UnitTypes
                 .Select(x => new FermentingIngredientUnitNameResponse()
                 {
                     Id = x.Id,

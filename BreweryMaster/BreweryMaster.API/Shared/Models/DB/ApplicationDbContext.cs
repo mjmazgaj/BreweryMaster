@@ -26,7 +26,7 @@ namespace BreweryMaster.API.Shared.Models.DB
         public DbSet<AddressTypeEntity> AddressTypes { get; set; }
 
         //Shared
-        public DbSet<UnitEntity> Units { get; set; }
+        public DbSet<UnitEntity> UnitTypes { get; set; }
 
         //Order
         public DbSet<Order> Orders { get; set; }

@@ -13,7 +13,7 @@ namespace BreweryMaster.API.Info.Services
         }
         public async Task<IEnumerable<EntityResponse>> GetUnitsAsync()
         {
-            return await _context.Units.Select(x =>
+            return await _context.UnitTypes.Select(x =>
             new EntityResponse()
             {
                 Id = x.Id,
