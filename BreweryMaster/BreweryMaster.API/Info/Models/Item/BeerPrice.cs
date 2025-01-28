@@ -1,5 +1,4 @@
-﻿using BreweryMaster.API.Recipe.Models.DB;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace BreweryMaster.API.Info.Models.Item
 {
