@@ -11,10 +11,10 @@ namespace BreweryMaster.API.Shared.Services
         {
             _context = context;
         }
-        public async Task<IEnumerable<UnitEntityResponse>> GetUnitsAsync()
+        public async Task<IEnumerable<EntityResponse>> GetUnitsAsync()
         {
             return await _context.Units.Select(x =>
-            new UnitEntityResponse()
+            new EntityResponse()
             {
                 Id = x.Id,
                 Name = x.Name

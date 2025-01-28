@@ -4,6 +4,6 @@ namespace BreweryMaster.API.Shared.Services
 {
     public interface IEntityService
     {
-        Task<IEnumerable<UnitEntityResponse>> GetUnitsAsync();
+        Task<IEnumerable<EntityResponse>> GetUnitsAsync();
     }
 }
