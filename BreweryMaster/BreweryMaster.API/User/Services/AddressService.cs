@@ -1,5 +1,6 @@
 ﻿using BreweryMaster.API.Shared.Models.DB;
 using BreweryMaster.API.User.Models;
+using BreweryMaster.API.User.Models.DB;
 using BreweryMaster.API.UserModule.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,7 +39,7 @@ namespace BreweryMaster.API.User.Services
             return addressResponse;
         }
 
-        public Address AddAddress(AddressRequest request, string userId)
+        public Address AddAddress(AddressRequest request)
         {
             var addressToCreate = new Address
             {
@@ -57,11 +58,20 @@ namespace BreweryMaster.API.User.Services
             return addressToCreate;
         }
 
-        public async Task<Address> CreateAddress(AddressRequest request, string userId)
+        public UserAddress AddUserAddress(string userId, Address address, int addressType)
         {
-            var addressToCreate = AddAddress(request, userId);
-            await _context.SaveChangesAsync();
-            return addressToCreate;
+            var userAddress = new UserAddress
+            {
+                UserId = userId,
+                User = null!,
+                Address = address,
+                AddressTypeId = addressType,
+                AddressType = null!,
+            };
+
+            _context.Add(userAddress);
+
+            return userAddress;
         }
     }
 }

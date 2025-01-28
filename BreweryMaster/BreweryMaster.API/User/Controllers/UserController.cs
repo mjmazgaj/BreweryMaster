@@ -77,9 +77,6 @@ namespace BreweryMaster.API.UserModule.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            if (request.Password != request.ConfirmPassword)
-                return BadRequest(new { message = "Passwords do not match." });
-
             try
             {
                 await _userService.UpdateUser(request, userId);

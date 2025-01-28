@@ -1,5 +1,6 @@
 ﻿using BreweryMaster.API.User.Models.DB;
 using Microsoft.AspNetCore.Identity;
+using System.Text.Json.Serialization;
 
 namespace BreweryMaster.API.User.Models.Users.DB
 {
@@ -11,6 +12,7 @@ namespace BreweryMaster.API.User.Models.Users.DB
         /// <summary>
         /// The address of the company user. 
         /// </summary>
+        [JsonIgnore]
         public ICollection<UserAddress>? UserAddresses { get; set; }
 
         /// <summary>

@@ -4,6 +4,7 @@ using BreweryMaster.API.User.Models;
 using BreweryMaster.API.User.Models.DB;
 using BreweryMaster.API.User.Models.Users;
 using BreweryMaster.API.User.Models.Users.DB;
+using BreweryMaster.API.UserModule.Helpers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
@@ -102,9 +103,8 @@ namespace BreweryMaster.API.User.Services
             };
         }
 
-        public async Task<ApplicationUser> CreateUser(UserRegisterRequest request)
+        public async Task<UserResponse> CreateUser(UserRegisterRequest request)
         {
-
             using var transaction = await _context.Database.BeginTransactionAsync();
 
             try
@@ -144,13 +144,17 @@ namespace BreweryMaster.API.User.Services
                     throw new Exception();
 
                 if (request.Address is not null)
-                    _addressService.AddAddress(request.Address, userToCreate.Id);
+                {
+                    var createdAddress = _addressService.AddAddress(request.Address);
+
+                    _addressService.AddUserAddress(userToCreate.Id, createdAddress, 1);
+                }
 
                 await _context.SaveChangesAsync();
 
                 await transaction.CommitAsync();
 
-                return userToCreate;
+                return userToCreate.ToUserResponse();
             }
             catch (Exception)
             {
@@ -158,13 +162,9 @@ namespace BreweryMaster.API.User.Services
 
                 throw;
             }
-            finally
-            {
-                await transaction.DisposeAsync();
-            }
         }
 
-        public async Task<ApplicationUser> UpdateUser(UserUpdateRequest request, string userId)
+        public async Task<UserResponse> UpdateUser(UserUpdateRequest request, string userId)
         {
             var user = await _userManager.FindByIdAsync(request.Id);
 
@@ -179,8 +179,9 @@ namespace BreweryMaster.API.User.Services
             if (!result.Succeeded)
                 throw new Exception();
 
-            return user;
+            return user.ToUserResponse();
         }
+
         public async Task<bool> CreateTestUsers()
         {
             var roles = await _roleManager.Roles.ToListAsync();
@@ -208,7 +209,9 @@ namespace BreweryMaster.API.User.Services
                     if (createdUser == null)
                         throw new Exception();
 
-                    var result = await _userManager.AddToRolesAsync(createdUser, roles.GetRoles(role.Name));
+                    var applicationUser = await _userManager.Users.FirstAsync(x=>x.Id == createdUser.Id);
+
+                    var result = await _userManager.AddToRolesAsync(applicationUser, roles.GetRoles(role.Name));
 
                     if (!result.Succeeded)
                         throw new Exception();

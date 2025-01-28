@@ -9,8 +9,8 @@ namespace BreweryMaster.API.User.Services
         Task<IEnumerable<UserResponse>?> GetUsers();
         Task<UserResponse?> GetUserById(string id);
         Task<UserResponse> GetCurrentUser(ClaimsPrincipal? user);
-        Task<ApplicationUser> CreateUser(UserRegisterRequest request);
-        Task<ApplicationUser> UpdateUser(UserUpdateRequest request, string userId);
+        Task<UserResponse> CreateUser(UserRegisterRequest request);
+        Task<UserResponse> UpdateUser(UserUpdateRequest request, string userId);
 
         Task<bool> CreateTestUsers();
     }
