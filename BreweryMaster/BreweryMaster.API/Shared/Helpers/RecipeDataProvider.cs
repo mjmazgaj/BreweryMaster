@@ -1,4 +1,4 @@
-﻿using BreweryMaster.API.Info.Models.Item;
+﻿using BreweryMaster.API.Info.Models;
 using BreweryMaster.API.Recipe.Models.DB;
 
 public static class RecipeDataProvider

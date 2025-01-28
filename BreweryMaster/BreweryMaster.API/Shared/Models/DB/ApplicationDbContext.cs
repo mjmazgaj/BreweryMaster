@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using BreweryMaster.API.Recipe.Models.DB;
 using BreweryMaster.API.Shared.Extensions;
-using BreweryMaster.API.Info.Models.Item;
 using BreweryMaster.API.User.Models.Users.DB;
 using BreweryMaster.API.User.Models.DB;
 using BreweryMaster.API.Work.Models.DB;
@@ -43,8 +42,8 @@ namespace BreweryMaster.API.Shared.Models.DB
         public DbSet<FermentingIngredientReserved> FermentingIngredientsReserved { get; set; }
 
         public DbSet<Container> Containers { get; set; }
-        public DbSet<Info.Models.Item.ContainerPrice> ContainerPrices { get; set; }
-        public DbSet<Info.Models.Item.BeerPrice> BeerPrices { get; set; }
+        public DbSet<Info.Models.ContainerPrice> ContainerPrices { get; set; }
+        public DbSet<Info.Models.BeerPrice> BeerPrices { get; set; }
 
         //Recipe
         public DbSet<BeerStyleEntity> BeerStyles { get; set; }

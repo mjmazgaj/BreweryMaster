@@ -1,4 +1,4 @@
-﻿using BreweryMaster.API.Info.Models.Item;
+﻿using BreweryMaster.API.Info.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BreweryMaster.API.Shared.Extensions

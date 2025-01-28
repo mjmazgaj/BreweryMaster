@@ -1,6 +1,6 @@
 ﻿using BreweryMaster.API.Shared.Models.DB;
 
-namespace BreweryMaster.API.Info.Models.Item
+namespace BreweryMaster.API.Info.Models
 {
     public class Container
     {

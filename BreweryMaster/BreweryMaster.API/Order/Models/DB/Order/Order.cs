@@ -1,4 +1,4 @@
-﻿using BreweryMaster.API.Info.Models.Item;
+﻿using BreweryMaster.API.Info.Models;
 using BreweryMaster.API.User.Models.Users.DB;
 using Microsoft.EntityFrameworkCore;
 

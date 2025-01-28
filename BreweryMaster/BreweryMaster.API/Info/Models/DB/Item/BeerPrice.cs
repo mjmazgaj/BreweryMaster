@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace BreweryMaster.API.Info.Models.Item
+namespace BreweryMaster.API.Info.Models
 {
     public class BeerPrice
     {

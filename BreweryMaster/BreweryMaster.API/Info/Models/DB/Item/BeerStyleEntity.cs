@@ -1,4 +1,4 @@
-﻿namespace BreweryMaster.API.Info.Models.Item
+﻿namespace BreweryMaster.API.Info.Models
 {
     public class BeerStyleEntity
     {
