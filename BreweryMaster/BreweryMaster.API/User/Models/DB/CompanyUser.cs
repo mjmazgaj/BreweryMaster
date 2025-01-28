@@ -1,5 +1,4 @@
 ﻿using BreweryMaster.API.User.Models.Users.DB;
-using BreweryMaster.API.UserModule.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace BreweryMaster.API.User.Models.DB
