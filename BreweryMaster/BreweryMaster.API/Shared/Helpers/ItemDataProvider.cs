@@ -99,7 +99,7 @@ public static class ItemDataProvider
         {
             new()
             {
-                Id = 1,
+                Id = 11,
                 ContainerId = 1,
                 Container = null!,
                 Price = 1,
@@ -107,7 +107,7 @@ public static class ItemDataProvider
             },
             new()
             {
-                Id = 2,
+                Id = 12,
                 ContainerId = 2,
                 Container = null!,
                 Price = 0.5m,
@@ -115,7 +115,7 @@ public static class ItemDataProvider
             },
             new()
             {
-                Id = 3,
+                Id = 13,
                 ContainerId = 3,
                 Container = null!,
                 Price = 1,
@@ -123,7 +123,7 @@ public static class ItemDataProvider
             },
             new()
             {
-                Id = 4,
+                Id = 14,
                 ContainerId = 4,
                 Container = null!,
                 Price = 0.5m,
@@ -131,7 +131,7 @@ public static class ItemDataProvider
             },
             new()
             {
-                Id = 5,
+                Id = 15,
                 ContainerId = 5,
                 Container = null!,
                 Price = 25,
