@@ -2,7 +2,7 @@
 
 namespace BreweryMaster.API.Shared.Helpers
 {
-    public static class ProspectOrderDataProvider
+    public static class OrderDataProvider
     {
         public static IEnumerable<ProspectIndyvidualClient> GetProspectIndyvidualClients()
         {

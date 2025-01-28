@@ -29,9 +29,9 @@ namespace BreweryMaster.API.Shared.Extensions
                       .OnDelete(DeleteBehavior.Cascade);
             });
 
-            builder.Entity<ProspectCompanyClient>().HasData(ProspectOrderDataProvider.GetProspectCompanyClients());
-            builder.Entity<ProspectIndyvidualClient>().HasData(ProspectOrderDataProvider.GetProspectIndyvidualClients());
-            builder.Entity<ProspectOrder>().HasData(ProspectOrderDataProvider.GetProspectOrders());
+            builder.Entity<ProspectCompanyClient>().HasData(OrderDataProvider.GetProspectCompanyClients());
+            builder.Entity<ProspectIndyvidualClient>().HasData(OrderDataProvider.GetProspectIndyvidualClients());
+            builder.Entity<ProspectOrder>().HasData(OrderDataProvider.GetProspectOrders());
         }
     }
 }
