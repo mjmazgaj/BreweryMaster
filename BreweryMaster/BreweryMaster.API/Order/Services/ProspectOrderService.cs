@@ -109,6 +109,7 @@ namespace BreweryMaster.API.OrderModule.Services
                         Nip = request.NIP,
                         Orders = null!,
                         PhoneNumber = request.PhoneNumber,
+                        CreatedOn = DateTime.Now,
                     };
 
                     _context.ProspectClients.Add(clientToCreate);
@@ -123,6 +124,7 @@ namespace BreweryMaster.API.OrderModule.Services
                         Email = "email@test.pl",
                         Orders = null!,
                         PhoneNumber = request.PhoneNumber,
+                        CreatedOn = DateTime.Now,
                     };
 
                     _context.ProspectClients.Add(clientToCreate);
@@ -142,6 +144,7 @@ namespace BreweryMaster.API.OrderModule.Services
                     ContainerId = request.ContainerId,
                     Container = null!,
                     Capacity = request.Capacity,
+                    CreatedOn = DateTime.Now,
                 };
 
                 _context.ProspectOrders.Add(orderToCreate);

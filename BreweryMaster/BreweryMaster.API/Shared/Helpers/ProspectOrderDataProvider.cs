@@ -15,7 +15,8 @@ namespace BreweryMaster.API.Shared.Helpers
                     Surname = "Doe",
                     Email = "client1@example.com",
                     Orders = null!,
-                    PhoneNumber = "+48123456789"
+                    PhoneNumber = "+48123456789",
+                    CreatedOn = DateTime.Now,
                 },
                 new()
                 {
@@ -24,7 +25,8 @@ namespace BreweryMaster.API.Shared.Helpers
                     Surname = "Smith",
                     Email = "client2@example.com",
                     Orders = null!,
-                    PhoneNumber = "+48987654321"
+                    PhoneNumber = "+48987654321",
+                    CreatedOn = DateTime.Now,
                 },
                 new()
                 {
@@ -33,7 +35,8 @@ namespace BreweryMaster.API.Shared.Helpers
                     Surname = "Brown",
                     Email = "client3@example.com",
                     Orders = null!,
-                    PhoneNumber = "+48765432100"
+                    PhoneNumber = "+48765432100",
+                    CreatedOn = DateTime.Now,
                 }
             };
         }
@@ -49,7 +52,8 @@ namespace BreweryMaster.API.Shared.Helpers
                     Nip = 772777217,
                     Email = "client1@example.com",
                     Orders = null!,
-                    PhoneNumber = "+48123456789"
+                    PhoneNumber = "+48123456789",
+                    CreatedOn = DateTime.Now,
                 },
                 new()
                 {
@@ -58,7 +62,8 @@ namespace BreweryMaster.API.Shared.Helpers
                     Nip = 882888218,
                     Email = "client2@example.com",
                     Orders = null!,
-                    PhoneNumber = "+48987654321"
+                    PhoneNumber = "+48987654321",
+                    CreatedOn = DateTime.Now,
                 },
                 new()
                 {
@@ -67,7 +72,8 @@ namespace BreweryMaster.API.Shared.Helpers
                     Nip = 993999319,
                     Email = "client3@example.com",
                     Orders = null!,
-                    PhoneNumber = "+48765432100"
+                    PhoneNumber = "+48765432100",
+                    CreatedOn = DateTime.Now,
                 }
             };
 
@@ -86,8 +92,9 @@ namespace BreweryMaster.API.Shared.Helpers
                     BeerStyle = null!,
                     ContainerId = 1,
                     Container = null!,
-                    TargetDate = DateTime.Today,
+                    TargetDate = DateTime.Today.AddDays(2),
                     Capacity = 1000,
+                    CreatedOn = DateTime.Now,
                 },
                 new()
                 {
@@ -98,8 +105,9 @@ namespace BreweryMaster.API.Shared.Helpers
                     BeerStyle = null!,
                     ContainerId = 3,
                     Container = null!,
-                    TargetDate = DateTime.Today,
+                    TargetDate = DateTime.Today.AddDays(2),
                     Capacity = 1400,
+                    CreatedOn = DateTime.Now,
                 },
                 new()
                 {
@@ -110,8 +118,9 @@ namespace BreweryMaster.API.Shared.Helpers
                     BeerStyle = null!,
                     ContainerId = 3,
                     Container = null!,
-                    TargetDate = DateTime.Today,
+                    TargetDate = DateTime.Today.AddDays(4),
                     Capacity = 3000,
+                    CreatedOn = DateTime.Now,
                 }
             };
         }

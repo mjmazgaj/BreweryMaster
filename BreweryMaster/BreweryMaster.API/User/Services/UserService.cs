@@ -5,6 +5,7 @@ using BreweryMaster.API.User.Models.DB;
 using BreweryMaster.API.User.Models.Users;
 using BreweryMaster.API.User.Models.Users.DB;
 using BreweryMaster.API.UserModule.Helpers;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
@@ -122,6 +123,7 @@ namespace BreweryMaster.API.User.Services
                         Email = request.UserAuthInfo.Email,
                         CompanyName = request.CompanyUserInfo.CompanyName,
                         Nip = request.CompanyUserInfo.Nip,
+                        CreatedOn = DateTime.Now,
                     };
                 }
                 else
@@ -135,6 +137,7 @@ namespace BreweryMaster.API.User.Services
                         Email = request.UserAuthInfo.Email,
                         Forename = request.IndividualUserInfo.Forename,
                         Surname = request.IndividualUserInfo.Surname,
+                        CreatedOn = DateTime.Now,
                     };
                 }
 
@@ -173,6 +176,7 @@ namespace BreweryMaster.API.User.Services
 
             user.Email = request.Email;
             user.UserName = request.Email;
+            user.ModifiedOn = DateTime.Now;
 
             var result = await _userManager.UpdateAsync(user);
 

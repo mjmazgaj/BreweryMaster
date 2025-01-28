@@ -15,6 +15,8 @@ namespace BreweryMaster.API.User.Models.Users.DB
         [JsonIgnore]
         public ICollection<UserAddress>? UserAddresses { get; set; }
 
+        public DateTime CreatedOn { get; set; }
+        public DateTime? ModifiedOn { get; set; }
         /// <summary>
         /// The removal indicator
         /// </summary>
