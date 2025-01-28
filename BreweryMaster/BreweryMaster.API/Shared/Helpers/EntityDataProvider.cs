@@ -130,4 +130,26 @@ public static class EntityDataProvider
                 }
             };
     }
+
+    public static IEnumerable<MaterialType> GetMaterialTypes()
+    {
+        return new List<MaterialType>()
+        {
+                new()
+                {
+                    Id = 1,
+                    Name = "Glass"
+                },
+                new()
+                {
+                    Id = 2,
+                    Name = "Metal"
+                },
+                new()
+                {
+                    Id = 3,
+                    Name = "Plastic"
+                }
+        };
+    }
 }

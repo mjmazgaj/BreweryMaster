@@ -8,8 +8,8 @@ namespace BreweryMaster.API.Shared.Extensions
     {
         public static void ConfigureUser(this ModelBuilder builder)
         {
-            builder.Entity<IndividualUser>().ToTable("IndividualUser");
-            builder.Entity<CompanyUser>().ToTable("CompanyUser");
+            builder.Entity<IndividualUser>().ToTable("IndividualUsers");
+            builder.Entity<CompanyUser>().ToTable("CompanyUsers");
             builder.Entity<UserAddress>()
                 .HasKey(ua => new { ua.UserId, ua.AddressId, ua.AddressTypeId });
 

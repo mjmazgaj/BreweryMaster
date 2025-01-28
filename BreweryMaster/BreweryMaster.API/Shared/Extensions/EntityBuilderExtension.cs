@@ -15,6 +15,7 @@ namespace BreweryMaster.API.Shared.Extensions
             builder.Entity<TaskStatusEntity>().HasData(EntityDataProvider.GetTaskStatusEntities());
             builder.Entity<IdentityRole>().HasData(EntityDataProvider.GetIdentityRoles());
             builder.Entity<AddressTypeEntity>().HasData(EntityDataProvider.GetAddressTypes());
+            builder.Entity<MaterialType>().HasData(EntityDataProvider.GetMaterialTypes());
         }
     }
 }

@@ -19,10 +19,14 @@ namespace BreweryMaster.API.Info.Models
         public required string ContainerName { get; set; }
 
         /// <summary>
-        /// The material
+        /// The material id
         /// </summary>
-        [MaxLength(255)]
-        public string? Material { get; set; }
+        public required int MaterialId { get; set; }
+
+        /// <summary>
+        /// The material model representation
+        /// </summary>
+        public required MaterialType Material { get; set; }
 
         /// <summary>
         /// The capacity

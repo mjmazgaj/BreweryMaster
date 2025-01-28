@@ -16,6 +16,13 @@ namespace BreweryMaster.API.Shared.Extensions
                       .OnDelete(DeleteBehavior.Cascade)
             );
 
+            builder.Entity<Container>(entity =>
+                entity.HasOne(e => e.Material)
+                      .WithMany()
+                      .HasForeignKey(e => e.MaterialId)
+                      .OnDelete(DeleteBehavior.Cascade)
+            );
+
             builder.Entity<BeerPrice>(entity =>
                 entity.HasOne(e => e.BeerStyle)
                       .WithMany()

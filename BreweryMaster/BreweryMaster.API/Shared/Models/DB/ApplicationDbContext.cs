@@ -44,6 +44,7 @@ namespace BreweryMaster.API.Shared.Models.DB
         public DbSet<Container> Containers { get; set; }
         public DbSet<Info.Models.ContainerPrice> ContainerPrices { get; set; }
         public DbSet<Info.Models.BeerPrice> BeerPrices { get; set; }
+        public DbSet<MaterialType> MaterialTypes { get; set; }
 
         //Recipe
         public DbSet<BeerStyleEntity> BeerStyles { get; set; }

@@ -10,7 +10,8 @@ public static class ItemDataProvider
             {
                 Id = 1,
                 ContainerName ="bottle",
-                Material = "glass",
+                MaterialId = 1,
+                Material = null!,
                 UnitEntity = null!,
                 UnitEntityId = 5,
                 Capacity = 500,
@@ -19,7 +20,8 @@ public static class ItemDataProvider
             {
                 Id = 2,
                 ContainerName ="bottle",
-                Material = "metal",
+                MaterialId = 2,
+                Material = null!,
                 UnitEntity = null!,
                 UnitEntityId = 5,
                 Capacity = 500,
@@ -28,7 +30,8 @@ public static class ItemDataProvider
             {
                 Id = 3,
                 ContainerName ="bottle",
-                Material = "glass",
+                MaterialId = 1,
+                Material = null!,
                 UnitEntity = null!,
                 UnitEntityId = 5,
                 Capacity = 300,
@@ -37,7 +40,8 @@ public static class ItemDataProvider
             {
                 Id = 4,
                 ContainerName ="bottle",
-                Material = "metal",
+                MaterialId = 2,
+                Material = null!,
                 UnitEntity = null!,
                 UnitEntityId = 5,
                 Capacity = 300,
@@ -46,7 +50,8 @@ public static class ItemDataProvider
             {
                 Id = 5,
                 ContainerName ="keg",
-                Material = "metal",
+                MaterialId = 3,
+                Material = null!,
                 UnitEntity = null!,
                 UnitEntityId = 3,
                 Capacity = 10,
