@@ -20,10 +20,5 @@ namespace BreweryMaster.API.User.Models.DB
         /// </summary>
         [MaxLength(255)]
         public required string Surname { get; set; }
-
-        /// <summary>
-        /// The deliver address of the user
-        /// </summary>
-        public Address? DeliveryAddress { get; set; }
     }
 }

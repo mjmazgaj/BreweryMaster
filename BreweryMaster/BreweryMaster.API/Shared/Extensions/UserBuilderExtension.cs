@@ -1,4 +1,5 @@
 ﻿using BreweryMaster.API.User.Models.DB;
+using BreweryMaster.API.User.Models.Users.DB;
 using Microsoft.EntityFrameworkCore;
 
 namespace BreweryMaster.API.Shared.Extensions
@@ -9,22 +10,31 @@ namespace BreweryMaster.API.Shared.Extensions
         {
             builder.Entity<IndividualUser>().ToTable("IndividualUser");
             builder.Entity<CompanyUser>().ToTable("CompanyUser");
+            builder.Entity<UserAddress>()
+                .HasKey(ua => new { ua.UserId, ua.AddressId, ua.AddressTypeId });
 
-
-            builder.Entity<IndividualUser>()
-                .HasOne(a => a.DeliveryAddress)
+            builder.Entity<UserAddress>()
+                .HasOne(x =>x.Address)
                 .WithMany()
+                .HasForeignKey(x => x.AddressId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.Entity<CompanyUser>()
-                .HasOne(a => a.InvoiceAddress)
+            builder.Entity<UserAddress>()
+                .HasOne(x => x.User)
                 .WithMany()
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(x => x.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-            builder.Entity<CompanyUser>()
-                .HasOne(a => a.DeliveryAddress)
+            builder.Entity<UserAddress>()
+                .HasOne(x => x.AddressType)
                 .WithMany()
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(x => x.AddressTypeId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<ApplicationUser>()
+                .HasMany(x => x.UserAddresses)
+                .WithOne(x => x.User)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

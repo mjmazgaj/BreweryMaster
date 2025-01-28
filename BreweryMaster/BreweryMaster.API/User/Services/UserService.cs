@@ -33,14 +33,12 @@ namespace BreweryMaster.API.User.Services
         {
             var response = new List<UserResponse>();
 
-            var companyUsers = await _context.CompanyUsers.Include(x => x.DeliveryAddress).ToListAsync();
-            var individualUsers = await _context.IndividualUsers.Include(x => x.DeliveryAddress).ToListAsync();
+            var companyUsers = await _context.CompanyUsers.Include(x => x.UserAddresses).ToListAsync();
+            var individualUsers = await _context.IndividualUsers.Include(x => x.UserAddresses).ToListAsync();
 
             response.AddRange(companyUsers.Select(x => new UserResponse()
             {
                 Id = x.Id,
-                PostCode = x.DeliveryAddress?.PostalCode,
-                City = x.DeliveryAddress?.City,
                 Email = x.Email,
                 Name = x.CompanyName,
                 IsCompany = true
@@ -49,8 +47,6 @@ namespace BreweryMaster.API.User.Services
             response.AddRange(individualUsers.Select(x => new UserResponse()
             {
                 Id = x.Id,
-                PostCode = x.DeliveryAddress?.PostalCode,
-                City = x.DeliveryAddress?.City,
                 Email = x.Email,
                 Name = $"{x.Surname} {x.Forename}",
                 IsCompany = false

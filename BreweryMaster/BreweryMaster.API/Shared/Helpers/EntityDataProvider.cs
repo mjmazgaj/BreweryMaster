@@ -1,5 +1,6 @@
 ﻿using BreweryMaster.API.Info.Models.Item;
 using BreweryMaster.API.Shared.Models.DB;
+using BreweryMaster.API.User.Models.DB;
 using BreweryMaster.API.Work.Models.DB;
 using Microsoft.AspNetCore.Identity;
 
@@ -106,5 +107,27 @@ public static class EntityDataProvider
                 ConcurrencyStamp = Guid.NewGuid().ToString()
             }
         };
+    }
+
+    public static IEnumerable<AddressTypeEntity> GetAddressTypes()
+    {
+        return new List<AddressTypeEntity>()
+            {
+                new()
+                {
+                    Id = 1,
+                    Name = "Home"
+                },
+                new()
+                {
+                    Id = 2,
+                    Name = "Delivery"
+                },
+                new()
+                {
+                    Id = 3,
+                    Name = "Invoice"
+                }
+            };
     }
 }

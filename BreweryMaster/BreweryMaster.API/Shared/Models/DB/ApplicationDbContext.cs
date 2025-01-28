@@ -23,6 +23,8 @@ namespace BreweryMaster.API.Shared.Models.DB
         public DbSet<IndividualUser> IndividualUsers { get; set; }
         public DbSet<CompanyUser> CompanyUsers { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<UserAddress> UserAddresses { get; set; }
+        public DbSet<AddressTypeEntity> AddressTypes { get; set; }
 
         //Shared
         public DbSet<UnitEntity> Units { get; set; }

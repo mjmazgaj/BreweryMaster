@@ -20,15 +20,5 @@ namespace BreweryMaster.API.User.Models.DB
         /// </summary>
         [MaxLength(255)]
         public required string Nip { get; set; }
-
-        /// <summary>
-        /// The deliver address of the user
-        /// </summary>
-        public Address? DeliveryAddress { get; set; }
-
-        /// <summary>
-        /// The invoice address of the company. 
-        /// </summary>
-        public Address? InvoiceAddress { get; set; }
     }
 }

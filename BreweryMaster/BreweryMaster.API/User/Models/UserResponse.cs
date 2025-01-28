@@ -5,8 +5,6 @@
         public required string Id { get; set; }
         public string? Email { get; set; }
         public string? Name { get; set; }
-        public string? City { get; set; }
-        public string? PostCode { get; set; }
         public bool IsCompany { get; set; }
         public IEnumerable<string>? Roles { get; set; }
     }
