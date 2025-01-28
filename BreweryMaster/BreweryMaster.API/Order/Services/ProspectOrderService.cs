@@ -1,4 +1,5 @@
-﻿using BreweryMaster.API.OrderModule.Helpers;
+﻿using BreweryMaster.API.Info.Models;
+using BreweryMaster.API.OrderModule.Helpers;
 using BreweryMaster.API.OrderModule.Models;
 using BreweryMaster.API.Shared.Helpers;
 using BreweryMaster.API.Shared.Models;

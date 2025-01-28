@@ -1,4 +1,4 @@
-﻿using BreweryMaster.API.Shared.Models.DB;
+﻿using BreweryMaster.API.Info.Models;
 
 namespace BreweryMaster.API.Shared.Helpers
 {

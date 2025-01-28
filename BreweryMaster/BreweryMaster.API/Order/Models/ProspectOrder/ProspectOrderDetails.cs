@@ -1,4 +1,4 @@
-﻿using BreweryMaster.API.Shared.Models;
+﻿using BreweryMaster.API.Info.Models;
 
 namespace BreweryMaster.API.OrderModule.Models
 {

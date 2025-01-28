@@ -1,8 +1,8 @@
-﻿using BreweryMaster.API.Shared.Models;
+﻿using BreweryMaster.API.Info.Models;
 using BreweryMaster.API.Shared.Models.DB;
 using Microsoft.EntityFrameworkCore;
 
-namespace BreweryMaster.API.Shared.Services
+namespace BreweryMaster.API.Info.Services
 {
     public class EntityService : IEntityService
     {

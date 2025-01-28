@@ -1,6 +1,6 @@
-﻿namespace BreweryMaster.API.Shared.Models.DB
+﻿namespace BreweryMaster.API.Info.Models
 {
-    public class UnitEntity
+    public class EntityResponse
     {
         public int Id { get; set; }
         public required string Name { get; set; }

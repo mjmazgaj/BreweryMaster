@@ -1,6 +1,6 @@
-﻿using BreweryMaster.API.Shared.Models;
+﻿using BreweryMaster.API.Info.Models;
 
-namespace BreweryMaster.API.Shared.Services
+namespace BreweryMaster.API.Info.Services
 {
     public interface IEntityService
     {
