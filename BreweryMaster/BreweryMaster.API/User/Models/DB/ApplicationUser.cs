@@ -5,12 +5,12 @@ using System.Text.Json.Serialization;
 namespace BreweryMaster.API.User.Models.Users.DB
 {
     /// <summary>
-    /// Represents an individual user stored in the database.
+    /// Represents a user stored in the database.
     /// </summary>
     public class ApplicationUser : IdentityUser
     {
         /// <summary>
-        /// The address of the company user. 
+        /// The address of the user. 
         /// </summary>
         [JsonIgnore]
         public ICollection<UserAddress>? UserAddresses { get; set; }

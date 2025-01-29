@@ -10,6 +10,7 @@ namespace BreweryMaster.API.Shared.Extensions
         {
             builder.Entity<IndividualUser>().ToTable("IndividualUsers");
             builder.Entity<CompanyUser>().ToTable("CompanyUsers");
+
             builder.Entity<UserAddress>()
                 .HasKey(ua => new { ua.UserId, ua.AddressId, ua.AddressTypeId });
 
