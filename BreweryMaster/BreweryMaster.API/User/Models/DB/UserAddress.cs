@@ -4,7 +4,7 @@ using BreweryMaster.API.UserModule.Models;
 namespace BreweryMaster.API.User.Models.DB
 {
     /// <summary>
-    /// Resents an address to type relations in the database. 
+    /// Represents an address to type relations in the database. 
     /// </summary>
     public class UserAddress
     {

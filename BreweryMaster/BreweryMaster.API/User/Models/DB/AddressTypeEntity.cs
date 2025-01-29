@@ -3,7 +3,7 @@
 namespace BreweryMaster.API.User.Models.DB
 {
     /// <summary>
-    /// Resents an address types in the database. 
+    /// Represents an address types in the database. 
     /// </summary>
     public class AddressTypeEntity
     {
