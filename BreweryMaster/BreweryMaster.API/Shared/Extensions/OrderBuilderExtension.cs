@@ -12,7 +12,10 @@ namespace BreweryMaster.API.Shared.Extensions
             builder.Entity<CompanyClient>().ToTable("CompanyClients");
 
             builder.Entity<ClientAddress>()
-                .HasKey(ua => new { ua.ClientId, ua.AddressId, ua.AddressTypeId });
+                .HasKey(x => new { x.ClientId, x.AddressId, x.AddressTypeId });
+
+            builder.Entity<OrderStatusChange>()
+                .HasKey(x => new { x.OrderId, x.OrderStatusId });
 
             builder.Entity<Order>(entity =>
             {
@@ -35,11 +38,19 @@ namespace BreweryMaster.API.Shared.Extensions
                       .WithMany()
                       .HasForeignKey(x => x.CreatedByUserId)
                       .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            builder.Entity<OrderStatusChange>(entity =>
+            {
+                entity.HasOne(x => x.Order)
+                       .WithMany(x => x.OrderStatusChanges)
+                       .HasForeignKey(x => x.OrderId)
+                       .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasOne(x => x.OrderStatus)
-                      .WithMany()
-                      .HasForeignKey(x => x.OrderStatusId)
-                      .OnDelete(DeleteBehavior.Cascade);
+                       .WithMany()
+                       .HasForeignKey(x => x.OrderStatusId)
+                       .OnDelete(DeleteBehavior.Cascade);
             });
         }
     }

@@ -77,8 +77,6 @@ namespace BreweryMaster.API.OrderModule.Services
                 CreatedOn = DateTime.Now,
                 CreatedByUser = null!,
                 CreatedByUserId = currentUser.Id,
-                OrderStatusId = 1,
-                OrderStatus = null!,
             };
 
             _context.Orders.Add(clientToCreate);

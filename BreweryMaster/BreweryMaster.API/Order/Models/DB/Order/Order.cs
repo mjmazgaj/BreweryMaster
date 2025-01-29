@@ -2,6 +2,7 @@
 using BreweryMaster.API.User.Models.Users.DB;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace BreweryMaster.API.OrderModule.Models
 {
@@ -83,14 +84,10 @@ namespace BreweryMaster.API.OrderModule.Models
         public DateTime? ModifiedOn { get; set; }
 
         /// <summary>
-        /// The order status id
+        /// The related list order status models
         /// </summary>
-        public int OrderStatusId { get; set; }
-
-        /// <summary>
-        /// The related order status model representation
-        /// </summary>
-        public required OrderStatus OrderStatus { get; set; }
+        [JsonIgnore]
+        public ICollection<OrderStatusChange>? OrderStatusChanges { get; set; }
 
         /// <summary>
         /// The removal indicator
