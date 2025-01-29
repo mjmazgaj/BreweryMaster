@@ -152,4 +152,56 @@ public static class EntityDataProvider
                 }
         };
     }
+
+    public static IEnumerable<OrderStatus> GetOrderStatuses()
+    {
+        return new List<OrderStatus>()
+        {
+                new()
+                {
+                    Id = 1,
+                    Name = "NotSet"
+                },
+                new()
+                {
+                    Id = 2,
+                    Name = "CreatingDocumentation"
+                },
+                new()
+                {
+                    Id = 3,
+                    Name = "ProductionPreparation"
+                },
+                new()
+                {
+                    Id = 4,
+                    Name = "Brewing"
+                },
+                new()
+                {
+                    Id = 5,
+                    Name = "PostBrewingWork"
+                },
+                new()
+                {
+                    Id = 6,
+                    Name = "Maturation"
+                },
+                new()
+                {
+                    Id = 7,
+                    Name = "Packaging"
+                },
+                new()
+                {
+                    Id = 8,
+                    Name = "PreparedForDelivery"
+                },
+                new()
+                {
+                    Id = 9,
+                    Name = "Completed"
+                }
+        };
+    }
 }

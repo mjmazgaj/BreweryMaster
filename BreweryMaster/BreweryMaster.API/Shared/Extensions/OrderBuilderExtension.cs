@@ -1,5 +1,4 @@
 ﻿using BreweryMaster.API.OrderModule.Models;
-using BreweryMaster.API.Shared.Helpers;
 using Microsoft.EntityFrameworkCore;
 
 namespace BreweryMaster.API.Shared.Extensions
@@ -23,6 +22,11 @@ namespace BreweryMaster.API.Shared.Extensions
                 entity.HasOne(x => x.User)
                       .WithMany()
                       .HasForeignKey(x => x.UserId)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(x => x.OrderStatus)
+                      .WithMany()
+                      .HasForeignKey(x => x.OrderStatusId)
                       .OnDelete(DeleteBehavior.Cascade);
             });
         }

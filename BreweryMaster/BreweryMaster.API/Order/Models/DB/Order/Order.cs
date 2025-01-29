@@ -17,5 +17,7 @@ namespace BreweryMaster.API.OrderModule.Models
         public DateTime TargetDate { get; set; }
         [Precision(18, 2)]
         public decimal Price { get; set; }
+        public int OrderStatusId { get; set; }
+        public required OrderStatus OrderStatus { get; set; }
     }
 }

@@ -77,6 +77,8 @@ namespace BreweryMaster.API.OrderModule.Services
                 RecipeId = request.RecipeId,
                 Recipe = null!,
                 TargetDate = request.TargetDate,
+                OrderStatusId = 1,
+                OrderStatus = null!,
             };
 
             _context.Orders.Add(clientToCreate);

@@ -30,6 +30,7 @@ namespace BreweryMaster.API.Shared.Models.DB
 
         //Order
         public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderStatus> OrderStatuses { get; set; }
         public DbSet<ProspectClient> ProspectClients { get; set; }
         public DbSet<ProspectOrder> ProspectOrders { get; set; }
 
