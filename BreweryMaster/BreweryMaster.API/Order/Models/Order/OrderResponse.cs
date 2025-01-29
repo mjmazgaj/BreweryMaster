@@ -3,8 +3,6 @@
     public class OrderResponse
     {
         public int Id { get; set; }
-        public required string UserId { get; set; }
-        public string? User { get; set; }
         public int RecipeId { get; set; }
         public required string Recipe { get; set; }
         public int Capacity { get; set; }

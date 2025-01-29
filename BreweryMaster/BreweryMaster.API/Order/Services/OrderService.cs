@@ -27,13 +27,12 @@ namespace BreweryMaster.API.OrderModule.Services
             return await _context.Orders
                         .Include(x => x.Container)
                         .Include(x => x.Recipe)
-                        .Include(x => x.User)
+                        .Include(x => x.Client)
+                        .Include(x => x.CreatedByUser)
                         .Select(x => new OrderResponse()
                         {
                             Id = x.Id,
                             Capacity = x.Capacity,
-                            UserId = x.UserId,
-                            User = x.User.UserName,
                             ContainerId = x.Container.Id,
                             Container = x.Container.ContainerName,
                             Price = x.Price,
@@ -51,8 +50,6 @@ namespace BreweryMaster.API.OrderModule.Services
                         {
                             Id = x.Id,
                             Capacity = x.Capacity,
-                            UserId = x.UserId,
-                            User = x.User.UserName,
                             ContainerId = x.Container.Id,
                             Container = x.Container.ContainerName,
                             Price = x.Price,
@@ -68,8 +65,8 @@ namespace BreweryMaster.API.OrderModule.Services
 
             var clientToCreate = new Order()
             {
-                UserId = currentUser.Id,
-                User = null!,
+                ClientId = null,
+                Client = null,
                 Capacity = request.Capacity,
                 ContainerId = request.ContainerId,
                 Container = null!,
@@ -77,6 +74,9 @@ namespace BreweryMaster.API.OrderModule.Services
                 RecipeId = request.RecipeId,
                 Recipe = null!,
                 TargetDate = request.TargetDate,
+                CreatedOn = DateTime.Now,
+                CreatedByUser = null!,
+                CreatedByUserId = currentUser.Id,
                 OrderStatusId = 1,
                 OrderStatus = null!,
             };
