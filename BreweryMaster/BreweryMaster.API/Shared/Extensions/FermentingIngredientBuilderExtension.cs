@@ -17,7 +17,7 @@ namespace BreweryMaster.API.Shared.Extensions
         {
             builder.Entity<FermentingIngredient>(entity =>
             {
-                entity.HasOne(x => x.FermentingIngredientTypeEntity)
+                entity.HasOne(x => x.Type)
                       .WithMany()
                       .HasForeignKey(e => e.TypeId)
                       .OnDelete(DeleteBehavior.Cascade);

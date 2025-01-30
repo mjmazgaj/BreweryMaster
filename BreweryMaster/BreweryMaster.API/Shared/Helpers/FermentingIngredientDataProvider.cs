@@ -16,7 +16,7 @@ public static class FermentingIngredientDataProvider
                 EBC = 4,
                 TypeId = 1,
                 Info = "Viking Pilsner malt test info",
-                FermentingIngredientTypeEntity = null!
+                Type = null!
             },
             new FermentingIngredient
             {
@@ -27,7 +27,7 @@ public static class FermentingIngredientDataProvider
                 EBC = 22,
                 TypeId = 1,
                 Info = "Strzegom Monachijski typ II test info",
-                FermentingIngredientTypeEntity = null!
+                Type = null!
             },
             new FermentingIngredient
             {
@@ -38,7 +38,7 @@ public static class FermentingIngredientDataProvider
                 EBC = 150,
                 TypeId = 1,
                 Info = "Strzegom Karmel 150 test info",
-                FermentingIngredientTypeEntity = null!
+                Type = null!
             }
         };
     }
