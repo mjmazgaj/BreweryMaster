@@ -42,6 +42,14 @@ namespace BreweryMaster.API.Shared.Extensions
         public static void ConfigureFermentingIngredientReserved(this ModelBuilder builder)
         {
             builder.Entity<FermentingIngredientReserved>().HasData(FermentingIngredientDataProvider.GetFermentingIngredientReserved());
+
+            builder.Entity<FermentingIngredientReserved>(entity =>
+            {
+                entity.HasOne(x => x.Order)
+                    .WithMany()
+                    .HasForeignKey(x => x.OrderId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
         }
 
         public static void ConfigureFermentingIngredientStored(this ModelBuilder builder)

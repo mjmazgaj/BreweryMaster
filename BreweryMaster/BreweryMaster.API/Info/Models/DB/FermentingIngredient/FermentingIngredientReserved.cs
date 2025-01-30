@@ -8,6 +8,16 @@ namespace BreweryMaster.API.Info.Models
     public class FermentingIngredientReserved : FermentingIngredientQuantity
     {
         /// <summary>
+        /// The order id
+        /// </summary>
+        public int? OrderId { get; set; }
+
+        /// <summary>
+        /// The order model representation
+        /// </summary>
+        public Order? Order { get; set; }
+
+        /// <summary>
         /// The reserved quantity
         /// </summary>
         public float ReservedQuantity { get; set; }
