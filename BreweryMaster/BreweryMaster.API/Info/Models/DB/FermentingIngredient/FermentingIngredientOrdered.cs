@@ -11,7 +11,7 @@ namespace BreweryMaster.API.Info.Models
         /// The ordered quantity
         /// </summary>
         [Precision(10, 3)]
-        public float OrderedQuantity { get; set; }
+        public decimal OrderedQuantity { get; set; }
 
         /// <summary>
         /// The ordered date

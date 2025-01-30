@@ -33,7 +33,7 @@ namespace BreweryMaster.API.Info.Models
         /// The percentage
         /// </summary>
         [Precision(5, 2)]
-        public float? Percentage { get; set; }
+        public decimal? Percentage { get; set; }
 
         /// <summary>
         /// The extraction
