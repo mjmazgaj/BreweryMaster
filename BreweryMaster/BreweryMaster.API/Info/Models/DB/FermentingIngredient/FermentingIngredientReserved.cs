@@ -1,4 +1,5 @@
 ﻿using BreweryMaster.API.OrderModule.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BreweryMaster.API.Info.Models
 {
@@ -20,6 +21,7 @@ namespace BreweryMaster.API.Info.Models
         /// <summary>
         /// The reserved quantity
         /// </summary>
+        [Precision(5, 2)]
         public float ReservedQuantity { get; set; }
 
         /// <summary>

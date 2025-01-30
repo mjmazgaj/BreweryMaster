@@ -1,4 +1,6 @@
-﻿namespace BreweryMaster.API.Info.Models
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace BreweryMaster.API.Info.Models
 {
     /// <summary>
     /// Represents a ordered fermenting ingredient in the database. 
@@ -8,6 +10,7 @@
         /// <summary>
         /// The ordered quantity
         /// </summary>
+        [Precision(10, 3)]
         public float OrderedQuantity { get; set; }
 
         /// <summary>

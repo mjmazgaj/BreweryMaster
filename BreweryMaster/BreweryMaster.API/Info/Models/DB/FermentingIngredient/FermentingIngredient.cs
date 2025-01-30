@@ -1,4 +1,7 @@
-﻿namespace BreweryMaster.API.Info.Models
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+
+namespace BreweryMaster.API.Info.Models
 {
     /// <summary>
     /// Represents a fermenting ingredient in the database. 
@@ -13,6 +16,7 @@
         /// <summary>
         /// The name
         /// </summary>
+        [MaxLength(255)]
         public required string Name { get; set; }
 
         /// <summary>
@@ -28,16 +32,19 @@
         /// <summary>
         /// The percentage
         /// </summary>
+        [Precision(5, 2)]
         public float? Percentage { get; set; }
 
         /// <summary>
         /// The extraction
         /// </summary>
+        [Range(0, 100)]
         public int? Extraction { get; set; }
 
         /// <summary>
         /// The ebc unit for measuring beer colour
         /// </summary>
+        [Range(0, 100)]
         public int? EBC { get; set; }
 
         /// <summary>
