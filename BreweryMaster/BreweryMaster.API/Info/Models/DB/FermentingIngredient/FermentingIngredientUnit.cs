@@ -1,17 +1,58 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using BreweryMaster.API.Shared.Models.DB;
+﻿using System.Text.Json.Serialization;
 
 namespace BreweryMaster.API.Info.Models
 {
+    /// <summary>
+    /// Represents a fermenting ingredient to unit relation in the database. 
+    /// </summary>
     public class FermentingIngredientUnit
     {
+        /// <summary>
+        /// The Entity id 
+        /// </summary>
         public int Id { get; set; }
-        [ForeignKey("FermentingIngredient")]
+
+        /// <summary>
+        /// The fermenting ingredient id in relation. 
+        /// </summary>
         public int FermentingIngredientId { get; set; }
+
+        /// <summary>
+        /// The fermenting ingredient model representation
+        /// </summary>
         public required FermentingIngredient FermentingIngredient { get; set; }
-        [ForeignKey("Unit")]
+
+        /// <summary>
+        /// The unit id in relation. 
+        /// </summary>
         public int UnitId { get; set; }
+
+        /// <summary>
+        /// The unit model representation
+        /// </summary>
         public required UnitEntity Unit { get; set; }
+
+        /// <summary>
+        /// The removal indicator
+        /// </summary>
         public bool IsRemoved { get; set; }
+
+        ///// <summary>
+        ///// The realeted reserved fermenting ingredients
+        ///// </summary>
+        [JsonIgnore]
+        public ICollection<FermentingIngredientReserved> FermentingIngredientsReserved { get; set; } = new List<FermentingIngredientReserved>();
+
+        ///// <summary>
+        ///// The realeted ordered fermenting ingredients
+        ///// </summary>
+        [JsonIgnore]
+        public ICollection<FermentingIngredientOrdered> FermentingIngredientsOrdered { get; set; } = new List<FermentingIngredientOrdered>();
+
+        ///// <summary>
+        ///// The realeted stored fermenting ingredients
+        ///// </summary>
+        [JsonIgnore]
+        public ICollection<FermentingIngredientStored> FermentingIngredientsStored { get; set; } = new List<FermentingIngredientStored>();
     }
 }

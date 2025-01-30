@@ -1,14 +1,23 @@
 ﻿namespace BreweryMaster.API.Info.Models
 {
-    public class FermentingIngredientOrdered
+    /// <summary>
+    /// Represents a ordered fermenting ingredient in the database. 
+    /// </summary>
+    public class FermentingIngredientOrdered : FermentingIngredientQuantity
     {
-        public int Id { get; set; }
-        public int FermentingIngredientUnitId { get; set; }
-        public required FermentingIngredientUnit FermentingIngredientUnit { get; set; }
+        /// <summary>
+        /// The ordered quantity
+        /// </summary>
         public float OrderedQuantity { get; set; }
+
+        /// <summary>
+        /// The ordered date
+        /// </summary>
         public DateTime OrderedDate { get; set; }
-        public DateTime ExpectedDate { get; set; }
-        public bool IsRemoved { get; set; } = false;
-        public string? Info { get; set; }
+
+        /// <summary>
+        /// The expected date
+        /// </summary>
+        public DateTime? ExpectedDate { get; set; }
     }
 }

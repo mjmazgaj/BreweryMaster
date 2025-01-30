@@ -1,15 +1,20 @@
-﻿namespace BreweryMaster.API.Info.Models
+﻿using BreweryMaster.API.OrderModule.Models;
+
+namespace BreweryMaster.API.Info.Models
 {
-    public class FermentingIngredientReserved
+    /// <summary>
+    /// Represents a reserved fermenting ingredient in the database. 
+    /// </summary>
+    public class FermentingIngredientReserved : FermentingIngredientQuantity
     {
-        public int Id { get; set; }
-        public int FermentingIngredientUnitId { get; set; }
-        public required FermentingIngredientUnit FermentingIngredientUnit { get; set; }
+        /// <summary>
+        /// The reserved quantity
+        /// </summary>
         public float ReservedQuantity { get; set; }
-        public int? OrderId { get; set; }
-        public int UserId { get; set; }
+
+        /// <summary>
+        /// The reservation date
+        /// </summary>
         public DateTime ReservationDate { get; set; }
-        public bool IsRemoved { get; set; } = false;
-        public string? Info { get; set; }
     }
 }

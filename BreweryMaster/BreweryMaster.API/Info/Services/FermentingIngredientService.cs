@@ -86,18 +86,6 @@ namespace BreweryMaster.API.Info.Services
 
         public async Task<IEnumerable<FermentingIngredientSummaryResponse>> GetFermentingIngredientSummary()
         {
-            var ingredientsReserve = await _context.FermentingIngredientsReserved
-                .GroupBy(x => x.FermentingIngredientUnitId)
-                .ToDictionaryAsync(x => x.Key, x => x.Sum(y => y.ReservedQuantity));
-
-            var ingredientsOrdered = await _context.FermentingIngredientsOrdered
-                .GroupBy(x => x.FermentingIngredientUnitId)
-                .ToDictionaryAsync(x => x.Key, x => x.Sum(y => y.OrderedQuantity));
-
-            var ingredientsStored = await _context.FermentingIngredientsStored
-                .GroupBy(x => x.FermentingIngredientUnitId)
-                .ToDictionaryAsync(x => x.Key, x => x.Sum(y => y.StoredQuantity));
-
             return await _context.FermentingIngredientUnits
                 .Where(x => !x.IsRemoved)
                 .Select(ingredient => new FermentingIngredientSummaryResponse()
@@ -109,9 +97,12 @@ namespace BreweryMaster.API.Info.Services
                     Extraction = ingredient.FermentingIngredient.Extraction,
                     EBC = ingredient.FermentingIngredient.EBC,
                     Percentage = ingredient.FermentingIngredient.Percentage,
-                    ReservedQuantity = ingredientsReserve.ContainsKey(ingredient.Id) ? ingredientsReserve[ingredient.Id] : 0,
-                    OrderedQuantity = ingredientsOrdered.ContainsKey(ingredient.Id) ? ingredientsOrdered[ingredient.Id] : 0,
-                    StoredQuantity = ingredientsStored.ContainsKey(ingredient.Id) ? ingredientsStored[ingredient.Id] : 0,
+                    ReservedQuantity = ingredient.FermentingIngredientsReserved.Any() ?
+                                        ingredient.FermentingIngredientsReserved.Sum(x => x.ReservedQuantity) : 0,
+                    OrderedQuantity = ingredient.FermentingIngredientsOrdered.Any() ?
+                                        ingredient.FermentingIngredientsOrdered.Sum(x => x.OrderedQuantity) : 0,
+                    StoredQuantity = ingredient.FermentingIngredientsStored.Any() ?
+                                        ingredient.FermentingIngredientsStored.Sum(x => x.StoredQuantity) : 0,
                     Unit = ingredient.Unit.Name,
                     Info = ingredient.FermentingIngredient.Info,
                 }).ToListAsync();

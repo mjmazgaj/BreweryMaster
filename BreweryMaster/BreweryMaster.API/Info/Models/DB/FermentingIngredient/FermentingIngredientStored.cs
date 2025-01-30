@@ -1,12 +1,13 @@
 ﻿namespace BreweryMaster.API.Info.Models
 {
-    public class FermentingIngredientStored
+    /// <summary>
+    /// Represents a stored fermenting ingredient in the database. 
+    /// </summary>
+    public class FermentingIngredientStored : FermentingIngredientQuantity
     {
-        public int Id { get; set; }
-        public int FermentingIngredientUnitId { get; set; }
-        public required FermentingIngredientUnit FermentingIngredientUnit { get; set; }
+        /// <summary>
+        /// The stored quantity
+        /// </summary>
         public float StoredQuantity { get; set; }
-        public bool IsRemoved { get; set; } = false;
-        public string? Info { get; set; }
     }
 }
