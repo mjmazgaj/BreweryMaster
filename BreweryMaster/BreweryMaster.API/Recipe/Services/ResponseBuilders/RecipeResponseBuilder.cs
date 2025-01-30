@@ -53,7 +53,7 @@ namespace BreweryMaster.API.Recipe.Services.ResponseBuilders
                     Percentage = fermentingIngredient.Percentage,
                     Extraction = fermentingIngredient.Extraction,
                     EBC = fermentingIngredient.EBC,
-                    Quantity = x.Quantity,
+                    Quantity = (decimal)x.Quantity,
                     Unit = x.FermentingIngredientUnit.Unit.Name,
                     Info = x.Info
                 };

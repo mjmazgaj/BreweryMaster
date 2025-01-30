@@ -8,7 +8,7 @@ namespace BreweryMaster.API.Info.Models
         public required string Name { get; set; }
         [Required]
         public required int TypeId { get; set; }
-        public float? Percentage { get; set; }
+        public decimal? Percentage { get; set; }
         public int? Extraction { get; set; }
         public int? EBC { get; set; }
         public string? Info { get; set; }

@@ -11,7 +11,7 @@ public static class FermentingIngredientDataProvider
             {
                 Id = 1,
                 Name = "Viking Pilsner malt",
-                Percentage = 62.5f,
+                Percentage = 62.5m,
                 Extraction = 82,
                 EBC = 4,
                 TypeId = 1,
@@ -22,7 +22,7 @@ public static class FermentingIngredientDataProvider
             {
                 Id = 2,
                 Name = "Strzegom Monachijski typ II",
-                Percentage = 20.8f,
+                Percentage = 20.8m,
                 Extraction = 79,
                 EBC = 22,
                 TypeId = 1,
@@ -33,7 +33,7 @@ public static class FermentingIngredientDataProvider
             {
                 Id = 3,
                 Name = "Strzegom Karmel 150",
-                Percentage = 10.4f,
+                Percentage = 10.4m,
                 Extraction = 75,
                 EBC = 150,
                 TypeId = 1,
