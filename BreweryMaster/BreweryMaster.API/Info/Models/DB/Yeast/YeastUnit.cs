@@ -10,8 +10,11 @@ namespace BreweryMaster.API.Info.Models
         public int UnitId { get; set; }
         public required UnitEntity Unit { get; set; }
         public bool IsRemoved { get; set; }
+        [JsonIgnore]
         public ICollection<YeastOrdered> YeastOrdered { get; set; } = new List<YeastOrdered>();
+        [JsonIgnore]
         public ICollection<YeastReserved> YeastReserved { get; set; } = new List<YeastReserved>();
+        [JsonIgnore]
         public ICollection<YeastStored> YeastStored { get; set; } = new List<YeastStored>();
     }
 }
