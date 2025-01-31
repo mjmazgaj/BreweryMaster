@@ -22,6 +22,7 @@ namespace BreweryMaster.API.Shared.Models.DB
             builder.ConfigureProspectOrder();
             builder.ConfigureFermentingIngredientEntities();
             builder.ConfigureYeastEntities();
+            builder.ConfigureHopEntities();
             builder.ConfigureOrder();
             builder.ConfigureKanbanTask();
 
@@ -31,6 +32,7 @@ namespace BreweryMaster.API.Shared.Models.DB
             builder.AddProspectOrderEntities();
             builder.AddFermentingIngredientEntities();
             builder.AddYeastEntities();
+            builder.AddHopEntities();
             builder.AddRecipeEntities();
         }
     }

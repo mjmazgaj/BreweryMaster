@@ -35,6 +35,9 @@ namespace BreweryMaster.API.Shared.Extensions
             //Yeast entites
             builder.Entity<YeastForm>().HasData(YeastDataProvider.GetYeastForm());
             builder.Entity<YeastType>().HasData(YeastDataProvider.GetYeastType());
+
+            //Hop entites
+            builder.Entity<Hop>().HasData(HopDataProvider.GetHops());
         }
 
         /// <summary>
@@ -93,6 +96,20 @@ namespace BreweryMaster.API.Shared.Extensions
             builder.Entity<YeastOrdered>().HasData(YeastDataProvider.GetYeastOrdered());
             builder.Entity<YeastReserved>().HasData(YeastDataProvider.GetYeastReserved());
             builder.Entity<YeastStored>().HasData(YeastDataProvider.GetYeastStored());
+        }
+
+        /// <summary>
+        /// Add hop entites
+        /// </summary>
+        public static void AddHopEntities(this ModelBuilder builder)
+        {
+            //Dependent on UnitEntity and Hop
+            builder.Entity<HopUnit>().HasData(HopDataProvider.GetHopUnit());
+
+            //Dependent on HopUnit
+            builder.Entity<HopOrdered>().HasData(HopDataProvider.GetHopOrdered());
+            builder.Entity<HopReserved>().HasData(HopDataProvider.GetHopReserved());
+            builder.Entity<HopStored>().HasData(HopDataProvider.GetHopStored());
         }
 
         /// <summary>

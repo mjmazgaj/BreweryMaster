@@ -22,6 +22,13 @@ namespace BreweryMaster.API.Shared.Models.DB
         public DbSet<YeastStored> YeastStored { get; set; }
         public DbSet<YeastReserved> YeastReserved { get; set; }
 
+        //Hops
+        public DbSet<Hop> Hop { get; set; }
+        public DbSet<HopUnit> HopsUnits { get; set; }
+        public DbSet<HopOrdered> HopsOrdered { get; set; }
+        public DbSet<HopStored> HopsStored { get; set; }
+        public DbSet<HopReserved> HopsReserved { get; set; }
+
         //Items
         public DbSet<Container> Containers { get; set; }
         public DbSet<ContainerPrice> ContainerPrices { get; set; }
