@@ -90,7 +90,7 @@ namespace BreweryMaster.API.Shared.Extensions
             //Dependent on UnitEntity and Yeast
             builder.Entity<YeastUnit>().HasData(YeastDataProvider.GetYeastUnit());
 
-            //Dependent on UnitEntity
+            //Dependent on YeastUnit
             builder.Entity<YeastOrdered>().HasData(YeastDataProvider.GetYeastOrdered());
             builder.Entity<YeastReserved>().HasData(YeastDataProvider.GetYeastReserved());
             builder.Entity<YeastStored>().HasData(YeastDataProvider.GetYeastStored());
