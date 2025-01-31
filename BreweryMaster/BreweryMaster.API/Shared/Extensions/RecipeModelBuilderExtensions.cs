@@ -8,11 +8,10 @@ namespace BreweryMaster.API.Shared.Extensions
     {
         public static void ConfigureRecipeEntities(this ModelBuilder builder)
         {
-            builder.ConfigureRecipeTypeEntity();
-            builder.ConfigureBeerStyleEntity();
-            builder.ConfigureRecipe();
-            builder.ConfigureRecipeFermentingIngredient();
+            builder.Entity<RecipeTypeEntity>().HasData(RecipeDataProvider.GetRecipeTypeEntity());
+            builder.Entity<BeerStyleEntity>().HasData(RecipeDataProvider.GetBeerStyleEntity());
         }
+
         public static void ConfigureRecipe(this ModelBuilder builder)
         {
             builder.Entity<Recipe.Models.DB.Recipe>(entity =>
@@ -51,14 +50,6 @@ namespace BreweryMaster.API.Shared.Extensions
             });
 
             builder.Entity<RecipeFermentingIngredient>().HasData(RecipeDataProvider.GetRecipeFermentingIngredient());
-        }
-        public static void ConfigureRecipeTypeEntity(this ModelBuilder builder)
-        {
-            builder.Entity<RecipeTypeEntity>().HasData(RecipeDataProvider.GetRecipeTypeEntity());
-        }
-        public static void ConfigureBeerStyleEntity(this ModelBuilder builder)
-        {
-            builder.Entity<BeerStyleEntity>().HasData(RecipeDataProvider.GetBeerStyleEntity());
         }
     }
 }
