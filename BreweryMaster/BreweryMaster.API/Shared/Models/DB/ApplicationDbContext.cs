@@ -19,15 +19,12 @@ namespace BreweryMaster.API.Shared.Models.DB
             //Independent entities
             builder.ConfigureEntity();
             builder.ConfigureItem();
-            builder.ConfigureRecipeEntities();
 
             //User
             builder.ConfigureUser();
 
             //Dependent entities in proper order
-            builder.ConfigureRecipe();
-            builder.ConfigureRecipeFermentingIngredient();
-
+            builder.ConfigureRecipeEntities();
             builder.ConfigureProspectOrder();
             builder.ConfigureFermentingIngredientEntities();
             builder.ConfigureYeastEntities();
