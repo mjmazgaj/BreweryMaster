@@ -1,7 +1,7 @@
 ﻿using BreweryMaster.API.OrderModule.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace BreweryMaster.API.Info.Models.DB.Yeast
+namespace BreweryMaster.API.Info.Models
 {
     /// <summary>
     /// Represents a reserved yeast in the database. 

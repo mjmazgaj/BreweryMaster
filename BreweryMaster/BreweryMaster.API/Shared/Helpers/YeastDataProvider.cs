@@ -1,5 +1,4 @@
 ﻿using BreweryMaster.API.Info.Models;
-using BreweryMaster.API.Info.Models.DB.Yeast;
 
 namespace BreweryMaster.API.Shared.Helpers
 {

@@ -1,4 +1,4 @@
-﻿namespace BreweryMaster.API.Info.Models.DB.Yeast
+﻿namespace BreweryMaster.API.Info.Models
 {
     /// <summary>
     /// Represents a quantity yeast in the database. 

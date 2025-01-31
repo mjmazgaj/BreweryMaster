@@ -1,5 +1,4 @@
-﻿using BreweryMaster.API.Info.Models.DB.Yeast;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace BreweryMaster.API.Info.Models
 {

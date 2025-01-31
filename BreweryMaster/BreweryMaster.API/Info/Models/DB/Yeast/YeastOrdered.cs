@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace BreweryMaster.API.Info.Models.DB.Yeast
+namespace BreweryMaster.API.Info.Models
 {
     /// <summary>
     /// Represents a ordered yeast in the database.

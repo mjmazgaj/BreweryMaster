@@ -1,5 +1,4 @@
 ﻿using BreweryMaster.API.Info.Models;
-using BreweryMaster.API.Info.Models.DB.Yeast;
 using BreweryMaster.API.OrderModule.Models;
 using BreweryMaster.API.Recipe.Models.DB;
 using BreweryMaster.API.Shared.Helpers;
