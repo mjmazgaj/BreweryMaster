@@ -28,10 +28,6 @@ namespace BreweryMaster.API.Shared.Extensions
                       .HasForeignKey(x => x.ContainerId)
                       .OnDelete(DeleteBehavior.Cascade);
             });
-
-            builder.Entity<ProspectCompanyClient>().HasData(OrderDataProvider.GetProspectCompanyClients());
-            builder.Entity<ProspectIndyvidualClient>().HasData(OrderDataProvider.GetProspectIndyvidualClients());
-            builder.Entity<ProspectOrder>().HasData(OrderDataProvider.GetProspectOrders());
         }
     }
 }

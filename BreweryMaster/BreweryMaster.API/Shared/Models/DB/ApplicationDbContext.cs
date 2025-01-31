@@ -17,7 +17,6 @@ namespace BreweryMaster.API.Shared.Models.DB
             base.OnModelCreating(builder);
 
             //Independent entities
-            builder.ConfigureEntity();
             builder.ConfigureItem();
 
             //User
@@ -30,6 +29,14 @@ namespace BreweryMaster.API.Shared.Models.DB
             builder.ConfigureYeastEntities();
             builder.ConfigureOrder();
             builder.ConfigureKanbanTask();
+
+            //Provide data
+            builder.AddIndependentEntities();
+            builder.AddEntitiesSimpleDepend();
+            builder.AddProspectOrderEntities();
+            builder.AddFermentingIngredientEntities();
+            builder.AddYeastEntities();
+            builder.AddRecipeEntities();
         }
     }
 }

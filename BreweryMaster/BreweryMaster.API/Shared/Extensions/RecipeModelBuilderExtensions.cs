@@ -1,5 +1,4 @@
-﻿using BreweryMaster.API.Info.Models;
-using BreweryMaster.API.Recipe.Models.DB;
+﻿using BreweryMaster.API.Recipe.Models.DB;
 using Microsoft.EntityFrameworkCore;
 
 namespace BreweryMaster.API.Shared.Extensions
@@ -8,8 +7,6 @@ namespace BreweryMaster.API.Shared.Extensions
     {
         public static void ConfigureRecipeEntities(this ModelBuilder builder)
         {
-            builder.ConfigureRecipeTypeEntity();
-            builder.ConfigureBeerStyleEntity();
             builder.ConfigureRecipe();
             builder.ConfigureRecipeFermentingIngredient();
         }
@@ -32,8 +29,6 @@ namespace BreweryMaster.API.Shared.Extensions
                       .HasForeignKey(fiu => fiu.RecipeId)
                       .OnDelete(DeleteBehavior.Cascade);
             });
-
-            builder.Entity<Recipe.Models.DB.Recipe>().HasData(RecipeDataProvider.GetRecpies());
         }
         public static void ConfigureRecipeFermentingIngredient(this ModelBuilder builder)
         {
@@ -49,16 +44,6 @@ namespace BreweryMaster.API.Shared.Extensions
                       .HasForeignKey(e => e.FermentingIngredientUnitId)
                       .OnDelete(DeleteBehavior.Cascade);
             });
-
-            builder.Entity<RecipeFermentingIngredient>().HasData(RecipeDataProvider.GetRecipeFermentingIngredient());
-        }
-        public static void ConfigureRecipeTypeEntity(this ModelBuilder builder)
-        {
-            builder.Entity<RecipeTypeEntity>().HasData(RecipeDataProvider.GetRecipeTypeEntity());
-        }
-        public static void ConfigureBeerStyleEntity(this ModelBuilder builder)
-        {
-            builder.Entity<BeerStyleEntity>().HasData(RecipeDataProvider.GetBeerStyleEntity());
         }
     }
 }

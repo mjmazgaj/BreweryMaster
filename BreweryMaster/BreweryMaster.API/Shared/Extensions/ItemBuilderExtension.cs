@@ -36,10 +36,6 @@ namespace BreweryMaster.API.Shared.Extensions
                       .HasForeignKey(e => e.ContainerId)
                       .OnDelete(DeleteBehavior.Cascade)
             );
-
-            builder.Entity<Container>().HasData(ItemDataProvider.GetContainers());
-            builder.Entity<ContainerPrice>().HasData(ItemDataProvider.GetContainerPrices());
-            builder.Entity<BeerPrice>().HasData(ItemDataProvider.GetBeerPrices());
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using BreweryMaster.API.Info.Models;
-using BreweryMaster.API.User.Models.DB;
 using Microsoft.EntityFrameworkCore;
 
 namespace BreweryMaster.API.Shared.Extensions
@@ -11,9 +10,7 @@ namespace BreweryMaster.API.Shared.Extensions
             builder.ConfigureFermentingIngredient();
             builder.ConfigureFermentingIngredientUnit();
             builder.ConfigureFermentingIngredientQuantity();
-            builder.ConfigureFermentingIngredientOrdered();
             builder.ConfigureFermentingIngredientReserved();
-            builder.ConfigureFermentingIngredientStored();
         }
 
         public static void ConfigureFermentingIngredient(this ModelBuilder builder)
@@ -25,20 +22,13 @@ namespace BreweryMaster.API.Shared.Extensions
                       .HasForeignKey(e => e.TypeId)
                       .OnDelete(DeleteBehavior.Cascade);
             });
-
-            builder.Entity<FermentingIngredientTypeEntity>().HasData(FermentingIngredientDataProvider.GetFermentingIngredientTypeEntity());
-            builder.Entity<FermentingIngredient>().HasData(FermentingIngredientDataProvider.GetFermentingIngredient());
-            builder.Entity<FermentingIngredientUnit>().HasData(FermentingIngredientDataProvider.GetFermentingIngredientUnit());
         }
+
         public static void ConfigureFermentingIngredientQuantity(this ModelBuilder builder)
         {
             builder.Entity<FermentingIngredientQuantity>().UseTpcMappingStrategy();
         }
 
-        public static void ConfigureFermentingIngredientOrdered(this ModelBuilder builder)
-        {
-            builder.Entity<FermentingIngredientOrdered>().HasData(FermentingIngredientDataProvider.GetFermentingIngredientOrdered());
-        }
         public static void ConfigureFermentingIngredientReserved(this ModelBuilder builder)
         {
             builder.Entity<FermentingIngredientReserved>(entity =>
@@ -48,13 +38,6 @@ namespace BreweryMaster.API.Shared.Extensions
                     .HasForeignKey(x => x.OrderId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
-
-            builder.Entity<FermentingIngredientReserved>().HasData(FermentingIngredientDataProvider.GetFermentingIngredientReserved());
-        }
-
-        public static void ConfigureFermentingIngredientStored(this ModelBuilder builder)
-        {
-            builder.Entity<FermentingIngredientStored>().HasData(FermentingIngredientDataProvider.GetFermentingIngredientStored());
         }
 
         public static void ConfigureFermentingIngredientUnit(this ModelBuilder builder)

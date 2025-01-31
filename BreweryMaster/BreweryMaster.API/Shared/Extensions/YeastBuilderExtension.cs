@@ -12,9 +12,7 @@ namespace BreweryMaster.API.Shared.Extensions
             builder.ConfigureYeast();
             builder.ConfigureYeastUnit();
             builder.ConfigureYeastQuantity();
-            builder.ConfigureYeastOrdered();
             builder.ConfigureYeastReserved();
-            builder.ConfigureYeastStored();
         }
 
         public static void ConfigureYeast(this ModelBuilder builder)
@@ -30,22 +28,12 @@ namespace BreweryMaster.API.Shared.Extensions
                       .WithMany()
                       .HasForeignKey(e => e.FormId)
                       .OnDelete(DeleteBehavior.Cascade);
-
-                entity.HasData(YeastDataProvider.GetYeasts());
             });
-
-            builder.Entity<YeastForm>().HasData(YeastDataProvider.GetYeastForm());
-            builder.Entity<YeastType>().HasData(YeastDataProvider.GetYeastType());
         }
 
         public static void ConfigureYeastQuantity(this ModelBuilder builder)
         {
             builder.Entity<YeastQuantity>().UseTpcMappingStrategy();
-        }
-
-        public static void ConfigureYeastOrdered(this ModelBuilder builder)
-        {
-            builder.Entity<YeastOrdered>().HasData(YeastDataProvider.GetYeastOrdered());
         }
 
         public static void ConfigureYeastReserved(this ModelBuilder builder)
@@ -57,13 +45,6 @@ namespace BreweryMaster.API.Shared.Extensions
                     .HasForeignKey(x => x.OrderId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
-
-            builder.Entity<YeastReserved>().HasData(YeastDataProvider.GetYeastReserved());
-        }
-
-        public static void ConfigureYeastStored(this ModelBuilder builder)
-        {
-            builder.Entity<YeastStored>().HasData(YeastDataProvider.GetYeastStored());
         }
 
         public static void ConfigureYeastUnit(this ModelBuilder builder)
@@ -91,8 +72,6 @@ namespace BreweryMaster.API.Shared.Extensions
                 entity.HasMany(x => x.YeastStored)
                     .WithOne(x => x.YeastUnit)
                     .OnDelete(DeleteBehavior.Cascade);
-
-                entity.HasData(YeastDataProvider.GetYeastUnit());
             });
         }
     }
