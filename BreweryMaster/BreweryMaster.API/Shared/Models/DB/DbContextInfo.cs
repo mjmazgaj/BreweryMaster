@@ -32,6 +32,7 @@ namespace BreweryMaster.API.Shared.Models.DB
         //Items
         public DbSet<Container> Containers { get; set; }
         public DbSet<ContainerPrice> ContainerPrices { get; set; }
+        public DbSet<BeerStyleEntity> BeerStyles { get; set; }
         public DbSet<BeerPrice> BeerPrices { get; set; }
         public DbSet<MaterialType> MaterialTypes { get; set; }
 

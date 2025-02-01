@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using BreweryMaster.API.Info.Models;
 
 namespace BreweryMaster.API.Recipe.Models.DB
@@ -27,7 +28,17 @@ namespace BreweryMaster.API.Recipe.Models.DB
         public float? WaterToGrainRatio { get; set; }
         public float? MashWaterVolume { get; set; }
         public float? TotalMashVolume { get; set; }
+        public string? Info { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public required string CreatedById { get; set; }
+        public DateTime? ModifiedOn { get; set; }
+        public string? ModifiedById { get; set; }
         public bool IsRemoved { get; set; } = false;
+        [JsonIgnore]
         public ICollection<RecipeFermentingIngredient> FermentingIngredients { get; set; } = new List<RecipeFermentingIngredient>();
+        [JsonIgnore]
+        public ICollection<RecipeHop> RecipeHops { get; set; } = new List<RecipeHop>();
+        [JsonIgnore]
+        public ICollection<RecipeYeast> RecipeYeasts { get; set; } = new List<RecipeYeast>();
     }
 }

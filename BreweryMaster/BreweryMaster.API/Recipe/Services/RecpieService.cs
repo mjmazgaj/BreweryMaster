@@ -97,6 +97,7 @@ namespace BreweryMaster.API.Recipe.Services
                     WaterToGrainRatio = request.WaterToGrainRatio,
                     MashWaterVolume = request.MashWaterVolume,
                     TotalMashVolume = request.TotalMashVolume,
+                    CreatedById = "todo",
                 };
 
                 _context.Recipes.Add(recipeToCreate);
