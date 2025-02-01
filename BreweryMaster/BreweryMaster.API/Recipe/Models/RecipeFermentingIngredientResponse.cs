@@ -1,10 +1,7 @@
-﻿using BreweryMaster.API.Shared.Models;
-
-namespace BreweryMaster.API.Info.Models
+﻿namespace BreweryMaster.API.Info.Models
 {
     public class RecipeFermentingIngredientResponse
     {
-        public int Id { get; set; }
         public int TypeId { get; set; }
         public required string TypeName { get; set; }
         public required string Name { get; set; }

@@ -38,6 +38,8 @@ namespace BreweryMaster.API.Shared.Extensions
         {
             builder.Entity<RecipeFermentingIngredient>(entity =>
             {
+                entity.HasKey(e => new { e.FermentingIngredientUnitId, e.RecipeId });
+
                 entity.HasOne(e => e.Recipe)
                       .WithMany(e => e.FermentingIngredients)
                       .HasForeignKey(e => e.RecipeId)
@@ -52,9 +54,10 @@ namespace BreweryMaster.API.Shared.Extensions
 
         public static void ConfigureRecipeHop(this ModelBuilder builder)
         {
-
             builder.Entity<RecipeHop>(entity =>
             {
+                entity.HasKey(e => new { e.HopUnitId, e.RecipeId });
+
                 entity.HasOne(e => e.Recipe)
                       .WithMany(e => e.RecipeHops)
                       .HasForeignKey(e => e.RecipeId)
@@ -69,9 +72,10 @@ namespace BreweryMaster.API.Shared.Extensions
 
         public static void ConfigureRecipeYeast(this ModelBuilder builder)
         {
-
             builder.Entity<RecipeYeast>(entity =>
             {
+                entity.HasKey(e => new { e.YeastUnitId, e.RecipeId });
+
                 entity.HasOne(e => e.Recipe)
                       .WithMany(e => e.RecipeYeasts)
                       .HasForeignKey(e => e.RecipeId)

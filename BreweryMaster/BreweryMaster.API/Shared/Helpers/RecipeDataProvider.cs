@@ -132,7 +132,6 @@ public static class RecipeDataProvider
         {
             new()
             {
-                Id = 1,
                 RecipeId = 1,
                 Recipe = null!,
                 FermentingIngredientUnitId = 1,
@@ -141,7 +140,6 @@ public static class RecipeDataProvider
             },
             new()
             {
-                Id = 2,
                 RecipeId = 1,
                 Recipe = null!,
                 FermentingIngredientUnitId = 2,
@@ -150,7 +148,6 @@ public static class RecipeDataProvider
             },
             new()
             {
-                Id = 3,
                 RecipeId = 2,
                 Recipe = null!,
                 FermentingIngredientUnitId = 1,
@@ -166,7 +163,6 @@ public static class RecipeDataProvider
         {
             new()
             {
-                Id = 1,
                 RecipeId = 1,
                 Recipe = null!,
                 HopUnitId = 1,
@@ -175,7 +171,6 @@ public static class RecipeDataProvider
             },
             new()
             {
-                Id = 2,
                 RecipeId = 1,
                 Recipe = null!,
                 HopUnitId = 2,
@@ -184,7 +179,6 @@ public static class RecipeDataProvider
             },
             new()
             {
-                Id = 3,
                 RecipeId = 2,
                 Recipe = null!,
                 HopUnitId = 1,
@@ -200,7 +194,6 @@ public static class RecipeDataProvider
         {
             new()
             {
-                Id = 1,
                 RecipeId = 1,
                 Recipe = null!,
                 YeastUnitId = 1,
@@ -209,7 +202,6 @@ public static class RecipeDataProvider
             },
             new()
             {
-                Id = 2,
                 RecipeId = 1,
                 Recipe = null!,
                 YeastUnitId = 2,
@@ -218,7 +210,6 @@ public static class RecipeDataProvider
             },
             new()
             {
-                Id = 3,
                 RecipeId = 2,
                 Recipe = null!,
                 YeastUnitId = 1,

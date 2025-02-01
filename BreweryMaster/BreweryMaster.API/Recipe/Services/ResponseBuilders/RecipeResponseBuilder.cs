@@ -46,7 +46,6 @@ namespace BreweryMaster.API.Recipe.Services.ResponseBuilders
                 var fermentingIngredient = x.FermentingIngredientUnit.FermentingIngredient;
                 return new RecipeFermentingIngredientResponse()
                 {
-                    Id = x.Id,
                     TypeId = fermentingIngredient.TypeId,
                     TypeName = dbIngredientTypes.TryGetValue(fermentingIngredient.TypeId, out var typeName) ? typeName : "",
                     Name = fermentingIngredient.Name,

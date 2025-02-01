@@ -5,7 +5,6 @@ namespace BreweryMaster.API.Recipe.Models.DB
 {
     public class RecipeFermentingIngredient
     {
-        public int Id { get; set; }
         public int RecipeId { get; set; }
         public required Recipe Recipe { get; set; }
         public int FermentingIngredientUnitId { get; set; }
