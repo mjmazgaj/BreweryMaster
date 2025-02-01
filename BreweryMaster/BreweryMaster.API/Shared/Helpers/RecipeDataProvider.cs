@@ -159,4 +159,72 @@ public static class RecipeDataProvider
             }
         };
     }
+
+    internal static IEnumerable<RecipeHop> GetRecipeHop()
+    {
+        return new List<RecipeHop>()
+        {
+            new()
+            {
+                Id = 1,
+                RecipeId = 1,
+                Recipe = null!,
+                HopUnitId = 1,
+                HopUnit = null!,
+                Quantity = 11.13f,
+            },
+            new()
+            {
+                Id = 2,
+                RecipeId = 1,
+                Recipe = null!,
+                HopUnitId = 2,
+                HopUnit = null!,
+                Quantity = 1.21f,
+            },
+            new()
+            {
+                Id = 3,
+                RecipeId = 2,
+                Recipe = null!,
+                HopUnitId = 1,
+                HopUnit = null!,
+                Quantity = 11.4f,
+            }
+        };
+    }
+
+    internal static IEnumerable<RecipeYeast> GetRecipeYeast()
+    {
+        return new List<RecipeYeast>()
+        {
+            new()
+            {
+                Id = 1,
+                RecipeId = 1,
+                Recipe = null!,
+                YeastUnitId = 1,
+                YeastUnit = null!,
+                Quantity = 11.13f,
+            },
+            new()
+            {
+                Id = 2,
+                RecipeId = 1,
+                Recipe = null!,
+                YeastUnitId = 2,
+                YeastUnit = null!,
+                Quantity = 1.21f,
+            },
+            new()
+            {
+                Id = 3,
+                RecipeId = 2,
+                Recipe = null!,
+                YeastUnitId = 1,
+                YeastUnit = null!,
+                Quantity = 11.4f,
+            }
+        };
+    }
 }

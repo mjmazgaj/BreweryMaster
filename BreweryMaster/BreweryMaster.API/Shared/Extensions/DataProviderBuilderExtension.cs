@@ -119,6 +119,12 @@ namespace BreweryMaster.API.Shared.Extensions
         {
             //Dependent on FermentingIngredient
             builder.Entity<RecipeFermentingIngredient>().HasData(RecipeDataProvider.GetRecipeFermentingIngredient());
+
+            //Dependent on Yeast
+            builder.Entity<RecipeYeast>().HasData(RecipeDataProvider.GetRecipeYeast());
+
+            //Dependent on Hop
+            builder.Entity<RecipeHop>().HasData(RecipeDataProvider.GetRecipeHop());
         }
     }
 }
