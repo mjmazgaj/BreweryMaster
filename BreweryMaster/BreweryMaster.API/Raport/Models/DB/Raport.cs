@@ -1,4 +1,6 @@
-﻿namespace BreweryMaster.API.RaportModule.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BreweryMaster.API.RaportModule.Models
 {
     /// <summary>
     /// Represents a report in the system.
@@ -13,6 +15,7 @@
         /// <summary>
         /// The title.
         /// </summary>
+        [MaxLength(255)]
         public required string Title { get; set; }
 
         /// <summary>
@@ -33,6 +36,7 @@
         /// <summary>
         /// The identifier of the user who created the report.
         /// </summary>
+        [MaxLength(450)]
         public required string CreatedById { get; set; }
 
         /// <summary>

@@ -1,4 +1,6 @@
-﻿namespace BreweryMaster.API.RaportModule.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BreweryMaster.API.RaportModule.Models
 {
     /// <summary>
     /// Represents a category for reports in the system.
@@ -13,6 +15,7 @@
         /// <summary>
         /// The name of the report category.
         /// </summary>
+        [MaxLength(255)]
         public required string Name { get; set; }
     }
 }
