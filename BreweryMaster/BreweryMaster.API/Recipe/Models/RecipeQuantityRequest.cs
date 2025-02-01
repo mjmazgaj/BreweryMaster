@@ -2,7 +2,7 @@
 {
     public class RecipeQuantityRequest
     {
-        public float Quantity { get; set; }
+        public decimal Quantity { get; set; }
         public string? Info { get; set; }
     }
 }

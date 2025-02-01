@@ -11,10 +11,10 @@ public static class RecipeDataProvider
                 {
                     Id = 1,
                     Name = "Ciekawe piwo",
-                    BLGScale = 12.5f,
+                    BLGScale = 12.5m,
                     IBUScale = 35,
-                    ABVScale = 5.2f,
-                    SRMScale = 6.0f,
+                    ABVScale = 5.2m,
+                    SRMScale = 6.0m,
                     TypeId = 1,
                     StyleId = 2,
                     ExpectedBeerVolume = 20,
@@ -22,12 +22,12 @@ public static class RecipeDataProvider
                     EvaporationRate = 10,
                     WortVolume = 25,
                     BoilLoss = 5,
-                    PreBoilGravity = 11.5f,
+                    PreBoilGravity = 11.5m,
                     FermentationLoss = 1,
                     DryHopLoss = 1,
                     MashEfficiency = 75,
                     WaterToGrainRatio = 3,
-                    MashWaterVolume = 15.0f,
+                    MashWaterVolume = 15.0m,
                     TotalMashVolume = 18,
                     CreatedById = "todo",
                 },
@@ -35,10 +35,10 @@ public static class RecipeDataProvider
                 {
                     Id = 2,
                     Name = "Smaczne piwo",
-                    BLGScale = 15.0f,
+                    BLGScale = 15.0m,
                     IBUScale = 45,
-                    ABVScale = 6.0f,
-                    SRMScale = 40.0f,
+                    ABVScale = 6.0m,
+                    SRMScale = 40.0m,
                     TypeId = 1,
                     StyleId = 3,
                     ExpectedBeerVolume = 18,
@@ -46,12 +46,12 @@ public static class RecipeDataProvider
                     EvaporationRate = 12,
                     WortVolume = 22,
                     BoilLoss = 4,
-                    PreBoilGravity = 13.5f,
+                    PreBoilGravity = 13.5m,
                     FermentationLoss = 2,
                     DryHopLoss = 0,
                     MashEfficiency = 70,
-                    WaterToGrainRatio = 2.5f,
-                    MashWaterVolume = 14.0f,
+                    WaterToGrainRatio = 2.5m,
+                    MashWaterVolume = 14.0m,
                     TotalMashVolume = 16,
                     CreatedById = "todo",
                 },
@@ -59,10 +59,10 @@ public static class RecipeDataProvider
                 {
                     Id = 3,
                     Name = "Swietne piwo",
-                    BLGScale = 14.0f,
+                    BLGScale = 14.0m,
                     IBUScale = 60,
-                    ABVScale = 6.5f,
-                    SRMScale = 8.0f,
+                    ABVScale = 6.5m,
+                    SRMScale = 8.0m,
                     TypeId = 2,
                     StyleId = 4,
                     ExpectedBeerVolume = 22,
@@ -70,12 +70,12 @@ public static class RecipeDataProvider
                     EvaporationRate = 8,
                     WortVolume = 27,
                     BoilLoss = 5,
-                    PreBoilGravity = 12.8f,
+                    PreBoilGravity = 12.8m,
                     FermentationLoss = 2,
                     DryHopLoss = 1,
                     MashEfficiency = 80,
-                    WaterToGrainRatio = 3.2f,
-                    MashWaterVolume = 16.5f,
+                    WaterToGrainRatio = 3.2m,
+                    MashWaterVolume = 16.5m,
                     TotalMashVolume = 20,
                     CreatedById = "todo",
                 }
@@ -137,7 +137,7 @@ public static class RecipeDataProvider
                 Recipe = null!,
                 FermentingIngredientUnitId = 1,
                 FermentingIngredientUnit = null!,
-                Quantity = 1.13f,
+                Quantity = 1.13m,
             },
             new()
             {
@@ -146,7 +146,7 @@ public static class RecipeDataProvider
                 Recipe = null!,
                 FermentingIngredientUnitId = 2,
                 FermentingIngredientUnit = null!,
-                Quantity = 21.21f,
+                Quantity = 21.21m,
             },
             new()
             {
@@ -155,7 +155,7 @@ public static class RecipeDataProvider
                 Recipe = null!,
                 FermentingIngredientUnitId = 1,
                 FermentingIngredientUnit = null!,
-                Quantity = 13.4f,
+                Quantity = 13.4m,
             }
         };
     }
@@ -171,7 +171,7 @@ public static class RecipeDataProvider
                 Recipe = null!,
                 HopUnitId = 1,
                 HopUnit = null!,
-                Quantity = 11.13f,
+                Quantity = 11.13m,
             },
             new()
             {
@@ -180,7 +180,7 @@ public static class RecipeDataProvider
                 Recipe = null!,
                 HopUnitId = 2,
                 HopUnit = null!,
-                Quantity = 1.21f,
+                Quantity = 1.21m,
             },
             new()
             {
@@ -189,7 +189,7 @@ public static class RecipeDataProvider
                 Recipe = null!,
                 HopUnitId = 1,
                 HopUnit = null!,
-                Quantity = 11.4f,
+                Quantity = 11.4m,
             }
         };
     }
@@ -205,7 +205,7 @@ public static class RecipeDataProvider
                 Recipe = null!,
                 YeastUnitId = 1,
                 YeastUnit = null!,
-                Quantity = 11.13f,
+                Quantity = 11.13m,
             },
             new()
             {
@@ -214,7 +214,7 @@ public static class RecipeDataProvider
                 Recipe = null!,
                 YeastUnitId = 2,
                 YeastUnit = null!,
-                Quantity = 1.21f,
+                Quantity = 1.21m,
             },
             new()
             {
@@ -223,7 +223,7 @@ public static class RecipeDataProvider
                 Recipe = null!,
                 YeastUnitId = 1,
                 YeastUnit = null!,
-                Quantity = 11.4f,
+                Quantity = 11.4m,
             }
         };
     }
