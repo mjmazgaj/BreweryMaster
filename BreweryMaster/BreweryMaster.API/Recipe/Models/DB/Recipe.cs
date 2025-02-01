@@ -11,10 +11,8 @@ namespace BreweryMaster.API.Recipe.Models.DB
         public int? IBUScale { get; set; }
         public float? ABVScale { get; set; }
         public float? SRMScale { get; set; }
-        [ForeignKey("Type")]
         public int? TypeId { get; set; }
         public RecipeTypeEntity? Type { get; set; }
-        [ForeignKey("Style")]
         public int? StyleId { get; set; }
         public BeerStyleEntity? Style { get; set; }
         public int ExpectedBeerVolume { get; set; }
