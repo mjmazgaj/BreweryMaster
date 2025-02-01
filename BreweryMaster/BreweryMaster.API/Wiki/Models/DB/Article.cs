@@ -1,7 +1,7 @@
 ﻿using BreweryMaster.API.User.Models.Users.DB;
 using System.ComponentModel.DataAnnotations;
 
-namespace BreweryMaster.API.Wiki.Models.DB
+namespace BreweryMaster.API.Wiki.Models
 {
     public class Article
     {

@@ -1,4 +1,4 @@
-﻿using BreweryMaster.API.Wiki.Models.DB;
+﻿using BreweryMaster.API.Wiki.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BreweryMaster.API.Shared.Models.DB
