@@ -29,7 +29,6 @@ public static class RecipeDataProvider
                     WaterToGrainRatio = 3,
                     MashWaterVolume = 15.0f,
                     TotalMashVolume = 18,
-                    FermentingIngredients = null!,
                 },
                 new Recipe
                 {
@@ -53,7 +52,6 @@ public static class RecipeDataProvider
                     WaterToGrainRatio = 2.5f,
                     MashWaterVolume = 14.0f,
                     TotalMashVolume = 16,
-                    FermentingIngredients = null!,
                 },
                 new Recipe
                 {
@@ -77,7 +75,6 @@ public static class RecipeDataProvider
                     WaterToGrainRatio = 3.2f,
                     MashWaterVolume = 16.5f,
                     TotalMashVolume = 20,
-                    FermentingIngredients = null!,
                 }
             };
     }

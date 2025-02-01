@@ -97,7 +97,6 @@ namespace BreweryMaster.API.Recipe.Services
                     WaterToGrainRatio = request.WaterToGrainRatio,
                     MashWaterVolume = request.MashWaterVolume,
                     TotalMashVolume = request.TotalMashVolume,
-                    FermentingIngredients = null!
                 };
 
                 _context.Recipes.Add(recipeToCreate);

@@ -28,6 +28,6 @@ namespace BreweryMaster.API.Recipe.Models.DB
         public float? MashWaterVolume { get; set; }
         public float? TotalMashVolume { get; set; }
         public bool IsRemoved { get; set; } = false;
-        public required ICollection<RecipeFermentingIngredient> FermentingIngredients { get; set; }
+        public ICollection<RecipeFermentingIngredient> FermentingIngredients { get; set; } = new List<RecipeFermentingIngredient>();
     }
 }
