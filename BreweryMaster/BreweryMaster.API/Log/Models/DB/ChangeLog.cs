@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using BreweryMaster.API.User.Models.Users.DB;
+using System.ComponentModel.DataAnnotations;
 
 namespace BreweryMaster.API.Log.Models
 {
@@ -30,8 +31,14 @@ namespace BreweryMaster.API.Log.Models
         public required string ChangedData { get; set; }
 
         /// <summary>
-        /// The timestamp of when the change was logged.
+        /// The Id of the user how make a change.
         /// </summary>
-        public DateTime Timestamp { get; set; } = DateTime.UtcNow;
+        [MaxLength(450)]
+        public required string ChangedById { get; set; }
+
+        /// <summary>
+        /// The timestamp when the change was logged.
+        /// </summary>
+        public DateTime ChangedOn { get; set; } = DateTime.UtcNow;
     }
 }
