@@ -1,4 +1,4 @@
-﻿namespace BreweryMaster.API.Log.Models.DB
+namespace BreweryMaster.API.Log.Models
 {
     public class ChangeLog
     {

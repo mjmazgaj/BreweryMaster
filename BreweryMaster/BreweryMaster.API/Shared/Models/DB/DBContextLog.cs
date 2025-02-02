@@ -1,4 +1,4 @@
-﻿using BreweryMaster.API.Log.Models.DB;
+﻿using BreweryMaster.API.Log.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BreweryMaster.API.Shared.Models.DB
