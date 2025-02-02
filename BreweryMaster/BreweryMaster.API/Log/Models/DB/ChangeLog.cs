@@ -1,3 +1,5 @@
+﻿using System.ComponentModel.DataAnnotations;
+
 namespace BreweryMaster.API.Log.Models
 {
     public class ChangeLog
