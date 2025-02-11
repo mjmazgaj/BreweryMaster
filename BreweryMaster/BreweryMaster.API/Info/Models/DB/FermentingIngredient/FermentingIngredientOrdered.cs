@@ -22,5 +22,10 @@ namespace BreweryMaster.API.Info.Models
         /// The expected date
         /// </summary>
         public DateTime? ExpectedDate { get; set; }
+
+        /// <summary>
+        /// The completion indicator
+        /// </summary>
+        public bool IsCompleted { get; set; }
     }
 }

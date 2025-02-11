@@ -28,5 +28,10 @@ namespace BreweryMaster.API.Info.Models
         /// The reservation date
         /// </summary>
         public DateTime ReservationDate { get; set; }
+
+        /// <summary>
+        /// The completion indicator
+        /// </summary>
+        public bool IsCompleted { get; set; }
     }
 }
