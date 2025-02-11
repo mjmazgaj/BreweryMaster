@@ -90,6 +90,13 @@ namespace BreweryMaster.API.Info.Services
                 }).ToListAsync();
         }
 
+        public async Task<FermentingIngredientReservationResponse?> GetFermentingIngredientReservationById(int id)
+        {
+            var ingredients = await GetFermentingIngredientReservations();
+
+            return ingredients?.FirstOrDefault(x => x.Id == id);
+        }
+
         public async Task<IEnumerable<FermentingIngredientOrderResponse>> GetFermentingIngredientOrders()
         {
             return await _context.FermentingIngredientsOrdered
@@ -114,9 +121,18 @@ namespace BreweryMaster.API.Info.Services
                 }).ToListAsync();
         }
 
-        public Task<FermentingIngredientSummaryResponse?> GetFermentingIngredientSummaryByIdAsync(int id)
+        public async Task<FermentingIngredientOrderResponse?> GetFermentingIngredientOrderById(int id)
         {
-            throw new NotImplementedException();
+            var ingredients = await GetFermentingIngredientOrders();
+
+            return ingredients?.FirstOrDefault(x => x.Id == id);
+        }
+
+        public async Task<FermentingIngredientSummaryResponse?> GetFermentingIngredientSummaryByIdAsync(int id)
+        {
+            var ingredients = await GetFermentingIngredientSummary();
+
+            return ingredients?.FirstOrDefault(x => x.Id == id);
         }
 
         public async Task<IEnumerable<FermentingIngredientUnitResponse>?> GetFermentingIngredientUnitAsync()
@@ -202,6 +218,31 @@ namespace BreweryMaster.API.Info.Services
             catch (Exception)
             {
                 await transaction.RollbackAsync();
+
+                throw;
+            }
+        }
+
+        public async Task<FermentingIngredientReservationResponse?> CreateFermentingIngredientReservation(FermentingIngredientReserveRequest request)
+        {
+            try
+            {
+                var ingredientReservationToCreate = new FermentingIngredientReserved()
+                {
+                    FermentingIngredientUnitId = request.FermentingIngredientUnitId,
+                    ReservedQuantity = request.Quantity,
+                    ReservationDate = DateTime.Now,
+                    OrderId = request.OrderId,
+                    Info = request.Info,
+                };
+
+                _context.FermentingIngredientsReserved.Add(ingredientReservationToCreate);
+                await _context.SaveChangesAsync();
+
+                return await GetFermentingIngredientReservationById(ingredientReservationToCreate.Id);
+            }
+            catch (Exception)
+            {
 
                 throw;
             }
