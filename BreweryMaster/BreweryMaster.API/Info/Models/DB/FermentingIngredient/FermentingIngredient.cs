@@ -27,7 +27,7 @@ namespace BreweryMaster.API.Info.Models
         /// <summary>
         /// The type model representation
         /// </summary>
-        public required FermentingIngredientTypeEntity Type { get; set; }
+        public FermentingIngredientTypeEntity Type { get; set; } = null!;
 
         /// <summary>
         /// The percentage

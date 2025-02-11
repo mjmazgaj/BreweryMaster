@@ -18,7 +18,7 @@
         /// <summary>
         /// The fermenting ingredient unit model representation
         /// </summary>
-        public required FermentingIngredientUnit FermentingIngredientUnit { get; set; }
+        public FermentingIngredientUnit FermentingIngredientUnit { get; set; } = null!;
 
         /// <summary>
         /// The removal indicator

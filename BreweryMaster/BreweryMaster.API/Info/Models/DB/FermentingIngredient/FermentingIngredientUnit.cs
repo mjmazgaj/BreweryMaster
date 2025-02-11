@@ -20,7 +20,7 @@ namespace BreweryMaster.API.Info.Models
         /// <summary>
         /// The fermenting ingredient model representation
         /// </summary>
-        public required FermentingIngredient FermentingIngredient { get; set; }
+        public FermentingIngredient FermentingIngredient { get; set; } = null!;
 
         /// <summary>
         /// The unit id in relation. 
@@ -30,7 +30,7 @@ namespace BreweryMaster.API.Info.Models
         /// <summary>
         /// The unit model representation
         /// </summary>
-        public required UnitEntity Unit { get; set; }
+        public UnitEntity Unit { get; set; } = null!;
 
         /// <summary>
         /// The removal indicator

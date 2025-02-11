@@ -25,7 +25,6 @@ namespace BreweryMaster.API.Info.Services
                     Extraction = request.Extraction,
                     EBC = request.EBC,
                     Info = request.Info,
-                    Type = null!
                 };
 
                 _context.FermentingIngredients.Add(ingredientToCreate);
@@ -34,9 +33,7 @@ namespace BreweryMaster.API.Info.Services
                 var fermentingIngredientUnitsToCreate = request.Units
                     .Select(x => new FermentingIngredientUnit()
                     {
-                        FermentingIngredient = null!,
                         FermentingIngredientId = ingredientToCreate.Id,
-                        Unit = null!,
                         UnitId = x,
                     });
 
