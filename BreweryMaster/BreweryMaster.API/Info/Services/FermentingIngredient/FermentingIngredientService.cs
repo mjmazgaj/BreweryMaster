@@ -64,37 +64,6 @@ namespace BreweryMaster.API.Info.Services
                 }).ToListAsync();
         }
 
-        public async Task<IEnumerable<FermentingIngredientOrderResponse>> GetFermentingIngredientOrders()
-        {
-            return await _context.FermentingIngredientsOrdered
-                .Where(x => !x.IsRemoved)
-                .Include(x => x.FermentingIngredientUnit)
-                    .ThenInclude(x => x.Unit)
-                .Include(x => x.FermentingIngredientUnit)
-                    .ThenInclude(x => x.FermentingIngredient)
-                .Select(ingredient => new FermentingIngredientOrderResponse()
-                {
-                    Id = ingredient.Id,
-                    Name = ingredient.FermentingIngredientUnit.FermentingIngredient.Name,
-                    TypeId = ingredient.FermentingIngredientUnit.FermentingIngredient.TypeId,
-                    TypeName = ingredient.FermentingIngredientUnit.FermentingIngredient.Type.Name,
-                    Percentage = ingredient.FermentingIngredientUnit.FermentingIngredient.Percentage,
-                    Extraction = ingredient.FermentingIngredientUnit.FermentingIngredient.Extraction,
-                    EBC = ingredient.FermentingIngredientUnit.FermentingIngredient.EBC,
-                    OrderedDate = DateOnly.FromDateTime(ingredient.OrderedDate),
-                    ExpectedDate = ingredient.ExpectedDate.HasValue ? DateOnly.FromDateTime(ingredient.ExpectedDate.Value) : null,
-                    Unit = ingredient.FermentingIngredientUnit.Unit.Name,
-                    Info = ingredient.Info,
-                }).ToListAsync();
-        }
-
-        public async Task<FermentingIngredientOrderResponse?> GetFermentingIngredientOrderById(int id)
-        {
-            var ingredients = await GetFermentingIngredientOrders();
-
-            return ingredients?.FirstOrDefault(x => x.Id == id);
-        }
-
         public async Task<FermentingIngredientSummaryResponse?> GetFermentingIngredientSummaryByIdAsync(int id)
         {
             var ingredients = await GetFermentingIngredientSummary();

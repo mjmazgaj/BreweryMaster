@@ -6,7 +6,7 @@ namespace BreweryMaster.API.Info.Controllers.FermentingIngredient
 {
     [Route("api/FermentingIngredient/Reservation")]
     [ApiController]
-    public class FermentingIngredientReservationController : Controller
+    public class FermentingIngredientReservationController : ControllerBase
     {
         private readonly IFermentingIngredientReservationService _reservationService;
 

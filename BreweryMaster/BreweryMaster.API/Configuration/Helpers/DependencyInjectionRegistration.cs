@@ -19,9 +19,9 @@ namespace BreweryMaster.API.Configuration.Helpers
 
         private static void RegisterInfoDependencies(this IServiceCollection services)
         {
-
             services.AddScoped<IFermentingIngredientService, FermentingIngredientService>();
             services.AddScoped<IFermentingIngredientReservationService, FermentingIngredientReservationService>();
+            services.AddScoped<IFermentingIngredientOrderService, FermentingIngredientOrderService>();
             services.AddScoped<IEntityService, EntityService>();
         }
 
