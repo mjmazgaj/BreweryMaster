@@ -7,8 +7,6 @@ namespace BreweryMaster.API.Info.Services
         Task<IEnumerable<FermentingIngredientResponse>> GetFermentingIngredientsAsync();
         Task<FermentingIngredientResponse?> GetFermentingIngredientByIdAsync(int id);
         Task<IEnumerable<FermentingIngredientSummaryResponse>> GetFermentingIngredientSummary();
-        Task<IEnumerable<FermentingIngredientReservationResponse>> GetFermentingIngredientReservations();
-        Task<FermentingIngredientReservationResponse?> GetFermentingIngredientReservationById(int id);
         Task<IEnumerable<FermentingIngredientOrderResponse>> GetFermentingIngredientOrders();
         Task<FermentingIngredientOrderResponse?> GetFermentingIngredientOrderById(int id);
         Task<FermentingIngredientSummaryResponse?> GetFermentingIngredientSummaryByIdAsync(int id);
@@ -16,7 +14,6 @@ namespace BreweryMaster.API.Info.Services
         Task<IEnumerable<FermentingIngredientUnitNameResponse>?> GetFermentingIngredientUnitNameByIdAsync(int fermentingIngredientId);
         Task<IEnumerable<FermentingIngredientTypeEntityResponse>> GetFermentingIngredientTypesAsync();
         Task<FermentingIngredient> CreateFermentingIngredientAsync(FermentingIngredientRequest request);
-        Task<FermentingIngredientReservationResponse?> CreateFermentingIngredientReservation(FermentingIngredientReserveRequest request);
         Task<bool> UpdateFermentingIngredientAsync(int id, FermentingIngredientUpdateRequest order);
         Task<bool> DeleteFermentingIngredientByIdAsync(int id);
     }

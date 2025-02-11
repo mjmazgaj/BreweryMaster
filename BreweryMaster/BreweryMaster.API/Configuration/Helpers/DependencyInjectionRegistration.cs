@@ -21,6 +21,7 @@ namespace BreweryMaster.API.Configuration.Helpers
         {
 
             services.AddScoped<IFermentingIngredientService, FermentingIngredientService>();
+            services.AddScoped<IFermentingIngredientReservationService, FermentingIngredientReservationService>();
             services.AddScoped<IEntityService, EntityService>();
         }
 
