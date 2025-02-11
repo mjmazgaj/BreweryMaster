@@ -11,7 +11,7 @@ const IngredientsMenu = ({ mode, setMode }) => {
   };
 
   return (
-    <div>
+    <div className="ingredients-menu__container">
       <ButtonGroup>
         <Button
           onClick={() => handleOnClick("summary")}
