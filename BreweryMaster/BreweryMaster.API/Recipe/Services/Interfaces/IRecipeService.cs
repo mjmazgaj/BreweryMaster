@@ -1,6 +1,6 @@
 ﻿using BreweryMaster.API.Recipe.Models;
 
-namespace BreweryMaster.API.Recipe.Services.Interfaces
+namespace BreweryMaster.API.Recipe.Services
 {
     public interface IRecipeService
     {
