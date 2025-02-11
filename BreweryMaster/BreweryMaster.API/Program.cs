@@ -34,6 +34,11 @@ builder.Services.AddHttpContextAccessor();
 var app = builder.Build();
 app.UseCors("ReactPolicy");
 
+//if(app.Environment.IsProduction())
+{
+    app.UseExceptionHandlerWithOptions();
+}
+
 app.MapIdentityApi<ApplicationUser>();
 
 // Configure the HTTP request pipeline.
