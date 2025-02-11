@@ -14,10 +14,25 @@ namespace BreweryMaster.API.SharedModule.Validators
         private int MinInt { get; }
         private bool IsNullAllowed { get; }
 
-        public override bool IsValid(object? value)
+        protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
-            return value == null && IsNullAllowed
-                    || value != null && (int)value >= MinInt;
+            if (value == null)
+            {
+                return IsNullAllowed
+                    ? ValidationResult.Success
+                    : new ValidationResult($"The field {validationContext.MemberName} is required.");
+            }
+
+            if (value is int intValue)
+            {
+                if (intValue < MinInt)
+                {
+                    return new ValidationResult($"The field {validationContext.MemberName} must be at least {MinInt}.");
+                }
+                return ValidationResult.Success;
+            }
+
+            return new ValidationResult($"The field {validationContext.MemberName} must be an integer.");
         }
     }
 }
