@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -8,15 +8,16 @@ import DynamicTable from "../../../Shared/TableComponents/DynamicTable";
 import ModalQuantity from "../../../Shared/ModalComponents/ModalQuantity";
 
 import modalFieldsProvider from "../../../Shared/ModalComponents/helpers/modalFieldsProvider";
+import { fetchIngredientData } from "../../api";
 
 import { useTranslation } from "react-i18next";
 import ModalConfirmation from "../../../Shared/ModalComponents/ModalConfirmation";
-import { dbhandler } from "../dbhandler";
 
 const FermentingIngredientsReservation = () => {
   const { t } = useTranslation();
 
   const [modalData, setModalData] = useState([]);
+  const [data, setData] = useState([]);
 
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   
@@ -26,12 +27,15 @@ const FermentingIngredientsReservation = () => {
         area: "reserve"
       });
 
-  const { ingredientsReservation } = dbhandler();
-
   const handleDoubleClick = (item) => {
     setModalData({ ...item });
     setShowQuantityModal(true);
   };
+
+
+    useEffect(() => {
+      fetchIngredientData("FermentingIngredient", "Reservations", setData);
+    }, []);
 
   return (
     <div className="Fermenting-Ingredient-Reservation_container">
@@ -39,7 +43,7 @@ const FermentingIngredientsReservation = () => {
         tableKey="fermentingIngredientReservation"
         tableTitle="Fermenting Ingredient Reservations"
         dataCategory="brewery"
-        data={ingredientsReservation}
+        data={data}
         handleDoubleClick={handleDoubleClick}
       />
       <ModalQuantity

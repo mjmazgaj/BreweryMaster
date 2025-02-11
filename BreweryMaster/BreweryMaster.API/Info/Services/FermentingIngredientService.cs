@@ -105,6 +105,32 @@ namespace BreweryMaster.API.Info.Services
                 }).ToListAsync();
         }
 
+        public async Task<IEnumerable<FermentingIngredientReservationResponse>> GetFermentingIngredientReservations()
+        {
+            return await _context.FermentingIngredientsReserved
+                .Where(x => !x.IsRemoved)
+                .Include(x => x.Order)
+                .Include(x => x.FermentingIngredientUnit)
+                    .ThenInclude(x => x.Unit)
+                .Include(x => x.FermentingIngredientUnit)
+                    .ThenInclude(x => x.FermentingIngredient)
+                .Select(ingredient => new FermentingIngredientReservationResponse()
+                {
+                    Id = ingredient.Id,
+                    Name = ingredient.FermentingIngredientUnit.FermentingIngredient.Name,
+                    TypeId = ingredient.FermentingIngredientUnit.FermentingIngredient.TypeId,
+                    TypeName = ingredient.FermentingIngredientUnit.FermentingIngredient.Type.Name,
+                    Percentage = ingredient.FermentingIngredientUnit.FermentingIngredient.Percentage,
+                    Extraction = ingredient.FermentingIngredientUnit.FermentingIngredient.Extraction,
+                    EBC = ingredient.FermentingIngredientUnit.FermentingIngredient.EBC,
+                    OrderId = ingredient.OrderId,
+                    OrderName = ingredient.Order != null ? ingredient.Order.Id.ToString() : string.Empty,
+                    ReservedQuantity = ingredient.ReservedQuantity,
+                    Unit = ingredient.FermentingIngredientUnit.Unit.Name,
+                    Info = ingredient.Info,
+                }).ToListAsync();
+        }
+
         public Task<FermentingIngredientSummaryResponse?> GetFermentingIngredientSummaryByIdAsync(int id)
         {
             throw new NotImplementedException();

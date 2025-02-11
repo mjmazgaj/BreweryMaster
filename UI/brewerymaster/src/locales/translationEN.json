@@ -34,6 +34,7 @@
             "orderId": "Order ID"
         },
         "brewery":{
+            "empty": "Empty",
             "form": "Form",
             "usage": "Usage",
             "laboratory": "Laboratory",
@@ -45,6 +46,7 @@
             "style": "Style",
             "reservedQuantity": "Reserved",
             "orderedQuantity": "Ordered",
+            "orderName": "Order Name",
             "storedQuantity": "Stored",
             "name": "Name",
             "totalQuantity": "Total",

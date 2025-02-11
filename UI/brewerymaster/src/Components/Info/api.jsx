@@ -8,6 +8,12 @@ export const fetchSummaryData = (ingredient, setSummaryData) => {
     .catch((error) => console.log(error));
 };
 
+export const fetchIngredientData = (ingredient, tableType, setData) => {
+  return axios.get(`${apiurl}/${ingredient}/${tableType}`)
+    .then((result) => setData(result.data))
+    .catch((error) => console.log(error));
+};
+
 export const fetchUnitsById = (ingredient, setUnits, id) => {
   return axios.get(`${apiurl}/${ingredient}/Unit/${id}`)
     .then((result) => setUnits(result.data))
