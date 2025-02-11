@@ -36,13 +36,23 @@ namespace BreweryMaster.API.Info.Controllers
         }
 
         [HttpGet]
-        [Route("Reservations")]
+        [Route("Reservation")]
         [ProducesResponseType(typeof(IEnumerable<FermentingIngredientReservationResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<IEnumerable<FermentingIngredientReservationResponse>>> GetFermentingIngredientReservations()
         {
-            var fermentingIngredientsSummary = await _fermentingIngredientService.GetFermentingIngredientReservations();
-            return Ok(fermentingIngredientsSummary);
+            var fermentingIngredientReservations = await _fermentingIngredientService.GetFermentingIngredientReservations();
+            return Ok(fermentingIngredientReservations);
+        }
+
+        [HttpGet]
+        [Route("Order")]
+        [ProducesResponseType(typeof(IEnumerable<FermentingIngredientOrderResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<FermentingIngredientOrderResponse>>> GetFermentingIngredientOrders()
+        {
+            var fermentingIngredientOrders = await _fermentingIngredientService.GetFermentingIngredientOrders();
+            return Ok(fermentingIngredientOrders);
         }
 
         [HttpGet]

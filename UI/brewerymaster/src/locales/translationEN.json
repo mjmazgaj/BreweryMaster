@@ -61,6 +61,7 @@
             "description": "Description",
             "orderedDate": "Ordered date",
             "expectedDate": "Expected date",
+            "reservationDate": "Reservation date",
             "usedFor": "Used for",
             "order": "Order",
             "blgScale": "BLG scale",

@@ -34,7 +34,7 @@ const FermentingIngredientsReservation = () => {
 
 
     useEffect(() => {
-      fetchIngredientData("FermentingIngredient", "Reservations", setData);
+      fetchIngredientData("FermentingIngredient", "Reservation", setData);
     }, []);
 
   return (

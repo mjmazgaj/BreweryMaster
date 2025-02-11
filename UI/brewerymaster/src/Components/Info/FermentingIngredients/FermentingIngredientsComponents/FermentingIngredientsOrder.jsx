@@ -1,19 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../info.css";
 
 import DynamicTable from "../../../Shared/TableComponents/DynamicTable";
 import ModalQuantity from "../../../Shared/ModalComponents/ModalQuantity";
 import modalFieldsProvider from "../../../Shared/ModalComponents/helpers/modalFieldsProvider";
+import { fetchIngredientData } from "../../api";
 
 import { useTranslation } from "react-i18next";
 import ModalConfirmation from "../../../Shared/ModalComponents/ModalConfirmation";
-import { dbhandler } from "../dbhandler";
 
 const FermentingIngredientsOrder = () => {
   const { t } = useTranslation();
 
   const [modalData, setModalData] = useState([]);
+  const [data, setData] = useState([]);
 
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
@@ -23,12 +24,14 @@ const FermentingIngredientsOrder = () => {
       area: "order"
     });
 
-  const { ingredientsOrdered } = dbhandler();
-
   const handleDoubleClick = (item) => {
     setModalData({ ...item });
     setShowQuantityModal(true);
   };
+
+    useEffect(() => {
+      fetchIngredientData("FermentingIngredient", "Order", setData);
+    }, []);
 
   return (
     <div className="Fermenting-Ingredient-Order_container">
@@ -36,7 +39,7 @@ const FermentingIngredientsOrder = () => {
         tableKey="fermentingIngredientOrder"
         tableTitle="Fermenting Ingredient Orders"
         dataCategory="brewery"
-        data={ingredientsOrdered}
+        data={data}
         handleDoubleClick={handleDoubleClick}
       />
       <ModalQuantity
