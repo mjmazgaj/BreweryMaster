@@ -51,7 +51,7 @@ export const dbhandler = () => {
           user: "user 1",
           date: "2015-05-16",
           reserveQuantity: 3,
-          describtion: "Viking Pilsner malt describtion"
+          description: "Viking Pilsner malt description"
         },
         {
           id: 2,
@@ -64,7 +64,7 @@ export const dbhandler = () => {
           user: "ujser 1",
           date: "2015-05-16",
           reserveQuantity: 3,
-          describtion: "Strzegom Monachijski typ II describtion"
+          description: "Strzegom Monachijski typ II description"
         }
       ];
       
@@ -80,7 +80,7 @@ export const dbhandler = () => {
             orderedDate: "2015-05-16",
             expectedDate: "2015-05-16",
             orderQuantity: 3,
-            describtion: "Viking Pilsner malt describtion"
+            description: "Viking Pilsner malt description"
           },
           {
             id: 2,
@@ -93,7 +93,7 @@ export const dbhandler = () => {
             orderedDate: "2015-05-16",
             expectedDate: "2015-05-16",
             orderQuantity: 3,
-            describtion: "Strzegom Monachijski typ II describtion"
+            description: "Strzegom Monachijski typ II description"
           }
         ];
 

@@ -2,16 +2,16 @@ const recipeFormFieldsProvider = (t) => ({
   summaryFields: [
     {
       id: "name",
-      label: `${t("common.name")}*`,
+      label: `${t("name.general.name")}*`,
       type: "text",
       required: true,
-      feedback: `${t("common.validation.text")}`
+      feedback: `${t("validation.text")}`
     },
     {
       id: "blgScale",
-      label: t("recipe.blgScale"),
+      label: t("name.brewery.blgScale"),
       type: "number",
-      feedback: `${t("common.validation.number")} 0-100`,
+      feedback: `${t("validation.number")} 0-100`,
       validation:{
         min: 0,
         max: 100,
@@ -19,9 +19,9 @@ const recipeFormFieldsProvider = (t) => ({
     },
     {
       id: "ibuScale",
-      label: t("recipe.ibuScale"),
+      label: t("name.brewery.ibuScale"),
       type: "number",
-      feedback: `${t("common.validation.number")} 0-1000`,
+      feedback: `${t("validation.number")} 0-1000`,
       validation:{
         min: 0,
         max: 1000,
@@ -29,9 +29,9 @@ const recipeFormFieldsProvider = (t) => ({
     },
     {
       id: "abvScale",
-      label: t("recipe.abvScale"),
+      label: t("name.brewery.abvScale"),
       type: "number",
-      feedback: `${t("common.validation.number")} 0-100`,
+      feedback: `${t("validation.number")} 0-100`,
       validation:{
         min: 0,
         max: 100,
@@ -39,9 +39,9 @@ const recipeFormFieldsProvider = (t) => ({
     },
     {
       id: "srmScale",
-      label: t("recipe.srmScale"),
+      label: t("name.brewery.srmScale"),
       type: "number",
-      feedback: `${t("common.validation.number")} 0-100`,
+      feedback: `${t("validation.number")} 0-100`,
       validation:{
         min: 0,
         max: 100,
@@ -49,22 +49,22 @@ const recipeFormFieldsProvider = (t) => ({
     },
     {
       id: "type",
-      label: t("common.type"),
+      label: t("name.brewery.type"),
       type: "text",
     },
     {
       id: "style",
-      label: t("common.style"),
+      label: t("name.brewery.style"),
       type: "text",
     },
   ],
   batchFields: [
     {
       id: "expectedBeerVolume",
-      label: `${t("recipe.batch.expectedBeerVolume")}*`,
+      label: `${t("name.brewery.expectedBeerVolume")}*`,
       type: "number",
       required: true,
-      feedback: `${t("common.validation.number")} 0-10000`,
+      feedback: `${t("validation.number")} 0-10000`,
       validation:{
         min: 0,
         max: 10000,
@@ -72,9 +72,9 @@ const recipeFormFieldsProvider = (t) => ({
     },
     {
       id: "boilingTime",
-      label: t("recipe.batch.boilingTime"),
+      label: t("name.brewery.boilingTime"),
       type: "number",
-      feedback: `${t("common.validation.number")} 0-10000`,
+      feedback: `${t("validation.number")} 0-10000`,
       validation:{
         min: 0,
         max: 10000,
@@ -82,9 +82,9 @@ const recipeFormFieldsProvider = (t) => ({
     },
     {
       id: "evaporationRate",
-      label: t("recipe.batch.evaporationRate"),
+      label: t("name.brewery.evaporationRate"),
       type: "number",
-      feedback: `${t("common.validation.number")} 0-100`,
+      feedback: `${t("validation.number")} 0-100`,
       validation:{
         min: 0,
         max: 100,
@@ -92,10 +92,10 @@ const recipeFormFieldsProvider = (t) => ({
     },
     {
       id: "wortVolume",
-      label: `${t("recipe.batch.boiledWortVolume")}*`,
+      label: `${t("name.brewery.boiledWortVolume")}*`,
       type: "number",
       required: true,
-      feedback: `${t("common.validation.number")} 0-10000`,
+      feedback: `${t("validation.number")} 0-10000`,
       validation:{
         min: 0,
         max: 10000,
@@ -103,9 +103,9 @@ const recipeFormFieldsProvider = (t) => ({
     },
     {
       id: "boilingLosses",
-      label: t("recipe.batch.boilingLosses"),
+      label: t("name.brewery.boilingLosses"),
       type: "number",
-      feedback: `${t("common.validation.number")} 0-100`,
+      feedback: `${t("validation.number")} 0-100`,
       validation:{
         min: 0,
         max: 100,
@@ -113,9 +113,9 @@ const recipeFormFieldsProvider = (t) => ({
     },
     {
       id: "preBoilingDensity",
-      label: t("recipe.batch.preBoilingDensity"),
+      label: t("name.brewery.preBoilingDensity"),
       type: "number",
-      feedback: `${t("common.validation.number")} 0-100`,
+      feedback: `${t("validation.number")} 0-100`,
       validation:{
         min: 0,
         max: 100,
@@ -123,9 +123,9 @@ const recipeFormFieldsProvider = (t) => ({
     },
     {
       id: "fermentationLosses",
-      label: t("recipe.batch.fermentationLosses"),
+      label: t("name.brewery.fermentationLosses"),
       type: "number",
-      feedback: `${t("common.validation.number")} 0-100`,
+      feedback: `${t("validation.number")} 0-100`,
       validation:{
         min: 0,
         max: 100,
@@ -133,9 +133,9 @@ const recipeFormFieldsProvider = (t) => ({
     },
     {
       id: "dryHoppingLosses",
-      label: t("recipe.batch.dryHoppingLosses"),
+      label: t("name.brewery.dryHoppingLosses"),
       type: "number",
-      feedback: `${t("common.validation.number")} 0-100`,
+      feedback: `${t("validation.number")} 0-100`,
       validation:{
         min: 0,
         max: 100,
@@ -145,22 +145,22 @@ const recipeFormFieldsProvider = (t) => ({
   mashFields: [
     {
       id: "mashEfficiency",
-      label: t("recipe.mash.efficiency"),
+      label: t("name.brewery.efficiency"),
       type: "number",
     },
     {
       id: "waterToGrainRatio",
-      label: t("recipe.mash.waterToGrainRatio"),
+      label: t("name.brewery.waterToGrainRatio"),
       type: "number",
     },
     {
       id: "mashWaterVolume",
-      label: t("recipe.mash.mashWaterVolume"),
+      label: t("name.brewery.mashWaterVolume"),
       type: "number",
     },
     {
       id: "totalMashVolume",
-      label: t("recipe.mash.totalMashVolume"),
+      label: t("name.brewery.totalMashVolume"),
       type: "number",
     },
   ],

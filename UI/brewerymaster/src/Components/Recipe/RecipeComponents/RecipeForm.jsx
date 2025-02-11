@@ -108,7 +108,7 @@ const RecipeForm = () => {
   const steps = [
     {
       key: "basicInformation",
-      name: t("recipe.step.basicInformation"),
+      name: t("name.general.basicInformation"),
       component: (
         <FormControls
           fields={recipeFormFieldsProvider(t).summaryFields}
@@ -120,11 +120,12 @@ const RecipeForm = () => {
     },
     {
       key: "fermentingIngredients",
-      name: t("recipe.step.fermentingIngredients"),
+      name: t("name.brewery.fermentingIngredients"),
       component: (
         <DynamicTableSelection
-          sourceTableTitle={t("recipe.ingredientsAvailable")}
+          sourceTableTitle={t("name.brewery.ingredientsAvailable")}
           data={ingredients}
+          dataCategory="brewery"
           selectedData={selectedIngredients}
           setSelectedData={setSelectedIngredients}
           quantityAction={{
@@ -136,11 +137,12 @@ const RecipeForm = () => {
     },
     {
       key: "hops",
-      name: t("recipe.step.hops"),
+      name: t("name.brewery.hops"),
       component: (
         <DynamicTableSelection
-          sourceTableTitle={t("recipe.hopsAvailable")}
+          sourceTableTitle={t("name.brewery.hopsAvailable")}
           data={hops}
+          dataCategory="brewery"
           selectedData={selectedHops}
           setSelectedData={setSelectedHops}
           quantityAction={{
@@ -152,11 +154,12 @@ const RecipeForm = () => {
     },
     {
       key: "yeast",
-      name: t("recipe.step.yeast"),
+      name: t("name.brewery.yeast"),
       component: (
         <DynamicTableSelection
-          sourceTableTitle={t("recipe.yeastAvailable")}
+          sourceTableTitle={t("name.brewery.yeastAvailable")}
           data={yeast}
+          dataCategory="brewery"
           selectedData={selectedYeast}
           setSelectedData={setSelectedYeast}
           quantityAction={{
@@ -168,11 +171,12 @@ const RecipeForm = () => {
     },
     {
       key: "extras",
-      name: t("recipe.step.extras"),
+      name: t("name.brewery.extras"),
       component: (
         <DynamicTableSelection
-          sourceTableTitle={t("recipe.extrasAvailable")}
+          sourceTableTitle={t("name.brewery.extrasAvailable")}
           data={extras}
+          dataCategory="brewery"
           selectedData={selectedExtras}
           setSelectedData={setSelectedExtras}
           quantityAction={{
@@ -184,7 +188,7 @@ const RecipeForm = () => {
     },
     {
       key: "batch",
-      name: t("recipe.step.batch"),
+      name: t("name.brewery.batch"),
       component: (
         <FormControls
           fields={recipeFormFieldsProvider(t).batchFields}
@@ -196,7 +200,7 @@ const RecipeForm = () => {
     },
     {
       key: "mash",
-      name: t("recipe.step.mash"),
+      name: t("name.brewery.mash"),
       component: (
         <FormControls
           fields={recipeFormFieldsProvider(t).mashFields}

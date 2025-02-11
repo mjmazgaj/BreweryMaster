@@ -31,7 +31,7 @@ const ModalQuantity = ({
       name: modalData.name,
       reserveQuantity: isEmpty ? "" : modalData.reserveQuantity,
       orderQuantity: isEmpty ? "" : modalData.orderQuantity,
-      describtion: isEmpty ? "" : modalData.describtion,
+      description: isEmpty ? "" : modalData.description,
     }));
   }, [modalData]);
 

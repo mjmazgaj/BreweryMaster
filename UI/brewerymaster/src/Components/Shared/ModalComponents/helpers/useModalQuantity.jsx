@@ -19,7 +19,7 @@ export const useModalQuantity = ({
       name: "",
       reserveQuantity: 0,
       orderQuantity: 0,
-      describtion: "",
+      description: "",
     });
   }
 

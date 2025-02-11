@@ -8,7 +8,7 @@ import { useDynamicTableSelection } from "./helpers/useDynamicTableSelection";
 import modalFieldsProvider from "../../Shared/ModalComponents/helpers/modalFieldsProvider";
 import ModalRecipeQuantity from "../ModalComponents/ModalRecipeQuantity";
 
-const DynamicTableSelection = ({sourceTableTitle, data, selectedData, setSelectedData, quantityAction}) => { 
+const DynamicTableSelection = ({sourceTableTitle, data, dataCategory, selectedData, setSelectedData, quantityAction}) => { 
 
   const { t } = useTranslation();
   const [showQuantityModal, setShowQuantityModal] = useState(false);
@@ -21,6 +21,7 @@ const DynamicTableSelection = ({sourceTableTitle, data, selectedData, setSelecte
       <DynamicTable
         tableKey="source-table"
         tableTitle={sourceTableTitle}
+        dataCategory={dataCategory}
         data={data.map((item)=>({...item, quantity:selectedData[item.id]?.quantity ?? 0}))}
         handleDoubleClick={handleDoubleClick}
       />

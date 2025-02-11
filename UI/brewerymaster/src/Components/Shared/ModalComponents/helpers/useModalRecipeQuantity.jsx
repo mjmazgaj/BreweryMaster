@@ -19,7 +19,7 @@ export const useModalRecipeQuantity = ({
       id: 0,
       name: "",
       quantity: 0,
-      describtion: "",
+      description: "",
     });
   }
   
@@ -47,7 +47,7 @@ export const useModalRecipeQuantity = ({
     
     const newData = {
       quantity: quantityData.quantity, 
-      describtion: quantityData.describtion
+      description: quantityData.description
     }
 
     updateField(quantityData.id, newData)

@@ -37,7 +37,8 @@ const FermentingIngredientsReservation = () => {
     <div className="Fermenting-Ingredient-Reservation_container">
       <DynamicTable
         tableKey="fermentingIngredientReservation"
-        tableTitle="Fermenting Ingredient reservation"
+        tableTitle="Fermenting Ingredient Reservations"
+        dataCategory="brewery"
         data={ingredientsReservation}
         handleDoubleClick={handleDoubleClick}
       />

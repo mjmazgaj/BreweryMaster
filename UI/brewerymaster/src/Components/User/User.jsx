@@ -21,6 +21,7 @@ const User = () => {
       <DynamicTable
           tableKey="users"
           tableTitle="All users"
+          dataCategory="user"
           data={users}
           handleDoubleClick={()=>console.log("it works")}
         />

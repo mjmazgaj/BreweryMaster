@@ -81,7 +81,7 @@ const ModalForm = ({
           />
           {action == "add" && units && (
             <div className="modal-form_checkbox-container">
-              <h5>{t("common.selectUnits")}</h5>
+              <h5>{t("name.brewery.selectUnits")}</h5>
               {units.map((unit) => (
                 <Form.Check
                   type="switch"

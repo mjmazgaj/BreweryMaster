@@ -75,7 +75,8 @@ const FermentingIngredientsSummary = () => {
       {data && (
         <DynamicTable
           tableKey="fermentingIngredient"
-          tableTitle="Fermenting Ingredient"
+          tableTitle="Fermenting Ingredients"
+          dataCategory="brewery"
           data={data}
           handleDoubleClick={handleDoubleClick}
         />

@@ -45,6 +45,7 @@ const ProspectOrderSummary = () => {
           <DynamicTable
             tableKey="prospectOrder"
             tableTitle="Prospect orders"
+            dataCategory="brewery"
             data={data}
             handleDoubleClick={handleDoubleClick}
           />

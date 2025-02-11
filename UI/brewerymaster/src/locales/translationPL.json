@@ -1,57 +1,115 @@
 {
-    "production": {
-        "stage": {
-    
-        }
-    },
     "button": {
         "submit": "Zatwierdź",
+        "add": "Dodaj",
         "cancel": "Anuluj",
         "confirm": "Potwierdź",
         "next": "Dalej",
-        "back": "Wstecz"
+        "back": "Wstecz",
+        "saveChanges": "Zapisz zmiany",
+        "close": "Zamknij"
     },
-    "message":{
-        "invalidinput": "Niepoprawna wartość"
-    },
-    "common": {
-        "style": "Styl",
-        "type": "Typ",
-        "name": "Nazwa",
-        "quantity": "Ilość"
-    },
-    "recipe": {
-        "abvScale": "Skala ABV",
-        "blgScale": "Skala BLG",
-        "ibuScale": "Skala IBU",
-        "srmScale": "Skala SRM",
-        "ingredientsSelected": "Wybrane składniki",
-        "ingredientsAvailable": "Dostępne składniki",
-        "mash": {
-            "efficiency": "Wydajność zacierania",
-            "waterToGrainRatio": "Stosunek wody do ziarna",
-            "mashWaterVolume": "Objętość wody do zacierania",
-            "totalMashVolume": "Całkowita objętość zacieru"
-        },
-        "batch": {
-            "expectedBeerVolume": "Oczekiwana objętość gotowego piwa",
-            "boilingTime": "Czas gotowania",
-            "evaporationRate": "Szybkość odparowywania",
-            "boiledWortVolume": "Ilość gotowanej brzeczki",
-            "boilingLosses": "Straty z gotowania",
-            "preBoilingDensity": "Gęstość przed gotowaniem",
-            "fermentationLosses": "Straty z fermentacji",
-            "dryHoppingLosses": "Straty z chmielenia na zimno"
-        },
-        "step": {
+    "name": {
+        "general":{
             "basicInformation": "Podstawowe informacje",
-            "fermentingIngredients": "Składniki fermentujące",
+            "name": "Nazwa"
+        },
+        "user":{
+            "empty": "Puste",
+            "city": "Miasto",
+            "postCode": "Kod pocztowy",
+            "email": "Email",
+            "name": "Imię i nazwisko",
+            "roles": "Role",
+            "phoneNumber": "Numer telefonu",
+            "isCompany": "Firma"
+        },
+        "kanban":{
+            "modalTitle": "Modyfikuj zadanie",
+            "title": "Tytuł",
+            "summary": "Podsumowanie",
+            "status": "Status",
+            "dueDate": "Termin",
+            "ownerId": "ID właściciela",
+            "orderId": "ID zamówienia"
+        },
+        "brewery":{
+            "form": "Formularz",
+            "usage": "Użycie",
+            "laboratory": "Laboratorium",
+            "alphaAcids": "Kwasy alfa",
+            "time": "Czas",
+            "type": "Typ",
+            "typeName": "Nazwa typu",
+            "quantity": "Ilość",
+            "style": "Styl",
+            "reservedQuantity": "Zarezerwowana ilość",
+            "orderedQuantity": "Zamówiona ilość",
+            "storedQuantity": "Przechowywana ilość",
+            "name": "Nazwa",
+            "totalQuantity": "Łączna ilość",
+            "percentage": "Procent",
+            "extraction": "Ekstrakcja",
+            "ebc": "EBC",
+            "total": "Łącznie",
+            "unit": "Jednostka",
+            "info": "Informacja",
+            "user": "Użytkownik",
+            "date": "Data",
+            "description": "Opis",
+            "orderedDate": "Data zamówienia",
+            "expectedDate": "Przewidywana data",
+            "usedFor": "Używane do",
+            "order": "Zamówienie",
+            "blgScale": "Skala BLG",
+            "ibuScale": "Skala IBU",
+            "abvScale": "Skala ABV",
+            "srmScale": "Skala SRM",
+            "clientName": "Klient",
+            "beerStyle": "Styl piwa",
+            "container": "Rodzaj opakowania",
+            "capacity": "Pojemność",
+            "targetDate": "Przewidywana data",
+            "isClosed": "Zamknięte",
+            "selectUnits": "Wybierz jednostki",
+            "styleName": "Styl",
+            "reserveQuantity": "Zarezerwowana ilość",
+            "orderQuantity": "Zamówiona ilość",
+            "efficiency": "Wydajność zacierania",
+            "waterToGrainRatio": "Stosunek wody do słodu",
+            "mashWaterVolume": "Objętość wody do zacierania",
+            "expectedBeerVolume": "Przewidywana objętość piwa",
+            "boilingTime": "Czas gotowania",
+            "evaporationRate": "Szybkość odparowania",
+            "boiledWortVolume": "Objętość gotowanej brzeczki",
+            "boilingLosses": "Straty podczas gotowania",
+            "preBoilingDensity": "Gęstość przed gotowaniem",
+            "fermentationLosses": "Straty podczas fermentacji",
+            "fermentingIngredients": "Fermentujące składniki",
             "hops": "Chmiel",
             "yeast": "Drożdże",
-            "batch": "Warka",
+            "extras": "Dodatki",
+            "batch": "Partia",
             "mash": "Zacieranie",
-            "stages": "Etapy"
+            "stages": "Etapy",
+            "dryHoppingLosses": "Straty podczas chmielenia na zimno",
+            "ingredientsSelected": "Wybrane składniki",
+            "ingredientsAvailable": "Dostępne składniki",
+            "hopsSelected": "Wybrany chmiel",
+            "hopsAvailable": "Dostępny chmiel",
+            "yeastSelected": "Wybrane drożdże",
+            "yeastAvailable": "Dostępne drożdże",
+            "extrasSelected": "Wybrane dodatki",
+            "extrasAvailable": "Dostępne dodatki",
+            "totalMashVolume": "Całkowita objętość zacieru"
         }
+    },
+    "message": {
+        "invalidinput": "Nieprawidłowe dane wejściowe"
+    },
+    "validation": {
+        "text": "Tekst powinien mieć mniej liter niż:",
+        "number": "Liczba powinna być w zakresie:"
     },
     "toast": {
         "addSuccess": "Element został pomyślnie dodany."

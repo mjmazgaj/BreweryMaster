@@ -26,32 +26,32 @@ const KanbanModal = ({
   const fields = [
     {
       id: "title",
-      label: t("kanban.title"),
+      label: t("name.kanban.title"),
       type: "text",
     },
     {
       id: "summary",
-      label: t("kanban.summary"),
+      label: t("name.kanban.summary"),
       type: "text",
     },
     {
       id: "status",
-      label: t("kanban.status"),
+      label: t("name.kanban.status"),
       type: "number",
     },
     {
       id: "dueDate",
-      label: t("kanban.dueDate"),
+      label: t("name.kanban.dueDate"),
       type: "date",
     },
     {
       id: "ownerId",
-      label: t("kanban.ownerId"),
+      label: t("name.kanban.ownerId"),
       type: "number",
     },
     {
       id: "orderId",
-      label: t("kanban.orderId"),
+      label: t("name.kanban.orderId"),
       type: "number",
     },
   ];
@@ -80,7 +80,7 @@ const KanbanModal = ({
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header>
-        <Modal.Title>{t("kanban.modalTitle")}</Modal.Title>
+        <Modal.Title>{t("name.kanban.modalTitle")}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Container>

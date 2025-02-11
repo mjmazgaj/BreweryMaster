@@ -25,6 +25,7 @@ const handleDoubleClick = (item) =>{
           <DynamicTable
             tableKey="orders"
             tableTitle="Orders"
+            dataCategory="brewery"
             data={data}
             handleDoubleClick={handleDoubleClick}
           />

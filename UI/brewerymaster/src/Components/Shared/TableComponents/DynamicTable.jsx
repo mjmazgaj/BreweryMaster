@@ -4,7 +4,7 @@ import {Table} from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import "../shared.css";
 
-const DynamicTable = ({tableKey, tableTitle, data, handleDoubleClick}) => {  
+const DynamicTable = ({tableKey, tableTitle, dataCategory, data, handleDoubleClick}) => {  
   const { t } = useTranslation();
 
   const keys = data.length > 0 ? Object.keys(data[0]).filter(x=>!x.toUpperCase().includes("ID") && x !== "maxQuantity") : ["empty"];
@@ -16,7 +16,7 @@ const DynamicTable = ({tableKey, tableTitle, data, handleDoubleClick}) => {
         <thead>
           <tr>
             {keys.map((header) => (
-              <th key={header}>{t(`column.${header}`) || header}</th>
+              <th key={header}>{t(`name.${dataCategory}.${header}`) || header}</th>
             ))}
           </tr>
         </thead>
