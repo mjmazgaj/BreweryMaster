@@ -11,48 +11,6 @@ namespace BreweryMaster.API.Info.Services
         {
             _context = context;
         }
-        public async Task<FermentingIngredient> CreateFermentingIngredientAsync(FermentingIngredientRequest request)
-        {
-            using var transaction = await _context.Database.BeginTransactionAsync();
-
-            try
-            {
-                var ingredientToCreate = new FermentingIngredient()
-                {
-                    Name = request.Name,
-                    TypeId = request.TypeId,
-                    Percentage = request.Percentage,
-                    Extraction = request.Extraction,
-                    EBC = request.EBC,
-                    Info = request.Info,
-                };
-
-                _context.FermentingIngredients.Add(ingredientToCreate);
-                await _context.SaveChangesAsync();
-
-                var fermentingIngredientUnitsToCreate = request.Units
-                    .Select(x => new FermentingIngredientUnit()
-                    {
-                        FermentingIngredientId = ingredientToCreate.Id,
-                        UnitId = x,
-                    });
-
-                _context.FermentingIngredientUnits.AddRange(fermentingIngredientUnitsToCreate);
-                await _context.SaveChangesAsync();
-
-                await transaction.CommitAsync();
-
-                return ingredientToCreate;
-
-            }
-            catch (Exception)
-            {
-                await transaction.RollbackAsync();
-
-                throw;
-            }
-        }
-
         public async Task<IEnumerable<FermentingIngredientResponse>> GetFermentingIngredientsAsync()
         {
             var dbIngredients = await _context.FermentingIngredients
@@ -205,6 +163,48 @@ namespace BreweryMaster.API.Info.Services
                 Id = x.Id,
                 Name = x.Name,
             }).ToListAsync();
+        }
+
+        public async Task<FermentingIngredient> CreateFermentingIngredientAsync(FermentingIngredientRequest request)
+        {
+            using var transaction = await _context.Database.BeginTransactionAsync();
+
+            try
+            {
+                var ingredientToCreate = new FermentingIngredient()
+                {
+                    Name = request.Name,
+                    TypeId = request.TypeId,
+                    Percentage = request.Percentage,
+                    Extraction = request.Extraction,
+                    EBC = request.EBC,
+                    Info = request.Info,
+                };
+
+                _context.FermentingIngredients.Add(ingredientToCreate);
+                await _context.SaveChangesAsync();
+
+                var fermentingIngredientUnitsToCreate = request.Units
+                    .Select(x => new FermentingIngredientUnit()
+                    {
+                        FermentingIngredientId = ingredientToCreate.Id,
+                        UnitId = x,
+                    });
+
+                _context.FermentingIngredientUnits.AddRange(fermentingIngredientUnitsToCreate);
+                await _context.SaveChangesAsync();
+
+                await transaction.CommitAsync();
+
+                return ingredientToCreate;
+
+            }
+            catch (Exception)
+            {
+                await transaction.RollbackAsync();
+
+                throw;
+            }
         }
 
         public async Task<bool> UpdateFermentingIngredientAsync(int id, FermentingIngredientUpdateRequest request)
