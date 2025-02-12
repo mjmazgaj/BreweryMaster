@@ -31,6 +31,7 @@ namespace BreweryMaster.API.Info.Services
                     OrderedDate = DateOnly.FromDateTime(ingredient.OrderedDate),
                     ExpectedDate = ingredient.ExpectedDate.HasValue ? DateOnly.FromDateTime(ingredient.ExpectedDate.Value) : null,
                     Unit = ingredient.FermentingIngredientUnit.Unit.Name,
+                    IsCompleted = ingredient.IsCompleted,
                     Info = ingredient.Info,
                 }).ToListAsync();
         }

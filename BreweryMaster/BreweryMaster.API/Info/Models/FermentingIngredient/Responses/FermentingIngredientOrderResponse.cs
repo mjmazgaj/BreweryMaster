@@ -13,6 +13,7 @@
         public DateOnly? ExpectedDate { get; set; }
         public decimal OrderedQuantity { get; set; }
         public required string Unit { get; set; }
+        public bool IsCompleted { get; set; }
         public string? Info { get; set; }
     }
 }
