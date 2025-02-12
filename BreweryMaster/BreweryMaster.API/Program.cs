@@ -7,8 +7,6 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.Configure<OrderSettings>(builder.Configuration.GetSection(nameof(OrderSettings)));
 
 builder.Services.AddDbContextWithOptions(builder.Configuration.GetConnectionString("BreweryMaster"));
@@ -36,7 +34,6 @@ Log.Logger = ConfigurationHelper.GetLogger();
 builder.Host.UseSerilog();
 
 var app = builder.Build();
-app.UseCors("ReactPolicy");
 
 if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
@@ -45,21 +42,15 @@ else
 
 app.MapIdentityApi<ApplicationUser>();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseCors(builder =>
-{
-    builder.AllowAnyOrigin()
-    .AllowAnyMethod()
-    .AllowAnyHeader();
-});
-
 app.UseHttpsRedirection();
+
+app.UseCors("ReactPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();
