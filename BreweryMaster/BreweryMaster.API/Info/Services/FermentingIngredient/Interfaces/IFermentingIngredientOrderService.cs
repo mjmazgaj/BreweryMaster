@@ -7,6 +7,7 @@ namespace BreweryMaster.API.Info.Services
         Task<IEnumerable<FermentingIngredientOrderResponse>> GetFermentingIngredientOrders();
         Task<FermentingIngredientOrderResponse?> GetFermentingIngredientOrderById(int id);
         Task<FermentingIngredientOrderResponse?> CreateFermentingIngredientOrder(FermentingIngredientOrderRequest request);
+        Task<bool> UpdateFermentingIngredientOrder(int id, FermentingIngredientOrderUpdateRequest request);
         Task<bool> CompleteFermentingIngredientOrder(int id);
         Task<bool> DeleteFermentingIngredientOrder(int id);
     }
