@@ -39,5 +39,18 @@ namespace BreweryMaster.API.Info.Controllers.FermentingIngredient
 
             return Ok(reservation);
         }
+
+        [HttpPost]
+        [ProducesResponseType(typeof(FermentingIngredientOrderResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<FermentingIngredientOrderResponse>> CreateFermentingIngredientOrder(FermentingIngredientOrderRequest request)
+        {
+            var createdOrder = await _orderService.CreateFermentingIngredientOrder(request);
+
+            if (createdOrder == null)
+                return BadRequest();
+
+            return CreatedAtAction(nameof(_orderService), new { id = createdOrder.Id }, createdOrder);
+        }
     }
 }

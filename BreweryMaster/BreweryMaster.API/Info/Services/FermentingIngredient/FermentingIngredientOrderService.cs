@@ -41,5 +41,22 @@ namespace BreweryMaster.API.Info.Services
 
             return ingredients?.FirstOrDefault(x => x.Id == id);
         }
+
+        public async Task<FermentingIngredientOrderResponse?> CreateFermentingIngredientOrder(FermentingIngredientOrderRequest request)
+        {
+            var ingredientOrderToCreate = new FermentingIngredientOrdered()
+            {
+                FermentingIngredientUnitId = request.FermentingIngredientUnitId,
+                OrderedQuantity = request.Quantity,
+                OrderedDate = DateTime.Now,
+                ExpectedDate = request.ExpectedDate,
+                Info = request.Info,
+            };
+
+            _context.FermentingIngredientsOrdered.Add(ingredientOrderToCreate);
+            await _context.SaveChangesAsync();
+
+            return await GetFermentingIngredientOrderById(ingredientOrderToCreate.Id);
+        }
     }
 }
