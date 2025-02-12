@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../../info.css";
 
 import DynamicTable from "../../../Shared/TableComponents/DynamicTable";
-import ModalQuantity from "../../../Shared/ModalComponents/ModalQuantity";
+import ModalFormBasic from "../../../Shared/ModalComponents/ModalFormBasic";
 import modalFieldsProvider from "../../../Shared/ModalComponents/helpers/modalFieldsProvider";
 
 import {useFermentingIngredientsOrder} from "./helpers/useFermentingIngredientsOrder";
@@ -20,12 +20,8 @@ const FermentingIngredientsOrder = () => {
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
   const [showQuantityModal, setShowQuantityModal] = useState(false);
-  const [quantityAction, setQuantityAction] = useState({
-      verb: "edit",
-      area: "order"
-    });
 
-    const {handleDoubleClick} = useFermentingIngredientsOrder({setModalData, setData, setShowQuantityModal})
+  const {handleDoubleClick} = useFermentingIngredientsOrder({setModalData, setData, setShowQuantityModal})
 
   return (
     <div className="Fermenting-Ingredient-Order_container">
@@ -36,14 +32,18 @@ const FermentingIngredientsOrder = () => {
         data={data}
         handleDoubleClick={handleDoubleClick}
       />
-      <ModalQuantity
-        fields={modalFieldsProvider(t).quantityModalFields[quantityAction.area]}
-        modalData={modalData}
-        show={showQuantityModal}
-        setShow={setShowQuantityModal}
-        action={quantityAction}
-        isEmpty={false}
-      />
+
+      <ModalFormBasic
+          fields={modalFieldsProvider(t).quantityModalFields["order"]}
+          data={modalData}
+          setData={setModalData}
+          show={showQuantityModal}
+          setShow={setShowQuantityModal}
+          action="edit"
+          itemName={`order for ${modalData.name}`}
+          path="FermentingIngredient/Order"
+        />
+
       <ModalConfirmation
         id={modalData.id}
         name={modalData.name}

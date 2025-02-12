@@ -34,7 +34,7 @@ export const addData = (path, data) => {
 };
 
 export const updateData = (path, id, data) => {
-  return axios.put(`${apiurl}/${path}/${id}`, data)
+  return axios.patch(`${apiurl}/${path}/${id}`, data)
     .then((result) => result.data)
     .catch((error) => console.log(error));
 };

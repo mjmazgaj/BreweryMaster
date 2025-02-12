@@ -88,18 +88,26 @@ const modalFieldsProvider = (t) => ({
         type: "textArea",
       },
     ],
-    order:[
-      {
-        id: "orderQuantity",
-        label: t("name.brewery.orderQuantity"),
-        type: "number",
-      },
-      {
-        id: "description",
-        label: t("name.brewery.description"),
-        type: "textArea",
-      },
-    ],
+    order:{
+      control: [
+        {
+          id: "quantity",
+          label: t("name.brewery.orderQuantity"),
+          type: "number",
+        },
+        {
+          id: "info",
+          label: t("name.brewery.description"),
+          type: "textArea",
+        },
+      ],
+      datePicker:[
+        {
+          name: "expectedDate",
+          label: "Expected Date",
+        },
+      ]
+    },
     ingredient:[
       {
         id: "quantity",

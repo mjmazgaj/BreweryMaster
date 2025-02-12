@@ -16,6 +16,7 @@ const ModalFormBasic = ({
   setShow,
   action,
   itemName,
+  path
 }) => {
   const { t } = useTranslation();
   const [isValid, setIsValid] = useState(true);
@@ -33,6 +34,7 @@ const ModalFormBasic = ({
     action,
     itemName,
     isValid,
+    path
   });
 
   const renderDropdowns = () =>

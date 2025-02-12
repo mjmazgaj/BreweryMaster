@@ -28,6 +28,7 @@ namespace BreweryMaster.API.Info.Services
                     Percentage = ingredient.FermentingIngredientUnit.FermentingIngredient.Percentage,
                     Extraction = ingredient.FermentingIngredientUnit.FermentingIngredient.Extraction,
                     EBC = ingredient.FermentingIngredientUnit.FermentingIngredient.EBC,
+                    OrderedQuantity = ingredient.OrderedQuantity,
                     OrderedDate = DateOnly.FromDateTime(ingredient.OrderedDate),
                     ExpectedDate = ingredient.ExpectedDate.HasValue ? DateOnly.FromDateTime(ingredient.ExpectedDate.Value) : null,
                     Unit = ingredient.FermentingIngredientUnit.Unit.Name,

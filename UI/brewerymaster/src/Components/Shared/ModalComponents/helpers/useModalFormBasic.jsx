@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { addData, updateData } from "../../api";
 
 export const useModalFormBasic = ({
   data,
@@ -6,7 +7,8 @@ export const useModalFormBasic = ({
   setShow,
   action,
   itemName,
-  isValid
+  isValid,
+  path
 }) => {
   const { t } = useTranslation();
 
@@ -53,8 +55,11 @@ export const useModalFormBasic = ({
     if (!handleFormSubmit(event)) {
       return;
     }
+
     console.log("add");
     console.log({...data});
+
+    addData(path, data)
     setShow(false);
   };
 
@@ -65,6 +70,7 @@ export const useModalFormBasic = ({
     
     console.log("edit");
     console.log({...data});
+    updateData(path, data.id, data)
     setShow(false);
   };
 
