@@ -8,5 +8,6 @@ namespace BreweryMaster.API.Info.Services
         Task<FermentingIngredientOrderResponse?> GetFermentingIngredientOrderById(int id);
         Task<FermentingIngredientOrderResponse?> CreateFermentingIngredientOrder(FermentingIngredientOrderRequest request);
         Task<bool> CompleteFermentingIngredientOrder(int id);
+        Task<bool> DeleteFermentingIngredientOrder(int id);
     }
 }
