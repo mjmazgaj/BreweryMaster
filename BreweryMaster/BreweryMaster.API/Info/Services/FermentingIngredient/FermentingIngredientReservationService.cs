@@ -49,27 +49,19 @@ namespace BreweryMaster.API.Info.Services
 
         public async Task<FermentingIngredientReservationResponse?> CreateFermentingIngredientReservation(FermentingIngredientReserveRequest request)
         {
-            try
+            var ingredientReservationToCreate = new FermentingIngredientReserved()
             {
-                var ingredientReservationToCreate = new FermentingIngredientReserved()
-                {
-                    FermentingIngredientUnitId = request.FermentingIngredientUnitId,
-                    ReservedQuantity = request.Quantity,
-                    ReservationDate = DateTime.Now,
-                    OrderId = request.OrderId,
-                    Info = request.Info,
-                };
+                FermentingIngredientUnitId = request.FermentingIngredientUnitId,
+                ReservedQuantity = request.Quantity,
+                ReservationDate = DateTime.Now,
+                OrderId = request.OrderId,
+                Info = request.Info,
+            };
 
-                _context.FermentingIngredientsReserved.Add(ingredientReservationToCreate);
-                await _context.SaveChangesAsync();
+            _context.FermentingIngredientsReserved.Add(ingredientReservationToCreate);
+            await _context.SaveChangesAsync();
 
-                return await GetFermentingIngredientReservationById(ingredientReservationToCreate.Id);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            return await GetFermentingIngredientReservationById(ingredientReservationToCreate.Id);
         }
 
         public async Task<bool> CompleteFermentingIngredientReservation(int id)
