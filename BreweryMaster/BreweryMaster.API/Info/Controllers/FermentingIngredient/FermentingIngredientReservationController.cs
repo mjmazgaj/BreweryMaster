@@ -25,6 +25,34 @@ namespace BreweryMaster.API.Info.Controllers.FermentingIngredient
             return Ok(fermentingIngredientReservations);
         }
 
+        [HttpGet]
+        [Route("{id:int}")]
+        [ProducesResponseType(typeof(FermentingIngredientReservationResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<FermentingIngredientReservationResponse>> GetFermentingIngredientReservationById([MinIntValidation] int id)
+        {
+            var reservation = await _reservationService.GetFermentingIngredientReservationById(id);
+
+            if (reservation == null)
+                return NotFound();
+
+            return Ok(reservation);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(typeof(FermentingIngredientReservationResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<bool>> CreateFermentingIngredientReservation(FermentingIngredientReserveRequest request)
+        {
+            var createdReservation = await _reservationService.CreateFermentingIngredientReservation(request);
+
+            if (createdReservation == null)
+                return BadRequest();
+
+            return CreatedAtAction(nameof(GetFermentingIngredientReservationById), new { id = createdReservation.Id }, createdReservation);
+        }
+
         [HttpPatch]
         [Route("Complete/{id:int}")]
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
