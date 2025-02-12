@@ -43,7 +43,7 @@ namespace BreweryMaster.API.Info.Controllers.FermentingIngredient
         [HttpPost]
         [ProducesResponseType(typeof(FermentingIngredientReservationResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<bool>> CreateFermentingIngredientReservation(FermentingIngredientReserveRequest request)
+        public async Task<ActionResult<FermentingIngredientReservationResponse>> CreateFermentingIngredientReservation(FermentingIngredientReserveRequest request)
         {
             var createdReservation = await _reservationService.CreateFermentingIngredientReservation(request);
 
