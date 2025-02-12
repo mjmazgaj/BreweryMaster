@@ -64,6 +64,23 @@ namespace BreweryMaster.API.Info.Services
             return await GetFermentingIngredientReservationById(ingredientReservationToCreate.Id);
         }
 
+        public async Task<bool> UpdateFermentingIngredientReservation(int id, FermentingIngredientQuantityUpdateRequest request)
+        {
+            var ingredientToUpdate = await _context.FermentingIngredientsReserved.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (ingredientToUpdate is null)
+                return false;
+
+            ingredientToUpdate.ReservedQuantity = request.Quantity;
+            ingredientToUpdate.Info = request.Info;
+
+            _context.FermentingIngredientsReserved.Update(ingredientToUpdate);
+
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+
         public async Task<bool> CompleteFermentingIngredientReservation(int id)
         {
             var fermentingIngredientsToComplete = await _context.FermentingIngredientsReserved.FirstOrDefaultAsync(x => x.Id == id);
