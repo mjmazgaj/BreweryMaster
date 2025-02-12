@@ -1,5 +1,6 @@
 ﻿using BreweryMaster.API.Info.Models;
 using BreweryMaster.API.Info.Services;
+using BreweryMaster.API.SharedModule.Validators;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BreweryMaster.API.Info.Controllers.FermentingIngredient
@@ -22,6 +23,21 @@ namespace BreweryMaster.API.Info.Controllers.FermentingIngredient
         {
             var fermentingIngredientOrders = await _orderService.GetFermentingIngredientOrders();
             return Ok(fermentingIngredientOrders);
+        }
+
+        [HttpGet]
+        [Route("{id:int}")]
+        [ProducesResponseType(typeof(FermentingIngredientOrderResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<FermentingIngredientOrderResponse>> GetFermentingIngredientOrderById([MinIntValidation] int id)
+        {
+            var reservation = await _orderService.GetFermentingIngredientOrderById(id);
+
+            if (reservation == null)
+                return NotFound();
+
+            return Ok(reservation);
         }
     }
 }
