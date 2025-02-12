@@ -1,5 +1,4 @@
 ﻿using BreweryMaster.API.Info.Models;
-using BreweryMaster.API.Info.Services;
 using BreweryMaster.API.Shared.Models.DB;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,6 +36,7 @@ namespace BreweryMaster.API.Info.Services
                     ReservedQuantity = ingredient.ReservedQuantity,
                     Unit = ingredient.FermentingIngredientUnit.Unit.Name,
                     Info = ingredient.Info,
+                    IsCompleted = ingredient.IsCompleted,
                 }).ToListAsync();
         }
 
@@ -70,6 +70,22 @@ namespace BreweryMaster.API.Info.Services
 
                 throw;
             }
+        }
+
+        public async Task<bool> CompleteFermentingIngredientReservation(int id)
+        {
+            var fermentingIngredientsToComplete = await _context.FermentingIngredientsReserved.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (fermentingIngredientsToComplete is null)
+                return false;
+
+            fermentingIngredientsToComplete.IsCompleted = true;
+
+            _context.FermentingIngredientsReserved.Update(fermentingIngredientsToComplete);
+
+            await _context.SaveChangesAsync();
+
+            return true;
         }
     }
 }

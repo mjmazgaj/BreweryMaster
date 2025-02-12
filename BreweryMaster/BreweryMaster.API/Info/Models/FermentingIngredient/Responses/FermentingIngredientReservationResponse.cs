@@ -14,6 +14,7 @@
         public DateOnly ReservationDate { get; set; }
         public decimal ReservedQuantity { get; set; }
         public required string Unit { get; set; }
+        public bool IsCompleted { get; set; }
         public string? Info { get; set; }
     }
 }
