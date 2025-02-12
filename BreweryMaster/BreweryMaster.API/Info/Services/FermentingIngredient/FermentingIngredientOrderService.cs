@@ -58,5 +58,21 @@ namespace BreweryMaster.API.Info.Services
 
             return await GetFermentingIngredientOrderById(ingredientOrderToCreate.Id);
         }
+
+        public async Task<bool> CompleteFermentingIngredientOrder(int id)
+        {
+            var ingredientToComplete = await _context.FermentingIngredientsOrdered.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (ingredientToComplete is null)
+                return false;
+
+            ingredientToComplete.IsCompleted = true;
+
+            _context.FermentingIngredientsOrdered.Update(ingredientToComplete);
+
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
     }
 }

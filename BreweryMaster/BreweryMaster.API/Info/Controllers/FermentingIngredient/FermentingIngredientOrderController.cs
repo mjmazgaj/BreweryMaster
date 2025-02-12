@@ -52,5 +52,19 @@ namespace BreweryMaster.API.Info.Controllers.FermentingIngredient
 
             return CreatedAtAction(nameof(_orderService), new { id = createdOrder.Id }, createdOrder);
         }
+
+        [HttpPatch]
+        [Route("Complete/{id:int}")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<bool>> CompleteFermentingIngredientOrder([MinIntValidation] int id)
+        {
+            var completionSuccessful = await _orderService.CompleteFermentingIngredientOrder(id);
+
+            if (completionSuccessful)
+                return Ok();
+
+            return NotFound();
+        }
     }
 }
