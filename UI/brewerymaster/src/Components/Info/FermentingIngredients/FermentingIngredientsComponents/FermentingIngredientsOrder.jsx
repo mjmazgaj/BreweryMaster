@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../info.css";
 
 import DynamicTable from "../../../Shared/TableComponents/DynamicTable";
 import ModalQuantity from "../../../Shared/ModalComponents/ModalQuantity";
 import modalFieldsProvider from "../../../Shared/ModalComponents/helpers/modalFieldsProvider";
-import { fetchData } from "../../../Shared/api";
+
+import {useFermentingIngredientsOrder} from "./helpers/useFermentingIngredientsOrder";
 
 import { useTranslation } from "react-i18next";
 import ModalConfirmation from "../../../Shared/ModalComponents/ModalConfirmation";
@@ -24,14 +25,7 @@ const FermentingIngredientsOrder = () => {
       area: "order"
     });
 
-  const handleDoubleClick = (item) => {
-    setModalData({ ...item });
-    setShowQuantityModal(true);
-  };
-
-    useEffect(() => {
-      fetchData("FermentingIngredient/Order", setData);
-    }, []);
+    const {handleDoubleClick} = useFermentingIngredientsOrder({setModalData, setData, setShowQuantityModal})
 
   return (
     <div className="Fermenting-Ingredient-Order_container">
