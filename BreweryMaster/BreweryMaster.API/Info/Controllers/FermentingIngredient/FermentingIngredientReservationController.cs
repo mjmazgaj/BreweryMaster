@@ -38,5 +38,19 @@ namespace BreweryMaster.API.Info.Controllers.FermentingIngredient
 
             return NotFound();
         }
+
+        [HttpPatch]
+        [Route("Delete/{id:int}")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<bool>> DeleteFermentingIngredientReservation([MinIntValidation] int id)
+        {
+            var deletedSuccessful = await _reservationService.DeleteFermentingIngredientReservation(id);
+
+            if (deletedSuccessful)
+                return Ok();
+
+            return NotFound();
+        }
     }
 }
