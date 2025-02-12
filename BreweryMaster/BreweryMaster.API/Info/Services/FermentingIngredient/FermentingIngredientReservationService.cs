@@ -33,7 +33,7 @@ namespace BreweryMaster.API.Info.Services
                     OrderId = ingredient.OrderId,
                     OrderName = ingredient.Order != null ? ingredient.Order.Id.ToString() : string.Empty,
                     ReservationDate = DateOnly.FromDateTime(ingredient.ReservationDate),
-                    ReservedQuantity = ingredient.ReservedQuantity,
+                    Quantity = ingredient.ReservedQuantity,
                     Unit = ingredient.FermentingIngredientUnit.Unit.Name,
                     Info = ingredient.Info,
                     IsCompleted = ingredient.IsCompleted,

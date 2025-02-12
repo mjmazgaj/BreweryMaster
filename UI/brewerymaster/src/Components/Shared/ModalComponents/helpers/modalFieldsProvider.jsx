@@ -76,18 +76,20 @@ const modalFieldsProvider = (t) => ({
     },
   ],
   quantityModalFields:{
-    reserve:[
-      {
-        id: "reserveQuantity",
-        label: t("name.brewery.reserveQuantity"),
-        type: "number",
-      },
-      {
-        id: "description",
-        label: t("name.brewery.description"),
-        type: "textArea",
-      },
-    ],
+    reserve:{
+      control: [
+        {
+          id: "quantity",
+          label: t("name.brewery.reservedQuantity"),
+          type: "number",
+        },
+        {
+          id: "info",
+          label: t("name.brewery.description"),
+          type: "textArea",
+        },
+      ],
+    },
     order:{
       control: [
         {

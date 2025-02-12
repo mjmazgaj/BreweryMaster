@@ -12,7 +12,7 @@
         public int? OrderId { get; set; }
         public string? OrderName { get; set; }
         public DateOnly ReservationDate { get; set; }
-        public decimal ReservedQuantity { get; set; }
+        public decimal Quantity { get; set; }
         public required string Unit { get; set; }
         public bool IsCompleted { get; set; }
         public string? Info { get; set; }

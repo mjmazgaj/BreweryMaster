@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "../../info.css";
 
 import DynamicTable from "../../../Shared/TableComponents/DynamicTable";
-import ModalQuantity from "../../../Shared/ModalComponents/ModalQuantity";
+import ModalFormBasic from "../../../Shared/ModalComponents/ModalFormBasic";
 
 import modalFieldsProvider from "../../../Shared/ModalComponents/helpers/modalFieldsProvider";
 import { fetchData } from "../../../Shared/api";
@@ -22,10 +22,6 @@ const FermentingIngredientsReservation = () => {
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   
   const [showQuantityModal, setShowQuantityModal] = useState(false);
-  const [quantityAction, setQuantityAction] = useState({
-        verb: "edit",
-        area: "reserve"
-      });
 
   const handleDoubleClick = (item) => {
     setModalData({ ...item });
@@ -46,14 +42,18 @@ const FermentingIngredientsReservation = () => {
         data={data}
         handleDoubleClick={handleDoubleClick}
       />
-      <ModalQuantity
-        fields={modalFieldsProvider(t).quantityModalFields[quantityAction.area]}
-        modalData={modalData}
-        show={showQuantityModal}
-        setShow={setShowQuantityModal}
-        action={quantityAction}
-        isEmpty={false}
-      />
+      
+      <ModalFormBasic
+          fields={modalFieldsProvider(t).quantityModalFields["reserve"]}
+          data={modalData}
+          setData={setModalData}
+          show={showQuantityModal}
+          setShow={setShowQuantityModal}
+          action="edit"
+          itemName={`reservation for ${modalData.name}`}
+          path="FermentingIngredient/Reservation"
+        />
+
       <ModalConfirmation
         id={modalData.id}
         name={modalData.name}
