@@ -8,7 +8,7 @@ import DynamicTable from "../../../Shared/TableComponents/DynamicTable";
 import ModalQuantity from "../../../Shared/ModalComponents/ModalQuantity";
 
 import modalFieldsProvider from "../../../Shared/ModalComponents/helpers/modalFieldsProvider";
-import { fetchIngredientData } from "../../api";
+import { fetchData } from "../../../Shared/api";
 
 import { useTranslation } from "react-i18next";
 import ModalConfirmation from "../../../Shared/ModalComponents/ModalConfirmation";
@@ -34,7 +34,7 @@ const FermentingIngredientsReservation = () => {
 
 
     useEffect(() => {
-      fetchIngredientData("FermentingIngredient", "Reservation", setData);
+      fetchData("FermentingIngredient/Reservation", setData);
     }, []);
 
   return (
