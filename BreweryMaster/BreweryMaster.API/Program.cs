@@ -3,6 +3,7 @@ using BreweryMaster.API.OrderModule.Models;
 using BreweryMaster.API.User.Models.Users.DB;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,14 +31,17 @@ builder.Services.AddSwaggerGenWithOptions();
 
 builder.Services.AddHttpContextAccessor();
 
+Log.Logger = ConfigurationHelper.GetLogger();
+
+builder.Host.UseSerilog();
 
 var app = builder.Build();
 app.UseCors("ReactPolicy");
 
-//if(app.Environment.IsProduction())
-{
+if (app.Environment.IsDevelopment())
+    app.UseDeveloperExceptionPage();
+else
     app.UseExceptionHandlerWithOptions();
-}
 
 app.MapIdentityApi<ApplicationUser>();
 
