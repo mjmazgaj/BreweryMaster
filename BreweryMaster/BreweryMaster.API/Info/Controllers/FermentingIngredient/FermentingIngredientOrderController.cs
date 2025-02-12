@@ -32,12 +32,12 @@ namespace BreweryMaster.API.Info.Controllers.FermentingIngredient
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<FermentingIngredientOrderResponse>> GetFermentingIngredientOrderById([MinIntValidation] int id)
         {
-            var reservation = await _orderService.GetFermentingIngredientOrderById(id);
+            var order = await _orderService.GetFermentingIngredientOrderById(id);
 
-            if (reservation == null)
+            if (order == null)
                 return NotFound();
 
-            return Ok(reservation);
+            return Ok(order);
         }
 
         [HttpPost]
