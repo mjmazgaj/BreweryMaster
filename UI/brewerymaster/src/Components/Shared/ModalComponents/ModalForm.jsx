@@ -86,6 +86,7 @@ const ModalForm = ({
                 <Form.Check
                   type="switch"
                   id={`${unit.id}`}
+                  key={`${unit.id}`}
                   label={unit.name}
                   checked={unit.isUsed}
                   onChange={() => handleCheckBox(unit)}
