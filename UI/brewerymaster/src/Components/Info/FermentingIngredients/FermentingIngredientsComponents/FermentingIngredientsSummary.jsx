@@ -13,8 +13,6 @@ import ModalConfirmation from "../../../Shared/ModalComponents/ModalConfirmation
 import ModalFormBasic from "../../../Shared/ModalComponents/ModalFormBasic";
 import ModalForm from "../../../Shared/ModalComponents/ModalForm";
 
-import {removeFields} from "../../../Shared/helpers/useObjectHelper";
-
 const FermentingIngredientsSummary = () => {
   const { t } = useTranslation();
 
@@ -28,6 +26,7 @@ const FermentingIngredientsSummary = () => {
 
   const [showItemAction, setShowItemAction] = useState(false);
   const [itemAction, setItemAction] = useState("summary");
+  const[units, setUnits] = useState([]);
 
   const [showModalForm, setShowModalForm] = useState(false);
   const [modalAction, setModalAction] = useState("add");
@@ -40,10 +39,21 @@ const FermentingIngredientsSummary = () => {
 
   const handleDoubleClick = (item) => {
     setItemAction("summary");
-    setModalData({...item});
+    fetchData(`FermentingIngredient/Unit/${item.id}`, setUnits);
+
+    setModalData({
+      typeId: item.typeId, 
+      typeName: item.typeName,
+      name: item.name,
+      percentage: item.percentage,
+      extraction: item.extraction,
+      ebc: item.ebc,
+      info: item.info,
+      units:[]});
+
     setModalQuantityData({
       name: item.name,
-      fermentingIngredientUnitId: item.id
+      fermentingIngredientUnitId: item.id,
     });
     setShowItemAction(true);
   };
@@ -58,13 +68,16 @@ const FermentingIngredientsSummary = () => {
       ebc: "",
       quantity: "",
       total: 13,
+      units:[]
     });
   };
+
 
   const handleAddOnClick = () => {
     clear();
     setModalAction("add");
     setShowModalForm(true);
+    fetchData(`entity/Unit`, setUnits);
   };
 
   useEffect(() => {
@@ -103,6 +116,8 @@ const FermentingIngredientsSummary = () => {
         fields={modalFieldsProvider(t).fermentingIngredientsModalFields}
         data={modalData}
         setData={setModalData}
+        units={units}
+        setUnits={setUnits}
         types={types}
         show={showModalForm}
         setShow={setShowModalForm}

@@ -5,13 +5,14 @@ import { useModalForm } from "./helpers/useModalForm";
 import FormControls from "../FormControls";
 
 import { useTranslation } from "react-i18next";
-import { fetchEntity } from "../api";
 import DropDownIndex from "../DropDownIndex";
 
 const ModalForm = ({
   fields,
   data,
   setData,
+  units,
+  setUnits,
   types,
   show,
   setShow,
@@ -19,32 +20,29 @@ const ModalForm = ({
   itemName,
 }) => {
   const { t } = useTranslation();
-  const [units, setUnits] = useState([]);
   const [isValid, setIsValid] = useState(true);
+  const [lockedUnits, setLockedUnits] = useState(new Set());
 
   const { handleClose, actionObject } = useModalForm({
     data,
     setShow,
     action,
     itemName,
-    units,
     isValid,
   });
 
-  useEffect(() => {
-    fetchEntity("Unit", (fetchedUnits) => {
-      const updatedUnits = fetchedUnits.map((unit) => ({
-        ...unit,
-        isUsed: unit.isUsed ?? false,
-      }));
-      setUnits(updatedUnits);
-    });
-  }, []);
-
   const handleCheckBox = (unit) => {
-    setUnits((prevUnits) =>
-      prevUnits.map((u) => (u.id === unit.id ? { ...u, isUsed: !u.isUsed } : u))
-    );
+    if(action == 'edit')
+    {
+      setUnits((prevUnits) =>
+        prevUnits.map((u) => (u.id === unit.id ? { ...u, isUsed: !(u.isUsed ?? false) } : u))
+      );
+    }
+    else{
+      setUnits((prevUnits) =>
+        prevUnits.map((u) => (u.id === unit.id ? { ...u} : u))
+      );
+    }
   };
 
   const handleSelectChange = (e) => {
@@ -54,6 +52,14 @@ const ModalForm = ({
       typeId: parseInt(value),
     }));
   };
+
+  useEffect(() => {
+    if (action === "edit") {
+      setLockedUnits(new Set(units.filter(unit => unit.isUsed).map(unit => unit.id)));
+    }
+    else
+      setLockedUnits();
+  }, [action]);
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -79,7 +85,7 @@ const ModalForm = ({
             isReadOnly={actionObject.isReadOnly}
             setIsValid={setIsValid}
           />
-          {action == "add" && units && (
+          {units && (
             <div className="modal-form_checkbox-container">
               <h5>{t("name.brewery.selectUnits")}</h5>
               {units.map((unit) => (
@@ -89,6 +95,7 @@ const ModalForm = ({
                   key={`${unit.id}`}
                   label={unit.name}
                   checked={unit.isUsed}
+                  disabled={lockedUnits && lockedUnits.has(unit.id)}
                   onChange={() => handleCheckBox(unit)}
                 />
               ))}

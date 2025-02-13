@@ -30,13 +30,9 @@ export const useModalForm = ({
     if (!handleFormSubmit(event)) {
       return;
     }
-    const updatedUnits = units.map((x) => ({
-      ...x,
-      isUsed: x.isUsed ?? false,
-    })).filter(x=>x.isUsed).map(x=>x.id);
 
     console.log("add");
-    console.log({...data, units: {...updatedUnits}});
+    console.log({...data});
     setShow(false);
   };
 
