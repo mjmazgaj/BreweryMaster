@@ -4,6 +4,7 @@ import { Modal, Button, Form } from "react-bootstrap";
 import { useModalForm } from "./helpers/useModalForm";
 import FormControls from "../FormControls";
 
+import { fetchData } from "../api";
 import { useTranslation } from "react-i18next";
 import DropDownIndex from "../DropDownIndex";
 
@@ -12,7 +13,6 @@ const ModalForm = ({
   data,
   setData,
   units,
-  setUnits,
   types,
   show,
   setShow,
@@ -21,7 +21,7 @@ const ModalForm = ({
 }) => {
   const { t } = useTranslation();
   const [isValid, setIsValid] = useState(true);
-  const [lockedUnits, setLockedUnits] = useState(new Set());
+  const [usedUnits, setUsedUnits] = useState([]);
 
   const { handleClose, actionObject } = useModalForm({
     data,
@@ -31,18 +31,12 @@ const ModalForm = ({
     isValid,
   });
 
-  const handleCheckBox = (unit) => {
-    if(action == 'edit')
-    {
-      setUnits((prevUnits) =>
-        prevUnits.map((u) => (u.id === unit.id ? { ...u, isUsed: !(u.isUsed ?? false) } : u))
-      );
-    }
-    else{
-      setUnits((prevUnits) =>
-        prevUnits.map((u) => (u.id === unit.id ? { ...u} : u))
-      );
-    }
+  const handleCheckBox = (unitId, isChecked) => {
+    setData((prevData) => ({
+        ...prevData,
+        units: isChecked ? [...prevData.units, unitId] : 
+          prevData.units.filter(x=>x !== unitId)
+      }))
   };
 
   const handleSelectChange = (e) => {
@@ -54,12 +48,12 @@ const ModalForm = ({
   };
 
   useEffect(() => {
-    if (action === "edit") {
-      setLockedUnits(new Set(units.filter(unit => unit.isUsed).map(unit => unit.id)));
-    }
-    else
-      setLockedUnits();
-  }, [action]);
+    if(data?.id && show === true)
+      fetchData(`FermentingIngredient/Units/${data.id}`, setUsedUnits);
+
+    if(show === false)
+      setUsedUnits([]);
+  }, [show]);
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -94,9 +88,9 @@ const ModalForm = ({
                   id={`${unit.id}`}
                   key={`${unit.id}`}
                   label={unit.name}
-                  checked={unit.isUsed}
-                  disabled={lockedUnits && lockedUnits.has(unit.id)}
-                  onChange={() => handleCheckBox(unit)}
+                  checked={usedUnits.includes(unit.id) || data.units?.includes(unit.id)}
+                  disabled={usedUnits.includes(unit.id)}
+                  onChange={(e) => handleCheckBox(unit.id, e.target.checked)}
                 />
               ))}
             </div>

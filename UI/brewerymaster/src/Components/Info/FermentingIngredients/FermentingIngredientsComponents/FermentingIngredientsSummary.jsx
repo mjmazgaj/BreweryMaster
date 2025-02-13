@@ -39,9 +39,9 @@ const FermentingIngredientsSummary = () => {
 
   const handleDoubleClick = (item) => {
     setItemAction("summary");
-    fetchData(`FermentingIngredient/Unit/${item.id}`, setUnits);
 
     setModalData({
+      id: item.id,
       typeId: item.typeId, 
       typeName: item.typeName,
       name: item.name,
@@ -77,13 +77,16 @@ const FermentingIngredientsSummary = () => {
     clear();
     setModalAction("add");
     setShowModalForm(true);
-    fetchData(`entity/Unit`, setUnits);
   };
 
   useEffect(() => {
     fetchData("FermentingIngredient/Summary", setData);
-    fetchData("FermentingIngredient/Type", setTypes);
   }, [modalData]);
+
+  useEffect(() => {
+    fetchData(`entity/Unit`, setUnits);
+    fetchData("FermentingIngredient/Type", setTypes);
+  }, []);
 
   return (
     <div className="Fermenting-Ingredient_container">
@@ -117,7 +120,6 @@ const FermentingIngredientsSummary = () => {
         data={modalData}
         setData={setModalData}
         units={units}
-        setUnits={setUnits}
         types={types}
         show={showModalForm}
         setShow={setShowModalForm}

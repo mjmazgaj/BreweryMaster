@@ -87,24 +87,17 @@ namespace BreweryMaster.API.Info.Services
                 }).ToListAsync();
         }
 
-        public async Task<IEnumerable<FermentingIngredientUnitNameResponse>?> GetFermentingIngredientUnitNameByIdAsync(int fermentingIngredientUnitId)
+        public async Task<IEnumerable<int>?> GetFermentingIngredientUnitsById(int fermentingIngredientUnitId)
         {
-            var id = _context.FermentingIngredientUnits
-                .Include(x => x.FermentingIngredient)
-                .FirstOrDefault(x => x.Id == fermentingIngredientUnitId)?.FermentingIngredientId;
+            var usedUnits = await _context.FermentingIngredientUnits
+                                .Include(x => x.FermentingIngredient)
+                                .ThenInclude(x => x.FermentingIngredientUnits)
+                                .SingleOrDefaultAsync(x => x.Id == fermentingIngredientUnitId);
 
-            var ingredientUnits = await _context.FermentingIngredientUnits
-                .Where(x => !x.IsRemoved && x.FermentingIngredientId == id)
-                .Select(x => x.UnitId)
-                .ToListAsync();
-
-            return _context.UnitTypes
-                .Select(x => new FermentingIngredientUnitNameResponse()
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    isUsed = ingredientUnits.Contains(x.Id)
-                });
+            return usedUnits?
+                .FermentingIngredient
+                .FermentingIngredientUnits
+                .Select(x => x.UnitId);
         }
 
         public async Task<IEnumerable<FermentingIngredientTypeEntityResponse>> GetFermentingIngredientTypesAsync()

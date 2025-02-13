@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace BreweryMaster.API.Info.Models
 {
@@ -56,5 +57,11 @@ namespace BreweryMaster.API.Info.Models
         /// The info
         /// </summary>
         public string? Info { get; set; }
+
+        ///// <summary>
+        ///// The realeted fermenting ingredient units
+        ///// </summary>
+        [JsonIgnore]
+        public ICollection<FermentingIngredientUnit> FermentingIngredientUnits { get; set; } = new List<FermentingIngredientUnit>();
     }
 }
