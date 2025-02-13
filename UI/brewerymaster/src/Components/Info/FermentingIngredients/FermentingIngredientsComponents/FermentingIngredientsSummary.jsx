@@ -10,7 +10,7 @@ import { fetchData } from "../../../Shared/api";
 
 import { useTranslation } from "react-i18next";
 import ModalConfirmation from "../../../Shared/ModalComponents/ModalConfirmation";
-import ModalQuantity from "../../../Shared/ModalComponents/ModalQuantity";
+import ModalFormBasic from "../../../Shared/ModalComponents/ModalFormBasic";
 import ModalForm from "../../../Shared/ModalComponents/ModalForm";
 
 import {removeFields} from "../../../Shared/helpers/useObjectHelper";
@@ -19,8 +19,7 @@ const FermentingIngredientsSummary = () => {
   const { t } = useTranslation();
 
   const [modalData, setModalData] = useState([]);
-  const [modalItemData, setModalItemData] = useState([]);
-  const [modalFormData, setModalFormData] = useState([]);
+  const [modalQuantityData, setModalQuantityData] = useState([]);
   
   const [data, setData] = useState([]);
   const [types, setTypes] = useState([]);
@@ -41,8 +40,11 @@ const FermentingIngredientsSummary = () => {
 
   const handleDoubleClick = (item) => {
     setItemAction("summary");
-    setModalItemData(removeFields(item, ["typeId"]));
-    setModalFormData(removeFields(item, ["typeName"]));
+    setModalData({...item});
+    setModalQuantityData({
+      name: item.name,
+      fermentingIngredientUnitId: item.id
+    });
     setShowItemAction(true);
   };
 
@@ -86,7 +88,7 @@ const FermentingIngredientsSummary = () => {
       </Button>
       <ModalItemAction
         fields={modalFieldsProvider(t).fermentingIngredientsModalReadOnlyFields}
-        data={modalItemData}
+        data={modalData}
         show={showItemAction}
         setShow={setShowItemAction}
         setShowConfirmationModal={setShowConfirmationModal}
@@ -99,8 +101,8 @@ const FermentingIngredientsSummary = () => {
       />
       <ModalForm
         fields={modalFieldsProvider(t).fermentingIngredientsModalFields}
-        data={modalFormData}
-        setData={setModalFormData}
+        data={modalData}
+        setData={setModalData}
         types={types}
         show={showModalForm}
         setShow={setShowModalForm}
@@ -108,14 +110,18 @@ const FermentingIngredientsSummary = () => {
         setAction={setModalAction}
         itemName="Fermenting Ingredient"
       />
-      <ModalQuantity
-        fields={modalFieldsProvider(t).quantityModalFields[quantityAction.area]}
-        modalData={modalData}
-        show={showQuantityModal}
-        setShow={setShowQuantityModal}
-        action={quantityAction}
-        isEmpty={true}
-      />
+      
+      <ModalFormBasic
+          fields={modalFieldsProvider(t).quantityModalFields[quantityAction.area]}
+          data={modalQuantityData}
+          setData={setModalQuantityData}
+          show={showQuantityModal}
+          setShow={setShowQuantityModal}
+          action={quantityAction.verb}
+          itemName={`${quantityAction.area == "reserve" ? "reservation" : "order"} for ${modalData.name}`}
+          path={`FermentingIngredient/${quantityAction.area == "reserve" ? "Reservation" : "Order"}`}
+        />
+
       <ModalConfirmation
         id={modalData.id}
         name={modalData.name}

@@ -50,7 +50,7 @@ namespace BreweryMaster.API.Info.Controllers.FermentingIngredient
             if (createdOrder == null)
                 return BadRequest();
 
-            return CreatedAtAction(nameof(_orderService), new { id = createdOrder.Id }, createdOrder);
+            return CreatedAtAction(nameof(GetFermentingIngredientOrderById), new { id = createdOrder.Id }, createdOrder);
         }
 
         [HttpPatch]
