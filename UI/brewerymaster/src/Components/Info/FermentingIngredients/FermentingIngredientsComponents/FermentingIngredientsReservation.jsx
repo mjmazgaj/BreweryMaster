@@ -8,7 +8,8 @@ import DynamicTable from "../../../Shared/TableComponents/DynamicTable";
 import ModalFormBasic from "../../../Shared/ModalComponents/ModalFormBasic";
 
 import modalFieldsProvider from "../../../Shared/ModalComponents/helpers/modalFieldsProvider";
-import { fetchData } from "../../../Shared/api";
+
+import { useFermentingIngredientsReservation } from "./helpers/useFermentingIngredientsReservation";
 
 import { useTranslation } from "react-i18next";
 import ModalConfirmation from "../../../Shared/ModalComponents/ModalConfirmation";
@@ -23,15 +24,7 @@ const FermentingIngredientsReservation = () => {
   
   const [showQuantityModal, setShowQuantityModal] = useState(false);
 
-  const handleDoubleClick = (item) => {
-    setModalData({ ...item });
-    setShowQuantityModal(true);
-  };
-
-
-    useEffect(() => {
-      fetchData("FermentingIngredient/Reservation", setData);
-    }, []);
+  const {handleDoubleClick} = useFermentingIngredientsReservation({setModalData, setShowQuantityModal, setData});
 
   return (
     <div className="Fermenting-Ingredient-Reservation_container">
