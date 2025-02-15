@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../info.css";
 
@@ -6,7 +6,8 @@ import DynamicTable from "../../../Shared/TableComponents/DynamicTable";
 import ModalItemAction from "../../../Shared/ModalComponents/ModalItemAction";
 import { Button } from "react-bootstrap";
 import modalFieldsProvider from "../../../Shared/ModalComponents/helpers/modalFieldsProvider";
-import { fetchData } from "../../../Shared/api";
+
+import { useFermentingIngredientsSummary } from "./helpers/useFermentingIngredientsSummary";
 
 import { useTranslation } from "react-i18next";
 import ModalConfirmation from "../../../Shared/ModalComponents/ModalConfirmation";
@@ -37,56 +38,17 @@ const FermentingIngredientsSummary = () => {
     area: "reserve",
   });
 
-  const handleDoubleClick = (item) => {
-    setItemAction("summary");
-
-    setModalData({
-      id: item.id,
-      typeId: item.typeId, 
-      typeName: item.typeName,
-      name: item.name,
-      percentage: item.percentage,
-      extraction: item.extraction,
-      ebc: item.ebc,
-      info: item.info,
-      units:[]});
-
-    setModalQuantityData({
-      name: item.name,
-      fermentingIngredientUnitId: item.id,
-    });
-    setShowItemAction(true);
-  };
-
-  const clear = () => {
-    setModalData({
-      id: 0,
-      type: "",
-      name: "",
-      percentage: "",
-      extraction: "",
-      ebc: "",
-      quantity: "",
-      total: 13,
-      units:[]
-    });
-  };
-
-
-  const handleAddOnClick = () => {
-    clear();
-    setModalAction("add");
-    setShowModalForm(true);
-  };
-
-  useEffect(() => {
-    fetchData("FermentingIngredient/Summary", setData);
-  }, [modalData]);
-
-  useEffect(() => {
-    fetchData(`entity/Unit`, setUnits);
-    fetchData("FermentingIngredient/Type", setTypes);
-  }, []);
+  const {handleDoubleClick, handleAddOnClick} = useFermentingIngredientsSummary({
+    setData,
+    modalData,
+    setModalData,
+    setUnits,
+    setTypes,
+    setItemAction,
+    setShowItemAction,
+    setModalAction,
+    setShowModalForm,
+    setModalQuantityData,});
 
   return (
     <div className="Fermenting-Ingredient_container">
