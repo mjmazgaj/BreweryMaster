@@ -9,6 +9,7 @@ import modalFieldsProvider from "../../../Shared/ModalComponents/helpers/modalFi
 
 import { useFermentingIngredientsSummary } from "./helpers/useFermentingIngredientsSummary";
 
+import { fetchData } from "../../../Shared/api";
 import { useTranslation } from "react-i18next";
 import ModalConfirmation from "../../../Shared/ModalComponents/ModalConfirmation";
 import ModalFormBasic from "../../../Shared/ModalComponents/ModalFormBasic";
@@ -91,6 +92,7 @@ const FermentingIngredientsSummary = () => {
         setAction={setModalAction}
         itemName="Fermenting Ingredient"
         path="FermentingIngredient"
+        refreshTableData ={()=>fetchData("FermentingIngredient/Summary", setData)}
       />
 
       <ModalFormBasic
@@ -115,6 +117,7 @@ const FermentingIngredientsSummary = () => {
         show={showConfirmationModal}
         setShow={setShowConfirmationModal}
         path="FermentingIngredient"
+        refreshTableData ={()=>fetchData("FermentingIngredient/Summary", setData)}
       />
     </div>
   );

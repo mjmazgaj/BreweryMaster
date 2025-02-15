@@ -12,7 +12,8 @@ export const useModalForm = ({
   setData,
   usedUnits,
   setUsedUnits,
-  path
+  path,
+  refreshTableData
 }) => {
   const { t } = useTranslation();
 
@@ -62,6 +63,7 @@ export const useModalForm = ({
     }
 
     await addData(path, data)
+    refreshTableData();
     setShow(false);
   };
 
@@ -73,6 +75,7 @@ export const useModalForm = ({
     const updateObject = { ...data, units: [...data.units, ...usedUnits]}
 
     await updateData(path, data.id, updateObject)
+    refreshTableData();
 
     setShow(false);
   };
