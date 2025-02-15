@@ -94,8 +94,8 @@ namespace BreweryMaster.API.OrderModule.Controllers
             return Ok();
         }
 
-        [HttpDelete]
-        [Route("{id:int}")]
+        [HttpPatch]
+        [Route("Delete/{id:int}")]
         [ProducesResponseType(typeof(ProspectOrder), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
