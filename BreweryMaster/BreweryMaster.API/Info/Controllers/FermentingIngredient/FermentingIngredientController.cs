@@ -29,9 +29,9 @@ namespace BreweryMaster.API.Info.Controllers
         [Route("Summary")]
         [ProducesResponseType(typeof(IEnumerable<FermentingIngredientSummaryResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<FermentingIngredientSummaryResponse>>> GetFermentingIngredientSummary()
+        public async Task<ActionResult<IEnumerable<FermentingIngredientSummaryResponse>>> GetFermentingIngredientSummary([FromQuery] FermentingIngredientFilterRequest? request)
         {
-            var fermentingIngredientsSummary = await _fermentingIngredientService.GetFermentingIngredientSummary();
+            var fermentingIngredientsSummary = await _fermentingIngredientService.GetFermentingIngredientSummary(request);
             return Ok(fermentingIngredientsSummary);
         }
 

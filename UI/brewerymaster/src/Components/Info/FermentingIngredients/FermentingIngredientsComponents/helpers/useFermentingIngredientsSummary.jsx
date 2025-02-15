@@ -13,7 +13,8 @@ export const useFermentingIngredientsSummary = ({
   setModalAction,
   setShowModalForm,
   setModalQuantityData,
-  setFields
+  setFields,
+  setFilterFields,
 }) => {
   const { t } = useTranslation();
   
@@ -80,12 +81,28 @@ export const useFermentingIngredientsSummary = ({
 
   useEffect(() => {
     refreshTableData();
-  }, [modalData, setData]);
-
-  useEffect(() => {
     fetchData(`entity/Unit`, setUnits);
     fetchData("FermentingIngredient/Type", setTypes);
-  }, [setUnits, setTypes]);
+  }, []);
+
+  useEffect(() =>{
+    setFilterFields({
+      control:modalFieldsProvider(t).fermentingIngredientsFilterFields,
+      dropdown:[
+        {
+          data: types,
+          name: "typeId",
+          label: "Types",
+        },
+        {
+          data: units,
+          name: "unitId",
+          label: "Units",
+        },
+      ],
+    });
+
+  },[types, units]);
 
   return {
     handleDoubleClick,

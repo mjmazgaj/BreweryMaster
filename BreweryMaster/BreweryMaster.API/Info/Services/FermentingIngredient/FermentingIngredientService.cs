@@ -40,10 +40,14 @@ namespace BreweryMaster.API.Info.Services
             return ingredients?.FirstOrDefault(x => x.Id == id);
         }
 
-        public async Task<IEnumerable<FermentingIngredientSummaryResponse>> GetFermentingIngredientSummary()
+        public async Task<IEnumerable<FermentingIngredientSummaryResponse>> GetFermentingIngredientSummary(FermentingIngredientFilterRequest? request)
         {
             return await _context.FermentingIngredientUnits
-                .Where(x => !x.IsRemoved)
+                .Where(x =>
+                    !x.IsRemoved &&
+                    (request == null || request.Name == null || x.FermentingIngredient.Name.Contains(request.Name)) &&
+                    (request == null || request.UnitId == null || x.UnitId == request.UnitId) &&
+                    (request == null || request.TypeId == null || x.FermentingIngredient.TypeId == request.TypeId))
                 .Select(ingredient => new FermentingIngredientSummaryResponse()
                 {
                     Id = ingredient.Id,
@@ -66,7 +70,7 @@ namespace BreweryMaster.API.Info.Services
 
         public async Task<FermentingIngredientSummaryResponse?> GetFermentingIngredientSummaryByIdAsync(int id)
         {
-            var ingredients = await GetFermentingIngredientSummary();
+            var ingredients = await GetFermentingIngredientSummary(null);
 
             return ingredients?.FirstOrDefault(x => x.Id == id);
         }

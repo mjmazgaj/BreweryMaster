@@ -12,6 +12,7 @@ import { useFermentingIngredientsSummary } from "./helpers/useFermentingIngredie
 import { useTranslation } from "react-i18next";
 import ModalConfirmation from "../../../Shared/ModalComponents/ModalConfirmation";
 import ModalFormBasic from "../../../Shared/ModalComponents/ModalFormBasic";
+import FermentingIngredientsFilter from "./FermentingIngredientsFilter";
 
 const FermentingIngredientsSummary = () => {
   const { t } = useTranslation();
@@ -24,6 +25,10 @@ const FermentingIngredientsSummary = () => {
     control: [],
     dropdown: [],
     checkBox: [],
+  });
+  const [filterFields, setFilterFields] = useState({
+    control: [],
+    dropdown: [],
   });
 
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
@@ -51,10 +56,17 @@ const FermentingIngredientsSummary = () => {
       setShowModalForm,
       setModalQuantityData,
       setFields,
+      setFilterFields,
     });
 
   return (
     <div className="Fermenting-Ingredient_container">
+      
+      <FermentingIngredientsFilter
+        fields={filterFields}
+        setTableData={setData}
+        />
+        
       {data && (
         <DynamicTable
           tableKey="fermentingIngredient"
@@ -80,6 +92,7 @@ const FermentingIngredientsSummary = () => {
         action={itemAction}
         setAction={setItemAction}
       />
+
       <ModalFormBasic
         fields={fields}
         data={modalData}

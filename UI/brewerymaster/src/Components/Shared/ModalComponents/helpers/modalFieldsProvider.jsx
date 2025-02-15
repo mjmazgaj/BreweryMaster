@@ -1,4 +1,15 @@
 const modalFieldsProvider = (t) => ({
+  fermentingIngredientsFilterFields:[
+    {
+      id: "name",
+      label: t("name.brewery.name"),
+      type: "text",
+      feedback: `${t("validation.text")} 255`,
+      validation: {
+        maxLength: 255,
+      }
+    },
+  ],
   fermentingIngredientsModalFields: [
     {
       id: "name",
