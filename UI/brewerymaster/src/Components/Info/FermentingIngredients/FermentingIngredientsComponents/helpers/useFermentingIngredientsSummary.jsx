@@ -75,6 +75,21 @@ export const useFermentingIngredientsSummary = ({
   const handleAddOnClick = () => {
     clear();
     setModalAction("add");
+
+    setFields(() =>(
+      {
+        control: modalFieldsProvider(t).fermentingIngredientsModalFields,
+        dropdown: [
+          {
+            data: types,
+            name: "typeId",
+            label: t("name.brewery.type"),
+          }
+        ],
+        checkBox: units.map((x)=>({...x, label: x.name}))
+      }
+    ));
+
     setShowModalForm(true);
   };
 
