@@ -42,6 +42,11 @@ const modalFieldsProvider = (t) => ({
         max: 100,
       }
     },
+    {
+      id: "info",
+      label: t("name.brewery.info"),
+      type: "text",
+    },
   ],
   fermentingIngredientsModalReadOnlyFields: [
     {
@@ -73,6 +78,11 @@ const modalFieldsProvider = (t) => ({
       id: "ebc",
       label: t("name.brewery.ebc"),
       type: "number",
+    },
+    {
+      id: "info",
+      label: t("name.brewery.info"),
+      type: "text",
     },
   ],
   quantityModalFields:{
