@@ -1,3 +1,5 @@
+import {updateWithoutBody} from '../../api'
+
 export const useModalConfirmation = ({id, setShow, confirmationAction, path}) => {
 
   const handleClose = () => {
@@ -8,6 +10,8 @@ export const useModalConfirmation = ({id, setShow, confirmationAction, path}) =>
     setShow(false);
     console.log(path);
     console.log(`delete ${id}`);
+
+    updateWithoutBody(`${path}/Delete`, id)
   };
 
   const confirmationCases = {
