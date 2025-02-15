@@ -114,6 +114,7 @@ const FermentingIngredientsSummary = () => {
         confirmationAction="delete"
         show={showConfirmationModal}
         setShow={setShowConfirmationModal}
+        path="FermentingIngredient"
       />
     </div>
   );

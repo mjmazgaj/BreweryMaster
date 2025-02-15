@@ -81,6 +81,7 @@ const ProspectOrderSummary = () => {
           confirmationAction="delete"
           show={showConfirmationModal}
           setShow={setShowConfirmationModal}
+          path="ProspectOrder"
         />
 
       </Fragment>
