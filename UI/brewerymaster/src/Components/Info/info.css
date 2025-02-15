@@ -1,3 +1,40 @@
 .ingredients-menu__container{
     margin-bottom: 1rem;
 }
+
+.Fermenting-Ingredient_container{
+    margin-top: 1rem;
+}
+
+.filter-form_container{
+    margin: auto;
+    display: flex;
+    gap: 1rem;
+    width: 50%;
+}
+
+.filter-form_dropdown-container{
+    display: flex;
+    flex: 1;
+    gap: 1rem;
+}
+
+.form-dropdown{
+    flex: 1;
+
+    .form-select{
+        margin: 10px 0;
+    }
+}
+
+.filter-form_control-container{
+    flex: 2;
+}
+
+.filter-button_container{
+    margin-bottom: 1rem;
+}
+
+.filter-button_container button{
+    margin: 0 0.5rem;
+}

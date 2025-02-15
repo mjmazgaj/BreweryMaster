@@ -9,7 +9,7 @@ const FermentingIngredientsFilter = ({ fields, setTableData }) => {
   const [filterData, setFilterData] = useState({});
   const [isValid, setIsValid] = useState(true);
 
-  const { handleSelectChange, handleSubmit } = useFermentingIngredientsFilter({
+  const { handleSelectChange, handleSubmit, handleClear } = useFermentingIngredientsFilter({
     setFilterData,
     filterData,
     setTableData,
@@ -17,11 +17,11 @@ const FermentingIngredientsFilter = ({ fields, setTableData }) => {
 
   const renderDropdowns = () =>
     fields?.dropdown && (
-      <div className="modal-form_dropdown-container">
+      <div className="filter-form_dropdown-container">
         {fields.dropdown.map((dropdownObject, index) => (
           <DropDownIndex
             key={index}
-            id={"modal-form_dropdown"}
+            id={"filter-form_dropdown"}
             data={dropdownObject.data}
             selectedOption={filterData[dropdownObject.name]}
             setSelectedOption={(e) =>
@@ -33,19 +33,29 @@ const FermentingIngredientsFilter = ({ fields, setTableData }) => {
         ))}
       </div>
     );
+
   return (
     <Form onSubmit={(event) => handleSubmit(event)}>
-      <FormControls
-        fields={fields.control}
-        data={filterData}
-        setData={setFilterData}
-        isReadOnly={false}
-        setIsValid={setIsValid}
-      />
-      {renderDropdowns()}
-      <Button type="submit" variant="dark" disabled={!isValid}>
-        Jeb
-      </Button>
+      <div className="filter-form_container">
+        <div className="filter-form_control-container">
+          <FormControls
+            fields={fields.control}
+            data={filterData}
+            setData={setFilterData}
+            isReadOnly={false}
+            setIsValid={setIsValid}
+          />
+        </div>
+        {renderDropdowns()}
+      </div>
+      <div className="filter-button_container">
+        <Button type="submit" variant="dark" disabled={!isValid}>
+          Filter
+        </Button>
+        <Button variant="dark" onClick={handleClear}>
+          Clear
+        </Button>
+      </div>
     </Form>
   );
 };

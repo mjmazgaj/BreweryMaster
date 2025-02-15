@@ -26,8 +26,17 @@ export const useFermentingIngredientsFilter = ({
       [name]: parseInt(value),
     }));
   };
+
+
+  const handleClear = () =>{
+    setFilterData({
+      control:[],
+      dropdown:[]
+    });
+  }
   return {
     handleSelectChange,
     handleSubmit,
+    handleClear
   };
 };
