@@ -76,8 +76,10 @@ export const useFermentingIngredientsSummary = ({
     setShowModalForm(true);
   };
 
+  const refreshTableData = () => fetchData("FermentingIngredient/Summary", setData);
+
   useEffect(() => {
-    fetchData("FermentingIngredient/Summary", setData);
+    refreshTableData();
   }, [modalData, setData]);
 
   useEffect(() => {
@@ -88,5 +90,6 @@ export const useFermentingIngredientsSummary = ({
   return {
     handleDoubleClick,
     handleAddOnClick,
+    refreshTableData
   };
 };

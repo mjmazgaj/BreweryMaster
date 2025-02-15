@@ -24,7 +24,7 @@ const FermentingIngredientsReservation = () => {
 
   const [showQuantityModal, setShowQuantityModal] = useState(false);
 
-  const { handleDoubleClick } = useFermentingIngredientsReservation({
+  const { handleDoubleClick, refreshTableData } = useFermentingIngredientsReservation({
     setModalData,
     setShowQuantityModal,
     setData,
@@ -49,6 +49,7 @@ const FermentingIngredientsReservation = () => {
         action="edit"
         itemName={`reservation for ${modalData.name}`}
         path="FermentingIngredient/Reservation"
+        refreshTableData={refreshTableData}
       />
 
       <ModalConfirmation

@@ -12,7 +12,8 @@ export const useModalFormBasic = ({
   action,
   itemName,
   isValid,
-  path
+  path,
+  refreshTableData,
 }) => {
   const { t } = useTranslation();
 
@@ -65,7 +66,9 @@ export const useModalFormBasic = ({
     console.log("add");
     console.log({...data});
 
-    await addData(path, data)
+    await addData(path, data);
+    refreshTableData();
+    
     setShow(false);
   };
 
@@ -80,6 +83,8 @@ export const useModalFormBasic = ({
     console.log("edit");
     console.log({...data});
     await updateData(path, data.id, updateObject)
+    refreshTableData();
+    
     setShow(false);
   };
 

@@ -21,7 +21,7 @@ const FermentingIngredientsOrder = () => {
 
   const [showQuantityModal, setShowQuantityModal] = useState(false);
 
-  const { handleDoubleClick } = useFermentingIngredientsOrder({
+  const { handleDoubleClick, refreshTableData } = useFermentingIngredientsOrder({
     setModalData,
     setData,
     setShowQuantityModal,
@@ -46,6 +46,7 @@ const FermentingIngredientsOrder = () => {
         action="edit"
         itemName={`order for ${modalData.name}`}
         path="FermentingIngredient/Order"
+        refreshTableData={refreshTableData}
       />
 
       <ModalConfirmation

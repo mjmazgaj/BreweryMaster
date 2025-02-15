@@ -17,11 +17,14 @@ export const useFermentingIngredientsOrder = ({
     setShowQuantityModal(true);
   };
 
+  const refreshTableData = () => fetchData("FermentingIngredient/Order", setData);
+
   useEffect(() => {
-    fetchData("FermentingIngredient/Order", setData);
+    refreshTableData();
   }, [setData]);
 
   return {
     handleDoubleClick,
+    refreshTableData,
   };
 };

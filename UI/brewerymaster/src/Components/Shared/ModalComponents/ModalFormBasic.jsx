@@ -16,7 +16,8 @@ const ModalFormBasic = ({
   setShow,
   action,
   itemName,
-  path
+  path,
+  refreshTableData,
 }) => {
   const { t } = useTranslation();
   const [isValid, setIsValid] = useState(true);
@@ -38,7 +39,8 @@ const ModalFormBasic = ({
     action,
     itemName,
     isValid,
-    path
+    path,
+    refreshTableData
   });
 
   const renderDropdowns = () =>

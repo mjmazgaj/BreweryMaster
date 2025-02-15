@@ -33,7 +33,7 @@ const ProspectOrderSummary = () => {
   });
   
 
-  const {handleDoubleClick} = useProspectOrderSummary({data, 
+  const {handleDoubleClick, refreshTableData} = useProspectOrderSummary({data, 
     setData,
     setShowItemAction,
     setModalFormData,
@@ -73,6 +73,7 @@ const ProspectOrderSummary = () => {
           setShow={setShowModalForm}
           action={modalAction}
           itemName="Prospect order"
+          refreshTableData={refreshTableData}
         />
 
         <ModalConfirmation

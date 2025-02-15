@@ -64,13 +64,16 @@ export const useProspectOrderSummary = ({data,
             ]
           });
         };
+
+        const refreshTableData = () => fetchData("ProspectOrder", setData);
         
           useEffect(() => {
-            fetchData("ProspectOrder" ,setData);
+            refreshTableData();
             fetchDetails("ProspectOrder", setDetails);
           }, []);
 
   return {
-    handleDoubleClick
+    handleDoubleClick,
+    refreshTableData,
   };
 };

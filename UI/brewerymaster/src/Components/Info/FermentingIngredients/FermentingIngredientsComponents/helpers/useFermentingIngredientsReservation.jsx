@@ -11,11 +11,15 @@ export const useFermentingIngredientsReservation = ({
     setModalData({ ...item });
     setShowQuantityModal(true);
   };
+
+  const refreshTableData = () => fetchData("FermentingIngredient/Reservation", setData);
+
   useEffect(() => {
-    fetchData("FermentingIngredient/Reservation", setData);
+    refreshTableData();
   }, [setData]);
 
   return {
     handleDoubleClick,
+    refreshTableData,
   };
 };

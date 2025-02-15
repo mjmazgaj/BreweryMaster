@@ -42,7 +42,7 @@ const FermentingIngredientsSummary = () => {
     area: "reserve",
   });
 
-  const { handleDoubleClick, handleAddOnClick } =
+  const { handleDoubleClick, handleAddOnClick, refreshTableData } =
     useFermentingIngredientsSummary({
       setData,
       modalData,
@@ -92,7 +92,7 @@ const FermentingIngredientsSummary = () => {
         setAction={setModalAction}
         itemName="Fermenting Ingredient"
         path="FermentingIngredient"
-        refreshTableData ={()=>fetchData("FermentingIngredient/Summary", setData)}
+        refreshTableData ={refreshTableData}
       />
 
       <ModalFormBasic
@@ -108,6 +108,7 @@ const FermentingIngredientsSummary = () => {
         path={`FermentingIngredient/${
           quantityAction.area === "reserve" ? "Reservation" : "Order"
         }`}
+        refreshTableData ={refreshTableData}
       />
 
       <ModalConfirmation
@@ -117,7 +118,7 @@ const FermentingIngredientsSummary = () => {
         show={showConfirmationModal}
         setShow={setShowConfirmationModal}
         path="FermentingIngredient"
-        refreshTableData ={()=>fetchData("FermentingIngredient/Summary", setData)}
+        refreshTableData ={refreshTableData}
       />
     </div>
   );
