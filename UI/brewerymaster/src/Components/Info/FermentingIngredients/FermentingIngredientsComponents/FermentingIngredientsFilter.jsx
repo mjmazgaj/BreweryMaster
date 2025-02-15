@@ -5,7 +5,9 @@ import { useFermentingIngredientsFilter } from "./helpers/useFermentingIngredien
 import FormControls from "../../../Shared/FormControls";
 import DropDownIndex from "../../../Shared/DropDownIndex";
 
+import { useTranslation } from "react-i18next";
 const FermentingIngredientsFilter = ({ fields, setTableData }) => {
+  const { t } = useTranslation();
   const [filterData, setFilterData] = useState({});
   const [isValid, setIsValid] = useState(true);
 
@@ -50,10 +52,10 @@ const FermentingIngredientsFilter = ({ fields, setTableData }) => {
       </div>
       <div className="filter-button_container">
         <Button type="submit" variant="dark" disabled={!isValid}>
-          Filter
+          {t("button.filter")}
         </Button>
         <Button variant="dark" onClick={handleClear}>
-          Clear
+          {t("button.clear")}
         </Button>
       </div>
     </Form>

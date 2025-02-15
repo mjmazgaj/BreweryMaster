@@ -70,14 +70,14 @@ const FermentingIngredientsSummary = () => {
       {data && (
         <DynamicTable
           tableKey="fermentingIngredient"
-          tableTitle="Fermenting Ingredients"
+          tableTitle={t("name.brewery.fermentingIngredients")}
           dataCategory="brewery"
           data={data}
           handleDoubleClick={handleDoubleClick}
         />
       )}
       <Button variant="dark" onClick={handleAddOnClick}>
-        Add Fermenting Ingredient
+        {t("button.add")}
       </Button>
       <ModalItemAction
         fields={modalFieldsProvider(t).fermentingIngredientsModalReadOnlyFields}
@@ -101,7 +101,7 @@ const FermentingIngredientsSummary = () => {
         setShow={setShowModalForm}
         action={modalAction}
         setAction={setModalAction}
-        itemName="Fermenting Ingredient"
+        itemName={t("name.brewery.fermentingIngredient")}
         path="FermentingIngredient"
         refreshTableData ={refreshTableData}
       />

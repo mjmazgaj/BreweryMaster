@@ -20,6 +20,7 @@ export const useFermentingIngredientsSummary = ({
   
   const [types, setTypes] = useState([]);
   const [units, setUnits] = useState([]);
+
   const handleDoubleClick = (item) => {
     setItemAction("summary");
 
@@ -43,7 +44,7 @@ export const useFermentingIngredientsSummary = ({
           {
             data: types,
             name: "typeId",
-            label: "Types",
+            label: t("name.brewery.type"),
           }
         ],
         checkBox: units.map((x)=>({...x, label: x.name}))
@@ -92,12 +93,12 @@ export const useFermentingIngredientsSummary = ({
         {
           data: types,
           name: "typeId",
-          label: "Types",
+          label: t("name.brewery.type"),
         },
         {
           data: units,
           name: "unitId",
-          label: "Units",
+          label: t("name.brewery.unit"),
         },
       ],
     });

@@ -1,6 +1,8 @@
 import {updateWithoutBody} from '../../api'
 
+import { useTranslation } from "react-i18next";
 export const useModalConfirmation = ({id, setShow, confirmationAction, path, refreshTableData}) => {
+  const { t } = useTranslation();
 
   const handleClose = () => {
     setShow(false);
@@ -15,7 +17,7 @@ export const useModalConfirmation = ({id, setShow, confirmationAction, path, ref
 
   const confirmationCases = {
     delete: {
-      title: "Do you want to delete the following item?",
+      title: t("message.deleteConfirmation"),
       function: handleDelete,
     },
   };

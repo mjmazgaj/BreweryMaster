@@ -5,7 +5,9 @@ import "../info.css";
 
 import { Button, ButtonGroup } from "react-bootstrap";
 
+import { useTranslation } from "react-i18next";
 const IngredientsMenu = ({ mode, setMode }) => {
+  const { t } = useTranslation();
   const handleOnClick = (a) => {
     setMode(a);
   };
@@ -17,19 +19,19 @@ const IngredientsMenu = ({ mode, setMode }) => {
           onClick={() => handleOnClick("summary")}
           variant={mode === "summary" ? "dark" : "secondary"}
         >
-          Summary
+          {t("button.summary")}
         </Button>
         <Button
           onClick={() => handleOnClick("order")}
           variant={mode === "order" ? "dark" : "secondary"}
         >
-          Orders
+          {t("button.orders")}
         </Button>
         <Button
           onClick={() => handleOnClick("reservation")}
           variant={mode === "reservation" ? "dark" : "secondary"}
         >
-          Reservations
+          {t("button.reservations")}
         </Button>
       </ButtonGroup>
     </div>

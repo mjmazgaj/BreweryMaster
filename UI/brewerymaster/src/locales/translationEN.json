@@ -7,7 +7,12 @@
         "next": "Next",
         "back": "Back",
         "saveChanges": "Save Changes",
-        "close": "Close"
+        "close": "Close",
+        "filter": "Filter",
+        "summary": "Summary",
+        "orders": "Orders",
+        "reservations": "Reservations",
+        "clear": "Clear"
     },
     "name": {
         "general":{
@@ -90,6 +95,7 @@
             "preBoilingDensity": "Pre-boiling density",
             "fermentationLosses": "Fermentation losses",
             "fermentingIngredients": "Fermenting ingredients",
+            "fermentingIngredient": "Fermenting ingredient",
             "hops": "Hops",
             "yeast": "Yeast",
             "extras": "Extras",
@@ -109,7 +115,8 @@
         }
     },
     "message": {
-        "invalidinput": "Invalid input"
+        "invalidinput": "Invalid input",
+        "deleteConfirmation":"Do you want to delete the following item?"
     },
     "validation": {
         "text": "Text should have less letters then:",

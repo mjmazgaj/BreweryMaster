@@ -7,7 +7,12 @@
         "next": "Dalej",
         "back": "Wstecz",
         "saveChanges": "Zapisz zmiany",
-        "close": "Zamknij"
+        "close": "Zamknij",
+        "filter": "Filtruj",
+        "summary": "Podsumowanie",
+        "orders": "Zamówienia",
+        "reservations": "Rezerwacje",
+        "clear": "Wyczyść"
     },
     "name": {
         "general":{
@@ -105,6 +110,7 @@
         }
     },
     "message": {
+        "deleteConfirmation":"Czy na pewno chcesz usunąć ten element?",
         "invalidinput": "Nieprawidłowe dane wejściowe"
     },
     "validation": {
