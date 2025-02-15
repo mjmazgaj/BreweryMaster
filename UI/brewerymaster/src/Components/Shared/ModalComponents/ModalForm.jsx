@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 
 import { useModalForm } from "./helpers/useModalForm";
 import FormControls from "../FormControls";
 
-import { fetchData } from "../api";
 import { useTranslation } from "react-i18next";
 import DropDownIndex from "../DropDownIndex";
 
@@ -23,37 +22,16 @@ const ModalForm = ({
   const [isValid, setIsValid] = useState(true);
   const [usedUnits, setUsedUnits] = useState([]);
 
-  const { handleClose, actionObject } = useModalForm({
+  const { handleClose, actionObject, handleCheckBox, handleSelectChange } = useModalForm({
     data,
+    show,
     setShow,
     action,
     itemName,
     isValid,
+    setData,
+    setUsedUnits
   });
-
-  const handleCheckBox = (unitId, isChecked) => {
-    setData((prevData) => ({
-        ...prevData,
-        units: isChecked ? [...prevData.units, unitId] : 
-          prevData.units.filter(x=>x !== unitId)
-      }))
-  };
-
-  const handleSelectChange = (e) => {
-    const { value } = e.target;
-    setData((prevData) => ({
-      ...prevData,
-      typeId: parseInt(value),
-    }));
-  };
-
-  useEffect(() => {
-    if(data?.id && show === true)
-      fetchData(`FermentingIngredient/Units/${data.id}`, setUsedUnits);
-
-    if(show === false)
-      setUsedUnits([]);
-  }, [show]);
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -98,7 +76,7 @@ const ModalForm = ({
         </Modal.Body>
         <Modal.Footer>
           <Button type="submit" variant="dark" disabled={!isValid}>
-            {action == "add" ? t("button.add") : t("button.saveChanges")}
+            {action === "add" ? t("button.add") : t("button.saveChanges")}
           </Button>
           <Button variant="dark" onClick={handleClose}>
             {t("button.close")}

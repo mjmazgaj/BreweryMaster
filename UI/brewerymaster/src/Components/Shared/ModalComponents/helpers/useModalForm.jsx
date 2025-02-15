@@ -1,12 +1,17 @@
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { fetchData } from "../../api";
 
 export const useModalForm = ({
   data,
+  show,
   setShow,
   action,
   itemName,
   units,
-  isValid
+  isValid,
+  setData,
+  setUsedUnits
 }) => {
   const { t } = useTranslation();
 
@@ -25,6 +30,31 @@ export const useModalForm = ({
 
     return true;
   }
+
+
+  const handleCheckBox = (unitId, isChecked) => {
+    setData((prevData) => ({
+        ...prevData,
+        units: isChecked ? [...prevData.units, unitId] : 
+          prevData.units.filter(x=>x !== unitId)
+      }))
+  };
+
+  const handleSelectChange = (e) => {
+    const { value } = e.target;
+    setData((prevData) => ({
+      ...prevData,
+      typeId: parseInt(value),
+    }));
+  };
+
+  useEffect(() => {
+    if(data?.id && show === true)
+      fetchData(`FermentingIngredient/Units/${data.id}`, setUsedUnits);
+
+    if(show === false)
+      setUsedUnits([]);
+  }, [show, setUsedUnits]);
 
   const handleAdd = (event, data) => {
     if (!handleFormSubmit(event)) {
@@ -68,5 +98,7 @@ export const useModalForm = ({
   return {
     handleClose,
     actionObject,
+    handleCheckBox,
+    handleSelectChange
   };
 };
