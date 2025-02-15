@@ -3,4 +3,16 @@ const removeFields = (obj, fields) =>
     Object.entries(obj).filter(([key]) => !fields.includes(key))
   );
 
-export { removeFields };
+const createPath = (basePath, query) => {
+  let path = basePath;
+
+  if (query) path += "?";
+
+  Object.entries(query).forEach(([key, value]) => {
+    path += `${key}=${value}&`;
+  });
+
+  return path;
+};
+
+export { removeFields, createPath };

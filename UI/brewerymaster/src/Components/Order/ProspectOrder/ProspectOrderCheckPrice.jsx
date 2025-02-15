@@ -5,17 +5,24 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'react-toastify/dist/ReactToastify.css';
 import '../order.css';
 
-import { checkPrice } from '../api';
+import { fetchData } from "../../Shared/api";
+import { createPath } from "../../Shared/helpers/useObjectHelper";
 
 const ProspectOrderCheckPrice = ({ prospectOrderData }) => {  
   const [estimatedPrice, setEstimatedPrice] = useState("");
 
   const handleCheckPrice = () => {
-    checkPrice(
-      prospectOrderData.selectedBeer,
-      prospectOrderData.selectedContainer,
-      prospectOrderData.capacity
-    ).then((result) => setEstimatedPrice(result));
+
+    let query = {
+      "BeerType" : prospectOrderData.selectedBeer,
+      "ContainerType" : prospectOrderData.selectedContainer,
+      "Capacity" : prospectOrderData.capacity,
+    };
+
+    const path = createPath("ProspectOrder/Price", query);
+
+    console.log(path);
+    fetchData(path, setEstimatedPrice);
   };
 
   return (
