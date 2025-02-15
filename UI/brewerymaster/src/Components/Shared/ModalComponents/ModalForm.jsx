@@ -22,16 +22,17 @@ const ModalForm = ({
   const [isValid, setIsValid] = useState(true);
   const [usedUnits, setUsedUnits] = useState([]);
 
-  const { handleClose, actionObject, handleCheckBox, handleSelectChange } = useModalForm({
-    data,
-    show,
-    setShow,
-    action,
-    itemName,
-    isValid,
-    setData,
-    setUsedUnits
-  });
+  const { handleClose, actionObject, handleCheckBox, handleSelectChange } =
+    useModalForm({
+      data,
+      show,
+      setShow,
+      action,
+      itemName,
+      isValid,
+      setData,
+      setUsedUnits,
+    });
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -66,7 +67,9 @@ const ModalForm = ({
                   id={`${unit.id}`}
                   key={`${unit.id}`}
                   label={unit.name}
-                  checked={usedUnits.includes(unit.id) || data.units?.includes(unit.id)}
+                  checked={
+                    usedUnits.includes(unit.id) || data.units?.includes(unit.id)
+                  }
                   disabled={usedUnits.includes(unit.id)}
                   onChange={(e) => handleCheckBox(unit.id, e.target.checked)}
                 />

@@ -11,7 +11,7 @@ export const useModalForm = ({
   units,
   isValid,
   setData,
-  setUsedUnits
+  setUsedUnits,
 }) => {
   const { t } = useTranslation();
 
@@ -19,7 +19,7 @@ export const useModalForm = ({
     setShow(false);
   };
 
-  const handleFormSubmit = (event) =>{
+  const handleFormSubmit = (event) => {
     const form = event.currentTarget;
     event.preventDefault();
 
@@ -29,15 +29,15 @@ export const useModalForm = ({
     }
 
     return true;
-  }
-
+  };
 
   const handleCheckBox = (unitId, isChecked) => {
     setData((prevData) => ({
-        ...prevData,
-        units: isChecked ? [...prevData.units, unitId] : 
-          prevData.units.filter(x=>x !== unitId)
-      }))
+      ...prevData,
+      units: isChecked
+        ? [...prevData.units, unitId]
+        : prevData.units.filter((x) => x !== unitId),
+    }));
   };
 
   const handleSelectChange = (e) => {
@@ -49,11 +49,10 @@ export const useModalForm = ({
   };
 
   useEffect(() => {
-    if(data?.id && show === true)
+    if (data?.id && show === true)
       fetchData(`FermentingIngredient/Units/${data.id}`, setUsedUnits);
 
-    if(show === false)
-      setUsedUnits([]);
+    if (show === false) setUsedUnits([]);
   }, [show, setUsedUnits]);
 
   const handleAdd = (event, data) => {
@@ -62,7 +61,7 @@ export const useModalForm = ({
     }
 
     console.log("add");
-    console.log({...data});
+    console.log({ ...data });
     setShow(false);
   };
 
@@ -74,9 +73,9 @@ export const useModalForm = ({
       ...x,
       isUsed: x.isUsed ?? false,
     }));
-    
+
     console.log("edit");
-    console.log({...data, units: {...updatedUnits}});
+    console.log({ ...data, units: { ...updatedUnits } });
     setShow(false);
   };
 
@@ -99,6 +98,6 @@ export const useModalForm = ({
     handleClose,
     actionObject,
     handleCheckBox,
-    handleSelectChange
+    handleSelectChange,
   };
 };
