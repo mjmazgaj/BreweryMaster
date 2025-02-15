@@ -90,6 +90,7 @@ const FermentingIngredientsSummary = () => {
         action={modalAction}
         setAction={setModalAction}
         itemName="Fermenting Ingredient"
+        path="FermentingIngredient"
       />
 
       <ModalFormBasic

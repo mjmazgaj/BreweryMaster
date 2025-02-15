@@ -17,6 +17,7 @@ const ModalForm = ({
   setShow,
   action,
   itemName,
+  path
 }) => {
   const { t } = useTranslation();
   const [isValid, setIsValid] = useState(true);
@@ -33,6 +34,7 @@ const ModalForm = ({
       setData,
       usedUnits,
       setUsedUnits,
+      path
     });
 
   return (

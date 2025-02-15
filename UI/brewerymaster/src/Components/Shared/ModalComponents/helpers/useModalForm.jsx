@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { fetchData } from "../../api";
+import { fetchData, addData, updateData } from "../../api";
 
 export const useModalForm = ({
   data,
@@ -12,6 +12,7 @@ export const useModalForm = ({
   setData,
   usedUnits,
   setUsedUnits,
+  path
 }) => {
   const { t } = useTranslation();
 
@@ -60,8 +61,7 @@ export const useModalForm = ({
       return;
     }
 
-    console.log("add");
-    console.log({ ...data });
+    addData(path, data)
     setShow(false);
   };
 
@@ -69,8 +69,11 @@ export const useModalForm = ({
     if (!handleFormSubmit(event)) {
       return;
     }
-    console.log("edit");
-    console.log({ ...data, units: [...data.units, ...usedUnits]});
+
+    const updateObject = { ...data, units: [...data.units, ...usedUnits]}
+
+    updateData(path, data.id, updateObject)
+
     setShow(false);
   };
 
