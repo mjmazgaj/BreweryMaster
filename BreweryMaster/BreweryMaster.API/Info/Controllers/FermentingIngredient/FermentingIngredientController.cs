@@ -105,14 +105,14 @@ namespace BreweryMaster.API.Info.Controllers
             return Ok();
         }
 
-        [HttpDelete]
-        [Route("{id:int}")]
+        [HttpPatch]
+        [Route("Delete/{id:int}")]
         [ProducesResponseType(typeof(FermentingIngredientResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> DeleteFermentingIngredientById([MinIntValidation] int id)
+        public async Task<ActionResult> DeleteFermentingIngredientUnitById([MinIntValidation] int id)
         {
-            if (!await _fermentingIngredientService.DeleteFermentingIngredientByIdAsync(id))
+            if (!await _fermentingIngredientService.DeleteFermentingIngredientUnitById(id))
                 return NotFound();
 
             return Ok();

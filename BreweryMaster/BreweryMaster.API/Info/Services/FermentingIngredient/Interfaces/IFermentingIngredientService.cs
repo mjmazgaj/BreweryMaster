@@ -13,6 +13,6 @@ namespace BreweryMaster.API.Info.Services
         Task<IEnumerable<FermentingIngredientTypeEntityResponse>> GetFermentingIngredientTypesAsync();
         Task<FermentingIngredient> CreateFermentingIngredientAsync(FermentingIngredientRequest request);
         Task<bool> UpdateFermentingIngredientAsync(int id, FermentingIngredientUpdateRequest request);
-        Task<bool> DeleteFermentingIngredientByIdAsync(int id);
+        Task<bool> DeleteFermentingIngredientUnitById(int id);
     }
 }

@@ -196,9 +196,9 @@ namespace BreweryMaster.API.Info.Services
             return true;
         }
 
-        public async Task<bool> DeleteFermentingIngredientByIdAsync(int id)
+        public async Task<bool> DeleteFermentingIngredientUnitById(int id)
         {
-            var ingredient = await _context.FermentingIngredients.FirstOrDefaultAsync(x => x.Id == id);
+            var ingredient = await _context.FermentingIngredientUnits.FirstOrDefaultAsync(x => x.Id == id);
 
             if (ingredient == null || ingredient.IsRemoved)
             {
