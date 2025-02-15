@@ -154,22 +154,23 @@ namespace BreweryMaster.API.Info.Services
 
         public async Task<bool> UpdateFermentingIngredientAsync(int id, FermentingIngredientUpdateRequest request)
         {
-            if (id != request.Id)
+            var ingredientToUpdate = await _context.FermentingIngredientUnits
+                                                .Include(x=>x.FermentingIngredient)
+                                                .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (ingredientToUpdate is null)
                 return false;
 
-            _context.Entry(request).State = EntityState.Modified;
+            ingredientToUpdate.FermentingIngredient.Name = request.Name;
+            ingredientToUpdate.FermentingIngredient.TypeId = request.TypeId;
+            ingredientToUpdate.FermentingIngredient.Percentage = request.Percentage;
+            ingredientToUpdate.FermentingIngredient.Extraction = request.Extraction;
+            ingredientToUpdate.FermentingIngredient.EBC = request.EBC;
+            ingredientToUpdate.FermentingIngredient.Info = request.Info;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!FermentingIngredientExists(id))
-                    return false;
-                else
-                    throw;
-            }
+            _context.FermentingIngredientUnits.Update(ingredientToUpdate);
+
+            await _context.SaveChangesAsync();
 
             return true;
         }
@@ -194,11 +195,6 @@ namespace BreweryMaster.API.Info.Services
             {
                 throw;
             }
-        }
-
-        private bool FermentingIngredientExists(int id)
-        {
-            return _context.FermentingIngredients.Any(x => x.Id == id && !x.IsRemoved);
         }
     }
 }

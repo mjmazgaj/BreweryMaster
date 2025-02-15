@@ -92,7 +92,7 @@ namespace BreweryMaster.API.Info.Controllers
             return CreatedAtAction(nameof(GetFermentingIngredientById), new { id = createdFermentingIngredient.Id }, createdFermentingIngredient);
         }
 
-        [HttpPut]
+        [HttpPatch]
         [Route("{id:int}")]
         [ProducesResponseType(typeof(FermentingIngredientResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
