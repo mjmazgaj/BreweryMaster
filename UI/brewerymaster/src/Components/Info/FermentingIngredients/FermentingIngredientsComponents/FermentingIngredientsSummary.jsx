@@ -100,10 +100,10 @@ const FermentingIngredientsSummary = () => {
         setShow={setShowQuantityModal}
         action={quantityAction.verb}
         itemName={`${
-          quantityAction.area == "reserve" ? "reservation" : "order"
+          quantityAction.area === "reserve" ? "reservation" : "order"
         } for ${modalData.name}`}
         path={`FermentingIngredient/${
-          quantityAction.area == "reserve" ? "Reservation" : "Order"
+          quantityAction.area === "reserve" ? "Reservation" : "Order"
         }`}
       />
 

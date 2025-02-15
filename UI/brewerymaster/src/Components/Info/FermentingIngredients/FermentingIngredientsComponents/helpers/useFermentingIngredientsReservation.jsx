@@ -13,7 +13,7 @@ export const useFermentingIngredientsReservation = ({
   };
   useEffect(() => {
     fetchData("FermentingIngredient/Reservation", setData);
-  }, []);
+  }, [setData]);
 
   return {
     handleDoubleClick,

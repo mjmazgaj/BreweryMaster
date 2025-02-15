@@ -19,7 +19,7 @@ export const useFermentingIngredientsOrder = ({
 
   useEffect(() => {
     fetchData("FermentingIngredient/Order", setData);
-  }, []);
+  }, [setData]);
 
   return {
     handleDoubleClick,

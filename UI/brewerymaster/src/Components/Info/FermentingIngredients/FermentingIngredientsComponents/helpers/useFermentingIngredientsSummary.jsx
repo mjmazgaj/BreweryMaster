@@ -58,12 +58,12 @@ export const useFermentingIngredientsSummary = ({
 
   useEffect(() => {
     fetchData("FermentingIngredient/Summary", setData);
-  }, [modalData]);
+  }, [modalData, setData]);
 
   useEffect(() => {
     fetchData(`entity/Unit`, setUnits);
     fetchData("FermentingIngredient/Type", setTypes);
-  }, []);
+  }, [setUnits, setTypes]);
 
   return {
     handleDoubleClick,
