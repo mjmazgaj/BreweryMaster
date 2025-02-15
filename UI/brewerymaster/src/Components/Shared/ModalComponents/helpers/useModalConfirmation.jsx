@@ -6,12 +6,12 @@ export const useModalConfirmation = ({id, setShow, confirmationAction, path}) =>
     setShow(false);
   }
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     setShow(false);
     console.log(path);
     console.log(`delete ${id}`);
 
-    updateWithoutBody(`${path}/Delete`, id)
+    await updateWithoutBody(`${path}/Delete`, id)
   };
 
   const confirmationCases = {

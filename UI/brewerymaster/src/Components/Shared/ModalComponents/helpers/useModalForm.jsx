@@ -56,23 +56,23 @@ export const useModalForm = ({
     if (show === false) setUsedUnits([]);
   }, [show, setUsedUnits]);
 
-  const handleAdd = (event, data) => {
+  const handleAdd = async (event, data) => {
     if (!handleFormSubmit(event)) {
       return;
     }
 
-    addData(path, data)
+    await addData(path, data)
     setShow(false);
   };
 
-  const handleEdit = (event, data) => {
+  const handleEdit = async (event, data) => {
     if (!handleFormSubmit(event)) {
       return;
     }
 
     const updateObject = { ...data, units: [...data.units, ...usedUnits]}
 
-    updateData(path, data.id, updateObject)
+    await updateData(path, data.id, updateObject)
 
     setShow(false);
   };

@@ -27,22 +27,32 @@ export const fetchDetails = (path, setDetails) => {
     .catch((error) => console.log(error));
 };
 
-export const addData = (path, data) => {
-  return axios.post(`${apiurl}/${path}`, data)
-    .then((result) => result.data)
-    .catch((error) => console.log(error));
+export const addData = async (path, data) => {
+  try {
+    const result = await axios.post(`${apiurl}/${path}`, data);
+    return result.data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-export const updateData = (path, id, data) => {
-  return axios.patch(`${apiurl}/${path}/${id}`, data)
-    .then((result) => result.data)
-    .catch((error) => console.log(error));
+export const updateData = async (path, id, data) => {
+  try {
+    const result = await axios.patch(`${apiurl}/${path}/${id}`, data);
+    return result.data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-export const updateWithoutBody = (path, id) => {
-  return axios.patch(`${apiurl}/${path}/${id}`)
-    .then((result) => result.data)
-    .catch((error) => console.log(error));
+
+export const updateWithoutBody = async (path, id) => {
+  try {
+    const result = await axios.patch(`${apiurl}/${path}/${id}`);
+    return result.data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const deleteData = (path, id) => {
