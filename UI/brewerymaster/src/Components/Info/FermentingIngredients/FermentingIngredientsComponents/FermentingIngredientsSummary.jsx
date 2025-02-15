@@ -22,13 +22,16 @@ const FermentingIngredientsSummary = () => {
   const [modalQuantityData, setModalQuantityData] = useState([]);
 
   const [data, setData] = useState([]);
-  const [types, setTypes] = useState([]);
+  const [fields, setFields] = useState({
+    control: [],
+    dropdown: [],
+    checkBox: [],
+  });
 
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
   const [showItemAction, setShowItemAction] = useState(false);
   const [itemAction, setItemAction] = useState("summary");
-  const [units, setUnits] = useState([]);
 
   const [showModalForm, setShowModalForm] = useState(false);
   const [modalAction, setModalAction] = useState("add");
@@ -44,13 +47,12 @@ const FermentingIngredientsSummary = () => {
       setData,
       modalData,
       setModalData,
-      setUnits,
-      setTypes,
       setItemAction,
       setShowItemAction,
       setModalAction,
       setShowModalForm,
       setModalQuantityData,
+      setFields,
     });
 
   return (
@@ -80,12 +82,10 @@ const FermentingIngredientsSummary = () => {
         action={itemAction}
         setAction={setItemAction}
       />
-      <ModalForm
-        fields={modalFieldsProvider(t).fermentingIngredientsModalFields}
+      <ModalFormBasic
+        fields={fields}
         data={modalData}
         setData={setModalData}
-        units={units}
-        types={types}
         show={showModalForm}
         setShow={setShowModalForm}
         action={modalAction}

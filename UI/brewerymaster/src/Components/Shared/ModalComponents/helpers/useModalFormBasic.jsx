@@ -1,9 +1,13 @@
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { addData, updateData } from "../../api";
+import { addData, updateData, fetchData } from "../../api";
 
 export const useModalFormBasic = ({
   data,
   setData,
+  usedUnits,
+  setUsedUnits,
+  show,
   setShow,
   action,
   itemName,
@@ -16,11 +20,13 @@ export const useModalFormBasic = ({
     setShow(false);
   };
   
-  const handleCheckBox = (item) => {
-    setData((prevData) =>({
+  const handleCheckBox = (unitId, isChecked) => {
+    setData((prevData) => ({
       ...prevData,
-      [item.name]: !prevData[item.name]
-    }))
+      units: isChecked
+        ? [...prevData.units, unitId]
+        : prevData.units.filter((x) => x !== unitId),
+    }));
   };
 
   const handleFormSubmit = (event) =>{
@@ -51,7 +57,7 @@ export const useModalFormBasic = ({
   };
   
 
-  const handleAdd = (event, data) => {
+  const handleAdd = async (event, data) => {
     if (!handleFormSubmit(event)) {
       return;
     }
@@ -59,18 +65,21 @@ export const useModalFormBasic = ({
     console.log("add");
     console.log({...data});
 
-    addData(path, data)
+    await addData(path, data)
     setShow(false);
   };
 
-  const handleEdit = (event, data) => {
+  const handleEdit = async (event, data) => {
     if (!handleFormSubmit(event)) {
       return;
     }
+
+    
+    const updateObject = { ...data, units: [...data.units, ...usedUnits]}
     
     console.log("edit");
     console.log({...data});
-    updateData(path, data.id, data)
+    await updateData(path, data.id, updateObject)
     setShow(false);
   };
 
@@ -88,6 +97,14 @@ export const useModalFormBasic = ({
   };
 
   let actionObject = actionCases[action];
+
+
+  useEffect(() => {
+    if (data?.id && show === true)
+      fetchData(`FermentingIngredient/Units/${data.id}`, setUsedUnits);
+
+    if (show === false) setUsedUnits([]);
+  }, [show, setUsedUnits]);
 
   return {
     handleClose,

@@ -1,19 +1,24 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import { fetchData } from "../../../../Shared/api";
+import { useTranslation } from "react-i18next";
 
+import modalFieldsProvider from "../../../../Shared/ModalComponents/helpers/modalFieldsProvider";
 export const useFermentingIngredientsSummary = ({
   setData,
   modalData,
   setModalData,
-  setUnits,
-  setTypes,
   setItemAction,
   setShowItemAction,
   setModalAction,
   setShowModalForm,
   setModalQuantityData,
+  setFields
 }) => {
+  const { t } = useTranslation();
+  
+  const [types, setTypes] = useState([]);
+  const [units, setUnits] = useState([]);
   const handleDoubleClick = (item) => {
     setItemAction("summary");
 
@@ -29,6 +34,20 @@ export const useFermentingIngredientsSummary = ({
       unit: item.unit,
       units: [],
     });
+
+    setFields(() =>(
+      {
+        control: modalFieldsProvider(t).fermentingIngredientsModalFields,
+        dropdown: [
+          {
+            data: types,
+            name: "typeId",
+            label: "Types",
+          }
+        ],
+        checkBox: units.map((x)=>({...x, label: x.name}))
+      }
+    ));
 
     setModalQuantityData({
       name: item.name,

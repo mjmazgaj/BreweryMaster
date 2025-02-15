@@ -20,6 +20,7 @@ const ModalFormBasic = ({
 }) => {
   const { t } = useTranslation();
   const [isValid, setIsValid] = useState(true);
+    const [usedUnits, setUsedUnits] = useState([]);
 
   const {
     handleClose,
@@ -30,6 +31,9 @@ const ModalFormBasic = ({
   } = useModalFormBasic({
     data,
     setData,
+    usedUnits,
+    setUsedUnits,
+    show,
     setShow,
     action,
     itemName,
@@ -67,8 +71,11 @@ const ModalFormBasic = ({
             key={checkBoxObject.id}
             id={checkBoxObject.name}
             label={checkBoxObject.label}
-            checked={data[checkBoxObject.name]}
-            onChange={() => handleCheckBox(checkBoxObject)}
+            checked={
+              usedUnits.includes(checkBoxObject.id) || data.units?.includes(checkBoxObject.id)
+            }
+            disabled={usedUnits.includes(checkBoxObject.id)}
+            onChange={(e) => handleCheckBox(checkBoxObject.id, e.target.checked)}
           />
         ))}
       </div>
