@@ -26,6 +26,7 @@ export const useFermentingIngredientsSummary = ({
       extraction: item.extraction,
       ebc: item.ebc,
       info: item.info,
+      unit: item.unit,
       units: [],
     });
 
