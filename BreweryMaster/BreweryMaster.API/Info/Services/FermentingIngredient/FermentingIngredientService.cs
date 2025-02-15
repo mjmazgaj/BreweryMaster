@@ -155,7 +155,7 @@ namespace BreweryMaster.API.Info.Services
         public async Task<bool> UpdateFermentingIngredientAsync(int id, FermentingIngredientUpdateRequest request)
         {
             var ingredientToUpdate = await _context.FermentingIngredientUnits
-                                                .Include(x=>x.FermentingIngredient)
+                                                .Include(x => x.FermentingIngredient)
                                                 .FirstOrDefaultAsync(x => x.Id == id);
 
             if (ingredientToUpdate is null)
@@ -171,6 +171,27 @@ namespace BreweryMaster.API.Info.Services
             _context.FermentingIngredientUnits.Update(ingredientToUpdate);
 
             await _context.SaveChangesAsync();
+
+            var fermentingIngredient = await _context.FermentingIngredientUnits
+                                           .Include(x => x.FermentingIngredient)
+                                           .ThenInclude(x => x.FermentingIngredientUnits)
+                                           .SingleOrDefaultAsync(x => x.Id == id);
+            var existingUnits = fermentingIngredient?.FermentingIngredient
+                                       .FermentingIngredientUnits
+                                       .Select(x => x.UnitId);
+
+            if (existingUnits is not null)
+            {
+                var fermentingIngredientUnitsToCreate = request.Units.Where(x => !existingUnits.Any(y => y == x))
+                                            .Select(x => new FermentingIngredientUnit()
+                                            {
+                                                FermentingIngredientId = ingredientToUpdate.FermentingIngredientId,
+                                                UnitId = x,
+                                            });
+
+                _context.FermentingIngredientUnits.AddRange(fermentingIngredientUnitsToCreate);
+                await _context.SaveChangesAsync();
+            }
 
             return true;
         }
