@@ -177,13 +177,19 @@ namespace BreweryMaster.API.Info.Services
                                            .Include(x => x.FermentingIngredient)
                                            .ThenInclude(x => x.FermentingIngredientUnits)
                                            .SingleOrDefaultAsync(x => x.Id == id);
-            var existingUnits = fermentingIngredient?.FermentingIngredient
+            var allSavedUnits = fermentingIngredient?.FermentingIngredient
                                        .FermentingIngredientUnits
                                        .Select(x => x.UnitId);
 
-            if (existingUnits is not null)
+            var unitsToRestore = fermentingIngredient?.FermentingIngredient
+                                       .FermentingIngredientUnits
+                                       .Where(x => x.IsRemoved)
+                                       .Select(x => x.UnitId)
+                                       .Where(x => request.Units.Contains(x));
+
+            if (allSavedUnits is not null)
             {
-                var fermentingIngredientUnitsToCreate = request.Units.Where(x => !existingUnits.Any(y => y == x))
+                var fermentingIngredientUnitsToCreate = request.Units.Where(x => !allSavedUnits.Any(y => y == x))
                                             .Select(x => new FermentingIngredientUnit()
                                             {
                                                 FermentingIngredientId = ingredientToUpdate.FermentingIngredientId,
@@ -192,6 +198,21 @@ namespace BreweryMaster.API.Info.Services
 
                 _context.FermentingIngredientUnits.AddRange(fermentingIngredientUnitsToCreate);
                 await _context.SaveChangesAsync();
+            }
+
+            if (unitsToRestore is not null)
+            {
+                foreach (int unit in unitsToRestore)
+                {
+                    var ingredientUnit = await _context.FermentingIngredientUnits
+                                            .FirstOrDefaultAsync(x => x.FermentingIngredientId == ingredientToUpdate.FermentingIngredientId && x.UnitId == unit);
+                    if (ingredientUnit is not null)
+                    {
+                        ingredientUnit.IsRemoved = false;
+                        _context.FermentingIngredientUnits.Update(ingredientUnit);
+                        await _context.SaveChangesAsync();
+                    }
+                }
             }
 
             return true;
