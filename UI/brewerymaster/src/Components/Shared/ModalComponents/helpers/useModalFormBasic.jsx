@@ -63,9 +63,6 @@ export const useModalFormBasic = ({
       return;
     }
 
-    console.log("add");
-    console.log({...data});
-
     await addData(path, data);
     refreshTableData();
     
@@ -80,8 +77,6 @@ export const useModalFormBasic = ({
     
     const updateObject = { ...data, units: [...data.units, ...usedUnits]}
     
-    console.log("edit");
-    console.log({...data});
     await updateData(path, data.id, updateObject)
     refreshTableData();
     

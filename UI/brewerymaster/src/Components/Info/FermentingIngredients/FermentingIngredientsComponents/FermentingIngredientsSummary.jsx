@@ -9,11 +9,9 @@ import modalFieldsProvider from "../../../Shared/ModalComponents/helpers/modalFi
 
 import { useFermentingIngredientsSummary } from "./helpers/useFermentingIngredientsSummary";
 
-import { fetchData } from "../../../Shared/api";
 import { useTranslation } from "react-i18next";
 import ModalConfirmation from "../../../Shared/ModalComponents/ModalConfirmation";
 import ModalFormBasic from "../../../Shared/ModalComponents/ModalFormBasic";
-import ModalForm from "../../../Shared/ModalComponents/ModalForm";
 
 const FermentingIngredientsSummary = () => {
   const { t } = useTranslation();

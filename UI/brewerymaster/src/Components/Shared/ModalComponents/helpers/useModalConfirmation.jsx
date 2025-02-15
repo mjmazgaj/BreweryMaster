@@ -8,8 +8,6 @@ export const useModalConfirmation = ({id, setShow, confirmationAction, path, ref
 
   const handleDelete = async () => {
     setShow(false);
-    console.log(path);
-    console.log(`delete ${id}`);
 
     await updateWithoutBody(`${path}/Delete`, id)
     refreshTableData();
@@ -22,7 +20,6 @@ export const useModalConfirmation = ({id, setShow, confirmationAction, path, ref
     },
   };
 
-  
   let confirmationObject = confirmationCases[confirmationAction];
 
   return {
