@@ -4,7 +4,7 @@ import { Modal, Button, Form } from "react-bootstrap";
 import { useModalItemAction } from "./helpers/useModalItemAction";
 import FormControlsReadOnly from "../FormControlsReadOnly";
 
-import { fetchEntity } from "../api";
+import { fetchData } from "../api";
 
 const ModalItemAction = ({
   fields,
@@ -62,7 +62,7 @@ const ModalItemAction = ({
   };
 
   useEffect(() => {
-    fetchEntity("Unit", setUnits);
+    fetchData("Entity/Unit", setUnits);
   }, []);
 
   return (

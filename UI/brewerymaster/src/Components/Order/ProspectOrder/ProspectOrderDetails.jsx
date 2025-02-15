@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'react-toastify/dist/ReactToastify.css';
 import '../order.css';
 
-import { fetchDetails } from "../../Shared/api";
+import { fetchData } from "../../Shared/api";
 
 import DropDownIndex from "../../Shared/DropDownIndex";
 import ProspectOrderCheckPrice from "./ProspectOrderCheckPrice";
@@ -21,7 +21,7 @@ const ProspectOrderDetails = ({prospectOrderData, setProspectOrderData}) => {
   const [details, setDetails] = useState({});
 
   useEffect(() => {
-    fetchDetails("ProspectOrder", setDetails);
+    fetchData("ProspectOrder/Details", setDetails);
   }, []);
 
   return (

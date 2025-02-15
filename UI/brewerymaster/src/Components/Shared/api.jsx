@@ -15,18 +15,6 @@ export const fetchDataById = (path, id, setData) => {
     .catch((error) => console.log(error));
 };
 
-export const fetchEntity = (entity, setEntity) => {
-  return axios.get(`${apiurl}/entity/${entity}`)
-    .then((result) => setEntity(result.data))
-    .catch((error) => console.log(error));
-};
-
-export const fetchDetails = (path, setDetails) => {
-  return axios.get(`${apiurl}/${path}/Details`)
-    .then((result) => setDetails(result.data))
-    .catch((error) => console.log(error));
-};
-
 export const addData = async (path, data) => {
   try {
     const result = await axios.post(`${apiurl}/${path}`, data);
@@ -44,7 +32,6 @@ export const updateData = async (path, id, data) => {
     console.log(error);
   }
 };
-
 
 export const updateWithoutBody = async (path, id) => {
   try {

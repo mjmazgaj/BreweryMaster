@@ -1,5 +1,5 @@
 import React, {Fragment, useState, useEffect} from "react";
-import { fetchData, fetchDetails } from "../../../Shared/api";
+import { fetchData } from "../../../Shared/api";
 import { useTranslation } from "react-i18next";
 import modalFieldsProvider from "./modalFieldsProvider";
 
@@ -69,7 +69,7 @@ export const useProspectOrderSummary = ({data,
         
           useEffect(() => {
             refreshTableData();
-            fetchDetails("ProspectOrder", setDetails);
+            fetchData("ProspectOrder/Details", setDetails);
           }, []);
 
   return {
