@@ -73,9 +73,11 @@ export const useModalFormBasic = ({
     if (!handleFormSubmit(event)) {
       return;
     }
-
     
-    const updateObject = { ...data, units: [...data.units, ...usedUnits]}
+    const updateObject = { 
+      ...data, 
+      ...(data?.units?{units: [...data.units, ...usedUnits]}:{})
+    }
     
     await updateData(path, data.id, updateObject)
     refreshTableData();
