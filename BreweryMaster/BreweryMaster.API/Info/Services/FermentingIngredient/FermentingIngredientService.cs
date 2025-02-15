@@ -97,6 +97,7 @@ namespace BreweryMaster.API.Info.Services
             return usedUnits?
                 .FermentingIngredient
                 .FermentingIngredientUnits
+                .Where(x => !x.IsRemoved)
                 .Select(x => x.UnitId);
         }
 
