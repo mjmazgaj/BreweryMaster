@@ -8,9 +8,9 @@ export const useModalForm = ({
   setShow,
   action,
   itemName,
-  units,
   isValid,
   setData,
+  usedUnits,
   setUsedUnits,
 }) => {
   const { t } = useTranslation();
@@ -69,13 +69,8 @@ export const useModalForm = ({
     if (!handleFormSubmit(event)) {
       return;
     }
-    const updatedUnits = units.map((x) => ({
-      ...x,
-      isUsed: x.isUsed ?? false,
-    }));
-
     console.log("edit");
-    console.log({ ...data, units: { ...updatedUnits } });
+    console.log({ ...data, units: [...data.units, ...usedUnits]});
     setShow(false);
   };
 

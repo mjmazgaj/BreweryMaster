@@ -31,6 +31,7 @@ const ModalForm = ({
       itemName,
       isValid,
       setData,
+      usedUnits,
       setUsedUnits,
     });
 
