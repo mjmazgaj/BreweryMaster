@@ -19,7 +19,7 @@ const FermentingIngredientsSummary = () => {
 
   const [modalData, setModalData] = useState([]);
   const [modalQuantityData, setModalQuantityData] = useState([]);
-  
+
   const [data, setData] = useState([]);
   const [types, setTypes] = useState([]);
 
@@ -27,7 +27,7 @@ const FermentingIngredientsSummary = () => {
 
   const [showItemAction, setShowItemAction] = useState(false);
   const [itemAction, setItemAction] = useState("summary");
-  const[units, setUnits] = useState([]);
+  const [units, setUnits] = useState([]);
 
   const [showModalForm, setShowModalForm] = useState(false);
   const [modalAction, setModalAction] = useState("add");
@@ -38,17 +38,19 @@ const FermentingIngredientsSummary = () => {
     area: "reserve",
   });
 
-  const {handleDoubleClick, handleAddOnClick} = useFermentingIngredientsSummary({
-    setData,
-    modalData,
-    setModalData,
-    setUnits,
-    setTypes,
-    setItemAction,
-    setShowItemAction,
-    setModalAction,
-    setShowModalForm,
-    setModalQuantityData,});
+  const { handleDoubleClick, handleAddOnClick } =
+    useFermentingIngredientsSummary({
+      setData,
+      modalData,
+      setModalData,
+      setUnits,
+      setTypes,
+      setItemAction,
+      setShowItemAction,
+      setModalAction,
+      setShowModalForm,
+      setModalQuantityData,
+    });
 
   return (
     <div className="Fermenting-Ingredient_container">
@@ -89,17 +91,21 @@ const FermentingIngredientsSummary = () => {
         setAction={setModalAction}
         itemName="Fermenting Ingredient"
       />
-      
+
       <ModalFormBasic
-          fields={modalFieldsProvider(t).quantityModalFields[quantityAction.area]}
-          data={modalQuantityData}
-          setData={setModalQuantityData}
-          show={showQuantityModal}
-          setShow={setShowQuantityModal}
-          action={quantityAction.verb}
-          itemName={`${quantityAction.area == "reserve" ? "reservation" : "order"} for ${modalData.name}`}
-          path={`FermentingIngredient/${quantityAction.area == "reserve" ? "Reservation" : "Order"}`}
-        />
+        fields={modalFieldsProvider(t).quantityModalFields[quantityAction.area]}
+        data={modalQuantityData}
+        setData={setModalQuantityData}
+        show={showQuantityModal}
+        setShow={setShowQuantityModal}
+        action={quantityAction.verb}
+        itemName={`${
+          quantityAction.area == "reserve" ? "reservation" : "order"
+        } for ${modalData.name}`}
+        path={`FermentingIngredient/${
+          quantityAction.area == "reserve" ? "Reservation" : "Order"
+        }`}
+      />
 
       <ModalConfirmation
         id={modalData.id}

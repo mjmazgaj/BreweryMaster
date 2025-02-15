@@ -64,6 +64,7 @@ export const useFermentingIngredientsSummary = ({
     fetchData(`entity/Unit`, setUnits);
     fetchData("FermentingIngredient/Type", setTypes);
   }, []);
+
   return {
     handleDoubleClick,
     handleAddOnClick,

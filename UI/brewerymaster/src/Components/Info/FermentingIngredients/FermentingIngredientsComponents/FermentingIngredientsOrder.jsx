@@ -6,7 +6,7 @@ import DynamicTable from "../../../Shared/TableComponents/DynamicTable";
 import ModalFormBasic from "../../../Shared/ModalComponents/ModalFormBasic";
 import modalFieldsProvider from "../../../Shared/ModalComponents/helpers/modalFieldsProvider";
 
-import {useFermentingIngredientsOrder} from "./helpers/useFermentingIngredientsOrder";
+import { useFermentingIngredientsOrder } from "./helpers/useFermentingIngredientsOrder";
 
 import { useTranslation } from "react-i18next";
 import ModalConfirmation from "../../../Shared/ModalComponents/ModalConfirmation";
@@ -21,7 +21,11 @@ const FermentingIngredientsOrder = () => {
 
   const [showQuantityModal, setShowQuantityModal] = useState(false);
 
-  const {handleDoubleClick} = useFermentingIngredientsOrder({setModalData, setData, setShowQuantityModal})
+  const { handleDoubleClick } = useFermentingIngredientsOrder({
+    setModalData,
+    setData,
+    setShowQuantityModal,
+  });
 
   return (
     <div className="Fermenting-Ingredient-Order_container">
@@ -34,15 +38,15 @@ const FermentingIngredientsOrder = () => {
       />
 
       <ModalFormBasic
-          fields={modalFieldsProvider(t).quantityModalFields["order"]}
-          data={modalData}
-          setData={setModalData}
-          show={showQuantityModal}
-          setShow={setShowQuantityModal}
-          action="edit"
-          itemName={`order for ${modalData.name}`}
-          path="FermentingIngredient/Order"
-        />
+        fields={modalFieldsProvider(t).quantityModalFields["order"]}
+        data={modalData}
+        setData={setModalData}
+        show={showQuantityModal}
+        setShow={setShowQuantityModal}
+        action="edit"
+        itemName={`order for ${modalData.name}`}
+        path="FermentingIngredient/Order"
+      />
 
       <ModalConfirmation
         id={modalData.id}

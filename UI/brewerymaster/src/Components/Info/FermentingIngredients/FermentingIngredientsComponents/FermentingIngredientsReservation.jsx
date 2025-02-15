@@ -21,10 +21,14 @@ const FermentingIngredientsReservation = () => {
   const [data, setData] = useState([]);
 
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
-  
+
   const [showQuantityModal, setShowQuantityModal] = useState(false);
 
-  const {handleDoubleClick} = useFermentingIngredientsReservation({setModalData, setShowQuantityModal, setData});
+  const { handleDoubleClick } = useFermentingIngredientsReservation({
+    setModalData,
+    setShowQuantityModal,
+    setData,
+  });
 
   return (
     <div className="Fermenting-Ingredient-Reservation_container">
@@ -35,17 +39,17 @@ const FermentingIngredientsReservation = () => {
         data={data}
         handleDoubleClick={handleDoubleClick}
       />
-      
+
       <ModalFormBasic
-          fields={modalFieldsProvider(t).quantityModalFields["reserve"]}
-          data={modalData}
-          setData={setModalData}
-          show={showQuantityModal}
-          setShow={setShowQuantityModal}
-          action="edit"
-          itemName={`reservation for ${modalData.name}`}
-          path="FermentingIngredient/Reservation"
-        />
+        fields={modalFieldsProvider(t).quantityModalFields["reserve"]}
+        data={modalData}
+        setData={setModalData}
+        show={showQuantityModal}
+        setShow={setShowQuantityModal}
+        action="edit"
+        itemName={`reservation for ${modalData.name}`}
+        path="FermentingIngredient/Reservation"
+      />
 
       <ModalConfirmation
         id={modalData.id}

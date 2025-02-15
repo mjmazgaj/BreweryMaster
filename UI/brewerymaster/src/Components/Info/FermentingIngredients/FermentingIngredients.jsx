@@ -16,12 +16,11 @@ const FermentingIngredients = () => {
 
   const [mode, setMode] = useState("summary");
 
-
   const steps = {
-    "summary":<FermentingIngredientsSummary />,
-    "reservation":<FermentingIngredientsReservation />,
-    "order":<FermentingIngredientsOrder />,
-  }
+    summary: <FermentingIngredientsSummary />,
+    reservation: <FermentingIngredientsReservation />,
+    order: <FermentingIngredientsOrder />,
+  };
 
   return (
     <div className="Info_container">
