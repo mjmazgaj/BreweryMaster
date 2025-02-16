@@ -23,7 +23,7 @@ export const useLogin = ({data, setErrorMessage}) => {
             isAuthenticated: loginResult.accessToken ? true : false,
           });
     
-          navigate("/kanban")
+          navigate("/")
           setErrorMessage("");
         } catch (error) {
           setErrorMessage(error.response?.data?.message || 'Logowanie nie powiodło się. Spróbuj ponownie.');
