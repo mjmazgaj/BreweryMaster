@@ -1,0 +1,35 @@
+.user-details_container {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+.info_container {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+}
+
+.user-info_container {
+  flex: 1;
+  border: solid 0.1rem black;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  height: fit-content;
+  margin-top: 1rem;
+}
+
+.buttons_container button {
+  margin: 1rem 0.5rem;
+}
+
+.home-address-info_container, 
+.delivery-address-info_container{
+    border: solid 0.1rem black;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    flex: 1;
+}

@@ -1,4 +1,5 @@
-﻿using BreweryMaster.API.User.Models.Users;
+﻿using BreweryMaster.API.User.Models.Responses;
+using BreweryMaster.API.User.Models.Users;
 using BreweryMaster.API.User.Models.Users.DB;
 using BreweryMaster.API.User.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -104,6 +105,16 @@ namespace BreweryMaster.API.UserModule.Controllers
             {
                 return Unauthorized();
             }
+        }
+
+        [HttpGet]
+        [Route("Details")]
+        public async Task<ActionResult<UserDetailsResponse>> GetUserDetails()
+        {
+            var userContext = HttpContext.User;
+
+            var user = await _userService.GetCurrentUserDetails(userContext);
+            return Ok(user);
         }
 
         [HttpPost]

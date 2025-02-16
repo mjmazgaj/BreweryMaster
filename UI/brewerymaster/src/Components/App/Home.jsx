@@ -2,7 +2,7 @@ import BackgroundDetails from "../Shared/BackgroundDetails";
 import "./App.css";
 
 import HomeGuest from "./AppComponents/HomeGuest"
-import HomeAuthenticated from "./AppComponents/HomeAuthenticated"
+import UserDetails from "../User/UserDetails";
 
 import { useUser } from "../Security/UserProvider";
 function Home() {
@@ -13,7 +13,7 @@ function Home() {
     <>
       <BackgroundDetails />
       <div className="home_container">
-        {user?.isAuthenticated ? <HomeAuthenticated /> : <HomeGuest />}
+        {user?.isAuthenticated ? <UserDetails /> : <HomeGuest />}
       </div>
     </>
   );

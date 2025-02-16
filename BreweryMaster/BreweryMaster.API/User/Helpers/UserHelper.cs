@@ -1,4 +1,6 @@
-﻿using BreweryMaster.API.User.Models.DB;
+﻿using BreweryMaster.API.User.Mappers;
+using BreweryMaster.API.User.Models.DB;
+using BreweryMaster.API.User.Models.Responses;
 using BreweryMaster.API.User.Models.Users;
 using BreweryMaster.API.User.Models.Users.DB;
 
@@ -39,6 +41,24 @@ namespace BreweryMaster.API.UserModule.Helpers
                     Name = user.UserName,
                     IsCompany = false
                 };
+            }
+        }
+
+        static public void SetDetailResponse(this ApplicationUser user, UserDetailsResponse detailsResponse)
+        {
+            if (user is CompanyUser companyUser)
+            {
+                detailsResponse.CompanyUser = companyUser.ToResponse();
+                detailsResponse.IsCompany = true;
+            }
+            else if (user is IndividualUser individualUser)
+            {
+                detailsResponse.IndividualUser = individualUser.ToResponse();
+                detailsResponse.IsCompany = false;
+            }
+            else
+            {
+                throw new Exception("User is not a valid type");
             }
         }
     }
