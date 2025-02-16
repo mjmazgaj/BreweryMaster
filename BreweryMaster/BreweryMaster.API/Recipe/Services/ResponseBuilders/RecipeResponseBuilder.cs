@@ -11,32 +11,49 @@ namespace BreweryMaster.API.Recipe.Services.ResponseBuilders
 
         public RecipeResponseBuilder(string name)
         {
-            _recipeResponse = new RecipeDetailsResponse() { Name = name };
+            _recipeResponse = new RecipeDetailsResponse()
+            {
+                GeneralInfo = new RecipeResponse() { Name = name },
+                MashInfo = new RecipeMashResponse(),
+                BatchInfo = new RecipeBatchResponse(),
+            };
         }
 
         public RecipeResponseBuilder SetFieldsWithRecipe(Models.DB.Recipe recipe)
         {
-            _recipeResponse.Id = recipe.Id;
-            _recipeResponse.BLGScale = recipe.BLGScale;
-            _recipeResponse.IBUScale = recipe.IBUScale;
-            _recipeResponse.ABVScale = recipe.ABVScale;
-            _recipeResponse.SRMScale = recipe.SRMScale;
-            _recipeResponse.TypeId = recipe.Type?.Id;
-            _recipeResponse.TypeName = recipe.Type?.Name;
-            _recipeResponse.StyleId = recipe.Style?.Id;
-            _recipeResponse.StyleName = recipe.Style?.Name;
-            _recipeResponse.ExpectedBeerVolume = recipe.ExpectedBeerVolume;
-            _recipeResponse.BoilTime = recipe.BoilTime;
-            _recipeResponse.EvaporationRate = recipe.EvaporationRate;
-            _recipeResponse.WortVolume = recipe.WortVolume;
-            _recipeResponse.BoilLoss = recipe.BoilLoss;
-            _recipeResponse.PreBoilGravity = recipe.PreBoilGravity;
-            _recipeResponse.FermentationLoss = recipe.FermentationLoss;
-            _recipeResponse.DryHopLoss = recipe.DryHopLoss;
-            _recipeResponse.MashEfficiency = recipe.MashEfficiency;
-            _recipeResponse.WaterToGrainRatio = recipe.WaterToGrainRatio;
-            _recipeResponse.MashWaterVolume = recipe.MashWaterVolume;
-            _recipeResponse.TotalMashVolume = recipe.TotalMashVolume;
+            _recipeResponse.GeneralInfo.Id = recipe.Id;
+            _recipeResponse.GeneralInfo.BLGScale = recipe.BLGScale;
+            _recipeResponse.GeneralInfo.IBUScale = recipe.IBUScale;
+            _recipeResponse.GeneralInfo.ABVScale = recipe.ABVScale;
+            _recipeResponse.GeneralInfo.SRMScale = recipe.SRMScale;
+            _recipeResponse.GeneralInfo.TypeId = recipe.Type?.Id;
+            _recipeResponse.GeneralInfo.TypeName = recipe.Type?.Name;
+            _recipeResponse.GeneralInfo.StyleId = recipe.Style?.Id;
+            _recipeResponse.GeneralInfo.StyleName = recipe.Style?.Name;
+
+            return this;
+        }
+
+        public RecipeResponseBuilder SetBatchInfo(Models.DB.Recipe recipe)
+        {
+            _recipeResponse.BatchInfo.ExpectedBeerVolume = recipe.ExpectedBeerVolume;
+            _recipeResponse.BatchInfo.BoilTime = recipe.BoilTime;
+            _recipeResponse.BatchInfo.EvaporationRate = recipe.EvaporationRate;
+            _recipeResponse.BatchInfo.WortVolume = recipe.WortVolume;
+            _recipeResponse.BatchInfo.BoilLoss = recipe.BoilLoss;
+            _recipeResponse.BatchInfo.PreBoilGravity = recipe.PreBoilGravity;
+            _recipeResponse.BatchInfo.FermentationLoss = recipe.FermentationLoss;
+            _recipeResponse.BatchInfo.DryHopLoss = recipe.DryHopLoss;
+
+            return this;
+        }
+
+        public RecipeResponseBuilder SetMashInfo(Models.DB.Recipe recipe)
+        {
+            _recipeResponse.MashInfo.MashEfficiency = recipe.MashEfficiency;
+            _recipeResponse.MashInfo.WaterToGrainRatio = recipe.WaterToGrainRatio;
+            _recipeResponse.MashInfo.MashWaterVolume = recipe.MashWaterVolume;
+            _recipeResponse.MashInfo.TotalMashVolume = recipe.TotalMashVolume;
 
             return this;
         }

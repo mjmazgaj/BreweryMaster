@@ -51,6 +51,8 @@ namespace BreweryMaster.API.Recipe.Services
             {
                 var responseBuilder = new RecipeResponseBuilder(recipe.Name);
                 responseBuilder.SetFieldsWithRecipe(recipe);
+                responseBuilder.SetBatchInfo(recipe);
+                responseBuilder.SetMashInfo(recipe);
                 responseBuilder.SetFermentingIngredients(recipe.FermentingIngredients);
                 responseBuilder.SetHops(recipe.Hops);
                 responseBuilder.SetYeast(recipe.Yeast);
@@ -83,7 +85,7 @@ namespace BreweryMaster.API.Recipe.Services
         {
             var recipes = await GetRecipeDetailsAsync();
 
-            return recipes.FirstOrDefault(x => x.Id == id);
+            return recipes.FirstOrDefault(x => x.GeneralInfo.Id == id);
         }
         public async Task<RecipeDetailsResponse?> CreateRecipeDetailAsync(RecipeDetailsRequest request)
         {

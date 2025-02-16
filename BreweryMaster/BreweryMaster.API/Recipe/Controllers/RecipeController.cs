@@ -63,7 +63,7 @@ namespace BreweryMaster.API.Info.Controllers
             if (createdRecipeDetails == null)
                 return UnprocessableEntity();
 
-            return CreatedAtAction(nameof(GetRecipeDetailsById), new { id = createdRecipeDetails.Id }, createdRecipeDetails);
+            return CreatedAtAction(nameof(GetRecipeDetailsById), new { id = createdRecipeDetails.GeneralInfo.Id }, createdRecipeDetails);
         }
     }
 }
