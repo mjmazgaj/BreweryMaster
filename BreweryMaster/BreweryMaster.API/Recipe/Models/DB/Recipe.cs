@@ -166,12 +166,12 @@ namespace BreweryMaster.API.Recipe.Models.DB
         /// The collection of hops used in the recipe
         /// </summary>
         [JsonIgnore]
-        public ICollection<RecipeHop> RecipeHops { get; set; } = new List<RecipeHop>();
+        public ICollection<RecipeHop> Hops { get; set; } = new List<RecipeHop>();
 
         /// <summary>
         /// The collection of yeasts used in the recipe
         /// </summary>
         [JsonIgnore]
-        public ICollection<RecipeYeast> RecipeYeasts { get; set; } = new List<RecipeYeast>();
+        public ICollection<RecipeYeast> Yeast { get; set; } = new List<RecipeYeast>();
     }
 }

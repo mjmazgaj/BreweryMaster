@@ -59,7 +59,7 @@ namespace BreweryMaster.API.Shared.Extensions
                 entity.HasKey(e => new { e.HopUnitId, e.RecipeId });
 
                 entity.HasOne(e => e.Recipe)
-                      .WithMany(e => e.RecipeHops)
+                      .WithMany(e => e.Hops)
                       .HasForeignKey(e => e.RecipeId)
                       .OnDelete(DeleteBehavior.Cascade);
 
@@ -77,7 +77,7 @@ namespace BreweryMaster.API.Shared.Extensions
                 entity.HasKey(e => new { e.YeastUnitId, e.RecipeId });
 
                 entity.HasOne(e => e.Recipe)
-                      .WithMany(e => e.RecipeYeasts)
+                      .WithMany(e => e.Yeast)
                       .HasForeignKey(e => e.RecipeId)
                       .OnDelete(DeleteBehavior.Cascade);
 

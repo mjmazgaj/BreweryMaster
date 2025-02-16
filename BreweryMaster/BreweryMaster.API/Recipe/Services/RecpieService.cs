@@ -24,19 +24,36 @@ namespace BreweryMaster.API.Recipe.Services
                 .Include(x => x.FermentingIngredients)
                     .ThenInclude(x => x.FermentingIngredientUnit)
                     .ThenInclude(x => x.FermentingIngredient)
+                    .ThenInclude(x => x.Type)
                 .Include(x => x.FermentingIngredients)
                     .ThenInclude(x => x.FermentingIngredientUnit)
                     .ThenInclude(x => x.Unit)
+                .Include(x => x.Hops)
+                    .ThenInclude(x=>x.HopUnit)
+                    .ThenInclude(x=>x.Unit)
+                .Include(x => x.Hops)
+                    .ThenInclude(x => x.HopUnit)
+                    .ThenInclude(x => x.Hop)
+                .Include(x=>x.Yeast)
+                    .ThenInclude(x=>x.YeastUnit)
+                    .ThenInclude(x=>x.Unit)
+                .Include(x => x.Yeast)
+                    .ThenInclude(x => x.YeastUnit)
+                    .ThenInclude(x => x.Yeast)
+                    .ThenInclude(x => x.Form)
+                .Include(x => x.Yeast)
+                    .ThenInclude(x => x.YeastUnit)
+                    .ThenInclude(x => x.Yeast)
+                    .ThenInclude(x => x.Type)
                 .ToListAsync();
-
-            var dbIngredientTypes = await _context.FermentingIngredientTypes
-                .ToDictionaryAsync(x => x.Id, x => x.Name);
 
             return recipes.Select(recipe =>
             {
                 var responseBuilder = new RecipeResponseBuilder(recipe.Name);
                 responseBuilder.SetFieldsWithRecipe(recipe);
-                responseBuilder.SetFermentingIngredients(recipe.FermentingIngredients, dbIngredientTypes);
+                responseBuilder.SetFermentingIngredients(recipe.FermentingIngredients);
+                responseBuilder.SetHops(recipe.Hops);
+                responseBuilder.SetYeast(recipe.Yeast);
 
                 return responseBuilder.Build();
             });

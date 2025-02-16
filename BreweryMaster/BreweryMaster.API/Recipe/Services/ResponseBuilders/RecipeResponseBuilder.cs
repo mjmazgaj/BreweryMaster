@@ -1,6 +1,7 @@
 ﻿using BreweryMaster.API.Info.Models;
 using BreweryMaster.API.Recipe.Models;
 using BreweryMaster.API.Recipe.Models.DB;
+using BreweryMaster.API.Recipe.Models.Responses;
 
 namespace BreweryMaster.API.Recipe.Services.ResponseBuilders
 {
@@ -39,15 +40,17 @@ namespace BreweryMaster.API.Recipe.Services.ResponseBuilders
 
             return this;
         }
-        public RecipeResponseBuilder SetFermentingIngredients(IEnumerable<RecipeFermentingIngredient> recipeFermentingIngredients, Dictionary<int, string> dbIngredientTypes)
+
+        public RecipeResponseBuilder SetFermentingIngredients(IEnumerable<RecipeFermentingIngredient> recipeFermentingIngredients)
         {
             _recipeResponse.FermentingIngredients = recipeFermentingIngredients.Select(x =>
             {
                 var fermentingIngredient = x.FermentingIngredientUnit.FermentingIngredient;
                 return new RecipeFermentingIngredientResponse()
                 {
+                    Id = x.FermentingIngredientUnitId,
                     TypeId = fermentingIngredient.TypeId,
-                    TypeName = dbIngredientTypes.TryGetValue(fermentingIngredient.TypeId, out var typeName) ? typeName : "",
+                    TypeName = fermentingIngredient.Type.Name,
                     Name = fermentingIngredient.Name,
                     Percentage = fermentingIngredient.Percentage,
                     Extraction = fermentingIngredient.Extraction,
@@ -61,6 +64,51 @@ namespace BreweryMaster.API.Recipe.Services.ResponseBuilders
 
             return this;
         }
+
+        public RecipeResponseBuilder SetHops(IEnumerable<RecipeHop> recipeHops)
+        {
+            _recipeResponse.Hops = recipeHops.Select(x =>
+            {
+                var hop = x.HopUnit.Hop;
+                return new RecipeHopResponse()
+                {
+                    Id = x.HopUnitId,
+                    Name = hop.Name,
+                    AlphaAcids = hop.AlphaAcids,
+                    Quantity = (decimal)x.Quantity,
+                    Unit = x.HopUnit.Unit.Name,
+                    Info = x.Info
+                };
+            }
+            );
+
+            return this;
+        }
+
+        public RecipeResponseBuilder SetYeast(IEnumerable<RecipeYeast> recipeYeast)
+        {
+            _recipeResponse.Yeast = recipeYeast.Select(x =>
+            {
+                var yeast = x.YeastUnit.Yeast;
+                return new RecipeYeastResponse()
+                {
+                    Id = x.YeastUnitId,
+                    Name = yeast.Name,
+                    FormId = yeast.FormId,
+                    FormName = yeast.Form.Name,
+                    Producer = yeast.Producer,
+                    TypeId = yeast.TypeId,
+                    TypeName = yeast.Type.Name,
+                    Quantity = (decimal)x.Quantity,
+                    Unit = x.YeastUnit.Unit.Name,
+                    Info = x.Info
+                };
+            }
+            );
+
+            return this;
+        }
+
         public RecipeDetailsResponse Build()
         {
             return _recipeResponse;

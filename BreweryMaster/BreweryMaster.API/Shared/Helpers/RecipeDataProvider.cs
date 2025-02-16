@@ -30,6 +30,7 @@ public static class RecipeDataProvider
                     MashWaterVolume = 15.0m,
                     TotalMashVolume = 18,
                     CreatedById = "todo",
+                    CreatedOn = DateTime.Now,
                 },
                 new Recipe
                 {
@@ -54,6 +55,7 @@ public static class RecipeDataProvider
                     MashWaterVolume = 14.0m,
                     TotalMashVolume = 16,
                     CreatedById = "todo",
+                    CreatedOn = DateTime.Now,
                 },
                 new Recipe
                 {
@@ -78,6 +80,7 @@ public static class RecipeDataProvider
                     MashWaterVolume = 16.5m,
                     TotalMashVolume = 20,
                     CreatedById = "todo",
+                    CreatedOn = DateTime.Now,
                 }
             };
     }
