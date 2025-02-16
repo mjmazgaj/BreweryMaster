@@ -59,7 +59,7 @@ const RecipeDetails = () => {
         </div>
       </div>
       <div>
-      {data && (
+      {data?.fermentingIngredients && (
           <DynamicTable
             tableKey="fermentingIngredients"
             tableTitle="Fermenting Ingredients"
@@ -68,7 +68,7 @@ const RecipeDetails = () => {
             handleDoubleClick={() => {}}
           />
         )}
-        {data && (
+        {data?.hops &&(
             <DynamicTable
               tableKey="hops"
               tableTitle="Hops"
@@ -77,7 +77,7 @@ const RecipeDetails = () => {
               handleDoubleClick={() => {}}
             />
           )}
-          {data && (
+          {data?.yeast &&(
               <DynamicTable
                 tableKey="yeast"
                 tableTitle="Yeast"
