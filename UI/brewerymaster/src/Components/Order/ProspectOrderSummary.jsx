@@ -23,7 +23,7 @@ const ProspectOrderSummary = () => {
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [showModalForm, setShowModalForm] = useState(false);
   const [itemAction, setItemAction] = useState("default");
-  const [modalAction, setModalAction] = useState("edit");
+  const [modalAction, setModalAction] = useState("Edit");
 
 
   const [formFields, setFormFields] = useState({

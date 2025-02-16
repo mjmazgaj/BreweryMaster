@@ -43,7 +43,7 @@ const FermentingIngredientsOrder = () => {
         setData={setModalData}
         show={showQuantityModal}
         setShow={setShowQuantityModal}
-        action="edit"
+        action="Edit"
         itemName={`order for ${modalData.name}`}
         path="FermentingIngredient/Order"
         refreshTableData={refreshTableData}

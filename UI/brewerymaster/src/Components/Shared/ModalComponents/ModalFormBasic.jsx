@@ -121,7 +121,7 @@ const ModalFormBasic = ({
           </Modal.Body>
           <Modal.Footer>
             <Button type="submit" variant="dark" disabled={!isValid}>
-              {action == "add" ? t("button.add") : t("button.saveChanges")}
+              {action == "Add" ? t("button.add") : t("button.saveChanges")}
             </Button>
             <Button variant="dark" onClick={handleClose}>
               {t("button.close")}

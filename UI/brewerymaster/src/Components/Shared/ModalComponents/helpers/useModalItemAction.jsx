@@ -17,17 +17,17 @@ export const useModalItemAction = ({
   };
 
   const handleEdit = () => {
-    setModalAction("edit");
+    setModalAction("Edit");
     setShow(false);
     setShowModalForm(true);
   };
 
-  const handleQuantityChange = (data, action) => () => {
+  const handleQuantityChange = (data, QuantityArea, QuantityVerb = "Add") => () => {
     console.log("QuantityChange");
     console.log(data);
     setQuantityAction({
-      verb: "add",
-      area: action,
+      verb: QuantityVerb,
+      area: QuantityArea,
     });
 
     setShow(false);

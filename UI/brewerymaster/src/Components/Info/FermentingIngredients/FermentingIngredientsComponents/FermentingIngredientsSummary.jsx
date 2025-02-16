@@ -37,12 +37,12 @@ const FermentingIngredientsSummary = () => {
   const [itemAction, setItemAction] = useState("summary");
 
   const [showModalForm, setShowModalForm] = useState(false);
-  const [modalAction, setModalAction] = useState("add");
+  const [modalAction, setModalAction] = useState("Add");
 
   const [showQuantityModal, setShowQuantityModal] = useState(false);
   const [quantityAction, setQuantityAction] = useState({
-    verb: "add",
-    area: "reserve",
+    verb: "Add",
+    area: "reservation",
   });
 
   const { handleDoubleClick, handleAddOnClick, refreshTableData } =
@@ -113,12 +113,8 @@ const FermentingIngredientsSummary = () => {
         show={showQuantityModal}
         setShow={setShowQuantityModal}
         action={quantityAction.verb}
-        itemName={`${
-          quantityAction.area === "reserve" ? "reservation" : "order"
-        } for ${modalData.name}`}
-        path={`FermentingIngredient/${
-          quantityAction.area === "reserve" ? "Reservation" : "Order"
-        }`}
+        itemName={`${quantityAction.verb} ${quantityAction.area} for ${modalData.name}`}
+        path={`FermentingIngredient/${quantityAction.area}`}
         refreshTableData ={refreshTableData}
       />
 

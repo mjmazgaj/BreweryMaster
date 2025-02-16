@@ -74,7 +74,7 @@ export const useFermentingIngredientsSummary = ({
 
   const handleAddOnClick = () => {
     clear();
-    setModalAction("add");
+    setModalAction("Add");
 
     setFields(() =>(
       {

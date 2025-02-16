@@ -41,12 +41,12 @@ const FermentingIngredientsReservation = () => {
       />
 
       <ModalFormBasic
-        fields={modalFieldsProvider(t).quantityModalFields["reserve"]}
+        fields={modalFieldsProvider(t).quantityModalFields["reservation"]}
         data={modalData}
         setData={setModalData}
         show={showQuantityModal}
         setShow={setShowQuantityModal}
-        action="edit"
+        action="Edit"
         itemName={`reservation for ${modalData.name}`}
         path="FermentingIngredient/Reservation"
         refreshTableData={refreshTableData}

@@ -86,12 +86,12 @@ export const useModalFormBasic = ({
   };
 
   const actionCases = {
-    add: {
-      title: `Add ${itemName}`,
+    Add: {
+      title: itemName,
       function: handleAdd,
       isReadOnly: false,
     },
-    edit: {
+    Edit: {
       title: `Edit ${data ? data.name : ""}`,
       function: handleEdit,
       isReadOnly: false,
