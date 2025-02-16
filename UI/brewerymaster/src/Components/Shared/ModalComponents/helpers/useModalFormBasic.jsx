@@ -85,6 +85,30 @@ export const useModalFormBasic = ({
     setShow(false);
   };
 
+  const handleReduce = async (event, data) => {
+    if (!handleFormSubmit(event)) {
+      return;
+    }
+
+    let reduceAmount = (-1) * parseInt(data.quantity);
+
+
+    await addData(path, {...data, quantity: reduceAmount});
+    refreshTableData();
+    
+    setShow(false);
+  };
+
+  const handleIncrease = async (event, data) => {
+    if (!handleFormSubmit(event)) {
+      return;
+    }
+    await addData(path, data);
+    refreshTableData();
+    
+    setShow(false);
+  };
+
   const actionCases = {
     Add: {
       title: itemName,
@@ -94,6 +118,16 @@ export const useModalFormBasic = ({
     Edit: {
       title: `Edit ${data ? data.name : ""}`,
       function: handleEdit,
+      isReadOnly: false,
+    },
+    Reduce: {
+      title: `Reduce ${data ? data.name : ""}`,
+      function: handleReduce,
+      isReadOnly: false,
+    },
+    Increase: {
+      title: `Increase ${data ? data.name : ""}`,
+      function: handleIncrease,
       isReadOnly: false,
     },
   };

@@ -45,7 +45,13 @@ const ModalItemAction = ({
     ),
     summary: (
       <>
-        <Button variant="dark" onClick={actionObject.function(data, "reserve")}>
+        <Button variant="dark" onClick={actionObject.function(data, "storage", "Increase")}>
+        Increase
+        </Button>
+        <Button variant="dark" onClick={actionObject.function(data, "storage", "Reduce")}>
+          Reduce
+        </Button>
+        <Button variant="dark" onClick={actionObject.function(data, "reservation")}>
           Reserve
         </Button>
         <Button variant="dark" onClick={actionObject.function(data, "order")}>
