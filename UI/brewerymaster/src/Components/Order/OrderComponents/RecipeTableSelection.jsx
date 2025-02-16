@@ -1,21 +1,19 @@
 import React, { useState, useEffect} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import '../recipe.css';
-
-import { Button } from "react-bootstrap";
+import '../order.css';
 
 import {fetchData} from "../../Shared/api"
 
 import DynamicTable from "../../Shared/TableComponents/DynamicTable";
 
-const RecipeTable = () => {
+const RecipeTableSelection = ({selectedRecipe, setSelectedRecipe}) => {
 
 const [data, setData] = useState([]);
 
 const handleDoubleClick = (item) =>{
     console.log("dziala");
+    setSelectedRecipe(item);
 }
 
   useEffect(() => {
@@ -37,4 +35,4 @@ const handleDoubleClick = (item) =>{
     );
 }
 
-export default RecipeTable;
+export default RecipeTableSelection;

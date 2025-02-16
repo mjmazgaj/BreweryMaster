@@ -11,8 +11,6 @@ import { Button } from "react-bootstrap";
 const Recipe = () => {
   const [isAddMode, setIsAddMode] = useState(false);
 
-  const [selectedRecipe, setSelectedRecipe] = useState({});
-
   const handleAddOnClick = () => {
     setIsAddMode(!isAddMode);
   };
@@ -30,10 +28,7 @@ const Recipe = () => {
       {isAddMode ? (
         <RecipeForm />
       ) : (
-        <RecipeTable
-          selectedRecipe={selectedRecipe}
-          setSelectedRecipe={setSelectedRecipe}
-        />
+        <RecipeTable />
       )}
     </div>
   );

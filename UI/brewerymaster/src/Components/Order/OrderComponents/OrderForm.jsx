@@ -6,7 +6,7 @@ import { addData } from '../../Shared/api';
 
 import Contact from './../../Shared/Contact'
 import MenuSteps from '../../Shared/MenuSteps';
-import RecipeTable from "../../Recipe/RecipeComponents/RecipeTable";
+import RecipeTableSelection from "../OrderComponents/RecipeTableSelection";
 
 const OrderForm = () => {  
 
@@ -71,7 +71,7 @@ const OrderForm = () => {
     {
       name: "Please select a recipe",
       component: (
-        <RecipeTable
+        <RecipeTableSelection
           selectedRecipe={selectedRecipe}
           setSelectedRecipe={setSelectedRecipe}
         />
