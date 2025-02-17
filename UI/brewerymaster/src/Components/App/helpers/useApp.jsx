@@ -14,6 +14,7 @@ import UserDetails from '../../User/UserDetails';
 import Kanban from '../../Work/Kanban';
 import Unauthorized from '../Unuthorized';
 import Error from '../../Shared/Error';
+import OrderDetails from '../../Order/OrderDetails';
 
 
 export const useApp = () => {
@@ -29,6 +30,7 @@ export const useApp = () => {
 
     const protectedRoutes = [
       { path: "/Order", roles:["supervisor"], element: <Order /> },
+      { path: "/Order/:id", roles:["supervisor"], element: <OrderDetails /> },
       { path: "/Recipe", roles:["brewer"], element: <Recipe /> },
       { path: "/Recipe/:id", roles:["brewer"], element: <RecipeDetails /> },
       { path: "/FermentingIngredients", roles:["supervisor"], element: <FermentingIngredients /> },

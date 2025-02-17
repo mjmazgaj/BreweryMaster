@@ -1,4 +1,5 @@
 ﻿using BreweryMaster.API.OrderModule.Models;
+using BreweryMaster.API.Recipe.Models;
 using BreweryMaster.API.Shared.Models.DB;
 using BreweryMaster.API.User.Services;
 using Microsoft.EntityFrameworkCore;
@@ -57,6 +58,46 @@ namespace BreweryMaster.API.OrderModule.Services
                             Recipe = x.Recipe.Name,
                             TargetDate = x.TargetDate,
                         }).FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<OrderDetailsResponse?> GetOrderDetailById(int id)
+        {
+            var order = await _context.Orders
+                            .Include(x => x.Container)
+                            .Include(x => x.Recipe)
+                                .ThenInclude(x => x.Type)
+                            .Include(x => x.Recipe)
+                                .ThenInclude(x => x.Style)
+                            .Include(x => x.CreatedByUser)
+                            .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (order is null)
+                return null;
+
+            return new OrderDetailsResponse()
+            {
+                Id = order.Id,
+                Capacity = order.Capacity,
+                Container = order.Container.ContainerName,
+                ContainerId = order.ContainerId,
+                CreatedBy = order.CreatedByUser.Email,
+                Price = order.Price,
+                Recipe = new RecipeResponse()
+                {
+                    Id = order.Recipe.Id,
+                    Name = order.Recipe.Name,
+                    ABVScale = order.Recipe.ABVScale,
+                    BLGScale = order.Recipe.BLGScale,
+                    IBUScale = order.Recipe.IBUScale,
+                    SRMScale = order.Recipe.SRMScale,
+                    StyleId = order.Recipe.StyleId,
+                    StyleName = order.Recipe.Style?.Name,
+                    TypeId = order.Recipe.TypeId,
+                    TypeName = order.Recipe.Type?.Name,
+                },
+                TargetDate = DateOnly.FromDateTime(order.TargetDate),
+                CreatedOn = DateOnly.FromDateTime(order.CreatedOn),
+            };
         }
 
         public async Task<Order> CreateOrderAsync(OrderRequest request, ClaimsPrincipal? user)

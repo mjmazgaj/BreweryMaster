@@ -108,3 +108,7 @@
 .control-card-buttons_container{
     margin-top: 1rem;
 }
+
+.control-card_container{
+    max-width: 400px;
+}

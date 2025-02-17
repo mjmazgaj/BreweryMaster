@@ -42,6 +42,21 @@ namespace BreweryMaster.API.OrderModule.Controllers
             return Ok(client);
         }
 
+        [HttpGet]
+        [Route("Details/{id:int}")]
+        [ProducesResponseType(typeof(OrderDetailsResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<OrderDetailsResponse>> GetOrderDetailsById([MinIntValidation] int id)
+        {
+            var client = await _clientService.GetOrderDetailById(id);
+
+            if (client == null)
+                return NotFound();
+
+            return Ok(client);
+        }
+
         [HttpPost]
         [ProducesResponseType(typeof(OrderResponse), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

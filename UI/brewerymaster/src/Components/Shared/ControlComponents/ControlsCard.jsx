@@ -24,7 +24,7 @@ const ControlsCard = ({
     }
 
   return (
-    <Card className={className}>
+    <Card className={`control-card_container ${className}`}>
       
       <Card.Header>
 

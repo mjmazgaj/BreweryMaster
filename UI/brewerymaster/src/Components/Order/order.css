@@ -1,9 +1,7 @@
-
 form input {
-    min-width: 300px;
-    margin: 10px 0;
-  }
-
+  min-width: 300px;
+  margin: 10px 0;
+}
 
 .prospectorder-form {
   margin-bottom: 50px;
@@ -13,44 +11,59 @@ form input {
   margin: auto 15%;
 }
 
-.prospectorder-checkprice_container{
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
+.prospectorder-checkprice_container {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
 
-.prospectorder-checkPrice_label{
-    padding-left: 1rem;
-    padding-right: 1rem;
+.prospectorder-checkPrice_label {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
-.prospectorder-checkPrice_result{
-    margin-bottom: 0;
-    margin-left: 1rem;
-    width: 200px;
+.prospectorder-checkPrice_result {
+  margin-bottom: 0;
+  margin-left: 1rem;
+  width: 200px;
 }
 
-.prospectorder-details{
-    margin-bottom: 1rem;
+.prospectorder-details {
+  margin-bottom: 1rem;
 }
 
-.prospectorder-contact-details{
-    margin-top: 2rem;
+.prospectorder-contact-details {
+  margin-top: 2rem;
 }
 
-.order_container{
-    margin: auto 15%;
+.order_container {
+  margin: auto 15%;
 }
 
 .order-companyValidatior_checkbox .form-check-input {
-    min-width: 1rem;
-    width: 5rem;
-    height: 2rem;
-  }
-  
-  .order-companyValidatior_checkbox :checked {
-    background-color: black;
-    border-color: black;
-  }
+  min-width: 1rem;
+  width: 5rem;
+  height: 2rem;
+}
+
+.order-companyValidatior_checkbox :checked {
+  background-color: black;
+  border-color: black;
+}
+
+.order-details-info_container {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  width: 60%;
+  margin: 2rem auto;
+  justify-content: center;
+}
+
+.order-details-general-info_container,
+.order-details-recipe-info_container {
+  flex: 1;
+  height: fit-content;
+}
