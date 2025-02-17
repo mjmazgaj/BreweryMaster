@@ -26,7 +26,7 @@ const Recipe = () => {
         {isAddMode ? "Show all recipes" : "Add Recipe"}
       </Button>
       {isAddMode ? (
-        <RecipeForm />
+        <RecipeForm setIsAddMode={setIsAddMode}/>
       ) : (
         <RecipeTable />
       )}

@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { addData } from '../../../Shared/api';
 
 import { useTranslation } from 'react-i18next';
-export const useRecipeForm = (isValid) => {
+export const useRecipeForm = ({isValid, setIsAddMode}) => {
   const { t } = useTranslation();
 
   const [currentStep, setCurrentStep] = useState(0);
@@ -77,6 +77,7 @@ export const useRecipeForm = (isValid) => {
     console.log("add");
     console.log({...newData});
     addData("recipe", newData);
+    setIsAddMode(false)
     clear();
   };
 

@@ -13,7 +13,7 @@ import MenuSteps from '../../Shared/MenuSteps';
 
 import DynamicTableSelection from "../../Shared/TableComponents/DynamicTableSelection";
 
-const RecipeForm = () => {    
+const RecipeForm = ({setIsAddMode}) => {    
   const { t } = useTranslation();
   const [isValid, setIsValid] = useState(true);
 
@@ -36,7 +36,7 @@ const RecipeForm = () => {
     setRecipeMashData,
     handleSave,
     clear
-  } = useRecipeForm(isValid);
+  } = useRecipeForm({isValid, setIsAddMode});
 
   const [ingredients, setIngredients] = useState([]);
   
