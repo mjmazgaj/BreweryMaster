@@ -30,6 +30,7 @@ namespace BreweryMaster.API.Recipe.Services.ResponseBuilders
             _recipeResponse.GeneralInfo.TypeName = recipe.Type?.Name;
             _recipeResponse.GeneralInfo.StyleId = recipe.Style?.Id;
             _recipeResponse.GeneralInfo.StyleName = recipe.Style?.Name;
+            _recipeResponse.Info = recipe.Info;
 
             return this;
         }

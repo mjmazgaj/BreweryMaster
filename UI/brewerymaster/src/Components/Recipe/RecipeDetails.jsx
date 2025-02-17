@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 
 import { useTranslation } from "react-i18next";
 import { fetchData } from "../Shared/api";
 
 import fieldsProvider from "./RecipeComponents/helpers/fieldsProvider";
-import "./recipe.css"
+import "./recipe.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
 import "./recipe.css";
@@ -35,8 +35,16 @@ const RecipeDetails = () => {
       </Button>
       <h4>Szczegóły na temat receputry:</h4>
       <h2>{data?.generalInfo?.name}</h2>
+      {data.info && (
+        <Card className="recipe-info_container">
+          <Card.Header>
+            <h3>Info</h3>
+          </Card.Header>
+          <Card.Text>{data.info}</Card.Text>
+        </Card>
+      )}
       <div className="recipe-controls_container">
-        <ControlsCard 
+        <ControlsCard
           className="recipe-controls_general-info"
           title="Genaral Info"
           data={data?.generalInfo}
@@ -44,7 +52,7 @@ const RecipeDetails = () => {
           path="User"
           emptyMessage="Batch Info can't be loaded"
         />
-        <ControlsCard 
+        <ControlsCard
           className="recipe-controls_batch-info"
           title="Batch Info"
           data={data?.batchInfo}
@@ -52,7 +60,7 @@ const RecipeDetails = () => {
           path="User"
           emptyMessage="Batch Info can't be loaded"
         />
-        <ControlsCard 
+        <ControlsCard
           className="recipe-controls_mash-info"
           title="Mash Info"
           data={data?.mashInfo}
@@ -62,33 +70,27 @@ const RecipeDetails = () => {
         />
       </div>
       <div>
-      {data?.fermentingIngredients && (
-          <DynamicTable
-            tableKey="fermentingIngredients"
-            tableTitle="Fermenting Ingredients"
-            dataCategory="brewery"
-            data={data.fermentingIngredients}
-            handleDoubleClick={() => {}}
-          />
-        )}
-        {data?.hops &&(
-            <DynamicTable
-              tableKey="hops"
-              tableTitle="Hops"
-              dataCategory="brewery"
-              data={data.hops}
-              handleDoubleClick={() => {}}
-            />
-          )}
-          {data?.yeast &&(
-              <DynamicTable
-                tableKey="yeast"
-                tableTitle="Yeast"
-                dataCategory="brewery"
-                data={data.yeast}
-                handleDoubleClick={() => {}}
-              />
-            )}
+        <DynamicTable
+          tableKey="fermentingIngredients"
+          tableTitle="Fermenting Ingredients"
+          dataCategory="brewery"
+          data={data?.fermentingIngredients}
+          handleDoubleClick={() => {}}
+        />
+        <DynamicTable
+          tableKey="hops"
+          tableTitle="Hops"
+          dataCategory="brewery"
+          data={data?.hops}
+          handleDoubleClick={() => {}}
+        />
+        <DynamicTable
+          tableKey="yeast"
+          tableTitle="Yeast"
+          dataCategory="brewery"
+          data={data?.yeast}
+          handleDoubleClick={() => {}}
+        />
       </div>
     </div>
   );
