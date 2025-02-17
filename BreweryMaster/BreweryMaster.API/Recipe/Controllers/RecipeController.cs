@@ -58,7 +58,9 @@ namespace BreweryMaster.API.Info.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var createdRecipeDetails = await _recipeService.CreateRecipeDetailAsync(request);
+            var userContext = HttpContext.User;
+
+            var createdRecipeDetails = await _recipeService.CreateRecipeDetailAsync(request, userContext);
 
             if (createdRecipeDetails == null)
                 return UnprocessableEntity();

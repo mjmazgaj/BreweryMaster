@@ -3,6 +3,7 @@ using BreweryMaster.API.Recipe.Models.DB;
 using BreweryMaster.API.Recipe.Services.ResponseBuilders;
 using BreweryMaster.API.Shared.Models.DB;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace BreweryMaster.API.Recipe.Services
 {
@@ -87,9 +88,14 @@ namespace BreweryMaster.API.Recipe.Services
 
             return recipes.FirstOrDefault(x => x.GeneralInfo.Id == id);
         }
-        public async Task<RecipeDetailsResponse?> CreateRecipeDetailAsync(RecipeDetailsRequest request)
+        public async Task<RecipeDetailsResponse?> CreateRecipeDetailAsync(RecipeDetailsRequest request, ClaimsPrincipal? claims)
         {
             using var transaction = await _context.Database.BeginTransactionAsync();
+
+            var nameIdClaim = claims?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+
+            if (nameIdClaim is null)
+                throw new ArgumentNullException("Cant find logged user");
 
             try
             {
@@ -114,7 +120,8 @@ namespace BreweryMaster.API.Recipe.Services
                     WaterToGrainRatio = request.WaterToGrainRatio,
                     MashWaterVolume = request.MashWaterVolume,
                     TotalMashVolume = request.TotalMashVolume,
-                    CreatedById = "todo",
+                    CreatedById = nameIdClaim.Value,
+                    CreatedOn = DateTime.Now
                 };
 
                 _context.Recipes.Add(recipeToCreate);
