@@ -2,7 +2,7 @@
 import Home from '../Home';
 import Register from '../../Security/Register';
 import Login from '../../Security/Login';
-import ProspectOrderForm from '../../Order/ProspectOrderForm';
+import ProspectOrder from '../../Order/ProspectOrder';
 import ProspectOrderSummary from '../../Order/ProspectOrderSummary';
 import Order from '../../Order/Order';
 import Recipe from '../../Recipe/Recipe';
@@ -21,7 +21,7 @@ export const useApp = () => {
       { path: "/", element: <Home /> },
       { path: "/register", element: <Register /> },
       { path: "/login", element: <Login /> },
-      { path: "/ProspectOrder", element: <ProspectOrderForm /> },
+      { path: "/ProspectOrder", element: <ProspectOrder /> },
       { path: "/ProspectOrderSummary", element: <ProspectOrderSummary /> },
       { path: "/Error", element: <Error /> },
       { path: "/Unauthorized", element: <Unauthorized /> },

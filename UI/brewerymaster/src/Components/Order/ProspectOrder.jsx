@@ -4,11 +4,11 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './order.css';
 
 import FormCarousel from '../Shared/FormCarousel'
-import BackgroundDetails from "./../Shared/BackgroundDetails";
+import BackgroundDetails from "../Shared/BackgroundDetails";
 
 import { useProspectOrderForm } from "./ProspectOrder/helpers/useProspectOrderForm";
 
-const ProspectOrderForm = () => { 
+const ProspectOrder = () => { 
   const {steps, handleSave} = useProspectOrderForm();
 
   return (
@@ -19,4 +19,4 @@ const ProspectOrderForm = () => {
   );
 };
 
-export default ProspectOrderForm;
+export default ProspectOrder;
