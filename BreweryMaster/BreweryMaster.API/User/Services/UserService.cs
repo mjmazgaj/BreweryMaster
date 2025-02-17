@@ -59,24 +59,27 @@ namespace BreweryMaster.API.User.Services
             return response;
         }
 
-        public async Task<UserResponse?> GetUserById(string id)
+        public async Task<UserDetailsResponse?> GetUserById(string id)
         {
-            var userList = await GetUsers();
 
-            var user = userList?.FirstOrDefault(x => x.Id == id);
+            var user = _context.Users.FirstOrDefault(x => x.Id == id);
 
-            UserResponse userResponse = null!;
+            var addresses = await _context.UserAddresses.Where(x => x.UserId == id).Include(x => x.Address).ToListAsync();
+            var homeAddress = addresses.FirstOrDefault(x => x.AddressTypeId == (int)AddressType.Home)?.Address.ToResponse();
+            var deliveryAddress = addresses.FirstOrDefault(x => x.AddressTypeId == (int)AddressType.Delivery)?.Address.ToResponse();
+            var invoiceAddress = addresses.FirstOrDefault(x => x.AddressTypeId == (int)AddressType.Invoice)?.Address.ToResponse();
 
-            if (user is not null)
+            var response = new UserDetailsResponse()
             {
-                userResponse = new UserResponse()
-                {
-                    Id = user.Id,
-                    Email = user.Email
-                };
+                Id = id,
+                Email = user.Email,
+                HomeAddress = homeAddress,
+                DeliveryAddress = deliveryAddress,
             };
 
-            return userResponse;
+            user.SetDetailResponse(response);
+
+            return response;
         }
 
         public async Task<UserResponse> GetCurrentUser(ClaimsPrincipal? user)

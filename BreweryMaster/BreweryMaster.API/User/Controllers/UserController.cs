@@ -35,10 +35,10 @@ namespace BreweryMaster.API.UserModule.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        [ProducesResponseType(typeof(UserResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(UserDetailsResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<UserResponse?>> GetUserById(string id)
+        public async Task<ActionResult<UserDetailsResponse?>> GetUserById(string id)
         {
             var user = await _userService.GetUserById(id);
 

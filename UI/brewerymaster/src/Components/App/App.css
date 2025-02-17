@@ -83,6 +83,10 @@ footer {
   width: 80%;
 }
 
+.home-user_container{
+  width: 100%;
+}
+
 .home-guest-navigation_container {
   display: flex;
   justify-content: center;

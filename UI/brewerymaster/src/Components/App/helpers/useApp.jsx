@@ -10,6 +10,7 @@ import RecipeDetails from '../../Recipe/RecipeDetails';
 import Client from '../../User/Client/Client';
 import FermentingIngredients from '../../Info/FermentingIngredients/FermentingIngredients';
 import User from '../../User/User';
+import UserDetails from '../../User/UserDetails';
 import Kanban from '../../Work/Kanban';
 import Unauthorized from '../Unuthorized';
 import Error from '../../Shared/Error';
@@ -33,6 +34,7 @@ export const useApp = () => {
       { path: "/FermentingIngredients", roles:["supervisor"], element: <FermentingIngredients /> },
       { path: "/Client", roles:["manager"], element: <Client /> },
       { path: "/User", roles:["manager"], element: <User /> },
+      { path: "/User/:id", roles:["manager"], element: <UserDetails /> },
       { path: "/Kanban", roles:["employee"], element: <Kanban /> },
     ];
 

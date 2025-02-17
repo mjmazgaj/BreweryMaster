@@ -8,7 +8,7 @@ namespace BreweryMaster.API.User.Services
     public interface IUserService
     {
         Task<IEnumerable<UserResponse>?> GetUsers();
-        Task<UserResponse?> GetUserById(string id);
+        Task<UserDetailsResponse?> GetUserById(string id);
         Task<UserResponse> GetCurrentUser(ClaimsPrincipal? user);
         Task<UserDetailsResponse> GetCurrentUserDetails(ClaimsPrincipal? user);
         Task<UserResponse> CreateUser(UserRegisterRequest request);
