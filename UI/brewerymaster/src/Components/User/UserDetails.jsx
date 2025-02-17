@@ -2,18 +2,15 @@ import React, { useState, useEffect } from "react";
 import "./user.css";
 
 import { useTranslation } from "react-i18next";
-import { useUser } from "../Security/UserProvider";
 
 import { useParams } from "react-router-dom";
 import fieldsProvider from "../User/helpers/fieldsProvider";
-import FormControlsReadOnly from "../Shared/FormControlsReadOnly";
-import { Button } from "react-bootstrap";
 
 import { fetchData } from "../Shared/api";
+import ControlsCard from "../Shared/ControlComponents/ControlsCard";
 
 const UserDetails = () => {
   const { t } = useTranslation();
-  const { user } = useUser();
   const { id } = useParams();
 
   const [data, setData] = useState({});
@@ -30,56 +27,30 @@ const UserDetails = () => {
     <div className="user-details_container">
       <h2>Details</h2>
       <div className="info_container">
-        <div className="user-info_container">
-          <h3>User info</h3>
-          <FormControlsReadOnly
-            fields={fieldsProvider(t).userInfoFields.control}
-            data={{ ...data.individualUser, email: data.email }}
-          />
-          <div className="buttons_container">
-            <Button variant="dark">Edit</Button>
-          </div>
-        </div>
-        <div className="home-address-info_container">
-          <h3>Home address info</h3>
-
-          {data.homeAddress ? (
-            <>
-              <FormControlsReadOnly
-                fields={fieldsProvider(t).addressInfoFields.control}
-                data={data.homeAddress}
-              />
-              <div className="buttons_container">
-                <Button variant="dark">Edit</Button>
-              </div>
-            </>
-          ) : (
-            <>
-              <p>Home address wasn't added</p>
-              <Button variant="dark">Add now</Button>
-            </>
-          )}
-        </div>
-        <div className="delivery-address-info_container">
-          <h3>Delivery address info</h3>
-
-          {data.deliveryAddress ? (
-            <>
-              <FormControlsReadOnly
-                fields={fieldsProvider(t).addressInfoFields.control}
-                data={data.deliveryAddress}
-              />
-              <div className="buttons_container">
-                <Button variant="dark">Edit</Button>
-              </div>
-            </>
-          ) : (
-            <>
-              <p>Delivery address wasn't added</p>
-              <Button variant="dark">Add now</Button>
-            </>
-          )}
-        </div>
+        <ControlsCard 
+          className="user-info_container"
+          title="User info"
+          data={{ ...data?.individualUser, email: data?.email }}
+          fields={fieldsProvider(t).userInfoFields.control}
+          path="User"
+          emptyMessage="User info can't be loaded"
+        />
+        <ControlsCard 
+          className="home-address-info_container"
+          title="Home address info"
+          data={data?.homeAddress}
+          fields={fieldsProvider(t).addressInfoFields.control}
+          path="Address"
+          emptyMessage="Home address wasn't added"
+        />
+        <ControlsCard 
+          className="delivery-address-info_container"
+          title="Delivery address info"
+          data={data?.deliveryAddress}
+          fields={fieldsProvider(t).addressInfoFields.control}
+          path="Address"
+          emptyMessage="Delivery address wasn't added"
+        />
       </div>
     </div>
   );

@@ -2,6 +2,8 @@
     "button": {
         "submit": "Submit",
         "add": "Add",
+        "addNow": "Add now",
+        "edit": "Edit",
         "cancel": "Cancel",
         "confirm": "Confirm",
         "next": "Next",

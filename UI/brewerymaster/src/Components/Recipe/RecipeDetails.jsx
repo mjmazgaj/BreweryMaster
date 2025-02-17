@@ -10,8 +10,8 @@ import "./recipe.css"
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
 import "./recipe.css";
-import FormControlsReadOnly from "../Shared/FormControlsReadOnly";
 import DynamicTable from "../Shared/TableComponents/DynamicTable";
+import ControlsCard from "../Shared/ControlComponents/ControlsCard";
 
 const RecipeDetails = () => {
   const { t } = useTranslation();
@@ -36,27 +36,30 @@ const RecipeDetails = () => {
       <h4>Szczegóły na temat receputry:</h4>
       <h2>{data?.generalInfo?.name}</h2>
       <div className="recipe-controls_container">
-        <div className="recipe-controls_general-info">
-          <h3>Genarl Info</h3>
-          <FormControlsReadOnly
-            fields={fieldsProvider(t).recipeGeneralInfoFields.control}
-            data={data.generalInfo}
-          />
-        </div>
-        <div className="recipe-controls_batch-info">
-          <h3>Batch Info</h3>
-          <FormControlsReadOnly
-            fields={fieldsProvider(t).recipeBatchInfoFields.control}
-            data={data.batchInfo}
-          />
-        </div>
-        <div className="recipe-controls_mash-info">
-          <h3>Mash Info</h3>
-          <FormControlsReadOnly
-            fields={fieldsProvider(t).recipeMashInfoFields.control}
-            data={data.mashInfo}
-          />
-        </div>
+        <ControlsCard 
+          className="recipe-controls_general-info"
+          title="Genaral Info"
+          data={data?.generalInfo}
+          fields={fieldsProvider(t).recipeGeneralInfoFields.control}
+          path="User"
+          emptyMessage="Batch Info can't be loaded"
+        />
+        <ControlsCard 
+          className="recipe-controls_batch-info"
+          title="Batch Info"
+          data={data?.batchInfo}
+          fields={fieldsProvider(t).recipeBatchInfoFields.control}
+          path="User"
+          emptyMessage="Batch Info can't be loaded"
+        />
+        <ControlsCard 
+          className="recipe-controls_mash-info"
+          title="Mash Info"
+          data={data?.mashInfo}
+          fields={fieldsProvider(t).recipeMashInfoFields.control}
+          path="User"
+          emptyMessage="Mash Info can't be loaded"
+        />
       </div>
       <div>
       {data?.fermentingIngredients && (
