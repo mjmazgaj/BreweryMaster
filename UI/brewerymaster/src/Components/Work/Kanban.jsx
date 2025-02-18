@@ -1,67 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import KanbanBoard from "./KanbanComponents/KanbanBoard";
 import "./kanban.css";
 
-import { updateStatus, fetchDataByOwnerId } from "./api";
 import KanbanModal from "./KanbanComponents/KanbanModal";
+
+import { useKanban } from "./KanbanComponents/helpers/useKanban";
 
 const Kanban = () => {
   const [columns, setColumns] = useState(null);
-  const [tasks, setTasks] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  useEffect(() => {
-    const getData = () => {
-      fetchDataByOwnerId(setColumns);
-    };
-    getData();
-  }, []);
-
-  useEffect(() => {
-    if (columns) {
-      const resultList = [];
-
-      for (const key in columns) {
-        if (columns.hasOwnProperty(key)) {
-          const obj = columns[key];
-          const status = obj.status;
-          obj.items.forEach((item) => {
-            const newItem = {
-              Id: item.id,
-              Status: status,
-            };
-            resultList.push(newItem);
-          });
-        }
-      }
-
-      setTasks(resultList);
-    }
-  }, [columns]);
-
-  const handleSave = async (e) => {
-    e.preventDefault();
-    try {
-      await updateStatus(tasks);
-    } catch (error) {
-      setErrorMessage(
-        error.response?.data?.message ||
-          "Zapisanie nie powiodło się. Spróbuj ponownie."
-      );
-    }
-  };
-
-  const handleAdd = async (e) => {
-    e.preventDefault();
-    setShowModal(true);
-  };
-
-  const handleClose = async (e) => {
-    e.preventDefault();
-    setShowModal(false);
-  };
+  const { handleSave, handleAdd, handleClose } = useKanban({
+    columns,
+    setColumns,
+    setErrorMessage,
+    setShowModal,
+  });
 
   return (
     <>
