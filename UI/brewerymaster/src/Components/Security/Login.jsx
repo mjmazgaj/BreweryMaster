@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import React, { useState } from "react";
+import { Form, Button, Card } from "react-bootstrap";
 
-import { useLogin } from './helpers/useLogin';
-import securityFormFieldsProvider from './helpers/securityFormFieldsProvider';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { useLogin } from "./helpers/useLogin";
+import securityFormFieldsProvider from "./helpers/securityFormFieldsProvider";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./security.css";
 
-import { useTranslation } from 'react-i18next';
-import FormControls from '../Shared/FormControls'
+import { useTranslation } from "react-i18next";
+import FormControls from "../Shared/FormControls";
 
 const Login = () => {
-
   const { t } = useTranslation();
-  
-  const [errorMessage, setErrorMessage] = useState('');
+
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [data, setData] = useState({});
 
@@ -21,20 +21,28 @@ const Login = () => {
 
   return (
     <Form onSubmit={handleLogin}>
-      <h1>Zaloguj się:</h1>
+      <Card className="login_container" >
+        <Card.Header>
+          <h1>Zaloguj się:</h1>
+        </Card.Header>
 
-      <FormControls
-        fields={securityFormFieldsProvider(t).loginFields}
-        data={data}
-        setData={setData}
-        setIsValid={setIsValid}
-      />
+        <Card.Body>
+          <FormControls
+            fields={securityFormFieldsProvider(t).loginFields}
+            data={data}
+            setData={setData}
+            setIsValid={setIsValid}
+          />
+        </Card.Body>
 
-      <Button variant="dark" type="submit">
-        Zaloguj
-      </Button>
+        <Card.Footer>
+          <Button variant="dark" type="submit">
+            Zaloguj
+          </Button>
+        </Card.Footer>
 
-      {errorMessage && <p className="text-danger">{errorMessage}</p>}
+        {errorMessage && <p className="text-danger">{errorMessage}</p>}
+      </Card>
     </Form>
   );
 };
