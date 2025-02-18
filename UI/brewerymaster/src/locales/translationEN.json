@@ -117,6 +117,7 @@
             "extras": "Extras",
             "batch": "Batch",
             "mash": "Mash",
+            "status": "Status",
             "createdOn": "Created On",
             "createdBy": "Created By",
             "stages": "Stages",

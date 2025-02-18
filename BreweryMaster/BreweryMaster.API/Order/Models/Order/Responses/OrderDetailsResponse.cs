@@ -13,5 +13,7 @@ namespace BreweryMaster.API.OrderModule.Models
         public DateOnly CreatedOn { get; set; }
         public DateOnly TargetDate { get; set; }
         public decimal Price { get; set; }
+        public int StatusId { get; set; }
+        public required string Status { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using BreweryMaster.API.OrderModule.Models;
+﻿using BreweryMaster.API.Info.Models;
+using BreweryMaster.API.OrderModule.Models;
 using BreweryMaster.API.Recipe.Models;
 using BreweryMaster.API.Shared.Models.DB;
 using BreweryMaster.API.User.Services;
@@ -43,6 +44,16 @@ namespace BreweryMaster.API.OrderModule.Services
                         }).ToListAsync();
         }
 
+        public async Task<IEnumerable<EntityResponse>> GetOrderStatuses()
+        {
+            return await _context.OrderStatuses
+                            .Select(x => new EntityResponse()
+                            {
+                                Id = x.Id,
+                                Name = x.Name,
+                            }).ToListAsync();
+        }
+
         public async Task<OrderResponse?> GetOrderByIdAsync(int id)
         {
             return await _context.Orders
@@ -74,6 +85,11 @@ namespace BreweryMaster.API.OrderModule.Services
             if (order is null)
                 return null;
 
+            var statusChanges = await _context.OrderStatusChanges
+                                .Where(x => x.OrderId == id)
+                                .Include(x=>x.OrderStatus)
+                                .OrderBy(x=>x.ChangedOn).ToListAsync();
+
             return new OrderDetailsResponse()
             {
                 Id = order.Id,
@@ -97,6 +113,8 @@ namespace BreweryMaster.API.OrderModule.Services
                 },
                 TargetDate = DateOnly.FromDateTime(order.TargetDate),
                 CreatedOn = DateOnly.FromDateTime(order.CreatedOn),
+                StatusId = statusChanges.LastOrDefault()?.OrderStatusId ?? 1,
+                Status = statusChanges.LastOrDefault()?.OrderStatus.Name ?? "NotSet",
             };
         }
 

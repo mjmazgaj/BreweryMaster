@@ -6,10 +6,10 @@ import { fetchData } from "../Shared/api";
 
 import { useTranslation } from "react-i18next";
 import ControlsCard from "../Shared/ControlComponents/ControlsCard";
-
+import DropDownIndex from "../Shared/DropDownIndex"
 import fieldsProviderOrder from "./OrderComponents/helpers/fieldsProvider";
 import fieldsProviderRecipe from "../Recipe/RecipeComponents/helpers/fieldsProvider";
-import { Button } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 
 const OrderDetails = () => {
   const { t } = useTranslation();
@@ -17,13 +17,27 @@ const OrderDetails = () => {
   const navigate = useNavigate();
 
   const [data, setData] = useState({});
+  const [editData, setEditData] = useState({
+    statusId: 1,
+  });
+  const [statuses, setStatuses] = useState({});
 
   const handleButton = () => {
     navigate("/Order");
   };
 
+  
+  const handleSelectChange = (e, name) => {
+    const { value } = e.target;
+    setEditData((prevData) => ({
+      ...prevData,
+      [name]: parseInt(value),
+    }));
+  };
+
   useEffect(() => {
     fetchData(`Order/Details/${id}`, setData);
+    fetchData(`Order/Status`, setStatuses);
   }, []);
 
   return (
@@ -31,12 +45,27 @@ const OrderDetails = () => {
       <Button variant="dark" onClick={handleButton}>
         Return
       </Button>
-      <h4>Szczegóły na temat zamówienia</h4>
-      <p>Receptura: {data?.recipe?.name}</p>
-      <p>Zamawiający: {data?.createdBy}</p>
-      <p>Termin: {data?.targetDate}</p>
 
       <div className="order-details-info_container">
+        <Card className="order-details-general-info_container">
+          <Card.Header>
+            <h3>Podsumowanie</h3>
+          </Card.Header>
+          <Card.Body>
+            <p>Receptura: {data?.recipe?.name}</p>
+            <p>Zamawiający: {data?.createdBy}</p>
+            <p>Termin: {data?.targetDate}</p>
+
+            <DropDownIndex 
+            id="test_ID"
+            data={statuses}
+            selectedOption={editData?.statusId ?? data.statusId}
+            setSelectedOption={(e) => {handleSelectChange(e, "statusId")}}
+            isReadOnly={false}
+            label="Status"
+            />
+          </Card.Body>
+        </Card>
         <ControlsCard
           className="order-details-general-info_container"
           title="General Info"

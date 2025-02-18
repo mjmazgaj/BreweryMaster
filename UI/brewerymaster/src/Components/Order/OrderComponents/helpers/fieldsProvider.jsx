@@ -31,6 +31,11 @@ const fieldsProvider = (t) => ({
             label: t("name.brewery.createdBy"),
             type: "textArea",
           },
+          {
+            id: "status",
+            label: t("name.brewery.status"),
+            type: "textArea",
+          },
         ],
     },
   });
