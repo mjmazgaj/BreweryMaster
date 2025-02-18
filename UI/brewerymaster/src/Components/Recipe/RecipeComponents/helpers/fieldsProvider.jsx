@@ -57,27 +57,27 @@ const fieldsProvider = (t) => ({
         },
         {
           id: "wortVolume",
-          label: t("name.brewery.wortVolume"),
+          label: t("name.brewery.boiledWortVolume"),
           type: "textArea"
         },
         {
           id: "boilLoss",
-          label: t("name.brewery.boilLoss"),
+          label: t("name.brewery.boilingLosses"),
           type: "textArea"
         },
         {
           id: "preBoilGravity",
-          label: t("name.brewery.preBoilGravity"),
+          label: t("name.brewery.preBoilingDensity"),
           type: "textArea"
         },
         {
           id: "fermentationLoss",
-          label: t("name.brewery.fermentationLoss"),
+          label: t("name.brewery.fermentationLosses"),
           type: "textArea"
         },
         {
           id: "dryHopLoss",
-          label: t("name.brewery.dryHopLoss"),
+          label: t("name.brewery.dryHoppingLosses"),
           type: "textArea"
         }
       ]
@@ -86,7 +86,7 @@ const fieldsProvider = (t) => ({
       control: [
         {
           id: "mashEfficiency",
-          label: t("name.brewery.mashEfficiency"),
+          label: t("name.brewery.efficiency"),
           type: "textArea"
         },
         {
