@@ -15,5 +15,5 @@ export const useTaskCard = () => {
     handleEditClick,
     handleDetailClick,
     handleRemoveClick,
-  }
-}
+  };
+};

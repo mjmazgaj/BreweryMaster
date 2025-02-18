@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import KanbanBoard from './KanbanComponents/KanbanBoard';
-import './kanban.css';
+import React, { useEffect, useState } from "react";
+import Button from "react-bootstrap/Button";
+import KanbanBoard from "./KanbanComponents/KanbanBoard";
+import "./kanban.css";
 
-import {updateStatus, fetchDataByOwnerId} from './api';
-import KanbanModal from './KanbanComponents/KanbanModal';
+import { updateStatus, fetchDataByOwnerId } from "./api";
+import KanbanModal from "./KanbanComponents/KanbanModal";
 
 const Kanban = () => {
   const [columns, setColumns] = useState(null);
   const [tasks, setTasks] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
 
-useEffect(() => {
-  const getData = () => {
-    fetchDataByOwnerId(setColumns)
-  };
-  getData()
-}, [])
+  useEffect(() => {
+    const getData = () => {
+      fetchDataByOwnerId(setColumns);
+    };
+    getData();
+  }, []);
 
   useEffect(() => {
     if (columns) {
@@ -27,10 +27,10 @@ useEffect(() => {
         if (columns.hasOwnProperty(key)) {
           const obj = columns[key];
           const status = obj.status;
-          obj.items.forEach(item => {
+          obj.items.forEach((item) => {
             const newItem = {
               Id: item.id,
-              Status: status
+              Status: status,
             };
             resultList.push(newItem);
           });
@@ -46,7 +46,10 @@ useEffect(() => {
     try {
       await updateStatus(tasks);
     } catch (error) {
-      setErrorMessage(error.response?.data?.message || 'Zapisanie nie powiodło się. Spróbuj ponownie.');
+      setErrorMessage(
+        error.response?.data?.message ||
+          "Zapisanie nie powiodło się. Spróbuj ponownie."
+      );
     }
   };
 
@@ -65,10 +68,18 @@ useEffect(() => {
       {columns ? (
         <>
           <KanbanBoard columns={columns} setColumns={setColumns} />
-          <KanbanModal show={showModal} setShow={setShowModal} handleClose={handleClose}/>
-          <div className='kanban-buttons_container'>
-            <Button onClick={handleSave} variant="dark">Zapisz</Button>
-            <Button onClick={handleAdd} variant="dark">Dodaj</Button>
+          <KanbanModal
+            show={showModal}
+            setShow={setShowModal}
+            handleClose={handleClose}
+          />
+          <div className="kanban-buttons_container">
+            <Button onClick={handleSave} variant="dark">
+              Zapisz
+            </Button>
+            <Button onClick={handleAdd} variant="dark">
+              Dodaj
+            </Button>
           </div>
         </>
       ) : (

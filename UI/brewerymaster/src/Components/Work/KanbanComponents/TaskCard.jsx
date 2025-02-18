@@ -1,42 +1,41 @@
-import React from 'react';
+import React from "react";
 
-import { Draggable } from 'react-beautiful-dnd';
-import { CiEdit , CiCircleRemove, CiCircleInfo  } from "react-icons/ci";
+import { Draggable } from "react-beautiful-dnd";
+import { CiEdit, CiCircleRemove, CiCircleInfo } from "react-icons/ci";
 
-import { useTaskCard } from './helpers/useTaskCard';
+import { useTaskCard } from "./helpers/useTaskCard";
 
 const TaskCard = ({ item, index }) => {
-
-  const {handleEditClick,
-    handleDetailClick,
-    handleRemoveClick} = useTaskCard();
+  const { handleEditClick, handleDetailClick, handleRemoveClick } =
+    useTaskCard();
 
   return (
     <Draggable key={item.id} draggableId={`${item.id}`} index={index}>
       {(provided) => (
-        <div className='task'
+        <div
+          className="task"
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          <div className='task-header'>
+          <div className="task-header">
             <p>{item.id}</p>
-              <div className='task-icons'>
-                <CiCircleInfo  onClick={() => handleDetailClick(item.id)}/>
-                <CiEdit onClick={() => handleEditClick(item.id)}/>
-                <CiCircleRemove  onClick={() => handleRemoveClick(item.id)}/>
-              </div>
+            <div className="task-icons">
+              <CiCircleInfo onClick={() => handleDetailClick(item.id)} />
+              <CiEdit onClick={() => handleEditClick(item.id)} />
+              <CiCircleRemove onClick={() => handleRemoveClick(item.id)} />
             </div>
-          <div className='task-information'>
+          </div>
+          <div className="task-information">
             <p>{item.title}</p>
             <p>{item.ownerName}</p>
             <p>{item.summary}</p>
             <div className="task-information-secondary-details">
               <p>
                 <span>
-                  {new Date(item.dueDate).toLocaleDateString('en-us', {
-                    month: 'short',
-                    day: '2-digit',
+                  {new Date(item.dueDate).toLocaleDateString("en-us", {
+                    month: "short",
+                    day: "2-digit",
                   })}
                 </span>
               </p>
