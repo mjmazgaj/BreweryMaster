@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import TaskCard from './TaskCard';
 import "../kanban.css"
@@ -9,17 +9,17 @@ const KanbanBoard = ({columns, setColumns}) => {
     <DragDropContext
       onDragEnd={(result) => handleOnDragEnd(result, columns, setColumns)}
     >
-      <div className='tasks-container'>
-        <div className='tasks-column'>
+      <div className='kanban-board_container'>
+        <div className='kanban-board-column_container'>
           {Object.entries(columns).map(([columnId, column], index) => {
             return (
               <Droppable key={columnId} droppableId={columnId}>
                 {(provided) => (
-                  <div className='tasks-list'
+                  <div className='kanban-board-column'
                     ref={provided.innerRef}
                     {...provided.droppableProps}
                   >
-                    <div className='title'>{column.title}</div>
+                    <div className='kanban-board-column_title'>{column.title}</div>
                     {column.items?.map((item, index) => (
                       <TaskCard key={item} item={item} index={index} />
                     ))}

@@ -3,21 +3,13 @@ import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { CiEdit , CiCircleRemove, CiCircleInfo  } from "react-icons/ci";
 
+import { useTaskCard } from './helpers/useTaskCard';
+
 const TaskCard = ({ item, index }) => {
 
-  const handleEditClick = (id) => {
-    console.log(`edit ${id}`);
-  };
-
-  const handleRemoveClick = (id) => {
-    console.log(`remove ${id}`);
-  };
-
-  const handleDetailClick = (id) => {
-    console.log(`detail ${id}`);
-  };
-
-  console.log(item)
+  const {handleEditClick,
+    handleDetailClick,
+    handleRemoveClick} = useTaskCard();
 
   return (
     <Draggable key={item.id} draggableId={`${item.id}`} index={index}>

@@ -66,8 +66,10 @@ useEffect(() => {
         <>
           <KanbanBoard columns={columns} setColumns={setColumns} />
           <KanbanModal show={showModal} setShow={setShowModal} handleClose={handleClose}/>
-          <Button onClick={handleSave} variant="primary">Zapisz</Button>
-          <Button onClick={handleAdd} variant="primary">Dodaj</Button>
+          <div className='kanban-buttons_container'>
+            <Button onClick={handleSave} variant="dark">Zapisz</Button>
+            <Button onClick={handleAdd} variant="dark">Dodaj</Button>
+          </div>
         </>
       ) : (
         <p>Loading...</p>
