@@ -14,9 +14,6 @@ namespace BreweryMaster.API.Shared.Extensions
             builder.Entity<ClientAddress>()
                 .HasKey(x => new { x.ClientId, x.AddressId, x.AddressTypeId });
 
-            builder.Entity<OrderStatusChange>()
-                .HasKey(x => new { x.OrderId, x.OrderStatusId });
-
             builder.Entity<Order>(entity =>
             {
                 entity.HasOne(x => x.Client)

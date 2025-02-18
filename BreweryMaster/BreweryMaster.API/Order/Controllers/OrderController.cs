@@ -80,6 +80,16 @@ namespace BreweryMaster.API.OrderModule.Controllers
             return CreatedAtAction(nameof(GetOrderById), new { id = createdClient.Id }, createdClient);
         }
 
+        [HttpPost]
+        [Route("Status")]
+        [ProducesResponseType(typeof(OrderStatusChangeResponse), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<OrderStatusChangeResponse>> CreateOrderStatusChange(OrderStatusChangeRequest request)
+        {
+            var createOrderStatusChange = await _clientService.CreateOrderStatusChange(request);
+            return Ok(createOrderStatusChange);
+        }
+
         [HttpPut]
         [Route("{id:int}")]
         [ProducesResponseType(typeof(OrderResponse), StatusCodes.Status200OK)]

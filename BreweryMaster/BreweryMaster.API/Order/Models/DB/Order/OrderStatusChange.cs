@@ -7,6 +7,10 @@ namespace BreweryMaster.API.OrderModule.Models
     /// </summary>
     public class OrderStatusChange
     {
+        /// <summary>
+        /// The id
+        /// </summary>
+        public int Id { get; set; }
 
         /// <summary>
         /// The order id

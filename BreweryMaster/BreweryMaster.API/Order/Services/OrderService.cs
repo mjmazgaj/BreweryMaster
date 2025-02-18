@@ -144,6 +144,30 @@ namespace BreweryMaster.API.OrderModule.Services
             return clientToCreate;
         }
 
+        public async Task<OrderStatusChangeResponse> CreateOrderStatusChange(OrderStatusChangeRequest request)
+        {
+            var orderStatusChangeToCreate = new OrderStatusChange()
+            {
+                OrderId = request.OrderId,
+                Order = null!,
+                OrderStatusId = request.OrderStatusId,
+                OrderStatus = null!,
+                ChangedOn = DateTime.Now,
+            };
+
+            _context.OrderStatusChanges.Add(orderStatusChangeToCreate);
+            await _context.SaveChangesAsync();
+
+            return new OrderStatusChangeResponse()
+            {
+                OrderId = orderStatusChangeToCreate.OrderId,
+                OrderStatusId = orderStatusChangeToCreate.OrderStatusId,
+                OrderStatus = orderStatusChangeToCreate.OrderStatus?.Name ?? "",
+                ChangedOnDateTime = orderStatusChangeToCreate.ChangedOn,
+                ChangedOnDateOnly = DateOnly.FromDateTime(orderStatusChangeToCreate.ChangedOn),
+            };
+        }
+
         public async Task<bool> EditOrderAsync(int id, OrderUpdateRequest order)
         {
             if (order.Id != id)

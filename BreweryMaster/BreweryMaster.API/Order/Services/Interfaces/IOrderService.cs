@@ -9,6 +9,7 @@ public interface IOrderService
     Task<OrderResponse?> GetOrderByIdAsync(int id);
     Task<OrderDetailsResponse?> GetOrderDetailById(int id);
     Task<Order> CreateOrderAsync(OrderRequest request, ClaimsPrincipal? user);
+    Task<OrderStatusChangeResponse> CreateOrderStatusChange(OrderStatusChangeRequest request);
     Task<bool> EditOrderAsync(int id, OrderUpdateRequest request);
     Task<bool> DeleteOrderByIdAsync(int id);
 }
