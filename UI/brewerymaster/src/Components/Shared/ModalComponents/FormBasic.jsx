@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { Form } from "react-bootstrap";
 
-import { useModalForm } from "./helpers/useModalForm";
+import { useFormBasic } from "./helpers/useFormBasic";
 
 import FormControls from "../FormControls";
 import DropDownIndex from "../DropDownIndex";
@@ -10,7 +10,7 @@ import FormDatePicker from "../FormDatePicker";
 const FormBasic = ({ fields, data, setData }) => {
   const [isValid, setIsValid] = useState(true);
 
-  const { handleCheckBox, handleSelectChange, handleDateChange } = useModalForm(
+  const { handleCheckBox, handleSelectChange, handleDateChange } = useFormBasic(
     {
       setData,
     }
