@@ -7,7 +7,6 @@ import ProspectOrderSummary from '../../Order/ProspectOrderSummary';
 import Order from '../../Order/Order';
 import Recipe from '../../Recipe/Recipe';
 import RecipeDetails from '../../Recipe/RecipeDetails';
-import Client from '../../User/Client/Client';
 import FermentingIngredients from '../../Info/FermentingIngredients/FermentingIngredients';
 import User from '../../User/User';
 import UserDetails from '../../User/UserDetails';
@@ -34,7 +33,6 @@ export const useApp = () => {
       { path: "/Recipe", roles:["brewer"], element: <Recipe /> },
       { path: "/Recipe/:id", roles:["brewer"], element: <RecipeDetails /> },
       { path: "/FermentingIngredients", roles:["supervisor"], element: <FermentingIngredients /> },
-      { path: "/Client", roles:["manager"], element: <Client /> },
       { path: "/User", roles:["manager"], element: <User /> },
       { path: "/User/:id", roles:["manager"], element: <UserDetails /> },
       { path: "/Kanban", roles:["employee"], element: <Kanban /> },
