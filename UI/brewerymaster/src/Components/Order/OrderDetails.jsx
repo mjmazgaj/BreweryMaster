@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { useParams, useNavigate } from "react-router-dom";
 
-import { fetchData } from "../Shared/api";
+import { addData, fetchData } from "../Shared/api";
 
 import { useTranslation } from "react-i18next";
 import ControlsCard from "../Shared/ControlComponents/ControlsCard";
@@ -17,27 +17,40 @@ const OrderDetails = () => {
   const navigate = useNavigate();
 
   const [data, setData] = useState({});
-  const [editData, setEditData] = useState({
-    statusId: 1,
-  });
+  const [editData, setEditData] = useState({});
   const [statuses, setStatuses] = useState({});
 
   const handleButton = () => {
     navigate("/Order");
   };
-
   
   const handleSelectChange = (e, name) => {
     const { value } = e.target;
+
+    let statusId = parseInt(value);
+
+    if(statusId == 0)
+      return
+
     setEditData((prevData) => ({
       ...prevData,
-      [name]: parseInt(value),
+      [name]: statusId,
     }));
+
+    addData("Order/Status", {
+      orderId: data.id,
+      orderStatusId: statusId
+    })
   };
 
   useEffect(() => {
     fetchData(`Order/Details/${id}`, setData);
     fetchData(`Order/Status`, setStatuses);
+
+    setEditData((prevData) => ({
+      ...prevData,
+      statusId: data.statusId,
+    }));
   }, []);
 
   return (
