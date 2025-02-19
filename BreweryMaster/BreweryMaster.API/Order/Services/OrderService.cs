@@ -25,9 +25,12 @@ namespace BreweryMaster.API.OrderModule.Services
             _settings = options.Value;
         }
 
-        public async Task<IEnumerable<OrderResponse>> GetOrdersAsync()
+        public async Task<IEnumerable<OrderResponse>> GetCurrentUserOrders(ClaimsPrincipal claims)
         {
+            var currentUser = await _userService.GetCurrentUser(claims);
+
             return await _context.Orders
+                        .Where(x=>x.CreatedByUserId == currentUser.Id)
                         .Include(x => x.Container)
                         .Include(x => x.Recipe)
                         .Include(x => x.Client)
@@ -131,9 +134,11 @@ namespace BreweryMaster.API.OrderModule.Services
         {
             var recipe = await _context.Recipes.FirstOrDefaultAsync(x => x.Id == request.RecipeId);
             var container = await _context.ContainerPrices
+                                .Where(x => x.ContainerId == request.ContainerId)
+                                .OrderByDescending(x => x.CreatedOn)
                                 .Include(x => x.Container)
                                     .ThenInclude(x => x.UnitEntity)
-                                .FirstOrDefaultAsync(x => x.Id == request.ContainerId);
+                                .FirstOrDefaultAsync();
 
             if (recipe is null || container is null)
                 throw new ArgumentNullException("Container or recipe wasn't found.");

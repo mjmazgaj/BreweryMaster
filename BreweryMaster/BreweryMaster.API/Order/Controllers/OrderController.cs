@@ -22,9 +22,9 @@ namespace BreweryMaster.API.OrderModule.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<OrderResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<OrderResponse>>> GetOrders()
+        public async Task<ActionResult<IEnumerable<OrderResponse>>> GetCurrentUserOrders()
         {
-            var clients = await _clientService.GetOrdersAsync();
+            var clients = await _clientService.GetCurrentUserOrders(HttpContext.User);
             return Ok(clients);
         }
 

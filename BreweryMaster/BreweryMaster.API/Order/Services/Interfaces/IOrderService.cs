@@ -4,7 +4,7 @@ using System.Security.Claims;
 
 public interface IOrderService
 {
-    Task<IEnumerable<OrderResponse>> GetOrdersAsync();
+    Task<IEnumerable<OrderResponse>> GetCurrentUserOrders(ClaimsPrincipal claims);
     Task<IEnumerable<EntityResponse>> GetOrderStatuses();
     Task<OrderResponse?> GetOrderByIdAsync(int id);
     Task<OrderDetailsResponse?> GetOrderDetailById(int id);
