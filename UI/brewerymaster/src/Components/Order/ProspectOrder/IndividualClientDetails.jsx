@@ -1,11 +1,10 @@
-import React from 'react';
+import React from "react";
 import { Form } from "react-bootstrap";
 
 const IndividualClientDetails = ({
   individualClientDetailsData,
-  setIndividualClientDetailsData
+  setIndividualClientDetailsData,
 }) => {
-
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setIndividualClientDetailsData((prevData) => ({

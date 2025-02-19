@@ -24,11 +24,12 @@ const FermentingIngredientsReservation = () => {
 
   const [showQuantityModal, setShowQuantityModal] = useState(false);
 
-  const { handleDoubleClick, refreshTableData } = useFermentingIngredientsReservation({
-    setModalData,
-    setShowQuantityModal,
-    setData,
-  });
+  const { handleDoubleClick, refreshTableData } =
+    useFermentingIngredientsReservation({
+      setModalData,
+      setShowQuantityModal,
+      setData,
+    });
 
   return (
     <div className="Fermenting-Ingredient-Reservation_container">

@@ -1,9 +1,15 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
-export const useFormControls = ({ setData, setIsValid, invalidFields, setInvalidFields }) => {
-  
+export const useFormControls = ({
+  setData,
+  setIsValid,
+  invalidFields,
+  setInvalidFields,
+}) => {
   const validateNumber = (value, validation, id) => {
-    const isInvalid = validation ? value > validation.max || value < validation.min : false;
+    const isInvalid = validation
+      ? value > validation.max || value < validation.min
+      : false;
     setInvalidFields((prev) => ({ ...prev, [id]: isInvalid }));
   };
 
@@ -36,7 +42,9 @@ export const useFormControls = ({ setData, setIsValid, invalidFields, setInvalid
   };
 
   useEffect(() => {
-    const isValidNow = !Object.values(invalidFields).some((isInvalid) => isInvalid);
+    const isValidNow = !Object.values(invalidFields).some(
+      (isInvalid) => isInvalid
+    );
     setIsValid(isValidNow);
   }, [invalidFields, setIsValid]);
 

@@ -1,8 +1,8 @@
-import React from 'react';
-import { Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
-function NavigateButton({path, name, variant}) {
+function NavigateButton({ path, name, variant }) {
   const navigate = useNavigate();
 
   const handleNavigate = () => {

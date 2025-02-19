@@ -1,4 +1,4 @@
-import "../App.css"
+import "../App.css";
 
 import { useUser } from "../../Security/UserProvider";
 import UserDetails from "../../User/UserDetails";
@@ -9,10 +9,10 @@ const HomeUser = () => {
 
   return (
     <div className="home-user_container">
-        <h3>You are logged as:</h3>
-        <p>{user?.email}</p>
-        <Button variant="dark">Change password</Button>
-        <UserDetails />
+      <h3>You are logged as:</h3>
+      <p>{user?.email}</p>
+      <Button variant="dark">Change password</Button>
+      <UserDetails />
     </div>
   );
 };

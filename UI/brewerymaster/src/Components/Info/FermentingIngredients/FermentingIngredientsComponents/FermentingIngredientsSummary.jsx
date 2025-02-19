@@ -61,12 +61,11 @@ const FermentingIngredientsSummary = () => {
 
   return (
     <div className="Fermenting-Ingredient_container">
-      
       <FermentingIngredientsFilter
         fields={filterFields}
         setTableData={setData}
-        />
-        
+      />
+
       {data && (
         <DynamicTable
           tableKey="fermentingIngredient"
@@ -103,7 +102,7 @@ const FermentingIngredientsSummary = () => {
         setAction={setModalAction}
         itemName={t("name.brewery.fermentingIngredient")}
         path="FermentingIngredient"
-        refreshTableData ={refreshTableData}
+        refreshTableData={refreshTableData}
       />
 
       <ModalFormBasic
@@ -115,7 +114,7 @@ const FermentingIngredientsSummary = () => {
         action={quantityAction.verb}
         itemName={`${quantityAction.verb} ${quantityAction.area} for ${modalData.name}`}
         path={`FermentingIngredient/${quantityAction.area}`}
-        refreshTableData ={refreshTableData}
+        refreshTableData={refreshTableData}
       />
 
       <ModalConfirmation
@@ -125,7 +124,7 @@ const FermentingIngredientsSummary = () => {
         show={showConfirmationModal}
         setShow={setShowConfirmationModal}
         path="FermentingIngredient"
-        refreshTableData ={refreshTableData}
+        refreshTableData={refreshTableData}
       />
     </div>
   );

@@ -1,13 +1,11 @@
-import React from 'react';
-import { useUser } from '../UserProvider';
+import React from "react";
+import { useUser } from "../UserProvider";
 
 const RequireRole = ({ roles, children }) => {
   const { user } = useUser();
 
-  if (!user?.roles && !roles)
-    return <>{children}</>;
-  else if (!user?.roles || !roles)
-    return null;
+  if (!user?.roles && !roles) return <>{children}</>;
+  else if (!user?.roles || !roles) return null;
 
   const hasAccess = user.roles.some((role) => roles.includes(role));
 

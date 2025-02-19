@@ -1,10 +1,13 @@
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
-export const useModalSingleInput = (modalData, handleConfirmQuantity, setModalData) => {
-  const { t } = useTranslation(); 
+export const useModalSingleInput = (
+  modalData,
+  handleConfirmQuantity,
+  setModalData
+) => {
+  const { t } = useTranslation();
 
   const handleConfirmOnClick = () => {
-
     const quantity = parseInt(
       document.getElementById("quantityInput").value,
       10
@@ -14,14 +17,14 @@ export const useModalSingleInput = (modalData, handleConfirmQuantity, setModalDa
     } else {
       alert(t("message.invalidInput"));
     }
-  }
+  };
 
   const handleCancelOnClick = () => {
-    setModalData(null)
-  }
+    setModalData(null);
+  };
 
   return {
     handleConfirmOnClick,
-    handleCancelOnClick
+    handleCancelOnClick,
   };
 };

@@ -6,7 +6,7 @@ import { addData, fetchData } from "../Shared/api";
 
 import { useTranslation } from "react-i18next";
 import ControlsCard from "../Shared/ControlComponents/ControlsCard";
-import DropDownIndex from "../Shared/DropDownIndex"
+import DropDownIndex from "../Shared/DropDownIndex";
 import OrderStatusChanges from "./OrderComponents/OrderStatusChanges";
 import fieldsProviderOrder from "./OrderComponents/helpers/fieldsProvider";
 import fieldsProviderRecipe from "../Recipe/RecipeComponents/helpers/fieldsProvider";
@@ -20,18 +20,17 @@ const OrderDetails = () => {
   const [data, setData] = useState({});
   const [editData, setEditData] = useState({});
   const [statuses, setStatuses] = useState({});
-  
+
   const handleButton = () => {
     navigate("/Order");
   };
-  
+
   const handleSelectChange = (e, name) => {
     const { value } = e.target;
 
     let statusId = parseInt(value);
 
-    if(statusId == 0 || statusId === editData.statusId)
-      return
+    if (statusId == 0 || statusId === editData.statusId) return;
 
     setEditData((prevData) => ({
       ...prevData,
@@ -40,8 +39,8 @@ const OrderDetails = () => {
 
     addData("Order/Status", {
       orderId: data.id,
-      orderStatusId: statusId
-    })
+      orderStatusId: statusId,
+    });
   };
 
   useEffect(() => {
@@ -59,8 +58,8 @@ const OrderDetails = () => {
       <Button variant="dark" onClick={handleButton}>
         Return
       </Button>
-      
-      <OrderStatusChanges statusChanges={data.statusChanges}/>
+
+      <OrderStatusChanges statusChanges={data.statusChanges} />
 
       <div className="order-details-info_container">
         <Card className="order-details-general-info_container">
@@ -72,13 +71,15 @@ const OrderDetails = () => {
             <p>Zamawiający: {data?.createdBy}</p>
             <p>Termin: {data?.targetDate}</p>
 
-            <DropDownIndex 
-            id="test_ID"
-            data={statuses}
-            selectedOption={editData?.statusId ?? data.statusId}
-            setSelectedOption={(e) => {handleSelectChange(e, "statusId")}}
-            isReadOnly={false}
-            label="Status"
+            <DropDownIndex
+              id="test_ID"
+              data={statuses}
+              selectedOption={editData?.statusId ?? data.statusId}
+              setSelectedOption={(e) => {
+                handleSelectChange(e, "statusId");
+              }}
+              isReadOnly={false}
+              label="Status"
             />
           </Card.Body>
         </Card>

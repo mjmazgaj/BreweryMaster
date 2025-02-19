@@ -18,7 +18,7 @@ const User = () => {
   }, []);
 
   const handleDoubleClick = (item) => {
-    navigate(`/User/${item.id}`)
+    navigate(`/User/${item.id}`);
   };
 
   return (

@@ -17,7 +17,7 @@ export const useFermentingIngredientsSummary = ({
   setFilterFields,
 }) => {
   const { t } = useTranslation();
-  
+
   const [types, setTypes] = useState([]);
   const [units, setUnits] = useState([]);
 
@@ -37,19 +37,17 @@ export const useFermentingIngredientsSummary = ({
       units: [],
     });
 
-    setFields(() =>(
-      {
-        control: modalFieldsProvider(t).fermentingIngredientsModalFields,
-        dropdown: [
-          {
-            data: types,
-            name: "typeId",
-            label: t("name.brewery.type"),
-          }
-        ],
-        checkBox: units.map((x)=>({...x, label: x.name}))
-      }
-    ));
+    setFields(() => ({
+      control: modalFieldsProvider(t).fermentingIngredientsModalFields,
+      dropdown: [
+        {
+          data: types,
+          name: "typeId",
+          label: t("name.brewery.type"),
+        },
+      ],
+      checkBox: units.map((x) => ({ ...x, label: x.name })),
+    }));
 
     setModalQuantityData({
       name: item.name,
@@ -76,24 +74,23 @@ export const useFermentingIngredientsSummary = ({
     clear();
     setModalAction("Add");
 
-    setFields(() =>(
-      {
-        control: modalFieldsProvider(t).fermentingIngredientsModalFields,
-        dropdown: [
-          {
-            data: types,
-            name: "typeId",
-            label: t("name.brewery.type"),
-          }
-        ],
-        checkBox: units.map((x)=>({...x, label: x.name}))
-      }
-    ));
+    setFields(() => ({
+      control: modalFieldsProvider(t).fermentingIngredientsModalFields,
+      dropdown: [
+        {
+          data: types,
+          name: "typeId",
+          label: t("name.brewery.type"),
+        },
+      ],
+      checkBox: units.map((x) => ({ ...x, label: x.name })),
+    }));
 
     setShowModalForm(true);
   };
 
-  const refreshTableData = () => fetchData("FermentingIngredient/Summary", setData);
+  const refreshTableData = () =>
+    fetchData("FermentingIngredient/Summary", setData);
 
   useEffect(() => {
     refreshTableData();
@@ -101,10 +98,10 @@ export const useFermentingIngredientsSummary = ({
     fetchData("FermentingIngredient/Type", setTypes);
   }, []);
 
-  useEffect(() =>{
+  useEffect(() => {
     setFilterFields({
-      control:modalFieldsProvider(t).fermentingIngredientsFilterFields,
-      dropdown:[
+      control: modalFieldsProvider(t).fermentingIngredientsFilterFields,
+      dropdown: [
         {
           data: types,
           name: "typeId",
@@ -117,12 +114,11 @@ export const useFermentingIngredientsSummary = ({
         },
       ],
     });
-
-  },[types, units]);
+  }, [types, units]);
 
   return {
     handleDoubleClick,
     handleAddOnClick,
-    refreshTableData
+    refreshTableData,
   };
 };

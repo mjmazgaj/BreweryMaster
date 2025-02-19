@@ -21,7 +21,7 @@ const ModalFormBasic = ({
 }) => {
   const { t } = useTranslation();
   const [isValid, setIsValid] = useState(true);
-    const [usedUnits, setUsedUnits] = useState([]);
+  const [usedUnits, setUsedUnits] = useState([]);
 
   const {
     handleClose,
@@ -40,7 +40,7 @@ const ModalFormBasic = ({
     itemName,
     isValid,
     path,
-    refreshTableData
+    refreshTableData,
   });
 
   const renderDropdowns = () =>
@@ -63,7 +63,7 @@ const ModalFormBasic = ({
       </div>
     );
 
-  const renderCheckBoxes = () =>(
+  const renderCheckBoxes = () =>
     fields?.checkBox && (
       <div className="modal-form_checkbox-container">
         <hr />
@@ -74,15 +74,17 @@ const ModalFormBasic = ({
             id={checkBoxObject.name}
             label={checkBoxObject.label}
             checked={
-              usedUnits.includes(checkBoxObject.id) || data.units?.includes(checkBoxObject.id)
+              usedUnits.includes(checkBoxObject.id) ||
+              data.units?.includes(checkBoxObject.id)
             }
             disabled={usedUnits.includes(checkBoxObject.id)}
-            onChange={(e) => handleCheckBox(checkBoxObject.id, e.target.checked)}
+            onChange={(e) =>
+              handleCheckBox(checkBoxObject.id, e.target.checked)
+            }
           />
         ))}
       </div>
-    )
-  )
+    );
 
   const renderDatePickers = () =>
     fields?.datePicker && (
@@ -94,12 +96,14 @@ const ModalFormBasic = ({
             id={`datepicker-${datePickerObject.name}`}
             label={datePickerObject.label}
             selectedDate={data[datePickerObject.name]}
-            setSelectedDate={(date) => handleDateChange(date, datePickerObject.name)}
+            setSelectedDate={(date) =>
+              handleDateChange(date, datePickerObject.name)
+            }
           />
         ))}
       </div>
     );
-  
+
   return (
     fields && (
       <Modal show={show} onHide={handleClose}>

@@ -20,7 +20,7 @@ export const useModalFormBasic = ({
   const handleClose = () => {
     setShow(false);
   };
-  
+
   const handleCheckBox = (unitId, isChecked) => {
     setData((prevData) => ({
       ...prevData,
@@ -30,7 +30,7 @@ export const useModalFormBasic = ({
     }));
   };
 
-  const handleFormSubmit = (event) =>{
+  const handleFormSubmit = (event) => {
     const form = event.currentTarget;
     event.preventDefault();
 
@@ -40,8 +40,8 @@ export const useModalFormBasic = ({
     }
 
     return true;
-  }
-  
+  };
+
   const handleSelectChange = (e, name) => {
     const { value } = e.target;
     setData((prevData) => ({
@@ -56,7 +56,6 @@ export const useModalFormBasic = ({
       [fieldName]: date,
     }));
   };
-  
 
   const handleAdd = async (event, data) => {
     if (!handleFormSubmit(event)) {
@@ -65,7 +64,7 @@ export const useModalFormBasic = ({
 
     await addData(path, data);
     refreshTableData();
-    
+
     setShow(false);
   };
 
@@ -73,15 +72,15 @@ export const useModalFormBasic = ({
     if (!handleFormSubmit(event)) {
       return;
     }
-    
-    const updateObject = { 
-      ...data, 
-      ...(data?.units?{units: [...data.units, ...usedUnits]}:{})
-    }
-    
-    await updateData(path, data.id, updateObject)
+
+    const updateObject = {
+      ...data,
+      ...(data?.units ? { units: [...data.units, ...usedUnits] } : {}),
+    };
+
+    await updateData(path, data.id, updateObject);
     refreshTableData();
-    
+
     setShow(false);
   };
 
@@ -90,12 +89,11 @@ export const useModalFormBasic = ({
       return;
     }
 
-    let reduceAmount = (-1) * parseInt(data.quantity);
+    let reduceAmount = -1 * parseInt(data.quantity);
 
-
-    await addData(path, {...data, quantity: reduceAmount});
+    await addData(path, { ...data, quantity: reduceAmount });
     refreshTableData();
-    
+
     setShow(false);
   };
 
@@ -105,7 +103,7 @@ export const useModalFormBasic = ({
     }
     await addData(path, data);
     refreshTableData();
-    
+
     setShow(false);
   };
 
@@ -134,7 +132,6 @@ export const useModalFormBasic = ({
 
   let actionObject = actionCases[action];
 
-
   useEffect(() => {
     if (data?.id && show === true)
       fetchData(`FermentingIngredient/Units/${data.id}`, setUsedUnits);
@@ -147,6 +144,6 @@ export const useModalFormBasic = ({
     actionObject,
     handleCheckBox,
     handleSelectChange,
-    handleDateChange
+    handleDateChange,
   };
 };

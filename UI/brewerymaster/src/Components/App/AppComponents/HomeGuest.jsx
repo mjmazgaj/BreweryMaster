@@ -32,11 +32,7 @@ function HomeGuest() {
             <hr />
             <h6>Masz już konto?</h6>
             <p>Zaloguj się do systemu</p>
-            <NavigateButton
-              path="/Login"
-              name="Zaloguj"
-              variant="dark"
-            />
+            <NavigateButton path="/Login" name="Zaloguj" variant="dark" />
             <hr />
             <h6>Chcesz założyć konto?</h6>
             <p>Zarejestruj się i uzyskaj dostęp do tworzenia zamówień</p>

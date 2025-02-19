@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import React, { useState, useEffect } from "react";
+import { Modal, Button } from "react-bootstrap";
 
-import { useModalRecipeQuantity } from './helpers/useModalRecipeQuantity';
-import FormControls from '../FormControls';
+import { useModalRecipeQuantity } from "./helpers/useModalRecipeQuantity";
+import FormControls from "../FormControls";
 
 const ModalRecipeQuantity = ({
   fields,
@@ -11,27 +11,24 @@ const ModalRecipeQuantity = ({
   show,
   setShow,
   action,
-  isEmpty
+  isEmpty,
 }) => {
-
   const [isValid, setIsValid] = useState(true);
   const [quantityData, setQuantityData] = useState({});
 
-  const { 
-    handleClose,
-    actionObject } = useModalRecipeQuantity({
-      quantityData,
-      setQuantityData,
-      setSelectedData,
-      setShow,
-      action,
+  const { handleClose, actionObject } = useModalRecipeQuantity({
+    quantityData,
+    setQuantityData,
+    setSelectedData,
+    setShow,
+    action,
   });
 
   useEffect(() => {
     setQuantityData(() => ({
       id: modalData.id,
       name: modalData.name,
-      quantity: isEmpty ? "" : modalData.quantity
+      quantity: isEmpty ? "" : modalData.quantity,
     }));
   }, [modalData]);
 

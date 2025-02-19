@@ -21,7 +21,7 @@ const Login = () => {
 
   return (
     <Form onSubmit={handleLogin}>
-      <Card className="login_container" >
+      <Card className="login_container">
         <Card.Header>
           <h1>Zaloguj się:</h1>
         </Card.Header>

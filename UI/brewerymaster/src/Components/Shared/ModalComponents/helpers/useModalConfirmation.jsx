@@ -1,17 +1,23 @@
-import {updateWithoutBody} from '../../api'
+import { updateWithoutBody } from "../../api";
 
 import { useTranslation } from "react-i18next";
-export const useModalConfirmation = ({id, setShow, confirmationAction, path, refreshTableData}) => {
+export const useModalConfirmation = ({
+  id,
+  setShow,
+  confirmationAction,
+  path,
+  refreshTableData,
+}) => {
   const { t } = useTranslation();
 
   const handleClose = () => {
     setShow(false);
-  }
+  };
 
   const handleDelete = async () => {
     setShow(false);
 
-    await updateWithoutBody(`${path}/Delete`, id)
+    await updateWithoutBody(`${path}/Delete`, id);
     refreshTableData();
   };
 
@@ -26,6 +32,6 @@ export const useModalConfirmation = ({id, setShow, confirmationAction, path, ref
 
   return {
     handleClose,
-    confirmationObject
+    confirmationObject,
   };
 };

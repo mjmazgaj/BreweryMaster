@@ -1,10 +1,11 @@
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
   height: 100%;
 }
 
-#root{
+#root {
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -79,11 +80,11 @@ footer {
   text-align: center;
 }
 
-.home-guest_container{
+.home-guest_container {
   width: 80%;
 }
 
-.home-user_container{
+.home-user_container {
   width: 100%;
 }
 

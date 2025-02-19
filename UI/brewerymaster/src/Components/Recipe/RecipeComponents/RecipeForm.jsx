@@ -1,19 +1,19 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Form } from "react-bootstrap";
-import Button from 'react-bootstrap/Button';
+import Button from "react-bootstrap/Button";
 
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import { useRecipeForm } from "./helpers/useRecipeForm";
 import recipeFormFieldsProvider from "./helpers/recipeFormFieldsProvider";
 
-import {fetchData} from "../../Shared/api"
+import { fetchData } from "../../Shared/api";
 
 import FormControls from "../../Shared/FormControls";
-import MenuSteps from '../../Shared/MenuSteps';
+import MenuSteps from "../../Shared/MenuSteps";
 
 import DynamicTableSelection from "../../Shared/TableComponents/DynamicTableSelection";
 
-const RecipeForm = ({setIsAddMode}) => {    
+const RecipeForm = ({ setIsAddMode }) => {
   const { t } = useTranslation();
   const [isValid, setIsValid] = useState(true);
 
@@ -35,51 +35,51 @@ const RecipeForm = ({setIsAddMode}) => {
     recipeMashData,
     setRecipeMashData,
     handleSave,
-    clear
-  } = useRecipeForm({isValid, setIsAddMode});
+    clear,
+  } = useRecipeForm({ isValid, setIsAddMode });
 
   const [ingredients, setIngredients] = useState([]);
-  
+
   const [hops, setHops] = useState([
-    { 
-      id: 1, 
-      usage: 'Gotowanie', 
-      name: 'Citra', 
+    {
+      id: 1,
+      usage: "Gotowanie",
+      name: "Citra",
       quantity: 25,
-      time: 60, 
-      alphaAcids: 12.0
+      time: 60,
+      alphaAcids: 12.0,
     },
-    { 
-      id: 2, 
-      usage: 'Gotowanie', 
-      name: 'Citra', 
-      quantity: 25, 
-      time: 15, 
-      alphaAcids: 12.0 
+    {
+      id: 2,
+      usage: "Gotowanie",
+      name: "Citra",
+      quantity: 25,
+      time: 15,
+      alphaAcids: 12.0,
     },
-    { 
-      id: 3, 
-      usage: 'Gotowanie', 
-      name: 'Citra', 
-      quantity: 25, 
-      time: 10, 
-      alphaAcids: 12.0 
+    {
+      id: 3,
+      usage: "Gotowanie",
+      name: "Citra",
+      quantity: 25,
+      time: 10,
+      alphaAcids: 12.0,
     },
-    { 
-      id: 4, 
-      usage: 'Aromat (koniec gotowania)', 
-      name: 'Citra', 
-      quantity: 25, 
-      time: 5, 
-      alphaAcids: 12.0 
+    {
+      id: 4,
+      usage: "Aromat (koniec gotowania)",
+      name: "Citra",
+      quantity: 25,
+      time: 5,
+      alphaAcids: 12.0,
     },
-    { 
-      id: 5, 
-      usage: 'Na zimno', 
-      name: 'Citra', 
-      quantity: 50, 
-      time: 7, 
-      alphaAcids: 12.0 
+    {
+      id: 5,
+      usage: "Na zimno",
+      name: "Citra",
+      quantity: 50,
+      time: 7,
+      alphaAcids: 12.0,
     },
   ]);
 
@@ -104,7 +104,7 @@ const RecipeForm = ({setIsAddMode}) => {
       time: "5 min",
     },
   ]);
-  
+
   const steps = [
     {
       key: "basicInformation",
@@ -130,7 +130,7 @@ const RecipeForm = ({setIsAddMode}) => {
           setSelectedData={setSelectedIngredients}
           quantityAction={{
             verb: "add",
-            area: "ingredient"
+            area: "ingredient",
           }}
         />
       ),
@@ -147,7 +147,7 @@ const RecipeForm = ({setIsAddMode}) => {
           setSelectedData={setSelectedHops}
           quantityAction={{
             verb: "add",
-            area: "ingredient"
+            area: "ingredient",
           }}
         />
       ),
@@ -164,7 +164,7 @@ const RecipeForm = ({setIsAddMode}) => {
           setSelectedData={setSelectedYeast}
           quantityAction={{
             verb: "add",
-            area: "ingredient"
+            area: "ingredient",
           }}
         />
       ),
@@ -181,7 +181,7 @@ const RecipeForm = ({setIsAddMode}) => {
           setSelectedData={setSelectedExtras}
           quantityAction={{
             verb: "add",
-            area: "ingredient"
+            area: "ingredient",
           }}
         />
       ),
@@ -211,7 +211,7 @@ const RecipeForm = ({setIsAddMode}) => {
       ),
     },
   ];
-  
+
   useEffect(() => {
     fetchData("FermentingIngredient/Unit", setIngredients);
   }, []);

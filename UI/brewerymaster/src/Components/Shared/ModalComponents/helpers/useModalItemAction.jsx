@@ -8,7 +8,7 @@ export const useModalItemAction = ({
   setShowModalForm,
   setModalAction,
   setQuantityAction,
-  action
+  action,
 }) => {
   const { t } = useTranslation();
 
@@ -22,17 +22,19 @@ export const useModalItemAction = ({
     setShowModalForm(true);
   };
 
-  const handleQuantityChange = (data, QuantityArea, QuantityVerb = "Add") => () => {
-    console.log("QuantityChange");
-    console.log(data);
-    setQuantityAction({
-      verb: QuantityVerb,
-      area: QuantityArea,
-    });
+  const handleQuantityChange =
+    (data, QuantityArea, QuantityVerb = "Add") =>
+    () => {
+      console.log("QuantityChange");
+      console.log(data);
+      setQuantityAction({
+        verb: QuantityVerb,
+        area: QuantityArea,
+      });
 
-    setShow(false);
-    setShowQuantityModal(true);
-  };
+      setShow(false);
+      setShowQuantityModal(true);
+    };
 
   const handleDelete = () => {
     setShow(false);
@@ -49,7 +51,7 @@ export const useModalItemAction = ({
       title: `${data ? data.name : ""} details`,
       function: handleQuantityChange,
       isReadOnly: true,
-    }
+    },
   };
 
   let actionObject = actionCases[action];

@@ -17,11 +17,11 @@
         "clear": "Clear"
     },
     "name": {
-        "general":{
+        "general": {
             "basicInformation": "Basic information",
             "name": "Name"
         },
-        "user":{
+        "user": {
             "empty": "Empty",
             "city": "City",
             "street": "Street",
@@ -39,7 +39,7 @@
             "phoneNumber": "Phone number",
             "isCompany": "Is company"
         },
-        "kanban":{
+        "kanban": {
             "modalTitle": "Modify Task",
             "title": "Title",
             "summary": "Summary",
@@ -48,7 +48,7 @@
             "ownerId": "Owner ID",
             "orderId": "Order ID"
         },
-        "brewery":{
+        "brewery": {
             "empty": "Empty",
             "form": "Form",
             "usage": "Usage",
@@ -135,7 +135,7 @@
     },
     "message": {
         "invalidinput": "Invalid input",
-        "deleteConfirmation":"Do you want to delete the following item?"
+        "deleteConfirmation": "Do you want to delete the following item?"
     },
     "validation": {
         "text": "Text should have less letters then:",

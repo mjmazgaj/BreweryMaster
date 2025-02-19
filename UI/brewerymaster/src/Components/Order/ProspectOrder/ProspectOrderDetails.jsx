@@ -1,15 +1,15 @@
-import React, {Fragment, useState, useEffect} from "react";
-import {  Form } from "react-bootstrap";
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'react-toastify/dist/ReactToastify.css';
-import '../order.css';
+import React, { Fragment, useState, useEffect } from "react";
+import { Form } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "react-toastify/dist/ReactToastify.css";
+import "../order.css";
 
 import { fetchData } from "../../Shared/api";
 
 import DropDownIndex from "../../Shared/DropDownIndex";
 import ProspectOrderCheckPrice from "./ProspectOrderCheckPrice";
 
-const ProspectOrderDetails = ({prospectOrderData, setProspectOrderData}) => { 
+const ProspectOrderDetails = ({ prospectOrderData, setProspectOrderData }) => {
   const handleInputChange = (key, e) => {
     const { value } = e.target;
     setProspectOrderData((prevData) => ({
@@ -63,6 +63,6 @@ const ProspectOrderDetails = ({prospectOrderData, setProspectOrderData}) => {
       <ProspectOrderCheckPrice prospectOrderData={prospectOrderData} />
     </Fragment>
   );
-}
+};
 
 export default ProspectOrderDetails;

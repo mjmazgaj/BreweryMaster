@@ -5,47 +5,47 @@ const recipeFormFieldsProvider = (t) => ({
       label: `${t("name.general.name")}*`,
       type: "text",
       required: true,
-      feedback: `${t("validation.text")}`
+      feedback: `${t("validation.text")}`,
     },
     {
       id: "blgScale",
       label: t("name.brewery.blgScale"),
       type: "number",
       feedback: `${t("validation.number")} 0-100`,
-      validation:{
+      validation: {
         min: 0,
         max: 100,
-      }
+      },
     },
     {
       id: "ibuScale",
       label: t("name.brewery.ibuScale"),
       type: "number",
       feedback: `${t("validation.number")} 0-1000`,
-      validation:{
+      validation: {
         min: 0,
         max: 1000,
-      }
+      },
     },
     {
       id: "abvScale",
       label: t("name.brewery.abvScale"),
       type: "number",
       feedback: `${t("validation.number")} 0-100`,
-      validation:{
+      validation: {
         min: 0,
         max: 100,
-      }
+      },
     },
     {
       id: "srmScale",
       label: t("name.brewery.srmScale"),
       type: "number",
       feedback: `${t("validation.number")} 0-100`,
-      validation:{
+      validation: {
         min: 0,
         max: 100,
-      }
+      },
     },
     {
       id: "type",
@@ -65,30 +65,30 @@ const recipeFormFieldsProvider = (t) => ({
       type: "number",
       required: true,
       feedback: `${t("validation.number")} 0-10000`,
-      validation:{
+      validation: {
         min: 0,
         max: 10000,
-      }
+      },
     },
     {
       id: "boilingTime",
       label: t("name.brewery.boilingTime"),
       type: "number",
       feedback: `${t("validation.number")} 0-10000`,
-      validation:{
+      validation: {
         min: 0,
         max: 10000,
-      }
+      },
     },
     {
       id: "evaporationRate",
       label: t("name.brewery.evaporationRate"),
       type: "number",
       feedback: `${t("validation.number")} 0-100`,
-      validation:{
+      validation: {
         min: 0,
         max: 100,
-      }
+      },
     },
     {
       id: "wortVolume",
@@ -96,50 +96,50 @@ const recipeFormFieldsProvider = (t) => ({
       type: "number",
       required: true,
       feedback: `${t("validation.number")} 0-10000`,
-      validation:{
+      validation: {
         min: 0,
         max: 10000,
-      }
+      },
     },
     {
       id: "boilingLosses",
       label: t("name.brewery.boilingLosses"),
       type: "number",
       feedback: `${t("validation.number")} 0-100`,
-      validation:{
+      validation: {
         min: 0,
         max: 100,
-      }
+      },
     },
     {
       id: "preBoilingDensity",
       label: t("name.brewery.preBoilingDensity"),
       type: "number",
       feedback: `${t("validation.number")} 0-100`,
-      validation:{
+      validation: {
         min: 0,
         max: 100,
-      }
+      },
     },
     {
       id: "fermentationLosses",
       label: t("name.brewery.fermentationLosses"),
       type: "number",
       feedback: `${t("validation.number")} 0-100`,
-      validation:{
+      validation: {
         min: 0,
         max: 100,
-      }
+      },
     },
     {
       id: "dryHoppingLosses",
       label: t("name.brewery.dryHoppingLosses"),
       type: "number",
       feedback: `${t("validation.number")} 0-100`,
-      validation:{
+      validation: {
         min: 0,
         max: 100,
-      }
+      },
     },
   ],
   mashFields: [

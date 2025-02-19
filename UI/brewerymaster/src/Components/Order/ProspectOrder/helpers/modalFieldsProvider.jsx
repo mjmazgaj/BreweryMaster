@@ -8,7 +8,7 @@ const modalFieldsProvider = (t) => ({
       feedback: `${t("validation.text")} 255`,
       validation: {
         maxLength: 255,
-      }
+      },
     },
     {
       id: "email",
@@ -19,7 +19,7 @@ const modalFieldsProvider = (t) => ({
       validation: {
         min: 0,
         max: 100,
-      }
+      },
     },
     {
       id: "phoneNumber",
@@ -30,7 +30,7 @@ const modalFieldsProvider = (t) => ({
       validation: {
         min: 0,
         max: 100,
-      }
+      },
     },
     {
       id: "capacity",
@@ -41,7 +41,7 @@ const modalFieldsProvider = (t) => ({
       validation: {
         min: 0,
         max: 100,
-      }
+      },
     },
   ],
   prospectOrderModalReadOnlyFields: [

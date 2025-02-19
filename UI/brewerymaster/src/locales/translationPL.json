@@ -15,11 +15,11 @@
         "clear": "Wyczyść"
     },
     "name": {
-        "general":{
+        "general": {
             "basicInformation": "Podstawowe informacje",
             "name": "Nazwa"
         },
-        "user":{
+        "user": {
             "empty": "Puste",
             "city": "Miasto",
             "postCode": "Kod pocztowy",
@@ -29,7 +29,7 @@
             "phoneNumber": "Numer telefonu",
             "isCompany": "Firma"
         },
-        "kanban":{
+        "kanban": {
             "modalTitle": "Modyfikuj zadanie",
             "title": "Tytuł",
             "summary": "Podsumowanie",
@@ -38,7 +38,7 @@
             "ownerId": "ID właściciela",
             "orderId": "ID zamówienia"
         },
-        "brewery":{
+        "brewery": {
             "form": "Formularz",
             "usage": "Użycie",
             "laboratory": "Laboratorium",
@@ -110,7 +110,7 @@
         }
     },
     "message": {
-        "deleteConfirmation":"Czy na pewno chcesz usunąć ten element?",
+        "deleteConfirmation": "Czy na pewno chcesz usunąć ten element?",
         "invalidinput": "Nieprawidłowe dane wejściowe"
     },
     "validation": {

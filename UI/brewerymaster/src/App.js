@@ -1,19 +1,23 @@
-import Navigation from './Components/App/Navigation';
+import Navigation from "./Components/App/Navigation";
 
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 
-import './Components/App/App.css';
-import React from 'react';
+import "./Components/App/App.css";
+import React from "react";
 
-import ProtectedRoute from './Components/Security/SecurityComponents/ProtectedRoute'
+import ProtectedRoute from "./Components/Security/SecurityComponents/ProtectedRoute";
 
-import { I18nextProvider } from 'react-i18next';
-import i18n from './i18n';
-import Footer from './Components/App/Footer.jsx';
-import { useApp } from './Components/App/helpers/useApp.jsx';
+import { I18nextProvider } from "react-i18next";
+import i18n from "./i18n";
+import Footer from "./Components/App/Footer.jsx";
+import { useApp } from "./Components/App/helpers/useApp.jsx";
 const App = () => {
-
-  const {routes, protectedRoutes} = useApp();
+  const { routes, protectedRoutes } = useApp();
 
   return (
     <>

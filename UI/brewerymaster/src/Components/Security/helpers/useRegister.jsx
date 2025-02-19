@@ -1,23 +1,21 @@
+import { useNavigate } from "react-router-dom";
 
-import { useNavigate } from 'react-router-dom';
+import { register } from "../Endpoints";
 
-import {register} from '../Endpoints'
+import securityFormFieldsProvider from "./securityFormFieldsProvider";
+import { useState } from "react";
 
-import securityFormFieldsProvider from './securityFormFieldsProvider';
-import { useState } from 'react';
+import { useTranslation } from "react-i18next";
+import FormControls from "../../Shared/FormControls";
+import UserInfo from "../SecurityComponents/UserInfo";
 
-import { useTranslation } from 'react-i18next';
-import FormControls from '../../Shared/FormControls';
-import UserInfo from '../SecurityComponents/UserInfo';
-
-export const useRegister = ({setErrorMessage, setIsValid}) => {
+export const useRegister = ({ setErrorMessage, setIsValid }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-
       const userObject = {
         userAuthInfo: {
           email: userAuthInfo.email,
@@ -34,7 +32,7 @@ export const useRegister = ({setErrorMessage, setIsValid}) => {
           region: address.region,
           country: address.country,
         },
-        isCompany : isCompany,
+        isCompany: isCompany,
         individualUserInfo: !isCompany
           ? {
               forename: individualUserInfo.forename,
@@ -61,10 +59,13 @@ export const useRegister = ({setErrorMessage, setIsValid}) => {
       };
 
       await register(userObject);
-      setErrorMessage('');
-      navigate('/login');
+      setErrorMessage("");
+      navigate("/login");
     } catch (error) {
-      setErrorMessage(error.response?.data?.message || 'Rejestracja nie powiodła się. Spróbuj ponownie.');
+      setErrorMessage(
+        error.response?.data?.message ||
+          "Rejestracja nie powiodła się. Spróbuj ponownie."
+      );
     }
   };
 
@@ -118,6 +119,6 @@ export const useRegister = ({setErrorMessage, setIsValid}) => {
 
   return {
     handleRegister,
-    steps
+    steps,
   };
 };

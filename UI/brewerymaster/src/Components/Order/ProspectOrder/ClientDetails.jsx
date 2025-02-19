@@ -1,8 +1,8 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 
-import CompanyClientDetails from './CompanyClientDetails';
-import IndividualClientDetails from './IndividualClientDetails';
+import CompanyClientDetails from "./CompanyClientDetails";
+import IndividualClientDetails from "./IndividualClientDetails";
 
 const ClientDetails = ({
   individualClientDetailsData,
@@ -10,12 +10,11 @@ const ClientDetails = ({
   companyClientDetailsData,
   setCompanyClientDetailsData,
   isCompany,
-  setIsCompany
+  setIsCompany,
 }) => {
-  
-  const handleSwichIsCompany = () =>{
+  const handleSwichIsCompany = () => {
     setIsCompany((prev) => !prev);
-  }
+  };
   return (
     <>
       <div className="order-companyValidatior">

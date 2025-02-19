@@ -1,26 +1,23 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Form } from "react-bootstrap";
-import Button from 'react-bootstrap/Button';
+import Button from "react-bootstrap/Button";
 import { toast } from "react-toastify";
-import { addData } from '../../Shared/api';
+import { addData } from "../../Shared/api";
 
-import MenuSteps from '../../Shared/MenuSteps';
+import MenuSteps from "../../Shared/MenuSteps";
 import RecipeTableSelection from "../OrderComponents/RecipeTableSelection";
 import OrderFormStep2 from "./OrderFormStep2";
 
-const OrderForm = () => {  
-
+const OrderForm = () => {
   const [orderData, setOrderData] = useState({});
 
   const [currentStep, setCurrentStep] = useState(0);
 
   const handleSave = async () => {
-  
     await addData("Order", orderData);
   };
-  
-  const clear = () => {
-  };
+
+  const clear = () => {};
 
   const steps = [
     {
@@ -34,10 +31,8 @@ const OrderForm = () => {
     },
     {
       name: "Specify following details",
-      component: (
-        <OrderFormStep2 data={orderData} setData={setOrderData} />
-      ),
-    }
+      component: <OrderFormStep2 data={orderData} setData={setOrderData} />,
+    },
   ];
 
   return (

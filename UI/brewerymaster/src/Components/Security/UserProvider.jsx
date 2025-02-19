@@ -1,16 +1,15 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-
   const [user, setUser] = useState(() => {
-    const savedUser = sessionStorage.getItem('user');
+    const savedUser = sessionStorage.getItem("user");
     return JSON.parse(savedUser);
   });
 
   useEffect(() => {
-    sessionStorage.setItem('user', JSON.stringify(user));
+    sessionStorage.setItem("user", JSON.stringify(user));
   }, [user]);
 
   return (

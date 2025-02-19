@@ -21,11 +21,13 @@ const FermentingIngredientsOrder = () => {
 
   const [showQuantityModal, setShowQuantityModal] = useState(false);
 
-  const { handleDoubleClick, refreshTableData } = useFermentingIngredientsOrder({
-    setModalData,
-    setData,
-    setShowQuantityModal,
-  });
+  const { handleDoubleClick, refreshTableData } = useFermentingIngredientsOrder(
+    {
+      setModalData,
+      setData,
+      setShowQuantityModal,
+    }
+  );
 
   return (
     <div className="Fermenting-Ingredient-Order_container">

@@ -7,11 +7,7 @@ import FormControls from "../FormControls";
 import DropDownIndex from "../DropDownIndex";
 import FormDatePicker from "../FormDatePicker";
 
-const FormBasic = ({
-  fields,
-  data,
-  setData,
-}) => {
+const FormBasic = ({ fields, data, setData }) => {
   const [isValid, setIsValid] = useState(true);
 
   const { handleCheckBox, handleSelectChange, handleDateChange } = useModalForm(

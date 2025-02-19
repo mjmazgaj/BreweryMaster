@@ -1,5 +1,5 @@
 const modalFieldsProvider = (t) => ({
-  fermentingIngredientsFilterFields:[
+  fermentingIngredientsFilterFields: [
     {
       id: "name",
       label: t("name.brewery.name"),
@@ -7,7 +7,7 @@ const modalFieldsProvider = (t) => ({
       feedback: `${t("validation.text")} 255`,
       validation: {
         maxLength: 255,
-      }
+      },
     },
   ],
   fermentingIngredientsModalFields: [
@@ -19,7 +19,7 @@ const modalFieldsProvider = (t) => ({
       feedback: `${t("validation.text")} 255`,
       validation: {
         maxLength: 255,
-      }
+      },
     },
     {
       id: "percentage",
@@ -30,7 +30,7 @@ const modalFieldsProvider = (t) => ({
       validation: {
         min: 0,
         max: 100,
-      }
+      },
     },
     {
       id: "extraction",
@@ -41,7 +41,7 @@ const modalFieldsProvider = (t) => ({
       validation: {
         min: 0,
         max: 100,
-      }
+      },
     },
     {
       id: "ebc",
@@ -51,7 +51,7 @@ const modalFieldsProvider = (t) => ({
       validation: {
         min: 0,
         max: 100,
-      }
+      },
     },
     {
       id: "info",
@@ -96,8 +96,8 @@ const modalFieldsProvider = (t) => ({
       type: "text",
     },
   ],
-  quantityModalFields:{
-    storage:{
+  quantityModalFields: {
+    storage: {
       control: [
         {
           id: "quantity",
@@ -111,7 +111,7 @@ const modalFieldsProvider = (t) => ({
         },
       ],
     },
-    reservation:{
+    reservation: {
       control: [
         {
           id: "quantity",
@@ -125,7 +125,7 @@ const modalFieldsProvider = (t) => ({
         },
       ],
     },
-    order:{
+    order: {
       control: [
         {
           id: "quantity",
@@ -138,14 +138,14 @@ const modalFieldsProvider = (t) => ({
           type: "textArea",
         },
       ],
-      datePicker:[
+      datePicker: [
         {
           name: "expectedDate",
           label: "Expected Date",
         },
-      ]
+      ],
     },
-    ingredient:[
+    ingredient: [
       {
         id: "quantity",
         label: t("name.brewery.quantity"),
@@ -156,7 +156,7 @@ const modalFieldsProvider = (t) => ({
         label: t("name.brewery.description"),
         type: "textArea",
       },
-    ]
+    ],
   },
 });
 

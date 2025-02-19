@@ -21,8 +21,8 @@ export const useModalRecipeQuantity = ({
       quantity: 0,
       description: "",
     });
-  }
-  
+  };
+
   const updateField = (id, updatedField) => {
     setSelectedData((prevData) => {
       if (prevData[id]) {
@@ -44,13 +44,13 @@ export const useModalRecipeQuantity = ({
     clear();
     console.log("Add ingredient");
     console.log(quantityData);
-    
-    const newData = {
-      quantity: quantityData.quantity, 
-      description: quantityData.description
-    }
 
-    updateField(quantityData.id, newData)
+    const newData = {
+      quantity: quantityData.quantity,
+      description: quantityData.description,
+    };
+
+    updateField(quantityData.id, newData);
   };
 
   const actionCases = {

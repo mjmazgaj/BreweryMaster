@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { addData } from '../../../Shared/api';
+import { addData } from "../../../Shared/api";
 
-import { useTranslation } from 'react-i18next';
-export const useRecipeForm = ({isValid, setIsAddMode}) => {
+import { useTranslation } from "react-i18next";
+export const useRecipeForm = ({ isValid, setIsAddMode }) => {
   const { t } = useTranslation();
 
   const [currentStep, setCurrentStep] = useState(0);
@@ -40,14 +40,18 @@ export const useRecipeForm = ({isValid, setIsAddMode}) => {
   });
 
   const [boilSteps, setBoilSteps] = useState([]);
-  
 
-  const handleFormSubmit = (event) =>{
-    if(!(recipeSummaryData || recipeSummaryData.name || recipeSummaryData.name.length === 0))
-    {
+  const handleFormSubmit = (event) => {
+    if (
+      !(
+        recipeSummaryData ||
+        recipeSummaryData.name ||
+        recipeSummaryData.name.length === 0
+      )
+    ) {
       toast.error("Name is missing");
     }
-    console.log(isValid)
+    console.log(isValid);
     const form = event.currentTarget;
     event.preventDefault();
 
@@ -57,27 +61,26 @@ export const useRecipeForm = ({isValid, setIsAddMode}) => {
     }
 
     return true;
-  }
+  };
 
   const handleSave = (event) => {
     if (!handleFormSubmit(event)) {
       return;
     }
-    const newData = 
-    {
+    const newData = {
       ...recipeSummaryData,
       fermentingIngredients: selectedIngredients,
       hops: selectedHops,
       yeast: selectedYeast,
       extras: selectedExtras,
-      ...recipeBatchData, 
+      ...recipeBatchData,
       ...recipeMashData,
     };
 
     console.log("add");
-    console.log({...newData});
+    console.log({ ...newData });
     addData("recipe", newData);
-    setIsAddMode(false)
+    setIsAddMode(false);
     clear();
   };
 

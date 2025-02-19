@@ -26,22 +26,18 @@ const OrderFormStep2 = ({ data, setData }) => {
           label: "Container",
         },
       ],
-      datePicker:[
+      datePicker: [
         {
           name: "targetDate",
           label: "Expected Date",
         },
-      ]
+      ],
     });
   }, [containers]);
 
   return (
     <div>
-      <FormBasic
-        fields={fields}
-        data={data}
-        setData={setData}
-      />
+      <FormBasic fields={fields} data={data} setData={setData} />
     </div>
   );
 };

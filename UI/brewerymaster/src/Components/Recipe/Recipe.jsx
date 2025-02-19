@@ -1,11 +1,11 @@
-import React, { useState} from "react";
-import 'bootstrap/dist/css/bootstrap.min.css'
+import React, { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
-import './recipe.css';
+import "react-toastify/dist/ReactToastify.css";
+import "./recipe.css";
 
-import RecipeForm from './RecipeComponents/RecipeForm';
-import RecipeTable from './RecipeComponents/RecipeTable';
+import RecipeForm from "./RecipeComponents/RecipeForm";
+import RecipeTable from "./RecipeComponents/RecipeTable";
 import { Button } from "react-bootstrap";
 
 const Recipe = () => {
@@ -25,13 +25,9 @@ const Recipe = () => {
       >
         {isAddMode ? "Show all recipes" : "Add Recipe"}
       </Button>
-      {isAddMode ? (
-        <RecipeForm setIsAddMode={setIsAddMode}/>
-      ) : (
-        <RecipeTable />
-      )}
+      {isAddMode ? <RecipeForm setIsAddMode={setIsAddMode} /> : <RecipeTable />}
     </div>
   );
-}
+};
 
 export default Recipe;

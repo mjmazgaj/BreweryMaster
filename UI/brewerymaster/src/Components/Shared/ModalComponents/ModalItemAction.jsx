@@ -21,16 +21,17 @@ const ModalItemAction = ({
 }) => {
   const [units, setUnits] = useState([]);
 
-  const { handleClose, handleDelete, handleEdit,  actionObject } = useModalItemAction({
-    data,
-    setShow,
-    setShowConfirmationModal,
-    setShowQuantityModal,
-    setShowModalForm,
-    setModalAction,
-    setQuantityAction,
-    action
-  });
+  const { handleClose, handleDelete, handleEdit, actionObject } =
+    useModalItemAction({
+      data,
+      setShow,
+      setShowConfirmationModal,
+      setShowQuantityModal,
+      setShowModalForm,
+      setModalAction,
+      setQuantityAction,
+      action,
+    });
 
   const buttonsSet = {
     default: (
@@ -45,13 +46,22 @@ const ModalItemAction = ({
     ),
     summary: (
       <>
-        <Button variant="dark" onClick={actionObject.function(data, "storage", "Increase")}>
-        Increase
+        <Button
+          variant="dark"
+          onClick={actionObject.function(data, "storage", "Increase")}
+        >
+          Increase
         </Button>
-        <Button variant="dark" onClick={actionObject.function(data, "storage", "Reduce")}>
+        <Button
+          variant="dark"
+          onClick={actionObject.function(data, "storage", "Reduce")}
+        >
           Reduce
         </Button>
-        <Button variant="dark" onClick={actionObject.function(data, "reservation")}>
+        <Button
+          variant="dark"
+          onClick={actionObject.function(data, "reservation")}
+        >
           Reserve
         </Button>
         <Button variant="dark" onClick={actionObject.function(data, "order")}>
@@ -64,7 +74,7 @@ const ModalItemAction = ({
           Delete
         </Button>
       </>
-    )
+    ),
   };
 
   useEffect(() => {
@@ -77,10 +87,7 @@ const ModalItemAction = ({
         <Modal.Title>{actionObject.title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-          <FormControlsReadOnly
-            fields={fields}
-            data={data}
-          />
+        <FormControlsReadOnly fields={fields} data={data} />
       </Modal.Body>
       <Modal.Footer>
         {buttonsSet[action]}

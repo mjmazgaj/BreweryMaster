@@ -27,16 +27,15 @@ export const useFermentingIngredientsFilter = ({
     }));
   };
 
-
-  const handleClear = () =>{
+  const handleClear = () => {
     setFilterData({
-      control:[],
-      dropdown:[]
+      control: [],
+      dropdown: [],
     });
-  }
+  };
   return {
     handleSelectChange,
     handleSubmit,
-    handleClear
+    handleClear,
   };
 };

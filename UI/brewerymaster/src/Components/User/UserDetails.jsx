@@ -27,7 +27,7 @@ const UserDetails = () => {
     <div className="user-details_container">
       <h2>Details</h2>
       <div className="info_container">
-        <ControlsCard 
+        <ControlsCard
           className="user-info_container"
           title="User info"
           data={{ ...data?.individualUser, email: data?.email }}
@@ -35,7 +35,7 @@ const UserDetails = () => {
           path="User"
           emptyMessage="User info can't be loaded"
         />
-        <ControlsCard 
+        <ControlsCard
           className="home-address-info_container"
           title="Home address info"
           data={data?.homeAddress}
@@ -43,7 +43,7 @@ const UserDetails = () => {
           path="Address"
           emptyMessage="Home address wasn't added"
         />
-        <ControlsCard 
+        <ControlsCard
           className="delivery-address-info_container"
           title="Delivery address info"
           data={data?.deliveryAddress}

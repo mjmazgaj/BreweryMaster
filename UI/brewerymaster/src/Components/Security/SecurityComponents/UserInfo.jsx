@@ -1,7 +1,7 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import securityFormFieldsProvider from "../helpers/securityFormFieldsProvider";
 import FormControls from "../../Shared/FormControls";
 

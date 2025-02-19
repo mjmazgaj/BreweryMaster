@@ -17,7 +17,8 @@ export const useFermentingIngredientsOrder = ({
     setShowQuantityModal(true);
   };
 
-  const refreshTableData = () => fetchData("FermentingIngredient/Order", setData);
+  const refreshTableData = () =>
+    fetchData("FermentingIngredient/Order", setData);
 
   useEffect(() => {
     refreshTableData();

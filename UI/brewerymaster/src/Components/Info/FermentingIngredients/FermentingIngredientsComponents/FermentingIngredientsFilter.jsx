@@ -11,11 +11,12 @@ const FermentingIngredientsFilter = ({ fields, setTableData }) => {
   const [filterData, setFilterData] = useState({});
   const [isValid, setIsValid] = useState(true);
 
-  const { handleSelectChange, handleSubmit, handleClear } = useFermentingIngredientsFilter({
-    setFilterData,
-    filterData,
-    setTableData,
-  });
+  const { handleSelectChange, handleSubmit, handleClear } =
+    useFermentingIngredientsFilter({
+      setFilterData,
+      filterData,
+      setTableData,
+    });
 
   const renderDropdowns = () =>
     fields?.dropdown && (

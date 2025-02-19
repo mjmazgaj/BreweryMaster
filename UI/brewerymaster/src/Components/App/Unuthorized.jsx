@@ -1,5 +1,5 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from 'react-bootstrap';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Button } from "react-bootstrap";
 
 function Unauthorized() {
   return (
@@ -7,9 +7,7 @@ function Unauthorized() {
       <h1>Strona niedostepna</h1>
       <p>Brak wystarczajacych uprawnien</p>
 
-      <Button href='/Login'>
-        Login
-      </Button>
+      <Button href="/Login">Login</Button>
     </>
   );
 }

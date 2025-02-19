@@ -90,7 +90,6 @@ form input {
   margin: 0;
 }
 
-.order-status-changes_list :last-child
-.order-status-changes_info{
+.order-status-changes_list :last-child .order-status-changes_info {
   background-color: rgb(187, 212, 184);
 }

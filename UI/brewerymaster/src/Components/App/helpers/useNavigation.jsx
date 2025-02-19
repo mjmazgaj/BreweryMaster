@@ -1,13 +1,6 @@
-
 import { useState } from "react";
-import {
-    Button,
-    ButtonGroup,
-    Nav,
-    NavDropdown,
-    Navbar,
-  } from "react-bootstrap";
-  
+import { Button, ButtonGroup, Nav, NavDropdown, Navbar } from "react-bootstrap";
+
 import RequireRole from "../../Security/SecurityComponents/RequireRole";
 
 import { logout } from "../../Security/Endpoints";
@@ -16,7 +9,7 @@ import { useUser } from "../../Security/UserProvider";
 import { useTranslation } from "react-i18next";
 
 export const useNavigation = () => {
-    const [currentLanguage, setCurrentLanguage] = useState("en");
+  const [currentLanguage, setCurrentLanguage] = useState("en");
   const { setUser } = useUser();
   const { t, i18n } = useTranslation();
 
@@ -114,6 +107,6 @@ export const useNavigation = () => {
   return {
     handleLogout,
     changeLanguage,
-    navigationModules
+    navigationModules,
   };
 };
