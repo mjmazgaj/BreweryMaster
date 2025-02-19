@@ -1,6 +1,7 @@
 ﻿using BreweryMaster.API.Info.Models;
 using BreweryMaster.API.OrderModule.Models;
 using BreweryMaster.API.Recipe.Models;
+using BreweryMaster.API.Shared.Helpers;
 using BreweryMaster.API.Shared.Models.DB;
 using BreweryMaster.API.User.Services;
 using Microsoft.EntityFrameworkCore;
@@ -126,6 +127,26 @@ namespace BreweryMaster.API.OrderModule.Services
             };
         }
 
+        public async Task<decimal> GetOrderPrice(OrderPriceRequest request)
+        {
+            var recipe = await _context.Recipes.FirstOrDefaultAsync(x => x.Id == request.RecipeId);
+            var container = await _context.ContainerPrices
+                                .Include(x => x.Container)
+                                    .ThenInclude(x => x.UnitEntity)
+                                .FirstOrDefaultAsync(x => x.Id == request.ContainerId);
+
+            if (recipe is null || container is null)
+                throw new ArgumentNullException("Container or recipe wasn't found.");
+
+            if (recipe.ExpectedBeerVolume == 0 || container.Container.Capacity == 0)
+                throw new DivideByZeroException("ExpectedBeerVolume and Container Capacity can't be zero.");
+
+            var beerPrice = recipe.Price / recipe.ExpectedBeerVolume * request.Capacity;
+            var containerPrice = request.Capacity / UnitHelper.ConvertToLitters(container.Container.UnitEntity, container.Container.Capacity) * container.Price;
+
+            return Math.Floor((beerPrice + containerPrice) / 1000) * 1000;
+        }
+
         public async Task<Order> CreateOrderAsync(OrderRequest request, ClaimsPrincipal? user)
         {
             var currentUser = await _userService.GetCurrentUser(user);
@@ -176,35 +197,24 @@ namespace BreweryMaster.API.OrderModule.Services
             };
         }
 
-        public async Task<bool> EditOrderAsync(int id, OrderUpdateRequest order)
+        public async Task<bool> EditOrderAsync(int id, OrderUpdateRequest request)
         {
-            if (order.Id != id)
+            if (request.Id != id)
                 return false;
 
             var orderToUpdate = await _context.Orders.FirstOrDefaultAsync(x => x.Id == id);
 
             if (orderToUpdate is null)
-                throw new Exception();
+                return false;
 
-            orderToUpdate.Capacity = order.Capacity;
-            orderToUpdate.ContainerId = order.ContainerId;
-            orderToUpdate.Price = order.Price;
-            orderToUpdate.RecipeId = order.RecipeId;
-            orderToUpdate.TargetDate = order.TargetDate;
+            orderToUpdate.Capacity = request.Capacity ?? orderToUpdate.Capacity;
+            orderToUpdate.ContainerId = request.ContainerId ?? orderToUpdate.ContainerId;
+            orderToUpdate.RecipeId = request.RecipeId ?? orderToUpdate.RecipeId;
+            orderToUpdate.TargetDate = request.TargetDate ?? orderToUpdate.TargetDate;
 
-            _context.Entry(order).State = EntityState.Modified;
+            _context.Orders.Update(orderToUpdate);
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!OrdersExists(id))
-                    return false;
-                else
-                    throw;
-            }
+            await _context.SaveChangesAsync();
 
             return true;
         }
@@ -220,11 +230,6 @@ namespace BreweryMaster.API.OrderModule.Services
             await _context.SaveChangesAsync();
 
             return true;
-        }
-
-        private bool OrdersExists(int id)
-        {
-            return _context.Orders.Any(x => x.Id == id);
         }
     }
 }

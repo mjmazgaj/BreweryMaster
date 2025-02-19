@@ -127,6 +127,12 @@ namespace BreweryMaster.API.Recipe.Models.DB
         public decimal? TotalMashVolume { get; set; }
 
         /// <summary>
+        /// The price per expected beer Volume
+        /// </summary>
+        [Precision(8, 2)]
+        public decimal Price { get; set; }
+
+        /// <summary>
         /// Additional recipe information
         /// </summary>
         public string? Info { get; set; }

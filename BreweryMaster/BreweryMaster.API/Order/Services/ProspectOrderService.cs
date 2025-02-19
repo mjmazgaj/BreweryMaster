@@ -58,10 +58,10 @@ namespace BreweryMaster.API.OrderModule.Services
 
             var numberOfContainers = request.Capacity / containerCapacityInLitters;
 
-            var beerPrice = (float)(request.Capacity * beerType.Price / 1000);
-            var containerPrice = numberOfContainers * (float)containerType.Price;
+            var beerPrice = request.Capacity * beerType.Price / 1000;
+            var containerPrice = numberOfContainers * containerType.Price;
 
-            return Math.Round(Convert.ToDecimal(beerPrice + containerPrice), 0);
+            return Math.Round(beerPrice + containerPrice, 0);
         }
 
         public async Task<IEnumerable<ProspectOrderResponse>> GetProspectOrdersAsync()

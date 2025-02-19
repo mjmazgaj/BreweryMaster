@@ -68,6 +68,19 @@ namespace BreweryMaster.API.OrderModule.Controllers
             return Ok(client);
         }
 
+
+        [HttpGet]
+        [Route("Price")]
+        [ProducesResponseType(typeof(decimal), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<decimal>> GetOrderPrice([FromQuery] OrderPriceRequest request)
+        {
+            var price = await _clientService.GetOrderPrice(request);
+
+            return Ok(price);
+        }
+
         [HttpPost]
         [ProducesResponseType(typeof(OrderResponse), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

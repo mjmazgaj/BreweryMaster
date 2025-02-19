@@ -120,6 +120,8 @@ namespace BreweryMaster.API.Recipe.Services
                     WaterToGrainRatio = request.WaterToGrainRatio,
                     MashWaterVolume = request.MashWaterVolume,
                     TotalMashVolume = request.TotalMashVolume,
+                    Price = request.Price,
+                    Info = request.Info,
                     CreatedById = nameIdClaim.Value,
                     CreatedOn = DateTime.Now
                 };

@@ -1,4 +1,4 @@
-﻿using Swashbuckle.AspNetCore.SwaggerGen;
+﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace BreweryMaster.API.Recipe.Models
@@ -29,6 +29,10 @@ namespace BreweryMaster.API.Recipe.Models
         public decimal? WaterToGrainRatio { get; set; }
         public decimal? MashWaterVolume { get; set; }
         public decimal? TotalMashVolume { get; set; }
+        [Required]
+        [Precision(8, 2)]
+        public decimal Price { get; set; }
+        public string? Info { get; set; }
         public Dictionary<int, RecipeQuantityRequest>? FermentingIngredients { get; set; }
         public Dictionary<int, RecipeQuantityRequest>? Hops { get; set; }
         public Dictionary<int, RecipeQuantityRequest>? Yeast { get; set; }

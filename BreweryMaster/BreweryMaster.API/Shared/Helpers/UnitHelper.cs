@@ -4,8 +4,11 @@ namespace BreweryMaster.API.Shared.Helpers
 {
     public static class UnitHelper
     {
-        public static float ConvertToLitters(UnitEntity unitEntity, int capacity)
+        public static decimal ConvertToLitters(UnitEntity unitEntity, int capacity)
         {
+            if(unitEntity is null)
+                throw new ArgumentNullException($"{nameof(unitEntity)} can not be null.");
+
             float result;
             switch (unitEntity.Name)
             {
@@ -22,7 +25,7 @@ namespace BreweryMaster.API.Shared.Helpers
                     throw new Exception("not supperted unit");
             }
 
-            return result;
+            return (decimal)result;
         }
     }
 }

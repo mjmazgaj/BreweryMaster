@@ -159,6 +159,10 @@ namespace BreweryMaster.API.Info.Services
 
         public async Task<bool> UpdateFermentingIngredientAsync(int id, FermentingIngredientUpdateRequest request)
         {
+
+            if (id != request.Id)
+                return false;
+
             var ingredientToUpdate = await _context.FermentingIngredientUnits
                                                 .Include(x => x.FermentingIngredient)
                                                 .FirstOrDefaultAsync(x => x.Id == id);

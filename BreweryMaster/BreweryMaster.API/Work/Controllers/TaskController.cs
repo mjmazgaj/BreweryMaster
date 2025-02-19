@@ -116,7 +116,6 @@ namespace BreweryMaster.API.WorkModule.Controllers
                 {
                     Capacity = 10,
                     ContainerId = 1,
-                    Price = 10,
                     RecipeId = 1,
                     TargetDate = DateTime.Now.AddDays(2),
                 };

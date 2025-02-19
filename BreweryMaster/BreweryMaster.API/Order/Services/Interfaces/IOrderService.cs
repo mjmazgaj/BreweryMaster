@@ -8,6 +8,7 @@ public interface IOrderService
     Task<IEnumerable<EntityResponse>> GetOrderStatuses();
     Task<OrderResponse?> GetOrderByIdAsync(int id);
     Task<OrderDetailsResponse?> GetOrderDetailById(int id);
+    Task<decimal> GetOrderPrice(OrderPriceRequest request);
     Task<Order> CreateOrderAsync(OrderRequest request, ClaimsPrincipal? user);
     Task<OrderStatusChangeResponse> CreateOrderStatusChange(OrderStatusChangeRequest request);
     Task<bool> EditOrderAsync(int id, OrderUpdateRequest request);
