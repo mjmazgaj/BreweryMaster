@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { fetchData } from "../../Shared/api";
-import FormBasic from "../../Shared/ModalComponents/FormBasic";
+import FormBasic from "../../Shared/FormBasic";
 
 import { useTranslation } from "react-i18next";
 

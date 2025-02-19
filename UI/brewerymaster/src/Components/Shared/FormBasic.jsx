@@ -1,11 +1,11 @@
 import React, { Fragment, useState } from "react";
 import { Form } from "react-bootstrap";
 
-import { useFormBasic } from "./helpers/useFormBasic";
+import { useFormBasic } from "./ModalComponents/helpers/useFormBasic";
 
-import FormControls from "../FormControls";
-import DropDownIndex from "../DropDownIndex";
-import FormDatePicker from "../FormDatePicker";
+import FormControls from "./FormControls";
+import DropDownIndex from "./DropDownIndex";
+import FormDatePicker from "./FormDatePicker";
 
 const FormBasic = ({ fields, data, setData }) => {
   const [isValid, setIsValid] = useState(true);
