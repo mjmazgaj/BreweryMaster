@@ -25,6 +25,26 @@ namespace BreweryMaster.API.OrderModule.Services
             _settings = options.Value;
         }
 
+        public async Task<IEnumerable<OrderResponse>> GetOrders()
+        {
+            return await _context.Orders
+                        .Include(x => x.Container)
+                        .Include(x => x.Recipe)
+                        .Include(x => x.Client)
+                        .Include(x => x.CreatedByUser)
+                        .Select(x => new OrderResponse()
+                        {
+                            Id = x.Id,
+                            Capacity = x.Capacity,
+                            ContainerId = x.Container.Id,
+                            Container = x.Container.ContainerName,
+                            Price = x.Price,
+                            RecipeId = x.RecipeId,
+                            Recipe = x.Recipe.Name,
+                            TargetDate = x.TargetDate,
+                        }).ToListAsync();
+        }
+
         public async Task<IEnumerable<OrderResponse>> GetCurrentUserOrders(ClaimsPrincipal claims)
         {
             var currentUser = await _userService.GetCurrentUser(claims);

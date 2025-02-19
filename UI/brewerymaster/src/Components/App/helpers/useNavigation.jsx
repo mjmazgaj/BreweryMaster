@@ -43,6 +43,11 @@ export const useNavigation = () => {
         <Nav.Link href="/Kanban">Kanban</Nav.Link>
       </RequireRole>
     ),
+    customer: (
+      <RequireRole roles={["customer"]}>
+        <Nav.Link href="/Order">Order</Nav.Link>
+      </RequireRole>
+    ),
     supervisor: (
       <RequireRole roles={["supervisor"]}>
         <Nav.Link href="/Order">Order</Nav.Link>

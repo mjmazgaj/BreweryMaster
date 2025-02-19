@@ -20,6 +20,7 @@ function Navigation() {
         {navigationModules.homePage}
         <Nav className="me-auto">
           {navigationModules.employee}
+          {navigationModules.customer}
           {navigationModules.supervisor}
           {navigationModules.brewer}
           {navigationModules.manager}

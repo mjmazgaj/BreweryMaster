@@ -20,6 +20,16 @@ namespace BreweryMaster.API.OrderModule.Controllers
         }
 
         [HttpGet]
+        [Route("All")]
+        [ProducesResponseType(typeof(IEnumerable<OrderResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<OrderResponse>>> GetOrders()
+        {
+            var clients = await _clientService.GetOrders();
+            return Ok(clients);
+        }
+
+        [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<OrderResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<IEnumerable<OrderResponse>>> GetCurrentUserOrders()

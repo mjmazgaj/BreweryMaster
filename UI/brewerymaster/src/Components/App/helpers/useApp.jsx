@@ -28,8 +28,8 @@ export const useApp = () => {
     ];
 
     const protectedRoutes = [
-      { path: "/Order", roles:["supervisor"], element: <Order /> },
-      { path: "/Order/:id", roles:["supervisor"], element: <OrderDetails /> },
+      { path: "/Order", roles:["supervisor", "customer"], element: <Order /> },
+      { path: "/Order/:id", roles:["supervisor", "customer"], element: <OrderDetails /> },
       { path: "/Recipe", roles:["brewer"], element: <Recipe /> },
       { path: "/Recipe/:id", roles:["brewer"], element: <RecipeDetails /> },
       { path: "/FermentingIngredients", roles:["supervisor"], element: <FermentingIngredients /> },
