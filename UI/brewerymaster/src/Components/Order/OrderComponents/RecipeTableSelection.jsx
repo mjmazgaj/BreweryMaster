@@ -12,7 +12,6 @@ const RecipeTableSelection = ({selectedRecipe, setSelectedRecipe}) => {
 const [data, setData] = useState([]);
 
 const handleDoubleClick = (item) =>{
-    console.log("dziala");
     setSelectedRecipe((prevData)=>({...prevData, recipeId: item.id}));
 }
 

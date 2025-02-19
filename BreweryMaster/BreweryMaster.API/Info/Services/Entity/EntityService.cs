@@ -20,5 +20,16 @@ namespace BreweryMaster.API.Info.Services
                 Name = x.Name
             }).ToListAsync();
         }
+        public async Task<IEnumerable<EntityResponse>> GetContainers()
+        {
+            return await _context.Containers
+                            .Include(x => x.UnitEntity)
+                            .Select(x =>
+                            new EntityResponse()
+                            {
+                                Id = x.Id,
+                                Name = $"{x.Material.Name} {x.ContainerName} {x.Capacity}{x.UnitEntity.Name}",
+                            }).ToListAsync();
+        }
     }
 }

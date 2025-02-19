@@ -4,67 +4,22 @@ import Button from 'react-bootstrap/Button';
 import { toast } from "react-toastify";
 import { addData } from '../../Shared/api';
 
-import Contact from './../../Shared/Contact'
 import MenuSteps from '../../Shared/MenuSteps';
 import RecipeTableSelection from "../OrderComponents/RecipeTableSelection";
+import OrderFormStep2 from "./OrderFormStep2";
 
 const OrderForm = () => {  
 
-  const [selectedRecipe, setSelectedRecipe] = useState({});
-  const [contactData, setContactData] = useState({
-    phoneNumber: "",
-    email: "",
-  });
-
-  const [companyClientDetailsData, setCompanyClientDetailsData] = useState({
-    companyName: "",
-    nip: "",
-  });
-  
-  const [individualClientDetailsData, setIndividualClientDetailsData] = useState({
-    forename: "",
-    surname: "",
-  });
-  
-  const [addressData, setAddressData] = useState({
-    addressId: "",
-    deliveryAddressId: "",
-  });
+  const [orderData, setOrderData] = useState({});
 
   const [currentStep, setCurrentStep] = useState(0);
 
-  const handleSave = () => {
-    const newData = {
-      addressId : addressData.addressId,
-      deliveryAddressId : addressData.deliveryAddressId,
-      phoneNumber : contactData.phoneNumber,
-      email : contactData.email,
-    };
+  const handleSave = async () => {
   
-    addData("Order", newData)
-      .then(() => {
-        clear();
-        toast.success('Order has been added');
-      })
+    await addData("Order", orderData);
   };
   
   const clear = () => {
-    setCompanyClientDetailsData({
-      companyName: "",
-      nip: "",
-    });
-    setIndividualClientDetailsData({
-      forename: "",
-      surname: "",
-    });
-    setAddressData({
-      addressId: "",
-      deliveryAddressId: "",
-    });
-    setContactData({
-      phoneNumber: "",
-      email: "",
-    });
   };
 
   const steps = [
@@ -72,15 +27,15 @@ const OrderForm = () => {
       name: "Please select a recipe",
       component: (
         <RecipeTableSelection
-          selectedRecipe={selectedRecipe}
-          setSelectedRecipe={setSelectedRecipe}
+          selectedRecipe={orderData.recipeId}
+          setSelectedRecipe={setOrderData}
         />
       ),
     },
     {
-      name: "Contact",
+      name: "Specify following details",
       component: (
-        <Contact contactData={contactData} setContactData={setContactData} />
+        <OrderFormStep2 data={orderData} setData={setOrderData} />
       ),
     }
   ];

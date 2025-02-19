@@ -38,6 +38,15 @@ const fieldsProvider = (t) => ({
           },
         ],
     },
+    orderFields:{
+      control: [
+        {
+          id: "capacity",
+          label: t("name.brewery.capacity"),
+          type: "number",
+        },
+      ],
+    }
   });
   
   export default fieldsProvider;

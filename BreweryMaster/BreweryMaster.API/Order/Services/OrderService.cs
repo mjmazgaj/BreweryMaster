@@ -150,15 +150,19 @@ namespace BreweryMaster.API.OrderModule.Services
         public async Task<Order> CreateOrderAsync(OrderRequest request, ClaimsPrincipal? user)
         {
             var currentUser = await _userService.GetCurrentUser(user);
+            var price = await GetOrderPrice(new OrderPriceRequest() 
+                            { 
+                                Capacity = request.Capacity, 
+                                ContainerId = request.ContainerId, 
+                                RecipeId = request.RecipeId 
+                            });
 
             var clientToCreate = new Order()
             {
-                ClientId = null,
-                Client = null,
                 Capacity = request.Capacity,
                 ContainerId = request.ContainerId,
                 Container = null!,
-                Price = request.Price,
+                Price = price,
                 RecipeId = request.RecipeId,
                 Recipe = null!,
                 TargetDate = request.TargetDate,

@@ -24,5 +24,15 @@ namespace BreweryMaster.API.Info.Controllers
             var units = await _entityService.GetUnitsAsync();
             return Ok(units);
         }
+
+        [HttpGet]
+        [Route("Container")]
+        [ProducesResponseType(typeof(IEnumerable<EntityResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<EntityResponse>>> GetContainers()
+        {
+            var containers = await _entityService.GetContainers();
+            return Ok(containers);
+        }
     }
 }
