@@ -115,6 +115,14 @@ namespace BreweryMaster.API.OrderModule.Services
                 CreatedOn = DateOnly.FromDateTime(order.CreatedOn),
                 StatusId = statusChanges.LastOrDefault()?.OrderStatusId ?? 1,
                 Status = statusChanges.LastOrDefault()?.OrderStatus.Name ?? "NotSet",
+                StatusChanges = statusChanges.Select(x=>new OrderStatusChangeResponse()
+                {
+                    OrderId = order.Id,
+                    OrderStatusId = x.OrderStatusId,
+                    OrderStatus = x.OrderStatus.Name,
+                    ChangedOnDateOnly = DateOnly.FromDateTime(x.ChangedOn),
+                    ChangedOnDateTime = x.ChangedOn,
+                })
             };
         }
 

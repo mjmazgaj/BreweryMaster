@@ -15,5 +15,6 @@ namespace BreweryMaster.API.OrderModule.Models
         public decimal Price { get; set; }
         public int StatusId { get; set; }
         public required string Status { get; set; }
+        public IEnumerable<OrderStatusChangeResponse>? StatusChanges { get; set; }
     }
 }

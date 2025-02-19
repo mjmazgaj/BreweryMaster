@@ -67,3 +67,30 @@ form input {
   flex: 1;
   height: fit-content;
 }
+
+.order-status-changes_container {
+  margin-top: 1rem;
+}
+
+.order-status-changes_list {
+  display: flex;
+  margin: auto;
+  margin-top: 1rem;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.order-status-changes_item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.order-status-changes_info :last-child {
+  margin: 0;
+}
+
+.order-status-changes_list :last-child
+.order-status-changes_info{
+  background-color: rgb(187, 212, 184);
+}

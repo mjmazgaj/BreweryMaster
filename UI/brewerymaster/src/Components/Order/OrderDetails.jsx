@@ -7,6 +7,7 @@ import { addData, fetchData } from "../Shared/api";
 import { useTranslation } from "react-i18next";
 import ControlsCard from "../Shared/ControlComponents/ControlsCard";
 import DropDownIndex from "../Shared/DropDownIndex"
+import OrderStatusChanges from "./OrderComponents/OrderStatusChanges";
 import fieldsProviderOrder from "./OrderComponents/helpers/fieldsProvider";
 import fieldsProviderRecipe from "../Recipe/RecipeComponents/helpers/fieldsProvider";
 import { Button, Card } from "react-bootstrap";
@@ -19,7 +20,7 @@ const OrderDetails = () => {
   const [data, setData] = useState({});
   const [editData, setEditData] = useState({});
   const [statuses, setStatuses] = useState({});
-
+  
   const handleButton = () => {
     navigate("/Order");
   };
@@ -29,7 +30,7 @@ const OrderDetails = () => {
 
     let statusId = parseInt(value);
 
-    if(statusId == 0)
+    if(statusId == 0 || statusId === editData.statusId)
       return
 
     setEditData((prevData) => ({
@@ -58,6 +59,8 @@ const OrderDetails = () => {
       <Button variant="dark" onClick={handleButton}>
         Return
       </Button>
+      
+      <OrderStatusChanges statusChanges={data.statusChanges}/>
 
       <div className="order-details-info_container">
         <Card className="order-details-general-info_container">
