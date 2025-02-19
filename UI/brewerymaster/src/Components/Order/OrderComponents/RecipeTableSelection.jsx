@@ -13,7 +13,7 @@ const [data, setData] = useState([]);
 
 const handleDoubleClick = (item) =>{
     console.log("dziala");
-    setSelectedRecipe(item);
+    setSelectedRecipe((prevData)=>({...prevData, recipeId: item.id}));
 }
 
   useEffect(() => {
