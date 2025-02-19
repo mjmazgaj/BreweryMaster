@@ -8,7 +8,6 @@ import { fetchData } from "../Shared/api";
 import fieldsProvider from "./RecipeComponents/helpers/fieldsProvider";
 import "./recipe.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "react-toastify/dist/ReactToastify.css";
 import "./recipe.css";
 import DynamicTable from "../Shared/TableComponents/DynamicTable";
 import ControlsCard from "../Shared/ControlComponents/ControlsCard";

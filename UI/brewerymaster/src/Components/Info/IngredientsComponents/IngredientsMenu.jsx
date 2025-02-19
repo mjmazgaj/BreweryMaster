@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "react-toastify/dist/ReactToastify.css";
 import "../info.css";
 
 import { Button, ButtonGroup } from "react-bootstrap";

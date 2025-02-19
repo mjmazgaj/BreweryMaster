@@ -1,4 +1,5 @@
 import Navigation from "./Components/App/Navigation";
+import "react-toastify/dist/ReactToastify.css";
 
 import {
   BrowserRouter as Router,
@@ -13,6 +14,7 @@ import React from "react";
 import ProtectedRoute from "./Components/Security/SecurityComponents/ProtectedRoute";
 
 import { I18nextProvider } from "react-i18next";
+import { ToastContainer } from "react-toastify";
 import i18n from "./i18n";
 import Footer from "./Components/App/Footer.jsx";
 import { useApp } from "./Components/App/helpers/useApp.jsx";
@@ -22,6 +24,7 @@ const App = () => {
   return (
     <>
       <I18nextProvider i18n={i18n}>
+        <ToastContainer />
         <Navigation />
         <Router>
           <div className="App">

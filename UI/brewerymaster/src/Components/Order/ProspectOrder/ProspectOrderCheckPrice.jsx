@@ -2,7 +2,6 @@ import React, { Fragment, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import "react-toastify/dist/ReactToastify.css";
 import "../order.css";
 
 import { fetchData } from "../../Shared/api";

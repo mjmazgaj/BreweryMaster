@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import "../info.css";
 
 import { useTranslation } from "react-i18next";
@@ -24,7 +22,6 @@ const FermentingIngredients = () => {
 
   return (
     <div className="Info_container">
-      <ToastContainer />
       <IngredientsMenu mode={mode} setMode={setMode} />
       {steps[mode]}
     </div>

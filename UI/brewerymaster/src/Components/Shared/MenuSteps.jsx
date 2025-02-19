@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import "./shared.css"
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import "react-toastify/dist/ReactToastify.css";
 import {
   Bs1Circle,
   Bs1CircleFill,
