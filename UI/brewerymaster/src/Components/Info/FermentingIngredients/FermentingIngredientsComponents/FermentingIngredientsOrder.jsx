@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../../info.css";
 
 import DynamicTable from "../../../Shared/TableComponents/DynamicTable";
-import ModalFormBasic from "../../../Shared/ModalComponents/ModalFormBasic";
+import ModalForm from "../../../Shared/ModalComponents/ModalForm";
 import modalFieldsProvider from "../../../Shared/ModalComponents/helpers/modalFieldsProvider";
 
 import { useFermentingIngredientsOrder } from "./helpers/useFermentingIngredientsOrder";
@@ -39,7 +39,7 @@ const FermentingIngredientsOrder = () => {
         handleDoubleClick={handleDoubleClick}
       />
 
-      <ModalFormBasic
+      <ModalForm
         fields={modalFieldsProvider(t).quantityModalFields["order"]}
         data={modalData}
         setData={setModalData}

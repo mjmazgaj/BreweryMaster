@@ -11,7 +11,7 @@ import { useFermentingIngredientsSummary } from "./helpers/useFermentingIngredie
 
 import { useTranslation } from "react-i18next";
 import ModalConfirmation from "../../../Shared/ModalComponents/ModalConfirmation";
-import ModalFormBasic from "../../../Shared/ModalComponents/ModalFormBasic";
+import ModalForm from "../../../Shared/ModalComponents/ModalForm";
 import FermentingIngredientsFilter from "./FermentingIngredientsFilter";
 
 const FermentingIngredientsSummary = () => {
@@ -92,7 +92,7 @@ const FermentingIngredientsSummary = () => {
         setAction={setItemAction}
       />
 
-      <ModalFormBasic
+      <ModalForm
         fields={fields}
         data={modalData}
         setData={setModalData}
@@ -105,7 +105,7 @@ const FermentingIngredientsSummary = () => {
         refreshTableData={refreshTableData}
       />
 
-      <ModalFormBasic
+      <ModalForm
         fields={modalFieldsProvider(t).quantityModalFields[quantityAction.area]}
         data={modalQuantityData}
         setData={setModalQuantityData}

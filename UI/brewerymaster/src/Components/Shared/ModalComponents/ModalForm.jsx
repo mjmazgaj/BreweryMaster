@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 
-import { useModalFormBasic } from "./helpers/useModalFormBasic";
+import { useModalForm } from "./helpers/useModalForm";
 import FormControls from "../FormControls";
 
 import { useTranslation } from "react-i18next";
 import DropDownIndex from "../DropDownIndex";
 import FormDatePicker from "../FormDatePicker";
 
-const ModalFormBasic = ({
+const ModalForm = ({
   fields,
   data,
   setData,
@@ -29,7 +29,7 @@ const ModalFormBasic = ({
     handleCheckBox,
     handleSelectChange,
     handleDateChange,
-  } = useModalFormBasic({
+  } = useModalForm({
     data,
     setData,
     usedUnits,
@@ -137,4 +137,4 @@ const ModalFormBasic = ({
   );
 };
 
-export default ModalFormBasic;
+export default ModalForm;

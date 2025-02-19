@@ -9,7 +9,7 @@ import DynamicTable from "../Shared/TableComponents/DynamicTable";
 import ModalItemAction from "../Shared/ModalComponents/ModalItemAction";
 import ModalConfirmation from "../Shared/ModalComponents/ModalConfirmation";
 
-import ModalFormBasic from "../Shared/ModalComponents/ModalFormBasic";
+import ModalForm from "../Shared/ModalComponents/ModalForm";
 import { useProspectOrderSummary } from "./ProspectOrder/helpers/useProspectOrderSummary";
 
 const ProspectOrderSummary = () => {
@@ -65,7 +65,7 @@ const ProspectOrderSummary = () => {
         setAction={setItemAction}
       />
 
-      <ModalFormBasic
+      <ModalForm
         fields={formFields}
         data={modalFormData}
         setData={setModalFormData}

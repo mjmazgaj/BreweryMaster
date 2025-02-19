@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import "../../info.css";
 
 import DynamicTable from "../../../Shared/TableComponents/DynamicTable";
-import ModalFormBasic from "../../../Shared/ModalComponents/ModalFormBasic";
+import ModalForm from "../../../Shared/ModalComponents/ModalForm";
 
 import modalFieldsProvider from "../../../Shared/ModalComponents/helpers/modalFieldsProvider";
 
@@ -41,7 +39,7 @@ const FermentingIngredientsReservation = () => {
         handleDoubleClick={handleDoubleClick}
       />
 
-      <ModalFormBasic
+      <ModalForm
         fields={modalFieldsProvider(t).quantityModalFields["reservation"]}
         data={modalData}
         setData={setModalData}
