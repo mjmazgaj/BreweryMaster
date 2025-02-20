@@ -1,4 +1,5 @@
-﻿using BreweryMaster.API.User.Models.Responses;
+﻿using BreweryMaster.API.User.Models.Requests;
+using BreweryMaster.API.User.Models.Responses;
 using BreweryMaster.API.User.Models.Users;
 using BreweryMaster.API.User.Models.Users.DB;
 using BreweryMaster.API.User.Services;
@@ -88,6 +89,15 @@ namespace BreweryMaster.API.UserModule.Controllers
             }
 
             return Ok(new { message = "User updated successfully." });
+        }
+
+        [HttpPatch]
+        [Route("Password")]
+        public async Task<IActionResult> UpdatePassword(UserPasswordRequest request)
+        {
+            var result = await _userService.UpdatePassword(request, HttpContext.User);
+
+            return Ok(result);
         }
 
         [HttpGet]

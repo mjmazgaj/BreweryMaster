@@ -3,10 +3,12 @@ using BreweryMaster.API.User.Enums;
 using BreweryMaster.API.User.Helpers;
 using BreweryMaster.API.User.Models;
 using BreweryMaster.API.User.Models.DB;
+using BreweryMaster.API.User.Models.Requests;
 using BreweryMaster.API.User.Models.Responses;
 using BreweryMaster.API.User.Models.Users;
 using BreweryMaster.API.User.Models.Users.DB;
 using BreweryMaster.API.UserModule.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -131,7 +133,7 @@ namespace BreweryMaster.API.User.Services
             if (user is null)
                 throw new ArgumentNullException("user can not be null");
 
-            var addresses = await _context.UserAddresses.Where(x => x.UserId == nameIdClaim.Value).Include(x=>x.Address).ToListAsync();
+            var addresses = await _context.UserAddresses.Where(x => x.UserId == nameIdClaim.Value).Include(x => x.Address).ToListAsync();
             var homeAddress = addresses.FirstOrDefault(x => x.AddressTypeId == (int)AddressType.Home)?.Address.ToResponse();
             var deliveryAddress = addresses.FirstOrDefault(x => x.AddressTypeId == (int)AddressType.Delivery)?.Address.ToResponse();
             var invoiceAddress = addresses.FirstOrDefault(x => x.AddressTypeId == (int)AddressType.Invoice)?.Address.ToResponse();
@@ -229,6 +231,32 @@ namespace BreweryMaster.API.User.Services
                 throw new Exception();
 
             return user.ToUserResponse();
+        }
+
+        public async Task<bool> UpdatePassword(UserPasswordRequest request, ClaimsPrincipal? userClaims)
+        {
+            if (userClaims is null)
+                throw new UnauthorizedAccessException("User not authenticated");
+
+            var nameIdClaim = userClaims.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+
+            if (nameIdClaim is null)
+                throw new ArgumentNullException("user id not found");
+
+            if (request.Password != request.ConfirmPassword)
+                return false;
+
+            var user = await _userManager.FindByIdAsync(nameIdClaim.Value);
+
+            if (user == null)
+                return false;
+
+            var result = await _userManager.ChangePasswordAsync(user, request.CurrentPassword, request.Password);
+
+            if (!result.Succeeded)
+                return false;
+
+            return true;
         }
 
         public async Task<bool> CreateTestUsers()

@@ -42,6 +42,15 @@ export const updateWithoutBody = async (path, id) => {
   }
 };
 
+export const updateWithoutParameter = async (path, data) => {
+  try {
+    const result = await api.patch(`${apiurl}/${path}`, data);
+    return result.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const deleteData = (path, id) => {
   return api.delete(`${apiurl}/${path}/${id}`)
     .then((result) => result.status === 200)

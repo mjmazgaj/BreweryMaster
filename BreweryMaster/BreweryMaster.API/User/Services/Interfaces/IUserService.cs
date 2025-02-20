@@ -1,6 +1,6 @@
-﻿using BreweryMaster.API.User.Models.Responses;
+﻿using BreweryMaster.API.User.Models.Requests;
+using BreweryMaster.API.User.Models.Responses;
 using BreweryMaster.API.User.Models.Users;
-using BreweryMaster.API.User.Models.Users.DB;
 using System.Security.Claims;
 
 namespace BreweryMaster.API.User.Services
@@ -13,6 +13,7 @@ namespace BreweryMaster.API.User.Services
         Task<UserDetailsResponse> GetCurrentUserDetails(ClaimsPrincipal? user);
         Task<UserResponse> CreateUser(UserRegisterRequest request);
         Task<UserResponse> UpdateUser(UserUpdateRequest request, string userId);
+        Task<bool> UpdatePassword(UserPasswordRequest request, ClaimsPrincipal? claims);
 
         Task<bool> CreateTestUsers();
     }

@@ -26,6 +26,9 @@ export const useFormControls = ({
       case "text":
         validateText(value, field.validation, field.id);
         break;
+      case "password":
+        validateText(value, field.validation, field.id);
+        break;
       default:
         setInvalidFields((prev) => ({ ...prev, [field.id]: false }));
         break;
