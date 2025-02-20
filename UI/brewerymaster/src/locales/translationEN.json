@@ -139,6 +139,7 @@
     },
     "validation": {
         "text": "Text should have less letters then:",
+        "email": "The input should have an email format and have less letters then:",
         "number": "Number should be in range:"
     },
     "toast": {

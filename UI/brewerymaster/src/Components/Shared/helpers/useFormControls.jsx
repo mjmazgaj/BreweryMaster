@@ -1,38 +1,41 @@
 import { useEffect } from "react";
 
-export const useFormControls = ({
-  setData,
-  setIsValid,
-  invalidFields,
-  setInvalidFields,
-}) => {
-  const validateNumber = (value, validation, id) => {
-    const isInvalid = validation
-      ? value > validation.max || value < validation.min
-      : false;
-    setInvalidFields((prev) => ({ ...prev, [id]: isInvalid }));
+export const useFormControls = ({ setData, setIsValid, invalidFields, setInvalidFields }) => {
+  const validateNumber = (value, validation) => {
+    return validation ? value > validation.max || value < validation.min : false;
   };
 
-  const validateText = (value, validation, id) => {
-    const isInvalid = validation ? value.length > validation.maxLength : false;
-    setInvalidFields((prev) => ({ ...prev, [id]: isInvalid }));
+  const validateText = (value, validation) => {
+    return validation ? value.length > validation.maxLength : false;
+  };
+
+  const validateEmail = (value, validation) => {
+    if (validateText(value, validation)) return true;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return !emailRegex.test(value);
   };
 
   const validation = (value, field) => {
+    let isInvalid = false;
+
     switch (field.type) {
       case "number":
-        validateNumber(value, field.validation, field.id);
+        isInvalid = validateNumber(value, field.validation);
         break;
       case "text":
-        validateText(value, field.validation, field.id);
-        break;
       case "password":
-        validateText(value, field.validation, field.id);
+        isInvalid = validateText(value, field.validation);
+        break;
+      case "email":
+        isInvalid = validateEmail(value, field.validation);
         break;
       default:
-        setInvalidFields((prev) => ({ ...prev, [field.id]: false }));
+        isInvalid = false;
         break;
     }
+
+    setInvalidFields((prev) => ({ ...prev, [field.id]: isInvalid }));
+    return isInvalid;
   };
 
   const handleInputChange = (e, field) => {
@@ -45,13 +48,9 @@ export const useFormControls = ({
   };
 
   useEffect(() => {
-    const isValidNow = !Object.values(invalidFields).some(
-      (isInvalid) => isInvalid
-    );
+    const isValidNow = !Object.values(invalidFields).some((isInvalid) => isInvalid);
     setIsValid(isValidNow);
   }, [invalidFields, setIsValid]);
 
-  return {
-    handleInputChange,
-  };
+  return { handleInputChange };
 };
