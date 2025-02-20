@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 
 import { useModalFormBasic } from "./helpers/useModalFormBasic";
@@ -13,17 +13,17 @@ const ModalFormBasic = ({
   setData,
   show,
   setShow,
-  title,
-  submitFunction,
-  buttons,
+  modalCustomizationObject,
   isValid,
   setIsValid
 }) => {
 
-  const { handleClose, handleCheckBox, handleSelectChange, handleDateChange } =
+  const { handleClose, handleCheckBox, handleSelectChange, handleDateChange, handleFormSubmit } =
     useModalFormBasic({
       setData,
       setShow,
+      isValid,
+      modalCustomizationObject,
     });
 
   const renderDropdowns = () =>
@@ -84,9 +84,9 @@ const ModalFormBasic = ({
   return (
     fields && (
       <Modal show={show} onHide={handleClose}>
-        <Form onSubmit={(event) => submitFunction(event, data)}>
+        <Form onSubmit={(event) => handleFormSubmit(event, data)}>
           <Modal.Header closeButton>
-            <Modal.Title>{title}</Modal.Title>
+            <Modal.Title>{modalCustomizationObject?.title ?? ""}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <FormControls
@@ -100,8 +100,8 @@ const ModalFormBasic = ({
             {renderDatePickers()}
           </Modal.Body>
           <Modal.Footer>
-            {buttons &&
-              buttons.map((button, index) => (
+            {modalCustomizationObject?.buttons &&
+              modalCustomizationObject.buttons.map((button, index) => (
                 <Button
                   type={button.isSubmit ? "submit" : ""}
                   key={index}

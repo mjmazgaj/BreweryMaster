@@ -1,8 +1,9 @@
 export const useModalFormBasic = ({
   setData,
   setShow,
+  isValid,
+  modalCustomizationObject,
 }) => {
-
   const handleClose = () => {
     setShow(false);
   };
@@ -31,10 +32,26 @@ export const useModalFormBasic = ({
     }));
   };
 
+  const handleFormSubmit = (event, data) => {
+    const form = event.currentTarget;
+    event.preventDefault();
+
+    if (form.checkValidity() === false || !isValid) {
+      event.stopPropagation();
+      return;
+    }
+
+    if (!modalCustomizationObject.addtionalValidation(data)) return;
+
+    modalCustomizationObject.submitFunction(data);
+    setShow(false);
+  };
+
   return {
     handleClose,
     handleCheckBox,
     handleSelectChange,
     handleDateChange,
+    handleFormSubmit,
   };
 };

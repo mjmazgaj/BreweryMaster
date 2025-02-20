@@ -142,6 +142,8 @@
         "number": "Number should be in range:"
     },
     "toast": {
-        "addSuccess": "The item has been added successfully."
+        "addSuccess": "The item has been added successfully.",
+        "PasswordNotMatching": "Password do not matching",
+        "NewPasswordShouldBeDifferent": "New Password should be diffent, then the old one"
     }
 }

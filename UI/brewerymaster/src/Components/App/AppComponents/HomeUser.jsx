@@ -4,14 +4,12 @@ import { useUser } from "../../Security/UserProvider";
 import UserDetails from "../../User/UserDetails";
 import { Button } from "react-bootstrap";
 
-import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import ModalFormBasic from "../../Shared/ModalComponents/ModalFormBasic";
 
-import { updateWithoutParameter } from "../../Shared/api";
-
 import fieldsProvider from "../helpers/fieldsProvider";
 
+import { useHomeUser } from "../helpers/useHomeUser";
 const HomeUser = () => {
   const { t } = useTranslation();
   const { user } = useUser();
@@ -21,42 +19,9 @@ const HomeUser = () => {
   const [isValid, setIsValid] = useState(false);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
 
-  const handleFormSubmit = (event) => {
-    const form = event.currentTarget;
-    event.preventDefault();
-
-    if (form.checkValidity() === false || !isValid) {
-      event.stopPropagation();
-      return false;
-    }
-
-    return true;
-  };
-
-  const buttons = [
-    {
-      isSubmit: false,
-      function: (event) => {
-        if (!handleFormSubmit(event)) {
-          return;
-        }
-        if (data?.password != data?.confirmPassword) {
-          toast.error("Potwierdzenie hasła rózni się od nowego hasła");
-          return;
-        }
-        if (data?.password == data?.currentPassword) {
-          toast.error("Nowe hasło jest takie samo jak stare");
-          return;
-        }
-        updateWithoutParameter("User/Password", data);
-      },
-      label: "Save",
-    },
-  ];
-
-  const handleChangePassword = () => {
-    setShowPasswordModal(true);
-  };
+  const { modalCustomizationObject, handleChangePassword } = useHomeUser({
+    setShowPasswordModal,
+  });
 
   return (
     <div className="home-user_container">
@@ -73,9 +38,7 @@ const HomeUser = () => {
         setIsValid={setIsValid}
         show={showPasswordModal}
         setShow={setShowPasswordModal}
-        title="Edit password"
-        submitFunction={() => {}}
-        buttons={buttons}
+        modalCustomizationObject={modalCustomizationObject}
         isValid={isValid}
       />
     </div>
