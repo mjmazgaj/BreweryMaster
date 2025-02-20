@@ -4,6 +4,7 @@ import { Modal, Button, Form } from "react-bootstrap";
 import { useModalItemAction } from "./helpers/useModalItemAction";
 import FormControlsReadOnly from "../FormControlsReadOnly";
 
+import { useTranslation } from "react-i18next";
 import { fetchData } from "../api";
 
 const ModalItemAction = ({
@@ -19,6 +20,7 @@ const ModalItemAction = ({
   action,
   setAction,
 }) => {
+  const { t } = useTranslation();
   const [units, setUnits] = useState([]);
 
   const { handleClose, handleDelete, handleEdit, actionObject } =
@@ -37,10 +39,10 @@ const ModalItemAction = ({
     default: (
       <>
         <Button variant="dark" onClick={handleEdit}>
-          Edit
+          {t("button.edit")}
         </Button>
         <Button variant="dark" onClick={handleDelete}>
-          Delete
+          {t("button.delete")}
         </Button>
       </>
     ),
@@ -50,28 +52,28 @@ const ModalItemAction = ({
           variant="dark"
           onClick={actionObject.function(data, "storage", "Increase")}
         >
-          Increase
+          {t("button.increase")}
         </Button>
         <Button
           variant="dark"
           onClick={actionObject.function(data, "storage", "Reduce")}
         >
-          Reduce
+          {t("button.reduce")}
         </Button>
         <Button
           variant="dark"
           onClick={actionObject.function(data, "reservation")}
         >
-          Reserve
+          {t("button.reserve")}
         </Button>
         <Button variant="dark" onClick={actionObject.function(data, "order")}>
-          Order
+          {t("button.order")}
         </Button>
         <Button variant="dark" onClick={handleEdit}>
-          Edit
+          {t("button.edit")}
         </Button>
         <Button variant="dark" onClick={handleDelete}>
-          Delete
+          {t("button.delete")}
         </Button>
       </>
     ),
@@ -92,7 +94,7 @@ const ModalItemAction = ({
       <Modal.Footer>
         {buttonsSet[action]}
         <Button variant="dark" onClick={handleClose}>
-          Close
+          {t("button.close")}
         </Button>
       </Modal.Footer>
     </Modal>

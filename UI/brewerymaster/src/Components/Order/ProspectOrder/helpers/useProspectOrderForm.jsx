@@ -6,8 +6,10 @@ import Contact from "../../../Shared/Contact";
 import FormDatePicker from "../../../Shared/FormDatePicker";
 
 import { addData } from "../../../Shared/api";
+import { useTranslation } from 'react-i18next';
 
 export const useProspectOrderForm = () => {
+  const { t } = useTranslation();
   const [contactData, setContactData] = useState({
     phoneNumber: "",
     email: "",
@@ -75,7 +77,7 @@ export const useProspectOrderForm = () => {
 
   const steps = [
     {
-      name: "Order",
+      name: t("name.brewery.order"),
       component: (
         <ProspectOrderDetails
           setProspectOrderData={setProspectOrderData}
@@ -84,7 +86,7 @@ export const useProspectOrderForm = () => {
       ),
     },
     {
-      name: "Client Details",
+      name: t("name.user.clientDetails"),
       component: (
         <ClientDetails
           individualClientDetailsData={individualClientDetailsData}
@@ -97,18 +99,18 @@ export const useProspectOrderForm = () => {
       ),
     },
     {
-      name: "Contact",
+      name: t("name.user.contact"),
       component: (
         <Contact contactData={contactData} setContactData={setContactData} />
       ),
     },
     {
-      name: "Date",
+      name: t("name.brewery.date"),
       component: (
         <FormDatePicker
           id="complitionDate"
           key="complitionDate"
-          label="Expected complition date"
+          label={t("name.brewery.expectedDate")}
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}
         />

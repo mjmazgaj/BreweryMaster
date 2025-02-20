@@ -23,10 +23,10 @@ export const useHomeUser = ({ setShowPasswordModal }) => {
     buttons: [
       {
         isSubmit: false,
-        label: "Save",
+        label: t("button.save"),
       },
     ],
-    title: "Edit password",
+    title: t("user.edditPassword"),
   };
 
   const handleChangePassword = () => {

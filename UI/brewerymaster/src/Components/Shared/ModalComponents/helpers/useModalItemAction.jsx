@@ -43,12 +43,12 @@ export const useModalItemAction = ({
 
   const actionCases = {
     default: {
-      title: `${data ? data.name : ""} details`,
+      title: `${data ? data.name : ""}`,
       function: () => () => {},
       isReadOnly: true,
     },
     summary: {
-      title: `${data ? data.name : ""} details`,
+      title: `${data ? data.name : ""}`,
       function: handleQuantityChange,
       isReadOnly: true,
     },

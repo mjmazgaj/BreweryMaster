@@ -4,11 +4,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../order.css";
 
 import { fetchData } from "../../Shared/api";
+import { useTranslation } from 'react-i18next';
 
 import DropDownIndex from "../../Shared/DropDownIndex";
 import ProspectOrderCheckPrice from "./ProspectOrderCheckPrice";
 
 const ProspectOrderDetails = ({ prospectOrderData, setProspectOrderData }) => {
+  const { t } = useTranslation();
   const handleInputChange = (key, e) => {
     const { value } = e.target;
     setProspectOrderData((prevData) => ({
@@ -26,12 +28,12 @@ const ProspectOrderDetails = ({ prospectOrderData, setProspectOrderData }) => {
   return (
     <Fragment>
       <div className="prospectorder-details">
-        <p>Please enter your order details</p>
-        <Form.Label>Capacity</Form.Label>
+        <p>{t("order.enterOrderDetails")}</p>
+        <Form.Label>{t("name.brewery.capacity")}</Form.Label>
         <Form.Control
           id="capacity"
           type="number"
-          placeholder="Enter capacity"
+          placeholder={t("name.brewery.capacity")}
           onChange={(value) => handleInputChange("capacity", value)}
         />
         {details["beerTypes"] && (
@@ -43,7 +45,7 @@ const ProspectOrderDetails = ({ prospectOrderData, setProspectOrderData }) => {
               handleInputChange("selectedBeer", value)
             }
             isReadOnly={false}
-            label="Beer type"
+            label={t("name.brewery.beerStyle")}
           />
         )}
         {details["beerTypes"] && (
@@ -55,7 +57,7 @@ const ProspectOrderDetails = ({ prospectOrderData, setProspectOrderData }) => {
               handleInputChange("selectedContainer", value)
             }
             isReadOnly={false}
-            label="Container type"
+            label={t("name.brewery.container")}
           />
         )}
       </div>

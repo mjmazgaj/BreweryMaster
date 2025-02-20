@@ -141,7 +141,7 @@ const modalFieldsProvider = (t) => ({
       datePicker: [
         {
           name: "expectedDate",
-          label: "Expected Date",
+          label: t("name.brewery.targetDate"),
         },
       ],
     },

@@ -29,7 +29,7 @@ const OrderFormStep2 = ({ data, setData }) => {
       datePicker: [
         {
           name: "targetDate",
-          label: "Expected Date",
+          label: t("name.brewery.targetDate"),
         },
       ],
     });

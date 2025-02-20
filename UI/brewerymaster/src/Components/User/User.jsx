@@ -23,10 +23,10 @@ const User = () => {
 
   return (
     <div>
-      <h2>User</h2>
+      <h2>{t("name.brewery.user")}</h2>
       <DynamicTable
         tableKey="users"
-        tableTitle="All users"
+        tableTitle={t("user.allUsers")}
         dataCategory="user"
         data={users}
         handleDoubleClick={handleDoubleClick}

@@ -5,8 +5,10 @@ import "./recipe.css";
 import RecipeForm from "./RecipeComponents/RecipeForm";
 import RecipeTable from "./RecipeComponents/RecipeTable";
 import { Button } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 
 const Recipe = () => {
+  const { t } = useTranslation();
   const [isAddMode, setIsAddMode] = useState(false);
 
   const handleAddOnClick = () => {
@@ -20,7 +22,7 @@ const Recipe = () => {
         variant="dark"
         onClick={handleAddOnClick}
       >
-        {isAddMode ? "Show all recipes" : "Add Recipe"}
+        {isAddMode ? t("recipe.showAll") : t("recipe.add")}
       </Button>
       {isAddMode ? <RecipeForm setIsAddMode={setIsAddMode} /> : <RecipeTable />}
     </div>

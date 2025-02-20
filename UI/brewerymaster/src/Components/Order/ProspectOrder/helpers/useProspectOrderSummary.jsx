@@ -60,7 +60,7 @@ export const useProspectOrderSummary = ({
       datePicker: [
         {
           name: "targetDate",
-          label: "Expected Date",
+          label: t("name.brewery.targetDate"),
         },
       ],
     });

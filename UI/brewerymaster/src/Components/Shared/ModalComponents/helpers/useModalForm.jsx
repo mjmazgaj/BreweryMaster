@@ -114,17 +114,17 @@ export const useModalForm = ({
       isReadOnly: false,
     },
     Edit: {
-      title: `Edit ${data?.name ? data.name : itemName}`,
+      title: `${t("name.general.edit")} ${data?.name ? data.name : itemName}`,
       function: handleEdit,
       isReadOnly: false,
     },
     Reduce: {
-      title: `Reduce ${data?.name ? data.name : itemName}`,
+      title: `${t("name.general.reduce")} ${data?.name ? data.name : itemName}`,
       function: handleReduce,
       isReadOnly: false,
     },
     Increase: {
-      title: `Increase ${data?.name ? data.name : itemName}`,
+      title: `${t("name.general.increase")} ${data?.name ? data.name : itemName}`,
       function: handleIncrease,
       isReadOnly: false,
     },

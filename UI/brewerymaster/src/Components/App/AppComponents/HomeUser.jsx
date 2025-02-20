@@ -25,10 +25,10 @@ const HomeUser = () => {
 
   return (
     <div className="home-user_container">
-      <h3>You are logged as:</h3>
+      <h3>{t("user.loggedAs")}</h3>
       <p>{user?.email}</p>
       <Button variant="dark" onClick={handleChangePassword}>
-        Change password
+        {t("button.changePassword")}
       </Button>
       <UserDetails />
       <ModalFormBasic

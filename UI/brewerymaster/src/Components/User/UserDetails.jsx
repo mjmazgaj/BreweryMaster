@@ -25,31 +25,31 @@ const UserDetails = () => {
 
   return (
     <div className="user-details_container">
-      <h2>Details</h2>
+      <h2>{t("name.general.details")}</h2>
       <div className="info_container">
         <ControlsCard
           className="user-info_container"
-          title="User info"
+          title={t("user.userInfoTitle")}
           data={{ ...data?.individualUser, email: data?.email }}
           fields={fieldsProvider(t).userInfoFields.control}
           path="User"
-          emptyMessage="User info can't be loaded"
+          emptyMessage={t("user.userInfoEmptyMsg")}
         />
         <ControlsCard
           className="home-address-info_container"
-          title="Home address info"
+          title={t("user.homeAddressTitle")}
           data={data?.homeAddress}
           fields={fieldsProvider(t).addressInfoFields.control}
           path="Address"
-          emptyMessage="Home address wasn't added"
+          emptyMessage={t("user.homeAddressMsg")}
         />
         <ControlsCard
           className="delivery-address-info_container"
-          title="Delivery address info"
+          title={t("user.deliveryAddressTitle")}
           data={data?.deliveryAddress}
           fields={fieldsProvider(t).addressInfoFields.control}
           path="Address"
-          emptyMessage="Delivery address wasn't added"
+          emptyMessage={t("user.deliveryAddressMsg")}
         />
       </div>
     </div>

@@ -4,10 +4,12 @@ import { Button, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../order.css";
 
+import { useTranslation } from "react-i18next";
 import { fetchData } from "../../Shared/api";
 import { createPath } from "../../Shared/helpers/useObjectHelper";
 
 const ProspectOrderCheckPrice = ({ prospectOrderData }) => {
+  const { t } = useTranslation();
   const [estimatedPrice, setEstimatedPrice] = useState("");
 
   const handleCheckPrice = () => {
@@ -31,16 +33,16 @@ const ProspectOrderCheckPrice = ({ prospectOrderData }) => {
           className="btn btn-secondary"
           onClick={handleCheckPrice}
         >
-          CheckPrice
+          {t("button.checkPrice")}
         </Button>
         <div>
           <Form.Label className="prospectorder-checkPrice_label">
-            Estimated Price:
+            {t("order.estimatedPrice")}
           </Form.Label>
           <Form.Control
             className="prospectorder-checkPrice_result"
             readOnly={true}
-            placeholder="Check Price"
+            placeholder={t("order.estimatedPrice")}
             type="number"
             value={estimatedPrice}
           />

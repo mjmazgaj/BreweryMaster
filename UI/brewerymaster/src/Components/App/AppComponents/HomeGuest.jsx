@@ -1,44 +1,47 @@
 import "../App.css";
 import NavigateButton from "../NavigateButton";
+import { useTranslation } from "react-i18next";
 
 function HomeGuest() {
+  const { t } = useTranslation();
+
   return (
     <>
       <div className="home-guest_container">
-        <h1>Browar rzemieślniczy</h1>
-        <h6>Zamów swoje piwo!</h6>
+        <h1>{t("homePage.title")}</h1>
+        <h6>{t("homePage.subTitle")}</h6>
         <div className="home-guest-navigation_container">
           <div className="home-guest_info">
-            <h3>Strefa gościa</h3>
+            <h3>{t("homePage.guestZone")}</h3>
             <hr />
-            <h6>Ile to kosztuje?</h6>
-            <p>Skorzystaj z naszego kalkulatora do oszacowania kosztów</p>
+            <h6>{t("homePage.costTitle")}</h6>
+            <p>{t("homePage.costText")}</p>
             <NavigateButton
               path="/ProspectOrder"
-              name="Kalkulator"
+              name={t("button.calculator")}
               variant="dark"
             />
             <hr />
-            <h6>Jesteś zainteresowany współpracą?</h6>
-            <p>Wypełnij formularz, a my skontaktujemy się z tobą</p>
+            <h6>{t("homePage.cooperationTitle")}</h6>
+            <p>{t("homePage.cooperationText")}</p>
             <NavigateButton
               path="/ProspectOrder"
-              name="Formularz"
+              name={t("button.form")}
               variant="dark"
             />
           </div>
           <div className="home-user_info">
-            <h3>Strefa użytkownika</h3>
+            <h3>{t("homePage.userZone")}</h3>
             <hr />
-            <h6>Masz już konto?</h6>
-            <p>Zaloguj się do systemu</p>
-            <NavigateButton path="/Login" name="Zaloguj" variant="dark" />
+            <h6>{t("homePage.loginTitle")}</h6>
+            <p>{t("homePage.loginText")}</p>
+            <NavigateButton path="/Login" name={t("button.login")} variant="dark" />
             <hr />
-            <h6>Chcesz założyć konto?</h6>
-            <p>Zarejestruj się i uzyskaj dostęp do tworzenia zamówień</p>
+            <h6>{t("homePage.registerTitle")}</h6>
+            <p>{t("homePage.registerText")}</p>
             <NavigateButton
               path="/Register"
-              name="Zarejestruj"
+              name={t("button.register")}
               variant="dark"
             />
           </div>
