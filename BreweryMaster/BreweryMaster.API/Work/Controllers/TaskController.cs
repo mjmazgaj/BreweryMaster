@@ -1,5 +1,7 @@
 ﻿using BreweryMaster.API.OrderModule.Models;
+using BreweryMaster.API.SharedModule.Validators;
 using BreweryMaster.API.Work.Models;
+using BreweryMaster.API.Work.Models.Requests;
 using BreweryMaster.API.WorkModule.Models;
 using BreweryMaster.API.WorkModule.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -65,6 +67,16 @@ namespace BreweryMaster.API.WorkModule.Controllers
         {
             var createdTask = await _taskService.CreateKanbanTaskAsync(kanbanTask, HttpContext.User);
             return CreatedAtAction(nameof(GetKanbanTaskById), new { id = createdTask.Id }, createdTask);
+        }
+
+        [HttpPost]
+        [Route("Template")]
+        [ProducesResponseType(typeof(IEnumerable<KanbanTaskResponse>), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<KanbanTaskResponse>>> CreateKanbanTaskTemplates(KanbanTaskTemplateRequest request)
+        {
+            var createdTask = await _taskService.CreateKanbanTaskTemplates(request, HttpContext.User);
+            return Ok(createdTask);
         }
 
         [HttpPut]

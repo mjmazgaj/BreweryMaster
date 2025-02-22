@@ -25,6 +25,15 @@ const OrderDetails = () => {
     navigate("/Order");
   };
 
+  const handleAddTasks = () => {
+    const newData = {
+      orderId: data.id,
+      orderStatus: data.statusId
+    }
+
+    addData("Task/Template", newData)
+  };
+
   const handleSelectChange = (e, name) => {
     const { value } = e.target;
 
@@ -82,6 +91,11 @@ const OrderDetails = () => {
               label="Status"
             />
           </Card.Body>
+          <Card.Footer>
+            <Button variant="dark" onClick={handleAddTasks}>
+              {t("button.addTasks")}
+            </Button>
+          </Card.Footer>
         </Card>
         <ControlsCard
           className="order-details-general-info_container"

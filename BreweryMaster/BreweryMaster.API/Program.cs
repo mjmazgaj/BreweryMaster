@@ -1,4 +1,5 @@
 using BreweryMaster.API.Configuration.Helpers;
+using BreweryMaster.API.Configuration.Models;
 using BreweryMaster.API.OrderModule.Models;
 using BreweryMaster.API.User.Models.Users.DB;
 using Microsoft.AspNetCore.Identity;
@@ -8,6 +9,7 @@ using Serilog;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<OrderSettings>(builder.Configuration.GetSection(nameof(OrderSettings)));
+builder.Services.Configure<WorkSettings>(builder.Configuration.GetSection(nameof(WorkSettings)));
 
 builder.Services.AddDbContextWithOptions(builder.Configuration.GetConnectionString("BreweryMaster"));
 

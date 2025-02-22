@@ -1,9 +1,13 @@
-﻿using BreweryMaster.API.Shared.Models.DB;
+﻿using BreweryMaster.API.Configuration.Models;
+using BreweryMaster.API.Shared.Models.DB;
 using BreweryMaster.API.User.Services;
 using BreweryMaster.API.Work.Models;
+using BreweryMaster.API.Work.Models.DB;
+using BreweryMaster.API.Work.Models.Requests;
 using BreweryMaster.API.WorkModule.Mappers;
 using BreweryMaster.API.WorkModule.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System.Security.Claims;
 
 namespace BreweryMaster.API.WorkModule.Services
@@ -12,11 +16,13 @@ namespace BreweryMaster.API.WorkModule.Services
     {
         private readonly ApplicationDbContext _context;
         private readonly IUserService _userService;
+        private readonly IOptions<WorkSettings> _options;
 
-        public TaskService(ApplicationDbContext context, IUserService userService)
+        public TaskService(ApplicationDbContext context, IUserService userService, IOptions<WorkSettings> options)
         {
             _context = context;
             _userService = userService;
+            _options = options;
         }
         public async Task<Dictionary<string, KanbanTaskGroupResponse>> GetKanbanTasksByOwnerIdAsync(ClaimsPrincipal? user)
         {
@@ -99,6 +105,56 @@ namespace BreweryMaster.API.WorkModule.Services
                 Id = kanbanTaskToAdd.Id,
                 Summary = kanbanTaskToAdd.Summary
             };
+        }
+
+        public async Task<IEnumerable<KanbanTaskResponse>> CreateKanbanTaskTemplates(KanbanTaskTemplateRequest request, ClaimsPrincipal? user)
+        {
+            var currentUser = await _userService.GetCurrentUser(user);
+
+            if (currentUser is null)
+                throw new Exception();
+
+            var createdTasks = new List<KanbanTaskResponse>();
+            var tasks = _options.Value.TaskTemplates?.FirstOrDefault(x=>x.Key == request.OrderStatus).Value;
+
+            if (tasks is null)
+                return createdTasks;
+
+            foreach (var task in tasks)
+            {
+                var kanbanTaskToAdd = new KanbanTask()
+                {
+                    Title = task.Title,
+                    Summary = task.Summary,
+                    DueDate = DateTime.Now.AddDays(task.TimeDelay),
+                    StatusId = (int)request.OrderStatus,
+                    Status = null!,
+                    CreatedById = currentUser.Id,
+                    CreatedBy = null!,
+                    CreatedOn = DateTime.Now,
+                    OrderId = request.OrderId
+                };
+
+                _context.KanbanTasks.Add(kanbanTaskToAdd);
+                await _context.SaveChangesAsync();
+
+                var createdTask = new KanbanTaskResponse()
+                {
+                    CreatedById = currentUser.Id,
+                    StatusId = kanbanTaskToAdd.StatusId,
+                    Status = null!,
+                    Title = kanbanTaskToAdd.Title,
+                    CreatedBy = currentUser.Email ?? "",
+                    CreatedOn = kanbanTaskToAdd.CreatedOn,
+                    DueDate = kanbanTaskToAdd.DueDate,
+                    Id = kanbanTaskToAdd.Id,
+                    Summary = kanbanTaskToAdd.Summary
+                };
+
+                createdTasks.Add(createdTask);
+            }
+
+            return createdTasks;
         }
 
         public async Task<bool> EditKanbanTaskAsync(int id, KanbanTaskUpdateRequest kanbanTask)
