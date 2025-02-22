@@ -7,8 +7,7 @@ import FormControls from "./FormControls";
 import DropDownIndex from "./DropDownIndex";
 import FormDatePicker from "./FormDatePicker";
 
-const FormBasic = ({ fields, data, setData }) => {
-  const [isValid, setIsValid] = useState(true);
+const FormBasic = ({ fields, data, setData, setIsValid }) => {
 
   const { handleCheckBox, handleSelectChange, handleDateChange } = useFormBasic(
     {

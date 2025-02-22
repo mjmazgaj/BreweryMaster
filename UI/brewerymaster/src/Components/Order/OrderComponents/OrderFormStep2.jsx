@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 
 import fieldsProvider from "./helpers/fieldsProvider";
 
-const OrderFormStep2 = ({ data, setData }) => {
+const OrderFormStep2 = ({ data, setData, setIsValid }) => {
   const { t } = useTranslation();
 
   const [containers, setContainers] = useState([]);
@@ -37,7 +37,7 @@ const OrderFormStep2 = ({ data, setData }) => {
 
   return (
     <div>
-      <FormBasic fields={fields} data={data} setData={setData} />
+      <FormBasic fields={fields} data={data} setData={setData} setIsValid={setIsValid}/>
     </div>
   );
 };

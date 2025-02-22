@@ -10,6 +10,7 @@ import OrderFormStep2 from "./OrderFormStep2";
 
 const OrderForm = () => {
   const [orderData, setOrderData] = useState({});
+  const [isValid, setIsValid] = useState(true);
 
   const [currentStep, setCurrentStep] = useState(0);
 
@@ -31,7 +32,7 @@ const OrderForm = () => {
     },
     {
       name: "Specify following details",
-      component: <OrderFormStep2 data={orderData} setData={setOrderData} />,
+      component: <OrderFormStep2 data={orderData} setData={setOrderData} setIsValid={setIsValid}/>,
     },
   ];
 
