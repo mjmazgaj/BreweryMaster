@@ -9,7 +9,8 @@ const createPath = (basePath, query) => {
   if (query) path += "?";
 
   Object.entries(query).forEach(([key, value]) => {
-    path += `${key}=${value}&`;
+    if(value)
+      path += `${key}=${value}&`;
   });
 
   return path;
