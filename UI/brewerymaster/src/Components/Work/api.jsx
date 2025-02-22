@@ -10,13 +10,6 @@ export const fetchDataByOwnerId = (setData) => {
     .catch((error) => console.log(error));
 };
 
-export const fetchDataByOrderId = (id) => {
-  return api
-    .get(`api/task/ByOrderId/${id}`)
-    .then((result) => result.data)
-    .catch((error) => console.log(error));
-};
-
 export const updateStatus = (data) => {
   return api
     .put(`api/task/EditStatus`, data)
