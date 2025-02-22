@@ -2,7 +2,7 @@ import api from "../Security/api";
 
 export const fetchDataByOwnerId = (setData) => {
   return api
-    .get(`api/task/ByOwnerId`)
+    .get(`api/Task`)
     .then((result) => {
       console.log(result);
       setData(result.data);

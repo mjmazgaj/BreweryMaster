@@ -1,9 +1,7 @@
-﻿using BreweryMaster.API.OrderModule.Models;
-using BreweryMaster.API.Work.Models;
+﻿using BreweryMaster.API.Work.Models;
 using BreweryMaster.API.Work.Models.Requests;
 using BreweryMaster.API.WorkModule.Models;
 using BreweryMaster.API.WorkModule.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BreweryMaster.API.WorkModule.Controllers
@@ -22,12 +20,10 @@ namespace BreweryMaster.API.WorkModule.Controllers
         }
 
         [HttpGet]
-        [Authorize]
-        [Route("ByOwnerId")]
         [ProducesResponseType(typeof(IEnumerable<KanbanTaskResponse>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<KanbanTaskResponse>>> GetKanbanTasksByOwnerId()
+        public async Task<ActionResult<IEnumerable<KanbanTaskResponse>>?> GetKanbanTasksByOwnerId([FromQuery] KanbanTaskFilterRequest? request)
         {
-            var tasks = await _taskService.GetKanbanTasksByOwnerIdAsync(HttpContext.User);
+            var tasks = await _taskService.GetKanbanTasksByOwnerIdAsync(request);
             return Ok(tasks);
         }
 

@@ -24,13 +24,8 @@ namespace BreweryMaster.API.WorkModule.Services
             _userService = userService;
             _options = options;
         }
-        public async Task<Dictionary<string, KanbanTaskGroupResponse>> GetKanbanTasksByOwnerIdAsync(ClaimsPrincipal? user)
+        public async Task<Dictionary<string, KanbanTaskGroupResponse>> GetKanbanTasksByOwnerIdAsync(KanbanTaskFilterRequest? request)
         {
-            var currentUser = await _userService.GetCurrentUser(user);
-
-            if (currentUser is null)
-                throw new Exception();
-
             var allStatuses = await _context.TaskStatusEntities.ToListAsync();
 
             var result = allStatuses.ToDictionary(
@@ -42,13 +37,25 @@ namespace BreweryMaster.API.WorkModule.Services
                                Items = new List<KanbanTaskResponse>()
                            });
 
-            var groupedTasks = await _context.KanbanTasks
-                .Include(x => x.Status)
-                .Where(x => x.AssignedToId == currentUser.Id)
-                .GroupBy(x => x.Status)
-                .ToListAsync();
+            var tasks = await _context.KanbanTasks
+                                .Include(x => x.Status)
+                                .Include(x => x.CreatedBy)
+                                .ToListAsync();
 
-            foreach (var group in groupedTasks)
+            if (tasks is null)
+                return result;
+
+            var filteredTasks = new List<IGrouping<TaskStatusEntity, KanbanTask>>();
+
+            if (request is null)
+                filteredTasks = tasks.GroupBy(x => x.Status).ToList();
+            else
+                filteredTasks = tasks.Where(x => string.IsNullOrEmpty(request.AssignedToId) || x.AssignedToId == request.AssignedToId)
+                                .Where(x => string.IsNullOrEmpty(request.CreatedById) || x.CreatedById == request.CreatedById)
+                                .Where(x => request.OrderId == null || x.OrderId == request.OrderId)
+                                .GroupBy(x => x.Status).ToList();
+
+            foreach (var group in filteredTasks)
             {
                 if (result.ContainsKey(group.Key.Name))
                 {

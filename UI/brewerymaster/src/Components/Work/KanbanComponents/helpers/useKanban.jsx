@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { updateStatus, fetchDataByOwnerId } from "../../api";
 
-import { addData } from "../../../Shared/api";
+import { addData, fetchData } from "../../../Shared/api";
+import { createPath } from "../../../Shared/helpers/useObjectHelper";
 
 export const useKanban = ({
   columns,
@@ -15,10 +16,8 @@ export const useKanban = ({
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    const getData = () => {
-      fetchDataByOwnerId(setColumns);
-    };
-    getData();
+    fillKanbanBoard({})
+
   }, []);
 
   useEffect(() => {
@@ -71,9 +70,37 @@ export const useKanban = ({
     title: t("work.editTask"),
   };
 
+  
+  const fillKanbanBoard = (data) =>{
+    console.log(data)
+    let query = {
+      CreatedById: data?.createdById,
+      AssignedToId: data?.assignedToId,
+      OrderId: data?.orderId,
+    };
+
+    const path = createPath("Task", query);
+
+    console.log(path);
+    fetchData(path, setColumns);
+  }
+
+  const formCustomizationObject = {
+    submitFunction: fillKanbanBoard,
+    buttons: [
+      {
+        isSubmit: true,
+        label: t("button.filter"),
+      },
+    ],
+    title: t("work.filter"),
+    classNamePrefix: "kanban-filter"
+  };
+
   return {
     handleSave,
     handleAdd,
     modalCustomizationObject,
+    formCustomizationObject
   };
 };

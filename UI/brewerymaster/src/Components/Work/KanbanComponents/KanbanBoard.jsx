@@ -24,7 +24,7 @@ const KanbanBoard = ({ columns, setColumns }) => {
                       {column.title}
                     </div>
                     {column.items?.map((item, index) => (
-                      <TaskCard key={item} item={item} index={index} />
+                      <TaskCard key={index} item={item} index={index} />
                     ))}
                     {provided.placeholder}
                   </div>

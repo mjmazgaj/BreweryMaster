@@ -7,7 +7,7 @@ namespace BreweryMaster.API.WorkModule.Services
 {
     public interface ITaskService
     {
-        Task<Dictionary<string, KanbanTaskGroupResponse>> GetKanbanTasksByOwnerIdAsync(ClaimsPrincipal? user);
+        Task<Dictionary<string, KanbanTaskGroupResponse>> GetKanbanTasksByOwnerIdAsync(KanbanTaskFilterRequest? request);
         Task<KanbanTaskResponse?> GetKanbanTaskByIdAsync(int id);
         Task<KanbanTaskResponse?> CreateKanbanTaskAsync(KanbanTaskRequest kanbanTask, ClaimsPrincipal? user);
         Task<IEnumerable<KanbanTaskResponse>?> CreateKanbanTaskTemplates(KanbanTaskTemplateRequest request, ClaimsPrincipal? user);

@@ -67,7 +67,9 @@
             "status": "Status",
             "dueDate": "Due Date",
             "ownerId": "Owner ID",
-            "orderId": "Order ID"
+            "createdById": "Created by",
+            "assignedToId": "Assigned to",
+            "orderId": "Order id"
         },
         "brewery": {
             "empty": "Empty",
