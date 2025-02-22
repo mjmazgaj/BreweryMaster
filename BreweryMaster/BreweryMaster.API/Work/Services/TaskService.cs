@@ -127,7 +127,7 @@ namespace BreweryMaster.API.WorkModule.Services
                     Title = task.Title,
                     Summary = task.Summary,
                     DueDate = DateTime.Now.AddDays(task.TimeDelay),
-                    StatusId = (int)request.OrderStatus,
+                    StatusId = 1,
                     Status = null!,
                     CreatedById = currentUser.Id,
                     CreatedBy = null!,
