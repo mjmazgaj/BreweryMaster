@@ -33,20 +33,6 @@ namespace BreweryMaster.API.WorkModule.Controllers
         }
 
         [HttpGet]
-        [Route("ByOrderId")]
-        [ProducesResponseType(typeof(IEnumerable<KanbanTaskResponse>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<IEnumerable<KanbanTaskResponse>>> GetKanbanTasksByOrderId(int orderId)
-        {
-            var tasks = await _taskService.GetKanbanTasksByOrderIdAsync(orderId);
-
-            if (tasks == null || !tasks.Any())
-                return NotFound();
-
-            return Ok(tasks);
-        }
-
-        [HttpGet]
         [Route("{id:int}")]
         [ProducesResponseType(typeof(KanbanTaskResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
