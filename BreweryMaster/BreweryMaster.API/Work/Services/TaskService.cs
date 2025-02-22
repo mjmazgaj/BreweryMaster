@@ -66,18 +66,21 @@ namespace BreweryMaster.API.WorkModule.Services
 
         public async Task<KanbanTaskResponse?> GetKanbanTaskByIdAsync(int id)
         {
-            var tasks = await _context.KanbanTasks.Include(x => x.Status).ToListAsync();
+            var tasks = await _context.KanbanTasks
+                            .Include(x => x.Status)
+                            .Include(x => x.CreatedBy)
+                            .ToListAsync();
 
             return tasks.Select(x => x.ToResponseModel()).FirstOrDefault(x => x.Id == id);
         }
 
-        public async Task<KanbanTaskResponse> CreateKanbanTaskAsync(KanbanTaskRequest kanbanTask, ClaimsPrincipal? user)
+        public async Task<KanbanTaskResponse?> CreateKanbanTaskAsync(KanbanTaskRequest kanbanTask, ClaimsPrincipal? user)
         {
             var kanbanTaskToAdd = kanbanTask.ToDbModel();
             var currentUser = await _userService.GetCurrentUser(user);
 
             if (currentUser is null)
-                throw new Exception();
+                return null;
 
             kanbanTaskToAdd.CreatedById = currentUser.Id;
             kanbanTaskToAdd.CreatedOn = DateTime.Now;
@@ -100,15 +103,15 @@ namespace BreweryMaster.API.WorkModule.Services
             };
         }
 
-        public async Task<IEnumerable<KanbanTaskResponse>> CreateKanbanTaskTemplates(KanbanTaskTemplateRequest request, ClaimsPrincipal? user)
+        public async Task<IEnumerable<KanbanTaskResponse>?> CreateKanbanTaskTemplates(KanbanTaskTemplateRequest request, ClaimsPrincipal? user)
         {
             var currentUser = await _userService.GetCurrentUser(user);
 
             if (currentUser is null)
-                throw new Exception();
+                return null;
 
             var createdTasks = new List<KanbanTaskResponse>();
-            var tasks = _options.Value.TaskTemplates?.FirstOrDefault(x=>x.Key == request.OrderStatus).Value;
+            var tasks = _options.Value.TaskTemplates?.FirstOrDefault(x => x.Key == request.OrderStatus).Value;
 
             if (tasks is null)
                 return createdTasks;
@@ -129,7 +132,6 @@ namespace BreweryMaster.API.WorkModule.Services
                 };
 
                 _context.KanbanTasks.Add(kanbanTaskToAdd);
-                await _context.SaveChangesAsync();
 
                 var createdTask = new KanbanTaskResponse()
                 {
@@ -147,27 +149,27 @@ namespace BreweryMaster.API.WorkModule.Services
                 createdTasks.Add(createdTask);
             }
 
+            await _context.SaveChangesAsync();
+
             return createdTasks;
         }
 
-        public async Task<bool> EditKanbanTaskAsync(int id, KanbanTaskUpdateRequest kanbanTask)
+        public async Task<bool> EditKanbanTaskAsync(int id, KanbanTaskUpdateRequest request)
         {
-            if (id != kanbanTask.Id)
+            if (id != request.Id)
                 return false;
 
-            _context.Entry(kanbanTask).State = EntityState.Modified;
+            var task = await _context.KanbanTasks.FirstOrDefaultAsync(x => x.Id == request.Id);
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!KanbanTaskExists(id))
-                    return false;
-                else
-                    throw;
-            }
+            if (task == null)
+                return false;
+
+            task.Title = request.Title;
+            task.Summary = request.Summary;
+            task.DueDate = request.DueDate;
+            task.AssignedToId = request.AssignTo;
+
+            await _context.SaveChangesAsync();
 
             return true;
         }
@@ -178,38 +180,29 @@ namespace BreweryMaster.API.WorkModule.Services
             {
                 var task = await _context.KanbanTasks.FirstOrDefaultAsync(x => x.Id == item.Id);
 
-                if (task != null)
-                    task.StatusId = item.Status;
+                if (task == null)
+                    return false;
+
+                task.StatusId = item.Status;
             }
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                throw;
-            }
+            await _context.SaveChangesAsync();
 
             return true;
         }
 
         public async Task<bool> DeleteKanbanTaskByIdAsync(int id)
         {
-            var kanbanTask = await _context.KanbanTasks.FirstOrDefaultAsync(x => x.Id == id);
+            var task = await _context.KanbanTasks.FirstOrDefaultAsync(x => x.Id == id);
 
-            if (kanbanTask == null)
+            if (task == null)
                 return false;
 
-            _context.KanbanTasks.Remove(kanbanTask);
+            task.IsRemoved = true;
+
             await _context.SaveChangesAsync();
 
             return true;
-        }
-
-        private bool KanbanTaskExists(int id)
-        {
-            return _context.KanbanTasks.Any(x => x.Id == id);
         }
     }
 }

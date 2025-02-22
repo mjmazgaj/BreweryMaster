@@ -1,5 +1,4 @@
 ﻿using BreweryMaster.API.OrderModule.Models;
-using BreweryMaster.API.SharedModule.Validators;
 using BreweryMaster.API.Work.Models;
 using BreweryMaster.API.Work.Models.Requests;
 using BreweryMaster.API.WorkModule.Models;
@@ -52,6 +51,10 @@ namespace BreweryMaster.API.WorkModule.Controllers
         public async Task<ActionResult<KanbanTaskResponse>> CreateKanbanTask([FromBody] KanbanTaskRequest kanbanTask)
         {
             var createdTask = await _taskService.CreateKanbanTaskAsync(kanbanTask, HttpContext.User);
+
+            if (createdTask == null)
+                return Unauthorized();
+
             return CreatedAtAction(nameof(GetKanbanTaskById), new { id = createdTask.Id }, createdTask);
         }
 
@@ -61,8 +64,12 @@ namespace BreweryMaster.API.WorkModule.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<IEnumerable<KanbanTaskResponse>>> CreateKanbanTaskTemplates(KanbanTaskTemplateRequest request)
         {
-            var createdTask = await _taskService.CreateKanbanTaskTemplates(request, HttpContext.User);
-            return Ok(createdTask);
+            var createdTasks = await _taskService.CreateKanbanTaskTemplates(request, HttpContext.User);
+
+            if (createdTasks == null)
+                return Unauthorized();
+
+            return Ok(createdTasks);
         }
 
         [HttpPut]
@@ -72,10 +79,12 @@ namespace BreweryMaster.API.WorkModule.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> EditKanbanTask(int id, [FromBody] KanbanTaskUpdateRequest kanbanTask)
         {
-            if (!await _taskService.EditKanbanTaskAsync(id, kanbanTask))
-                return NotFound();
+            var isUpdated = await _taskService.EditKanbanTaskAsync(id, kanbanTask);
 
-            return Ok();
+            if (!isUpdated)
+                return BadRequest();
+
+            return Ok(isUpdated);
         }
 
         [HttpPut]
@@ -84,10 +93,12 @@ namespace BreweryMaster.API.WorkModule.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> EditKanbanTaskStatus([FromBody] List<KanbanTaskStatusRequest> request)
         {
-            if (!await _taskService.EditKanbanTaskStatusAsync(request))
+            var isUpdated = await _taskService.EditKanbanTaskStatusAsync(request);
+
+            if (!isUpdated)
                 return BadRequest();
 
-            return Ok();
+            return Ok(isUpdated);
         }
 
         [HttpDelete]
@@ -96,44 +107,12 @@ namespace BreweryMaster.API.WorkModule.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> DeleteKanbanTaskById(int id)
         {
-            if (!await _taskService.DeleteKanbanTaskByIdAsync(id))
-                return NotFound();
+            var isDeleted = await _taskService.DeleteKanbanTaskByIdAsync(id);
 
-            return Ok();
-        }
+            if (!isDeleted)
+                return BadRequest();
 
-        [HttpPost]
-        [Route("AddTestTasks")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> AddTestTasks()
-        {
-            try
-            {
-                var order = new OrderRequest()
-                {
-                    Capacity = 10,
-                    ContainerId = 1,
-                    RecipeId = 1,
-                    TargetDate = DateTime.Now.AddDays(2),
-                };
-
-                var createdOrder = await _orderService.CreateOrderAsync(order, HttpContext.User);
-
-                var kanbanTask = new KanbanTaskRequest()
-                {
-                    Title = "test title",
-                    Summary = "test Summary",
-                    DueDate = DateTime.Now.AddDays(3),
-                };
-
-                var createdTask = await _taskService.CreateKanbanTaskAsync(kanbanTask, HttpContext.User);
-                return Ok(createdTask);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex);
-            }
+            return Ok(isDeleted);
         }
     }
 }

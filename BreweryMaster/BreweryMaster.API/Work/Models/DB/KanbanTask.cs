@@ -36,5 +36,7 @@ namespace BreweryMaster.API.Work.Models.DB
         public int? OrderId { get; set; }
 
         public Order? Order { get; set; }
+
+        public bool IsRemoved { get; set; }
     }
 }

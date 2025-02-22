@@ -9,8 +9,8 @@ namespace BreweryMaster.API.WorkModule.Services
     {
         Task<Dictionary<string, KanbanTaskGroupResponse>> GetKanbanTasksByOwnerIdAsync(ClaimsPrincipal? user);
         Task<KanbanTaskResponse?> GetKanbanTaskByIdAsync(int id);
-        Task<KanbanTaskResponse> CreateKanbanTaskAsync(KanbanTaskRequest kanbanTask, ClaimsPrincipal? user);
-        Task<IEnumerable<KanbanTaskResponse>> CreateKanbanTaskTemplates(KanbanTaskTemplateRequest request, ClaimsPrincipal? user);
+        Task<KanbanTaskResponse?> CreateKanbanTaskAsync(KanbanTaskRequest kanbanTask, ClaimsPrincipal? user);
+        Task<IEnumerable<KanbanTaskResponse>?> CreateKanbanTaskTemplates(KanbanTaskTemplateRequest request, ClaimsPrincipal? user);
         Task<bool> EditKanbanTaskAsync(int id, KanbanTaskUpdateRequest kanbanTask);
         Task<bool> EditKanbanTaskStatusAsync(List<KanbanTaskStatusRequest> request);
         Task<bool> DeleteKanbanTaskByIdAsync(int id);
