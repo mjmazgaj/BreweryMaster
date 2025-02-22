@@ -41,7 +41,7 @@ export const useModalFormBasic = ({
       return;
     }
 
-    if (!modalCustomizationObject.addtionalValidation(data)) return;
+    if (modalCustomizationObject?.addtionalValidation && !modalCustomizationObject.addtionalValidation(data)) return;
 
     modalCustomizationObject.submitFunction(data);
     setShow(false);

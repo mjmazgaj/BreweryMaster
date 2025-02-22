@@ -1,4 +1,5 @@
-﻿using BreweryMaster.API.Work.Models;
+﻿using BreweryMaster.API.UserModule.Helpers;
+using BreweryMaster.API.Work.Models;
 using BreweryMaster.API.Work.Models.DB;
 using BreweryMaster.API.WorkModule.Models;
 
@@ -8,6 +9,8 @@ namespace BreweryMaster.API.WorkModule.Mappers
     {
         public static KanbanTaskResponse ToResponseModel(this KanbanTask kanbanTask)
         {
+            var user = kanbanTask.CreatedBy.ToUserResponse();
+
             return new KanbanTaskResponse
             {
                 Id = kanbanTask.Id,
@@ -18,6 +21,7 @@ namespace BreweryMaster.API.WorkModule.Mappers
                 DueDate = kanbanTask.DueDate,
                 AssignedToId = kanbanTask.AssignedToId,
                 CreatedById = kanbanTask.CreatedById,
+                CreatedBy = user.Name ?? "",
                 CreatedOn = kanbanTask.CreatedOn,
                 OrderId = kanbanTask.OrderId,
             };
@@ -29,15 +33,10 @@ namespace BreweryMaster.API.WorkModule.Mappers
             {
                 Title = kanbanTask.Title,
                 Summary = kanbanTask.Summary,
-                StatusId = kanbanTask.StatusId,
                 Status = null!,
                 DueDate = kanbanTask.DueDate,
                 CreatedById = string.Empty,
                 CreatedBy = null!,
-                AssignedTo = null,
-                AssignedToId = kanbanTask.AssignedToId,
-                Order = null!,
-                OrderId = kanbanTask.OrderId,
             };
         }
     }

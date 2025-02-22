@@ -10,26 +10,12 @@ const fieldsProvider = (t) => ({
         id: "summary",
         label: t("name.kanban.summary"),
         type: "text",
-      },
+      }
+    ],
+    datePicker: [
       {
-        id: "status",
-        label: t("name.kanban.status"),
-        type: "number",
-      },
-      {
-        id: "dueDate",
-        label: t("name.kanban.dueDate"),
-        type: "date",
-      },
-      {
-        id: "ownerId",
-        label: t("name.kanban.ownerId"),
-        type: "number",
-      },
-      {
-        id: "orderId",
-        label: t("name.kanban.orderId"),
-        type: "number",
+        name: "dueDate",
+        label: t("name.brewery.dueDate"),
       },
     ],
   },

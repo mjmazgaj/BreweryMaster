@@ -126,10 +126,7 @@ namespace BreweryMaster.API.WorkModule.Controllers
                 {
                     Title = "test title",
                     Summary = "test Summary",
-                    StatusId = 1,
                     DueDate = DateTime.Now.AddDays(3),
-                    AssignedToId = null,
-                    OrderId = createdOrder.Id,
                 };
 
                 var createdTask = await _taskService.CreateKanbanTaskAsync(kanbanTask, HttpContext.User);

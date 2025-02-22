@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 
+import { useTranslation } from "react-i18next";
 import { updateStatus, fetchDataByOwnerId } from "../../api";
+
+import { addData } from "../../../Shared/api";
 
 export const useKanban = ({
   columns,
@@ -8,6 +11,7 @@ export const useKanban = ({
   setErrorMessage,
   setShowModal,
 }) => {
+  const { t } = useTranslation();
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
@@ -56,14 +60,20 @@ export const useKanban = ({
     setShowModal(true);
   };
 
-  const handleClose = async (e) => {
-    e.preventDefault();
-    setShowModal(false);
+  const modalCustomizationObject = {
+    submitFunction: (data) => addData("Task", data),
+    buttons: [
+      {
+        isSubmit: false,
+        label: t("button.save"),
+      },
+    ],
+    title: t("work.editTask"),
   };
 
   return {
     handleSave,
     handleAdd,
-    handleClose,
+    modalCustomizationObject,
   };
 };

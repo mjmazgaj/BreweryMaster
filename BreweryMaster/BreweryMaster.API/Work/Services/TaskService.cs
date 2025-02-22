@@ -82,6 +82,7 @@ namespace BreweryMaster.API.WorkModule.Services
 
             kanbanTaskToAdd.CreatedById = currentUser.Id;
             kanbanTaskToAdd.CreatedOn = DateTime.Now;
+            kanbanTaskToAdd.StatusId = 1;
 
             _context.KanbanTasks.Add(kanbanTaskToAdd);
             await _context.SaveChangesAsync();
@@ -91,7 +92,12 @@ namespace BreweryMaster.API.WorkModule.Services
                 CreatedById = currentUser.Id,
                 StatusId = kanbanTaskToAdd.StatusId,
                 Status = null!,
-                Title = kanbanTaskToAdd.Title
+                Title = kanbanTaskToAdd.Title,
+                CreatedBy = currentUser.Email ?? "",
+                CreatedOn = kanbanTaskToAdd.CreatedOn,
+                DueDate = kanbanTaskToAdd.DueDate,
+                Id = kanbanTaskToAdd.Id,
+                Summary = kanbanTaskToAdd.Summary
             };
         }
 

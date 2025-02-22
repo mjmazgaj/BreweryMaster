@@ -3,16 +3,22 @@ import Button from "react-bootstrap/Button";
 import KanbanBoard from "./KanbanComponents/KanbanBoard";
 import "./kanban.css";
 
-import KanbanModal from "./KanbanComponents/KanbanModal";
+import { useTranslation } from "react-i18next";
+import ModalFormBasic from "../Shared/ModalComponents/ModalFormBasic";
 
 import { useKanban } from "./KanbanComponents/helpers/useKanban";
 
+import fieldsProvider from "./KanbanComponents/helpers/fieldsProvider"
+
 const Kanban = () => {
+  const { t } = useTranslation();
   const [columns, setColumns] = useState(null);
+  const [data, setData] = useState({});
+  const [isValid, setIsValid] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const { handleSave, handleAdd, handleClose } = useKanban({
+  const { handleSave, handleAdd, modalCustomizationObject } = useKanban({
     columns,
     setColumns,
     setErrorMessage,
@@ -24,11 +30,6 @@ const Kanban = () => {
       {columns ? (
         <>
           <KanbanBoard columns={columns} setColumns={setColumns} />
-          <KanbanModal
-            show={showModal}
-            setShow={setShowModal}
-            handleClose={handleClose}
-          />
           <div className="kanban-buttons_container">
             <Button onClick={handleSave} variant="dark">
               Zapisz
@@ -37,6 +38,16 @@ const Kanban = () => {
               Dodaj
             </Button>
           </div>
+          <ModalFormBasic
+            fields={fieldsProvider(t).kanbanModalFields}
+            data={data}
+            setData={setData}
+            setIsValid={setIsValid}
+            show={showModal}
+            setShow={setShowModal}
+            modalCustomizationObject={modalCustomizationObject}
+            isValid={isValid}
+          />
         </>
       ) : (
         <p>Loading...</p>
