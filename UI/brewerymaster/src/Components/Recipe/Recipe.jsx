@@ -22,7 +22,7 @@ const Recipe = () => {
         variant="dark"
         onClick={handleAddOnClick}
       >
-        {isAddMode ? t("recipe.showAll") : t("recipe.add")}
+        {isAddMode ? t("button.showAll") : t("button.add")}
       </Button>
       {isAddMode ? <RecipeForm setIsAddMode={setIsAddMode} /> : <RecipeTable />}
     </div>
