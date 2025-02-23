@@ -20,8 +20,8 @@ namespace BreweryMaster.API.WorkModule.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<KanbanTaskResponse>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<KanbanTaskResponse>>?> GetKanbanTasksByOwnerId([FromQuery] KanbanTaskFilterRequest? request)
+        [ProducesResponseType(typeof(Dictionary<string, KanbanTaskGroupResponse>), StatusCodes.Status200OK)]
+        public async Task<ActionResult<Dictionary<string, KanbanTaskGroupResponse>>?> GetKanbanTasksByOwnerId([FromQuery] KanbanTaskFilterRequest? request)
         {
             var tasks = await _taskService.GetKanbanTasksByOwnerIdAsync(request);
             return Ok(tasks);
