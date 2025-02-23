@@ -128,6 +128,7 @@
             "unit": "Jednostka",
             "info": "Informacje",
             "user": "Użytkownik",
+            "users": "Użytkownicy",
             "date": "Data",
             "description": "Opis",
             "orderedDate": "Data zamówienia",
@@ -242,7 +243,7 @@
         "userInfoEmptyMsg": "Nie można załadować informacji o użytkowniku",
         "homeAddressTitle": "Adres domowy",
         "homeAddressMsg": "Adres domowy nie został dodany",
-        "allUsers": "Wszyscy użytkownicy",
+        "userList": "Lista użytkowników",
         "deliveryAddressTitle": "Adres dostawy",
         "edditPassword": "Edytuj hasło",
         "deliveryAddressMsg": "Adres dostawy nie został dodany"

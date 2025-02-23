@@ -129,6 +129,7 @@
             "unit": "Unit",
             "info": "Info",
             "user": "User",
+            "users": "Users",
             "date": "Date",
             "description": "Description",
             "orderedDate": "Ordered date",
@@ -243,7 +244,7 @@
         "userInfoEmptyMsg": "User info can't be loaded",
         "homeAddressTitle": "Home address",
         "homeAddressMsg": "Home address wasn't added",
-        "allUsers": "All users",
+        "userList": "User List",
         "deliveryAddressTitle": "Delivery address",
         "edditPassword": "Eddit Password",
         "deliveryAddressMsg": "Delivery address wasn't added"

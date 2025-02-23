@@ -3,17 +3,23 @@ import "./user.css";
 
 import { useTranslation } from "react-i18next";
 
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import fieldsProvider from "../User/helpers/fieldsProvider";
 
 import { fetchData } from "../Shared/api";
 import ControlsCard from "../Shared/ControlComponents/ControlsCard";
+import { Button } from "react-bootstrap";
 
 const UserDetails = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const { id } = useParams();
 
   const [data, setData] = useState({});
+
+  const handleBack = () => {
+    navigate("/User");
+  };
 
   useEffect(() => {
     if (id) {
@@ -25,7 +31,13 @@ const UserDetails = () => {
 
   return (
     <div className="user-details_container">
-      <h2>{t("name.general.details")}</h2>
+      <div className="user-details_buttons-container">
+        <Button variant="dark" onClick={handleBack}>
+          {t("button.back")}
+        </Button>
+      </div>
+      <h2>{t("name.brewery.users")}</h2>
+      <h4>{t("name.general.details")}</h4>
       <div className="info_container">
         <ControlsCard
           className="user-info_container"
