@@ -2,6 +2,7 @@
 using BreweryMaster.API.OrderModule.Models;
 using BreweryMaster.API.Recipe.Models;
 using BreweryMaster.API.Shared.Helpers;
+using BreweryMaster.API.Shared.Models;
 using BreweryMaster.API.Shared.Models.DB;
 using BreweryMaster.API.User.Services;
 using Microsoft.EntityFrameworkCore;

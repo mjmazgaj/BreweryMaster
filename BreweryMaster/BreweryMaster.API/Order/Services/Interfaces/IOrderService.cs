@@ -1,5 +1,6 @@
 ﻿using BreweryMaster.API.Info.Models;
 using BreweryMaster.API.OrderModule.Models;
+using BreweryMaster.API.Shared.Models;
 using System.Security.Claims;
 
 public interface IOrderService

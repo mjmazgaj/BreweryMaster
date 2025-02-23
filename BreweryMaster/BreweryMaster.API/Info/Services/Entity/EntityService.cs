@@ -1,4 +1,5 @@
 ﻿using BreweryMaster.API.Info.Models;
+using BreweryMaster.API.Shared.Models;
 using BreweryMaster.API.Shared.Models.DB;
 using Microsoft.EntityFrameworkCore;
 

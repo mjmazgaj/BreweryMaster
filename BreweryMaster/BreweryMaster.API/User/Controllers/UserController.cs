@@ -1,4 +1,5 @@
-﻿using BreweryMaster.API.User.Models.Requests;
+﻿using BreweryMaster.API.Shared.Models;
+using BreweryMaster.API.User.Models.Requests;
 using BreweryMaster.API.User.Models.Responses;
 using BreweryMaster.API.User.Models.Users;
 using BreweryMaster.API.User.Models.Users.DB;

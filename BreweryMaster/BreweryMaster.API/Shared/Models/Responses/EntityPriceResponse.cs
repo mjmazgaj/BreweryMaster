@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace BreweryMaster.API.Info.Models
+namespace BreweryMaster.API.Shared.Models
 {
     public class EntityPriceResponse : EntityResponse
     {

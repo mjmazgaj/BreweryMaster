@@ -1,5 +1,6 @@
 ﻿using BreweryMaster.API.Info.Models;
 using BreweryMaster.API.Info.Services;
+using BreweryMaster.API.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BreweryMaster.API.Info.Controllers

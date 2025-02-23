@@ -1,4 +1,5 @@
-﻿using BreweryMaster.API.Shared.Models.DB;
+﻿using BreweryMaster.API.Shared.Models;
+using BreweryMaster.API.Shared.Models.DB;
 using BreweryMaster.API.User.Enums;
 using BreweryMaster.API.User.Helpers;
 using BreweryMaster.API.User.Models;
