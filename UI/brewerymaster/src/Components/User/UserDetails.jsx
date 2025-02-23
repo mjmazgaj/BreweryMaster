@@ -8,7 +8,7 @@ import fieldsProvider from "../User/helpers/fieldsProvider";
 
 import { fetchData } from "../Shared/api";
 import ControlsCard from "../Shared/ControlComponents/ControlsCard";
-import { Button } from "react-bootstrap";
+import UserRoles from "./UserComponents/UserRoles";
 
 const UserDetails = () => {
   const { t } = useTranslation();
@@ -31,11 +31,6 @@ const UserDetails = () => {
 
   return (
     <div className="user-details_container">
-      <div className="user-details_buttons-container">
-        <Button variant="dark" onClick={handleBack}>
-          {t("button.back")}
-        </Button>
-      </div>
       <h2>{t("name.brewery.users")}</h2>
       <h4>{t("name.general.details")}</h4>
       <div className="info_container">
@@ -63,6 +58,8 @@ const UserDetails = () => {
           path="Address"
           emptyMessage={t("user.deliveryAddressMsg")}
         />
+
+        <UserRoles data={data.roles}/>
       </div>
     </div>
   );

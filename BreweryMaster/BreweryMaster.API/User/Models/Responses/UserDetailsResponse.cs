@@ -8,6 +8,7 @@
         public required AddressResponse HomeAddress { get; set; } = null!;
         public AddressResponse? DeliveryAddress { get; set; }
         public required string Email { get; set; }
+        public IEnumerable<string>? Roles { get; set; }
         public bool IsCompany { get; set; }
     }
 }

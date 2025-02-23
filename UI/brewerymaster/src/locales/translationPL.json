@@ -247,7 +247,15 @@
         "userList": "Lista użytkowników",
         "deliveryAddressTitle": "Adres dostawy",
         "edditPassword": "Edytuj hasło",
-        "deliveryAddressMsg": "Adres dostawy nie został dodany"
+        "deliveryAddressMsg": "Adres dostawy nie został dodany",
+        "role":{
+            "brewer":"Browarnik",
+            "customer":"Klient",
+            "employee":"Pracownik",
+            "employeeNotMobile":"Pracownik bez urządzenia",
+            "manager":"Kierownik",
+            "supervisor":"Przełożony"
+        }
     },
     "work": {
         "editTask": "Edytuj zadanie"

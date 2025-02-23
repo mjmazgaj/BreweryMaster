@@ -248,7 +248,15 @@
         "userList": "User List",
         "deliveryAddressTitle": "Delivery address",
         "edditPassword": "Eddit Password",
-        "deliveryAddressMsg": "Delivery address wasn't added"
+        "deliveryAddressMsg": "Delivery address wasn't added",
+        "role":{
+            "brewer":"Brewer",
+            "customer":"Customer",
+            "employee":"Employee",
+            "employeeNotMobile":"Employee Not Mobile",
+            "manager":"Manager",
+            "supervisor":"Supervisor"
+        }
     },
     "work": {
         "editTask": "Edit task"

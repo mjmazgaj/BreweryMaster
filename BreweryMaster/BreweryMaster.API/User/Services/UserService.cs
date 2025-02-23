@@ -78,6 +78,17 @@ namespace BreweryMaster.API.User.Services
             });
         }
 
+        public async Task<IEnumerable<EntityStringIdResponse>?> GetRolesDropDownList()
+        {
+            var users = await _context.Roles.ToListAsync();
+
+            return users?.Select(x => new EntityStringIdResponse()
+            {
+                Id = x.Id,
+                Name = x.Name ?? string.Empty
+            });
+        }
+
         public async Task<UserDetailsResponse?> GetUserById(string id)
         {
 
@@ -94,6 +105,7 @@ namespace BreweryMaster.API.User.Services
                 Email = user.Email,
                 HomeAddress = homeAddress,
                 DeliveryAddress = deliveryAddress,
+                Roles = _userManager.GetRolesAsync(user).Result
             };
 
             user.SetDetailResponse(response);

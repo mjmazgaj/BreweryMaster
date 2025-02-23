@@ -47,6 +47,17 @@ namespace BreweryMaster.API.UserModule.Controllers
         }
 
         [HttpGet]
+        [Route("Role")]
+        [ProducesResponseType(typeof(IEnumerable<EntityStringIdResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<EntityStringIdResponse>?>> GetRolesDropDownList()
+        {
+            var users = await _userService.GetRolesDropDownList();
+
+            return Ok(users);
+        }
+
+        [HttpGet]
         [Route("{id}")]
         [ProducesResponseType(typeof(UserDetailsResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
