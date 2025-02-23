@@ -249,6 +249,7 @@
         "deliveryAddressTitle": "Delivery address",
         "edditPassword": "Eddit Password",
         "deliveryAddressMsg": "Delivery address wasn't added",
+        "roleEdit": "Edit roles",
         "role":{
             "brewer":"Brewer",
             "customer":"Customer",

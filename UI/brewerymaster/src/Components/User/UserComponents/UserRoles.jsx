@@ -3,11 +3,43 @@ import { Button, Card } from "react-bootstrap";
 
 import { useTranslation } from "react-i18next";
 
-import { fetchData } from "../../Shared/api";
+import { fetchData, updateData } from "../../Shared/api";
+import ModalFormBasic from "../../Shared/ModalComponents/ModalFormBasic";
+
+import fieldsProvider from "../helpers/fieldsProvider";
 
 const UserRoles = ({ data }) => {
   const { t } = useTranslation();
   const [roles, setRoles] = useState();
+
+  const [editRoles, setEditRoles] = useState({});
+  const [isValid, setIsValid] = useState({});
+  const [showModal, setShowModal] = useState(false);
+
+  const handleEdit = () => {
+    setShowModal(true);
+    setEditRoles({
+      roles: data.roles,
+    });
+  };
+
+  const modalCustomizationObject = {
+    submitFunction: (model) => {
+        const requestModel = {
+            userId: data.id,
+            rolesId: editRoles.roles
+        }
+        console.log(requestModel)
+        updateData("User/Roles", data.id, requestModel)
+    },
+    buttons: [
+      {
+        isSubmit: true,
+        label: t("button.save"),
+      },
+    ],
+    title: t("user.roleEdit"),
+  };
 
   useEffect(() => {
     fetchData("User/Role", setRoles);
@@ -21,7 +53,7 @@ const UserRoles = ({ data }) => {
         </Card.Header>
 
         <Card.Body>
-          {data ? (
+          {data.roles ? (
             <Fragment>
               <div className="control-card-roles_container">
                 {roles &&
@@ -29,7 +61,7 @@ const UserRoles = ({ data }) => {
                     <div
                       key={index}
                       className={`control-card-role ${
-                        data.includes(role.id)
+                        data.roles.includes(role.id)
                           ? "control-card-role_include"
                           : ""
                       }`}
@@ -39,7 +71,7 @@ const UserRoles = ({ data }) => {
                   ))}
               </div>
               <div className="control-card-buttons_container">
-                <Button variant="dark" onClick={() => {}}>
+                <Button variant="dark" onClick={handleEdit}>
                   {t("button.edit")}
                 </Button>
               </div>
@@ -52,8 +84,19 @@ const UserRoles = ({ data }) => {
           )}
         </Card.Body>
       </Card>
+      <ModalFormBasic
+        fields={fieldsProvider(t).rolesModal}
+        data={editRoles}
+        setData={setEditRoles}
+        setIsValid={setIsValid}
+        show={showModal}
+        setShow={setShowModal}
+        modalCustomizationObject={modalCustomizationObject}
+        isValid={isValid}
+      />
     </Fragment>
   );
+
 };
 
 export default UserRoles;

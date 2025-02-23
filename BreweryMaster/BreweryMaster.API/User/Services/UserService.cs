@@ -288,6 +288,36 @@ namespace BreweryMaster.API.User.Services
             return true;
         }
 
+        public async Task<bool> UpdateUserRoles(UserRolesUpdateRequest request)
+        {
+            if (request.RolesId == null)
+                return false;
+
+            var user = await _userManager.FindByIdAsync(request.UserId);
+            if (user == null)
+                throw new ArgumentNullException("user not found");
+
+            var currentRoles = await _userManager.GetRolesAsync(user);
+            var rolesToAdd = request.RolesId.Except(currentRoles).ToList();
+            var rolesToRemove = currentRoles.Except(request.RolesId).ToList();
+
+            if (rolesToAdd.Any())
+            {
+                var addResult = await _userManager.AddToRolesAsync(user, rolesToAdd);
+                if (!addResult.Succeeded)
+                    return false;
+            }
+
+            if (rolesToRemove.Any())
+            {
+                var removeResult = await _userManager.RemoveFromRolesAsync(user, rolesToRemove);
+                if (!removeResult.Succeeded)
+                    return false;
+            }
+
+            return true;
+        }
+
         public async Task<bool> CreateTestUsers()
         {
             var roles = await _roleManager.Roles.ToListAsync();

@@ -248,13 +248,14 @@
         "deliveryAddressTitle": "Adres dostawy",
         "edditPassword": "Edytuj hasło",
         "deliveryAddressMsg": "Adres dostawy nie został dodany",
+        "roleEdit": "Edytuj role",
         "role":{
             "brewer":"Browarnik",
             "customer":"Klient",
             "employee":"Pracownik",
             "employeeNotMobile":"Pracownik bez urządzenia",
             "manager":"Kierownik",
-            "supervisor":"Przełożony"
+            "supervisor":"Brygadzista"
         }
     },
     "work": {

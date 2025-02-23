@@ -18,6 +18,7 @@ namespace BreweryMaster.API.User.Services
         Task<UserResponse> CreateUser(UserRegisterRequest request);
         Task<UserResponse> UpdateUser(UserUpdateRequest request, string userId);
         Task<bool> UpdatePassword(UserPasswordRequest request, ClaimsPrincipal? claims);
+        Task<bool> UpdateUserRoles(UserRolesUpdateRequest request);
 
         Task<bool> CreateTestUsers();
     }

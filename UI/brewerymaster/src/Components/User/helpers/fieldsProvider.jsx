@@ -57,6 +57,46 @@ const fieldsProvider = (t) => ({
       },
     ],
   },
+  rolesModal: {
+    checkBox: [
+      {
+        id: "brewer",
+        name: "brewer",
+        label: t("user.role.brewer"),
+        category: "roles",
+      },
+      {
+        id: "customer",
+        name: "customer",
+        label: t("user.role.customer"),
+        category: "roles",
+      },
+      {
+        id: "employee",
+        name: "employee",
+        label: t("user.role.employee"),
+        category: "roles",
+      },
+      {
+        id: "employeeNotMobile",
+        name: "employeeNotMobile",
+        label: t("user.role.employeeNotMobile"),
+        category: "roles",
+      },
+      {
+        id: "manager",
+        name: "manager",
+        label: t("user.role.manager"),
+        category: "roles",
+      },
+      {
+        id: "supervisor",
+        name: "supervisor",
+        label: t("user.role.supervisor"),
+        category: "roles",
+      },
+    ],
+  },
 });
 
 export default fieldsProvider;

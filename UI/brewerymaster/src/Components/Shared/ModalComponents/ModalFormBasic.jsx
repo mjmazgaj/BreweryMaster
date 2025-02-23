@@ -17,7 +17,6 @@ const ModalFormBasic = ({
   isValid,
   setIsValid
 }) => {
-
   const { handleClose, handleCheckBox, handleSelectChange, handleDateChange, handleFormSubmit } =
     useModalFormBasic({
       setData,
@@ -55,8 +54,9 @@ const ModalFormBasic = ({
             key={checkBoxObject.id}
             id={checkBoxObject.name}
             label={checkBoxObject.label}
+            checked={data && data[checkBoxObject.category] && data[checkBoxObject.category].includes(checkBoxObject.id)}
             onChange={(e) =>
-              handleCheckBox(checkBoxObject.id, e.target.checked)
+              handleCheckBox(checkBoxObject.id, checkBoxObject.category, e.target.checked)
             }
           />
         ))}

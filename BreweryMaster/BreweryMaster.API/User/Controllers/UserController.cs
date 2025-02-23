@@ -120,6 +120,21 @@ namespace BreweryMaster.API.UserModule.Controllers
         {
             var result = await _userService.UpdatePassword(request, HttpContext.User);
 
+            if (!result)
+                BadRequest(result);
+
+            return Ok(result);
+        }
+
+        [HttpPatch]
+        [Route("Roles/{id}")]
+        public async Task<IActionResult> UpdateUserRoles(UserRolesUpdateRequest request, string id)
+        {
+            var result = await _userService.UpdateUserRoles(request);
+
+            if (!result)
+                BadRequest(result);
+
             return Ok(result);
         }
 

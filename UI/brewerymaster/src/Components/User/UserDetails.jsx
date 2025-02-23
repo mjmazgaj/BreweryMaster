@@ -59,7 +59,7 @@ const UserDetails = () => {
           emptyMessage={t("user.deliveryAddressMsg")}
         />
 
-        <UserRoles data={data.roles}/>
+        {id && <UserRoles data={data} />}
       </div>
     </div>
   );
