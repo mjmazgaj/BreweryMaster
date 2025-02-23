@@ -16,4 +16,11 @@ const createPath = (basePath, query) => {
   return path;
 };
 
-export { removeFields, createPath };
+const lowerCaseFirstLetter = (text) => {
+  if (!text) return "";
+  return text.charAt(0).toLowerCase() + text.slice(1);
+}
+
+
+export { removeFields, createPath, lowerCaseFirstLetter };
+

@@ -4,11 +4,14 @@ import Button from "react-bootstrap/Button";
 import { toast } from "react-toastify";
 import { addData } from "../../Shared/api";
 
+import { useTranslation } from "react-i18next";
+
 import MenuSteps from "../../Shared/MenuSteps";
 import RecipeTableSelection from "../OrderComponents/RecipeTableSelection";
 import OrderFormStep2 from "./OrderFormStep2";
 
 const OrderForm = () => {
+  const { t } = useTranslation();
   const [orderData, setOrderData] = useState({});
   const [isValid, setIsValid] = useState(true);
 
@@ -22,7 +25,7 @@ const OrderForm = () => {
 
   const steps = [
     {
-      name: "Please select a recipe",
+      name: t("order.selectRecipeTitle"),
       component: (
         <RecipeTableSelection
           selectedRecipe={orderData.recipeId}
@@ -31,8 +34,14 @@ const OrderForm = () => {
       ),
     },
     {
-      name: "Specify following details",
-      component: <OrderFormStep2 data={orderData} setData={setOrderData} setIsValid={setIsValid}/>,
+      name: t("order.addOrderDetails"),
+      component: (
+        <OrderFormStep2
+          data={orderData}
+          setData={setOrderData}
+          setIsValid={setIsValid}
+        />
+      ),
     },
   ];
 
@@ -48,7 +57,7 @@ const OrderForm = () => {
       <div>{steps[currentStep].component}</div>
       {currentStep === steps.length - 1 ? (
         <Button variant="dark" onClick={handleSave}>
-          Submit
+          {t("button.submit")}
         </Button>
       ) : null}
     </Form>

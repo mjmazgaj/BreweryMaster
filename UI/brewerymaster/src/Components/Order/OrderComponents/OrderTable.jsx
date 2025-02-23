@@ -6,9 +6,12 @@ import { fetchData } from "../../Shared/api";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../Security/UserProvider";
 
+import { useTranslation } from "react-i18next";
+
 import DynamicTable from "../../Shared/TableComponents/DynamicTable";
 
 const OrderTable = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { user } = useUser();
 
@@ -29,7 +32,7 @@ const OrderTable = () => {
       {data && (
         <DynamicTable
           tableKey="orders"
-          tableTitle="Orders"
+          tableTitle={t("name.brewery.orders")}
           dataCategory="brewery"
           data={data}
           handleDoubleClick={handleDoubleClick}

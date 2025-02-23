@@ -3,10 +3,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../order.css";
 
 import { fetchData } from "../../Shared/api";
+import { useTranslation } from "react-i18next";
 
 import DynamicTable from "../../Shared/TableComponents/DynamicTable";
 
 const RecipeTableSelection = ({ selectedRecipe, setSelectedRecipe }) => {
+  const {t} = useTranslation();
   const [data, setData] = useState([]);
 
   const handleDoubleClick = (item) => {
@@ -22,7 +24,7 @@ const RecipeTableSelection = ({ selectedRecipe, setSelectedRecipe }) => {
       {data && (
         <DynamicTable
           tableKey="recipes"
-          tableTitle="Recipies"
+          tableTitle={t("name.general.recipes")}
           dataCategory="brewery"
           data={data}
           handleDoubleClick={handleDoubleClick}

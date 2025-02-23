@@ -3,6 +3,7 @@
         "submit": "Submit",
         "add": "Add",
         "addNow": "Add now",
+        "generateTasks": "Generate tasks",
         "save": "Save",
         "edit": "Edit",
         "cancel": "Cancel",
@@ -55,6 +56,8 @@
             "details": "Details",
             "edit": "Edit",
             "reduce": "Reduce",
+            "recipe": "Recipe",
+            "recipes": "Recipes",
             "increase": "Increase",
             "name": "Name"
         },
@@ -129,6 +132,7 @@
             "reservationDate": "Reservation date",
             "usedFor": "Used for",
             "order": "Order",
+            "orders": "Orders",
             "recipe": "Recipe",
             "price": "Price",
             "blgScale": "BLG scale",
@@ -211,7 +215,21 @@
     "order": {
         "enterOrderDetails": "Please enter your order details",
         "estimatedPrice": "Estimated Price",
-        "checkPrice": "Estimeted price"
+        "selectRecipeTitle": "Select a recipe",
+        "addOrderDetails": "Add order details",
+        "statusChangeHistory": "Status change history",
+        "checkPrice": "Estimeted price",
+        "status": {
+            "notSet": "Not set",
+            "creatingDocumentation": "Creating Documentation",
+            "productionPreparation": "Production Preparation",
+            "brewing": "Brewing",
+            "postBrewingWork": "Post Brewing Work",
+            "maturation": "Maturation",
+            "packaging": "Packaging",
+            "preparedForDelivery": "Prepared For Delivery",
+            "completed": "Completed"
+        }
     },
     "user": {
         "loggedAs": "You are logged as",

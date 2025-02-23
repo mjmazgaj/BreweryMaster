@@ -23,7 +23,7 @@ const OrderFormStep2 = ({ data, setData, setIsValid }) => {
         {
           data: containers,
           name: "containerId",
-          label: "Container",
+          label: t("name.brewery.container"),
         },
       ],
       datePicker: [

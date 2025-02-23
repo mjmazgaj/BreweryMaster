@@ -3,18 +3,24 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import { BsArrowRightCircleFill } from "react-icons/bs";
 
+import { useTranslation } from "react-i18next";
+
+import {lowerCaseFirstLetter} from "../../Shared/helpers/useObjectHelper"
+
 const OrderStatusChanges = ({ statusChanges }) => {
+  const { t } = useTranslation();
+
   return (
     statusChanges &&
     statusChanges.length > 0 && (
       <div className="order-status-changes_container">
-        <h3>Status change history</h3>
+        <h3>{t("order.statusChangeHistory")}</h3>
         <div className="order-status-changes_list">
           {statusChanges.map((x, index) => (
             <div key={index} className="order-status-changes_item">
               <Card className="order-status-changes_info">
                 <Card.Body>
-                  <p>{x.orderStatus}</p>
+                  <p>{t(`order.status.${lowerCaseFirstLetter(x.orderStatus)}`)}</p>
                   <p>{x.changedOnDateOnly}</p>
                 </Card.Body>
               </Card>

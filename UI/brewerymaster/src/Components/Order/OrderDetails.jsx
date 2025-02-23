@@ -12,6 +12,8 @@ import fieldsProviderOrder from "./OrderComponents/helpers/fieldsProvider";
 import fieldsProviderRecipe from "../Recipe/RecipeComponents/helpers/fieldsProvider";
 import { Button, Card } from "react-bootstrap";
 
+import { lowerCaseFirstLetter } from "../Shared/helpers/useObjectHelper";
+
 const OrderDetails = () => {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -28,10 +30,10 @@ const OrderDetails = () => {
   const handleAddTasks = () => {
     const newData = {
       orderId: data.id,
-      orderStatus: data.statusId
-    }
+      orderStatus: data.statusId,
+    };
 
-    addData("Task/Template", newData)
+    addData("Task/Template", newData);
   };
 
   const handleSelectChange = (e, name) => {
@@ -65,7 +67,7 @@ const OrderDetails = () => {
   return (
     <div className="order-details_container">
       <Button variant="dark" onClick={handleButton}>
-        Return
+        {t("button.back")}
       </Button>
 
       <OrderStatusChanges statusChanges={data.statusChanges} />
@@ -82,7 +84,14 @@ const OrderDetails = () => {
 
             <DropDownIndex
               id="test_ID"
-              data={statuses}
+              data={
+                statuses &&
+                statuses.length > 0 &&
+                statuses.map((x) => ({
+                  ...x,
+                  name: t(`order.status.${lowerCaseFirstLetter(x.name)}`),
+                }))
+              }
               selectedOption={editData?.statusId ?? data.statusId}
               setSelectedOption={(e) => {
                 handleSelectChange(e, "statusId");
@@ -93,13 +102,13 @@ const OrderDetails = () => {
           </Card.Body>
           <Card.Footer>
             <Button variant="dark" onClick={handleAddTasks}>
-              {t("button.addTasks")}
+              {t("button.generateTasks")}
             </Button>
           </Card.Footer>
         </Card>
         <ControlsCard
           className="order-details-general-info_container"
-          title="General Info"
+          title={t("name.general.details")}
           data={data}
           fields={fieldsProviderOrder(t).orderGeneralInfoFields.control}
           path=""
@@ -107,7 +116,7 @@ const OrderDetails = () => {
         />
         <ControlsCard
           className="order-details-recipe-info_container"
-          title="Recipe"
+          title={t("name.general.recipe")}
           data={data.recipe}
           fields={fieldsProviderRecipe(t).recipeGeneralInfoFields.control}
           path=""

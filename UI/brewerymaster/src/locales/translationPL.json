@@ -1,8 +1,9 @@
 {
     "button": {
-        "submit": "Prześlij",
+        "submit": "Wyślij",
         "add": "Dodaj",
         "addNow": "Dodaj teraz",
+        "generateTasks": "Generuj zadania",
         "save": "Zapisz",
         "edit": "Edytuj",
         "cancel": "Anuluj",
@@ -44,7 +45,7 @@
         "equipment": "Sprzęt",
         "user": "Użytkownicy"
     },
-    "status":{
+    "status": {
         "todo": "Do zrobienia",
         "inProgress": "W trakcie",
         "done": "Zrobione"
@@ -55,6 +56,8 @@
             "details": "Szczegóły",
             "edit": "Edytuj",
             "reduce": "Zmniejsz",
+            "recipe": "Recpetura",
+            "recipes": "Receptury",
             "increase": "Zwiększ",
             "name": "Nazwa"
         },
@@ -128,6 +131,7 @@
             "reservationDate": "Data rezerwacji",
             "usedFor": "Używane do",
             "order": "Zamówienie",
+            "orders": "Zamówienia",
             "recipe": "Przepis",
             "price": "Cena",
             "blgScale": "Skala BLG",
@@ -210,7 +214,21 @@
     "order": {
         "enterOrderDetails": "Wprowadź szczegóły zamówienia",
         "estimatedPrice": "Szacowana cena",
-        "checkPrice": "Sprawdź cenę"
+        "selectRecipeTitle": "Wybierz recepturę",
+        "addOrderDetails": "Dodaj sczegóły zamówienia",
+        "statusChangeHistory": "Historia zmian statusu",
+        "checkPrice": "Sprawdź cenę",
+        "status": {
+            "notSet": "Brak statusu",
+            "creatingDocumentation": "Tworzenie dokumentacji",
+            "productionPreparation": "Przygotowanie produkcji",
+            "brewing": "Warzenie",
+            "postBrewingWork": "Prace po warzeniu",
+            "maturation": "Dojrzewanie",
+            "packaging": "Pakowanie",
+            "preparedForDelivery": "Przygotowane do dostawy",
+            "completed": "Zakończony"
+        }
     },
     "user": {
         "loggedAs": "Zalogowano jako",
