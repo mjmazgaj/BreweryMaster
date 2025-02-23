@@ -53,8 +53,10 @@
     "name": {
         "general": {
             "basicInformation": "Podstawowe informacje",
+            "describtion": "Opis",
             "details": "Szczegóły",
             "edit": "Edytuj",
+            "summary": "Podsumowanie",
             "reduce": "Zmniejsz",
             "recipe": "Recpetura",
             "recipes": "Receptury",
@@ -156,7 +158,7 @@
             "waterToGrainRatio": "Stosunek wody do ziarna",
             "mashWaterVolume": "Objętość wody do zacierania",
             "expectedBeerVolume": "Oczekiwana objętość piwa",
-            "boilingTime": "Czas gotowania",
+            "boilTime": "Czas gotowania",
             "evaporationRate": "Tempo odparowania",
             "boiledWortVolume": "Objętość zagotowanej brzeczki",
             "boilingLosses": "Straty podczas gotowania",
@@ -242,5 +244,13 @@
         "deliveryAddressTitle": "Informacje o adresie dostawy",
         "edditPassword": "Edytuj hasło",
         "deliveryAddressMsg": "Adres dostawy nie został dodany"
+    },
+    "work": {
+        "editTask": "Edytuj zadanie"
+    },
+    "recipe": {
+        "detailTitle": "Szczegóły na temat receputry",
+        "batchInfo": "Warka",
+        "mashInfo": "Zacier"
     }
 }

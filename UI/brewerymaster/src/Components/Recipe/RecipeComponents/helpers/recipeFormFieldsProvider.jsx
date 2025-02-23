@@ -71,8 +71,8 @@ const recipeFormFieldsProvider = (t) => ({
       },
     },
     {
-      id: "boilingTime",
-      label: t("name.brewery.boilingTime"),
+      id: "boilTime",
+      label: t("name.brewery.boilTime"),
       type: "number",
       feedback: `${t("validation.number")} 0-10000`,
       validation: {

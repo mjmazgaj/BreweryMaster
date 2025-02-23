@@ -30,14 +30,14 @@ const RecipeDetails = () => {
   return (
     <div className="recipe-details_container">
       <Button variant="dark" onClick={handleButton}>
-        Return
+        {t("button.back")}
       </Button>
-      <h4>Szczegóły na temat receputry:</h4>
+      <h4>{t("recipe.detailTitle")}:</h4>
       <h2>{data?.generalInfo?.name}</h2>
       {data.info && (
         <Card className="recipe-info_container">
           <Card.Header>
-            <h3>Info</h3>
+            <h3>{t("name.general.describtion")}</h3>
           </Card.Header>
           <Card.Text>{data.info}</Card.Text>
         </Card>
@@ -45,7 +45,7 @@ const RecipeDetails = () => {
       <div className="recipe-controls_container">
         <ControlsCard
           className="recipe-controls_general-info"
-          title="Genaral Info"
+          title={t("name.general.summary")}
           data={data?.generalInfo}
           fields={fieldsProvider(t).recipeGeneralInfoFields.control}
           path="User"
@@ -53,7 +53,7 @@ const RecipeDetails = () => {
         />
         <ControlsCard
           className="recipe-controls_batch-info"
-          title="Batch Info"
+          title={t("recipe.batchInfo")}
           data={data?.batchInfo}
           fields={fieldsProvider(t).recipeBatchInfoFields.control}
           path="User"
@@ -61,7 +61,7 @@ const RecipeDetails = () => {
         />
         <ControlsCard
           className="recipe-controls_mash-info"
-          title="Mash Info"
+          title={t("recipe.mashInfo")}
           data={data?.mashInfo}
           fields={fieldsProvider(t).recipeMashInfoFields.control}
           path="User"
@@ -71,21 +71,21 @@ const RecipeDetails = () => {
       <div>
         <DynamicTable
           tableKey="fermentingIngredients"
-          tableTitle="Fermenting Ingredients"
+          tableTitle={t("name.brewery.fermentingIngredients")}
           dataCategory="brewery"
           data={data?.fermentingIngredients}
           handleDoubleClick={() => {}}
         />
         <DynamicTable
           tableKey="hops"
-          tableTitle="Hops"
+          tableTitle={t("name.brewery.hops")}
           dataCategory="brewery"
           data={data?.hops}
           handleDoubleClick={() => {}}
         />
         <DynamicTable
           tableKey="yeast"
-          tableTitle="Yeast"
+          tableTitle={t("name.brewery.yeast")}
           dataCategory="brewery"
           data={data?.yeast}
           handleDoubleClick={() => {}}

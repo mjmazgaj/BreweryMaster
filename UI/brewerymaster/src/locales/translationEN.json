@@ -53,12 +53,14 @@
     "name": {
         "general": {
             "basicInformation": "Basic information",
+            "describtion": "Describtion",
             "details": "Details",
             "edit": "Edit",
             "reduce": "Reduce",
             "recipe": "Recipe",
             "prospectOrder": "Prospect order",
             "recipes": "Recipes",
+            "summary": "Summary",
             "increase": "Increase",
             "name": "Name"
         },
@@ -157,7 +159,7 @@
             "waterToGrainRatio": "Water-to-grain ratio",
             "mashWaterVolume": "Mash water volume",
             "expectedBeerVolume": "Expected beer volume",
-            "boilingTime": "Boiling time",
+            "boilTime": "Boiling time",
             "evaporationRate": "Evaporation rate",
             "boiledWortVolume": "Boiled wort volume",
             "boilingLosses": "Boiling losses",
@@ -246,5 +248,10 @@
     },
     "work": {
         "editTask": "Edit task"
+    },
+    "recipe": {
+        "detailTitle": "Recipe details about",
+        "batchInfo": "Batch details",
+        "mashInfo": "Mash details"
     }
 }
