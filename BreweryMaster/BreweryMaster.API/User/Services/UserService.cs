@@ -48,6 +48,8 @@ namespace BreweryMaster.API.User.Services
                 Id = x.Id,
                 Email = x.Email,
                 Name = x.CompanyName,
+                Roles = _userManager.GetRolesAsync(x).Result,
+                CreatedOn = DateOnly.FromDateTime(x.CreatedOn),
                 IsCompany = true
             }));
 
@@ -56,8 +58,11 @@ namespace BreweryMaster.API.User.Services
                 Id = x.Id,
                 Email = x.Email,
                 Name = $"{x.Surname} {x.Forename}",
+                Roles = _userManager.GetRolesAsync(x).Result,
+                CreatedOn = DateOnly.FromDateTime(x.CreatedOn),
                 IsCompany = false
             }));
+
 
             return response;
         }

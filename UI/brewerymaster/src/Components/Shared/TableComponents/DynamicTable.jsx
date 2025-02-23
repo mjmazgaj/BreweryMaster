@@ -1,13 +1,24 @@
 import React from "react";
-import {Table} from 'react-bootstrap';
+import { Table } from "react-bootstrap";
 
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import "../shared.css";
 
-const DynamicTable = ({tableKey, tableTitle, dataCategory, data, handleDoubleClick}) => {  
+const DynamicTable = ({
+  tableKey,
+  tableTitle,
+  dataCategory,
+  data,
+  handleDoubleClick,
+}) => {
   const { t } = useTranslation();
-  
-  const keys = (data && data.length > 0) ? Object.keys(data[0]).filter(x=>!x.toUpperCase().includes("ID") && x !== "maxQuantity") : ["empty"];
+
+  const keys =
+    data && data.length > 0
+      ? Object.keys(data[0]).filter(
+          (x) => !x.toUpperCase().includes("ID") && x !== "maxQuantity"
+        )
+      : ["empty"];
 
   return (
     <div className={`dynamicTable-${tableKey}_container`}>
@@ -16,7 +27,9 @@ const DynamicTable = ({tableKey, tableTitle, dataCategory, data, handleDoubleCli
         <thead>
           <tr>
             {keys.map((header) => (
-              <th key={header}>{t(`name.${dataCategory}.${header}`) || header}</th>
+              <th key={header}>
+                {t(`name.${dataCategory}.${header}`) || header}
+              </th>
             ))}
           </tr>
         </thead>
@@ -36,6 +49,8 @@ const DynamicTable = ({tableKey, tableTitle, dataCategory, data, handleDoubleCli
                         checked={item[column]}
                         onChange={() => {}}
                       />
+                    ) : Array.isArray(item[column]) ? (
+                      item[column].join(", ")
                     ) : (
                       item[column]
                     )}
