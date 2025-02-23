@@ -26,7 +26,28 @@
         "form": "Form",
         "login": "Login",
         "register": "Register",
+        "logout": "Logout",
         "clear": "Clear"
+    },
+    "navigation": {
+        "kanban": "Task Board",
+        "order": "Orders",
+        "prospectOrder": "Inquiries",
+        "recipe": "Recipes",
+        "info": "Information",
+        "fermentingIngredient": "Fermenting Ingredients",
+        "hops": "Hops",
+        "client": "Clients",
+        "yeast": "Yeast",
+        "extras": "Extras",
+        "homePage": "Home Page",
+        "equipment": "Equipment",
+        "user": "Users"
+    },
+    "status": {
+        "todo": "To do",
+        "inProgress": "In Progress",
+        "done": "Done"
     },
     "name": {
         "general": {
@@ -203,7 +224,7 @@
         "edditPassword": "Eddit Password",
         "deliveryAddressMsg": "Delivery address wasn't added"
     },
-    "work":{
+    "work": {
         "editTask": "Edit task"
     }
 }

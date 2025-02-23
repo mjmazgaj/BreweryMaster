@@ -30,49 +30,55 @@ export const useNavigation = () => {
   };
 
   const navigationModules = {
-    homePage: <Navbar.Brand href="/">Strona główna</Navbar.Brand>,
+    homePage: <Navbar.Brand href="/">{t("navigation.homePage")}</Navbar.Brand>,
     employee: (
       <RequireRole roles={["employee"]}>
-        <Nav.Link href="/Kanban">Kanban</Nav.Link>
+        <Nav.Link href="/Kanban">{t("navigation.kanban")}</Nav.Link>
       </RequireRole>
     ),
     customer: (
       <RequireRole roles={["customer"]}>
-        <Nav.Link href="/Order">Order</Nav.Link>
+        <Nav.Link href="/Order">{t("navigation.order")}</Nav.Link>
       </RequireRole>
     ),
     supervisor: (
       <RequireRole roles={["supervisor"]}>
-        <Nav.Link href="/Order">Order</Nav.Link>
-        <Nav.Link href="/ProspectOrderSummary">ProspectOrderSummary</Nav.Link>
+        <Nav.Link href="/Order">{t("navigation.order")}</Nav.Link>
+        <Nav.Link href="/ProspectOrderSummary">
+          {t("navigation.prospectOrder")}
+        </Nav.Link>
       </RequireRole>
     ),
     manager: (
       <RequireRole roles={["manager"]}>
-        <NavDropdown title="User" id="navbarScrollingDropdown">
-          <NavDropdown.Item href="/User">User</NavDropdown.Item>
-          <NavDropdown.Item href="/Client">Client</NavDropdown.Item>
+        <NavDropdown title={t("navigation.user")} id="navbarScrollingDropdown">
+          <NavDropdown.Item href="/User">
+            {t("navigation.user")}
+          </NavDropdown.Item>
+          <NavDropdown.Item href="/Client">
+            {t("navigation.client")}
+          </NavDropdown.Item>
         </NavDropdown>
       </RequireRole>
     ),
     brewer: (
       <RequireRole roles={["brewer"]}>
-        <Nav.Link href="/Recipe">Recipe</Nav.Link>
-        <NavDropdown title="Info" id="navbarScrollingDropdown">
+        <Nav.Link href="/Recipe">{t("navigation.recipe")}</Nav.Link>
+        <NavDropdown title={t("navigation.info")} id="navbarScrollingDropdown">
           <NavDropdown.Item href="/FermentingIngredients">
-            Fermenting Ingredients
+            {t("navigation.fermentingIngredient")}
           </NavDropdown.Item>
           <NavDropdown.Item href="/FermentingIngredients">
-            Hops
+            {t("navigation.hops")}
           </NavDropdown.Item>
           <NavDropdown.Item href="/FermentingIngredients">
-            Yeast
+            {t("navigation.yeast")}
           </NavDropdown.Item>
           <NavDropdown.Item href="/FermentingIngredients">
-            Extras
+            {t("navigation.extras")}
           </NavDropdown.Item>
           <NavDropdown.Item href="/FermentingIngredients">
-            Tanks
+            {t("navigation.equipment")}
           </NavDropdown.Item>
         </NavDropdown>
       </RequireRole>
@@ -83,7 +89,7 @@ export const useNavigation = () => {
         variant="light"
         onClick={handleLogout}
       >
-        Wyloguj
+        {t("button.logout")}
       </Button>
     ),
     languageSwitch: (

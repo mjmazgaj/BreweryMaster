@@ -18,9 +18,15 @@ const Kanban = () => {
   const [isValid, setIsValid] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-    const [filterData, setFilterData] = useState({});
+  const [filterData, setFilterData] = useState({});
 
-  const { handleSave, handleAdd, modalCustomizationObject, filterObject, filterFields } = useKanban({
+  const {
+    handleSave,
+    handleAdd,
+    modalCustomizationObject,
+    filterObject,
+    filterFields,
+  } = useKanban({
     columns,
     setColumns,
     setErrorMessage,
@@ -39,10 +45,10 @@ const Kanban = () => {
           />
           <div className="kanban-buttons_container">
             <Button onClick={handleSave} variant="dark">
-              Zapisz
+              {t("button.save")}
             </Button>
             <Button onClick={handleAdd} variant="dark">
-              Dodaj
+              {t("button.add")}
             </Button>
           </div>
           <KanbanBoard columns={columns} setColumns={setColumns} />

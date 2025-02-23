@@ -26,7 +26,28 @@
         "form": "Formularz",
         "login": "Zaloguj się",
         "register": "Zarejestruj się",
+        "logout": "Wyloguj",
         "clear": "Wyczyść"
+    },
+    "navigation": {
+        "kanban": "Tablica zadań",
+        "order": "Zamówienia",
+        "prospectOrder": "Zapytania",
+        "recipe": "Receptury",
+        "info": "Informacja",
+        "fermentingIngredient": "Składniki fermentujące",
+        "hops": "Słody",
+        "client": "Klienci",
+        "yeast": "Drożdże",
+        "extras": "Dodatki",
+        "homePage": "Strona główna",
+        "equipment": "Sprzęt",
+        "user": "Użytkownicy"
+    },
+    "status":{
+        "todo": "Do zrobienia",
+        "inProgress": "W trakcie",
+        "done": "Zrobione"
     },
     "name": {
         "general": {
@@ -67,6 +88,8 @@
             "status": "Status",
             "dueDate": "Termin",
             "ownerId": "ID właściciela",
+            "createdById": "Stworzone przez",
+            "assignedToId": "Przypisane do",
             "orderId": "ID zamówienia"
         },
         "brewery": {

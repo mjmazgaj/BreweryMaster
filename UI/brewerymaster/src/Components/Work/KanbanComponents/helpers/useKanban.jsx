@@ -85,7 +85,7 @@ export const useKanban = ({
       {
         data: orders,
         name: "orderId",
-        label: t("name.kanban.orderId"),
+        label: t("name.brewery.order"),
       }
     ]
   }

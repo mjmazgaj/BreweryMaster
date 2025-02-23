@@ -3,8 +3,17 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import TaskCard from "./TaskCard";
 import "../kanban.css";
 import { handleOnDragEnd } from "./KanbanFunctions";
+import { useTranslation } from "react-i18next";
 
 const KanbanBoard = ({ columns, setColumns }) => {
+  const { t } = useTranslation();
+
+  const columnNames = {
+    1:t("status.todo"),
+    2:t("status.inProgress"),
+    3:t("status.done")
+  }
+
   return (
     <DragDropContext
       onDragEnd={(result) => handleOnDragEnd(result, columns, setColumns)}
@@ -21,7 +30,7 @@ const KanbanBoard = ({ columns, setColumns }) => {
                     {...provided.droppableProps}
                   >
                     <div className="kanban-board-column_title">
-                      {column.title}
+                      {columnNames[column.status]}
                     </div>
                     {column.items?.map((item, index) => (
                       <TaskCard key={index} item={item} index={index} />
