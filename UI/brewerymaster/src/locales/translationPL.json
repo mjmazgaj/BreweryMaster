@@ -58,6 +58,7 @@
             "reduce": "Zmniejsz",
             "recipe": "Recpetura",
             "recipes": "Receptury",
+            "prospectOrder": "Zapytania o zamówienia",
             "increase": "Zwiększ",
             "name": "Nazwa"
         },
@@ -65,6 +66,7 @@
             "empty": "Puste",
             "city": "Miasto",
             "street": "Ulica",
+            "clientName": "Klient",
             "houseNumber": "Numer domu",
             "apartamentNumber": "Numer mieszkania",
             "postalCode": "Kod pocztowy",

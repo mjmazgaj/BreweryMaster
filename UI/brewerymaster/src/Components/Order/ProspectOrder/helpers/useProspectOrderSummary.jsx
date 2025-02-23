@@ -21,7 +21,7 @@ export const useProspectOrderSummary = ({
   const setFormData = (item) => {
     setModalFormData({
       id: item.id,
-      name: "Prospect order",
+      name: t("name.general.prospectOrder"),
       clientName: item.clientName,
       email: item.email,
       phoneNumber: item.phoneNumber,
@@ -41,19 +41,19 @@ export const useProspectOrderSummary = ({
         {
           data: details.beerTypes,
           name: "beerStyleId",
-          label: "Beer style",
+          label: t("name.brewery.style"),
         },
         {
           data: details.containerTypes,
           name: "containerTypeId",
-          label: "Container type",
+          label: t("name.brewery.container"),
         },
       ],
       checkBox: [
         {
           id: 1,
           name: "isClosed",
-          label: "Is order closed",
+          label: t("name.brewery.isClosed"),
           isChecked: item.isClosed,
         },
       ],

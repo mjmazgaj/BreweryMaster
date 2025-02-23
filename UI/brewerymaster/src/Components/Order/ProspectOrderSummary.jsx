@@ -44,7 +44,7 @@ const ProspectOrderSummary = () => {
       {data && (
         <DynamicTable
           tableKey="prospectOrder"
-          tableTitle="Prospect orders"
+          tableTitle={t("name.general.prospectOrder")}
           dataCategory="brewery"
           data={data}
           handleDoubleClick={handleDoubleClick}
@@ -72,7 +72,7 @@ const ProspectOrderSummary = () => {
         show={showModalForm}
         setShow={setShowModalForm}
         action={modalAction}
-        itemName="Prospect order"
+        itemName={t("name.general.prospectOrder")}
         refreshTableData={refreshTableData}
       />
 

@@ -2,7 +2,7 @@ const modalFieldsProvider = (t) => ({
   prospectOrderModalModalFields: [
     {
       id: "clientName",
-      label: t("name.name"),
+      label: t("name.user.name"),
       type: "text",
       required: true,
       feedback: `${t("validation.text")} 255`,
@@ -12,7 +12,7 @@ const modalFieldsProvider = (t) => ({
     },
     {
       id: "email",
-      label: t("name.email"),
+      label: t("name.user.email"),
       type: "text",
       required: true,
       feedback: `${t("validation.number")} 0-100`,
@@ -23,7 +23,7 @@ const modalFieldsProvider = (t) => ({
     },
     {
       id: "phoneNumber",
-      label: t("name.phoneNumber"),
+      label: t("name.user.phoneNumber"),
       type: "text",
       required: true,
       feedback: `${t("validation.number")} 0-100`,
@@ -47,17 +47,17 @@ const modalFieldsProvider = (t) => ({
   prospectOrderModalReadOnlyFields: [
     {
       id: "clientName",
-      label: t("name.clientName"),
+      label: t("name.user.clientName"),
       type: "text",
     },
     {
       id: "email",
-      label: t("name.email"),
+      label: t("name.user.email"),
       type: "text",
     },
     {
       id: "phoneNumber",
-      label: t("name.phoneNumber"),
+      label: t("name.user.phoneNumber"),
       type: "text",
     },
     {

@@ -57,6 +57,7 @@
             "edit": "Edit",
             "reduce": "Reduce",
             "recipe": "Recipe",
+            "prospectOrder": "Prospect order",
             "recipes": "Recipes",
             "increase": "Increase",
             "name": "Name"
@@ -70,6 +71,7 @@
             "postalCode": "postalCode",
             "commune": "commune",
             "postCode": "postCode",
+            "clientName": "Client",
             "country": "country",
             "email": "email",
             "name": "Name",
