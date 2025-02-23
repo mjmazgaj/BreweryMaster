@@ -71,3 +71,21 @@
 .kanban-buttons_container button {
   margin: auto 0.5rem;
 }
+
+.kanban-filter{
+  display: flex;
+  margin: auto;
+  width: 80%;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.kanban-filter_dropdown-container{
+  display: flex;
+  gap: 2rem;
+  width: 100%;
+}
+
+.kanban-filter_buttons-container{
+  margin: auto;
+}

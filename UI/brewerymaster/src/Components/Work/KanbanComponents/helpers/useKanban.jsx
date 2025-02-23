@@ -5,6 +5,7 @@ import { updateStatus, fetchDataByOwnerId } from "../../api";
 
 import { addData, fetchData } from "../../../Shared/api";
 import { createPath } from "../../../Shared/helpers/useObjectHelper";
+import fieldsProvider from "./fieldsProvider";
 
 export const useKanban = ({
   columns,
@@ -14,34 +15,21 @@ export const useKanban = ({
 }) => {
   const { t } = useTranslation();
   const [tasks, setTasks] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [orders, setOrders] = useState([]);
 
-  useEffect(() => {
-    fillKanbanBoard({})
+  const fillKanbanBoard = (data) =>{
+    let query = {
+      CreatedById: data?.createdById,
+      AssignedToId: data?.assignedToId,
+      OrderId: data?.orderId,
+    };
 
-  }, []);
+    const path = createPath("Task", query);
 
-  useEffect(() => {
-    if (columns) {
-      const resultList = [];
-
-      for (const key in columns) {
-        if (columns.hasOwnProperty(key)) {
-          const obj = columns[key];
-          const status = obj.status;
-          obj.items.forEach((item) => {
-            const newItem = {
-              Id: item.id,
-              Status: status,
-            };
-            resultList.push(newItem);
-          });
-        }
-      }
-
-      setTasks(resultList);
-    }
-  }, [columns]);
-
+    fetchData(path, setColumns);
+  }
+  
   const handleSave = async (e) => {
     e.preventDefault();
     try {
@@ -70,22 +58,7 @@ export const useKanban = ({
     title: t("work.editTask"),
   };
 
-  
-  const fillKanbanBoard = (data) =>{
-    console.log(data)
-    let query = {
-      CreatedById: data?.createdById,
-      AssignedToId: data?.assignedToId,
-      OrderId: data?.orderId,
-    };
-
-    const path = createPath("Task", query);
-
-    console.log(path);
-    fetchData(path, setColumns);
-  }
-
-  const formCustomizationObject = {
+  const filterObject = {
     submitFunction: fillKanbanBoard,
     buttons: [
       {
@@ -93,14 +66,63 @@ export const useKanban = ({
         label: t("button.filter"),
       },
     ],
-    title: t("work.filter"),
     classNamePrefix: "kanban-filter"
   };
+
+  const filterFields = {
+    constrol: fieldsProvider(t).filterFields.control,
+    dropdown: [
+      {
+        data: users,
+        name: "createdById",
+        label: t("name.kanban.createdById"),
+      },
+      {
+        data: users,
+        name: "assignedToId",
+        label: t("name.kanban.assignedToId"),
+      },
+      {
+        data: orders,
+        name: "orderId",
+        label: t("name.kanban.orderId"),
+      }
+    ]
+  }
+  
+  useEffect(() => {
+    fillKanbanBoard({});
+    fetchData("Order/DropDown", setOrders);
+    fetchData("User/DropDown", setUsers);
+  }, []);
+
+  useEffect(() => {
+    if (columns) {
+      const resultList = [];
+
+      for (const key in columns) {
+        if (columns.hasOwnProperty(key)) {
+          const obj = columns[key];
+          const status = obj.status;
+          obj.items.forEach((item) => {
+            const newItem = {
+              Id: item.id,
+              Status: status,
+            };
+            resultList.push(newItem);
+          });
+        }
+      }
+
+      setTasks(resultList);
+    }
+  }, [columns]);
 
   return {
     handleSave,
     handleAdd,
     modalCustomizationObject,
-    formCustomizationObject
+    filterObject,
+    filterFields
   };
 };

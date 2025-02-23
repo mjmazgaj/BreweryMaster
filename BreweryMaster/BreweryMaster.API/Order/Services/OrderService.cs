@@ -46,6 +46,16 @@ namespace BreweryMaster.API.OrderModule.Services
                         }).ToListAsync();
         }
 
+        public async Task<IEnumerable<EntityResponse>> GetOrderDropDownList()
+        {
+            return await _context.Orders
+                        .Select(x => new EntityResponse()
+                        {
+                            Id = x.Id,
+                            Name = $"{x.Recipe.Name}, {x.Capacity}, {DateOnly.FromDateTime(x.TargetDate)}",
+                        }).ToListAsync();
+        }
+
         public async Task<IEnumerable<OrderResponse>> GetCurrentUserOrders(ClaimsPrincipal claims)
         {
             var currentUser = await _userService.GetCurrentUser(claims);

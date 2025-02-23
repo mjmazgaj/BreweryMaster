@@ -10,6 +10,7 @@ namespace BreweryMaster.API.User.Services
     public interface IUserService
     {
         Task<IEnumerable<UserResponse>?> GetUsers();
+        Task<IEnumerable<EntityStringIdResponse>?> GetUserDropDownList();
         Task<UserDetailsResponse?> GetUserById(string id);
         Task<UserResponse> GetCurrentUser(ClaimsPrincipal? user);
         Task<UserDetailsResponse> GetCurrentUserDetails(ClaimsPrincipal? user);

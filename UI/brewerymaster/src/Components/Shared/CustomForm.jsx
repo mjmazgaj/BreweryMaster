@@ -7,12 +7,7 @@ import FormControls from "./FormControls";
 import DropDownIndex from "./DropDownIndex";
 import FormDatePicker from "./FormDatePicker";
 
-const CustomForm = ({
-  fields,
-  formCustomizationObject,
-}) => {
-
-  const [data, setData] = useState({});
+const CustomForm = ({ data, setData, fields, formCustomizationObject }) => {
   const [isValid, setIsValid] = useState({});
 
   const {
@@ -89,7 +84,10 @@ const CustomForm = ({
 
   return (
     fields && (
-      <Form onSubmit={(event) => handleFormSubmit(event, data)}>
+      <Form
+        className={formCustomizationObject.classNamePrefix}
+        onSubmit={(event) => handleFormSubmit(event, data)}
+      >
         <h2>{formCustomizationObject?.title ?? ""}</h2>
         <FormControls
           fields={fields.control}
@@ -100,18 +98,20 @@ const CustomForm = ({
         {renderDropdowns()}
         {renderCheckBoxes()}
         {renderDatePickers()}
-        {formCustomizationObject?.buttons &&
-          formCustomizationObject.buttons.map((button, index) => (
-            <Button
-              type={button.isSubmit ? "submit" : ""}
-              key={index}
-              variant="dark"
-              disabled={!isValid}
-              onClick={button?.function ?? null}
-            >
-              {button.label}
-            </Button>
-          ))}
+        <div className={`${formCustomizationObject.classNamePrefix}_buttons-container`}>
+          {formCustomizationObject?.buttons &&
+            formCustomizationObject.buttons.map((button, index) => (
+              <Button
+                type={button.isSubmit ? "submit" : ""}
+                key={index}
+                variant="dark"
+                disabled={!isValid}
+                onClick={button?.function ?? null}
+              >
+                {button.label}
+              </Button>
+            ))}
+        </div>
       </Form>
     )
   );

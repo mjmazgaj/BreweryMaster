@@ -62,6 +62,17 @@ namespace BreweryMaster.API.User.Services
             return response;
         }
 
+        public async Task<IEnumerable<EntityStringIdResponse>?> GetUserDropDownList()
+        {
+            var users = await GetUsers();
+
+            return users?.Select(x => new EntityStringIdResponse()
+            {
+                Id = x.Id,
+                Name = x.Name
+            });
+        }
+
         public async Task<UserDetailsResponse?> GetUserById(string id)
         {
 

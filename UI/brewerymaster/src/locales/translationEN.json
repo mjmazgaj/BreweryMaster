@@ -67,6 +67,7 @@
             "status": "Status",
             "dueDate": "Due Date",
             "ownerId": "Owner ID",
+            "filter": "Filter tasks",
             "createdById": "Created by",
             "assignedToId": "Assigned to",
             "orderId": "Order id"

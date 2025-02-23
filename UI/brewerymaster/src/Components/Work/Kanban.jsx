@@ -18,8 +18,9 @@ const Kanban = () => {
   const [isValid, setIsValid] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+    const [filterData, setFilterData] = useState({});
 
-  const { handleSave, handleAdd, modalCustomizationObject, formCustomizationObject } = useKanban({
+  const { handleSave, handleAdd, modalCustomizationObject, filterObject, filterFields } = useKanban({
     columns,
     setColumns,
     setErrorMessage,
@@ -31,8 +32,10 @@ const Kanban = () => {
       {columns ? (
         <>
           <CustomForm
-            fields={fieldsProvider(t).filterFields}
-            formCustomizationObject={formCustomizationObject}
+            fields={filterFields}
+            formCustomizationObject={filterObject}
+            data={filterData}
+            setData={setFilterData}
           />
           <KanbanBoard columns={columns} setColumns={setColumns} />
           <div className="kanban-buttons_container">

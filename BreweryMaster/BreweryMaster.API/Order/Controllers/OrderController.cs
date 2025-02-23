@@ -28,6 +28,15 @@ namespace BreweryMaster.API.OrderModule.Controllers
         {
             var clients = await _clientService.GetOrders();
             return Ok(clients);
+
+        [HttpGet]
+        [Route("DropDown")]
+        [ProducesResponseType(typeof(IEnumerable<EntityResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<EntityResponse>>> GetOrderDropDownList()
+        {
+            var orders = await _clientService.GetOrderDropDownList();
+            return Ok(orders);
         }
 
         [HttpGet]

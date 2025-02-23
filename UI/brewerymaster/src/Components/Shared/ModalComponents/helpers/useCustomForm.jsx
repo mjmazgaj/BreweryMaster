@@ -14,9 +14,10 @@ export const useCustomForm = ({
 
   const handleSelectChange = (e, name) => {
     const { value } = e.target;
+
     setData((prevData) => ({
       ...prevData,
-      [name]: parseInt(value),
+      [name]: value,
     }));
   };
 
