@@ -37,7 +37,6 @@ const Kanban = () => {
             data={filterData}
             setData={setFilterData}
           />
-          <KanbanBoard columns={columns} setColumns={setColumns} />
           <div className="kanban-buttons_container">
             <Button onClick={handleSave} variant="dark">
               Zapisz
@@ -46,6 +45,7 @@ const Kanban = () => {
               Dodaj
             </Button>
           </div>
+          <KanbanBoard columns={columns} setColumns={setColumns} />
           <ModalFormBasic
             fields={fieldsProvider(t).kanbanModalFields}
             data={data}
