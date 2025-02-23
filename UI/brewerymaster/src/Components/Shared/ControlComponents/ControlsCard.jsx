@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 
 import { Button, Card, CardBody } from "react-bootstrap";
 import FormControlsReadOnly from "../FormControlsReadOnly";
@@ -29,21 +29,23 @@ const ControlsCard = ({
         <h3>{title}</h3>
       </Card.Header>
 
-      {data ? (
-        <Card.Body>
-          <FormControlsReadOnly fields={fields} data={data} />
+      <Card.Body>
+        {data ? (
+          <Fragment>
+            <FormControlsReadOnly fields={fields} data={data} />
+            <div className="control-card-buttons_container">
+              <Button variant="dark" onClick={handleEdit}>
+                {t("button.edit")}
+              </Button>
+            </div>
+          </Fragment>
+        ) : (
           <div className="control-card-buttons_container">
-            <Button variant="dark" onClick={handleEdit}>
-              {t("button.edit")}
-            </Button>
+            <p>{emptyMessage}</p>
+            <Button variant="dark">{t("button.addNow")}</Button>
           </div>
-        </Card.Body>
-      ) : (
-        <div className="control-card-buttons_container">
-          <p>{emptyMessage}</p>
-          <Button variant="dark">{t("button.addNow")}</Button>
-        </div>
-      )}
+        )}
+      </Card.Body>
     </Card>
   );
 };

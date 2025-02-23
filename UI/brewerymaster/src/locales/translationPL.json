@@ -240,10 +240,10 @@
         "loggedAs": "Zalogowano jako",
         "userInfoTitle": "Informacje o użytkowniku",
         "userInfoEmptyMsg": "Nie można załadować informacji o użytkowniku",
-        "homeAddressTitle": "Informacje o adresie domowym",
+        "homeAddressTitle": "Adres domowy",
         "homeAddressMsg": "Adres domowy nie został dodany",
         "allUsers": "Wszyscy użytkownicy",
-        "deliveryAddressTitle": "Informacje o adresie dostawy",
+        "deliveryAddressTitle": "Adres dostawy",
         "edditPassword": "Edytuj hasło",
         "deliveryAddressMsg": "Adres dostawy nie został dodany"
     },

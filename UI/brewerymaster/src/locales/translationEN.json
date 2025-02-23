@@ -241,10 +241,10 @@
         "loggedAs": "You are logged as",
         "userInfoTitle": "User info",
         "userInfoEmptyMsg": "User info can't be loaded",
-        "homeAddressTitle": "Home address info",
+        "homeAddressTitle": "Home address",
         "homeAddressMsg": "Home address wasn't added",
         "allUsers": "All users",
-        "deliveryAddressTitle": "Delivery address info",
+        "deliveryAddressTitle": "Delivery address",
         "edditPassword": "Eddit Password",
         "deliveryAddressMsg": "Delivery address wasn't added"
     },
