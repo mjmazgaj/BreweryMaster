@@ -8,7 +8,7 @@
         public int Capacity { get; set; }
         public int ContainerId { get; set; }
         public required string Container { get; set; }
-        public DateTime TargetDate { get; set; }
+        public DateOnly TargetDate { get; set; }
         public decimal Price { get; set;}
     }
 }

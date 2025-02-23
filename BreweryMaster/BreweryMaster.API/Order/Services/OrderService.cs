@@ -42,7 +42,7 @@ namespace BreweryMaster.API.OrderModule.Services
                             Price = x.Price,
                             RecipeId = x.RecipeId,
                             Recipe = x.Recipe.Name,
-                            TargetDate = x.TargetDate,
+                            TargetDate = DateOnly.FromDateTime(x.TargetDate),
                         }).ToListAsync();
         }
 
@@ -75,7 +75,7 @@ namespace BreweryMaster.API.OrderModule.Services
                             Price = x.Price,
                             RecipeId = x.RecipeId,
                             Recipe = x.Recipe.Name,
-                            TargetDate = x.TargetDate,
+                            TargetDate = DateOnly.FromDateTime(x.TargetDate),
                         }).ToListAsync();
         }
 
@@ -102,7 +102,7 @@ namespace BreweryMaster.API.OrderModule.Services
                             Price = x.Price,
                             RecipeId = x.RecipeId,
                             Recipe = x.Recipe.Name,
-                            TargetDate = x.TargetDate,
+                            TargetDate = DateOnly.FromDateTime(x.TargetDate),
                         }).FirstOrDefaultAsync(x => x.Id == id);
         }
 
