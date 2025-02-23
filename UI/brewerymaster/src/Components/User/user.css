@@ -35,3 +35,37 @@
 .control-card-role_include {
   background-color: rgb(187, 212, 184);
 }
+
+.user-filter {
+  background-color: #f3f3f3;
+  padding: 1rem;
+  padding-bottom: 0;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 1rem;
+  .formControl_container {
+    flex: 0.5;
+  }
+}
+
+.user-filter_dropdown-container {
+  display: flex;
+  gap: 1rem;
+  flex: 1;
+}
+
+.user-filter_datepicker-container {
+  display: flex;
+  flex: 1;
+  gap: 1rem;
+}
+
+.user-filter_buttons-container {
+  display: flex;
+  align-items: center;
+
+  .btn {
+    margin-top: 10px;
+  }
+}

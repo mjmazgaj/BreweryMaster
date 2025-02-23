@@ -9,7 +9,7 @@ namespace BreweryMaster.API.User.Services
 {
     public interface IUserService
     {
-        Task<IEnumerable<UserResponse>?> GetUsers();
+        Task<IEnumerable<UserResponse>?> GetUsers(UserFilterRequest? request);
         Task<IEnumerable<EntityStringIdResponse>?> GetUserDropDownList();
         Task<IEnumerable<EntityStringIdResponse>?> GetRolesDropDownList();
         Task<UserDetailsResponse?> GetUserById(string id);

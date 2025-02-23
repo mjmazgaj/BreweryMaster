@@ -36,12 +36,44 @@ namespace BreweryMaster.API.User.Services
             _addressService = addressService;
         }
 
-        public async Task<IEnumerable<UserResponse>?> GetUsers()
+        public async Task<IEnumerable<UserResponse>?> GetUsers(UserFilterRequest? request = null)
         {
             var response = new List<UserResponse>();
+            var companyUsers = new List<CompanyUser>();
+            var individualUsers = new List<IndividualUser>();
 
-            var companyUsers = await _context.CompanyUsers.Include(x => x.UserAddresses).ToListAsync();
-            var individualUsers = await _context.IndividualUsers.Include(x => x.UserAddresses).ToListAsync();
+            if (request is null)
+            {
+                companyUsers = await _context.CompanyUsers.Include(x => x.UserAddresses).ToListAsync();
+                individualUsers = await _context.IndividualUsers.Include(x => x.UserAddresses).ToListAsync();
+            }
+            else
+            {
+                companyUsers = await _context.CompanyUsers
+                                    .Include(x => x.UserAddresses)
+                                    .Where(x => request.Email == null || x.Email == null || x.Email.Contains(request.Email))
+                                    .Where(x => request.CreatedAfter == null || x.CreatedOn >= request.CreatedAfter)
+                                    .Where(x => request.CreatedBefore == null || x.CreatedOn <= request.CreatedBefore)
+                                    .Where(x => request.IsCompany ?? true)
+                                    .ToListAsync();
+
+
+                individualUsers = await _context.IndividualUsers
+                                    .Include(x => x.UserAddresses)
+                                    .Where(x => request.Email == null || x.Email == null || x.Email.Contains(request.Email))
+                                    .Where(x => request.CreatedAfter == null || x.CreatedOn >= request.CreatedAfter)
+                                    .Where(x => request.CreatedBefore == null || x.CreatedOn <= request.CreatedBefore)
+                                    .Where(x => !request.IsCompany ?? true)
+                                    .ToListAsync();
+
+                if (request.RoleId != null)
+                {
+                    companyUsers = companyUsers.Where(x => _userManager.GetRolesAsync(x).Result.Contains(request.RoleId)).ToList();
+                    individualUsers = individualUsers.Where(x => _userManager.GetRolesAsync(x).Result.Contains(request.RoleId)).ToList();
+                }
+            }
+
+
 
             response.AddRange(companyUsers.Select(x => new UserResponse()
             {

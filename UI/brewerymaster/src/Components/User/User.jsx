@@ -1,29 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import DynamicTable from "../Shared/TableComponents/DynamicTable";
+import CustomForm from "../Shared/CustomForm";
 
 import { useTranslation } from "react-i18next";
-
-import { useNavigate } from "react-router-dom";
-import { fetchData } from "../Shared/api";
+import { useUser } from "./helpers/useUser";
 
 const User = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
 
   const [users, setUsers] = useState([]);
+  const [filterData, setFilterData] = useState({});
 
-  useEffect(() => {
-    fetchData("User", setUsers);
-  }, []);
-
-  const handleDoubleClick = (item) => {
-    navigate(`/User/${item.id}`);
-  };
+  const { filterObject, filterFields, handleDoubleClick } = useUser({
+    setUsers,
+  });
 
   return (
     <div>
       <h2>{t("name.brewery.users")}</h2>
+      <CustomForm
+        fields={filterFields}
+        formCustomizationObject={filterObject}
+        data={filterData}
+        setData={setFilterData}
+      />
       <DynamicTable
         tableKey="users"
         tableTitle={t("user.userList")}

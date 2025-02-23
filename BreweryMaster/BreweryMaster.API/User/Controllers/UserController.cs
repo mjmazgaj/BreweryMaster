@@ -28,9 +28,9 @@ namespace BreweryMaster.API.UserModule.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<UserResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<UserResponse>?>> GetUsers()
+        public async Task<ActionResult<IEnumerable<UserResponse>?>> GetUsers([FromQuery] UserFilterRequest? request)
         {
-            var users = await _userService.GetUsers();
+            var users = await _userService.GetUsers(request);
 
             return Ok(users);
         }
