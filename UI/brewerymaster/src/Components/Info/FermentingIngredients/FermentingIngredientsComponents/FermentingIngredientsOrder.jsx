@@ -33,7 +33,7 @@ const FermentingIngredientsOrder = () => {
     <div className="Fermenting-Ingredient-Order_container">
       <DynamicTable
         tableKey="fermentingIngredientOrder"
-        tableTitle="Fermenting Ingredient Orders"
+        tableTitle={t("name.brewery.fermentingIngredientOrders")}
         dataCategory="brewery"
         data={data}
         handleDoubleClick={handleDoubleClick}

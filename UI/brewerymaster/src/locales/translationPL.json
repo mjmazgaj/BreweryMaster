@@ -165,6 +165,8 @@
             "preBoilingDensity": "Gęstość przed gotowaniem",
             "fermentationLosses": "Straty fermentacyjne",
             "fermentingIngredients": "Składniki fermentujące",
+            "fermentingIngredientOrders": "Zamówienia składników fermentujących",
+            "fermentingIngredientReservations": "Rezerwacje składników fermentujących",
             "fermentingIngredient": "Składnik fermentujący",
             "hops": "Chmiel",
             "yeast": "Drożdże",
