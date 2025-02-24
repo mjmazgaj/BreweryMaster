@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { toast } from "react-toastify";
-import { addData } from "../../Shared/api";
+import { addData, fetchData } from "../../Shared/api";
 
 import { useTranslation } from "react-i18next";
 
@@ -10,15 +10,17 @@ import MenuSteps from "../../Shared/MenuSteps";
 import RecipeTableSelection from "../OrderComponents/RecipeTableSelection";
 import OrderFormStep2 from "./OrderFormStep2";
 
-const OrderForm = () => {
+const OrderForm = ({ setData, setIsAddMode }) => {
   const { t } = useTranslation();
   const [orderData, setOrderData] = useState({});
-  const [isValid, setIsValid] = useState(true);
+  const [isValid, setIsValid] = useState(false);
 
   const [currentStep, setCurrentStep] = useState(0);
 
   const handleSave = async () => {
     await addData("Order", orderData);
+    fetchData("Order/All", setData);
+    setIsAddMode(false);
   };
 
   const clear = () => {};
@@ -28,8 +30,9 @@ const OrderForm = () => {
       name: t("order.selectRecipeTitle"),
       component: (
         <RecipeTableSelection
-          selectedRecipe={orderData.recipeId}
+          selectedRecipe={orderData}
           setSelectedRecipe={setOrderData}
+          setIsValid={setIsValid}
         />
       ),
     },
@@ -51,6 +54,7 @@ const OrderForm = () => {
         currentStep={currentStep}
         setCurrentStep={setCurrentStep}
         amountOfSteps={steps.length}
+        isValid={isValid}
       />
 
       <h2>{steps[currentStep].name}</h2>

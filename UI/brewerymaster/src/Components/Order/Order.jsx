@@ -9,6 +9,7 @@ import OrderTable from "./OrderComponents/OrderTable";
 const Order = () => {
   const { t } = useTranslation();
   const [isAddMode, setIsAddMode] = useState(false);
+  const [data, setData] = useState([]);
 
   const handleAddOnClick = () => {
     setIsAddMode(!isAddMode);
@@ -23,7 +24,11 @@ const Order = () => {
       >
         {isAddMode ? t("button.back") : t("button.add")}
       </Button>
-      {isAddMode ? <OrderForm /> : <OrderTable />}
+      {isAddMode ? (
+        <OrderForm setData={setData} setIsAddMode={setIsAddMode} />
+      ) : (
+        <OrderTable data={data} setData={setData} />
+      )}
     </div>
   );
 };

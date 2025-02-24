@@ -151,3 +151,14 @@ form input {
   align-items: center;
   margin-top: 1rem;
 }
+
+.recipe-table-selection_item {
+  padding: 1rem;
+  width: 25rem;
+  border: 0.5rem solid #cfcfcf;
+  border-radius: 1rem;
+  margin: auto;
+  position: fixed;
+  left: 2rem;
+  top: 5rem;
+}

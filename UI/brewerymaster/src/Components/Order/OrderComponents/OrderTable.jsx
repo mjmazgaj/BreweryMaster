@@ -13,19 +13,17 @@ import DynamicTable from "../../Shared/TableComponents/DynamicTable";
 import { useOrder } from "./helpers/useOrder";
 import CustomForm from "../../Shared/CustomForm";
 
-const OrderTable = () => {
+const OrderTable = ({data, setData}) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { user } = useUser();
 
-  const [data, setData] = useState([]);
   const [filterData, setFilterData] = useState([]);
 
   const { filterObject, filterFields, handleDoubleClick } = useOrder({
     user,
     setData
   });
-
 
   return (
     <div className="recipe-table">

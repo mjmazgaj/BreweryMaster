@@ -47,7 +47,7 @@ const fieldsProvider = (t) => ({
       },
     ],
   },
-  filterFields:{
+  filterFields: {
     control: [
       {
         id: "recipeName",
@@ -55,7 +55,14 @@ const fieldsProvider = (t) => ({
         type: "textArea",
       },
     ],
-  }
+  },
+  selectedRecipe: [
+    {
+      id: "name",
+      label: t("name.general.name"),
+      type: "textArea",
+    }
+  ],
 });
 
 export default fieldsProvider;
