@@ -5,8 +5,10 @@ using BreweryMaster.API.Shared.Helpers;
 using BreweryMaster.API.Shared.Models;
 using BreweryMaster.API.Shared.Models.DB;
 using BreweryMaster.API.User.Services;
+using BreweryMaster.API.UserModule.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using System.Linq;
 using System.Security.Claims;
 
 namespace BreweryMaster.API.OrderModule.Services
@@ -26,9 +28,12 @@ namespace BreweryMaster.API.OrderModule.Services
             _settings = options.Value;
         }
 
-        public async Task<IEnumerable<OrderResponse>> GetOrders()
+        public async Task<IEnumerable<OrderResponse>> GetOrders(OrderFilterRequest? request = null)
         {
-            return await _context.Orders
+            var response = new List<OrderResponse>();
+
+            if(request is null)
+                response = await _context.Orders
                         .Include(x => x.Container)
                         .Include(x => x.Recipe)
                         .Include(x => x.Client)
@@ -41,9 +46,37 @@ namespace BreweryMaster.API.OrderModule.Services
                             Container = x.Container.ContainerName,
                             Price = x.Price,
                             RecipeId = x.RecipeId,
+                            CreatedBy = x.CreatedByUser.ToUserResponse().Name,
                             Recipe = x.Recipe.Name,
                             TargetDate = DateOnly.FromDateTime(x.TargetDate),
                         }).ToListAsync();
+            else
+            {
+                response = await _context.Orders
+                        .Include(x => x.Container)
+                        .Include(x => x.Recipe)
+                        .Include(x => x.Client)
+                        .Include(x => x.CreatedByUser)
+                        .Where(x => request.CreatedBy == null ||  x.CreatedByUserId == request.CreatedBy)
+                        .Where(x => request.ExpectedBefore == null ||  x.TargetDate >= request.ExpectedBefore)
+                        .Where(x => request.ExpectedAfter == null ||  x.TargetDate <= request.ExpectedAfter)
+                        .Where(x => request.RecipeName == null ||  x.Recipe.Name.ToLower().Contains(request.RecipeName.ToLower()))
+                        .Select(x => new OrderResponse()
+                        {
+                            Id = x.Id,
+                            Capacity = x.Capacity,
+                            ContainerId = x.Container.Id,
+                            Container = x.Container.ContainerName,
+                            Price = x.Price,
+                            RecipeId = x.RecipeId,
+                            Recipe = x.Recipe.Name,
+                            CreatedBy = x.CreatedByUser.ToUserResponse().Name,
+                            TargetDate = DateOnly.FromDateTime(x.TargetDate),
+                        }).ToListAsync();
+            }
+
+
+            return response;
         }
 
         public async Task<IEnumerable<EntityResponse>> GetOrderDropDownList()

@@ -47,6 +47,15 @@ const fieldsProvider = (t) => ({
       },
     ],
   },
+  filterFields:{
+    control: [
+      {
+        id: "recipeName",
+        label: t("name.brewery.recipe"),
+        type: "textArea",
+      },
+    ],
+  }
 });
 
 export default fieldsProvider;

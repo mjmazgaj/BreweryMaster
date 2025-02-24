@@ -5,7 +5,7 @@ using System.Security.Claims;
 
 public interface IOrderService
 {
-    Task<IEnumerable<OrderResponse>> GetOrders();
+    Task<IEnumerable<OrderResponse>> GetOrders(OrderFilterRequest? request);
     Task<IEnumerable<EntityResponse>> GetOrderDropDownList();
     Task<IEnumerable<OrderResponse>> GetCurrentUserOrders(ClaimsPrincipal claims);
     Task<IEnumerable<EntityResponse>> GetOrderStatuses();

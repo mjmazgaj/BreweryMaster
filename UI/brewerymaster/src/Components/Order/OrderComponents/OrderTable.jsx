@@ -10,25 +10,31 @@ import { useTranslation } from "react-i18next";
 
 import DynamicTable from "../../Shared/TableComponents/DynamicTable";
 
+import { useOrder } from "./helpers/useOrder";
+import CustomForm from "../../Shared/CustomForm";
+
 const OrderTable = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { user } = useUser();
 
   const [data, setData] = useState([]);
+  const [filterData, setFilterData] = useState([]);
 
-  const handleDoubleClick = (item) => {
-    console.log(item);
-    navigate(`/Order/${item.id}`);
-  };
+  const { filterObject, filterFields, handleDoubleClick } = useOrder({
+    user,
+    setData
+  });
 
-  useEffect(() => {
-    if (user?.roles?.includes("customer")) fetchData("Order", setData);
-    else fetchData("Order/All", setData);
-  }, []);
 
   return (
     <div className="recipe-table">
+      <CustomForm
+        fields={filterFields}
+        formCustomizationObject={filterObject}
+        data={filterData}
+        setData={setFilterData}
+      />
       {data && (
         <DynamicTable
           tableKey="orders"

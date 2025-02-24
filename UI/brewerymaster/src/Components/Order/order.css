@@ -93,3 +93,31 @@ form input {
 .order-status-changes_list :last-child .order-status-changes_info {
   background-color: rgb(187, 212, 184);
 }
+
+.order-filter {
+  background-color: #f3f3f3;
+  padding: 1rem;
+  padding-bottom: 0;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 1rem;
+  .formControl_container {
+    flex: 0.5;
+  }
+}
+
+.order-filter_dropdown-container {
+  display: flex;
+}
+
+.order-filter_datepicker-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.order-filter_buttons-container {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}

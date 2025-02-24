@@ -24,9 +24,9 @@ namespace BreweryMaster.API.OrderModule.Controllers
         [Route("All")]
         [ProducesResponseType(typeof(IEnumerable<OrderResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<OrderResponse>>> GetOrders()
+        public async Task<ActionResult<IEnumerable<OrderResponse>>> GetOrders([FromQuery] OrderFilterRequest? request)
         {
-            var orders = await _clientService.GetOrders();
+            var orders = await _clientService.GetOrders(request);
             return Ok(orders);
         }
 

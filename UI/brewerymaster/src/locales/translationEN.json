@@ -121,6 +121,8 @@
             "reservedQuantity": "Reserved",
             "recipes": "Recipes",
             "orderedQuantity": "Ordered",
+            "expectedBefore": "Expected Before",
+            "expectedAfter": "Expected After",
             "orderName": "Order Name",
             "formName": "Form Name",
             "storedQuantity": "Stored",
