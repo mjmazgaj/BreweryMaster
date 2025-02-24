@@ -18,7 +18,6 @@ const User = () => {
 
   return (
     <div>
-      <h2>{t("name.brewery.users")}</h2>
       <CustomForm
         fields={filterFields}
         formCustomizationObject={filterObject}

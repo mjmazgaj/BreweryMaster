@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import "./user.css";
 
 import { useTranslation } from "react-i18next";
@@ -31,8 +31,12 @@ const UserDetails = () => {
 
   return (
     <div className="user-details_container">
-      <h2>{t("name.brewery.users")}</h2>
-      <h4>{t("name.general.details")}</h4>
+      {id && (
+        <Fragment>
+          <h2>{t("name.brewery.users")}</h2>
+          <h4>{t("name.general.details")}</h4>
+        </Fragment>
+      )}
       <div className="info_container">
         <ControlsCard
           className="user-info_container"
