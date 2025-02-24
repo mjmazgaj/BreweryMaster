@@ -34,3 +34,27 @@
   width: 60%;
   margin: 2rem auto;
 }
+
+.recipe-filter {
+  background-color: #f3f3f3;
+  padding: 1rem;
+  padding-bottom: 0;
+  border-radius: 1rem;
+  margin: auto;
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 1rem;
+  width: 80%;
+}
+
+.recipe-filter_dropdown-container {
+  display: flex;
+  flex: 1;
+  gap: 1rem;
+}
+
+.recipe-filter_buttons-container {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}

@@ -106,6 +106,15 @@ const fieldsProvider = (t) => ({
       },
     ],
   },
+  filterFields:{
+    control: [
+      {
+        id: "name",
+        label: t("name.general.name"),
+        type: "textArea",
+      },
+    ],
+  }
 });
 
 export default fieldsProvider;

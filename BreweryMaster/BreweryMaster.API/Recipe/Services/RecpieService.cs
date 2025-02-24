@@ -1,5 +1,6 @@
 ﻿using BreweryMaster.API.Recipe.Models;
 using BreweryMaster.API.Recipe.Models.DB;
+using BreweryMaster.API.Recipe.Models.Requests;
 using BreweryMaster.API.Recipe.Services.ResponseBuilders;
 using BreweryMaster.API.Shared.Models;
 using BreweryMaster.API.Shared.Models.DB;
@@ -63,13 +64,29 @@ namespace BreweryMaster.API.Recipe.Services
             });
         }
 
-        public async Task<IEnumerable<RecipeResponse>> GetRecipesAsync()
+        public async Task<IEnumerable<RecipeResponse>> GetRecipesAsync(RecipeFilterRequest? request = null)
         {
-            var recipes = await _context.Recipes
-                .Where(x => !x.IsRemoved)
-                .Include(x => x.Type)
-                .Include(x => x.Style)
-                .ToListAsync();
+            var recipes = new List<Recipe.Models.DB.Recipe>();
+
+            if (request == null)
+            {
+                recipes = await _context.Recipes
+                    .Where(x => !x.IsRemoved)
+                    .Include(x => x.Type)
+                    .Include(x => x.Style)
+                    .ToListAsync();
+            }
+            else
+            {
+                recipes = await _context.Recipes
+                    .Where(x => !x.IsRemoved)
+                    .Include(x => x.Type)
+                    .Include(x => x.Style)
+                        .Where(x => request.TypeId == null || x.TypeId == request.TypeId)
+                        .Where(x => request.BeerStyleId == null || x.StyleId== request.BeerStyleId)
+                        .Where(x => request.Name == null || x.Name.ToLower().Contains(request.Name.ToLower()))
+                    .ToListAsync();
+            }
 
             return recipes.Select(x => new RecipeResponse()
             {
@@ -79,8 +96,10 @@ namespace BreweryMaster.API.Recipe.Services
                 IBUScale = x.IBUScale,
                 ABVScale = x.ABVScale,
                 SRMScale = x.SRMScale,
+                TypeId = x.Type?.Id,
                 TypeName = x.Type?.Name,
                 StyleName = x.Style?.Name,
+                StyleId = x.Style?.Id,
             });
         }
         public async Task<RecipeDetailsResponse?> GetRecipeDetailByIdAsync(int id)
@@ -93,6 +112,17 @@ namespace BreweryMaster.API.Recipe.Services
         public async Task<IEnumerable<EntityResponse>?> GetBeerStyleDropDownList()
         {
             return await _context.BeerStyles
+                .Select(x => new EntityResponse()
+                {
+                    Id = x.Id,
+                    Name = x.Name
+                })
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<EntityResponse>?> GetRecipeTypeDropDownList()
+        {
+            return await _context.RecipeTypes
                 .Select(x => new EntityResponse()
                 {
                     Id = x.Id,

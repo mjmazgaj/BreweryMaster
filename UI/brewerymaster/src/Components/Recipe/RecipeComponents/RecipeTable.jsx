@@ -6,16 +6,24 @@ import { useTranslation } from "react-i18next";
 
 import DynamicTable from "../../Shared/TableComponents/DynamicTable";
 import { useRecipeTable } from "./helpers/useRecipeTable";
+import CustomForm from "../../Shared/CustomForm";
 
 const RecipeTable = () => {
   const { t } = useTranslation();
 
   const [data, setData] = useState([]);
+    const [filterData, setFilterData] = useState([]);
 
-  const {handleDoubleClick} = useRecipeTable({setData});
+  const {handleDoubleClick, filterObject, filterFields} = useRecipeTable({setData});
 
   return (
     <div className="recipe-table">
+    <CustomForm
+      fields={filterFields}
+      formCustomizationObject={filterObject}
+      data={filterData}
+      setData={setFilterData}
+    />
       {data && (
         <DynamicTable
           tableKey="recipes"

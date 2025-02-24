@@ -1,4 +1,5 @@
 ﻿using BreweryMaster.API.Recipe.Models;
+using BreweryMaster.API.Recipe.Models.Requests;
 using BreweryMaster.API.Recipe.Services;
 using BreweryMaster.API.Shared.Models;
 using BreweryMaster.API.SharedModule.Validators;
@@ -30,9 +31,9 @@ namespace BreweryMaster.API.Info.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<RecipeResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<RecipeResponse>>> GetRecipes()
+        public async Task<ActionResult<IEnumerable<RecipeResponse>>> GetRecipes([FromQuery] RecipeFilterRequest? request)
         {
-            var recipes = await _recipeService.GetRecipesAsync();
+            var recipes = await _recipeService.GetRecipesAsync(request);
             return Ok(recipes);
         }
 
@@ -57,8 +58,18 @@ namespace BreweryMaster.API.Info.Controllers
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<IEnumerable<EntityResponse>>> GetBeerStyleDropDownList()
         {
-            var recipes = await _recipeService.GetBeerStyleDropDownList();
-            return Ok(recipes);
+            var beerStyles = await _recipeService.GetBeerStyleDropDownList();
+            return Ok(beerStyles);
+        }
+
+        [HttpGet]
+        [Route("Type/DropDown")]
+        [ProducesResponseType(typeof(IEnumerable<EntityResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<EntityResponse>>> GetRecipeTypeDropDownList()
+        {
+            var recipeTypes = await _recipeService.GetRecipeTypeDropDownList();
+            return Ok(recipeTypes);
         }
 
         [HttpPost]
