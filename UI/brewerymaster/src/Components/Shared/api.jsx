@@ -56,3 +56,10 @@ export const deleteData = (path, id) => {
     .then((result) => result.status === 200)
     .catch((error) => console.log(error));
 };
+
+export const apiEndpoints = {
+ task: "Task",
+ taskEditStatus: "Task/EditStatus",
+ orderDropDown: "Order/DropDown",
+ userDropDown: "User/DropDown",
+};

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { useTranslation } from "react-i18next";
 
-import { addData, fetchData, updateWithoutParameter } from "../../../Shared/api";
+import { addData, fetchData, updateWithoutParameter, apiEndpoints } from "../../../Shared/api";
 import { createPath } from "../../../Shared/helpers/useObjectHelper";
 
 export const useKanban = ({
@@ -29,7 +29,7 @@ export const useKanban = ({
   
   const handleSave = async (e) => {
     e.preventDefault();
-    updateWithoutParameter("Task/EditStatus", tasks);
+    updateWithoutParameter(apiEndpoints.taskEditStatus, tasks);
   };
 
   const handleAdd = async (e) => {
@@ -38,7 +38,7 @@ export const useKanban = ({
   };
 
   const modalCustomizationObject = {
-    submitFunction: (data) => addData("Task", data),
+    submitFunction: (data) => addData(apiEndpoints.task, data),
     buttons: [
       {
         isSubmit: false,
@@ -81,8 +81,8 @@ export const useKanban = ({
   
   useEffect(() => {
     fillKanbanBoard({});
-    fetchData("Order/DropDown", setOrders);
-    fetchData("User/DropDown", setUsers);
+    fetchData(apiEndpoints.orderDropDown, setOrders);
+    fetchData(apiEndpoints.userDropDown, setUsers);
   }, []);
 
   useEffect(() => {
