@@ -14,21 +14,16 @@ import CustomForm from "../Shared/CustomForm";
 const Kanban = () => {
   const { t } = useTranslation();
   const [columns, setColumns] = useState(null);
-  const [data, setData] = useState({});
-  const [showModal, setShowModal] = useState(false);
+  const [modalData, setModalData] = useState({});
+  const [showAddModal, setShowAddModal] = useState(false);
   const [filterData, setFilterData] = useState({});
 
-  const {
-    handleSave,
-    handleAdd,
-    modalCustomizationObject,
-    filterObject,
-    filterFields,
-  } = useKanban({
-    columns,
-    setColumns,
-    setShowModal,
-  });
+  const { handleSave, handleAdd, addModalObject, filterObject, filterFields } =
+    useKanban({
+      columns,
+      setColumns,
+      setShowAddModal,
+    });
 
   return (
     <>
@@ -51,11 +46,11 @@ const Kanban = () => {
           <KanbanBoard columns={columns} setColumns={setColumns} />
           <ModalFormBasic
             fields={kanbanFieldsProvider(t).modalFields}
-            data={data}
-            setData={setData}
-            show={showModal}
-            setShow={setShowModal}
-            modalCustomizationObject={modalCustomizationObject}
+            data={modalData}
+            setData={setModalData}
+            show={showAddModal}
+            setShow={setShowAddModal}
+            modalCustomizationObject={addModalObject}
           />
         </>
       ) : (

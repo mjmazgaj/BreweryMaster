@@ -8,9 +8,10 @@ import {
   updateWithoutParameter,
   apiEndpoints,
 } from "../../../Shared/api";
+
 import { createPath } from "../../../Shared/helpers/useObjectHelper";
 
-export const useKanban = ({ columns, setColumns, setShowModal }) => {
+export const useKanban = ({ columns, setColumns, setShowAddModal }) => {
   const { t } = useTranslation();
   const [tasks, setTasks] = useState([]);
   const [users, setUsers] = useState([]);
@@ -35,10 +36,10 @@ export const useKanban = ({ columns, setColumns, setShowModal }) => {
 
   const handleAdd = async (e) => {
     e.preventDefault();
-    setShowModal(true);
+    setShowAddModal(true);
   };
 
-  const modalCustomizationObject = {
+  const addModalObject = {
     submitFunction: (data) => addData(apiEndpoints.task, data),
     buttons: [
       {
@@ -111,7 +112,7 @@ export const useKanban = ({ columns, setColumns, setShowModal }) => {
   return {
     handleSave,
     handleAdd,
-    modalCustomizationObject,
+    addModalObject,
     filterObject,
     filterFields,
   };
