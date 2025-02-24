@@ -38,8 +38,11 @@ const FermentingIngredientsFilter = ({ fields, setTableData }) => {
     );
 
   return (
-    <Form onSubmit={(event) => handleSubmit(event)}>
-      <div className="filter-form_container">
+    <Form
+      className="filter-form_container"
+      onSubmit={(event) => handleSubmit(event)}
+    >
+      <div className="filter-form_filters-container">
         <div className="filter-form_control-container">
           <FormControls
             fields={fields.control}

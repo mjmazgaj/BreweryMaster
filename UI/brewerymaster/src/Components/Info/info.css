@@ -38,3 +38,37 @@
 .filter-button_container button {
   margin: 0 0.5rem;
 }
+
+.filter-form_container {
+  background-color: #f3f3f3;
+  padding: 1rem;
+  padding-bottom: 0;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 1rem;
+  width: 80%;
+}
+
+.filter-form_filters-container {
+  display: flex;
+  width: 100%;
+  gap: 2rem;
+}
+
+.filter-form_control-container {
+  flex: 1;
+}
+
+.filter-form_dropdown-container {
+  flex: 1;
+}
+
+.filter-button_container {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  .btn {
+    align-items: center;
+  }
+}
