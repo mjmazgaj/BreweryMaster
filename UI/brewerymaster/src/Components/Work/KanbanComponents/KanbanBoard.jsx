@@ -9,10 +9,10 @@ const KanbanBoard = ({ columns, setColumns }) => {
   const { t } = useTranslation();
 
   const columnNames = {
-    1:t("status.todo"),
-    2:t("status.inProgress"),
-    3:t("status.done")
-  }
+    1: t("status.todo"),
+    2: t("status.inProgress"),
+    3: t("status.done"),
+  };
 
   return (
     <DragDropContext

@@ -2,20 +2,21 @@ import { useEffect, useState } from "react";
 
 import { useTranslation } from "react-i18next";
 
-import { addData, fetchData, updateWithoutParameter, apiEndpoints } from "../../../Shared/api";
+import {
+  addData,
+  fetchData,
+  updateWithoutParameter,
+  apiEndpoints,
+} from "../../../Shared/api";
 import { createPath } from "../../../Shared/helpers/useObjectHelper";
 
-export const useKanban = ({
-  columns,
-  setColumns,
-  setShowModal,
-}) => {
+export const useKanban = ({ columns, setColumns, setShowModal }) => {
   const { t } = useTranslation();
   const [tasks, setTasks] = useState([]);
   const [users, setUsers] = useState([]);
   const [orders, setOrders] = useState([]);
 
-  const fillKanbanBoard = (data) =>{
+  const fillKanbanBoard = (data) => {
     let query = {
       CreatedById: data?.createdById,
       AssignedToId: data?.assignedToId,
@@ -25,8 +26,8 @@ export const useKanban = ({
     const path = createPath("Task", query);
 
     fetchData(path, setColumns);
-  }
-  
+  };
+
   const handleSave = async (e) => {
     e.preventDefault();
     updateWithoutParameter(apiEndpoints.taskEditStatus, tasks);
@@ -56,7 +57,7 @@ export const useKanban = ({
         label: t("button.filter"),
       },
     ],
-    classNamePrefix: "kanban-filter"
+    classNamePrefix: "kanban-filter",
   };
 
   const filterFields = {
@@ -75,10 +76,10 @@ export const useKanban = ({
         data: orders,
         name: "orderId",
         label: t("name.brewery.order"),
-      }
-    ]
-  }
-  
+      },
+    ],
+  };
+
   useEffect(() => {
     fillKanbanBoard({});
     fetchData(apiEndpoints.orderDropDown, setOrders);
@@ -112,6 +113,6 @@ export const useKanban = ({
     handleAdd,
     modalCustomizationObject,
     filterObject,
-    filterFields
+    filterFields,
   };
 };
