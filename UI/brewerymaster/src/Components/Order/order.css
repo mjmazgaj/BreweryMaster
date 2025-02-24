@@ -121,3 +121,33 @@ form input {
   align-items: center;
   margin-top: 1rem;
 }
+
+.prospect-order-filter {
+  background-color: #f3f3f3;
+  padding: 1rem;
+  padding-bottom: 0;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 1rem;
+  width: 80%;
+  margin: auto;
+}
+
+.prospect-order-filter_dropdown-container {
+  display: flex;
+  flex: 1;
+  gap: 1rem;
+}
+
+.prospect-order-filter_datepicker-container {
+  display: flex;
+  gap: 1rem;
+  flex: 1;
+}
+
+.prospect-order-filter_buttons-container {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}

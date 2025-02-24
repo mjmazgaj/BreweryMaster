@@ -1,4 +1,5 @@
 ﻿using BreweryMaster.API.OrderModule.Models;
+using BreweryMaster.API.Shared.Models;
 using BreweryMaster.API.Shared.Models.DB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -23,6 +24,15 @@ namespace BreweryMaster.API.OrderModule.Services
                 Id = x.Id,
                 Email = x.Email,
                 PhoneNumber = x.PhoneNumber,
+            }).ToListAsync();
+        }
+
+        public async Task<IEnumerable<EntityResponse>> GetProspectClientDropDownList()
+        {
+            return await _context.ProspectClients.Select(x => new EntityResponse()
+            {
+                Id = x.Id,
+                Name = x.Email,
             }).ToListAsync();
         }
 

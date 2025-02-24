@@ -88,7 +88,9 @@ const CustomForm = ({ data, setData, fields, formCustomizationObject }) => {
         className={formCustomizationObject.classNamePrefix}
         onSubmit={(event) => handleFormSubmit(event, data)}
       >
-        <h2>{formCustomizationObject?.title ?? ""}</h2>
+        {formCustomizationObject?.title && (
+          <h2>{formCustomizationObject?.title}</h2>
+        )}
         <FormControls
           fields={fields.control}
           data={data}
@@ -98,7 +100,9 @@ const CustomForm = ({ data, setData, fields, formCustomizationObject }) => {
         {renderDropdowns()}
         {renderCheckBoxes()}
         {renderDatePickers()}
-        <div className={`${formCustomizationObject.classNamePrefix}_buttons-container`}>
+        <div
+          className={`${formCustomizationObject.classNamePrefix}_buttons-container`}
+        >
           {formCustomizationObject?.buttons &&
             formCustomizationObject.buttons.map((button, index) => (
               <Button

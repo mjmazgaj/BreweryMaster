@@ -1,6 +1,7 @@
 ﻿using BreweryMaster.API.Info.Models;
 using BreweryMaster.API.OrderModule.Helpers;
 using BreweryMaster.API.OrderModule.Models;
+using BreweryMaster.API.OrderModules.Models;
 using BreweryMaster.API.Shared.Helpers;
 using BreweryMaster.API.Shared.Models;
 using BreweryMaster.API.Shared.Models.DB;
@@ -64,9 +65,13 @@ namespace BreweryMaster.API.OrderModule.Services
             return Math.Round(beerPrice + containerPrice, 0);
         }
 
-        public async Task<IEnumerable<ProspectOrderResponse>> GetProspectOrdersAsync()
+        public async Task<IEnumerable<ProspectOrderResponse>> GetProspectOrdersAsync(ProspectOrderFilterRequest? request = null)
         {
-            return await _context.ProspectOrders
+
+            var response = new List<ProspectOrderResponse>();
+
+            if (request is null)
+                response = await _context.ProspectOrders
                                 .Include(x => x.BeerStyle)
                                 .Include(x => x.ProspectClient)
                                 .Include(x => x.Container)
@@ -84,6 +89,33 @@ namespace BreweryMaster.API.OrderModule.Services
                                     TargetDate = DateOnly.FromDateTime(x.TargetDate),
                                     IsClosed = x.IsClosed,
                                 }).ToListAsync();
+            else
+            {
+                response = await _context.ProspectOrders
+                                .Include(x => x.BeerStyle)
+                                .Include(x => x.ProspectClient)
+                                .Include(x => x.Container)
+                                .Where(x => request.ClientId == null || x.ProspectClientId == request.ClientId)
+                                .Where(x => request.ExpectedBefore == null || x.TargetDate <= request.ExpectedBefore)
+                                .Where(x => request.ExpectedAfter == null || x.TargetDate >= request.ExpectedAfter)
+                                .Where(x => request.BeerStyleId == null || x.BeerStyleId == request.BeerStyleId)
+                                .Select(x => new ProspectOrderResponse()
+                                {
+                                    Id = x.Id,
+                                    BeerStyle = x.BeerStyle.Name,
+                                    BeerStyleId = x.BeerStyleId,
+                                    Capacity = x.Capacity,
+                                    Container = x.Container.ContainerName,
+                                    ContainerTypeId = x.ContainerId,
+                                    ClientName = x.ProspectClient.GetName(),
+                                    Email = x.ProspectClient.Email,
+                                    PhoneNumber = x.ProspectClient.PhoneNumber,
+                                    TargetDate = DateOnly.FromDateTime(x.TargetDate),
+                                    IsClosed = x.IsClosed,
+                                }).ToListAsync();
+            }
+
+            return response;
         }
 
         public async Task<ProspectOrder?> GetProspectOrderByIdAsync(int id)

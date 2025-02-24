@@ -1,4 +1,5 @@
 ﻿using BreweryMaster.API.OrderModule.Models;
+using BreweryMaster.API.Shared.Models;
 using BreweryMaster.API.SharedModule.Validators;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -24,6 +25,16 @@ namespace BreweryMaster.API.OrderModule.Controllers
         public async Task<ActionResult<IEnumerable<ProspectClientResponse>>> GetProspectClients()
         {
             var clients = await _clientService.GetProspectClientsAsync();
+            return Ok(clients);
+        }
+
+        [HttpGet]
+        [Route("DropDown")]
+        [ProducesResponseType(typeof(IEnumerable<EntityResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<EntityResponse>>> GetProspectClientDropDownList()
+        {
+            var clients = await _clientService.GetProspectClientDropDownList();
             return Ok(clients);
         }
 

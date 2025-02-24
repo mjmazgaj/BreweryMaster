@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import { fetchData } from "../../../Shared/api";
 import { useTranslation } from "react-i18next";
 import modalFieldsProvider from "./modalFieldsProvider";
+import { createPath } from "../../../Shared/helpers/useObjectHelper";
 
 export const useProspectOrderSummary = ({
   data,
@@ -12,6 +13,8 @@ export const useProspectOrderSummary = ({
 }) => {
   const { t } = useTranslation();
   const [details, setDetails] = useState({});
+  const [clients, setClients] = useState([]);
+  const [beerStyles, setBeerStyles] = useState([]);
 
   const handleDoubleClick = (item) => {
     setFormData(item);
@@ -68,13 +71,70 @@ export const useProspectOrderSummary = ({
 
   const refreshTableData = () => fetchData("ProspectOrder", setData);
 
+  const filterObject = {
+    submitFunction: (data) => fillUserTable(data),
+    buttons: [
+      {
+        isSubmit: true,
+        label: t("button.filter"),
+      },
+    ],
+    classNamePrefix: "prospect-order-filter",
+  };
+
+  const fillUserTable = (data) => {
+    let query = {
+      clientId: data?.clientId,
+      expectedAfter: data?.expectedAfter
+        ? new Date(data.expectedAfter).toISOString()
+        : undefined,
+      expectedBefore: data?.expectedBefore
+        ? new Date(data.expectedBefore).toISOString()
+        : undefined,
+      beerStyleId: data?.beerStyleId,
+    };
+
+    const path = createPath("ProspectOrder", query);
+
+    fetchData(path, setData);
+  };
+
+  const filterFields = {
+    dropdown: [
+      {
+        data: clients,
+        name: "clientId",
+        label: t("name.brewery.clientName"),
+      },
+      {
+        data: beerStyles,
+        name: "beerStyleId",
+        label: t("name.brewery.beerStyle"),
+      },
+    ],
+    datePicker: [
+      {
+        name: "expectedAfter",
+        label: t("name.brewery.expectedAfter"),
+      },
+      {
+        name: "expectedBefore",
+        label: t("name.brewery.expectedBefore"),
+      },
+    ],
+  };
+
   useEffect(() => {
     refreshTableData();
     fetchData("ProspectOrder/Details", setDetails);
+    fetchData("ProspectClient/DropDown", setClients);
+    fetchData("Recipe/BeerStyle/DropDown", setBeerStyles);
   }, []);
 
   return {
     handleDoubleClick,
     refreshTableData,
+    filterObject,
+    filterFields,
   };
 };

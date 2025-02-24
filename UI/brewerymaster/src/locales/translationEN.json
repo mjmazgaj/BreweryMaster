@@ -137,6 +137,7 @@
             "unit": "Unit",
             "info": "Info",
             "user": "User",
+            "client": "Client",
             "users": "Users",
             "date": "Date",
             "description": "Description",

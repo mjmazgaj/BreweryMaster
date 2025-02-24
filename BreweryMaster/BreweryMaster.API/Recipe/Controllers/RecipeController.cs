@@ -1,5 +1,6 @@
 ﻿using BreweryMaster.API.Recipe.Models;
 using BreweryMaster.API.Recipe.Services;
+using BreweryMaster.API.Shared.Models;
 using BreweryMaster.API.SharedModule.Validators;
 using Microsoft.AspNetCore.Mvc;
 
@@ -48,6 +49,16 @@ namespace BreweryMaster.API.Info.Controllers
                 return NotFound();
 
             return Ok(recipeDetails);
+        }
+
+        [HttpGet]
+        [Route("BeerStyle/DropDown")]
+        [ProducesResponseType(typeof(IEnumerable<EntityResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<EntityResponse>>> GetBeerStyleDropDownList()
+        {
+            var recipes = await _recipeService.GetBeerStyleDropDownList();
+            return Ok(recipes);
         }
 
         [HttpPost]

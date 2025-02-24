@@ -11,6 +11,7 @@ import ModalConfirmation from "../Shared/ModalComponents/ModalConfirmation";
 
 import ModalForm from "../Shared/ModalComponents/ModalForm";
 import { useProspectOrderSummary } from "./ProspectOrder/helpers/useProspectOrderSummary";
+import CustomForm from "../Shared/CustomForm";
 
 const ProspectOrderSummary = () => {
   const { t } = useTranslation();
@@ -24,6 +25,7 @@ const ProspectOrderSummary = () => {
   const [showModalForm, setShowModalForm] = useState(false);
   const [itemAction, setItemAction] = useState("default");
   const [modalAction, setModalAction] = useState("Edit");
+    const [filterData, setFilterData] = useState([]);
 
   const [formFields, setFormFields] = useState({
     control: [],
@@ -31,7 +33,9 @@ const ProspectOrderSummary = () => {
     checkBox: [],
   });
 
-  const { handleDoubleClick, refreshTableData } = useProspectOrderSummary({
+  const { handleDoubleClick, refreshTableData,
+    filterObject, 
+    filterFields } = useProspectOrderSummary({
     data,
     setData,
     setShowItemAction,
@@ -41,6 +45,13 @@ const ProspectOrderSummary = () => {
 
   return (
     <Fragment>
+      <CustomForm
+        fields={filterFields}
+        formCustomizationObject={filterObject}
+        data={filterData}
+        setData={setFilterData}
+      />
+
       {data && (
         <DynamicTable
           tableKey="prospectOrder"

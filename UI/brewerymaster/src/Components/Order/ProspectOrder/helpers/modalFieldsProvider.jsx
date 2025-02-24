@@ -80,7 +80,7 @@ const modalFieldsProvider = (t) => ({
       label: t("name.brewery.isClosed"),
       type: "text",
     },
-  ],
+  ]
 });
 
 export default modalFieldsProvider;

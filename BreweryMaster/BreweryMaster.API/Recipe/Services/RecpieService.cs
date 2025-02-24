@@ -1,6 +1,7 @@
 ﻿using BreweryMaster.API.Recipe.Models;
 using BreweryMaster.API.Recipe.Models.DB;
 using BreweryMaster.API.Recipe.Services.ResponseBuilders;
+using BreweryMaster.API.Shared.Models;
 using BreweryMaster.API.Shared.Models.DB;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
@@ -88,6 +89,18 @@ namespace BreweryMaster.API.Recipe.Services
 
             return recipes.FirstOrDefault(x => x.GeneralInfo.Id == id);
         }
+
+        public async Task<IEnumerable<EntityResponse>?> GetBeerStyleDropDownList()
+        {
+            return await _context.BeerStyles
+                .Select(x => new EntityResponse()
+                {
+                    Id = x.Id,
+                    Name = x.Name
+                })
+                .ToListAsync();
+        }
+
         public async Task<RecipeDetailsResponse?> CreateRecipeDetailAsync(RecipeDetailsRequest request, ClaimsPrincipal? claims)
         {
             using var transaction = await _context.Database.BeginTransactionAsync();

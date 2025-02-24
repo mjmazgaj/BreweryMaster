@@ -1,4 +1,5 @@
 ﻿using BreweryMaster.API.OrderModule.Models;
+using BreweryMaster.API.OrderModules.Models;
 using BreweryMaster.API.SharedModule.Validators;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -44,9 +45,9 @@ namespace BreweryMaster.API.OrderModule.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<ProspectOrderResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<ProspectOrderResponse>>> GetProspectOrders()
+        public async Task<ActionResult<IEnumerable<ProspectOrderResponse>>> GetProspectOrders([FromQuery] ProspectOrderFilterRequest? request)
         {
-            var orders = await _prospectOrderService.GetProspectOrdersAsync();
+            var orders = await _prospectOrderService.GetProspectOrdersAsync(request);
             return Ok(orders);
         }
 
