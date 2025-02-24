@@ -13,7 +13,6 @@ const UserRoles = ({ data }) => {
   const [roles, setRoles] = useState();
 
   const [editRoles, setEditRoles] = useState({});
-  const [isValid, setIsValid] = useState({});
   const [showModal, setShowModal] = useState(false);
 
   const handleEdit = () => {
@@ -88,11 +87,9 @@ const UserRoles = ({ data }) => {
         fields={fieldsProvider(t).rolesModal}
         data={editRoles}
         setData={setEditRoles}
-        setIsValid={setIsValid}
         show={showModal}
         setShow={setShowModal}
         modalCustomizationObject={modalCustomizationObject}
-        isValid={isValid}
       />
     </Fragment>
   );

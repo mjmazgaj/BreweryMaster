@@ -3,23 +3,19 @@ import "./user.css";
 
 import { useTranslation } from "react-i18next";
 
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import fieldsProvider from "../User/helpers/fieldsProvider";
 
 import { fetchData } from "../Shared/api";
 import ControlsCard from "../Shared/ControlComponents/ControlsCard";
 import UserRoles from "./UserComponents/UserRoles";
+import ModalFormBasic from "../Shared/ModalComponents/ModalFormBasic";
 
 const UserDetails = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const { id } = useParams();
 
   const [data, setData] = useState({});
-
-  const handleBack = () => {
-    navigate("/User");
-  };
 
   useEffect(() => {
     if (id) {

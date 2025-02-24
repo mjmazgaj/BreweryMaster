@@ -1,23 +1,21 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
-import KanbanBoard from "./KanbanComponents/KanbanBoard";
 import "./kanban.css";
 
 import { useTranslation } from "react-i18next";
-import ModalFormBasic from "../Shared/ModalComponents/ModalFormBasic";
-
 import { useKanban } from "./KanbanComponents/helpers/useKanban";
 
-import fieldsProvider from "./KanbanComponents/helpers/fieldsProvider";
+import kanbanFieldsProvider from "./KanbanComponents/helpers/kanbanFieldsProvider";
+
+import KanbanBoard from "./KanbanComponents/KanbanBoard";
+import ModalFormBasic from "../Shared/ModalComponents/ModalFormBasic";
 import CustomForm from "../Shared/CustomForm";
 
 const Kanban = () => {
   const { t } = useTranslation();
   const [columns, setColumns] = useState(null);
   const [data, setData] = useState({});
-  const [isValid, setIsValid] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
   const [filterData, setFilterData] = useState({});
 
   const {
@@ -29,7 +27,6 @@ const Kanban = () => {
   } = useKanban({
     columns,
     setColumns,
-    setErrorMessage,
     setShowModal,
   });
 
@@ -53,20 +50,17 @@ const Kanban = () => {
           </div>
           <KanbanBoard columns={columns} setColumns={setColumns} />
           <ModalFormBasic
-            fields={fieldsProvider(t).kanbanModalFields}
+            fields={kanbanFieldsProvider(t).modalFields}
             data={data}
             setData={setData}
-            setIsValid={setIsValid}
             show={showModal}
             setShow={setShowModal}
             modalCustomizationObject={modalCustomizationObject}
-            isValid={isValid}
           />
         </>
       ) : (
         <p>Loading...</p>
       )}
-      {errorMessage && <p className="text-danger">{errorMessage}</p>}
     </>
   );
 };

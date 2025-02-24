@@ -268,7 +268,8 @@
         }
     },
     "work": {
-        "editTask": "Edit task"
+        "editTask": "Edit task",
+        "addTask": "Add task"
     },
     "recipe": {
         "detailTitle": "Recipe details about",

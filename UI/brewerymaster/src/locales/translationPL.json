@@ -266,7 +266,8 @@
         }
     },
     "work": {
-        "editTask": "Edytuj zadanie"
+        "editTask": "Edytuj zadanie",
+        "addTask": "Dodaj zadanie"
     },
     "recipe": {
         "detailTitle": "Szczegóły na temat receputry",

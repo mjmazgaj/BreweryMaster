@@ -16,7 +16,6 @@ const HomeUser = () => {
 
   const [data, setData] = useState({});
 
-  const [isValid, setIsValid] = useState(false);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
 
   const { modalCustomizationObject, handleChangePassword } = useHomeUser({
@@ -35,11 +34,9 @@ const HomeUser = () => {
         fields={fieldsProvider(t).passwordModalFields}
         data={data}
         setData={setData}
-        setIsValid={setIsValid}
         show={showPasswordModal}
         setShow={setShowPasswordModal}
         modalCustomizationObject={modalCustomizationObject}
-        isValid={isValid}
       />
     </div>
   );

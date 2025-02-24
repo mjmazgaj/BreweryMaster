@@ -1,16 +1,13 @@
 import { useEffect, useState } from "react";
 
 import { useTranslation } from "react-i18next";
-import { updateStatus, fetchDataByOwnerId } from "../../api";
 
-import { addData, fetchData } from "../../../Shared/api";
+import { addData, fetchData, updateWithoutParameter } from "../../../Shared/api";
 import { createPath } from "../../../Shared/helpers/useObjectHelper";
-import fieldsProvider from "./fieldsProvider";
 
 export const useKanban = ({
   columns,
   setColumns,
-  setErrorMessage,
   setShowModal,
 }) => {
   const { t } = useTranslation();
@@ -32,14 +29,7 @@ export const useKanban = ({
   
   const handleSave = async (e) => {
     e.preventDefault();
-    try {
-      await updateStatus(tasks);
-    } catch (error) {
-      setErrorMessage(
-        error.response?.data?.message ||
-          "Zapisanie nie powiodło się. Spróbuj ponownie."
-      );
-    }
+    updateWithoutParameter("Task/EditStatus", tasks);
   };
 
   const handleAdd = async (e) => {
@@ -55,7 +45,7 @@ export const useKanban = ({
         label: t("button.save"),
       },
     ],
-    title: t("work.editTask"),
+    title: t("work.addTask"),
   };
 
   const filterObject = {
@@ -70,7 +60,6 @@ export const useKanban = ({
   };
 
   const filterFields = {
-    constrol: fieldsProvider(t).filterFields.control,
     dropdown: [
       {
         data: users,

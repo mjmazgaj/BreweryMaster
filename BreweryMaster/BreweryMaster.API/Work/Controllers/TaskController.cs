@@ -83,7 +83,7 @@ namespace BreweryMaster.API.WorkModule.Controllers
             return Ok(isUpdated);
         }
 
-        [HttpPut]
+        [HttpPatch]
         [Route("EditStatus")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

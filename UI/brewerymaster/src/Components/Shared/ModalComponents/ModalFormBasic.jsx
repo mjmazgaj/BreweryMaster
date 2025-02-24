@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 
 import { useModalFormBasic } from "./helpers/useModalFormBasic";
@@ -13,10 +13,11 @@ const ModalFormBasic = ({
   setData,
   show,
   setShow,
-  modalCustomizationObject,
-  isValid,
-  setIsValid
+  modalCustomizationObject
 }) => {
+
+  const [isValid, setIsValid] = useState(true);
+
   const { handleClose, handleCheckBox, handleSelectChange, handleDateChange, handleFormSubmit } =
     useModalFormBasic({
       setData,
