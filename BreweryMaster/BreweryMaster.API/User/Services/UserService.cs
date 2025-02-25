@@ -126,6 +126,9 @@ namespace BreweryMaster.API.User.Services
 
             var user = _context.Users.FirstOrDefault(x => x.Id == id);
 
+            if(user is null)
+                return null;
+
             var addresses = await _context.UserAddresses.Where(x => x.UserId == id).Include(x => x.Address).ToListAsync();
             var homeAddress = addresses.FirstOrDefault(x => x.AddressTypeId == (int)AddressType.Home)?.Address.ToResponse();
             var deliveryAddress = addresses.FirstOrDefault(x => x.AddressTypeId == (int)AddressType.Delivery)?.Address.ToResponse();
@@ -134,7 +137,7 @@ namespace BreweryMaster.API.User.Services
             var response = new UserDetailsResponse()
             {
                 Id = id,
-                Email = user.Email,
+                Email = user.Email ?? string.Empty,
                 HomeAddress = homeAddress,
                 DeliveryAddress = deliveryAddress,
                 Roles = _userManager.GetRolesAsync(user).Result
@@ -384,7 +387,7 @@ namespace BreweryMaster.API.User.Services
                     if (!result.Succeeded)
                         throw new Exception();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return false;
                 }

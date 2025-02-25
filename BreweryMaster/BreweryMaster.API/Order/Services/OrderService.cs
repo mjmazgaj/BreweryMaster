@@ -264,7 +264,7 @@ namespace BreweryMaster.API.OrderModule.Services
             {
                 OrderId = orderStatusChangeToCreate.OrderId,
                 OrderStatusId = orderStatusChangeToCreate.OrderStatusId,
-                OrderStatus = orderStatusChangeToCreate.OrderStatus?.Name ?? "",
+                OrderStatus = orderStatusChangeToCreate.OrderStatus?.Name ?? string.Empty,
                 ChangedOnDateTime = orderStatusChangeToCreate.ChangedOn,
                 ChangedOnDateOnly = DateOnly.FromDateTime(orderStatusChangeToCreate.ChangedOn),
             };

@@ -19,6 +19,9 @@ namespace BreweryMaster.API.Info.Services
                             .Include(x => x.FermentingIngredientUnit)
                             .FirstOrDefaultAsync(x => x.Id == id);
 
+            if (storedIngridient is null)
+                return null;
+
             return new FermentingIngredientStorageResponse()
             {
                 Id = id,

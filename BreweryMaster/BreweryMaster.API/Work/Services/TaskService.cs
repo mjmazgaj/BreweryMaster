@@ -103,7 +103,7 @@ namespace BreweryMaster.API.WorkModule.Services
                 StatusId = kanbanTaskToAdd.StatusId,
                 Status = null!,
                 Title = kanbanTaskToAdd.Title,
-                CreatedBy = currentUser.Email ?? "",
+                CreatedBy = currentUser.Email ?? string.Empty,
                 CreatedOn = kanbanTaskToAdd.CreatedOn,
                 DueDate = kanbanTaskToAdd.DueDate,
                 Id = kanbanTaskToAdd.Id,
@@ -147,7 +147,7 @@ namespace BreweryMaster.API.WorkModule.Services
                     StatusId = kanbanTaskToAdd.StatusId,
                     Status = null!,
                     Title = kanbanTaskToAdd.Title,
-                    CreatedBy = currentUser.Email ?? "",
+                    CreatedBy = currentUser.Email ?? string.Empty,
                     CreatedOn = kanbanTaskToAdd.CreatedOn,
                     DueDate = kanbanTaskToAdd.DueDate,
                     Id = kanbanTaskToAdd.Id,
@@ -172,7 +172,7 @@ namespace BreweryMaster.API.WorkModule.Services
             if (task == null)
                 return false;
 
-            task.Title = request.Title;
+            task.Title = request.Title ?? string.Empty;
             task.Summary = request.Summary;
             task.DueDate = request.DueDate;
             task.AssignedToId = request.AssignedToId;

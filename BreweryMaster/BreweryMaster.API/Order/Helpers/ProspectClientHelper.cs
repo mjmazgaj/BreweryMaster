@@ -6,7 +6,7 @@ namespace BreweryMaster.API.OrderModule.Helpers
     {
         public static string GetName(this ProspectClient client)
         {
-            var name = "";
+            var name = string.Empty;
             if (client is ProspectIndyvidualClient indyvidualClient)
                 name = $"{indyvidualClient.Forename} {indyvidualClient.Surname}";
             else if (client is ProspectCompanyClient companyClient)

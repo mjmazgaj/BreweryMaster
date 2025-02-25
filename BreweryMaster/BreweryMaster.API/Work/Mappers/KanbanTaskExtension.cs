@@ -21,7 +21,7 @@ namespace BreweryMaster.API.WorkModule.Mappers
                 DueDate = kanbanTask.DueDate,
                 AssignedToId = kanbanTask.AssignedToId,
                 CreatedById = kanbanTask.CreatedById,
-                CreatedBy = user.Name ?? "",
+                CreatedBy = user.Name ?? string.Empty,
                 CreatedOn = kanbanTask.CreatedOn,
                 OrderId = kanbanTask.OrderId,
             };
@@ -31,7 +31,7 @@ namespace BreweryMaster.API.WorkModule.Mappers
         {
             return new KanbanTask
             {
-                Title = kanbanTask.Title,
+                Title = kanbanTask.Title ?? string.Empty,
                 Summary = kanbanTask.Summary,
                 Status = null!,
                 DueDate = kanbanTask.DueDate,

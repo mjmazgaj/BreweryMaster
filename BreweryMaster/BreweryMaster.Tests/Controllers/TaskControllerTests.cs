@@ -70,7 +70,7 @@ public class TaskControllerTests : BaseTestController
     public async Task CreateKanbanTask_ShouldReturnProperResponse(string? title, string? summary, string? dueDateString, HttpStatusCode expectedStatusCode)
     {
         // Arrange
-        DateTime? dueDate = string.IsNullOrEmpty(dueDateString) ? (DateTime?)null : DateTime.Parse(dueDateString);
+        DateTime? dueDate = string.IsNullOrEmpty(dueDateString) ? null : DateTime.Parse(dueDateString);
 
         var request = new KanbanTaskRequest
         {
@@ -124,7 +124,7 @@ public class TaskControllerTests : BaseTestController
     public async Task EditKanbanTask_ShouldReturnProperResponse(int? id, string? assignedToId, string? title, string? summary, string? dueDateString, HttpStatusCode expectedStatusCode)
     {
         // Arrange
-        DateTime? dueDate = string.IsNullOrEmpty(dueDateString) ? (DateTime?)null : DateTime.Parse(dueDateString);
+        DateTime? dueDate = string.IsNullOrEmpty(dueDateString) ? null : DateTime.Parse(dueDateString);
 
         var request = new KanbanTaskUpdateRequest
         {

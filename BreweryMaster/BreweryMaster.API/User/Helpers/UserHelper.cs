@@ -38,7 +38,7 @@ namespace BreweryMaster.API.UserModule.Helpers
                 {
                     Id = user.Id,
                     Email = user.Email,
-                    Name = user.UserName,
+                    Name = user.UserName ?? string.Empty,
                     IsCompany = false
                 };
             }

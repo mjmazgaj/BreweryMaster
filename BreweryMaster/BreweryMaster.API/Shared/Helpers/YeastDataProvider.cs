@@ -97,7 +97,7 @@ namespace BreweryMaster.API.Shared.Helpers
                     FormId = 1,
                     Form = null!,
                     Producer = "Fermentis",
-                    Info = ""
+                    Info = string.Empty
                 },
                 new ()
                 {
@@ -108,7 +108,7 @@ namespace BreweryMaster.API.Shared.Helpers
                     FormId = 2,
                     Form = null!,
                     Producer = "Fermentis",
-                    Info = ""
+                    Info = string.Empty
                 },
                 new ()
                 {
@@ -119,7 +119,7 @@ namespace BreweryMaster.API.Shared.Helpers
                     FormId = 1,
                     Form = null!,
                     Producer = "Wyeast",
-                    Info = ""
+                    Info = string.Empty
                 }
             };
         }

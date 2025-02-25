@@ -9,7 +9,7 @@ namespace BreweryMaster.API.User.Helpers
             if (identityRole == null)
                 return Enumerable.Empty<string>();
 
-            var rolesNames = roles.Select(roles => roles.Name ?? "").ToList();
+            var rolesNames = roles.Select(roles => roles.Name ?? string.Empty).ToList();
 
             switch (identityRole)
             {
