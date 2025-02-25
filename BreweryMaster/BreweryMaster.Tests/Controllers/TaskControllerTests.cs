@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.WebUtilities;
 using BreweryMaster.API.Work.Models;
 using System.Security.Claims;
 using System.Net.Http.Json;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 using BreweryMaster.API.Configuration.Enums;
 
 namespace BreweryMaster.Tests.Controllers;
@@ -99,8 +98,8 @@ public class TaskControllerTests : BaseTestController
         // Arrange
         var request = new KanbanTaskTemplateRequest
         {
-            OrderId = orderId,
-            OrderStatus = orderStatus is not null ? (OrderStatus)orderStatus : null,
+            OrderId = orderId ?? default,
+            OrderStatus = (OrderStatus)(orderStatus ?? default),
         };
 
         MockTaskService.Setup(s => s.CreateKanbanTaskTemplates(It.IsAny<KanbanTaskTemplateRequest>(), It.IsAny<ClaimsPrincipal>()))
@@ -108,6 +107,39 @@ public class TaskControllerTests : BaseTestController
 
         // Act
         var httpResponse = await Client.PostAsJsonAsync(EndpointsConst.TaskTemplate, request);
+
+        // Assert
+        Assert.Equal(expectedStatusCode, httpResponse.StatusCode);
+    }
+
+    [Theory]
+    [InlineData(1, TestConst.String, TestConst.String, TestConst.String, TestConst.Date, HttpStatusCode.OK)]
+    [InlineData(1, null, TestConst.String, TestConst.String, TestConst.Date, HttpStatusCode.OK)]
+    [InlineData(1, TestConst.String, null, TestConst.String, TestConst.Date, HttpStatusCode.BadRequest)]
+    [InlineData(1, TestConst.String, TestConst.String, null, TestConst.Date, HttpStatusCode.OK)]
+    [InlineData(1, TestConst.String, TestConst.String, TestConst.String, null, HttpStatusCode.BadRequest)]
+    [InlineData(0, TestConst.String, TestConst.String, TestConst.String, TestConst.Date, HttpStatusCode.BadRequest)]
+    [InlineData(1, TestConst.String451Characters, TestConst.String, TestConst.String, TestConst.Date, HttpStatusCode.BadRequest)]
+    [InlineData(1, TestConst.String, TestConst.String256Characters, TestConst.String, TestConst.Date, HttpStatusCode.BadRequest)]
+    public async Task EditKanbanTask_ShouldReturnProperResponse(int? id, string? assignedToId, string? title, string? summary, string? dueDateString, HttpStatusCode expectedStatusCode)
+    {
+        // Arrange
+        DateTime? dueDate = string.IsNullOrEmpty(dueDateString) ? (DateTime?)null : DateTime.Parse(dueDateString);
+
+        var request = new KanbanTaskUpdateRequest
+        {
+            Id = id ?? 0,
+            AssignedToId = assignedToId,
+            Title = title,
+            Summary = summary,
+            DueDate = dueDate ?? default,
+        };
+
+        MockTaskService.Setup(s => s.EditKanbanTaskAsync(It.IsAny<int>(), It.IsAny<KanbanTaskUpdateRequest>()))
+            .ReturnsAsync(true);
+
+        // Act
+        var httpResponse = await Client.PatchAsJsonAsync($"{EndpointsConst.Task}/{id}", request);
 
         // Assert
         Assert.Equal(expectedStatusCode, httpResponse.StatusCode);

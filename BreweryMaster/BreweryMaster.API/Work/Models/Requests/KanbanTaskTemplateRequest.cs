@@ -8,10 +8,10 @@ namespace BreweryMaster.API.Work.Models.Requests
     {
         [Required]
         [MinIntValidation]
-        public int? OrderId { get; set; }
+        public int OrderId { get; set; }
 
         [Required]
         [EnumDataType(typeof(OrderStatus))]
-        public OrderStatus? OrderStatus { get; set; }
+        public OrderStatus OrderStatus { get; set; }
     }
 }
