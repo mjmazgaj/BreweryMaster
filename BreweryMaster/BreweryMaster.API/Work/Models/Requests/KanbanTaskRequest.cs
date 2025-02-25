@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using BreweryMaster.API.SharedModule.Validators;
+using System.ComponentModel.DataAnnotations;
 
 namespace BreweryMaster.API.Work.Models
 {
@@ -7,7 +8,10 @@ namespace BreweryMaster.API.Work.Models
         [Required]
         [MaxLength(255)]
         public required string Title { get; set; }
+
         public string? Summary { get; set; }
-        public DateTime DueDate { get; set; }
+
+        [DateTimeRequired]
+        public required DateTime DueDate { get; set; }
     }
 }

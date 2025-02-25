@@ -4,6 +4,10 @@ using BreweryMaster.API.WorkModule.Models;
 using BreweryMaster.Tests.Models;
 using BreweryMaster.API.Work.Models.Requests;
 using Microsoft.AspNetCore.WebUtilities;
+using BreweryMaster.API.Work.Models;
+using System.Security.Claims;
+using System.Net.Http.Json;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BreweryMaster.Tests.Controllers;
 
@@ -56,5 +60,32 @@ public class TaskControllerTests : BaseTestController
 
         // Assert
         Assert.Equal(expectedStatusCode, response.StatusCode);
+    }
+
+    [Theory]
+    [InlineData(TestConst.String, TestConst.String, TestConst.Date, HttpStatusCode.Created)]
+    [InlineData(null, TestConst.String, TestConst.Date, HttpStatusCode.BadRequest)]
+    [InlineData(TestConst.String, null, TestConst.Date, HttpStatusCode.Created)]
+    [InlineData(TestConst.String, TestConst.String, null, HttpStatusCode.BadRequest)]
+    public async Task CreateKanbanTask_ShouldReturnProperResponse(string? title, string? summary, string? dueDateString, HttpStatusCode expectedStatusCode)
+    {
+        // Arrange
+        DateTime? dueDate = string.IsNullOrEmpty(dueDateString) ? (DateTime?)null : DateTime.Parse(dueDateString);
+
+        var request = new KanbanTaskRequest
+        {
+            Title = title,
+            Summary = summary,
+            DueDate = dueDate ?? default,
+        };
+
+        MockTaskService.Setup(s => s.CreateKanbanTaskAsync(It.IsAny<KanbanTaskRequest>(), It.IsAny<ClaimsPrincipal>()))
+            .ReturnsAsync(new KanbanTaskResponse());
+
+        // Act
+        var httpResponse = await Client.PostAsJsonAsync(EndpointsConst.Task, request);
+
+        // Assert
+        Assert.Equal(expectedStatusCode, httpResponse.StatusCode);
     }
 }
