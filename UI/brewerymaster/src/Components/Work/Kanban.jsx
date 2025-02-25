@@ -24,6 +24,7 @@ const Kanban = () => {
     handleAdd,
     addModalObject,
     editModalObject,
+    editModalFields,
     filterObject,
     filterFields,
   } = useKanban({
@@ -66,7 +67,7 @@ const Kanban = () => {
             modalCustomizationObject={addModalObject}
           />
           <ModalFormBasic
-            fields={kanbanFieldsProvider(t).modalFields}
+            fields={editModalFields}
             data={modalData}
             setData={setModalData}
             show={showEditModal}

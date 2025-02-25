@@ -11,6 +11,7 @@ import {
 } from "../../../Shared/api";
 
 import { createPath } from "../../../Shared/helpers/useObjectHelper";
+import kanbanFieldsProvider from "./kanbanFieldsProvider";
 
 export const useKanban = ({
   columns,
@@ -70,6 +71,17 @@ export const useKanban = ({
     ],
     title: t("work.editTask"),
   };
+
+  const editModalFields = {
+    control: kanbanFieldsProvider(t).modalFields.control,
+    dropdown: [
+      {
+        data: users,
+        name: "assignedToId",
+        label: t("name.kanban.assignedToId"),
+      },
+    ],
+  }
 
   const filterObject = {
     submitFunction: fillKanbanBoard,
@@ -135,6 +147,7 @@ export const useKanban = ({
     handleAdd,
     addModalObject,
     editModalObject,
+    editModalFields,
     filterObject,
     filterFields,
   };

@@ -15,7 +15,6 @@ const ModalFormBasic = ({
   setShow,
   modalCustomizationObject
 }) => {
-
   const [isValid, setIsValid] = useState(true);
 
   const { handleClose, handleCheckBox, handleSelectChange, handleDateChange, handleFormSubmit } =

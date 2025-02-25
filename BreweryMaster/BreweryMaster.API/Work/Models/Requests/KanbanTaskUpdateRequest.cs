@@ -10,6 +10,6 @@ namespace BreweryMaster.API.Work.Models
         public int Id { get; set; }
 
         [MaxLength(450)]
-        public string? AssignTo { get; set; }
+        public string? AssignedToId { get; set; }
     }
 }

@@ -34,7 +34,7 @@ export const useModalFormBasic = ({
     const { value } = e.target;
     setData((prevData) => ({
       ...prevData,
-      [name]: parseInt(value),
+      [name]: value,
     }));
   };
 

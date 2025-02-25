@@ -174,7 +174,7 @@ namespace BreweryMaster.API.WorkModule.Services
             task.Title = request.Title;
             task.Summary = request.Summary;
             task.DueDate = request.DueDate;
-            task.AssignedToId = request.AssignTo;
+            task.AssignedToId = request.AssignedToId;
 
             await _context.SaveChangesAsync();
 
