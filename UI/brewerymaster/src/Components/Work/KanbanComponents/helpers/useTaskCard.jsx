@@ -8,13 +8,8 @@ export const useTaskCard = ({ setShowEditModal, setModalData }) => {
     console.log(`remove ${id}`);
   };
 
-  const handleDetailClick = (id) => {
-    console.log(`detail ${id}`);
-  };
-
   return {
     handleEditClick,
-    handleDetailClick,
     handleRemoveClick,
   };
 };
