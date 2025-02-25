@@ -3,7 +3,7 @@ import { Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../order.css";
 
-import { fetchData } from "../../Shared/api";
+import { fetchData, apiEndpoints } from "../../Shared/api";
 import { useTranslation } from 'react-i18next';
 
 import DropDownIndex from "../../Shared/DropDownIndex";
@@ -22,7 +22,7 @@ const ProspectOrderDetails = ({ prospectOrderData, setProspectOrderData }) => {
   const [details, setDetails] = useState({});
 
   useEffect(() => {
-    fetchData("ProspectOrder/Details", setDetails);
+    fetchData(apiEndpoints.prospectOrderDetails, setDetails);
   }, []);
 
   return (

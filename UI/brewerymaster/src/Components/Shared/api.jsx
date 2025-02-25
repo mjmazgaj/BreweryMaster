@@ -60,9 +60,37 @@ export const deleteData = (path, id) => {
 };
 
 export const apiEndpoints = {
+  entityUnit: "entity/Unit",
+  entityContainer: "entity/Container",
+
   task: "Task",
   taskEditStatus: "Task/EditStatus",
   taskDelete: "Task/Delete",
+
   orderDropDown: "Order/DropDown",
+  orderStatus: "Order/Status",
+  orderDetails: "Order/Details",
+  order: "Order",
+  orderAll: "Order/All",
+
+  prospectOrder: "ProspectOrder",
+  prospectOrderPrice: "ProspectOrder/Price",
+  prospectOrderDetails: "ProspectOrder/Details",
+
+  prospectClientDropDown: "ProspectClient/DropDown",
+
+  recipe: "Recipe",
+  recipeBeerStyleDropDown: "Recipe/BeerStyle/DropDown",
+  recipeTypeDropDown: "Recipe/Type/DropDown",
+
   userDropDown: "User/DropDown",
+  userRole: "User/Role",
+  userDetails: "User/Details",
+  user: "User",
+
+  fermentingIngredientSummary: "FermentingIngredient/Summary",
+  fermentingIngredientOrder: "FermentingIngredient/Order",
+  fermentingIngredientReservation: "FermentingIngredient/Reservation",
+  fermentingIngredientType: "FermentingIngredient/Type",
+  fermentingIngredientUnit: "FermentingIngredient/Unit",
 };

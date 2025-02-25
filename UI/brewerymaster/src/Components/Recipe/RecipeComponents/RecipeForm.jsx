@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useRecipeForm } from "./helpers/useRecipeForm";
 import recipeFormFieldsProvider from "./helpers/recipeFormFieldsProvider";
 
-import { fetchData } from "../../Shared/api";
+import { fetchData, apiEndpoints } from "../../Shared/api";
 
 import FormControls from "../../Shared/FormControls";
 import MenuSteps from "../../Shared/MenuSteps";
@@ -213,7 +213,7 @@ const RecipeForm = ({ setIsAddMode }) => {
   ];
 
   useEffect(() => {
-    fetchData("FermentingIngredient/Unit", setIngredients);
+    fetchData(apiEndpoints.fermentingIngredientUnit, setIngredients);
   }, []);
 
   return (

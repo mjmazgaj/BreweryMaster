@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../order.css";
 
 import { useTranslation } from "react-i18next";
-import { fetchData } from "../../Shared/api";
+import { fetchData, apiEndpoints } from "../../Shared/api";
 import { createPath } from "../../Shared/helpers/useObjectHelper";
 
 const ProspectOrderCheckPrice = ({ prospectOrderData }) => {
@@ -19,7 +19,7 @@ const ProspectOrderCheckPrice = ({ prospectOrderData }) => {
       Capacity: prospectOrderData.capacity,
     };
 
-    const path = createPath("ProspectOrder/Price", query);
+    const path = createPath(apiEndpoints.prospectOrderPrice, query);
 
     console.log(path);
     fetchData(path, setEstimatedPrice);

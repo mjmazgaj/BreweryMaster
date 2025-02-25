@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { addData, updateData, fetchData } from "../../api";
+import { addData, updateData, fetchData, apiEndpoints } from "../../api";
 
 export const useModalForm = ({
   data,
@@ -134,7 +134,7 @@ export const useModalForm = ({
 
   useEffect(() => {
     if (data?.id && show === true)
-      fetchData(`FermentingIngredient/Units/${data.id}`, setUsedUnits);
+      fetchData(`${apiEndpoints.fermentingIngredientUnit}/${data.id}`, setUsedUnits);
 
     if (show === false) setUsedUnits([]);
   }, [show, setUsedUnits]);

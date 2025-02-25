@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 import fieldsProvider from "./fieldsProvider";
-import { fetchData } from "../../../Shared/api";
+import { fetchData, apiEndpoints } from "../../../Shared/api";
 import { createPath } from "../../../Shared/helpers/useObjectHelper";
 
 import { useTranslation } from "react-i18next";
@@ -35,7 +35,7 @@ export const useOrder = ({ user, setData }) => {
       recipeName: data?.recipeName,
     };
 
-    const path = createPath("Order/All", query);
+    const path = createPath(apiEndpoints.orderAll, query);
 
     fetchData(path, setData);
   };
@@ -62,9 +62,9 @@ export const useOrder = ({ user, setData }) => {
   };
 
   useEffect(() => {
-    if (user?.roles?.includes("customer")) fetchData("Order", setData);
-    else fetchData("Order/All", setData);
-    fetchData("User", setUsers);
+    if (user?.roles?.includes("customer")) fetchData(apiEndpoints.order, setData);
+    else fetchData(apiEndpoints.orderAll, setData);
+    fetchData(apiEndpoints.user, setUsers);
   }, []);
 
   const handleDoubleClick = (item) => {

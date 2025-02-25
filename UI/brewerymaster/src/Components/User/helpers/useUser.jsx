@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 import fieldsProvider from "./fieldsProvider";
-import { fetchData } from "../../Shared/api";
+import { fetchData, apiEndpoints } from "../../Shared/api";
 import { createPath } from "../../Shared/helpers/useObjectHelper";
 
 import { useTranslation } from "react-i18next";
@@ -47,7 +47,7 @@ export const useUser = ({ setUsers }) => {
       roleId: data?.roleId,
     };
 
-    const path = createPath("User", query);
+    const path = createPath(apiEndpoints.user, query);
 
     fetchData(path, setUsers);
   };
@@ -82,8 +82,8 @@ export const useUser = ({ setUsers }) => {
   };
 
   useEffect(() => {
-    fetchData("User", setUsers);
-    fetchData("User/Role", setRoles);
+    fetchData(apiEndpoints.user, setUsers);
+    fetchData(apiEndpoints.userRole, setRoles);
   }, []);
 
   const handleDoubleClick = (item) => {

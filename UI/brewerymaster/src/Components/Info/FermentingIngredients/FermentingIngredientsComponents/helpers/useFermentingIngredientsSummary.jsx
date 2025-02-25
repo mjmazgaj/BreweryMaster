@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { fetchData } from "../../../../Shared/api";
+import { fetchData, apiEndpoints } from "../../../../Shared/api";
 import { useTranslation } from "react-i18next";
 
 import modalFieldsProvider from "../../../../Shared/ModalComponents/helpers/modalFieldsProvider";
@@ -90,12 +90,12 @@ export const useFermentingIngredientsSummary = ({
   };
 
   const refreshTableData = () =>
-    fetchData("FermentingIngredient/Summary", setData);
+    fetchData(apiEndpoints.fermentingIngredientSummary, setData);
 
   useEffect(() => {
     refreshTableData();
-    fetchData(`entity/Unit`, setUnits);
-    fetchData("FermentingIngredient/Type", setTypes);
+    fetchData(apiEndpoints.entityUnit, setUnits);
+    fetchData(apiEndpoints.fermentingIngredientType, setTypes);
   }, []);
 
   useEffect(() => {

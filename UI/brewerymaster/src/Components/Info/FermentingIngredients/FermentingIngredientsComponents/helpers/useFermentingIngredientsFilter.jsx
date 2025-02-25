@@ -1,4 +1,4 @@
-import { fetchData } from "../../../../Shared/api";
+import { fetchData, apiEndpoints } from "../../../../Shared/api";
 import { createPath } from "../../../../Shared/helpers/useObjectHelper";
 
 export const useFermentingIngredientsFilter = ({
@@ -15,7 +15,7 @@ export const useFermentingIngredientsFilter = ({
       UnitId: filterData?.unitId ? parseInt(filterData?.unitId) : "",
     };
 
-    const path = createPath("FermentingIngredient/Summary", query);
+    const path = createPath(apiEndpoints.fermentingIngredientSummary, query);
     fetchData(path, setTableData);
   };
 

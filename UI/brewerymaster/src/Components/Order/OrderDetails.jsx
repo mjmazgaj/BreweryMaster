@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { useParams, useNavigate } from "react-router-dom";
 
-import { addData, fetchData } from "../Shared/api";
+import { addData, fetchData, apiEndpoints } from "../Shared/api";
 
 import { useTranslation } from "react-i18next";
 import ControlsCard from "../Shared/ControlComponents/ControlsCard";
@@ -55,8 +55,8 @@ const OrderDetails = () => {
   };
 
   useEffect(() => {
-    fetchData(`Order/Details/${id}`, setData);
-    fetchData(`Order/Status`, setStatuses);
+    fetchData(`${apiEndpoints.orderDetails}/${id}`, setData);
+    fetchData(apiEndpoints.orderStatus, setStatuses);
 
     setEditData((prevData) => ({
       ...prevData,

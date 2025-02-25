@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import fieldsProvider from "../User/helpers/fieldsProvider";
 
-import { fetchData } from "../Shared/api";
+import { fetchData, apiEndpoints } from "../Shared/api";
 import ControlsCard from "../Shared/ControlComponents/ControlsCard";
 import UserRoles from "./UserComponents/UserRoles";
 import ModalFormBasic from "../Shared/ModalComponents/ModalFormBasic";
@@ -19,9 +19,9 @@ const UserDetails = () => {
 
   useEffect(() => {
     if (id) {
-      fetchData(`User/${id}`, setData);
+      fetchData(`${apiEndpoints.user}/${id}`, setData);
     } else {
-      fetchData(`User/Details`, setData);
+      fetchData(apiEndpoints.userDetails, setData);
     }
   }, []);
 

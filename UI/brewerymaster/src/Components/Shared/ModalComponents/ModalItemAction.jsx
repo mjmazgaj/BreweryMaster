@@ -5,7 +5,7 @@ import { useModalItemAction } from "./helpers/useModalItemAction";
 import FormControlsReadOnly from "../FormControlsReadOnly";
 
 import { useTranslation } from "react-i18next";
-import { fetchData } from "../api";
+import { fetchData, apiEndpoints } from "../api";
 
 const ModalItemAction = ({
   fields,
@@ -80,7 +80,7 @@ const ModalItemAction = ({
   };
 
   useEffect(() => {
-    fetchData("Entity/Unit", setUnits);
+    fetchData(apiEndpoints.entityUnit, setUnits);
   }, []);
 
   return (

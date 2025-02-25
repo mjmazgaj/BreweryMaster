@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Button, Card } from "react-bootstrap";
 
 import { useTranslation } from "react-i18next";
-import { fetchData } from "../Shared/api";
+import { fetchData, apiEndpoints } from "../Shared/api";
 
 import fieldsProvider from "./RecipeComponents/helpers/fieldsProvider";
 import "./recipe.css";
@@ -24,7 +24,7 @@ const RecipeDetails = () => {
   };
 
   useEffect(() => {
-    fetchData(`Recipe/${id}`, setData);
+    fetchData(`${apiEndpoints.recipe}/${id}`, setData);
   }, []);
 
   return (

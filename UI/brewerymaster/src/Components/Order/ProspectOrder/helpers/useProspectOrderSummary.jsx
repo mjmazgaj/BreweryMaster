@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { fetchData } from "../../../Shared/api";
+import { fetchData, apiEndpoints } from "../../../Shared/api";
 import { useTranslation } from "react-i18next";
 import modalFieldsProvider from "./modalFieldsProvider";
 import { createPath } from "../../../Shared/helpers/useObjectHelper";
@@ -69,7 +69,7 @@ export const useProspectOrderSummary = ({
     });
   };
 
-  const refreshTableData = () => fetchData("ProspectOrder", setData);
+  const refreshTableData = () => fetchData(apiEndpoints.prospectOrder, setData);
 
   const filterObject = {
     submitFunction: (data) => fillUserTable(data),
@@ -94,7 +94,7 @@ export const useProspectOrderSummary = ({
       beerStyleId: data?.beerStyleId,
     };
 
-    const path = createPath("ProspectOrder", query);
+    const path = createPath(apiEndpoints.prospectOrder, query);
 
     fetchData(path, setData);
   };
@@ -126,9 +126,9 @@ export const useProspectOrderSummary = ({
 
   useEffect(() => {
     refreshTableData();
-    fetchData("ProspectOrder/Details", setDetails);
-    fetchData("ProspectClient/DropDown", setClients);
-    fetchData("Recipe/BeerStyle/DropDown", setBeerStyles);
+    fetchData(apiEndpoints.prospectOrderDetails, setDetails);
+    fetchData(apiEndpoints.prospectClientDropDown, setClients);
+    fetchData(apiEndpoints.recipeBeerStyleDropDown, setBeerStyles);
   }, []);
 
   return {

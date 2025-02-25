@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { toast } from "react-toastify";
-import { addData, fetchData } from "../../Shared/api";
+import { addData, fetchData, apiEndpoints } from "../../Shared/api";
 
 import { useTranslation } from "react-i18next";
 
@@ -18,8 +18,8 @@ const OrderForm = ({ setData, setIsAddMode }) => {
   const [currentStep, setCurrentStep] = useState(0);
 
   const handleSave = async () => {
-    await addData("Order", orderData);
-    fetchData("Order/All", setData);
+    await addData(apiEndpoints.order, orderData);
+    fetchData(apiEndpoints.orderAll, setData);
     setIsAddMode(false);
   };
 

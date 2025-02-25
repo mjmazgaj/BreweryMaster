@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchData } from "../../Shared/api";
+import { fetchData, apiEndpoints } from "../../Shared/api";
 import FormBasic from "../../Shared/FormBasic";
 
 import { useTranslation } from "react-i18next";
@@ -13,7 +13,7 @@ const OrderFormStep2 = ({ data, setData, setIsValid }) => {
   const [fields, setFields] = useState({});
 
   useEffect(() => {
-    fetchData("Entity/Container", setContainers);
+    fetchData(apiEndpoints.entityContainer, setContainers);
   }, []);
 
   useEffect(() => {

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchData } from "../../../Shared/api";
+import { fetchData, apiEndpoints } from "../../../Shared/api";
 import { useNavigate } from "react-router-dom";
 
 import fieldsProvider from "./fieldsProvider";
@@ -37,7 +37,7 @@ export const useRecipeTable = ({ setData }) => {
       name: data?.name,
     };
 
-    const path = createPath("Recipe", query);
+    const path = createPath(apiEndpoints.recipe, query);
 
     fetchData(path, setData);
   };
@@ -59,9 +59,9 @@ export const useRecipeTable = ({ setData }) => {
   };
 
   useEffect(() => {
-    fetchData("Recipe", setData);
-    fetchData("Recipe/BeerStyle/Dropdown", setBeerStyles);
-    fetchData("Recipe/Type/DropDown", setRecipeTypes);
+    fetchData(apiEndpoints.recipe, setData);
+    fetchData(apiEndpoints.recipeBeerStyleDropDown, setBeerStyles);
+    fetchData(apiEndpoints.recipeTypeDropDown, setRecipeTypes);
   }, []);
 
   return {

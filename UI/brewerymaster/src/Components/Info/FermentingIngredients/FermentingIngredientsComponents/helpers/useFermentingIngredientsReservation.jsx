@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { fetchData } from "../../../../Shared/api";
+import { fetchData, apiEndpoints } from "../../../../Shared/api";
 
 export const useFermentingIngredientsReservation = ({
   setModalData,
@@ -13,7 +13,7 @@ export const useFermentingIngredientsReservation = ({
   };
 
   const refreshTableData = () =>
-    fetchData("FermentingIngredient/Reservation", setData);
+    fetchData(apiEndpoints.fermentingIngredientReservation, setData);
 
   useEffect(() => {
     refreshTableData();

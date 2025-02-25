@@ -3,7 +3,7 @@ import { Button, Card } from "react-bootstrap";
 
 import { useTranslation } from "react-i18next";
 
-import { fetchData, updateData } from "../../Shared/api";
+import { fetchData, updateData, apiEndpoints } from "../../Shared/api";
 import ModalFormBasic from "../../Shared/ModalComponents/ModalFormBasic";
 
 import fieldsProvider from "../helpers/fieldsProvider";
@@ -41,7 +41,7 @@ const UserRoles = ({ data }) => {
   };
 
   useEffect(() => {
-    fetchData("User/Role", setRoles);
+    fetchData(apiEndpoints.userRole, setRoles);
   }, []);
 
   return (
