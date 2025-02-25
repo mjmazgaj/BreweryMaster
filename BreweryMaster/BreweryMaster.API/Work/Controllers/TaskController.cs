@@ -110,7 +110,7 @@ namespace BreweryMaster.API.WorkModule.Controllers
         }
 
         [HttpPatch]
-        [Route("EditStatus")]
+        [Route("Status")]
         [Authorize(Roles = "employee")]
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]

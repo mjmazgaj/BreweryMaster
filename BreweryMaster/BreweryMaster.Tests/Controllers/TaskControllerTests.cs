@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using Moq;
 using BreweryMaster.API.WorkModule.Models;
+using BreweryMaster.Tests.Models;
 
 namespace BreweryMaster.Tests.Controllers;
 
@@ -17,7 +18,7 @@ public class TaskControllerTests : BaseTestController
             .ReturnsAsync(new KanbanTaskResponse());
 
         // Act
-        var response = await Client.GetAsync($"/api/task/{id}");
+        var response = await Client.GetAsync($"{EndpointsConst.Task}/{id}");
 
         // Assert
         Assert.Equal(expectedStatusCode, response.StatusCode);

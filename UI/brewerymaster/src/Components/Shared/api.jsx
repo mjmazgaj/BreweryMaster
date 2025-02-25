@@ -83,7 +83,7 @@ export const apiEndpoints = {
   entityContainer: "entity/Container",
 
   task: "Task",
-  taskEditStatus: "Task/EditStatus",
+  taskEditStatus: "Task/Status",
   taskTemplate: "Task/Template",
   taskDelete: "Task/Delete",
 
