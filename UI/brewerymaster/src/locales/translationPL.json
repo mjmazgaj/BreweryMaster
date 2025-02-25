@@ -209,8 +209,11 @@
     },
     "toast": {
         "addSuccess": "Element został pomyślnie dodany.",
-        "PasswordNotMatching": "Hasła nie pasują do siebie",
-        "NewPasswordShouldBeDifferent": "Nowe hasło powinno być inne niż stare"
+        "addFail": "Nie udało się dodać elementu. Proszę spróbować później.",
+        "updateSuccess": "Element został pomyślnie zaktualizowany.",
+        "updateFail": "Nie udało się zaktualizować elementu. Proszę spróbować później.",
+        "passwordNotMatching": "Hasła nie pasują do siebie",
+        "newPasswordShouldBeDifferent": "Nowe hasło powinno być inne niż stare"
     },
     "homePage": {
         "title": "Browar rzemieślniczy",

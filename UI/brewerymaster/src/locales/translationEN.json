@@ -211,8 +211,11 @@
     },
     "toast": {
         "addSuccess": "The item has been added successfully.",
-        "PasswordNotMatching": "Password do not matching",
-        "NewPasswordShouldBeDifferent": "New Password should be diffent, then the old one"
+        "addFail": "Failed to add the item. Please try again later.",
+        "updateSuccess": "The item has been updated successfully.",
+        "updateFail": "Failed to update the item. Please try again later.",
+        "passwordNotMatching": "Password do not matching",
+        "newPasswordShouldBeDifferent": "New Password should be diffent, then the old one"
     },
     "homePage": {
         "title": "Craft Brewery",

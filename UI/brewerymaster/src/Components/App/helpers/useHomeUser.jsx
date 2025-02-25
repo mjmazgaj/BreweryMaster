@@ -9,11 +9,11 @@ export const useHomeUser = ({ setShowPasswordModal }) => {
   const modalCustomizationObject = {
     addtionalValidation: (data) => {
       if (data?.password != data?.confirmPassword) {
-        toast.error(t("toast.PasswordNotMatching"));
+        toast.error(t("toast.passwordNotMatching"));
         return false;
       }
       if (data?.password == data?.currentPassword) {
-        toast.error(t("toast.NewPasswordShouldBeDifferent"));
+        toast.error(t("toast.newPasswordShouldBeDifferent"));
         return false;
       }
 

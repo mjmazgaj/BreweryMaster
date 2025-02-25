@@ -1,5 +1,9 @@
 import api from "../Security/api";
 
+import { toast } from "react-toastify";
+
+import i18next from "i18next";
+
 const apiurl = "/api";
 
 export const fetchData = (path, setData) => {
@@ -9,39 +13,68 @@ export const fetchData = (path, setData) => {
     .catch((error) => console.log(error));
 };
 
-export const addData = async (path, data) => {
+export const addData = async (
+  path,
+  data,
+  successMessage = i18next.t("toast.addSuccess"),
+  errorMessage = i18next.t("toast.addFail")
+) => {
   try {
     const result = await api.post(`${apiurl}/${path}`, data);
+    toast.success(successMessage);
     return result.data;
   } catch (error) {
     console.log(error);
+    toast.error(errorMessage);
   }
 };
 
-export const updateData = async (path, id, data) => {
+export const updateData = async (
+  path,
+  id,
+  data,
+  successMessage = i18next.t("toast.updateSuccess"),
+  errorMessage = i18next.t("toast.updateFail")
+) => {
   try {
     const result = await api.patch(`${apiurl}/${path}/${id}`, data);
+    toast.success(successMessage);
     return result.data;
   } catch (error) {
     console.log(error);
+    toast.error(errorMessage);
   }
 };
 
-export const updateWithoutBody = async (path, id) => {
+export const updateWithoutBody = async (
+  path,
+  id,
+  successMessage = i18next.t("toast.updateSuccess"),
+  errorMessage = i18next.t("toast.updateFail")
+) => {
   try {
     const result = await api.patch(`${apiurl}/${path}/${id}`);
+    toast.success(successMessage);
     return result.data;
   } catch (error) {
     console.log(error);
+    toast.error(errorMessage);
   }
 };
 
-export const updateWithoutParameter = async (path, data) => {
+export const updateWithoutParameter = async (
+  path,
+  data,
+  successMessage = i18next.t("toast.updateSuccess"),
+  errorMessage = i18next.t("toast.updateFail")
+) => {
   try {
     const result = await api.patch(`${apiurl}/${path}`, data);
+    toast.success(successMessage);
     return result.data;
   } catch (error) {
     console.log(error);
+    toast.error(errorMessage);
   }
 };
 
