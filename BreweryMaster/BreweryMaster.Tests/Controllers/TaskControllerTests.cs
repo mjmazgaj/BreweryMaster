@@ -160,6 +160,22 @@ public class TaskControllerTests : BaseTestController
         Assert.Equal(expectedStatusCode, httpResponse.StatusCode);
     }
 
+    [Theory]
+    [InlineData(1, HttpStatusCode.OK)]
+    [InlineData(0, HttpStatusCode.BadRequest)]
+    public async Task DeleteKanbanTaskById_ShouldReturnProperResponse(int? id, HttpStatusCode expectedStatusCode)
+    {
+        // Arrange
+        MockTaskService.Setup(s => s.DeleteKanbanTaskByIdAsync(It.IsAny<int>()))
+            .ReturnsAsync(true);
+
+        // Act
+        var httpResponse = await Client.PatchAsync($"{EndpointsConst.TaskDelete}/{id}", null);
+
+        // Assert
+        Assert.Equal(expectedStatusCode, httpResponse.StatusCode);
+    }
+
     public static IEnumerable<object[]> GetEditKanbanTaskStatusTestData()
     {
         yield return new object[] { new List<KanbanTaskStatusRequest> { new KanbanTaskStatusRequest { Id = 1, Status = 1 } }, HttpStatusCode.OK };
