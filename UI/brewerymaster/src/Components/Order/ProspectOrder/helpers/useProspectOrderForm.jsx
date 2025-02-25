@@ -5,7 +5,7 @@ import ClientDetails from "../ClientDetails";
 import Contact from "../../../Shared/Contact";
 import FormDatePicker from "../../../Shared/FormDatePicker";
 
-import { addData } from "../../../Shared/api";
+import { addData, apiEndpoints } from "../../../Shared/api";
 import { useTranslation } from 'react-i18next';
 
 export const useProspectOrderForm = () => {
@@ -49,7 +49,7 @@ export const useProspectOrderForm = () => {
       isCompany: isCompany,
     };
 
-    addData("ProspectOrder", newData);
+    addData(apiEndpoints.prospectOrder, newData);
     clear();
   };
 

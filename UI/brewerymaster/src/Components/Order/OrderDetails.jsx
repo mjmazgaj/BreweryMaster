@@ -33,7 +33,7 @@ const OrderDetails = () => {
       orderStatus: data.statusId,
     };
 
-    addData("Task/Template", newData);
+    addData(apiEndpoints.taskTemplate, newData);
   };
 
   const handleSelectChange = (e, name) => {
@@ -48,7 +48,7 @@ const OrderDetails = () => {
       [name]: statusId,
     }));
 
-    addData("Order/Status", {
+    addData(apiEndpoints.orderStatus, {
       orderId: data.id,
       orderStatusId: statusId,
     });

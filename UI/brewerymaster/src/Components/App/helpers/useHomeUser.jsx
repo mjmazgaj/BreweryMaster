@@ -1,4 +1,4 @@
-import { updateWithoutParameter } from "../../Shared/api";
+import { apiEndpoints, updateWithoutParameter } from "../../Shared/api";
 import { toast } from "react-toastify";
 
 import { useTranslation } from "react-i18next";
@@ -19,7 +19,7 @@ export const useHomeUser = ({ setShowPasswordModal }) => {
 
       return true;
     },
-    submitFunction: (data) => updateWithoutParameter("User/Password", data),
+    submitFunction: (data) => updateWithoutParameter(apiEndpoints.userPassword, data),
     buttons: [
       {
         isSubmit: false,

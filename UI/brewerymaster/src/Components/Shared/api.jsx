@@ -51,6 +51,7 @@ export const apiEndpoints = {
 
   task: "Task",
   taskEditStatus: "Task/EditStatus",
+  taskTemplate: "Task/Template",
   taskDelete: "Task/Delete",
 
   orderDropDown: "Order/DropDown",
@@ -72,6 +73,7 @@ export const apiEndpoints = {
   userDropDown: "User/DropDown",
   userRole: "User/Role",
   userDetails: "User/Details",
+  userPassword: "User/Password",
   user: "User",
 
   fermentingIngredientSummary: "FermentingIngredient/Summary",

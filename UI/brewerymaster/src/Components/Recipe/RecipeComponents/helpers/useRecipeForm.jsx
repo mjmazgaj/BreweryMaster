@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { addData } from "../../../Shared/api";
+import { addData, apiEndpoints } from "../../../Shared/api";
 
 import { useTranslation } from "react-i18next";
 export const useRecipeForm = ({ isValid, setIsAddMode }) => {
@@ -79,7 +79,7 @@ export const useRecipeForm = ({ isValid, setIsAddMode }) => {
 
     console.log("add");
     console.log({ ...newData });
-    addData("recipe", newData);
+    addData(apiEndpoints.recipe, newData);
     setIsAddMode(false);
     clear();
   };
