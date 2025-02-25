@@ -26,7 +26,7 @@ namespace BreweryMaster.API.WorkModule.Controllers
         [ProducesResponseType(typeof(Dictionary<string, KanbanTaskGroupResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        public async Task<ActionResult<Dictionary<string, KanbanTaskGroupResponse>>?> GetKanbanTasks([FromQuery] KanbanTaskFilterRequest? request)
+        public async Task<ActionResult<Dictionary<string, KanbanTaskGroupResponse>>> GetKanbanTasks([FromQuery] KanbanTaskFilterRequest? request)
         {
             var tasks = await _taskService.GetKanbanTasks(request);
             return Ok(tasks);
