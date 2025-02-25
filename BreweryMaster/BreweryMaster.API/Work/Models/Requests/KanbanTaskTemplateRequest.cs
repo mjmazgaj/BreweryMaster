@@ -12,6 +12,6 @@ namespace BreweryMaster.API.Work.Models.Requests
 
         [Required]
         [EnumDataType(typeof(OrderStatus))]
-        public OrderStatus OrderStatus { get; set; }
+        public OrderStatus? OrderStatus { get; set; }
     }
 }

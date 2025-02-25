@@ -99,7 +99,7 @@ public class TaskControllerTests : BaseTestController
         var request = new KanbanTaskTemplateRequest
         {
             OrderId = orderId ?? default,
-            OrderStatus = (OrderStatus)(orderStatus ?? default),
+            OrderStatus = orderStatus is not null ? (OrderStatus)(orderStatus) : null
         };
 
         MockTaskService.Setup(s => s.CreateKanbanTaskTemplates(It.IsAny<KanbanTaskTemplateRequest>(), It.IsAny<ClaimsPrincipal>()))
