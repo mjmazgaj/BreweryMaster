@@ -144,4 +144,26 @@ public class TaskControllerTests : BaseTestController
         // Assert
         Assert.Equal(expectedStatusCode, httpResponse.StatusCode);
     }
+
+    [Theory]
+    [MemberData(nameof(GetEditKanbanTaskStatusTestData))]
+    public async Task EditKanbanTaskStatus_ShouldReturnProperResponse(List<KanbanTaskStatusRequest> request, HttpStatusCode expectedStatusCode)
+    {
+        // Arrange
+        MockTaskService.Setup(s => s.EditKanbanTaskStatusAsync(It.IsAny<List<KanbanTaskStatusRequest>>()))
+            .ReturnsAsync(true);
+
+        // Act
+        var httpResponse = await Client.PatchAsJsonAsync(EndpointsConst.TaskStatus, request);
+
+        // Assert
+        Assert.Equal(expectedStatusCode, httpResponse.StatusCode);
+    }
+
+    public static IEnumerable<object[]> GetEditKanbanTaskStatusTestData()
+    {
+        yield return new object[] { new List<KanbanTaskStatusRequest> { new KanbanTaskStatusRequest { Id = 1, Status = 1 } }, HttpStatusCode.OK };
+        yield return new object[] { new List<KanbanTaskStatusRequest> { new KanbanTaskStatusRequest { Id = 1, Status = default } }, HttpStatusCode.BadRequest };
+        yield return new object[] { new List<KanbanTaskStatusRequest> { new KanbanTaskStatusRequest { Id = default, Status = 1 } }, HttpStatusCode.BadRequest };
+    }
 }
