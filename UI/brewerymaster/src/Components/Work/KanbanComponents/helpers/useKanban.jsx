@@ -51,7 +51,10 @@ export const useKanban = ({
   };
 
   const addModalObject = {
-    submitFunction: (data) => addData(apiEndpoints.task, data),
+    submitFunction: async (data) => {
+      await addData(apiEndpoints.task, data);
+      fillKanbanBoard({});
+    },
     buttons: [
       {
         isSubmit: false,
