@@ -24,7 +24,7 @@ namespace BreweryMaster.API.WorkModule.Services
             _userService = userService;
             _options = options;
         }
-        public async Task<Dictionary<string, KanbanTaskGroupResponse>> GetKanbanTasksByOwnerIdAsync(KanbanTaskFilterRequest? request)
+        public async Task<Dictionary<string, KanbanTaskGroupResponse>> GetKanbanTasks(KanbanTaskFilterRequest? request)
         {
             var allStatuses = await _context.TaskStatusEntities.ToListAsync();
 
