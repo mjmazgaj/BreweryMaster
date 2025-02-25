@@ -8,6 +8,7 @@ using BreweryMaster.API.Work.Models;
 using System.Security.Claims;
 using System.Net.Http.Json;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using BreweryMaster.API.Configuration.Enums;
 
 namespace BreweryMaster.Tests.Controllers;
 
@@ -84,6 +85,29 @@ public class TaskControllerTests : BaseTestController
 
         // Act
         var httpResponse = await Client.PostAsJsonAsync(EndpointsConst.Task, request);
+
+        // Assert
+        Assert.Equal(expectedStatusCode, httpResponse.StatusCode);
+    }
+
+    [Theory]
+    [InlineData(1, 1, HttpStatusCode.OK)]
+    [InlineData(1, null, HttpStatusCode.BadRequest)]
+    [InlineData(null, 1, HttpStatusCode.BadRequest)]
+    public async Task CreateKanbanTaskTemplates_ShouldReturnProperResponse(int? orderId, int? orderStatus, HttpStatusCode expectedStatusCode)
+    {
+        // Arrange
+        var request = new KanbanTaskTemplateRequest
+        {
+            OrderId = orderId,
+            OrderStatus = orderStatus is not null ? (OrderStatus)orderStatus : null,
+        };
+
+        MockTaskService.Setup(s => s.CreateKanbanTaskTemplates(It.IsAny<KanbanTaskTemplateRequest>(), It.IsAny<ClaimsPrincipal>()))
+            .ReturnsAsync(new List<KanbanTaskResponse>());
+
+        // Act
+        var httpResponse = await Client.PostAsJsonAsync(EndpointsConst.TaskTemplate, request);
 
         // Assert
         Assert.Equal(expectedStatusCode, httpResponse.StatusCode);
