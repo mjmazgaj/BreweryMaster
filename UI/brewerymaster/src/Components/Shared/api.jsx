@@ -9,13 +9,6 @@ export const fetchData = (path, setData) => {
     .catch((error) => console.log(error));
 };
 
-export const fetchDataById = (path, id, setData) => {
-  return api
-    .get(`${apiurl}/${path}/${id}`)
-    .then((result) => setData(result.data))
-    .catch((error) => console.log(error));
-};
-
 export const addData = async (path, data) => {
   try {
     const result = await api.post(`${apiurl}/${path}`, data);
@@ -50,13 +43,6 @@ export const updateWithoutParameter = async (path, data) => {
   } catch (error) {
     console.log(error);
   }
-};
-
-export const deleteData = (path, id) => {
-  return api
-    .delete(`${apiurl}/${path}/${id}`)
-    .then((result) => result.status === 200)
-    .catch((error) => console.log(error));
 };
 
 export const apiEndpoints = {
