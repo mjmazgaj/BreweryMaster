@@ -5,9 +5,10 @@ import { CiEdit, CiCircleRemove, CiCircleInfo } from "react-icons/ci";
 
 import { useTaskCard } from "./helpers/useTaskCard";
 
-const TaskCard = ({ item, index }) => {
-  const { handleEditClick, handleDetailClick, handleRemoveClick } =
-    useTaskCard();
+const TaskCard = ({ item, index, setShowEditModal, setModalData }) => {
+  const { handleEditClick, handleDetailClick, handleRemoveClick } = useTaskCard(
+    { setShowEditModal, setModalData }
+  );
 
   return (
     <Draggable key={item.id} draggableId={`${item.id}`} index={index}>
@@ -22,7 +23,7 @@ const TaskCard = ({ item, index }) => {
             <p>{item.id}</p>
             <div className="task-icons">
               <CiCircleInfo onClick={() => handleDetailClick(item.id)} />
-              <CiEdit onClick={() => handleEditClick(item.id)} />
+              <CiEdit onClick={() => handleEditClick(item)} />
               <CiCircleRemove onClick={() => handleRemoveClick(item.id)} />
             </div>
           </div>

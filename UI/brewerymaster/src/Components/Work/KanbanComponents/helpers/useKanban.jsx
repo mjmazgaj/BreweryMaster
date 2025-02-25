@@ -7,11 +7,17 @@ import {
   fetchData,
   updateWithoutParameter,
   apiEndpoints,
+  updateData,
 } from "../../../Shared/api";
 
 import { createPath } from "../../../Shared/helpers/useObjectHelper";
 
-export const useKanban = ({ columns, setColumns, setShowAddModal }) => {
+export const useKanban = ({
+  columns,
+  setColumns,
+  setShowAddModal,
+  setModalData,
+}) => {
   const { t } = useTranslation();
   const [tasks, setTasks] = useState([]);
   const [users, setUsers] = useState([]);
@@ -24,7 +30,7 @@ export const useKanban = ({ columns, setColumns, setShowAddModal }) => {
       OrderId: data?.orderId,
     };
 
-    const path = createPath("Task", query);
+    const path = createPath(apiEndpoints.task, query);
 
     fetchData(path, setColumns);
   };
@@ -36,6 +42,7 @@ export const useKanban = ({ columns, setColumns, setShowAddModal }) => {
 
   const handleAdd = async (e) => {
     e.preventDefault();
+    setModalData({});
     setShowAddModal(true);
   };
 
@@ -44,10 +51,24 @@ export const useKanban = ({ columns, setColumns, setShowAddModal }) => {
     buttons: [
       {
         isSubmit: false,
-        label: t("button.save"),
+        label: t("button.add"),
       },
     ],
     title: t("work.addTask"),
+  };
+
+  const editModalObject = {
+    submitFunction: async (data) => {
+      await updateData(apiEndpoints.task, data.id, data);
+      fillKanbanBoard({});
+    },
+    buttons: [
+      {
+        isSubmit: false,
+        label: t("button.save"),
+      },
+    ],
+    title: t("work.editTask"),
   };
 
   const filterObject = {
@@ -113,6 +134,7 @@ export const useKanban = ({ columns, setColumns, setShowAddModal }) => {
     handleSave,
     handleAdd,
     addModalObject,
+    editModalObject,
     filterObject,
     filterFields,
   };

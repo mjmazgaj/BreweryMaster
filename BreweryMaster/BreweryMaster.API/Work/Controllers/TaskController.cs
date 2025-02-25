@@ -68,7 +68,7 @@ namespace BreweryMaster.API.WorkModule.Controllers
             return Ok(createdTasks);
         }
 
-        [HttpPut]
+        [HttpPatch]
         [Route("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

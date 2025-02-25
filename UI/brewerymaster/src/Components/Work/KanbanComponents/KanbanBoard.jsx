@@ -5,7 +5,12 @@ import "../kanban.css";
 import { handleOnDragEnd } from "./KanbanFunctions";
 import { useTranslation } from "react-i18next";
 
-const KanbanBoard = ({ columns, setColumns }) => {
+const KanbanBoard = ({
+  columns,
+  setColumns,
+  setShowEditModal,
+  setModalData,
+}) => {
   const { t } = useTranslation();
 
   const columnNames = {
@@ -33,7 +38,13 @@ const KanbanBoard = ({ columns, setColumns }) => {
                       {columnNames[column.status]}
                     </div>
                     {column.items?.map((item, index) => (
-                      <TaskCard key={index} item={item} index={index} />
+                      <TaskCard
+                        key={index}
+                        item={item}
+                        index={index}
+                        setShowEditModal={setShowEditModal}
+                        setModalData={setModalData}
+                      />
                     ))}
                     {provided.placeholder}
                   </div>

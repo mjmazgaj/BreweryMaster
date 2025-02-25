@@ -16,14 +16,22 @@ const Kanban = () => {
   const [columns, setColumns] = useState(null);
   const [modalData, setModalData] = useState({});
   const [showAddModal, setShowAddModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
   const [filterData, setFilterData] = useState({});
 
-  const { handleSave, handleAdd, addModalObject, filterObject, filterFields } =
-    useKanban({
-      columns,
-      setColumns,
-      setShowAddModal,
-    });
+  const {
+    handleSave,
+    handleAdd,
+    addModalObject,
+    editModalObject,
+    filterObject,
+    filterFields,
+  } = useKanban({
+    columns,
+    setColumns,
+    setShowAddModal,
+    setModalData,
+  });
 
   return (
     <>
@@ -43,7 +51,12 @@ const Kanban = () => {
               {t("button.add")}
             </Button>
           </div>
-          <KanbanBoard columns={columns} setColumns={setColumns} />
+          <KanbanBoard
+            columns={columns}
+            setColumns={setColumns}
+            setShowEditModal={setShowEditModal}
+            setModalData={setModalData}
+          />
           <ModalFormBasic
             fields={kanbanFieldsProvider(t).modalFields}
             data={modalData}
@@ -51,6 +64,14 @@ const Kanban = () => {
             show={showAddModal}
             setShow={setShowAddModal}
             modalCustomizationObject={addModalObject}
+          />
+          <ModalFormBasic
+            fields={kanbanFieldsProvider(t).modalFields}
+            data={modalData}
+            setData={setModalData}
+            show={showEditModal}
+            setShow={setShowEditModal}
+            modalCustomizationObject={editModalObject}
           />
         </>
       ) : (
