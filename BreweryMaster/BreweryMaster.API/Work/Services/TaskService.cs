@@ -40,6 +40,7 @@ namespace BreweryMaster.API.WorkModule.Services
             var tasks = await _context.KanbanTasks
                                 .Include(x => x.Status)
                                 .Include(x => x.CreatedBy)
+                                .Where(x => !x.IsRemoved)
                                 .ToListAsync();
 
             if (tasks is null)

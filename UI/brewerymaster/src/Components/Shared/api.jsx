@@ -62,6 +62,7 @@ export const deleteData = (path, id) => {
 export const apiEndpoints = {
   task: "Task",
   taskEditStatus: "Task/EditStatus",
+  taskDelete: "Task/Delete",
   orderDropDown: "Order/DropDown",
   userDropDown: "User/DropDown",
 };

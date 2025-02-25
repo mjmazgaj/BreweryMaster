@@ -97,8 +97,8 @@ namespace BreweryMaster.API.WorkModule.Controllers
             return Ok(isUpdated);
         }
 
-        [HttpDelete]
-        [Route("{id:int}")]
+        [HttpPatch]
+        [Route("Delete/{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> DeleteKanbanTaskById(int id)

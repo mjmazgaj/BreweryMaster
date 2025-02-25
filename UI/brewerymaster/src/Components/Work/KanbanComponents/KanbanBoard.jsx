@@ -9,6 +9,7 @@ const KanbanBoard = ({
   columns,
   setColumns,
   setShowEditModal,
+  setShowDeleteModal,
   setModalData,
 }) => {
   const { t } = useTranslation();
@@ -43,6 +44,7 @@ const KanbanBoard = ({
                         item={item}
                         index={index}
                         setShowEditModal={setShowEditModal}
+                        setShowDeleteModal={setShowDeleteModal}
                         setModalData={setModalData}
                       />
                     ))}

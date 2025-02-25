@@ -269,6 +269,7 @@
     },
     "work": {
         "editTask": "Edit task",
+        "deleteTask": "Do you want to remove following task?",
         "addTask": "Add task"
     },
     "recipe": {

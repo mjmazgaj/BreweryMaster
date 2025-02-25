@@ -10,6 +10,7 @@ import kanbanFieldsProvider from "./KanbanComponents/helpers/kanbanFieldsProvide
 import KanbanBoard from "./KanbanComponents/KanbanBoard";
 import ModalFormBasic from "../Shared/ModalComponents/ModalFormBasic";
 import CustomForm from "../Shared/CustomForm";
+import ModalConfirmationBasic from "../Shared/ModalComponents/ModalConfirmationBasic";
 
 const Kanban = () => {
   const { t } = useTranslation();
@@ -17,6 +18,7 @@ const Kanban = () => {
   const [modalData, setModalData] = useState({});
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [filterData, setFilterData] = useState({});
 
   const {
@@ -25,12 +27,15 @@ const Kanban = () => {
     addModalObject,
     editModalObject,
     editModalFields,
+    deleteModalObject,
     filterObject,
     filterFields,
   } = useKanban({
     columns,
     setColumns,
     setShowAddModal,
+    setShowDeleteModal,
+    modalData,
     setModalData,
   });
 
@@ -56,6 +61,7 @@ const Kanban = () => {
             columns={columns}
             setColumns={setColumns}
             setShowEditModal={setShowEditModal}
+            setShowDeleteModal={setShowDeleteModal}
             setModalData={setModalData}
           />
           <ModalFormBasic
@@ -73,6 +79,11 @@ const Kanban = () => {
             show={showEditModal}
             setShow={setShowEditModal}
             modalCustomizationObject={editModalObject}
+          />
+          <ModalConfirmationBasic
+            show={showDeleteModal}
+            setShow={setShowDeleteModal}
+            modalCustomizationObject={deleteModalObject}
           />
         </>
       ) : (

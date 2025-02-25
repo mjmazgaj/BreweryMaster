@@ -6,6 +6,7 @@ import {
   addData,
   fetchData,
   updateWithoutParameter,
+  updateWithoutBody,
   apiEndpoints,
   updateData,
 } from "../../../Shared/api";
@@ -17,6 +18,8 @@ export const useKanban = ({
   columns,
   setColumns,
   setShowAddModal,
+  setShowDeleteModal,
+  modalData,
   setModalData,
 }) => {
   const { t } = useTranslation();
@@ -81,7 +84,7 @@ export const useKanban = ({
         label: t("name.kanban.assignedToId"),
       },
     ],
-  }
+  };
 
   const filterObject = {
     submitFunction: fillKanbanBoard,
@@ -112,6 +115,17 @@ export const useKanban = ({
         label: t("name.brewery.order"),
       },
     ],
+  };
+
+  const deleteModalObject = {
+    name: modalData?.title,
+    title: t("work.deleteTask"),
+    function: async () => {
+      setShowDeleteModal(false);
+
+      await updateWithoutBody(apiEndpoints.taskDelete, modalData.id);
+      fillKanbanBoard({});
+    },
   };
 
   useEffect(() => {
@@ -148,6 +162,7 @@ export const useKanban = ({
     addModalObject,
     editModalObject,
     editModalFields,
+    deleteModalObject,
     filterObject,
     filterFields,
   };

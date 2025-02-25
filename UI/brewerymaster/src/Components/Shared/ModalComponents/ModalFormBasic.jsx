@@ -34,7 +34,7 @@ const ModalFormBasic = ({
             key={index}
             id={"modal-form_dropdown"}
             data={dropdownObject.data}
-            selectedOption={data[dropdownObject.name]}
+            selectedOption={data[dropdownObject.name] ?? ""}
             setSelectedOption={(e) =>
               handleSelectChange(e, dropdownObject.name)
             }

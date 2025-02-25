@@ -5,9 +5,10 @@ import { CiEdit, CiCircleRemove } from "react-icons/ci";
 
 import { useTaskCard } from "./helpers/useTaskCard";
 
-const TaskCard = ({ item, index, setShowEditModal, setModalData }) => {
+const TaskCard = ({ item, index, setShowEditModal, setShowDeleteModal, setModalData }) => {
   const { handleEditClick, handleRemoveClick } = useTaskCard({
     setShowEditModal,
+    setShowDeleteModal,
     setModalData,
   });
 
@@ -24,7 +25,7 @@ const TaskCard = ({ item, index, setShowEditModal, setModalData }) => {
             <p>{item.id}</p>
             <div className="task-icons">
               <CiEdit onClick={() => handleEditClick(item)} />
-              <CiCircleRemove onClick={() => handleRemoveClick(item.id)} />
+              <CiCircleRemove onClick={() => handleRemoveClick(item)} />
             </div>
           </div>
           <div className="task-information">

@@ -267,6 +267,7 @@
     },
     "work": {
         "editTask": "Edytuj zadanie",
+        "deleteTask": "Czy na pewno chcesz usunąć następujące zadanie?",
         "addTask": "Dodaj zadanie"
     },
     "recipe": {
