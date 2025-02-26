@@ -1,4 +1,7 @@
-import { login, currentUserRoles, fetchInfo } from "../Endpoints";
+import { login } from "../Endpoints";
+
+import { apiEndpoints, fetchData } from "../../Shared/api";
+
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../UserProvider";
 
@@ -9,12 +12,10 @@ export const useLogin = ({ data, setErrorMessage }) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      console.log(data);
-
       const loginResult = await login(data);
       sessionStorage.setItem("token", loginResult.accessToken);
 
-      const info = await fetchInfo();
+      const info = await fetchData(apiEndpoints.userInfo);
       setUser({
         token: loginResult.accessToken,
         email: info.email,

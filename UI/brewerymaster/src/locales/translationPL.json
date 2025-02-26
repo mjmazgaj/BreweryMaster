@@ -208,6 +208,7 @@
         "number": "Liczba powinna mieścić się w zakresie:"
     },
     "toast": {
+        "getFail": "Nie udało się pobrać danych z serwera. Proszę spróbować później.",
         "addSuccess": "Element został pomyślnie dodany.",
         "addFail": "Nie udało się dodać elementu. Proszę spróbować później.",
         "updateSuccess": "Element został pomyślnie zaktualizowany.",

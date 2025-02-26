@@ -210,6 +210,7 @@
         "number": "Number should be in range:"
     },
     "toast": {
+        "getFail": "Failed to get data from the server. Please try again later.",
         "addSuccess": "The item has been added successfully.",
         "addFail": "Failed to add the item. Please try again later.",
         "updateSuccess": "The item has been updated successfully.",

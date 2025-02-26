@@ -6,11 +6,16 @@ import i18next from "i18next";
 
 const apiurl = "/api";
 
-export const fetchData = (path, setData) => {
-  return api
-    .get(`${apiurl}/${path}`)
-    .then((result) => setData(result.data))
-    .catch((error) => console.log(error));
+export const fetchData = async (path, setData = null) => {
+  try {
+    const result = await api.get(`${apiurl}/${path}`);
+
+    if (setData) setData(result.data);
+
+    return result.data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const addData = async (
@@ -79,8 +84,8 @@ export const updateWithoutParameter = async (
 };
 
 export const apiEndpoints = {
-  entityUnit: "entity/Unit",
-  entityContainer: "entity/Container",
+  entityUnit: "Entity/Unit",
+  entityContainer: "Entity/Container",
 
   task: "Task",
   taskEditStatus: "Task/Status",
@@ -108,6 +113,7 @@ export const apiEndpoints = {
   userRoles: "User/Roles",
   userDetails: "User/Details",
   userPassword: "User/Password",
+  userInfo: "User/Info",
   user: "User",
 
   fermentingIngredientSummary: "FermentingIngredient/Summary",

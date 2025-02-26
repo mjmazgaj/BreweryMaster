@@ -17,10 +17,3 @@ export const logout = async () => {
   await api.post("api/user/logout");
   sessionStorage.removeItem("token");
 };
-
-export const fetchInfo = async () => {
-  return api
-    .get(`api/user/info`)
-    .then((result) => result.data)
-    .catch((error) => console.log(error));
-};
