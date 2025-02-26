@@ -3,6 +3,7 @@
     public static class TestConst
     {
         public const string String = "TestString";
+        public const string String2 = "TestString2";
         public const string String257Characters = "aqolnktggqdrisbyatesphjrrevbmoownetttbagvvdlyaheyuncqtexubvhnszszabcbonfzdzowzqlyjflwwgvbnpgbljfqkuumybhvodudydhzqccxdwlczierzxbioequuenipgakyktgsdpecmswowvakgswjdqlkpfojgtedcthkgptsbmjmpiqarxhfxxbhgxczyyphacnayxguqfwvwqzjpyqhotijdzfedmftccptmgorvnkqpmljtbh";
         public const string String451Characters = "aipchbalugywjzfdcqkexabdpvcmslokommfbxwxvzcbrursjhrerbykrgvrznpniwtucqrgldyoogqigzjuoahrjbvtilmqpluemdjkavkkwtqodiqnnbmebydaaednvzstderipagzyxtjxvteywyuoyfsabdhcqugpjkpiksfbjxbolereumjfwsdtwdjbelgowsqshadmdzyqdjhawhlraydjeuqcnswvlhyvhpijbbdpisnxmyhzauxcnrmpzstpnqjlqcfmqodddavqlgexmarpdpphcfrvlettrarazwnwqmzqdzcwtvcssdewjzftwdtdfstugjgsnmmrjafvphqnjcerhjeewcmxhlgqpzmvhjltwbxahcyudjbmroajslvyesmyoxxzzmzykocumlttgtnzsejnlgrmoflfriizgshezuagwvpbxjagkb";
 

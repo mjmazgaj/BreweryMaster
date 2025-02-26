@@ -1,8 +1,15 @@
-﻿namespace BreweryMaster.API.User.Models.Users
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BreweryMaster.API.User.Models.Users
 {
     public class UserUpdateRequest
     {
-        public required string Id { get; set; }
-        public required string Email { get; set; }
+        [Required]
+        [MaxLength(450)]
+        public string? Id { get; set; }
+
+        [Required]
+        [MaxLength(256)]
+        public string? Email { get; set; }
     }
 }

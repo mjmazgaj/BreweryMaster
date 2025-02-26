@@ -2,12 +2,12 @@
 {
     public class UserDetailsResponse
     {
-        public required string Id { get; set; }
+        public string Id { get; set; } = string.Empty;
         public CompanyUserResponse? CompanyUser { get; set; }
         public IndividualUserResponse? IndividualUser { get; set; }
         public AddressResponse? HomeAddress { get; set; }
         public AddressResponse? DeliveryAddress { get; set; }
-        public required string Email { get; set; }
+        public string Email { get; set; } = string.Empty;
         public IEnumerable<string>? Roles { get; set; }
         public bool IsCompany { get; set; }
     }

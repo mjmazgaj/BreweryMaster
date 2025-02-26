@@ -102,6 +102,9 @@ namespace BreweryMaster.API.UserModule.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<UserResponse>> Update(UserUpdateRequest request, [MaxLength(450)] string userId)
         {
+            if (request.Id != userId)
+                return BadRequest();
+
             var updatedUser = await _userService.UpdateUser(request, userId);
 
             if (updatedUser is null)
@@ -141,7 +144,7 @@ namespace BreweryMaster.API.UserModule.Controllers
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        public async Task<ActionResult<bool>> UpdateUserRoles(UserRolesUpdateRequest request, string id)
+        public async Task<ActionResult<bool>> UpdateUserRoles(UserRolesUpdateRequest request, [MaxLength(450)] string id)
         {
             if (request.UserId != id)
                 return BadRequest();

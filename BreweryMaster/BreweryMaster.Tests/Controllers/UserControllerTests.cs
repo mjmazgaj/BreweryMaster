@@ -1,9 +1,15 @@
-﻿using BreweryMaster.API.User.Models.Requests;
+﻿using BreweryMaster.API.Shared.Models;
+using BreweryMaster.API.User.Models.Requests;
+using BreweryMaster.API.User.Models.Responses;
 using BreweryMaster.API.User.Models.Users;
+using BreweryMaster.API.Work.Models;
 using BreweryMaster.Tests.Models;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.VisualBasic;
 using Moq;
 using System.Net;
+using System.Net.Http.Json;
+using System.Security.Claims;
 
 namespace BreweryMaster.Tests.Controllers
 {
@@ -42,6 +48,160 @@ namespace BreweryMaster.Tests.Controllers
 
             // Assert
             Assert.Equal(expectedStatusCode, httpResponse.StatusCode);
+        }
+
+        [Fact]
+        public async Task GetUserDropDownList_ShouldReturnProperResponse()
+        {
+            // Arrange
+            var response = new List<EntityStringIdResponse>();
+
+            MockUserService.Setup(s => s.GetRolesDropDownList())
+                .ReturnsAsync(response);
+
+            // Act
+            var httpResponse = await Client.GetAsync(EndpointsConst.UserDropDown);
+
+            // Assert
+            Assert.Equal(HttpStatusCode.OK, httpResponse.StatusCode);
+        }
+
+        [Theory]
+        [InlineData(TestConst.String, HttpStatusCode.OK)]
+        [InlineData(TestConst.String451Characters, HttpStatusCode.BadRequest)]
+        public async Task GetUserById_ShouldReturnProperResponse(string? id, HttpStatusCode expectedStatusCode)
+        {
+            // Arrange
+            var response = new UserDetailsResponse() { Email = "", Id = "" };
+
+
+            MockUserService.Setup(s => s.GetUserById(It.IsAny<string>()))
+                .ReturnsAsync(response);
+
+            // Act
+            var httpResponse = await Client.GetAsync($"{EndpointsConst.User}/${id}");
+
+            // Assert
+            Assert.Equal(expectedStatusCode, httpResponse.StatusCode);
+        }
+
+        [Theory]
+        [InlineData(TestConst.String, TestConst.String, TestConst.String, HttpStatusCode.OK)]
+        [InlineData(TestConst.String451Characters, TestConst.String, TestConst.String, HttpStatusCode.BadRequest)]
+        [InlineData(TestConst.String, TestConst.String257Characters, TestConst.String, HttpStatusCode.BadRequest)]
+        [InlineData(TestConst.String, TestConst.String, TestConst.String257Characters, HttpStatusCode.BadRequest)]
+        public async Task Update_ShouldReturnProperResponse(string? id, string? email, string? userId, HttpStatusCode expectedStatusCode)
+        {
+            // Arrange
+            var request = new UserUpdateRequest
+            {
+                Id = id,
+                Email = email
+            };
+            var response = new UserResponse();
+
+            MockUserService.Setup(s => s.UpdateUser(It.IsAny<UserUpdateRequest>(), It.IsAny<string>()))
+                .ReturnsAsync(response);
+
+            // Act
+            var httpResponse = await Client.PatchAsJsonAsync($"{EndpointsConst.User}/{userId}", request);
+
+            // Assert
+            Assert.Equal(expectedStatusCode, httpResponse.StatusCode);
+        }
+        [Theory]
+        [InlineData(TestConst.String, TestConst.String, TestConst.String, HttpStatusCode.OK)]
+        [InlineData(TestConst.String, TestConst.String257Characters, TestConst.String, HttpStatusCode.BadRequest)]
+        [InlineData(TestConst.String, TestConst.String, TestConst.String257Characters, HttpStatusCode.BadRequest)]
+        [InlineData(TestConst.String, TestConst.String, TestConst.String2, HttpStatusCode.BadRequest)]
+        public async Task UpdatePassword_ShouldReturnProperResponse(string currentPassword, string password, string confirmPassword, HttpStatusCode expectedStatusCode)
+        {
+            // Arrange
+            var request = new UserPasswordRequest
+            {
+                CurrentPassword = currentPassword,
+                Password = password,
+                ConfirmPassword = confirmPassword
+            };
+
+            MockUserService.Setup(s => s.UpdatePassword(It.IsAny<UserPasswordRequest>(), It.IsAny<ClaimsPrincipal>()))
+                .ReturnsAsync(true);
+
+            // Act
+            var httpResponse = await Client.PatchAsJsonAsync(EndpointsConst.UserPassword, request);
+
+            // Assert
+            Assert.Equal(expectedStatusCode, httpResponse.StatusCode);
+        }
+
+        [Theory]
+        [InlineData(TestConst.String, new string[] { TestConst.String }, HttpStatusCode.OK)]
+        [InlineData(TestConst.String451Characters, new string[] { TestConst.String }, HttpStatusCode.BadRequest)]
+        [InlineData(TestConst.String, new string[] { }, HttpStatusCode.BadRequest)]
+        [InlineData(TestConst.String, null, HttpStatusCode.BadRequest)]
+        public async Task UpdateUserRoles_ShouldReturnProperResponse(string userId, IEnumerable<string> rolesId, HttpStatusCode expectedStatusCode)
+        {
+            // Arrange
+            var request = new UserRolesUpdateRequest
+            {
+                UserId = userId,
+                RolesId = rolesId
+            };
+
+            MockUserService.Setup(s => s.UpdateUserRoles(It.IsAny<UserRolesUpdateRequest>()))
+                .ReturnsAsync(rolesId != null && rolesId.Any());
+
+            // Act
+            var httpResponse = await Client.PatchAsJsonAsync($"{EndpointsConst.UserRoles}/{userId}", request);
+
+            // Assert
+            Assert.Equal(expectedStatusCode, httpResponse.StatusCode);
+        }
+
+        [Fact]
+        public async Task GetInfo_ShouldReturnProperResponse()
+        {
+            // Arrange
+            var response = new UserResponse();
+
+            MockUserService.Setup(s => s.GetCurrentUser(It.IsAny<ClaimsPrincipal>()))
+                .ReturnsAsync(response);
+
+            // Act
+            var httpResponse = await Client.GetAsync(EndpointsConst.UserInfo);
+
+            // Assert
+            Assert.Equal(HttpStatusCode.OK, httpResponse.StatusCode);
+        }
+
+        [Fact]
+        public async Task GetUserDetails_ShouldReturnProperResponse()
+        {
+            // Arrange
+            var response = new UserDetailsResponse();
+
+            MockUserService.Setup(s => s.GetCurrentUserDetails(It.IsAny<ClaimsPrincipal>()))
+                .ReturnsAsync(response);
+
+            // Act
+            var httpResponse = await Client.GetAsync(EndpointsConst.UserDetails);
+
+            // Assert
+            Assert.Equal(HttpStatusCode.OK, httpResponse.StatusCode);
+        }
+
+        [Fact]
+        public async Task AddTestUsers_ShouldReturnProperResponse()
+        {
+            // Arrange
+            MockUserService.Setup(s => s.CreateTestUsers())
+                .ReturnsAsync(true);
+
+            // Act
+            var httpResponse = await Client.PostAsync(EndpointsConst.UserAddTestUsers, null);
+
+            // Assert
+            Assert.Equal(HttpStatusCode.OK, httpResponse.StatusCode);
         }
     }
 }
