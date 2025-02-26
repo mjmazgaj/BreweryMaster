@@ -4,8 +4,10 @@ using BreweryMaster.API.User.Models.Responses;
 using BreweryMaster.API.User.Models.Users;
 using BreweryMaster.API.User.Models.Users.DB;
 using BreweryMaster.API.User.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace BreweryMaster.API.UserModule.Controllers
 {
@@ -25,9 +27,10 @@ namespace BreweryMaster.API.UserModule.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "manager")]
         [ProducesResponseType(typeof(IEnumerable<UserResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<UserResponse>?>> GetUsers([FromQuery] UserFilterRequest? request)
+        public async Task<ActionResult<IEnumerable<UserResponse>>> GetUsers([FromQuery] UserFilterRequest? request)
         {
             var users = await _userService.GetUsers(request);
 
@@ -36,9 +39,9 @@ namespace BreweryMaster.API.UserModule.Controllers
 
         [HttpGet]
         [Route("DropDown")]
+        [Authorize(Roles = "employee")]
         [ProducesResponseType(typeof(IEnumerable<EntityStringIdResponse>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<EntityStringIdResponse>?>> GetUserDropDownList()
+        public async Task<ActionResult<IEnumerable<EntityStringIdResponse>>> GetUserDropDownList()
         {
             var users = await _userService.GetUserDropDownList();
 
@@ -47,9 +50,9 @@ namespace BreweryMaster.API.UserModule.Controllers
 
         [HttpGet]
         [Route("Role")]
+        [Authorize(Roles = "manager")]
         [ProducesResponseType(typeof(IEnumerable<EntityStringIdResponse>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<EntityStringIdResponse>?>> GetRolesDropDownList()
+        public async Task<ActionResult<IEnumerable<EntityStringIdResponse>>> GetRolesDropDownList()
         {
             var users = await _userService.GetRolesDropDownList();
 
@@ -58,10 +61,13 @@ namespace BreweryMaster.API.UserModule.Controllers
 
         [HttpGet]
         [Route("{id}")]
+        [Authorize(Roles = "manager")]
         [ProducesResponseType(typeof(UserDetailsResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<UserDetailsResponse?>> GetUserById(string id)
+        public async Task<ActionResult<UserDetailsResponse>> GetUserById([MaxLength(450)] string id)
         {
             var user = await _userService.GetUserById(id);
 
@@ -74,98 +80,117 @@ namespace BreweryMaster.API.UserModule.Controllers
         [HttpPost]
         [Route("Register")]
         [ProducesResponseType(typeof(UserResponse), StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Register(UserRegisterRequest request)
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<UserResponse>> Register(UserRegisterRequest request)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
             if (request.UserAuthInfo.Password != request.UserAuthInfo.ConfirmPassword)
-                return BadRequest(new { message = "Passwords do not match." });
+                return BadRequest("Password and ConfirmPassword dosen't match");
 
-            try
-            {
-                var createdUser = await _userService.CreateUser(request);
-                return CreatedAtAction(nameof(GetUserById), new { id = createdUser.Id }, createdUser);
-            }
-            catch (Exception)
-            {
-                return UnprocessableEntity($"{request.UserAuthInfo.Email} registration faild");
-            }
+            var createdUser = await _userService.CreateUser(request);
 
+            if (createdUser is null)
+                return BadRequest();
+
+            return CreatedAtAction(nameof(GetUserById), new { id = createdUser.Id }, createdUser);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Update(UserUpdateRequest request, string userId)
+        [HttpPatch]
+        [Route("{userId}")]
+        [Authorize]
+        [ProducesResponseType(typeof(UserResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<ActionResult<UserResponse>> Update(UserUpdateRequest request, [MaxLength(450)] string userId)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            var updatedUser = await _userService.UpdateUser(request, userId);
 
-            try
-            {
-                await _userService.UpdateUser(request, userId);
-            }
-            catch (Exception)
-            {
-                return BadRequest("User not updated");
-            }
+            if (updatedUser is null)
+                return BadRequest();
 
-            return Ok(new { message = "User updated successfully." });
+            return Ok(updatedUser);
         }
 
         [HttpPatch]
         [Route("Password")]
-        public async Task<IActionResult> UpdatePassword(UserPasswordRequest request)
+        [Authorize]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<ActionResult<bool>> UpdatePassword(UserPasswordRequest request)
         {
-            var result = await _userService.UpdatePassword(request, HttpContext.User);
+            var userIdentity = HttpContext?.User?.Identity;
+
+            if (userIdentity is null || !userIdentity.IsAuthenticated)
+                return Unauthorized();
+
+            if (request.Password != request.ConfirmPassword)
+                return BadRequest("Password and ConfirmPassword dosen't match");
+
+            var result = await _userService.UpdatePassword(request, HttpContext?.User);
 
             if (!result)
-                BadRequest(result);
+                return BadRequest(result);
 
             return Ok(result);
         }
 
         [HttpPatch]
         [Route("Roles/{id}")]
-        public async Task<IActionResult> UpdateUserRoles(UserRolesUpdateRequest request, string id)
+        [Authorize(Roles = "manager")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        public async Task<ActionResult<bool>> UpdateUserRoles(UserRolesUpdateRequest request, string id)
         {
+            if (request.UserId != id)
+                return BadRequest();
+
             var result = await _userService.UpdateUserRoles(request);
 
             if (!result)
-                BadRequest(result);
+                return BadRequest(result);
 
             return Ok(result);
         }
 
         [HttpGet]
-        [Route("info")]
-        public async Task<ActionResult<UserResponse?>> GetInfo()
+        [Route("Info")]
+        [Authorize]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<ActionResult<UserResponse>> GetInfo()
         {
-            var userContext = HttpContext.User;
+            var userIdentity = HttpContext?.User?.Identity;
 
-            try
-            {
-                var user = await _userService.GetCurrentUser(userContext);
-                return Ok(user);
-            }
-            catch (Exception)
-            {
+            if (userIdentity is null || !userIdentity.IsAuthenticated)
                 return Unauthorized();
-            }
+
+            var curretUser = await _userService.GetCurrentUser(HttpContext?.User);
+
+            return Ok(curretUser);
         }
 
         [HttpGet]
         [Route("Details")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<UserDetailsResponse>> GetUserDetails()
         {
-            var userContext = HttpContext.User;
+            var userIdentity = HttpContext?.User?.Identity;
 
-            var user = await _userService.GetCurrentUserDetails(userContext);
-            return Ok(user);
+            if (userIdentity is null || !userIdentity.IsAuthenticated)
+                return Unauthorized();
+
+            var userDetails = await _userService.GetCurrentUserDetails(HttpContext?.User);
+
+            return Ok(userDetails);
         }
 
         [HttpPost]
-        [Route("logout")]
+        [Route("Logout")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         public ActionResult LogOff()
         {
             _signInManager.SignOutAsync();
@@ -174,10 +199,16 @@ namespace BreweryMaster.API.UserModule.Controllers
         }
 
         [HttpPost]
-        [Route("addTestUsers")]
-        public async Task<ActionResult> AddTestUsers()
+        [Route("AddTestUsers")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<bool>> AddTestUsers()
         {
             var result = await _userService.CreateTestUsers();
+
+            if (!result)
+                return BadRequest();
+
             return Ok(result);
         }
     }

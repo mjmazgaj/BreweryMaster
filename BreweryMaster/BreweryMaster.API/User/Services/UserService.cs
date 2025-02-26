@@ -9,8 +9,6 @@ using BreweryMaster.API.User.Models.Responses;
 using BreweryMaster.API.User.Models.Users;
 using BreweryMaster.API.User.Models.Users.DB;
 using BreweryMaster.API.UserModule.Helpers;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
@@ -36,7 +34,7 @@ namespace BreweryMaster.API.User.Services
             _addressService = addressService;
         }
 
-        public async Task<IEnumerable<UserResponse>?> GetUsers(UserFilterRequest? request = null)
+        public async Task<IEnumerable<UserResponse>> GetUsers(UserFilterRequest? request = null)
         {
             var response = new List<UserResponse>();
             var companyUsers = new List<CompanyUser>();
@@ -99,22 +97,22 @@ namespace BreweryMaster.API.User.Services
             return response;
         }
 
-        public async Task<IEnumerable<EntityStringIdResponse>?> GetUserDropDownList()
+        public async Task<IEnumerable<EntityStringIdResponse>> GetUserDropDownList()
         {
             var users = await GetUsers();
 
-            return users?.Select(x => new EntityStringIdResponse()
+            return users.Select(x => new EntityStringIdResponse()
             {
                 Id = x.Id,
                 Name = x.Name
             });
         }
 
-        public async Task<IEnumerable<EntityStringIdResponse>?> GetRolesDropDownList()
+        public async Task<IEnumerable<EntityStringIdResponse>> GetRolesDropDownList()
         {
             var users = await _context.Roles.ToListAsync();
 
-            return users?.Select(x => new EntityStringIdResponse()
+            return users.Select(x => new EntityStringIdResponse()
             {
                 Id = x.Id,
                 Name = x.Name ?? string.Empty
@@ -126,7 +124,7 @@ namespace BreweryMaster.API.User.Services
 
             var user = _context.Users.FirstOrDefault(x => x.Id == id);
 
-            if(user is null)
+            if (user is null)
                 return null;
 
             var addresses = await _context.UserAddresses.Where(x => x.UserId == id).Include(x => x.Address).ToListAsync();
@@ -151,19 +149,13 @@ namespace BreweryMaster.API.User.Services
         public async Task<UserResponse> GetCurrentUser(ClaimsPrincipal? user)
         {
             if (user is null)
-                throw new ArgumentNullException("user not found");
-
-            if (user.Identity is null)
-                throw new ArgumentNullException("user identity not found");
-
-            if (user.Identity.IsAuthenticated == false)
-                throw new UnauthorizedAccessException("user not authenticated");
+                throw new UnauthorizedAccessException("User claims not found");
 
             var emailClaim = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email);
             var nameIdClaim = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
 
             if (emailClaim is null || nameIdClaim is null)
-                throw new ArgumentNullException("user claims not found");
+                throw new ArgumentNullException("User claims not found");
 
             var roles = await _context.UserRoles.Where(x => x.UserId == nameIdClaim.Value).Select(x => x.RoleId).ToListAsync();
 
@@ -178,13 +170,7 @@ namespace BreweryMaster.API.User.Services
         public async Task<UserDetailsResponse> GetCurrentUserDetails(ClaimsPrincipal? userClaims)
         {
             if (userClaims is null)
-                throw new ArgumentNullException("user not found");
-
-            if (userClaims.Identity is null)
-                throw new ArgumentNullException("user identity not found");
-
-            if (userClaims.Identity.IsAuthenticated == false)
-                throw new UnauthorizedAccessException("user not authenticated");
+                throw new UnauthorizedAccessException("User claims not found");
 
             var emailClaim = userClaims.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email);
             var nameIdClaim = userClaims.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
@@ -195,7 +181,7 @@ namespace BreweryMaster.API.User.Services
             var user = _context.Users.FirstOrDefault(x => x.Id == nameIdClaim.Value);
 
             if (user is null)
-                throw new ArgumentNullException("user can not be null");
+                throw new ArgumentNullException("user not found");
 
             var addresses = await _context.UserAddresses.Where(x => x.UserId == nameIdClaim.Value).Include(x => x.Address).ToListAsync();
             var homeAddress = addresses.FirstOrDefault(x => x.AddressTypeId == (int)AddressType.Home)?.Address.ToResponse();
@@ -215,7 +201,7 @@ namespace BreweryMaster.API.User.Services
             return response;
         }
 
-        public async Task<UserResponse> CreateUser(UserRegisterRequest request)
+        public async Task<UserResponse?> CreateUser(UserRegisterRequest request)
         {
             using var transaction = await _context.Database.BeginTransactionAsync();
 
@@ -226,7 +212,7 @@ namespace BreweryMaster.API.User.Services
                 if (request.IsCompany)
                 {
                     if (request.CompanyUserInfo is null)
-                        throw new Exception();
+                        return null;
 
                     userToCreate = new CompanyUser
                     {
@@ -240,7 +226,7 @@ namespace BreweryMaster.API.User.Services
                 else
                 {
                     if (request.IndividualUserInfo is null)
-                        throw new Exception();
+                        return null;
 
                     userToCreate = new IndividualUser
                     {
@@ -255,7 +241,7 @@ namespace BreweryMaster.API.User.Services
                 var result = await _userManager.CreateAsync(userToCreate, request.UserAuthInfo.Password);
 
                 if (!result.Succeeded)
-                    throw new Exception();
+                    return null;
 
                 if (request.Address is not null)
                 {
@@ -278,12 +264,12 @@ namespace BreweryMaster.API.User.Services
             }
         }
 
-        public async Task<UserResponse> UpdateUser(UserUpdateRequest request, string userId)
+        public async Task<UserResponse?> UpdateUser(UserUpdateRequest request, string userId)
         {
             var user = await _userManager.FindByIdAsync(request.Id);
 
             if (user == null)
-                throw new Exception();
+                throw new ArgumentNullException("User not found");
 
             user.Email = request.Email;
             user.UserName = request.Email;
@@ -292,7 +278,7 @@ namespace BreweryMaster.API.User.Services
             var result = await _userManager.UpdateAsync(user);
 
             if (!result.Succeeded)
-                throw new Exception();
+                return null;
 
             return user.ToUserResponse();
         }
@@ -300,20 +286,17 @@ namespace BreweryMaster.API.User.Services
         public async Task<bool> UpdatePassword(UserPasswordRequest request, ClaimsPrincipal? userClaims)
         {
             if (userClaims is null)
-                throw new UnauthorizedAccessException("User not authenticated");
+                throw new UnauthorizedAccessException("User claims not found");
 
             var nameIdClaim = userClaims.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
 
             if (nameIdClaim is null)
-                throw new ArgumentNullException("user id not found");
-
-            if (request.Password != request.ConfirmPassword)
-                return false;
+                throw new UnauthorizedAccessException("User name not found");
 
             var user = await _userManager.FindByIdAsync(nameIdClaim.Value);
 
             if (user == null)
-                return false;
+                throw new ArgumentNullException("User not found");
 
             var result = await _userManager.ChangePasswordAsync(user, request.CurrentPassword, request.Password);
 
@@ -326,11 +309,12 @@ namespace BreweryMaster.API.User.Services
         public async Task<bool> UpdateUserRoles(UserRolesUpdateRequest request)
         {
             if (request.RolesId == null)
-                return false;
+                throw new ArgumentNullException("Roles list cant be empty");
 
             var user = await _userManager.FindByIdAsync(request.UserId);
+
             if (user == null)
-                throw new ArgumentNullException("user not found");
+                throw new ArgumentNullException("User not found");
 
             var currentRoles = await _userManager.GetRolesAsync(user);
             var rolesToAdd = request.RolesId.Except(currentRoles).ToList();
@@ -374,23 +358,17 @@ namespace BreweryMaster.API.User.Services
                     }
                 };
 
-                try
-                {
-                    var createdUser = await CreateUser(userRequest);
-                    if (createdUser == null)
-                        throw new Exception();
+                var createdUser = await CreateUser(userRequest);
 
-                    var applicationUser = await _userManager.Users.FirstAsync(x => x.Id == createdUser.Id);
+                if (createdUser == null)
+                    throw new ArgumentNullException("User not created");
 
-                    var result = await _userManager.AddToRolesAsync(applicationUser, roles.GetRoles(role.Name));
+                var applicationUser = await _userManager.Users.FirstAsync(x => x.Id == createdUser.Id);
 
-                    if (!result.Succeeded)
-                        throw new Exception();
-                }
-                catch (Exception)
-                {
+                var result = await _userManager.AddToRolesAsync(applicationUser, roles.GetRoles(role.Name));
+
+                if (!result.Succeeded)
                     return false;
-                }
             }
 
             return true;
