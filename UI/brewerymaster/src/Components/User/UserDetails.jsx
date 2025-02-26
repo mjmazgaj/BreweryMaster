@@ -2,26 +2,33 @@ import React, { useState, useEffect, Fragment } from "react";
 import "./user.css";
 
 import { useTranslation } from "react-i18next";
-
 import { useParams } from "react-router-dom";
-import userFieldsProvider from "../User/helpers/userFieldsProvider";
 
+import userFieldsProvider from "../User/helpers/userFieldsProvider";
 import { fetchData, apiEndpoints } from "../Shared/api";
+
 import ControlsCard from "../Shared/ControlComponents/ControlsCard";
 import UserRoles from "./UserComponents/UserRoles";
-import ModalFormBasic from "../Shared/ModalComponents/ModalFormBasic";
 
 const UserDetails = () => {
   const { t } = useTranslation();
   const { id } = useParams();
 
-  const [data, setData] = useState({});
+  const [userData, setUserData] = useState({});
+
+  const fetchUserDataById = () => {
+    fetchData(`${apiEndpoints.user}/${id}`, setUserData);
+  };
+
+  const fetchCurrentUserData = () => {
+    fetchData(apiEndpoints.userDetails, setUserData);
+  };
 
   useEffect(() => {
     if (id) {
-      fetchData(`${apiEndpoints.user}/${id}`, setData);
+      fetchUserDataById();
     } else {
-      fetchData(apiEndpoints.userDetails, setData);
+      fetchCurrentUserData();
     }
   }, []);
 
@@ -37,7 +44,7 @@ const UserDetails = () => {
         <ControlsCard
           className="user-info_container"
           title={t("user.userInfoTitle")}
-          data={{ ...data?.individualUser, email: data?.email }}
+          data={{ ...userData?.individualUser, email: userData?.email }}
           fields={userFieldsProvider(t).infoFields.control}
           path="User"
           emptyMessage={t("user.userInfoEmptyMsg")}
@@ -45,7 +52,7 @@ const UserDetails = () => {
         <ControlsCard
           className="home-address-info_container"
           title={t("user.homeAddressTitle")}
-          data={data?.homeAddress}
+          data={userData?.homeAddress}
           fields={userFieldsProvider(t).addressInfoFields.control}
           path="Address"
           emptyMessage={t("user.homeAddressMsg")}
@@ -53,13 +60,13 @@ const UserDetails = () => {
         <ControlsCard
           className="delivery-address-info_container"
           title={t("user.deliveryAddressTitle")}
-          data={data?.deliveryAddress}
+          data={userData?.deliveryAddress}
           fields={userFieldsProvider(t).addressInfoFields.control}
           path="Address"
           emptyMessage={t("user.deliveryAddressMsg")}
         />
 
-        {id && <UserRoles data={data} />}
+        {id && <UserRoles userData={userData} refreshPageData={fetchUserDataById}/>}
       </div>
     </div>
   );

@@ -1,48 +1,26 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState } from "react";
 import { Button, Card } from "react-bootstrap";
 
 import { useTranslation } from "react-i18next";
 
-import { fetchData, updateData, apiEndpoints } from "../../Shared/api";
+import userFieldsProvider from "../helpers/userFieldsProvider";
+import { useUserRoles } from "./helpers/useUserRoles";
 import ModalFormBasic from "../../Shared/ModalComponents/ModalFormBasic";
 
-import userFieldsProvider from "../helpers/userFieldsProvider";
-
-const UserRoles = ({ data }) => {
+const UserRoles = ({ userData, refreshPageData }) => {
   const { t } = useTranslation();
   const [roles, setRoles] = useState();
 
   const [editRoles, setEditRoles] = useState({});
   const [showModal, setShowModal] = useState(false);
 
-  const handleEdit = () => {
-    setShowModal(true);
-    setEditRoles({
-      roles: data.roles,
-    });
-  };
-
-  const modalCustomizationObject = {
-    submitFunction: (model) => {
-        const requestModel = {
-            userId: data.id,
-            rolesId: editRoles.roles
-        }
-        console.log(requestModel)
-        updateData("User/Roles", data.id, requestModel)
-    },
-    buttons: [
-      {
-        isSubmit: true,
-        label: t("button.save"),
-      },
-    ],
-    title: t("user.roleEdit"),
-  };
-
-  useEffect(() => {
-    fetchData(apiEndpoints.userRole, setRoles);
-  }, []);
+  const { handleEdit, modalCustomizationObject } = useUserRoles({
+    userData,
+    setShowModal,
+    setRoles,
+    setEditRoles,
+    refreshPageData
+  });
 
   return (
     <Fragment>
@@ -52,7 +30,7 @@ const UserRoles = ({ data }) => {
         </Card.Header>
 
         <Card.Body>
-          {data.roles ? (
+          {userData.roles ? (
             <Fragment>
               <div className="control-card-roles_container">
                 {roles &&
@@ -60,7 +38,7 @@ const UserRoles = ({ data }) => {
                     <div
                       key={index}
                       className={`control-card-role ${
-                        data.roles.includes(role.id)
+                        userData.roles.includes(role.id)
                           ? "control-card-role_include"
                           : ""
                       }`}
@@ -93,7 +71,6 @@ const UserRoles = ({ data }) => {
       />
     </Fragment>
   );
-
 };
 
 export default UserRoles;

@@ -10,25 +10,24 @@ export const useModalFormBasic = ({
   const handleCheckBox = (fieldName, category, isChecked) => {
     setData((prevData) => {
       const currentValues = prevData?.[category] || [];
-      
+
       if (isChecked) {
         if (!currentValues.includes(fieldName)) {
           return {
             ...prevData,
-            [category]: [...currentValues, fieldName]
+            [category]: [...currentValues, fieldName],
           };
         }
       } else {
         return {
           ...prevData,
-          [category]: currentValues.filter(item => item !== fieldName)
+          [category]: currentValues.filter((item) => item !== fieldName),
         };
       }
-      
+
       return prevData;
     });
   };
-  
 
   const handleSelectChange = (e, name) => {
     const { value } = e.target;
@@ -59,7 +58,7 @@ export const useModalFormBasic = ({
       !modalCustomizationObject.addtionalValidation(data)
     )
       return;
-    console.log(data)
+
     modalCustomizationObject.submitFunction(data);
     setShow(false);
   };
