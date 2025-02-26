@@ -8,5 +8,7 @@
         public static readonly string TaskTemplate = $"{Task}/Template";
         public static readonly string TaskStatus = $"{Task}/Status";
         public static readonly string TaskDelete = $"{Task}/Delete";
+
+        public static readonly string User = $"{Base}/User";
     }
 }
