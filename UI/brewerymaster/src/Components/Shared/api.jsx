@@ -105,6 +105,7 @@ export const apiEndpoints = {
 
   userDropDown: "User/DropDown",
   userRole: "User/Role",
+  userRoles: "User/Roles",
   userDetails: "User/Details",
   userPassword: "User/Password",
   user: "User",

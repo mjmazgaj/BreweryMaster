@@ -25,7 +25,7 @@ export const useUserRoles = ({
         userId: userData.id,
         rolesId: model.roles,
       };
-        await updateData("User/Roles", userData.id, requestModel);
+        await updateData(apiEndpoints.userRoles, userData.id, requestModel);
         refreshPageData();
     },
     buttons: [
