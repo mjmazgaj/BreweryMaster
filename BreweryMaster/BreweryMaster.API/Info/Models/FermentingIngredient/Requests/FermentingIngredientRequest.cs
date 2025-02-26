@@ -7,7 +7,7 @@ namespace BreweryMaster.API.Info.Models
     public class FermentingIngredientRequest
     {
         [Required]
-        [MaxLength(255)]
+        [MaxLength(256)]
         public required string Name { get; set; }
 
         [Required]

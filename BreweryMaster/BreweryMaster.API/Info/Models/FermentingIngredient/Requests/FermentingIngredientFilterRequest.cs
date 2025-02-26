@@ -8,7 +8,7 @@ namespace BreweryMaster.API.Info.Models
         [MinIntValidation(isNullAllowed: true)]
         public int? TypeId { get; set; }
 
-        [MaxLength(255)]
+        [MaxLength(256)]
         public string? Name { get; set; }
 
         [MinIntValidation(isNullAllowed: true)]

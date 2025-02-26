@@ -15,7 +15,7 @@ namespace BreweryMaster.API.Info.Models
         /// <summary>
         /// The name
         /// </summary>
-        [MaxLength(255)]
+        [MaxLength(256)]
         public required string Name { get; set; }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace BreweryMaster.API.Info.Models
         /// <summary>
         /// The producer
         /// </summary>
-        [MaxLength(255)]
+        [MaxLength(256)]
         public string? Producer { get; set; }
 
         /// <summary>

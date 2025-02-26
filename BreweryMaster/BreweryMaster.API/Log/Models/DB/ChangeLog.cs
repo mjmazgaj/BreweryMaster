@@ -16,13 +16,13 @@ namespace BreweryMaster.API.Log.Models
         /// <summary>
         /// The name of the table where the change occurred.
         /// </summary>
-        [MaxLength(255)]
+        [MaxLength(256)]
         public required string TableName { get; set; }
 
         /// <summary>
         /// The type of change (INSERT, UPDATE, DELETE).
         /// </summary>
-        [MaxLength(255)]
+        [MaxLength(256)]
         public required string ChangeType { get; set; }
 
         /// <summary>
