@@ -6,7 +6,7 @@ namespace BreweryMaster.API.Work.Models.DB
     {
         public int Id { get; set; }
 
-        [MaxLength(255)]
+        [MaxLength(256)]
         public required string Name { get; set; }
     }
 }

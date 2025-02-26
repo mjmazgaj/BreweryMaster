@@ -19,19 +19,19 @@ namespace BreweryMaster.API.User.Models
         public required string PostalCode { get; set; }
 
         [Required]
-        [MaxLength(255)]
+        [MaxLength(256)]
         public required string City { get; set; }
 
         [Required]
-        [MaxLength(255)] 
+        [MaxLength(256)] 
         public required string Commune { get; set; }
 
         [Required]
-        [MaxLength(255)]
+        [MaxLength(256)]
         public required string Region { get; set; }
 
         [Required]
-        [MaxLength(255)]
+        [MaxLength(256)]
         public required string Country { get; set; }
     }
 }

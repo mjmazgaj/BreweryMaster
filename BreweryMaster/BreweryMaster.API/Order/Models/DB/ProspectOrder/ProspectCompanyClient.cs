@@ -10,7 +10,7 @@ namespace BreweryMaster.API.OrderModule.Models
         /// <summary>
         /// The company name
         /// </summary>
-        [MaxLength(255)]
+        [MaxLength(256)]
         public required string CompanyName { get; set; }
 
         /// <summary>

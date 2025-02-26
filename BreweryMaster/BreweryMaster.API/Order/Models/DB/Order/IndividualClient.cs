@@ -10,13 +10,13 @@ namespace BreweryMaster.API.OrderModule.Models
         /// <summary>
         /// The forname
         /// </summary>
-        [MaxLength(255)]
+        [MaxLength(256)]
         public required string Forename { get; set; }
 
         /// <summary>
         /// The surname
         /// </summary>
-        [MaxLength(255)]
+        [MaxLength(256)]
         public required string Surname { get; set; }
     }
 }

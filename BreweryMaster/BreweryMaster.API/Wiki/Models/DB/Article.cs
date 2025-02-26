@@ -16,13 +16,13 @@ namespace BreweryMaster.API.Wiki.Models
         /// <summary>
         /// The title of the article.
         /// </summary>
-        [MaxLength(255)]
+        [MaxLength(256)]
         public required string Title { get; set; }
 
         /// <summary>
         /// The unique identifier of the linked Google Docs document.
         /// </summary>
-        [MaxLength(255)]
+        [MaxLength(256)]
         public required string GoogleDocId { get; set; }
 
         /// <summary>

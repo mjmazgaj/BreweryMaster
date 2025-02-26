@@ -15,7 +15,7 @@ namespace BreweryMaster.API.UserModule.Models
         /// <summary>
         /// The Street
         /// </summary>
-        [MaxLength(255)]
+        [MaxLength(256)]
         public string? Street { get; set; }
 
         /// <summary>
@@ -39,25 +39,25 @@ namespace BreweryMaster.API.UserModule.Models
         /// <summary>
         /// The City
         /// </summary>
-        [MaxLength(255)]
+        [MaxLength(256)]
         public required string City { get; set; }
 
         /// <summary>
         /// The Commune
         /// </summary>
-        [MaxLength(255)]
+        [MaxLength(256)]
         public required string Commune { get; set; }
 
         /// <summary>
         /// The Region
         /// </summary>
-        [MaxLength(255)]
+        [MaxLength(256)]
         public required string Region { get; set; }
 
         /// <summary>
         /// The Country
         /// </summary>
-        [MaxLength(255)]
+        [MaxLength(256)]
         public required string Country { get; set; }
     }
 }

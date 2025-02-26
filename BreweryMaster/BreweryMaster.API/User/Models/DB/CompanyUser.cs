@@ -11,13 +11,13 @@ namespace BreweryMaster.API.User.Models.DB
         /// <summary>
         /// The name of the company
         /// </summary>
-        [MaxLength(255)]
+        [MaxLength(256)]
         public required string CompanyName { get; set; }
 
         /// <summary>
         /// The tax identifier of the company
         /// </summary>
-        [MaxLength(255)]
+        [MaxLength(256)]
         public required string Nip { get; set; }
     }
 }

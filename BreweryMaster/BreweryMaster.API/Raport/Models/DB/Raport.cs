@@ -15,7 +15,7 @@ namespace BreweryMaster.API.RaportModule.Models
         /// <summary>
         /// The title.
         /// </summary>
-        [MaxLength(255)]
+        [MaxLength(256)]
         public required string Title { get; set; }
 
         /// <summary>

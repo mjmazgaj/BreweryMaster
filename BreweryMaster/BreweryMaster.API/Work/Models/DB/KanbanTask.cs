@@ -9,7 +9,7 @@ namespace BreweryMaster.API.Work.Models.DB
     {
         public int Id { get; set; }
 
-        [MaxLength(255)]
+        [MaxLength(256)]
         public required string Title { get; set; }
 
         public string? Summary { get; set; }

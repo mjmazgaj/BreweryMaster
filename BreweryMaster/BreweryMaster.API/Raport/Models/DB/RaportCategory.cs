@@ -15,7 +15,7 @@ namespace BreweryMaster.API.RaportModule.Models
         /// <summary>
         /// The name of the report category.
         /// </summary>
-        [MaxLength(255)]
+        [MaxLength(256)]
         public required string Name { get; set; }
     }
 }

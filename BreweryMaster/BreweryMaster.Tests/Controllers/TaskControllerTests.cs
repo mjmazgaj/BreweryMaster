@@ -120,7 +120,7 @@ public class TaskControllerTests : BaseTestController
     [InlineData(1, TestConst.String, TestConst.String, TestConst.String, null, HttpStatusCode.BadRequest)]
     [InlineData(0, TestConst.String, TestConst.String, TestConst.String, TestConst.Date, HttpStatusCode.BadRequest)]
     [InlineData(1, TestConst.String451Characters, TestConst.String, TestConst.String, TestConst.Date, HttpStatusCode.BadRequest)]
-    [InlineData(1, TestConst.String, TestConst.String256Characters, TestConst.String, TestConst.Date, HttpStatusCode.BadRequest)]
+    [InlineData(1, TestConst.String, TestConst.String257Characters, TestConst.String, TestConst.Date, HttpStatusCode.BadRequest)]
     public async Task EditKanbanTask_ShouldReturnProperResponse(int? id, string? assignedToId, string? title, string? summary, string? dueDateString, HttpStatusCode expectedStatusCode)
     {
         // Arrange

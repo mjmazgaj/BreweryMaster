@@ -6,7 +6,7 @@ namespace BreweryMaster.API.Work.Models
     public class KanbanTaskRequest
     {
         [Required]
-        [MaxLength(255)]
+        [MaxLength(256)]
         public string? Title { get; set; }
 
         public string? Summary { get; set; }

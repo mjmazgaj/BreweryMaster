@@ -12,13 +12,13 @@ namespace BreweryMaster.API.User.Models.DB
         /// <summary>
         /// First name of the user.
         /// </summary>
-        [MaxLength(255)]
+        [MaxLength(256)]
         public required string Forename { get; set; }
 
         /// <summary>
         /// Last name of the user.
         /// </summary>
-        [MaxLength(255)]
+        [MaxLength(256)]
         public required string Surname { get; set; }
     }
 }

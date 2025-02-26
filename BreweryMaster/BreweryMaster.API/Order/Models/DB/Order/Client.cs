@@ -23,7 +23,7 @@ namespace BreweryMaster.API.OrderModule.Models
         /// <summary>
         /// The email
         /// </summary>
-        [MaxLength(255)]
+        [MaxLength(256)]
         public required string Email { get; set; }
 
         /// <summary>

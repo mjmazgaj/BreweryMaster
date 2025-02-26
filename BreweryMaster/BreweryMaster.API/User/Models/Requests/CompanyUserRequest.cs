@@ -6,11 +6,11 @@ namespace BreweryMaster.API.User.Models
     {
 
         [Required]
-        [MaxLength(255)]
+        [MaxLength(256)]
         public required string CompanyName { get; set; }
 
         [Required]
-        [MaxLength(255)]
+        [MaxLength(256)]
         public required string Nip { get; set; }
         public AddressRequest? InvoiceAddress { get; set; }
     }
