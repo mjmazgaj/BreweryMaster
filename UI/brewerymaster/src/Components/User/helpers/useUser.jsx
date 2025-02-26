@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import fieldsProvider from "./fieldsProvider";
+import userFieldsProvider from "./userFieldsProvider";
 import { fetchData, apiEndpoints } from "../../Shared/api";
 import { createPath } from "../../Shared/helpers/useObjectHelper";
 
@@ -53,7 +53,7 @@ export const useUser = ({ setUsers }) => {
   };
 
   const filterFields = {
-    control: fieldsProvider(t).filterFields.control,
+    control: userFieldsProvider(t).filterFields.control,
     dropdown: [
       {
         data: dropdownData,

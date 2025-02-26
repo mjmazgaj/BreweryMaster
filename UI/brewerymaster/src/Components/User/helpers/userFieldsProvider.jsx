@@ -1,5 +1,5 @@
-const fieldsProvider = (t) => ({
-  userInfoFields: {
+const userFieldsProvider = (t) => ({
+  infoFields: {
     control: [
       {
         id: "forename",
@@ -108,4 +108,4 @@ const fieldsProvider = (t) => ({
   },
 });
 
-export default fieldsProvider;
+export default userFieldsProvider;

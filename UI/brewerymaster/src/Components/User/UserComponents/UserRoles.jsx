@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { fetchData, updateData, apiEndpoints } from "../../Shared/api";
 import ModalFormBasic from "../../Shared/ModalComponents/ModalFormBasic";
 
-import fieldsProvider from "../helpers/fieldsProvider";
+import userFieldsProvider from "../helpers/userFieldsProvider";
 
 const UserRoles = ({ data }) => {
   const { t } = useTranslation();
@@ -84,7 +84,7 @@ const UserRoles = ({ data }) => {
         </Card.Body>
       </Card>
       <ModalFormBasic
-        fields={fieldsProvider(t).rolesModal}
+        fields={userFieldsProvider(t).rolesModal}
         data={editRoles}
         setData={setEditRoles}
         show={showModal}
