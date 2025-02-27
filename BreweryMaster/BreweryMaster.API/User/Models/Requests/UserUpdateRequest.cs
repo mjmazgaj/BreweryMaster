@@ -6,10 +6,10 @@ namespace BreweryMaster.API.User.Models.Users
     {
         [Required]
         [MaxLength(450)]
-        public string? Id { get; set; }
+        public required string Id { get; set; }
 
         [Required]
         [MaxLength(256)]
-        public string? Email { get; set; }
+        public required string Email { get; set; }
     }
 }

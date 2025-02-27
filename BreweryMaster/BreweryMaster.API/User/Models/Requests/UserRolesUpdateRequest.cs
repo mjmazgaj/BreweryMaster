@@ -7,7 +7,7 @@ namespace BreweryMaster.API.User.Models.Requests
     {
         [Required]
         [MaxLength(450)]
-        public string? UserId { get; set; }
+        public required string UserId { get; set; }
 
         [Required]
         public IEnumerable<string>? RolesId { get; set; }

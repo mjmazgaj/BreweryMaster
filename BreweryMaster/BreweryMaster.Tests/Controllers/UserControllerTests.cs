@@ -2,10 +2,8 @@
 using BreweryMaster.API.User.Models.Requests;
 using BreweryMaster.API.User.Models.Responses;
 using BreweryMaster.API.User.Models.Users;
-using BreweryMaster.API.Work.Models;
 using BreweryMaster.Tests.Models;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.VisualBasic;
 using Moq;
 using System.Net;
 using System.Net.Http.Json;
@@ -93,7 +91,7 @@ namespace BreweryMaster.Tests.Controllers
         public async Task Update_ShouldReturnProperResponse(string? id, string? email, string? userId, HttpStatusCode expectedStatusCode)
         {
             // Arrange
-            var request = new UserUpdateRequest
+            var request = new
             {
                 Id = id,
                 Email = email

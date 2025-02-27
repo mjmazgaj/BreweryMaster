@@ -7,7 +7,7 @@ namespace BreweryMaster.API.Work.Models
     {
         [Required]
         [MaxLength(256)]
-        public string? Title { get; set; }
+        public required string Title { get; set; }
 
         public string? Summary { get; set; }
 

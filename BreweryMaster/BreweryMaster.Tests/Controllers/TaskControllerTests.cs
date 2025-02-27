@@ -67,16 +67,14 @@ public class TaskControllerTests : BaseTestController
     [InlineData(null, TestConst.String, TestConst.Date, HttpStatusCode.BadRequest)]
     [InlineData(TestConst.String, null, TestConst.Date, HttpStatusCode.Created)]
     [InlineData(TestConst.String, TestConst.String, null, HttpStatusCode.BadRequest)]
-    public async Task CreateKanbanTask_ShouldReturnProperResponse(string? title, string? summary, string? dueDateString, HttpStatusCode expectedStatusCode)
+    public async Task CreateKanbanTask_ShouldReturnProperResponse(string? title, string? summary, string? dueDate, HttpStatusCode expectedStatusCode)
     {
         // Arrange
-        DateTime? dueDate = string.IsNullOrEmpty(dueDateString) ? null : DateTime.Parse(dueDateString);
-
-        var request = new KanbanTaskRequest
+        var request = new
         {
             Title = title,
             Summary = summary,
-            DueDate = dueDate ?? default,
+            DueDate = dueDate,
         };
 
         MockTaskService.Setup(s => s.CreateKanbanTaskAsync(It.IsAny<KanbanTaskRequest>(), It.IsAny<ClaimsPrincipal>()))
@@ -121,12 +119,10 @@ public class TaskControllerTests : BaseTestController
     [InlineData(0, TestConst.String, TestConst.String, TestConst.String, TestConst.Date, HttpStatusCode.BadRequest)]
     [InlineData(1, TestConst.String451Characters, TestConst.String, TestConst.String, TestConst.Date, HttpStatusCode.BadRequest)]
     [InlineData(1, TestConst.String, TestConst.String257Characters, TestConst.String, TestConst.Date, HttpStatusCode.BadRequest)]
-    public async Task EditKanbanTask_ShouldReturnProperResponse(int? id, string? assignedToId, string? title, string? summary, string? dueDateString, HttpStatusCode expectedStatusCode)
+    public async Task EditKanbanTask_ShouldReturnProperResponse(int? id, string? assignedToId, string? title, string? summary, string? dueDate, HttpStatusCode expectedStatusCode)
     {
         // Arrange
-        DateTime? dueDate = string.IsNullOrEmpty(dueDateString) ? null : DateTime.Parse(dueDateString);
-
-        var request = new KanbanTaskUpdateRequest
+        var request = new
         {
             Id = id ?? 0,
             AssignedToId = assignedToId,
