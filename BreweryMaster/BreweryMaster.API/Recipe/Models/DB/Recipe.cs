@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using BreweryMaster.API.Info.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +18,7 @@ namespace BreweryMaster.API.Recipe.Models.DB
         /// <summary>
         /// The name of the recipe
         /// </summary>
+        [MaxLength(256)]
         public required string Name { get; set; }
 
         /// <summary>

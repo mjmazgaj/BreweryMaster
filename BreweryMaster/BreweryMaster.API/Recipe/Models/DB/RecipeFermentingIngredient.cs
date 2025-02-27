@@ -31,7 +31,7 @@ namespace BreweryMaster.API.Recipe.Models.DB
         /// <summary>
         /// The quantity of the ingredient used in the recipe.
         /// </summary>
-        [Precision(5, 2)]
+        [Precision(8, 2)]
         public decimal Quantity { get; set; }
 
         /// <summary>

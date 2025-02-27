@@ -131,7 +131,7 @@ namespace BreweryMaster.API.Recipe.Services
                 .ToListAsync();
         }
 
-        public async Task<RecipeDetailsResponse?> CreateRecipeDetailAsync(RecipeDetailsRequest request, ClaimsPrincipal? claims)
+        public async Task<RecipeDetailsResponse?> CreateRecipeDetailAsync(RecipeRequest request, ClaimsPrincipal? claims)
         {
             using var transaction = await _context.Database.BeginTransactionAsync();
 

@@ -12,6 +12,6 @@ namespace BreweryMaster.API.Recipe.Services
         Task<RecipeDetailsResponse?> GetRecipeDetailByIdAsync(int id);
         Task<IEnumerable<EntityResponse>?> GetBeerStyleDropDownList();
         Task<IEnumerable<EntityResponse>?> GetRecipeTypeDropDownList();
-        Task<RecipeDetailsResponse?> CreateRecipeDetailAsync(RecipeDetailsRequest request, ClaimsPrincipal? claims);
+        Task<RecipeDetailsResponse?> CreateRecipeDetailAsync(RecipeRequest request, ClaimsPrincipal? claims);
     }
 }

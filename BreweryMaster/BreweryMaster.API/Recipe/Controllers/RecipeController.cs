@@ -75,7 +75,7 @@ namespace BreweryMaster.API.Info.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(RecipeDetailsResponse), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<RecipeDetailsResponse>> CreateRecipe([FromBody] RecipeDetailsRequest request)
+        public async Task<ActionResult<RecipeDetailsResponse>> CreateRecipe([FromBody] RecipeRequest request)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
