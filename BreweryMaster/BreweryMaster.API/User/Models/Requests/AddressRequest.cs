@@ -4,13 +4,13 @@ namespace BreweryMaster.API.User.Models
 {
     public class AddressRequest
     {
+        [MaxLength(256)]
         public string? Street { get; set; }
 
         [Required]
         [MaxLength(10)]
         public required string HouseNumber { get; set; }
 
-        [Required]
         [MaxLength(10)]
         public string? ApartamentNumber { get; set; }
 

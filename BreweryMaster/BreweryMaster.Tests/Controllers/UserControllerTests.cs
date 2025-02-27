@@ -84,10 +84,10 @@ namespace BreweryMaster.Tests.Controllers
         }
 
         [Theory]
-        [InlineData(TestConst.String, TestConst.String, TestConst.String, HttpStatusCode.OK)]
-        [InlineData(TestConst.String451Characters, TestConst.String, TestConst.String, HttpStatusCode.BadRequest)]
+        [InlineData(TestConst.String, TestConst.Email1, TestConst.String, HttpStatusCode.OK)]
+        [InlineData(TestConst.String451Characters, TestConst.Email1, TestConst.String, HttpStatusCode.BadRequest)]
         [InlineData(TestConst.String, TestConst.String257Characters, TestConst.String, HttpStatusCode.BadRequest)]
-        [InlineData(TestConst.String, TestConst.String, TestConst.String257Characters, HttpStatusCode.BadRequest)]
+        [InlineData(TestConst.String, TestConst.Email1, TestConst.String257Characters, HttpStatusCode.BadRequest)]
         public async Task Update_ShouldReturnProperResponse(string? id, string? email, string? userId, HttpStatusCode expectedStatusCode)
         {
             // Arrange

@@ -1,5 +1,4 @@
-﻿using BreweryMaster.API.SharedModule.Validators;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace BreweryMaster.API.User.Models.Requests
 {
@@ -10,6 +9,6 @@ namespace BreweryMaster.API.User.Models.Requests
         public required string UserId { get; set; }
 
         [Required]
-        public IEnumerable<string>? RolesId { get; set; }
+        public required IEnumerable<string> RolesId { get; set; }
     }
 }
