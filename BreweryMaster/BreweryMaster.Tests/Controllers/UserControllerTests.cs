@@ -112,10 +112,13 @@ namespace BreweryMaster.Tests.Controllers
         [InlineData(TestConst.String, TestConst.String257Characters, TestConst.String, HttpStatusCode.BadRequest)]
         [InlineData(TestConst.String, TestConst.String, TestConst.String257Characters, HttpStatusCode.BadRequest)]
         [InlineData(TestConst.String, TestConst.String, TestConst.String2, HttpStatusCode.BadRequest)]
-        public async Task UpdatePassword_ShouldReturnProperResponse(string currentPassword, string password, string confirmPassword, HttpStatusCode expectedStatusCode)
+        [InlineData(null, TestConst.String, TestConst.String, HttpStatusCode.BadRequest)]
+        [InlineData(TestConst.String, null, TestConst.String, HttpStatusCode.BadRequest)]
+        [InlineData(TestConst.String, TestConst.String, null, HttpStatusCode.BadRequest)]
+        public async Task UpdatePassword_ShouldReturnProperResponse(string? currentPassword, string? password, string? confirmPassword, HttpStatusCode expectedStatusCode)
         {
             // Arrange
-            var request = new UserPasswordRequest
+            var request = new
             {
                 CurrentPassword = currentPassword,
                 Password = password,
@@ -137,10 +140,11 @@ namespace BreweryMaster.Tests.Controllers
         [InlineData(TestConst.String451Characters, new string[] { TestConst.String }, HttpStatusCode.BadRequest)]
         [InlineData(TestConst.String, new string[] { }, HttpStatusCode.BadRequest)]
         [InlineData(TestConst.String, null, HttpStatusCode.BadRequest)]
-        public async Task UpdateUserRoles_ShouldReturnProperResponse(string userId, IEnumerable<string> rolesId, HttpStatusCode expectedStatusCode)
+        [InlineData(null, new string[] { TestConst.String }, HttpStatusCode.BadRequest)]
+        public async Task UpdateUserRoles_ShouldReturnProperResponse(string? userId, IEnumerable<string>? rolesId, HttpStatusCode expectedStatusCode)
         {
             // Arrange
-            var request = new UserRolesUpdateRequest
+            var request = new
             {
                 UserId = userId,
                 RolesId = rolesId
