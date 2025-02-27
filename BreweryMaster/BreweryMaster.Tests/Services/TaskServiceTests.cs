@@ -33,6 +33,9 @@ public class KanbanTaskServiceTests
 
         _dbContext = new ApplicationDbContext(options);
 
+        _dbContext.Database.EnsureDeleted();
+        _dbContext.Database.EnsureCreated();
+
         SeedDatabase();
     }
 
