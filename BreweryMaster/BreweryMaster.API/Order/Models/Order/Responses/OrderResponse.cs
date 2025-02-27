@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public int RecipeId { get; set; }
-        public required string Recipe { get; set; }
+        public string Recipe { get; set; } = string.Empty;
         public int Capacity { get; set; }
         public int ContainerId { get; set; }
         public string Container { get; set; } = string.Empty;
