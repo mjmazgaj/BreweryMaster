@@ -2,7 +2,7 @@
 {
     public class CompanyUserResponse
     {
-        public required string CompanyName { get; set; }
-        public required string Nip { get; set; }
+        public string CompanyName { get; set; } = string.Empty;
+        public string Nip { get; set; } = string.Empty;
     }
 }

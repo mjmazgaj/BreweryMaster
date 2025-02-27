@@ -2,7 +2,7 @@
 {
     public class IndividualUserResponse
     {
-        public required string Forename { get; set; }
-        public required string Surname { get; set; }
+        public string Forename { get; set; } = string.Empty;
+        public string Surname { get; set; } = string.Empty;
     }
 }
