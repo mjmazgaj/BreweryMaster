@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 namespace BreweryMaster.API.Info.Models
 {
@@ -31,6 +32,12 @@ namespace BreweryMaster.API.Info.Models
         /// The unit model representation
         /// </summary>
         public UnitEntity Unit { get; set; } = null!;
+
+        /// <summary>
+        /// The quantity
+        /// </summary>
+        [Precision(9, 3)]
+        public decimal Quantity { get; set; }
 
         /// <summary>
         /// The removal indicator

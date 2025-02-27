@@ -10,7 +10,6 @@ namespace BreweryMaster.API.Info.Models
         /// <summary>
         /// The stored quantity
         /// </summary>
-        [Precision(5, 2)]
-        public decimal StoredQuantity { get; set; }
+        public int StoredQuantity { get; set; }
     }
 }

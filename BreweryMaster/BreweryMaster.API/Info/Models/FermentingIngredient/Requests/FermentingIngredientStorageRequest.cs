@@ -10,6 +10,7 @@ namespace BreweryMaster.API.Info.Models
         public int FermentingIngredientUnitId { get; set; }
 
         [Required]
+        [MinIntValidation]
         public int Quantity { get; set; }
 
         public string? Info { get; set; }

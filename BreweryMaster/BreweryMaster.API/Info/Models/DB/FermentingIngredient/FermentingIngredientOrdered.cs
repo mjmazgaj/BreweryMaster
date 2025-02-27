@@ -10,8 +10,7 @@ namespace BreweryMaster.API.Info.Models
         /// <summary>
         /// The ordered quantity
         /// </summary>
-        [Precision(10, 3)]
-        public decimal OrderedQuantity { get; set; }
+        public int OrderedQuantity { get; set; }
 
         /// <summary>
         /// The ordered date
