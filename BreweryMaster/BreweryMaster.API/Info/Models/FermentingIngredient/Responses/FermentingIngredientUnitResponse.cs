@@ -2,6 +2,6 @@
 {
     public class FermentingIngredientUnitResponse : FermentingIngredientResponse
     {
-        public required string Unit { get; set; }
+        public string Unit { get; set; } = string.Empty;
     }
 }

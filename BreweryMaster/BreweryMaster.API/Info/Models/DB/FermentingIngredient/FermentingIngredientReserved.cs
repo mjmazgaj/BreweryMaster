@@ -21,7 +21,8 @@ namespace BreweryMaster.API.Info.Models
         /// <summary>
         /// The reserved quantity
         /// </summary>
-        public int ReservedQuantity { get; set; }
+        [Precision(9, 3)]
+        public decimal ReservedQuantity { get; set; }
 
         /// <summary>
         /// The reservation date

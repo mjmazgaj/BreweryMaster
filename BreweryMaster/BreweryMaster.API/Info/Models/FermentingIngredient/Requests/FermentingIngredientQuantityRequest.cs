@@ -1,4 +1,5 @@
 ﻿using BreweryMaster.API.SharedModule.Validators;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace BreweryMaster.API.Info.Models
@@ -10,8 +11,9 @@ namespace BreweryMaster.API.Info.Models
         public int FermentingIngredientUnitId { get; set; }
 
         [Required]
-        [MinIntValidation]
-        public int Quantity { get; set; }
+        [Precision(9, 3)]
+        [Range(0, 1000000)]
+        public decimal Quantity { get; set; }
 
         public string? Info { get; set; }
     }

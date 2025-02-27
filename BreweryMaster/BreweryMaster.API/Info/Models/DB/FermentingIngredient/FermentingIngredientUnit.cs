@@ -34,12 +34,6 @@ namespace BreweryMaster.API.Info.Models
         public UnitEntity Unit { get; set; } = null!;
 
         /// <summary>
-        /// The quantity
-        /// </summary>
-        [Precision(9, 3)]
-        public decimal Quantity { get; set; }
-
-        /// <summary>
         /// The removal indicator
         /// </summary>
         public bool IsRemoved { get; set; }
