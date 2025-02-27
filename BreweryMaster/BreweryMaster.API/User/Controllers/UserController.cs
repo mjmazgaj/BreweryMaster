@@ -30,6 +30,8 @@ namespace BreweryMaster.API.UserModule.Controllers
         [Authorize(Roles = "manager")]
         [ProducesResponseType(typeof(IEnumerable<UserResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<IEnumerable<UserResponse>>> GetUsers([FromQuery] UserFilterRequest? request)
         {
             var users = await _userService.GetUsers(request);
@@ -41,6 +43,8 @@ namespace BreweryMaster.API.UserModule.Controllers
         [Route("DropDown")]
         [Authorize(Roles = "employee")]
         [ProducesResponseType(typeof(IEnumerable<EntityStringIdResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<IEnumerable<EntityStringIdResponse>>> GetUserDropDownList()
         {
             var users = await _userService.GetUserDropDownList();
@@ -52,6 +56,8 @@ namespace BreweryMaster.API.UserModule.Controllers
         [Route("Role")]
         [Authorize(Roles = "manager")]
         [ProducesResponseType(typeof(IEnumerable<EntityStringIdResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<IEnumerable<EntityStringIdResponse>>> GetRolesDropDownList()
         {
             var users = await _userService.GetRolesDropDownList();

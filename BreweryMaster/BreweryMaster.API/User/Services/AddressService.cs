@@ -18,29 +18,28 @@ namespace BreweryMaster.API.User.Services
         {
             var address = await _context.Addresses.FirstOrDefaultAsync(x => x.Id == id);
 
-            AddressResponse addressResponse = null!;
+            if (address is null)
+                return null;
 
-            if (address is not null)
+            return new AddressResponse()
             {
-                addressResponse = new AddressResponse()
-                {
-                    Id = address.Id,
-                    Street = address.Street,
-                    HouseNumber = address.HouseNumber,
-                    ApartamentNumber = address.ApartamentNumber,
-                    City = address.City,
-                    PostalCode = address.PostalCode,
-                    Commune = address.Commune,
-                    Region = address.Region,
-                    Country = address.Country,
-                };
+                Id = address.Id,
+                Street = address.Street,
+                HouseNumber = address.HouseNumber,
+                ApartamentNumber = address.ApartamentNumber,
+                City = address.City,
+                PostalCode = address.PostalCode,
+                Commune = address.Commune,
+                Region = address.Region,
+                Country = address.Country,
             };
-
-            return addressResponse;
         }
 
         public Address AddAddress(AddressRequest request)
         {
+            if (request is null)
+                throw new ArgumentNullException($"{nameof(request)} can not be null.");
+
             var addressToCreate = new Address
             {
                 Street = request.Street,
@@ -60,6 +59,15 @@ namespace BreweryMaster.API.User.Services
 
         public UserAddress AddUserAddress(string userId, Address address, int addressType)
         {
+            if (address is null)
+                throw new ArgumentNullException($"{nameof(address)} can not be null.");
+
+            if (userId is null)
+                throw new ArgumentNullException($"{nameof(userId)} can not be null.");
+
+            if (addressType < 0)
+                throw new ArgumentException($"{nameof(addressType)} show be greater then 0.");
+
             var userAddress = new UserAddress
             {
                 UserId = userId,
