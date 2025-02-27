@@ -13,12 +13,14 @@ public class BaseTestController : IDisposable
     protected readonly HttpClient Client;
     protected readonly Mock<ITaskService> MockTaskService;
     protected readonly Mock<IUserService> MockUserService;
+    protected readonly Mock<IAddressService> MockAddressService;
     private readonly WebApplicationFactory<Program> ApplicationFactory;
 
     public BaseTestController()
     {
         this.MockTaskService = new Mock<ITaskService>();
         this.MockUserService = new Mock<IUserService>();
+        this.MockAddressService = new Mock<IAddressService>();
 
         this.ApplicationFactory = new WebApplicationFactory<Program>().WithWebHostBuilder(
             builder => builder
@@ -27,6 +29,7 @@ public class BaseTestController : IDisposable
             {
                 services.AddSingleton(this.MockTaskService.Object);
                 services.AddSingleton(this.MockUserService.Object);
+                services.AddSingleton(this.MockAddressService.Object);
 
                 services.AddAuthentication("TestAuth")
                     .AddScheme<TestAuthOptions, TestAuthHandler>("TestAuth", options => { });

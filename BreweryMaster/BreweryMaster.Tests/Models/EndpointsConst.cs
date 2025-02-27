@@ -19,5 +19,7 @@
         public static readonly string UserDetails = $"{User}/Details";
         public static readonly string UserLogout = $"{User}/Logout";
         public static readonly string UserAddTestUsers = $"{User}/AddTestUsers";
+
+        public static readonly string Address = $"{Base}/Address";
     }
 }

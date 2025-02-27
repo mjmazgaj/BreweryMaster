@@ -1,13 +1,14 @@
 ﻿using BreweryMaster.API.SharedModule.Validators;
 using BreweryMaster.API.User.Models;
-using BreweryMaster.API.User.Models.Users.DB;
 using BreweryMaster.API.User.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BreweryMaster.API.User.Controllers
 {
-    public class AddressController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class AddressController : ControllerBase
     {
         private readonly IAddressService _addressService;
 
