@@ -21,5 +21,6 @@
         public static readonly string UserAddTestUsers = $"{User}/AddTestUsers";
 
         public static readonly string Address = $"{Base}/Address";
+        public static readonly string Recipe = $"{Base}/Recipe";
     }
 }

@@ -64,7 +64,7 @@ namespace BreweryMaster.API.Recipe.Services
             });
         }
 
-        public async Task<IEnumerable<RecipeResponse>> GetRecipesAsync(RecipeFilterRequest? request)
+        public async Task<IEnumerable<RecipeResponse>> GetRecipes(RecipeFilterRequest? request)
         {
             var recipes = new List<Models.DB.Recipe>();
 

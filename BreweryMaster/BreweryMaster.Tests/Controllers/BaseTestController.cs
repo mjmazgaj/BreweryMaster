@@ -1,4 +1,5 @@
-﻿using BreweryMaster.API.User.Services;
+﻿using BreweryMaster.API.Recipe.Services;
+using BreweryMaster.API.User.Services;
 using BreweryMaster.API.WorkModule.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,7 @@ public class BaseTestController : IDisposable
     protected readonly Mock<ITaskService> MockTaskService;
     protected readonly Mock<IUserService> MockUserService;
     protected readonly Mock<IAddressService> MockAddressService;
+    protected readonly Mock<IRecipeService> MockRecipeService;
     private readonly WebApplicationFactory<Program> ApplicationFactory;
 
     public BaseTestController()
@@ -21,6 +23,7 @@ public class BaseTestController : IDisposable
         this.MockTaskService = new Mock<ITaskService>();
         this.MockUserService = new Mock<IUserService>();
         this.MockAddressService = new Mock<IAddressService>();
+        this.MockRecipeService = new Mock<IRecipeService>();
 
         this.ApplicationFactory = new WebApplicationFactory<Program>().WithWebHostBuilder(
             builder => builder
@@ -30,6 +33,7 @@ public class BaseTestController : IDisposable
                 services.AddSingleton(this.MockTaskService.Object);
                 services.AddSingleton(this.MockUserService.Object);
                 services.AddSingleton(this.MockAddressService.Object);
+                services.AddSingleton(this.MockRecipeService.Object);
 
                 services.AddAuthentication("TestAuth")
                     .AddScheme<TestAuthOptions, TestAuthHandler>("TestAuth", options => { });

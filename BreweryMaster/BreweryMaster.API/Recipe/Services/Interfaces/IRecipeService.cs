@@ -8,7 +8,7 @@ namespace BreweryMaster.API.Recipe.Services
     public interface IRecipeService
     {
         Task<IEnumerable<RecipeDetailsResponse>> GetRecipeDetailsAsync();
-        Task<IEnumerable<RecipeResponse>> GetRecipesAsync(RecipeFilterRequest? request);
+        Task<IEnumerable<RecipeResponse>> GetRecipes(RecipeFilterRequest? request);
         Task<RecipeDetailsResponse?> GetRecipeDetailByIdAsync(int id);
         Task<IEnumerable<EntityResponse>> GetBeerStyleDropDownList();
         Task<IEnumerable<EntityResponse>> GetRecipeTypeDropDownList();

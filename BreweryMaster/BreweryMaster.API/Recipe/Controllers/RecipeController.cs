@@ -38,7 +38,7 @@ namespace BreweryMaster.API.Info.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<IEnumerable<RecipeResponse>>> GetRecipes([FromQuery] RecipeFilterRequest? request)
         {
-            var recipes = await _recipeService.GetRecipesAsync(request);
+            var recipes = await _recipeService.GetRecipes(request);
             return Ok(recipes);
         }
 
