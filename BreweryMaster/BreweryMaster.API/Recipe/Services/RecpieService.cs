@@ -64,9 +64,9 @@ namespace BreweryMaster.API.Recipe.Services
             });
         }
 
-        public async Task<IEnumerable<RecipeResponse>> GetRecipesAsync(RecipeFilterRequest? request = null)
+        public async Task<IEnumerable<RecipeResponse>> GetRecipesAsync(RecipeFilterRequest? request)
         {
-            var recipes = new List<Recipe.Models.DB.Recipe>();
+            var recipes = new List<Models.DB.Recipe>();
 
             if (request == null)
             {
@@ -102,6 +102,7 @@ namespace BreweryMaster.API.Recipe.Services
                 StyleId = x.Style?.Id,
             });
         }
+
         public async Task<RecipeDetailsResponse?> GetRecipeDetailByIdAsync(int id)
         {
             var recipes = await GetRecipeDetailsAsync();
@@ -109,7 +110,7 @@ namespace BreweryMaster.API.Recipe.Services
             return recipes.FirstOrDefault(x => x.GeneralInfo.Id == id);
         }
 
-        public async Task<IEnumerable<EntityResponse>?> GetBeerStyleDropDownList()
+        public async Task<IEnumerable<EntityResponse>> GetBeerStyleDropDownList()
         {
             return await _context.BeerStyles
                 .Select(x => new EntityResponse()
@@ -120,7 +121,7 @@ namespace BreweryMaster.API.Recipe.Services
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<EntityResponse>?> GetRecipeTypeDropDownList()
+        public async Task<IEnumerable<EntityResponse>> GetRecipeTypeDropDownList()
         {
             return await _context.RecipeTypes
                 .Select(x => new EntityResponse()
@@ -133,12 +134,16 @@ namespace BreweryMaster.API.Recipe.Services
 
         public async Task<RecipeDetailsResponse?> CreateRecipeDetailAsync(RecipeRequest request, ClaimsPrincipal? claims)
         {
-            using var transaction = await _context.Database.BeginTransactionAsync();
+
+            if (claims is null)
+                throw new UnauthorizedAccessException("Cant find user claims");
 
             var nameIdClaim = claims?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
 
             if (nameIdClaim is null)
                 throw new ArgumentNullException("Cant find logged user");
+
+            using var transaction = await _context.Database.BeginTransactionAsync();
 
             try
             {
@@ -191,7 +196,6 @@ namespace BreweryMaster.API.Recipe.Services
                 await transaction.CommitAsync();
 
                 return await GetRecipeDetailByIdAsync(recipeToCreate.Id);
-
             }
             catch (Exception)
             {
@@ -199,11 +203,6 @@ namespace BreweryMaster.API.Recipe.Services
 
                 throw;
             }
-        }
-
-        private bool RecpieExists(int id)
-        {
-            return _context.Recipes.Any(x => x.Id == id && !x.IsRemoved);
         }
     }
 }

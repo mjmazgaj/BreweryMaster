@@ -3,6 +3,7 @@ using BreweryMaster.API.Recipe.Models.Requests;
 using BreweryMaster.API.Recipe.Services;
 using BreweryMaster.API.Shared.Models;
 using BreweryMaster.API.SharedModule.Validators;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BreweryMaster.API.Info.Controllers
@@ -20,8 +21,10 @@ namespace BreweryMaster.API.Info.Controllers
 
         [HttpGet]
         [Route("Details")]
+        [Authorize(Roles = "brewer")]
         [ProducesResponseType(typeof(IEnumerable<RecipeDetailsResponse>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<IEnumerable<RecipeDetailsResponse>>> GetRecipeDetails()
         {
             var recipes = await _recipeService.GetRecipeDetailsAsync();
@@ -29,8 +32,10 @@ namespace BreweryMaster.API.Info.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [ProducesResponseType(typeof(IEnumerable<RecipeResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<IEnumerable<RecipeResponse>>> GetRecipes([FromQuery] RecipeFilterRequest? request)
         {
             var recipes = await _recipeService.GetRecipesAsync(request);
@@ -39,8 +44,11 @@ namespace BreweryMaster.API.Info.Controllers
 
         [HttpGet]
         [Route("{id:int}")]
+        [Authorize(Roles = "brewer")]
         [ProducesResponseType(typeof(RecipeDetailsResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<RecipeDetailsResponse>> GetRecipeDetailsById([MinIntValidation] int id)
         {
@@ -73,19 +81,19 @@ namespace BreweryMaster.API.Info.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "brewer")]
         [ProducesResponseType(typeof(RecipeDetailsResponse), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<RecipeDetailsResponse>> CreateRecipe([FromBody] RecipeRequest request)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
             var userContext = HttpContext.User;
 
             var createdRecipeDetails = await _recipeService.CreateRecipeDetailAsync(request, userContext);
 
             if (createdRecipeDetails == null)
-                return UnprocessableEntity();
+                return BadRequest();
 
             return CreatedAtAction(nameof(GetRecipeDetailsById), new { id = createdRecipeDetails.GeneralInfo.Id }, createdRecipeDetails);
         }
