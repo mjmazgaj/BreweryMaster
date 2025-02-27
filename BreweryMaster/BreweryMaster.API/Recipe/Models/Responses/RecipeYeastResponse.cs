@@ -3,14 +3,14 @@
     public class RecipeYeastResponse
     {
         public int Id { get; set; }
-        public required string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         public int TypeId { get; set; }
-        public required string TypeName { get; set; }
+        public string TypeName { get; set; } = string.Empty;
         public int FormId { get; set; }
-        public required string FormName { get; set; }
+        public string FormName { get; set; } = string.Empty;
         public string? Producer { get; set; }
         public decimal Quantity { get; set; }
-        public required string Unit { get; set; }
+        public string Unit { get; set; } = string.Empty;
         public string? Info { get; set; }
     }
 }

@@ -3,7 +3,7 @@
     public class RecipeResponse
     {
         public int Id { get; set; }
-        public required string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         public decimal? BLGScale { get; set; }
         public int? IBUScale { get; set; }
         public decimal? ABVScale { get; set; }
