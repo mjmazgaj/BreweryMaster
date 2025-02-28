@@ -71,6 +71,7 @@ namespace BreweryMaster.API.OrderModule.Services
 
             if (request is null)
                 response = await _context.ProspectOrders
+                                 .Where(x => !x.IsRemoved)
                                 .Include(x => x.BeerStyle)
                                 .Include(x => x.ProspectClient)
                                 .Include(x => x.Container)
@@ -91,6 +92,7 @@ namespace BreweryMaster.API.OrderModule.Services
             else
             {
                 response = await _context.ProspectOrders
+                                 .Where(x => !x.IsRemoved)
                                 .Include(x => x.BeerStyle)
                                 .Include(x => x.ProspectClient)
                                 .Include(x => x.Container)

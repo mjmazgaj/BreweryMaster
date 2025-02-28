@@ -27,5 +27,7 @@
         public static readonly string OrderAll = $"{Order}/All";
 
         public static readonly string ProspectClient = $"{Base}/ProspectClient";
+
+        public static readonly string ProspectOrder = $"{Base}/ProspectOrder";
     }
 }
