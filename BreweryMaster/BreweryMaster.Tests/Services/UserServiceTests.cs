@@ -2,6 +2,7 @@
 using BreweryMaster.API.User.Models.Requests;
 using BreweryMaster.API.User.Models.Users.DB;
 using BreweryMaster.API.User.Services;
+using BreweryMaster.Tests.Helpers;
 using BreweryMaster.Tests.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -23,13 +24,10 @@ namespace BreweryMaster.Tests.Services
             _addressService = new Mock<IAddressService>();
 
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "TestDb")
+                .UseInMemoryDatabase(databaseName: "UserDb")
                 .Options;
 
             _dbContext = new ApplicationDbContext(options);
-
-            _dbContext.Database.EnsureDeleted();
-            _dbContext.Database.EnsureCreated();
 
             var userStore = new Mock<IUserStore<ApplicationUser>>().Object;
             var optionsAccessor = new Mock<IOptions<IdentityOptions>>().Object;
@@ -54,13 +52,8 @@ namespace BreweryMaster.Tests.Services
 
         private void SeedDatabase()
         {
-            if (_dbContext.Users.Any())
-                return;
-
-            var user1 = new ApplicationUser { Id = TestConst.User1, UserName = TestConst.User1 };
-            var user2 = new ApplicationUser { Id = TestConst.User2, UserName = TestConst.User2 };
-
-            _dbContext.Users.AddRange(user1, user2);
+            if (!_dbContext.Users.Any())
+                _dbContext.Users.AddRange(UserDataProvider.GetUsers());
 
             _dbContext.SaveChanges();
         }

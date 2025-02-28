@@ -22,5 +22,8 @@
 
         public static readonly string Address = $"{Base}/Address";
         public static readonly string Recipe = $"{Base}/Recipe";
+
+        public static readonly string Order = $"{Base}/Order";
+        public static readonly string OrderAll = $"{Order}/All";
     }
 }

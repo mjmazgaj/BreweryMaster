@@ -31,6 +31,7 @@ namespace BreweryMaster.API.OrderModule.Services
                         .Include(x => x.Recipe)
                         .Include(x => x.Client)
                         .Include(x => x.CreatedByUser)
+                        .Where(x => !x.IsRemoved)
                         .Select(x => new OrderResponse()
                         {
                             Id = x.Id,
@@ -50,6 +51,7 @@ namespace BreweryMaster.API.OrderModule.Services
                         .Include(x => x.Recipe)
                         .Include(x => x.Client)
                         .Include(x => x.CreatedByUser)
+                        .Where(x => !x.IsRemoved)
                         .Where(x => request.CreatedBy == null || x.CreatedByUserId == request.CreatedBy)
                         .Where(x => request.ExpectedBefore == null || x.TargetDate >= request.ExpectedBefore)
                         .Where(x => request.ExpectedAfter == null || x.TargetDate <= request.ExpectedAfter)

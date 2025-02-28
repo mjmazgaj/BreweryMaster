@@ -28,13 +28,10 @@ public class KanbanTaskServiceTests
         _optionsMock = new Mock<IOptions<WorkSettings>>();
 
         var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-            .UseInMemoryDatabase(databaseName: "TestDb")
+            .UseInMemoryDatabase(databaseName: "TaskDb")
             .Options;
 
         _dbContext = new ApplicationDbContext(options);
-
-        _dbContext.Database.EnsureDeleted();
-        _dbContext.Database.EnsureCreated();
 
         SeedDatabase();
     }
