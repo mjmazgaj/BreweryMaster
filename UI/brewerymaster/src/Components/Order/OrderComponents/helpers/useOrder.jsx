@@ -35,9 +35,14 @@ export const useOrder = ({ user, setData }) => {
       recipeName: data?.recipeName,
     };
 
-    const path = createPath(apiEndpoints.orderAll, query);
+    const getOrdersPath = "";
 
-    fetchData(path, setData);
+    if (user?.roles?.includes("customer")) getOrdersPath = apiEndpoints.order;
+    else getOrdersPath = apiEndpoints.orderAll;
+
+    const pathWithQuery = createPath(getOrdersPath, query);
+
+    fetchData(pathWithQuery, setData);
   };
 
   const filterFields = {
@@ -62,7 +67,8 @@ export const useOrder = ({ user, setData }) => {
   };
 
   useEffect(() => {
-    if (user?.roles?.includes("customer")) fetchData(apiEndpoints.order, setData);
+    if (user?.roles?.includes("customer"))
+      fetchData(apiEndpoints.order, setData);
     else fetchData(apiEndpoints.orderAll, setData);
     fetchData(apiEndpoints.user, setUsers);
   }, []);

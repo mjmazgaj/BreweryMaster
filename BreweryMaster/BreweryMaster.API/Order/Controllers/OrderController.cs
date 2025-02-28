@@ -1,7 +1,7 @@
-﻿using BreweryMaster.API.Info.Models;
-using BreweryMaster.API.OrderModule.Models;
+﻿using BreweryMaster.API.OrderModule.Models;
 using BreweryMaster.API.Shared.Models;
 using BreweryMaster.API.SharedModule.Validators;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
@@ -22,8 +22,11 @@ namespace BreweryMaster.API.OrderModule.Controllers
 
         [HttpGet]
         [Route("All")]
+        [Authorize(Roles = "employee")]
         [ProducesResponseType(typeof(IEnumerable<OrderResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<IEnumerable<OrderResponse>>> GetOrders([FromQuery] OrderFilterRequest? request)
         {
             var orders = await _clientService.GetOrders(request);
@@ -32,8 +35,10 @@ namespace BreweryMaster.API.OrderModule.Controllers
 
         [HttpGet]
         [Route("DropDown")]
+        [Authorize(Roles = "employee")]
         [ProducesResponseType(typeof(IEnumerable<EntityResponse>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<IEnumerable<EntityResponse>>> GetOrderDropDownList()
         {
             var orders = await _clientService.GetOrderDropDownList();
@@ -41,8 +46,10 @@ namespace BreweryMaster.API.OrderModule.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "customer")]
         [ProducesResponseType(typeof(IEnumerable<OrderResponse>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<IEnumerable<OrderResponse>>> GetCurrentUserOrders()
         {
             var orders = await _clientService.GetCurrentUserOrders(HttpContext.User);
@@ -51,6 +58,7 @@ namespace BreweryMaster.API.OrderModule.Controllers
 
         [HttpGet]
         [Route("Status")]
+        [Authorize]
         [ProducesResponseType(typeof(IEnumerable<EntityResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<IEnumerable<EntityResponse>>> GetOrderStatuses()
@@ -61,8 +69,9 @@ namespace BreweryMaster.API.OrderModule.Controllers
 
         [HttpGet]
         [Route("{id:int}")]
+        [Authorize]
         [ProducesResponseType(typeof(OrderResponse), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<OrderResponse>> GetOrderById([MinIntValidation] int id)
         {
@@ -76,8 +85,10 @@ namespace BreweryMaster.API.OrderModule.Controllers
 
         [HttpGet]
         [Route("Details/{id:int}")]
+        [Authorize]
         [ProducesResponseType(typeof(OrderDetailsResponse), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<OrderDetailsResponse>> GetOrderDetailsById([MinIntValidation] int id)
         {
@@ -93,61 +104,78 @@ namespace BreweryMaster.API.OrderModule.Controllers
         [HttpGet]
         [Route("Price")]
         [ProducesResponseType(typeof(decimal), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<decimal>> GetOrderPrice([FromQuery] OrderPriceRequest request)
         {
             var price = await _clientService.GetOrderPrice(request);
+
+            if (price is null)
+                return BadRequest();
 
             return Ok(price);
         }
 
         [HttpPost]
+        [Authorize]
         [ProducesResponseType(typeof(OrderResponse), StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<OrderResponse>> CreateOrder([FromBody] OrderRequest request)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
             var createdClient = await _clientService.CreateOrderAsync(request, HttpContext.User);
+
+            if (createdClient == null)
+                return BadRequest();
+
             return CreatedAtAction(nameof(GetOrderById), new { id = createdClient.Id }, createdClient);
         }
 
         [HttpPost]
         [Route("Status")]
+        [Authorize(Roles = "employee")]
         [ProducesResponseType(typeof(OrderStatusChangeResponse), StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<OrderStatusChangeResponse>> CreateOrderStatusChange(OrderStatusChangeRequest request)
         {
             var createOrderStatusChange = await _clientService.CreateOrderStatusChange(request);
             return Ok(createOrderStatusChange);
         }
 
-        [HttpPut]
+        [HttpPatch]
         [Route("{id:int}")]
-        [ProducesResponseType(typeof(OrderResponse), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize(Roles = "supervisor")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> EditOrder(int id, [FromBody] OrderUpdateRequest orders)
+        public async Task<ActionResult> EditOrder([MinIntValidation] int id, [FromBody] OrderUpdateRequest orders)
         {
-            if (!await _clientService.EditOrderAsync(id, orders))
+            var isUpdated = await _clientService.EditOrderAsync(id, orders);
+
+            if (!isUpdated)
                 return NotFound();
 
-            return Ok();
+            return Ok(isUpdated);
         }
 
-        [HttpDelete]
-        [Route("{id:int}")]
-        [ProducesResponseType(typeof(OrderResponse), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpPatch]
+        [Route("Delete/{id:int}")]
+        [Authorize(Roles = "manager")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> DeleteOrderById([MinIntValidation] int id)
         {
-            if (!await _clientService.DeleteOrderByIdAsync(id))
+            var isUpdated = await _clientService.DeleteOrderByIdAsync(id);
+
+            if (!isUpdated)
                 return NotFound();
 
-            return Ok();
+            return Ok(isUpdated);
         }
     }
 }

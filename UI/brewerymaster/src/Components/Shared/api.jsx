@@ -95,6 +95,7 @@ export const apiEndpoints = {
   orderDropDown: "Order/DropDown",
   orderStatus: "Order/Status",
   orderDetails: "Order/Details",
+  orderDelete: "Order/Delete",
   order: "Order",
   orderAll: "Order/All",
 
@@ -113,6 +114,7 @@ export const apiEndpoints = {
   userRoles: "User/Roles",
   userDetails: "User/Details",
   userPassword: "User/Password",
+  userDelete: "User/Delete",
   userInfo: "User/Info",
   user: "User",
 

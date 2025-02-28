@@ -1,5 +1,4 @@
-﻿using BreweryMaster.API.Info.Models;
-using BreweryMaster.API.OrderModule.Models;
+﻿using BreweryMaster.API.OrderModule.Models;
 using BreweryMaster.API.Recipe.Models;
 using BreweryMaster.API.Shared.Helpers;
 using BreweryMaster.API.Shared.Models;
@@ -7,8 +6,6 @@ using BreweryMaster.API.Shared.Models.DB;
 using BreweryMaster.API.User.Services;
 using BreweryMaster.API.UserModule.Helpers;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using System.Linq;
 using System.Security.Claims;
 
 namespace BreweryMaster.API.OrderModule.Services
@@ -16,23 +13,19 @@ namespace BreweryMaster.API.OrderModule.Services
     public class OrderService : IOrderService
     {
         private readonly ApplicationDbContext _context;
-        private readonly IOptions<OrderSettings> options;
         private readonly IUserService _userService;
-        private readonly OrderSettings _settings;
 
-        public OrderService(ApplicationDbContext context, IOptions<OrderSettings> options, IUserService userService)
+        public OrderService(ApplicationDbContext context, IUserService userService)
         {
             _context = context;
-            this.options = options;
             _userService = userService;
-            _settings = options.Value;
         }
 
         public async Task<IEnumerable<OrderResponse>> GetOrders(OrderFilterRequest? request = null)
         {
             var response = new List<OrderResponse>();
 
-            if(request is null)
+            if (request is null)
                 response = await _context.Orders
                         .Include(x => x.Container)
                         .Include(x => x.Recipe)
@@ -57,10 +50,10 @@ namespace BreweryMaster.API.OrderModule.Services
                         .Include(x => x.Recipe)
                         .Include(x => x.Client)
                         .Include(x => x.CreatedByUser)
-                        .Where(x => request.CreatedBy == null ||  x.CreatedByUserId == request.CreatedBy)
-                        .Where(x => request.ExpectedBefore == null ||  x.TargetDate >= request.ExpectedBefore)
-                        .Where(x => request.ExpectedAfter == null ||  x.TargetDate <= request.ExpectedAfter)
-                        .Where(x => request.RecipeName == null ||  x.Recipe.Name.ToLower().Contains(request.RecipeName.ToLower()))
+                        .Where(x => request.CreatedBy == null || x.CreatedByUserId == request.CreatedBy)
+                        .Where(x => request.ExpectedBefore == null || x.TargetDate >= request.ExpectedBefore)
+                        .Where(x => request.ExpectedAfter == null || x.TargetDate <= request.ExpectedAfter)
+                        .Where(x => request.RecipeName == null || x.Recipe.Name.ToLower().Contains(request.RecipeName.ToLower()))
                         .Select(x => new OrderResponse()
                         {
                             Id = x.Id,
@@ -89,12 +82,12 @@ namespace BreweryMaster.API.OrderModule.Services
                         }).ToListAsync();
         }
 
-        public async Task<IEnumerable<OrderResponse>> GetCurrentUserOrders(ClaimsPrincipal claims)
+        public async Task<IEnumerable<OrderResponse>> GetCurrentUserOrders(ClaimsPrincipal? claims)
         {
             var currentUser = await _userService.GetCurrentUser(claims);
 
             return await _context.Orders
-                        .Where(x=>x.CreatedByUserId == currentUser.Id)
+                        .Where(x => x.CreatedByUserId == currentUser.Id)
                         .Include(x => x.Container)
                         .Include(x => x.Recipe)
                         .Include(x => x.Client)
@@ -155,8 +148,8 @@ namespace BreweryMaster.API.OrderModule.Services
 
             var statusChanges = await _context.OrderStatusChanges
                                 .Where(x => x.OrderId == id)
-                                .Include(x=>x.OrderStatus)
-                                .OrderBy(x=>x.ChangedOn).ToListAsync();
+                                .Include(x => x.OrderStatus)
+                                .OrderBy(x => x.ChangedOn).ToListAsync();
 
             return new OrderDetailsResponse()
             {
@@ -181,9 +174,9 @@ namespace BreweryMaster.API.OrderModule.Services
                 },
                 TargetDate = DateOnly.FromDateTime(order.TargetDate),
                 CreatedOn = DateOnly.FromDateTime(order.CreatedOn),
-                StatusId = statusChanges.LastOrDefault()?.OrderStatusId ?? 1,
-                Status = statusChanges.LastOrDefault()?.OrderStatus.Name ?? "NotSet",
-                StatusChanges = statusChanges.Select(x=>new OrderStatusChangeResponse()
+                StatusId = statusChanges?.LastOrDefault()?.OrderStatusId ?? 1,
+                Status = statusChanges?.LastOrDefault()?.OrderStatus.Name ?? "NotSet",
+                StatusChanges = statusChanges?.Select(x => new OrderStatusChangeResponse()
                 {
                     OrderId = order.Id,
                     OrderStatusId = x.OrderStatusId,
@@ -194,7 +187,7 @@ namespace BreweryMaster.API.OrderModule.Services
             };
         }
 
-        public async Task<decimal> GetOrderPrice(OrderPriceRequest request)
+        public async Task<decimal?> GetOrderPrice(OrderPriceRequest request)
         {
             var recipe = await _context.Recipes.FirstOrDefaultAsync(x => x.Id == request.RecipeId);
             var container = await _context.ContainerPrices
@@ -205,7 +198,7 @@ namespace BreweryMaster.API.OrderModule.Services
                                 .FirstOrDefaultAsync();
 
             if (recipe is null || container is null)
-                throw new ArgumentNullException("Container or recipe wasn't found.");
+                return null;
 
             if (recipe.ExpectedBeerVolume == 0 || container.Container.Capacity == 0)
                 throw new DivideByZeroException("ExpectedBeerVolume and Container Capacity can't be zero.");
@@ -216,22 +209,26 @@ namespace BreweryMaster.API.OrderModule.Services
             return Math.Floor((beerPrice + containerPrice) / 1000) * 1000;
         }
 
-        public async Task<Order> CreateOrderAsync(OrderRequest request, ClaimsPrincipal? user)
+        public async Task<Order?> CreateOrderAsync(OrderRequest request, ClaimsPrincipal? user)
         {
             var currentUser = await _userService.GetCurrentUser(user);
-            var price = await GetOrderPrice(new OrderPriceRequest() 
-                            { 
-                                Capacity = request.Capacity, 
-                                ContainerId = request.ContainerId, 
-                                RecipeId = request.RecipeId 
-                            });
+
+            var price = await GetOrderPrice(new OrderPriceRequest()
+            {
+                Capacity = request.Capacity,
+                ContainerId = request.ContainerId,
+                RecipeId = request.RecipeId
+            });
+
+            if(price is null)
+                return null;
 
             var clientToCreate = new Order()
             {
                 Capacity = request.Capacity,
                 ContainerId = request.ContainerId,
                 Container = null!,
-                Price = price,
+                Price = (decimal)price,
                 RecipeId = request.RecipeId,
                 Recipe = null!,
                 TargetDate = request.TargetDate,
@@ -272,9 +269,6 @@ namespace BreweryMaster.API.OrderModule.Services
 
         public async Task<bool> EditOrderAsync(int id, OrderUpdateRequest request)
         {
-            if (request.Id != id)
-                return false;
-
             var orderToUpdate = await _context.Orders.FirstOrDefaultAsync(x => x.Id == id);
 
             if (orderToUpdate is null)
@@ -286,7 +280,6 @@ namespace BreweryMaster.API.OrderModule.Services
             orderToUpdate.TargetDate = request.TargetDate ?? orderToUpdate.TargetDate;
 
             _context.Orders.Update(orderToUpdate);
-
             await _context.SaveChangesAsync();
 
             return true;
@@ -294,12 +287,14 @@ namespace BreweryMaster.API.OrderModule.Services
 
         public async Task<bool> DeleteOrderByIdAsync(int id)
         {
-            var order = await _context.Orders.FirstOrDefaultAsync(x => x.Id == id);
+            var orderToUpdate = await _context.Orders.FirstOrDefaultAsync(x => x.Id == id);
 
-            if (order == null)
+            if (orderToUpdate == null)
                 return false;
 
-            _context.Orders.Remove(order);
+            orderToUpdate.IsRemoved = true;
+
+            _context.Orders.Update(orderToUpdate);
             await _context.SaveChangesAsync();
 
             return true;

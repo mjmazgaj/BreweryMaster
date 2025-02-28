@@ -3,6 +3,7 @@ import { Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { toast } from "react-toastify";
 import { addData, fetchData, apiEndpoints } from "../../Shared/api";
+import { useUser } from "../../Security/UserProvider";
 
 import { useTranslation } from "react-i18next";
 
@@ -14,12 +15,14 @@ const OrderForm = ({ setData, setIsAddMode }) => {
   const { t } = useTranslation();
   const [orderData, setOrderData] = useState({});
   const [isValid, setIsValid] = useState(false);
+  const { user } = useUser();
 
   const [currentStep, setCurrentStep] = useState(0);
 
   const handleSave = async () => {
     await addData(apiEndpoints.order, orderData);
-    fetchData(apiEndpoints.orderAll, setData);
+    if (user?.roles?.includes("customer")) fetchData(apiEndpoints.order, setData);
+    else fetchData(apiEndpoints.orderAll, setData);
     setIsAddMode(false);
   };
 
