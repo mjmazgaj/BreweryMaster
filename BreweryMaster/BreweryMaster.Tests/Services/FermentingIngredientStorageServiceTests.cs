@@ -10,7 +10,7 @@ namespace BreweryMaster.Tests.Services
         {
 
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-            .UseInMemoryDatabase(databaseName: "TestDb")
+            .UseInMemoryDatabase(databaseName: "FermentingIngredientStorageDb")
                 .Options;
 
             _dbContext = new ApplicationDbContext(options);

@@ -9,12 +9,10 @@ namespace BreweryMaster.API.OrderModule.Services
     public class ProspectClientService : IProspectClientService
     {
         private readonly ApplicationDbContext _context;
-        private readonly OrderSettings _settings;
 
-        public ProspectClientService(ApplicationDbContext context, IOptions<OrderSettings> options)
+        public ProspectClientService(ApplicationDbContext context)
         {
             _context = context;
-            _settings = options.Value;
         }
 
         public async Task<IEnumerable<ProspectClientResponse>> GetProspectClientsAsync()

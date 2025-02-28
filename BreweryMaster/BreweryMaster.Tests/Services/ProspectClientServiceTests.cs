@@ -1,4 +1,5 @@
-﻿using BreweryMaster.API.Shared.Helpers;
+﻿using BreweryMaster.API.OrderModule.Services;
+using BreweryMaster.API.Shared.Helpers;
 using BreweryMaster.API.Shared.Models.DB;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,13 +12,10 @@ namespace BreweryMaster.Tests.Services
         {
 
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-            .UseInMemoryDatabase(databaseName: "TestDb")
+            .UseInMemoryDatabase(databaseName: "ProspectClientDb")
                 .Options;
 
             _dbContext = new ApplicationDbContext(options);
-
-            _dbContext.Database.EnsureDeleted();
-            _dbContext.Database.EnsureCreated();
 
             SeedDatabase();
         }
@@ -28,6 +26,21 @@ namespace BreweryMaster.Tests.Services
                 _dbContext.ProspectClients.AddRange(OrderDataProvider.GetProspectIndyvidualClients());
 
             _dbContext.SaveChanges();
+        }
+
+        [Fact]
+        public async Task GetProspectClientsAsync_ShouldReturn_AllProspectClients()
+        {
+            // Arrange
+            var service = new ProspectClientService(_dbContext);
+
+            // Act
+            var result = await service.GetProspectClientsAsync();
+            var expectedResult = OrderDataProvider.GetProspectIndyvidualClients();
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(expectedResult.Count(), result.Count());
         }
     }
 }
