@@ -1,5 +1,4 @@
 ﻿using BreweryMaster.API.Info.Models;
-using Microsoft.Identity.Client;
 
 public static class FermentingIngredientDataProvider
 {

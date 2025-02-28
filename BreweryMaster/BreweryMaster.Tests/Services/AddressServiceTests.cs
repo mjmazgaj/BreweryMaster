@@ -1,10 +1,7 @@
 ﻿using BreweryMaster.API.Shared.Models.DB;
-using BreweryMaster.API.User.Models.Requests;
-using BreweryMaster.API.User.Models.Users.DB;
 using BreweryMaster.API.User.Services;
 using BreweryMaster.API.UserModule.Models;
 using BreweryMaster.Tests.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace BreweryMaster.Tests.Services

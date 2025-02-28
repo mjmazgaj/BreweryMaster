@@ -1,4 +1,5 @@
 ﻿using BreweryMaster.API.OrderModule.Models;
+using BreweryMaster.API.User.Models.Users.DB;
 
 namespace BreweryMaster.API.Shared.Helpers
 {
