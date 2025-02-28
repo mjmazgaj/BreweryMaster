@@ -1,14 +1,6 @@
-﻿using BreweryMaster.API.Shared.Models;
-using BreweryMaster.API.User.Models;
-using BreweryMaster.API.UserModule.Models;
-using BreweryMaster.API.Work.Models.Requests;
-using BreweryMaster.API.WorkModule.Models;
+﻿using BreweryMaster.API.User.Models;
 using BreweryMaster.Tests.Models;
-using Microsoft.AspNetCore.WebUtilities;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 
 namespace BreweryMaster.Tests.Controllers
