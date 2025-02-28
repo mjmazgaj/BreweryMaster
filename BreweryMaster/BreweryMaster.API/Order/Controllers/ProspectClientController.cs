@@ -21,8 +21,12 @@ namespace BreweryMaster.API.OrderModule.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "employee")]
         [ProducesResponseType(typeof(IEnumerable<ProspectClientResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<IEnumerable<ProspectClientResponse>>> GetProspectClients()
         {
             var clients = await _clientService.GetProspectClientsAsync();
@@ -31,8 +35,12 @@ namespace BreweryMaster.API.OrderModule.Controllers
 
         [HttpGet]
         [Route("DropDown")]
+        [Authorize(Roles = "employee")]
         [ProducesResponseType(typeof(IEnumerable<EntityResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<IEnumerable<EntityResponse>>> GetProspectClientDropDownList()
         {
             var clients = await _clientService.GetProspectClientDropDownList();
@@ -41,8 +49,11 @@ namespace BreweryMaster.API.OrderModule.Controllers
 
         [HttpGet]
         [Route("{id:int}")]
+        [Authorize(Roles = "employee")]
         [ProducesResponseType(typeof(ProspectClientResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ProspectClientResponse>> GetProspectClientById([MinIntValidation] int id)
         {
@@ -63,7 +74,7 @@ namespace BreweryMaster.API.OrderModule.Controllers
             return CreatedAtAction(nameof(GetProspectClientById), new { id = createdClient.Id }, createdClient);
         }
 
-        [HttpPut]
+        [HttpPatch]
         [Route("{id:int}")]
         [Authorize(Roles = "supervisor")]
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
@@ -84,8 +95,8 @@ namespace BreweryMaster.API.OrderModule.Controllers
             return Ok(isupdated);
         }
 
-        [HttpDelete]
-        [Route("{id:int}")]
+        [HttpPatch]
+        [Route("Delete/{id:int}")]
         [Authorize(Roles = "supervisor")]
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]

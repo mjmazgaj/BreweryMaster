@@ -1,6 +1,7 @@
 ﻿using BreweryMaster.API.OrderModule.Models;
 using BreweryMaster.API.OrderModules.Models;
 using BreweryMaster.API.SharedModule.Validators;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
@@ -23,7 +24,6 @@ namespace BreweryMaster.API.OrderModule.Controllers
         [Route("Price")]
         [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<decimal>> GetEstimatedPrice([FromQuery] ProspectPriceEstimationRequest request)
         {
             return await _prospectOrderService.GetEstimatedPrice(request);
@@ -32,19 +32,24 @@ namespace BreweryMaster.API.OrderModule.Controllers
         [HttpGet]
         [Route("Details")]
         [ProducesResponseType(typeof(ProspectOrderDetails), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ProspectOrderDetails>> GetProspectOrderDetails()
         {
             var prospectOrderDetails = await _prospectOrderService.GetProspectOrderDetails();
+
             if (prospectOrderDetails == null)
                 return NotFound();
+
             return Ok(prospectOrderDetails);
         }
 
         [HttpGet]
+        [Authorize(Roles = "employee")]
         [ProducesResponseType(typeof(IEnumerable<ProspectOrderResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<IEnumerable<ProspectOrderResponse>>> GetProspectOrders([FromQuery] ProspectOrderFilterRequest? request)
         {
             var orders = await _prospectOrderService.GetProspectOrdersAsync(request);
@@ -53,8 +58,11 @@ namespace BreweryMaster.API.OrderModule.Controllers
 
         [HttpGet]
         [Route("{id:int}")]
+        [Authorize(Roles = "employee")]
         [ProducesResponseType(typeof(ProspectOrder), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ProspectOrder>> GetProspectOrderById([MinIntValidation] int id)
         {
@@ -68,51 +76,54 @@ namespace BreweryMaster.API.OrderModule.Controllers
 
         [HttpPost]
         [ProducesResponseType(typeof(ProspectOrder), StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<ProspectOrder>> CreateProspectOrder([FromBody] ProspectOrderRequest request)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
             var createdOrder = await _prospectOrderService.CreateProspectOrderAsync(request);
 
             if (createdOrder is null)
-                return UnprocessableEntity();
+                return BadRequest();
 
             return CreatedAtAction(nameof(GetProspectOrderById), new { id = createdOrder.Id }, createdOrder);
         }
 
-        [HttpPut]
+        [HttpPatch]
         [Route("{id:int}")]
-        [ProducesResponseType(typeof(ProspectOrder), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize(Roles = "supervisor")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> EditProspectOrder(int id, [FromBody] ProspectOrder order)
+        public async Task<ActionResult<bool>> EditProspectOrder([MinIntValidation] int id, [FromBody] ProspectOrderUpdateRequest request)
         {
-            if (!await _prospectOrderService.EditProspectOrderAsync(id, order))
+            if (id != request.Id)
+                return BadRequest();
+
+            var isUpdated = await _prospectOrderService.EditProspectOrderAsync(id, request);
+
+            if (!isUpdated)
                 return NotFound();
 
-            return Ok();
+            return Ok(isUpdated);
         }
 
         [HttpPatch]
         [Route("Delete/{id:int}")]
-        [ProducesResponseType(typeof(ProspectOrder), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize(Roles = "supervisor")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> DeleteProspectOrderById([MinIntValidation] int id)
+        public async Task<ActionResult<bool>> DeleteProspectOrderById([MinIntValidation] int id)
         {
-            if (!await _prospectOrderService.DeleteProspectOrderByIdAsync(id))
+            var isDeleted = await _prospectOrderService.DeleteProspectOrderByIdAsync(id);
+
+            if (!isDeleted)
                 return NotFound();
 
-            return Ok();
-        }
-
-        [HttpGet]
-        [Route("testowo")]
-        public ActionResult Testowo()
-        {
-            return Ok(_settings);
+            return Ok(isDeleted);
         }
     }
 }

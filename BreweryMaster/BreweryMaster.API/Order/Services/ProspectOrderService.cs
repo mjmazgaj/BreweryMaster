@@ -1,25 +1,24 @@
-﻿using BreweryMaster.API.Info.Models;
-using BreweryMaster.API.OrderModule.Helpers;
+﻿using BreweryMaster.API.OrderModule.Helpers;
 using BreweryMaster.API.OrderModule.Models;
 using BreweryMaster.API.OrderModules.Models;
 using BreweryMaster.API.Shared.Helpers;
 using BreweryMaster.API.Shared.Models;
 using BreweryMaster.API.Shared.Models.DB;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 
 namespace BreweryMaster.API.OrderModule.Services
 {
     public class ProspectOrderService : IProspectOrderService
     {
+        private readonly IProspectClientService _prospectClientService;
         private readonly ApplicationDbContext _context;
-        private readonly OrderSettings _settings;
 
-        public ProspectOrderService(ApplicationDbContext context, IOptions<OrderSettings> options)
+        public ProspectOrderService(ApplicationDbContext context, IProspectClientService prospectClientService)
         {
             _context = context;
-            _settings = options.Value;
+            _prospectClientService = prospectClientService;
         }
+
         public async Task<ProspectOrderDetails> GetProspectOrderDetails()
         {
             var beerStyles = await _context.BeerStyles
@@ -43,17 +42,18 @@ namespace BreweryMaster.API.OrderModule.Services
                 ContainerTypes = containerTypes,
             };
         }
+
         public async Task<decimal> GetEstimatedPrice(ProspectPriceEstimationRequest request)
         {
             var beerType = await _context.BeerPrices
-                                .FirstOrDefaultAsync(x=>x.Id ==request.BeerType);
+                                .FirstOrDefaultAsync(x => x.Id == request.BeerType);
             var containerType = await _context.ContainerPrices
-                                .Include(x=>x.Container)
-                                    .ThenInclude(x=>x.UnitEntity)
+                                .Include(x => x.Container)
+                                    .ThenInclude(x => x.UnitEntity)
                                 .FirstOrDefaultAsync(x => x.Id == request.ContainerType);
 
             if (beerType is null || containerType is null)
-                throw new Exception();
+                throw new ArgumentNullException($"{nameof(containerType)} and {nameof(beerType)} can not be null");
 
             var containerCapacityInLitters = UnitHelper.ConvertToLitters(containerType!.Container.UnitEntity, containerType!.Container.Capacity);
 
@@ -65,9 +65,8 @@ namespace BreweryMaster.API.OrderModule.Services
             return Math.Round(beerPrice + containerPrice, 0);
         }
 
-        public async Task<IEnumerable<ProspectOrderResponse>> GetProspectOrdersAsync(ProspectOrderFilterRequest? request = null)
+        public async Task<IEnumerable<ProspectOrderResponse>> GetProspectOrdersAsync(ProspectOrderFilterRequest? request)
         {
-
             var response = new List<ProspectOrderResponse>();
 
             if (request is null)
@@ -125,114 +124,59 @@ namespace BreweryMaster.API.OrderModule.Services
 
         public async Task<ProspectOrder?> CreateProspectOrderAsync(ProspectOrderRequest request)
         {
+            var client = await _prospectClientService.CreateProspectClientAsync(request.Client);
 
-            using var transaction = await _context.Database.BeginTransactionAsync();
+            if (client is null)
+                throw new Exception("client can not be null");
 
-            try
+            var orderToCreate = new ProspectOrder()
             {
+                TargetDate = request.TargetDate,
+                ProspectClientId = client.Id,
+                ProspectClient = null!,
+                BeerStyleId = request.BeerStyleId,
+                BeerStyle = null!,
+                ContainerId = request.ContainerId,
+                Container = null!,
+                Capacity = request.Capacity,
+                CreatedOn = DateTime.Now,
+            };
 
-                ProspectClient clientToCreate = null!;
+            _context.ProspectOrders.Add(orderToCreate);
+            await _context.SaveChangesAsync();
 
-                if (request.IsCompany && !string.IsNullOrEmpty(request.CompanyName))
-                {
-                    clientToCreate = new ProspectCompanyClient()
-                    {
-                        CompanyName = request.CompanyName,
-                        Email = "email@test.pl",
-                        Nip = request.NIP,
-                        Orders = null!,
-                        PhoneNumber = request.PhoneNumber,
-                        CreatedOn = DateTime.Now,
-                    };
-
-                    _context.ProspectClients.Add(clientToCreate);
-                    await _context.SaveChangesAsync();
-                }
-                else if (!string.IsNullOrEmpty(request.Forename) && !string.IsNullOrEmpty(request.Surname))
-                {
-                    clientToCreate = new ProspectIndyvidualClient()
-                    {
-                        Forename = request.Forename,
-                        Surname = request.Surname,
-                        Email = "email@test.pl",
-                        Orders = null!,
-                        PhoneNumber = request.PhoneNumber,
-                        CreatedOn = DateTime.Now,
-                    };
-
-                    _context.ProspectClients.Add(clientToCreate);
-                    await _context.SaveChangesAsync();
-                }
-
-                if (clientToCreate is null)
-                    throw new Exception("ClientToCreate can not be null");
-
-                var orderToCreate = new ProspectOrder()
-                {
-                    TargetDate = request.TargetDate,
-                    ProspectClientId = clientToCreate.Id,
-                    ProspectClient = null!,
-                    BeerStyleId = request.BeerStyleId,
-                    BeerStyle = null!,
-                    ContainerId = request.ContainerId,
-                    Container = null!,
-                    Capacity = request.Capacity,
-                    CreatedOn = DateTime.Now,
-                };
-
-                _context.ProspectOrders.Add(orderToCreate);
-                await _context.SaveChangesAsync();
-
-                await transaction.CommitAsync();
-
-                return await GetProspectOrderByIdAsync(orderToCreate.Id);
-            }
-            catch (Exception)
-            {
-                await transaction.RollbackAsync();
-
-                throw;
-            }
+            return await GetProspectOrderByIdAsync(orderToCreate.Id);
         }
 
-        public async Task<bool> EditProspectOrderAsync(int id, ProspectOrder order)
+        public async Task<bool> EditProspectOrderAsync(int id, ProspectOrderUpdateRequest request)
         {
-            if (id != order.Id)
+            var orderToUpdate = await _context.ProspectOrders.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (orderToUpdate == null)
                 return false;
 
-            _context.Entry(order).State = EntityState.Modified;
+            orderToUpdate.BeerStyleId = request.BeerStyleId ?? orderToUpdate.BeerStyleId;
+            orderToUpdate.ContainerId = request.ContainerId ?? orderToUpdate.ContainerId;
+            orderToUpdate.Capacity = request.Capacity ?? orderToUpdate.Capacity;
+            orderToUpdate.TargetDate = request.TargetDate ?? orderToUpdate.TargetDate;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProspectOrdersExists(id))
-                    return false;
-                else
-                    throw;
-            }
+            await _context.SaveChangesAsync();
 
             return true;
         }
 
         public async Task<bool> DeleteProspectOrderByIdAsync(int id)
         {
-            var order = await _context.ProspectOrders.FirstOrDefaultAsync(x => x.Id == id);
+            var orderToRemove = await _context.ProspectOrders.FirstOrDefaultAsync(x => x.Id == id);
 
-            if (order == null)
+            if (orderToRemove == null)
                 return false;
 
-            _context.ProspectOrders.Remove(order);
+            orderToRemove.IsRemoved = true;
+
             await _context.SaveChangesAsync();
 
             return true;
-        }
-
-        private bool ProspectOrdersExists(int id)
-        {
-            return _context.ProspectOrders.Any(x => x.Id == id);
         }
     }
 }

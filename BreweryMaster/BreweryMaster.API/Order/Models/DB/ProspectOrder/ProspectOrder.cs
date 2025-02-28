@@ -61,5 +61,10 @@ namespace BreweryMaster.API.OrderModule.Models
         /// The is closed indicator
         /// </summary>
         public bool IsClosed { get; set; } = false;
+
+        /// <summary>
+        /// The is removed indicator
+        /// </summary>
+        public bool IsRemoved { get; set; } = false;
     }
 }
