@@ -4,9 +4,8 @@ namespace BreweryMaster.API.OrderModule.Models
 {
     public class ProspectClientRequest
     {
-        [Required]
-        [MaxLength(256)]
-        public required string Forename { get; set; }
+        public ProspectClientCompanyRequest? CompanyClient { get; set; }
+        public ProspectClientIndividualRequest? IndividualClient { get; set; }
 
         [Required]
         [MaxLength(50)]
@@ -17,5 +16,7 @@ namespace BreweryMaster.API.OrderModule.Models
         [MaxLength(256)]
         [EmailAddress]
         public required string Email { get; set; }
+
+        public bool IsCompany { get; set; }
     }
 }

@@ -7,6 +7,6 @@ public interface IProspectClientService
     Task<IEnumerable<EntityResponse>> GetProspectClientDropDownList();
     Task<ProspectClientResponse?> GetProspectClientByIdAsync(int id);
     Task<ProspectClient> CreateProspectClientAsync(ProspectClientRequest client);
-    Task<bool> EditProspectClientAsync(int id, ProspectClientResponse client);
+    Task<bool> EditProspectClientAsync(int id, ProspectClientUpdateRequest client);
     Task<bool> DeleteProspectClientByIdAsync(int id);
 }

@@ -1,6 +1,7 @@
 ﻿using BreweryMaster.API.OrderModule.Models;
 using BreweryMaster.API.Shared.Models;
 using BreweryMaster.API.SharedModule.Validators;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
@@ -13,7 +14,7 @@ namespace BreweryMaster.API.OrderModule.Controllers
         private readonly IProspectClientService _clientService;
         private readonly OrderSettings _settings;
 
-        public ProspectClientController(IProspectClientService clientService,  IOptions<OrderSettings> options)
+        public ProspectClientController(IProspectClientService clientService, IOptions<OrderSettings> options)
         {
             _clientService = clientService;
             _settings = options.Value;
@@ -58,44 +59,47 @@ namespace BreweryMaster.API.OrderModule.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<ProspectClientResponse>> CreateProspectClient([FromBody] ProspectClientRequest request)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
             var createdClient = await _clientService.CreateProspectClientAsync(request);
             return CreatedAtAction(nameof(GetProspectClientById), new { id = createdClient.Id }, createdClient);
         }
 
         [HttpPut]
         [Route("{id:int}")]
-        [ProducesResponseType(typeof(ProspectClientResponse), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize(Roles = "supervisor")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> EditProspectClient(int id, [FromBody] ProspectClientResponse client)
+        public async Task<ActionResult<bool>> EditProspectClient([MinIntValidation] int id, [FromBody] ProspectClientUpdateRequest request)
         {
-            if (!await _clientService.EditProspectClientAsync(id, client))
+            if(id != request.Id)
+                return BadRequest();
+
+            var isupdated = await _clientService.EditProspectClientAsync(id, request);
+
+            if (!isupdated)
                 return NotFound();
 
-            return Ok();
+            return Ok(isupdated);
         }
 
         [HttpDelete]
         [Route("{id:int}")]
-        [ProducesResponseType(typeof(ProspectClientResponse), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize(Roles = "supervisor")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> DeleteProspectClientById([MinIntValidation] int id)
+        public async Task<ActionResult<bool>> DeleteProspectClientById([MinIntValidation] int id)
         {
-            if (!await _clientService.DeleteProspectClientByIdAsync(id))
+            var isDeleted = await _clientService.DeleteProspectClientByIdAsync(id);
+
+            if (!isDeleted)
                 return NotFound();
 
-            return Ok();
-        }
-
-        [HttpGet]
-        [Route("testowo")]
-        public ActionResult Testowo()
-        {
-            return Ok(_settings);
+            return Ok(isDeleted);
         }
     }
 }
