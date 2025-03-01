@@ -13,6 +13,7 @@ import Kanban from "../../Work/Kanban";
 import Unauthorized from "../Unuthorized";
 import Error from "../../Shared/Error";
 import OrderDetails from "../../Order/OrderDetails";
+import FermentingIngredientDetails from "../../Info/FermentingIngredients/FermentingIngredientDetails";
 
 export const useApp = () => {
   const routes = [
@@ -36,8 +37,13 @@ export const useApp = () => {
     { path: "/Recipe/:id", roles: ["brewer"], element: <RecipeDetails /> },
     {
       path: "/FermentingIngredients",
-      roles: ["supervisor"],
+      roles: ["brewer"],
       element: <FermentingIngredients />,
+    },
+    {
+      path: "/FermentingIngredients/:id",
+      roles: ["brewer"],
+      element: <FermentingIngredientDetails />,
     },
     { path: "/User", roles: ["manager"], element: <User /> },
     { path: "/User/:id", roles: ["manager"], element: <UserDetails /> },

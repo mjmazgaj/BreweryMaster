@@ -42,6 +42,23 @@ namespace BreweryMaster.API.Info.Controllers
         }
 
         [HttpGet]
+        [Route("Summary/{id:int}")]
+        [ProducesResponseType(typeof(FermentingIngredientSummaryResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<FermentingIngredientSummaryResponse>> GetFermentingIngredientSummaryById([MinIntValidation] int id)
+        {
+            var fermentingIngredient = await _fermentingIngredientService.GetFermentingIngredientSummaryByIdAsync(id);
+
+            if (fermentingIngredient == null)
+                return NotFound();
+
+            return Ok(fermentingIngredient);
+        }
+
+        [HttpGet]
         [Route("{id:int}")]
         [Authorize(Roles = "brewer")]
         [ProducesResponseType(typeof(FermentingIngredientResponse), StatusCodes.Status200OK)]

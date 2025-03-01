@@ -280,5 +280,12 @@
         "detailTitle": "Recipe details about",
         "batchInfo": "Batch details",
         "mashInfo": "Mash details"
+    },
+    "fermentingIngredient":{
+        "infoTitle" : "Summary",
+        "quantityTitle": "Quantity Info",
+        "changeStorage": "Change storage",
+        "orderOrReserve": "Order Or Reserve",
+        "infoEmptyMsg": "Fermenting Ingredient info can't be loaded"
     }
 }

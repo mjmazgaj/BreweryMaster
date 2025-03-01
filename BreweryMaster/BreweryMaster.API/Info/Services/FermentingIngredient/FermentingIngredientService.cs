@@ -64,6 +64,7 @@ namespace BreweryMaster.API.Info.Services
                                         ingredient.FermentingIngredientsStored.Sum(x => x.StoredQuantity) : 0,
                     Unit = ingredient.Unit.Name,
                     Info = ingredient.FermentingIngredient.Info,
+                    Units = ingredient.FermentingIngredient.FermentingIngredientUnits.Select(x=>x.UnitId)
                 }).ToListAsync();
         }
 
