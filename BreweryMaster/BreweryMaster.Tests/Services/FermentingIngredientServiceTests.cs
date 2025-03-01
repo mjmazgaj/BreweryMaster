@@ -1,4 +1,5 @@
-﻿using BreweryMaster.API.Shared.Models.DB;
+﻿using BreweryMaster.API.Info.Services;
+using BreweryMaster.API.Shared.Models.DB;
 using Microsoft.EntityFrameworkCore;
 
 namespace BreweryMaster.Tests.Services
@@ -33,6 +34,21 @@ namespace BreweryMaster.Tests.Services
                 _dbContext.FermentingIngredientUnits.AddRange(FermentingIngredientDataProvider.GetFermentingIngredientUnit());
 
             _dbContext.SaveChanges();
+        }
+
+        [Fact]
+        public async Task GetFermentingIngredientsAsync_ShouldReturn_AllFermentingIngredients()
+        {
+            // Arrange
+            var service = new FermentingIngredientService(_dbContext);
+
+            // Act
+            var result = await service.GetFermentingIngredientsAsync();
+            var expectedResult = FermentingIngredientDataProvider.GetFermentingIngredient();
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(expectedResult.Count(), result.Count());
         }
     }
 }
