@@ -14,14 +14,9 @@ const ControlsCard = ({
   fields,
   path,
   emptyMessage,
+  handleEdit = () => {}
 }) => {
   const { t } = useTranslation();
-
-  const handleEdit = () => {
-    console.log("Edit works");
-    console.log("Path");
-    console.log(path);
-  };
 
   return (
     <Card className={`control-card_container ${className}`}>

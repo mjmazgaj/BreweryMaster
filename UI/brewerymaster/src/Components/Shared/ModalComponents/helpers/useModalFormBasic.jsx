@@ -9,8 +9,10 @@ export const useModalFormBasic = ({
   };
   const handleCheckBox = (fieldName, category, isChecked) => {
     setData((prevData) => {
-      const currentValues = prevData?.[category] || [];
+      console.log(prevData)
+      console.log(category)
 
+      const currentValues = prevData?.[category] || [];
       if (isChecked) {
         if (!currentValues.includes(fieldName)) {
           return {

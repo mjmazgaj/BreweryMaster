@@ -162,11 +162,26 @@ namespace BreweryMaster.API.Info.Services
             ingredientToUpdate.FermentingIngredient.EBC = request.EBC ?? ingredientToUpdate.FermentingIngredient.EBC;
             ingredientToUpdate.FermentingIngredient.Info = request.Info ?? ingredientToUpdate.FermentingIngredient.Info;
 
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> UpdateFermentingIngredientUnits(int id, FermentingIngredientUnitsUpdateRequest request)
+        {
+            var ingredientToUpdate = await _context.FermentingIngredientUnits
+                                                .Include(x => x.FermentingIngredient)
+                                                    .ThenInclude(x => x.FermentingIngredientUnits)
+                                                .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (ingredientToUpdate is null)
+                return false;
+
             var allSavedUnits = ingredientToUpdate.FermentingIngredient
                                        .FermentingIngredientUnits
                                        .Select(x => x.UnitId);
 
-            var fermentingIngredientUnitsToCreate = request.Units?.Where(x => !allSavedUnits.Any(y => y == x))
+            var fermentingIngredientUnitsToCreate = request.UnitsId?.Where(x => !allSavedUnits.Any(y => y == x))
                                         .Select(x => new FermentingIngredientUnit()
                                         {
                                             FermentingIngredientId = ingredientToUpdate.FermentingIngredientId,
@@ -179,7 +194,7 @@ namespace BreweryMaster.API.Info.Services
             var unitsToRestore = ingredientToUpdate.FermentingIngredient
                                        .FermentingIngredientUnits
                                        .Where(x => x.IsRemoved)
-                                       .Where(x => request.Units?.Contains(x.UnitId) ?? false);
+                                       .Where(x => request.UnitsId?.Contains(x.UnitId) ?? false);
 
             foreach (var unit in unitsToRestore)
             {

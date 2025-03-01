@@ -10,7 +10,7 @@
         "confirm": "Potwierdź",
         "checkPrice": "Sprawdź cenę",
         "increase": "Zwiększ",
-        "reduce": "Zmniejsz",
+        "reduce": "Redukuj",
         "reserve": "Zarezerwuj",
         "order": "Zamów",
         "delete": "Usuń",
@@ -278,5 +278,14 @@
         "detailTitle": "Szczegóły na temat receputry",
         "batchInfo": "Warka",
         "mashInfo": "Zacier"
+    },
+    "fermentingIngredient":{
+        "infoTitle" : "Posumowanie",
+        "quantityTitle": "Stan",
+        "changeStorage": "Change storage",
+        "orderOrReserve": "Order Or Reserve",
+        "infoEmptyMsg": "Informacja o składnikach fermentujących chwilowo niedostępna",
+        "editTitle": "Edytuj składnik fermentujący",
+        "unitEdit": "Edytuj jednostki"
     }
 }

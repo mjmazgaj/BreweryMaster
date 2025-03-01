@@ -157,6 +157,27 @@ namespace BreweryMaster.API.Info.Controllers
         }
 
         [HttpPatch]
+        [Route("Unit/{id:int}")]
+        [Authorize(Roles = "brewer")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<bool>> UpdateFermentingIngredientUnits(int id, [FromBody] FermentingIngredientUnitsUpdateRequest request)
+        {
+            if (id != request.Id)
+                return BadRequest();
+
+            var isUpdated = await _fermentingIngredientService.UpdateFermentingIngredientUnits(id, request);
+
+            if (!isUpdated)
+                return NotFound();
+
+            return Ok();
+        }
+
+        [HttpPatch]
         [Route("Delete/{id:int}")]
         [Authorize(Roles = "brewer")]
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]

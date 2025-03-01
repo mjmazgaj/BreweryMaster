@@ -5,12 +5,12 @@ const COLORS = ["#A9A9A9", "#808080", "#696969", "#505050", "#D3D3D3", "#B0B0B0"
 
 const PieChartComponent = ({data, setOfColor = 0}) => {
   return (
-    <PieChart width={400} height={300}>
+    <PieChart width={400} height={250}>
       <Pie 
         data={data} 
         cx="50%" 
         cy="50%" 
-        outerRadius={120} 
+        outerRadius={100} 
         fill="#8884d8"
         dataKey="value"
         label

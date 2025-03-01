@@ -118,6 +118,7 @@ export const apiEndpoints = {
   userInfo: "User/Info",
   user: "User",
 
+  fermentingIngredient: "FermentingIngredient",
   fermentingIngredientSummary: "FermentingIngredient/Summary",
   fermentingIngredientOrder: "FermentingIngredient/Order",
   fermentingIngredientReservation: "FermentingIngredient/Reservation",

@@ -2,7 +2,6 @@ const fermentingIngredientFieldsProvider = (t) => ({
   infoFields: {
     control: [
       { id: "typeName", label: t("name.brewery.typeName"), type: "textArea" },
-      { id: "name", label: t("name.brewery.name"), type: "textArea" },
       {
         id: "percentage",
         label: t("name.brewery.percentage"),
@@ -19,7 +18,6 @@ const fermentingIngredientFieldsProvider = (t) => ({
         label: t("name.brewery.totalQuantity"),
         type: "textArea",
       },
-      { id: "unit", label: t("name.brewery.unit"), type: "textArea" },
       { id: "info", label: t("name.brewery.info"), type: "textArea" },
     ],
   },
@@ -38,6 +36,55 @@ const fermentingIngredientFieldsProvider = (t) => ({
       id: "orderedQuantity",
       label: t("name.brewery.orderedQuantity"),
       type: "textArea",
+    },
+  ],
+  modalFields: [
+    {
+      id: "name",
+      label: t("name.brewery.name"),
+      type: "text",
+      required: true,
+      feedback: `${t("validation.text")} 255`,
+      validation: {
+        maxLength: 255,
+      },
+    },
+    {
+      id: "percentage",
+      label: t("name.brewery.percentage"),
+      type: "number",
+      required: true,
+      feedback: `${t("validation.number")} 0-100`,
+      validation: {
+        min: 0,
+        max: 100,
+      },
+    },
+    {
+      id: "extraction",
+      label: t("name.brewery.extraction"),
+      type: "number",
+      required: true,
+      feedback: `${t("validation.number")} 0-100`,
+      validation: {
+        min: 0,
+        max: 100,
+      },
+    },
+    {
+      id: "ebc",
+      label: t("name.brewery.ebc"),
+      type: "number",
+      feedback: `${t("validation.number")} 0-100`,
+      validation: {
+        min: 0,
+        max: 100,
+      },
+    },
+    {
+      id: "info",
+      label: t("name.brewery.info"),
+      type: "text",
     },
   ],
 });

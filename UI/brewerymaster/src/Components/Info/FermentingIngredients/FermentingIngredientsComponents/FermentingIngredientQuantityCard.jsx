@@ -45,26 +45,18 @@ const FermentingIngredientQuantityCard = ({
               fields={fermentingIngredientFieldsProvider(t).quantityFields}
             />
             <div className="fermenting-ingredient-card-buttons_container">
-              <Form.Label>{t("fermentingIngredient.changeStorage")}</Form.Label>
-              <div className="fermenting-ingredient-card-storage-buttons_container">
-                <Button variant="dark" onClick={handleIncrease}>
-                  {t("button.increase")}
-                </Button>
-                <Button variant="dark" onClick={handleReduce}>
-                  {t("button.reduce")}
-                </Button>
-              </div>
-              <Form.Label>
-                {t("fermentingIngredient.orderOrReserve")}
-              </Form.Label>
-              <div className="fermenting-ingredient-card-order-buttons_container">
-                <Button variant="dark" onClick={handleIncrease}>
-                  {t("button.reserve")}
-                </Button>
-                <Button variant="dark" onClick={handleReduce}>
-                  {t("button.order")}
-                </Button>
-              </div>
+              <Button variant="dark" onClick={handleIncrease}>
+                {t("button.increase")}
+              </Button>
+              <Button variant="dark" onClick={handleReduce}>
+                {t("button.reduce")}
+              </Button>
+              <Button variant="dark" onClick={handleIncrease}>
+                {t("button.reserve")}
+              </Button>
+              <Button variant="dark" onClick={handleReduce}>
+                {t("button.order")}
+              </Button>
             </div>
           </Fragment>
         ) : (

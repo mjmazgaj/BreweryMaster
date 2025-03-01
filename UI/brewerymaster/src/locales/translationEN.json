@@ -286,6 +286,8 @@
         "quantityTitle": "Quantity Info",
         "changeStorage": "Change storage",
         "orderOrReserve": "Order Or Reserve",
-        "infoEmptyMsg": "Fermenting Ingredient info can't be loaded"
+        "infoEmptyMsg": "Fermenting Ingredient info can't be loaded",
+        "editTitle": "Edit Fermenting Ingredient",
+        "unitEdit": "Edit units"
     }
 }

@@ -26,9 +26,5 @@ namespace BreweryMaster.API.Info.Models
         public int? EBC { get; set; }
 
         public string? Info { get; set; }
-
-        [MinLength(1)]
-        [MinIntCollectionValidation]
-        public required IEnumerable<int>? Units { get; set; }
     }
 }

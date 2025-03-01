@@ -3,7 +3,6 @@ import { Button, Card } from "react-bootstrap";
 
 import { useTranslation } from "react-i18next";
 
-import fermentingIngredientFieldsProvider from "./helpers/fermentingIngredientFieldsProvider";
 import { useUnitsList } from "./helpers/useUnitsList";
 import ModalFormBasic from "../../../Shared/ModalComponents/ModalFormBasic";
 
@@ -11,22 +10,28 @@ const UnitsList = ({ data, refreshPageData }) => {
   const { t } = useTranslation();
   const [units, setUnits] = useState();
 
-  const [editUnits, setEditUnits] = useState({});
+  const [editUnits, setEditUnits] = useState({
+    itemId: "",
+    unitsId: [],
+  });
   const [showModal, setShowModal] = useState(false);
+  const [modalFields, setModalFields] = useState({});
 
-  const { handleEdit, modalCustomizationObject } = useUnitsList({
+  const { handleEditUnitsOnClick, modalCustomizationObject } = useUnitsList({
     data,
     setShowModal,
+    units,
     setUnits,
     setEditUnits,
     refreshPageData,
+    setModalFields,
   });
 
   return (
-    <Fragment>
+    <div>
       <Card className="unit-info_container">
         <Card.Header>
-          <h3>Units</h3>
+          <h3>Jednostki</h3>
         </Card.Header>
 
         <Card.Body>
@@ -48,7 +53,7 @@ const UnitsList = ({ data, refreshPageData }) => {
                   ))}
               </div>
               <div className="control-card-buttons_container">
-                <Button variant="dark" onClick={handleEdit}>
+                <Button variant="dark" onClick={handleEditUnitsOnClick}>
                   {t("button.edit")}
                 </Button>
               </div>
@@ -64,14 +69,14 @@ const UnitsList = ({ data, refreshPageData }) => {
         </Card.Body>
       </Card>
       <ModalFormBasic
-        fields={fermentingIngredientFieldsProvider(t).unitsModal}
+        fields={modalFields}
         data={editUnits}
         setData={setEditUnits}
         show={showModal}
         setShow={setShowModal}
         modalCustomizationObject={modalCustomizationObject}
       />
-    </Fragment>
+    </div>
   );
 };
 

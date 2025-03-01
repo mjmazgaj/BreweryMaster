@@ -14,7 +14,7 @@ namespace BreweryMaster.API.Info.Models
         public decimal StoredQuantity { get; set; }
         public decimal ReservedQuantity { get; set; }
         public decimal OrderedQuantity { get; set; }
-        public decimal TotalQuantity { get { return StoredQuantity - ReservedQuantity + OrderedQuantity; } }
+        public decimal TotalQuantity { get { return StoredQuantity - ReservedQuantity; } }
         public string Unit { get; set; } = string.Empty;
         public IEnumerable<int>? Units { get; set; }
         public string? Info { get; set; }

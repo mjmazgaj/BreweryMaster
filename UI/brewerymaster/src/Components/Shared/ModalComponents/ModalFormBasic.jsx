@@ -54,6 +54,7 @@ const ModalFormBasic = ({
             key={checkBoxObject.id}
             id={checkBoxObject.name}
             label={checkBoxObject.label}
+            disabled={checkBoxObject.isReadOnly}
             checked={data && data[checkBoxObject.category] && data[checkBoxObject.category].includes(checkBoxObject.id)}
             onChange={(e) =>
               handleCheckBox(checkBoxObject.id, checkBoxObject.category, e.target.checked)
