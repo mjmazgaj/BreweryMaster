@@ -1,5 +1,4 @@
 ﻿using BreweryMaster.API.Info.Models;
-using BreweryMaster.API.Info.Services;
 using BreweryMaster.API.Shared.Models.DB;
 using Microsoft.EntityFrameworkCore;
 
@@ -72,10 +71,10 @@ namespace BreweryMaster.API.Info.Services
         {
             var ingredients = await GetFermentingIngredientSummary(null);
 
-            return ingredients?.FirstOrDefault(x => x.Id == id);
+            return ingredients.FirstOrDefault(x => x.Id == id);
         }
 
-        public async Task<IEnumerable<FermentingIngredientUnitResponse>?> GetFermentingIngredientUnitAsync()
+        public async Task<IEnumerable<FermentingIngredientUnitResponse>> GetFermentingIngredientUnitAsync()
         {
             return await _context.FermentingIngredientUnits
                 .Select(x => new FermentingIngredientUnitResponse()
@@ -115,137 +114,94 @@ namespace BreweryMaster.API.Info.Services
             }).ToListAsync();
         }
 
-        public async Task<FermentingIngredient> CreateFermentingIngredientAsync(FermentingIngredientRequest request)
+        public async Task<FermentingIngredientResponse?> CreateFermentingIngredientAsync(FermentingIngredientRequest request)
         {
-            using var transaction = await _context.Database.BeginTransactionAsync();
-
-            try
+            var ingredientToCreate = new FermentingIngredient()
             {
-                var ingredientToCreate = new FermentingIngredient()
+                Name = request.Name,
+                TypeId = request.TypeId,
+                Percentage = request.Percentage,
+                Extraction = request.Extraction,
+                EBC = request.EBC,
+                Info = request.Info,
+            };
+
+            _context.FermentingIngredients.Add(ingredientToCreate);
+
+            await _context.SaveChangesAsync();
+
+            var fermentingIngredientUnitsToCreate = request.Units
+                .Select(x => new FermentingIngredientUnit()
                 {
-                    Name = request.Name,
-                    TypeId = request.TypeId,
-                    Percentage = request.Percentage,
-                    Extraction = request.Extraction,
-                    EBC = request.EBC,
-                    Info = request.Info,
-                };
+                    FermentingIngredientId = ingredientToCreate.Id,
+                    UnitId = x,
+                });
 
-                _context.FermentingIngredients.Add(ingredientToCreate);
-                await _context.SaveChangesAsync();
+            _context.FermentingIngredientUnits.AddRange(fermentingIngredientUnitsToCreate);
 
-                var fermentingIngredientUnitsToCreate = request.Units
-                    .Select(x => new FermentingIngredientUnit()
-                    {
-                        FermentingIngredientId = ingredientToCreate.Id,
-                        UnitId = x,
-                    });
+            await _context.SaveChangesAsync();
 
-                _context.FermentingIngredientUnits.AddRange(fermentingIngredientUnitsToCreate);
-                await _context.SaveChangesAsync();
-
-                await transaction.CommitAsync();
-
-                return ingredientToCreate;
-
-            }
-            catch (Exception)
-            {
-                await transaction.RollbackAsync();
-
-                throw;
-            }
+            return await GetFermentingIngredientByIdAsync(ingredientToCreate.Id);
         }
 
         public async Task<bool> UpdateFermentingIngredientAsync(int id, FermentingIngredientUpdateRequest request)
         {
-
-            if (id != request.Id)
-                return false;
-
             var ingredientToUpdate = await _context.FermentingIngredientUnits
                                                 .Include(x => x.FermentingIngredient)
+                                                    .ThenInclude(x => x.FermentingIngredientUnits)
                                                 .FirstOrDefaultAsync(x => x.Id == id);
 
             if (ingredientToUpdate is null)
                 return false;
 
-            ingredientToUpdate.FermentingIngredient.Name = request.Name;
-            ingredientToUpdate.FermentingIngredient.TypeId = request.TypeId;
-            ingredientToUpdate.FermentingIngredient.Percentage = request.Percentage;
-            ingredientToUpdate.FermentingIngredient.Extraction = request.Extraction;
-            ingredientToUpdate.FermentingIngredient.EBC = request.EBC;
-            ingredientToUpdate.FermentingIngredient.Info = request.Info;
+            ingredientToUpdate.FermentingIngredient.Name = request.Name ?? ingredientToUpdate.FermentingIngredient.Name;
+            ingredientToUpdate.FermentingIngredient.TypeId = request.TypeId ?? ingredientToUpdate.FermentingIngredient.TypeId;
+            ingredientToUpdate.FermentingIngredient.Percentage = request.Percentage ?? ingredientToUpdate.FermentingIngredient.Percentage;
+            ingredientToUpdate.FermentingIngredient.Extraction = request.Extraction ?? ingredientToUpdate.FermentingIngredient.Extraction;
+            ingredientToUpdate.FermentingIngredient.EBC = request.EBC ?? ingredientToUpdate.FermentingIngredient.EBC;
+            ingredientToUpdate.FermentingIngredient.Info = request.Info ?? ingredientToUpdate.FermentingIngredient.Info;
 
-            _context.FermentingIngredientUnits.Update(ingredientToUpdate);
-
-            await _context.SaveChangesAsync();
-
-            var fermentingIngredient = await _context.FermentingIngredientUnits
-                                           .Include(x => x.FermentingIngredient)
-                                           .ThenInclude(x => x.FermentingIngredientUnits)
-                                           .SingleOrDefaultAsync(x => x.Id == id);
-            var allSavedUnits = fermentingIngredient?.FermentingIngredient
+            var allSavedUnits = ingredientToUpdate.FermentingIngredient
                                        .FermentingIngredientUnits
                                        .Select(x => x.UnitId);
 
-            var unitsToRestore = fermentingIngredient?.FermentingIngredient
+            var fermentingIngredientUnitsToCreate = request.Units?.Where(x => !allSavedUnits.Any(y => y == x))
+                                        .Select(x => new FermentingIngredientUnit()
+                                        {
+                                            FermentingIngredientId = ingredientToUpdate.FermentingIngredientId,
+                                            UnitId = x,
+                                        });
+
+            if (fermentingIngredientUnitsToCreate is not null)
+                _context.FermentingIngredientUnits.AddRange(fermentingIngredientUnitsToCreate);
+
+            var unitsToRestore = ingredientToUpdate.FermentingIngredient
                                        .FermentingIngredientUnits
                                        .Where(x => x.IsRemoved)
-                                       .Select(x => x.UnitId)
-                                       .Where(x => request.Units.Contains(x));
+                                       .Where(x => request.Units?.Contains(x.UnitId) ?? false);
 
-            if (allSavedUnits is not null)
+            foreach (var unit in unitsToRestore)
             {
-                var fermentingIngredientUnitsToCreate = request.Units.Where(x => !allSavedUnits.Any(y => y == x))
-                                            .Select(x => new FermentingIngredientUnit()
-                                            {
-                                                FermentingIngredientId = ingredientToUpdate.FermentingIngredientId,
-                                                UnitId = x,
-                                            });
-
-                _context.FermentingIngredientUnits.AddRange(fermentingIngredientUnitsToCreate);
-                await _context.SaveChangesAsync();
+                unit.IsRemoved = false;
             }
 
-            if (unitsToRestore is not null)
-            {
-                foreach (int unit in unitsToRestore)
-                {
-                    var ingredientUnit = await _context.FermentingIngredientUnits
-                                            .FirstOrDefaultAsync(x => x.FermentingIngredientId == ingredientToUpdate.FermentingIngredientId && x.UnitId == unit);
-                    if (ingredientUnit is not null)
-                    {
-                        ingredientUnit.IsRemoved = false;
-                        _context.FermentingIngredientUnits.Update(ingredientUnit);
-                        await _context.SaveChangesAsync();
-                    }
-                }
-            }
+            await _context.SaveChangesAsync();
 
             return true;
         }
 
         public async Task<bool> DeleteFermentingIngredientUnitById(int id)
         {
-            var ingredient = await _context.FermentingIngredientUnits.FirstOrDefaultAsync(x => x.Id == id);
+            var ingredientToRemove = await _context.FermentingIngredientUnits.FirstOrDefaultAsync(x => x.Id == id);
 
-            if (ingredient == null || ingredient.IsRemoved)
-            {
+            if (ingredientToRemove == null)
                 return false;
-            }
 
-            ingredient.IsRemoved = true;
+            ingredientToRemove.IsRemoved = true;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-                return true;
-            }
-            catch
-            {
-                throw;
-            }
+            await _context.SaveChangesAsync();
+
+            return true;
         }
     }
 }
