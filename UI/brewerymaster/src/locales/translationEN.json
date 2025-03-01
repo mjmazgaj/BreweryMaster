@@ -71,6 +71,8 @@
         "user": {
             "empty": "Empty",
             "city": "City",
+            "companyName": "Company Name",
+            "nip": "NIP",
             "street": "Street",
             "houseNumber": "House Number",
             "apartamentNumber": "Apartament Number",
