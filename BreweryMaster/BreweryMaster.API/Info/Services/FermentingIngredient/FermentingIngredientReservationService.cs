@@ -59,6 +59,7 @@ namespace BreweryMaster.API.Info.Services
             };
 
             _context.FermentingIngredientsReserved.Add(ingredientReservationToCreate);
+
             await _context.SaveChangesAsync();
 
             return await GetFermentingIngredientReservationById(ingredientReservationToCreate.Id);
@@ -71,10 +72,8 @@ namespace BreweryMaster.API.Info.Services
             if (ingredientToUpdate is null)
                 return false;
 
-            ingredientToUpdate.ReservedQuantity = request.Quantity;
-            ingredientToUpdate.Info = request.Info;
-
-            _context.FermentingIngredientsReserved.Update(ingredientToUpdate);
+            ingredientToUpdate.ReservedQuantity = request.Quantity ?? ingredientToUpdate.ReservedQuantity;
+            ingredientToUpdate.Info = request.Info ?? ingredientToUpdate.Info;
 
             await _context.SaveChangesAsync();
 
@@ -90,8 +89,6 @@ namespace BreweryMaster.API.Info.Services
 
             fermentingIngredientsToComplete.IsCompleted = true;
 
-            _context.FermentingIngredientsReserved.Update(fermentingIngredientsToComplete);
-
             await _context.SaveChangesAsync();
 
             return true;
@@ -105,8 +102,6 @@ namespace BreweryMaster.API.Info.Services
                 return false;
 
             fermentingIngredientsToDelete.IsRemoved = true;
-
-            _context.FermentingIngredientsReserved.Update(fermentingIngredientsToDelete);
 
             await _context.SaveChangesAsync();
 

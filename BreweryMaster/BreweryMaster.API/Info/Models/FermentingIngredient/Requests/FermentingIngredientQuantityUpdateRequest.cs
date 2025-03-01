@@ -10,10 +10,9 @@ namespace BreweryMaster.API.Info.Models
         [MinIntValidation]
         public int Id { get; set; }
 
-        [Required]
         [Precision(9, 3)]
         [Range(0, 1000000)]
-        public decimal Quantity { get; set; }
+        public decimal? Quantity { get; set; }
 
         public string? Info { get; set; }
     }

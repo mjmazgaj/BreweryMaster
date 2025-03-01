@@ -1,6 +1,7 @@
 ﻿using BreweryMaster.API.Info.Models;
 using BreweryMaster.API.Info.Services;
 using BreweryMaster.API.SharedModule.Validators;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BreweryMaster.API.Info.Controllers.FermentingIngredient
@@ -17,18 +18,23 @@ namespace BreweryMaster.API.Info.Controllers.FermentingIngredient
         }
 
         [HttpGet]
+        [Authorize(Roles = "brewer")]
         [ProducesResponseType(typeof(IEnumerable<FermentingIngredientReservationResponse>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<IEnumerable<FermentingIngredientReservationResponse>>> GetFermentingIngredientReservations()
         {
-            var fermentingIngredientReservations = await _reservationService.GetFermentingIngredientReservations();
-            return Ok(fermentingIngredientReservations);
+            var reservations = await _reservationService.GetFermentingIngredientReservations();
+            return Ok(reservations);
         }
 
         [HttpGet]
         [Route("{id:int}")]
+        [Authorize(Roles = "brewer")]
         [ProducesResponseType(typeof(FermentingIngredientReservationResponse), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<FermentingIngredientReservationResponse>> GetFermentingIngredientReservationById([MinIntValidation] int id)
         {
@@ -41,8 +47,11 @@ namespace BreweryMaster.API.Info.Controllers.FermentingIngredient
         }
 
         [HttpPost]
+        [Authorize(Roles = "brewer")]
         [ProducesResponseType(typeof(FermentingIngredientReservationResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<FermentingIngredientReservationResponse>> CreateFermentingIngredientReservation(FermentingIngredientReserveRequest request)
         {
             var createdReservation = await _reservationService.CreateFermentingIngredientReservation(request);
@@ -55,47 +64,58 @@ namespace BreweryMaster.API.Info.Controllers.FermentingIngredient
 
         [HttpPatch]
         [Route("{id:int}")]
+        [Authorize(Roles = "brewer")]
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<bool>> UpdateFermentingIngredientReservation([MinIntValidation] int id, FermentingIngredientQuantityUpdateRequest request)
         {
             if (request.Id != id)
                 return BadRequest();
 
-            var updateSuccessful = await _reservationService.UpdateFermentingIngredientReservation(id, request);
+            var isUpdated = await _reservationService.UpdateFermentingIngredientReservation(id, request);
 
-            if (updateSuccessful)
-                return Ok();
+            if (!isUpdated)
+                return NotFound();
 
-            return NotFound();
+            return Ok();
         }
 
         [HttpPatch]
         [Route("Complete/{id:int}")]
+        [Authorize(Roles = "brewer")]
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<bool>> CompleteFermentingIngredientReservation([MinIntValidation] int id)
         {
-            var completionSuccessful = await _reservationService.CompleteFermentingIngredientReservation(id);
+            var isComplated = await _reservationService.CompleteFermentingIngredientReservation(id);
 
-            if(completionSuccessful)
-                return Ok();
+            if (!isComplated)
+                return NotFound();
 
-            return NotFound();
+            return Ok();
         }
 
         [HttpPatch]
         [Route("Delete/{id:int}")]
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<bool>> DeleteFermentingIngredientReservation([MinIntValidation] int id)
         {
-            var deletedSuccessful = await _reservationService.DeleteFermentingIngredientReservation(id);
+            var isDeleted = await _reservationService.DeleteFermentingIngredientReservation(id);
 
-            if (deletedSuccessful)
-                return Ok();
+            if (!isDeleted)
+                return NotFound();
 
-            return NotFound();
+            return Ok();
         }
     }
 }
