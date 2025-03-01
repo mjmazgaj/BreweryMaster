@@ -1,7 +1,7 @@
 ﻿using BreweryMaster.API.Info.Models;
 using BreweryMaster.API.Info.Services;
-using BreweryMaster.API.OrderModule.Services;
 using BreweryMaster.API.SharedModule.Validators;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BreweryMaster.API.Info.Controllers.FermentingIngredient
@@ -19,8 +19,11 @@ namespace BreweryMaster.API.Info.Controllers.FermentingIngredient
 
         [HttpGet]
         [Route("{id:int}")]
+        [Authorize(Roles = "brewer")]
         [ProducesResponseType(typeof(FermentingIngredientStorageResponse), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<FermentingIngredientStorageResponse>> GetFermentingIngredientStorageById([MinIntValidation] int id)
         {
@@ -33,8 +36,11 @@ namespace BreweryMaster.API.Info.Controllers.FermentingIngredient
         }
 
         [HttpPost]
+        [Authorize(Roles = "brewer")]
         [ProducesResponseType(typeof(FermentingIngredientStorageResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<FermentingIngredientStorageResponse>> CreateFermentingIngredientStorage(FermentingIngredientStorageRequest request)
         {
             var createdStorage = await _storageService.CreateFermentingIngredientStorage(request);
