@@ -1,5 +1,4 @@
-﻿using BreweryMaster.API.Info.Models;
-using BreweryMaster.API.Shared.Models;
+﻿using BreweryMaster.API.Shared.Models;
 
 namespace BreweryMaster.API.Info.Services
 {

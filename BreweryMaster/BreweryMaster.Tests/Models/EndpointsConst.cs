@@ -29,5 +29,9 @@
         public static readonly string ProspectClient = $"{Base}/ProspectClient";
 
         public static readonly string ProspectOrder = $"{Base}/ProspectOrder";
+
+        public static readonly string Entity = $"{Base}/Entity";
+        public static readonly string EntityUnit = $"{Entity}/Unit";
+        public static readonly string EntityContainer = $"{Entity}/Container";
     }
 }

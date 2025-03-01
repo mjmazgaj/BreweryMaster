@@ -1,5 +1,4 @@
-﻿using BreweryMaster.API.Info.Models;
-using BreweryMaster.API.Shared.Models;
+﻿using BreweryMaster.API.Shared.Models;
 using BreweryMaster.API.Shared.Models.DB;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,10 +20,12 @@ namespace BreweryMaster.API.Info.Services
                 Name = x.Name
             }).ToListAsync();
         }
+
         public async Task<IEnumerable<EntityResponse>> GetContainers()
         {
             return await _context.Containers
                             .Include(x => x.UnitEntity)
+                            .Include(x => x.Material)
                             .Select(x =>
                             new EntityResponse()
                             {
