@@ -35,8 +35,8 @@
         public static readonly string EntityContainer = $"{Entity}/Container";
 
         public static readonly string FermentingIngredient = $"{Base}/FermentingIngredient";
-        public static readonly string FermentingIngredientOrder = $"{Base}/FermentingIngredientOrder";
-        public static readonly string FermentingIngredientReservation = $"{Base}/FermentingIngredientReservation";
-        public static readonly string FermentingIngredientStorage = $"{Base}/FermentingIngredientStorage";
+        public static readonly string FermentingIngredientOrder = $"{FermentingIngredient}/Order";
+        public static readonly string FermentingIngredientReservation = $"{FermentingIngredient}/Reservation";
+        public static readonly string FermentingIngredientStorage = $"{FermentingIngredient}/Storage";
     }
 }

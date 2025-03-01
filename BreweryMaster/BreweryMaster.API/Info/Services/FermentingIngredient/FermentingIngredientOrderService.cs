@@ -56,6 +56,7 @@ namespace BreweryMaster.API.Info.Services
             };
 
             _context.FermentingIngredientsOrdered.Add(ingredientOrderToCreate);
+
             await _context.SaveChangesAsync();
 
             return await GetFermentingIngredientOrderById(ingredientOrderToCreate.Id);
@@ -68,9 +69,9 @@ namespace BreweryMaster.API.Info.Services
             if (ingredientToUpdate is null)
                 return false;
 
-            ingredientToUpdate.ExpectedDate = request.ExpectedDate;
-            ingredientToUpdate.OrderedQuantity = request.Quantity;
-            ingredientToUpdate.Info = request.Info;
+            ingredientToUpdate.ExpectedDate = request.ExpectedDate ?? ingredientToUpdate.ExpectedDate;
+            ingredientToUpdate.OrderedQuantity = request.Quantity ?? ingredientToUpdate.OrderedQuantity;
+            ingredientToUpdate.Info = request.Info ?? ingredientToUpdate.Info;
 
             _context.FermentingIngredientsOrdered.Update(ingredientToUpdate);
 
@@ -88,8 +89,6 @@ namespace BreweryMaster.API.Info.Services
 
             ingredientToComplete.IsCompleted = true;
 
-            _context.FermentingIngredientsOrdered.Update(ingredientToComplete);
-
             await _context.SaveChangesAsync();
 
             return true;
@@ -103,8 +102,6 @@ namespace BreweryMaster.API.Info.Services
                 return false;
 
             ingredientToDelete.IsRemoved = true;
-
-            _context.FermentingIngredientsOrdered.Update(ingredientToDelete);
 
             await _context.SaveChangesAsync();
 
