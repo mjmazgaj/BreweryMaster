@@ -6,34 +6,32 @@ import fermentingIngredientFieldsProvider from "./fermentingIngredientFieldsProv
 import { apiEndpoints, fetchData, updateData } from "../../../../Shared/api";
 
 export const useFermentingIngredientsDetails = ({
-  setModalFields,
   setShowEditInfoModal,
   setModalData,
   ingredientData,
   setIngredientData,
   setChartAvailableData,
+  setCustomModalForm,
   id,
 }) => {
   const { t } = useTranslation();
   const [types, setTypes] = useState([]);
 
   const handleEditInfoOnClick = () => {
-    setModalFields(() => ({
-      control: fermentingIngredientFieldsProvider(t).modalFields,
-      dropdown: [
-        {
-          data: types,
-          name: "typeId",
-          label: t("name.brewery.type"),
-        },
-      ],
-    }));
+    setCustomModalForm("editInfo");
 
     const { units, ...rest } = ingredientData;
     setModalData(rest);
 
     setShowEditInfoModal(true);
   };
+
+  const handleQuantity = (action) =>{
+    setCustomModalForm(action);
+    setModalData({});
+
+    setShowEditInfoModal(true);
+  }
 
   const setPageData = () => {
     fetchData(
@@ -56,6 +54,106 @@ export const useFermentingIngredientsDetails = ({
     title: t("fermentingIngredient.editTitle"),
   };
 
+  const increaseModalObject = {
+    submitFunction: async (data) => {
+      await updateData(apiEndpoints.fermentingIngredient, data.id, data);
+      setPageData();
+    },
+    buttons: [
+      {
+        isSubmit: false,
+        label: t("button.add"),
+      },
+    ],
+    title: t("fermentingIngredient.increaseModalTitle"),
+  };
+
+  const reduceModalObject = {
+    submitFunction: async (data) => {
+      await updateData(apiEndpoints.fermentingIngredient, data.id, data);
+      setPageData();
+    },
+    buttons: [
+      {
+        isSubmit: false,
+        label: t("button.add"),
+      },
+    ],
+    title: t("fermentingIngredient.reduceModalTitle"),
+  };
+
+  const reservationModalObject = {
+    submitFunction: async (data) => {
+      await updateData(apiEndpoints.fermentingIngredient, data.id, data);
+      setPageData();
+    },
+    buttons: [
+      {
+        isSubmit: false,
+        label: t("button.add"),
+      },
+    ],
+    title: t("fermentingIngredient.reservationModalTitle"),
+  };
+
+  const orderModalObject = {
+    submitFunction: async (data) => {
+      await updateData(apiEndpoints.fermentingIngredient, data.id, data);
+      setPageData();
+    },
+    buttons: [
+      {
+        isSubmit: false,
+        label: t("button.add"),
+      },
+    ],
+    title: t("fermentingIngredient.orderModalTitle"),
+  };
+
+  const editInfoModalFields = {
+    control: fermentingIngredientFieldsProvider(t).modalFields,
+    dropdown: [
+      {
+        data: types,
+        name: "typeId",
+        label: t("name.brewery.type"),
+      },
+    ],
+  };
+
+  const storageModalFields = {
+    control: fermentingIngredientFieldsProvider(t).storageModalFields,
+  };
+
+  const reservationModalFields = {
+    control: fermentingIngredientFieldsProvider(t).reservationModalFields,
+  };
+
+  const orderModalFields = fermentingIngredientFieldsProvider(t).orderModalFields;
+
+  const modalDataProvider = {
+    editInfo: {
+      object: editInfoModalObject,
+      fields: editInfoModalFields,
+    },
+    increase: {
+      object: increaseModalObject,
+      fields: storageModalFields,
+    },
+    reduce: {
+      object: reduceModalObject,
+      fields: storageModalFields,
+    },
+    reservation: {
+      object: reservationModalObject,
+      fields: reservationModalFields,
+    },
+    order: {
+      object: orderModalObject,
+      fields: orderModalFields,
+    },
+  };
+
   useEffect(() => {
     setPageData();
     fetchData(apiEndpoints.fermentingIngredientType, setTypes);
@@ -72,5 +170,5 @@ export const useFermentingIngredientsDetails = ({
     ]);
   }, [ingredientData]);
 
-  return { handleEditInfoOnClick, editInfoModalObject };
+  return { handleEditInfoOnClick, handleQuantity, modalDataProvider };
 };

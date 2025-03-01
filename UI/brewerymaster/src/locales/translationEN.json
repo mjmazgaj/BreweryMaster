@@ -288,6 +288,10 @@
         "orderOrReserve": "Order Or Reserve",
         "infoEmptyMsg": "Fermenting Ingredient info can't be loaded",
         "editTitle": "Edit Fermenting Ingredient",
+        "increaseModalTitle": "Increase storage",
+        "reduceModalTitle": "Reduce storage",
+        "reservationModalTitle": "Reserve Fermenting Ingredient",
+        "orderModalTitle": "Order Fermenting Ingredient",
         "unitEdit": "Edit units"
     }
 }

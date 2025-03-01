@@ -144,3 +144,10 @@
   margin: 0.1rem;
   min-width: 7rem;
 }
+
+.fermenting-ingredient-details_buttons-container{
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  gap: 1rem;
+}

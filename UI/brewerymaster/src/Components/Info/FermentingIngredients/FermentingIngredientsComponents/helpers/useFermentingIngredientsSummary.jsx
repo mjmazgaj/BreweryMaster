@@ -3,57 +3,24 @@ import { useState, useEffect } from "react";
 import { fetchData, apiEndpoints } from "../../../../Shared/api";
 import { useTranslation } from "react-i18next";
 
+import { useNavigate } from "react-router-dom";
+
 import modalFieldsProvider from "../../../../Shared/ModalComponents/helpers/modalFieldsProvider";
 export const useFermentingIngredientsSummary = ({
   setData,
-  modalData,
   setModalData,
-  setItemAction,
-  setShowItemAction,
-  setModalAction,
   setShowModalForm,
-  setModalQuantityData,
   setFields,
   setFilterFields,
 }) => {
   const { t } = useTranslation();
+    const navigate = useNavigate();
 
   const [types, setTypes] = useState([]);
   const [units, setUnits] = useState([]);
 
   const handleDoubleClick = (item) => {
-    setItemAction("summary");
-
-    setModalData({
-      id: item.id,
-      typeId: item.typeId,
-      typeName: item.typeName,
-      name: item.name,
-      percentage: item.percentage,
-      extraction: item.extraction,
-      ebc: item.ebc,
-      info: item.info,
-      unit: item.unit,
-      units: [],
-    });
-
-    setFields(() => ({
-      control: modalFieldsProvider(t).fermentingIngredientsModalFields,
-      dropdown: [
-        {
-          data: types,
-          name: "typeId",
-          label: t("name.brewery.type"),
-        },
-      ],
-      checkBox: units.map((x) => ({ ...x, label: x.name })),
-    }));
-
-    setModalQuantityData({
-      name: item.name,
-      fermentingIngredientUnitId: item.id,
-    });
-    setShowItemAction(true);
+    navigate(`/FermentingIngredients/${item.id}`)
   };
 
   const clear = () => {
@@ -72,7 +39,6 @@ export const useFermentingIngredientsSummary = ({
 
   const handleAddOnClick = () => {
     clear();
-    setModalAction("Add");
 
     setFields(() => ({
       control: modalFieldsProvider(t).fermentingIngredientsModalFields,

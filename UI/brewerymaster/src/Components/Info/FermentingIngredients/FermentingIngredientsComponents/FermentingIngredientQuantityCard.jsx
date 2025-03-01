@@ -8,7 +8,6 @@ import FormControlReadOnly from "../../../Shared/FormControlsReadOnly";
 
 import { useTranslation } from "react-i18next";
 import fermentingIngredientFieldsProvider from "./helpers/fermentingIngredientFieldsProvider";
-import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 
 const FermentingIngredientQuantityCard = ({
   className,
@@ -16,20 +15,9 @@ const FermentingIngredientQuantityCard = ({
   data,
   path,
   emptyMessage,
+  handleQuantity,
 }) => {
   const { t } = useTranslation();
-
-  const handleIncrease = () => {
-    console.log("Increase works");
-    console.log("Path");
-    console.log(path);
-  };
-
-  const handleReduce = () => {
-    console.log("Reduce works");
-    console.log("Path");
-    console.log(path);
-  };
 
   return (
     <Card className={`fermenting-ingredient-card_container ${className}`}>
@@ -45,16 +33,19 @@ const FermentingIngredientQuantityCard = ({
               fields={fermentingIngredientFieldsProvider(t).quantityFields}
             />
             <div className="fermenting-ingredient-card-buttons_container">
-              <Button variant="dark" onClick={handleIncrease}>
+              <Button variant="dark" onClick={() => handleQuantity("increase")}>
                 {t("button.increase")}
               </Button>
-              <Button variant="dark" onClick={handleReduce}>
+              <Button variant="dark" onClick={() => handleQuantity("reduce")}>
                 {t("button.reduce")}
               </Button>
-              <Button variant="dark" onClick={handleIncrease}>
+              <Button
+                variant="dark"
+                onClick={() => handleQuantity("reservation")}
+              >
                 {t("button.reserve")}
               </Button>
-              <Button variant="dark" onClick={handleReduce}>
+              <Button variant="dark" onClick={() => handleQuantity("order")}>
                 {t("button.order")}
               </Button>
             </div>

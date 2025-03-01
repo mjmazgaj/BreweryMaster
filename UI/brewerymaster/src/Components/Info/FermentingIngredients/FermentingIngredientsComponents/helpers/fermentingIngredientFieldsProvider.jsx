@@ -87,6 +87,50 @@ const fermentingIngredientFieldsProvider = (t) => ({
       type: "text",
     },
   ],
+  storageModalFields: [
+    {
+      id: "quantity",
+      label: t("name.brewery.storageQuantity"),
+      type: "number",
+    },
+    {
+      id: "info",
+      label: t("name.brewery.description"),
+      type: "textArea",
+    },
+  ],
+  reservationModalFields: [
+    {
+      id: "quantity",
+      label: t("name.brewery.reservedQuantity"),
+      type: "number",
+    },
+    {
+      id: "info",
+      label: t("name.brewery.description"),
+      type: "textArea",
+    },
+  ],
+  orderModalFields: {
+    control: [
+      {
+        id: "quantity",
+        label: t("name.brewery.orderQuantity"),
+        type: "number",
+      },
+      {
+        id: "info",
+        label: t("name.brewery.description"),
+        type: "textArea",
+      },
+    ],
+    datePicker: [
+      {
+        name: "expectedDate",
+        label: t("name.brewery.targetDate"),
+      },
+    ],
+  },
 });
 
 export default fermentingIngredientFieldsProvider;

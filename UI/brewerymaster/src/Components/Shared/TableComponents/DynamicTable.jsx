@@ -16,7 +16,10 @@ const DynamicTable = ({
   const keys =
     data && data.length > 0
       ? Object.keys(data[0]).filter(
-          (x) => !x.toUpperCase().includes("ID") && x !== "maxQuantity"
+          (x) =>
+            !x.toUpperCase().includes("ID") &&
+            x !== "maxQuantity" &&
+            x !== "units"
         )
       : ["empty"];
 

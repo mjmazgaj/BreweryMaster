@@ -13,10 +13,12 @@ import PieChartComponent from "../../Shared/PieChartComponent";
 import { Button } from "react-bootstrap";
 import UnitsList from "./FermentingIngredientsComponents/UnitsList";
 import ModalFormBasic from "../../Shared/ModalComponents/ModalFormBasic";
+import { useNavigate } from "react-router-dom";
 
 import { useFermentingIngredientsDetails } from "./FermentingIngredientsComponents/helpers/useFermentingIngredientsDetails";
 
 const FermentingIngredientDetails = () => {
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const { id } = useParams();
 
@@ -26,17 +28,17 @@ const FermentingIngredientDetails = () => {
   const [modalData, setModalData] = useState({});
   const [showEditInfoModal, setShowEditInfoModal] = useState(false);
 
-  const [modalFields, setModalFields] = useState({});
+  const [customModalForm, setCustomModalForm] = useState("editInfo");
 
-  const { handleEditInfoOnClick, editInfoModalObject } =
+  const { handleEditInfoOnClick, handleQuantity, modalDataProvider } =
     useFermentingIngredientsDetails({
-      setModalFields,
       setShowEditInfoModal,
       setModalData,
       ingredientData,
       setIngredientData,
       setChartAvailableData,
       id,
+      setCustomModalForm,
     });
 
   return (
@@ -46,6 +48,12 @@ const FermentingIngredientDetails = () => {
         {ingredientData.name} [{ingredientData.unit}]
       </h3>
       <div className="fermenting-ingredient-details_buttons-container">
+        <Button
+          variant="dark"
+          onClick={() => navigate("/FermentingIngredients")}
+        >
+          {t("button.back")}
+        </Button>
         <Button variant="dark" onClick={handleEditInfoOnClick}>
           {t("button.delete")}
         </Button>
@@ -72,16 +80,17 @@ const FermentingIngredientDetails = () => {
             data={ingredientData}
             path={`${apiEndpoints.fermentingIngredientSummary}/${id}`}
             emptyMessage={t("fermentingIngredient.infoEmptyMsg")}
+            handleQuantity={handleQuantity}
           />
         </div>
 
         <ModalFormBasic
-          fields={modalFields}
+          fields={modalDataProvider[customModalForm].fields}
           data={modalData}
           setData={setModalData}
           show={showEditInfoModal}
           setShow={setShowEditInfoModal}
-          modalCustomizationObject={editInfoModalObject}
+          modalCustomizationObject={modalDataProvider[customModalForm].object}
         />
       </div>
     </div>

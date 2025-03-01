@@ -286,6 +286,10 @@
         "orderOrReserve": "Order Or Reserve",
         "infoEmptyMsg": "Informacja o składnikach fermentujących chwilowo niedostępna",
         "editTitle": "Edytuj składnik fermentujący",
+        "increaseModalTitle": "Zwiększ stan magazynowy",
+        "reduceModalTitle": "Zmniejsz stan magazynowy",
+        "reservationModalTitle": "Zarezerwuj część zasobu",
+        "orderModalTitle": "Zarejestruj zamówienie",
         "unitEdit": "Edytuj jednostki"
     }
 }
