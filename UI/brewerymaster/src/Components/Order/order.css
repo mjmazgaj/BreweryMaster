@@ -39,7 +39,8 @@ form input {
 }
 
 .order_container {
-  margin: auto 15%;
+  margin: auto;
+  width: 80%;
 }
 
 .order-companyValidatior_checkbox .form-check-input {
@@ -132,6 +133,11 @@ form input {
   display: flex;
   gap: 1rem;
   width: 80%;
+}
+
+.dynamicTable-prospectOrder_container {
+  width: 80%;
+  margin: auto;
 }
 
 .prospect-order-filter_dropdown-container {

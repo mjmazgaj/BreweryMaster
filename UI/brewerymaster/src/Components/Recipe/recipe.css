@@ -1,5 +1,6 @@
 .recipe_container {
-  margin: auto 15%;
+  margin: auto;
+  width: 80%;
 }
 
 .recipe-ingredients-selected_table {
@@ -44,7 +45,7 @@
   margin-bottom: 1rem;
   display: flex;
   gap: 1rem;
-  width: 80%;
+  width: 100%;
 }
 
 .recipe-filter_dropdown-container {

@@ -6,13 +6,6 @@
   margin-top: 1rem;
 }
 
-.filter-form_container {
-  margin: auto;
-  display: flex;
-  gap: 1rem;
-  width: 50%;
-}
-
 .filter-form_dropdown-container {
   display: flex;
   flex: 1;
@@ -43,11 +36,11 @@
   background-color: #f3f3f3;
   padding: 1rem;
   padding-bottom: 0;
+  margin: auto;
   border-radius: 1rem;
   margin-bottom: 1rem;
   display: flex;
   gap: 1rem;
-  width: 80%;
 }
 
 .filter-form_filters-container {
@@ -145,9 +138,14 @@
   min-width: 7rem;
 }
 
-.fermenting-ingredient-details_buttons-container{
+.fermenting-ingredient-details_buttons-container {
   display: flex;
   justify-content: center;
   margin-top: 1rem;
   gap: 1rem;
+}
+
+.Info_container {
+  width: 80%;
+  margin: auto;
 }

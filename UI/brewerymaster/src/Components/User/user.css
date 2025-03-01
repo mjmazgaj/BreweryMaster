@@ -44,9 +44,17 @@
   margin-bottom: 1rem;
   display: flex;
   gap: 1rem;
+  width: 80%;
+  margin: auto;
   .formControl_container {
     flex: 0.5;
   }
+}
+
+.dynamicTable-users_container{
+  width: 80%;
+  margin: auto;
+
 }
 
 .user-filter_dropdown-container {
