@@ -10,8 +10,7 @@ namespace BreweryMaster.API.OrderModule.Models
         public required string CompanyName { get; set; }
 
         [Required]
-        [MaxLength(20)]
-        [MinIntValidation]
-        public int Nip { get; set; }
+        [MaxLength(12)]
+        public required string Nip { get; set; }
     }
 }

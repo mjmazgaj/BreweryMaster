@@ -14,6 +14,7 @@ import Unauthorized from "../Unuthorized";
 import Error from "../../Shared/Error";
 import OrderDetails from "../../Order/OrderDetails";
 import FermentingIngredientDetails from "../../Info/FermentingIngredients/FermentingIngredientDetails";
+import OrderCalculator from "../../Order/ProspectOrder/OrderCalculator";
 
 export const useApp = () => {
   const routes = [
@@ -24,6 +25,7 @@ export const useApp = () => {
     { path: "/ProspectOrderSummary", element: <ProspectOrderSummary /> },
     { path: "/Error", element: <Error /> },
     { path: "/Unauthorized", element: <Unauthorized /> },
+    { path: "/Calculator", element: <OrderCalculator /> },
   ];
 
   const protectedRoutes = [

@@ -71,6 +71,8 @@
         "user": {
             "empty": "Puste",
             "city": "Miasto",
+            "companyName": "Nazwa firmy",
+            "nip": "NIP",
             "street": "Ulica",
             "clientName": "Klient",
             "createdOn": "Utworzono",

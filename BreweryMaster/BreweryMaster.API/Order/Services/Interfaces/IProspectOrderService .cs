@@ -6,8 +6,8 @@ public interface IProspectOrderService
     Task<ProspectOrderDetails> GetProspectOrderDetails();
     Task<decimal> GetEstimatedPrice(ProspectPriceEstimationRequest request);
     Task<IEnumerable<ProspectOrderResponse>> GetProspectOrdersAsync(ProspectOrderFilterRequest? request);
-    Task<ProspectOrder?> GetProspectOrderByIdAsync(int id);
-    Task<ProspectOrder?> CreateProspectOrderAsync(ProspectOrderRequest rder);
+    Task<ProspectOrderResponse?> GetProspectOrderByIdAsync(int id);
+    Task<ProspectOrderResponse?> CreateProspectOrderAsync(ProspectOrderRequest rder);
     Task<bool> EditProspectOrderAsync(int id, ProspectOrderUpdateRequest order);
     Task<bool> DeleteProspectOrderByIdAsync(int id);
 }

@@ -17,6 +17,6 @@ namespace BreweryMaster.API.OrderModule.Models
         /// The tax identifier of the company
         /// </summary>
         [MaxLength(20)]
-        public int Nip { get; set; }
+        public required string Nip { get; set; }
     }
 }

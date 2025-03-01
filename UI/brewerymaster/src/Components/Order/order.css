@@ -168,3 +168,9 @@ form input {
   left: 2rem;
   top: 5rem;
 }
+
+.calculator_container {
+  width: 60%;
+  margin: auto;
+  margin-top: 1rem;
+}

@@ -19,7 +19,7 @@ namespace BreweryMaster.API.OrderModule.Models
         public string? CompanyName { get; set; }
 
         [MaxLength(20)]
-        public int? Nip { get; set; }
+        public string? Nip { get; set; }
 
         [MaxLength(50)]
         [Phone]

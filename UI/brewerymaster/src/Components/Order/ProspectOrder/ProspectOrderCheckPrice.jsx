@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import { fetchData, apiEndpoints } from "../../Shared/api";
 import { createPath } from "../../Shared/helpers/useObjectHelper";
 
-const ProspectOrderCheckPrice = ({ prospectOrderData }) => {
+const ProspectOrderCheckPrice = ({ prospectOrderData, isValid= true }) => {
   const { t } = useTranslation();
   const [estimatedPrice, setEstimatedPrice] = useState("");
 
@@ -30,8 +30,9 @@ const ProspectOrderCheckPrice = ({ prospectOrderData }) => {
       <div className="prospectorder-checkprice_container">
         <Button
           id="checkPrice"
-          className="btn btn-secondary"
+          variant="dark"
           onClick={handleCheckPrice}
+          disabled={!isValid}
         >
           {t("button.checkPrice")}
         </Button>

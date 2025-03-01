@@ -45,36 +45,48 @@ namespace BreweryMaster.API.OrderModule.Services
 
         public async Task<ProspectClient> CreateProspectClientAsync(ProspectClientRequest request)
         {
-            var clientToCreate = new ProspectClient()
+            if (request.IsCompany)
+                return await CreateProspectCompanyClient(request);
+            else
+                return await CreateProspectIndividualClient(request);
+        }
+
+        private async Task<ProspectClient> CreateProspectCompanyClient(ProspectClientRequest request)
+        {
+            if (request.CompanyClient is null)
+                throw new ArgumentNullException($"{typeof(ProspectClientCompanyRequest)} can not be null");
+
+            var clientToCreate = new ProspectCompanyClient()
             {
                 PhoneNumber = request.PhoneNumber,
                 Email = request.Email,
+                CompanyName = request.CompanyClient.CompanyName,
+                Nip = request.CompanyClient.Nip,
+                CreatedOn = DateTime.Now,
+            };
+            _context.ProspectClients.Add(clientToCreate);
+
+
+            await _context.SaveChangesAsync();
+
+            return clientToCreate;
+        }
+
+        private async Task<ProspectClient> CreateProspectIndividualClient(ProspectClientRequest request)
+        {
+            if (request.IndividualClient is null)
+                throw new ArgumentNullException($"{typeof(ProspectClientIndividualRequest)} can not be null");
+
+            var clientToCreate = new ProspectIndyvidualClient()
+            {
+                Forename = request.IndividualClient.Forename,
+                Surname = request.IndividualClient.Surname,
+                PhoneNumber = request.PhoneNumber,
+                Email = request.Email,
+                CreatedOn = DateTime.Now,
             };
 
-            if (request.IsCompany)
-            {
-                if (request.CompanyClient is null)
-                    throw new ArgumentNullException($"{typeof(ProspectClientCompanyRequest)} can not be null");
-
-                var companyClientToCreate = (ProspectCompanyClient)clientToCreate;
-
-                companyClientToCreate.CompanyName = request.CompanyClient.CompanyName;
-                companyClientToCreate.Nip = request.CompanyClient.Nip;
-
-                _context.ProspectClients.Add(clientToCreate);
-            }
-            else
-            {
-                if (request.IndividualClient is null)
-                    throw new ArgumentNullException($"{typeof(ProspectClientIndividualRequest)} can not be null");
-
-                var individualClientToCreate = (ProspectIndyvidualClient)clientToCreate;
-
-                individualClientToCreate.Forename = request.IndividualClient.Forename;
-                individualClientToCreate.Surname = request.IndividualClient.Surname;
-
-                _context.ProspectClients.Add(clientToCreate);
-            }
+            _context.ProspectClients.Add(clientToCreate);
 
             await _context.SaveChangesAsync();
 

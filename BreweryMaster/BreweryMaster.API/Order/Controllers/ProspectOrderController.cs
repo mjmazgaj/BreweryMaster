@@ -58,13 +58,9 @@ namespace BreweryMaster.API.OrderModule.Controllers
 
         [HttpGet]
         [Route("{id:int}")]
-        [Authorize(Roles = "employee")]
         [ProducesResponseType(typeof(ProspectOrder), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ProspectOrder>> GetProspectOrderById([MinIntValidation] int id)
+        public async Task<ActionResult<ProspectOrderResponse>> GetProspectOrderById([MinIntValidation] int id)
         {
             var order = await _prospectOrderService.GetProspectOrderByIdAsync(id);
 
@@ -77,7 +73,7 @@ namespace BreweryMaster.API.OrderModule.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(ProspectOrder), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<ProspectOrder>> CreateProspectOrder([FromBody] ProspectOrderRequest request)
+        public async Task<ActionResult<ProspectOrderResponse>> CreateProspectOrder([FromBody] ProspectOrderRequest request)
         {
             var createdOrder = await _prospectOrderService.CreateProspectOrderAsync(request);
 

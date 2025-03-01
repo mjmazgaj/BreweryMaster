@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./order.css";
 import { useTranslation } from "react-i18next";
 
-import modalFieldsProvider from "./ProspectOrder/helpers/modalFieldsProvider";
+import prospectOrderFieldsProvider from "./ProspectOrder/helpers/prospectOrderFieldsProvider";
 
 import DynamicTable from "../Shared/TableComponents/DynamicTable";
 import ModalItemAction from "../Shared/ModalComponents/ModalItemAction";
@@ -63,7 +63,7 @@ const ProspectOrderSummary = () => {
       )}
 
       <ModalItemAction
-        fields={modalFieldsProvider(t).prospectOrderModalReadOnlyFields}
+        fields={prospectOrderFieldsProvider(t).modalReadOnlyFields}
         data={modalFormData}
         show={showItemAction}
         setShow={setShowItemAction}

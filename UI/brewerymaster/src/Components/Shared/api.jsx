@@ -27,7 +27,7 @@ export const addData = async (
   try {
     const result = await api.post(`${apiurl}/${path}`, data);
     toast.success(successMessage);
-    return result.data;
+    return result;
   } catch (error) {
     console.log(error);
     toast.error(errorMessage);

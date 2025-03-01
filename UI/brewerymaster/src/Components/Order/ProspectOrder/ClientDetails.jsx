@@ -1,19 +1,14 @@
-import React, { useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import React from "react";
+import { Form } from "react-bootstrap";
 
-import CompanyClientDetails from "./CompanyClientDetails";
-import IndividualClientDetails from "./IndividualClientDetails";
+import prospectOrderFieldsProvider from "./helpers/prospectOrderFieldsProvider";
 
-const ClientDetails = ({
-  individualClientDetailsData,
-  setIndividualClientDetailsData,
-  companyClientDetailsData,
-  setCompanyClientDetailsData,
-  isCompany,
-  setIsCompany,
-}) => {
+import { useTranslation } from "react-i18next";
+import FormControls from "../../Shared/FormControls";
+const ClientDetails = ({ data, setData, setIsValid }) => {
+  const { t } = useTranslation();
   const handleSwichIsCompany = () => {
-    setIsCompany((prev) => !prev);
+    setData((prevData) => ({ ...prevData, isCompany: !prevData.isCompany }));
   };
   return (
     <>
@@ -22,19 +17,23 @@ const ClientDetails = ({
         <Form.Check
           type="switch"
           className="order-companyValidatior_checkbox"
-          checked={isCompany}
+          checked={data.isCompany}
           onChange={handleSwichIsCompany}
         />
       </div>
-      {isCompany ? (
-        <CompanyClientDetails
-          companyClientDetailsData={companyClientDetailsData}
-          setCompanyClientDetailsData={setCompanyClientDetailsData}
+      {data.isCompany ? (
+        <FormControls
+          fields={prospectOrderFieldsProvider(t).companyClientDetails}
+          data={data}
+          setData={setData}
+          setIsValid={setIsValid}
         />
       ) : (
-        <IndividualClientDetails
-          individualClientDetailsData={individualClientDetailsData}
-          setIndividualClientDetailsData={setIndividualClientDetailsData}
+        <FormControls
+          fields={prospectOrderFieldsProvider(t).individualClientDetails}
+          data={data}
+          setData={setData}
+          setIsValid={setIsValid}
         />
       )}
     </>

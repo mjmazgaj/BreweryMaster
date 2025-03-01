@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { fetchData, apiEndpoints } from "../../../Shared/api";
 import { useTranslation } from "react-i18next";
-import modalFieldsProvider from "./modalFieldsProvider";
+import prospectOrderFieldsProvider from "./prospectOrderFieldsProvider";
 import { createPath } from "../../../Shared/helpers/useObjectHelper";
 
 export const useProspectOrderSummary = ({
@@ -39,7 +39,7 @@ export const useProspectOrderSummary = ({
     });
 
     setFormFields({
-      control: modalFieldsProvider(t).prospectOrderModalModalFields,
+      control: prospectOrderFieldsProvider(t).modalModalFields,
       dropdown: [
         {
           data: details.beerTypes,

@@ -50,7 +50,7 @@ namespace BreweryMaster.API.OrderModule.Services
             var containerType = await _context.ContainerPrices
                                 .Include(x => x.Container)
                                     .ThenInclude(x => x.UnitEntity)
-                                .FirstOrDefaultAsync(x => x.Id == request.ContainerType);
+                                .FirstOrDefaultAsync(x => x.ContainerId == request.ContainerType);
 
             if (beerType is null || containerType is null)
                 throw new ArgumentNullException($"{nameof(containerType)} and {nameof(beerType)} can not be null");
@@ -119,12 +119,25 @@ namespace BreweryMaster.API.OrderModule.Services
             return response;
         }
 
-        public async Task<ProspectOrder?> GetProspectOrderByIdAsync(int id)
+        public async Task<ProspectOrderResponse?> GetProspectOrderByIdAsync(int id)
         {
-            return await _context.ProspectOrders.FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.ProspectOrders.Select(x=>new ProspectOrderResponse()
+            {
+                Id = x.Id,
+                BeerStyle = x.BeerStyle.Name,
+                BeerStyleId = x.BeerStyleId,
+                Capacity = x.Capacity,
+                Container = x.Container.ContainerName,
+                ContainerTypeId = x.ContainerId,
+                ClientName = x.ProspectClient.GetName(),
+                Email = x.ProspectClient.Email,
+                PhoneNumber = x.ProspectClient.PhoneNumber,
+                TargetDate = DateOnly.FromDateTime(x.TargetDate),
+                IsClosed = x.IsClosed,
+            }).FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<ProspectOrder?> CreateProspectOrderAsync(ProspectOrderRequest request)
+        public async Task<ProspectOrderResponse?> CreateProspectOrderAsync(ProspectOrderRequest request)
         {
             var client = await _prospectClientService.CreateProspectClientAsync(request.Client);
 

@@ -50,7 +50,7 @@ namespace BreweryMaster.API.Shared.Helpers
                 {
                     Id = 4,
                     CompanyName = "John's Company",
-                    Nip = 772777217,
+                    Nip = "772777217",
                     Email = "client1@example.com",
                     Orders = null!,
                     PhoneNumber = "+48123456789",
@@ -60,7 +60,7 @@ namespace BreweryMaster.API.Shared.Helpers
                 {
                     Id = 5,
                     CompanyName = "Jane's Enterprises",
-                    Nip = 882888218,
+                    Nip = "882888218",
                     Email = "client2@example.com",
                     Orders = null!,
                     PhoneNumber = "+48987654321",
@@ -70,7 +70,7 @@ namespace BreweryMaster.API.Shared.Helpers
                 {
                     Id = 6,
                     CompanyName = "Alice's Solutions",
-                    Nip = 993999319,
+                    Nip = "993999319",
                     Email = "client3@example.com",
                     Orders = null!,
                     PhoneNumber = "+48765432100",

@@ -17,7 +17,7 @@ function HomeGuest() {
             <h6>{t("homePage.costTitle")}</h6>
             <p>{t("homePage.costText")}</p>
             <NavigateButton
-              path="/ProspectOrder"
+              path="/Calculator"
               name={t("button.calculator")}
               variant="dark"
             />
