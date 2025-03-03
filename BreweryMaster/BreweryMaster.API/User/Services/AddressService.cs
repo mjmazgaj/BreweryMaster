@@ -1,6 +1,8 @@
-﻿using BreweryMaster.API.Shared.Models.DB;
+﻿using BreweryMaster.API.Shared.Models;
+using BreweryMaster.API.Shared.Models.DB;
 using BreweryMaster.API.User.Models;
 using BreweryMaster.API.User.Models.DB;
+using BreweryMaster.API.User.Models.Requests;
 using BreweryMaster.API.UserModule.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,23 +18,36 @@ namespace BreweryMaster.API.User.Services
 
         public async Task<AddressResponse?> GetAddressById(int id)
         {
-            var address = await _context.Addresses.FirstOrDefaultAsync(x => x.Id == id);
+            var address = await _context.UserAddresses
+                .Include(x => x.Address)
+                .Include(x => x.AddressType)
+                .FirstOrDefaultAsync(x => x.Address.Id == id);
 
             if (address is null)
                 return null;
 
             return new AddressResponse()
             {
-                Id = address.Id,
-                Street = address.Street,
-                HouseNumber = address.HouseNumber,
-                ApartamentNumber = address.ApartamentNumber,
-                City = address.City,
-                PostalCode = address.PostalCode,
-                Commune = address.Commune,
-                Region = address.Region,
-                Country = address.Country,
+                Id = address.Address.Id,
+                Street = address.Address.Street,
+                HouseNumber = address.Address.HouseNumber,
+                ApartamentNumber = address.Address.ApartamentNumber,
+                City = address.Address.City,
+                PostalCode = address.Address.PostalCode,
+                Commune = address.Address.Commune,
+                Region = address.Address.Region,
+                Country = address.Address.Country,
+                Type = address.AddressType.Name,
             };
+        }
+
+        public async Task<IEnumerable<EntityResponse>> GetAddressTypes()
+        {
+            return await _context.AddressTypes.Select(x=> new EntityResponse()
+            {
+                Id = x.Id,
+                Name = x.Name,
+            }).ToListAsync();
         }
 
         public Address AddAddress(AddressRequest request)
@@ -62,12 +77,6 @@ namespace BreweryMaster.API.User.Services
             if (address is null)
                 throw new ArgumentNullException($"{nameof(address)} can not be null.");
 
-            if (userId is null)
-                throw new ArgumentNullException($"{nameof(userId)} can not be null.");
-
-            if (addressType < 0)
-                throw new ArgumentException($"{nameof(addressType)} show be greater then 0.");
-
             var userAddress = new UserAddress
             {
                 UserId = userId,
@@ -80,6 +89,34 @@ namespace BreweryMaster.API.User.Services
             _context.Add(userAddress);
 
             return userAddress;
+        }
+
+        public async Task<AddressResponse?> CreateAddress(AddressTypeRequest request)
+        {
+            var addressToCreate = AddAddress(request);
+            AddUserAddress(request.UserId, addressToCreate, request.TypeId);
+
+            await _context.SaveChangesAsync();
+
+            return await GetAddressById(addressToCreate.Id);
+        }
+
+        public async Task<AddressResponse?> CreateUserAddress(UserAddressRequest request)
+        {
+            var userAddresToCreate = new UserAddress
+            {
+                AddressId = request.AddressId,
+                Address = null!,
+                AddressType = null!,
+                AddressTypeId = request.AddressTypeId,
+                UserId = request.UserId,
+                User = null!
+            };
+
+            _context.UserAddresses.Add(userAddresToCreate);
+            await _context.SaveChangesAsync();
+
+            return await GetAddressById(userAddresToCreate.AddressId);
         }
     }
 }

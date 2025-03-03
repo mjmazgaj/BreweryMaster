@@ -51,10 +51,9 @@
   }
 }
 
-.dynamicTable-users_container{
+.dynamicTable-users_container {
   width: 80%;
   margin: auto;
-
 }
 
 .user-filter_dropdown-container {
@@ -75,5 +74,35 @@
 
   .btn {
     margin-top: 10px;
+  }
+}
+
+.button-add-address {
+  margin-top: 1rem;
+}
+
+
+.address-modal {
+  .formControl_container {
+    display: flex;
+  }
+
+  .modal-dialog {
+    max-width: fit-content;
+  }
+  
+  .modal-body {
+    .formControl_container {
+      min-width: 30rem;
+      max-height: 30rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      flex-direction: column;
+    }
+  
+    .form-group {
+      min-width: 30rem;
+    }
   }
 }

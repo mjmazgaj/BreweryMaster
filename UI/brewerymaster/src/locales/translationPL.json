@@ -253,13 +253,17 @@
     },
     "user": {
         "loggedAs": "Zalogowano jako",
-        "userInfoTitle": "Informacje o użytkowniku",
+        "userInfoTitle": "Dane użytkownika",
         "userInfoEmptyMsg": "Nie można załadować informacji o użytkowniku",
         "homeAddressTitle": "Adres domowy",
         "homeAddressMsg": "Adres domowy nie został dodany",
+        "editDeliveryAddress": "Edytuj adres",
+        "addDeliveryAddress": "Dodaj adres",
+        "editHomeAddress": "Edytuj adres domowy",
         "userList": "Lista użytkowników",
         "deliveryAddressTitle": "Adres dostawy",
         "edditPassword": "Edytuj hasło",
+        "edditUserInfo": "Edytuj dane użytkownika",
         "deliveryAddressMsg": "Adres dostawy nie został dodany",
         "roleEdit": "Edytuj role",
         "role":{

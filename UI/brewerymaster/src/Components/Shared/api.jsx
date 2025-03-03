@@ -118,6 +118,10 @@ export const apiEndpoints = {
   userInfo: "User/Info",
   user: "User",
 
+  address : "Address",
+  addressUserAddress : "Address/UserAddress",
+  addressType : "Address/Type",
+
   fermentingIngredient: "FermentingIngredient",
   fermentingIngredientSummary: "FermentingIngredient/Summary",
   fermentingIngredientOrder: "FermentingIngredient/Order",

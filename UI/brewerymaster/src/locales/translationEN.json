@@ -262,6 +262,10 @@
         "userList": "User List",
         "deliveryAddressTitle": "Delivery address",
         "edditPassword": "Eddit Password",
+        "edditUserInfo": "Eddit User Info",
+        "editDeliveryAddress": "Edit Address",
+        "addDeliveryAddress": "Add Address",
+        "editHomeAddress": "Edit Address",
         "deliveryAddressMsg": "Delivery address wasn't added",
         "roleEdit": "Edit roles",
         "role":{

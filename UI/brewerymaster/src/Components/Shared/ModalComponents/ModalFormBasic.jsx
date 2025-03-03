@@ -84,7 +84,7 @@ const ModalFormBasic = ({
 
   return (
     fields && (
-      <Modal show={show} onHide={handleClose}>
+      <Modal className={modalCustomizationObject?.className ?? modalCustomizationObject.className} show={show} onHide={handleClose}>
         <Form onSubmit={(event) => handleFormSubmit(event, data)}>
           <Modal.Header closeButton>
             <Modal.Title>{modalCustomizationObject?.title ?? ""}</Modal.Title>
