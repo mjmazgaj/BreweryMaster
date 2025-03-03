@@ -207,40 +207,14 @@ namespace BreweryMaster.API.User.Services
 
             try
             {
-                ApplicationUser userToCreate = null!;
+                UserResponse? userToCreate = null;
 
                 if (request.IsCompany)
-                {
-                    if (request.CompanyUserInfo is null)
-                        return null;
-
-                    userToCreate = new CompanyUser
-                    {
-                        UserName = request.UserAuthInfo.Email,
-                        Email = request.UserAuthInfo.Email,
-                        CompanyName = request.CompanyUserInfo.CompanyName,
-                        Nip = request.CompanyUserInfo.Nip,
-                        CreatedOn = DateTime.Now,
-                    };
-                }
+                    userToCreate = await CreateCompanyUser(request);
                 else
-                {
-                    if (request.IndividualUserInfo is null)
-                        return null;
+                    userToCreate = await CreateIndividualUser(request);
 
-                    userToCreate = new IndividualUser
-                    {
-                        UserName = request.UserAuthInfo.Email,
-                        Email = request.UserAuthInfo.Email,
-                        Forename = request.IndividualUserInfo.Forename,
-                        Surname = request.IndividualUserInfo.Surname,
-                        CreatedOn = DateTime.Now,
-                    };
-                }
-
-                var result = await _userManager.CreateAsync(userToCreate, request.UserAuthInfo.Password);
-
-                if (!result.Succeeded)
+                if (userToCreate is null)
                     return null;
 
                 if (request.Address is not null)
@@ -254,7 +228,7 @@ namespace BreweryMaster.API.User.Services
 
                 await transaction.CommitAsync();
 
-                return userToCreate.ToUserResponse();
+                return userToCreate;
             }
             catch (Exception)
             {
@@ -262,6 +236,51 @@ namespace BreweryMaster.API.User.Services
 
                 throw;
             }
+        }
+
+        public async Task<UserResponse?> CreateCompanyUser(UserRegisterRequest request)
+        {
+
+            if (request.CompanyUserInfo is null)
+                return null;
+
+            var userToCreate = new CompanyUser
+            {
+                UserName = request.UserAuthInfo.Email,
+                Email = request.UserAuthInfo.Email,
+                CompanyName = request.CompanyUserInfo.CompanyName,
+                Nip = request.CompanyUserInfo.Nip,
+                CreatedOn = DateTime.Now,
+            };
+
+            var result = await _userManager.CreateAsync(userToCreate, request.UserAuthInfo.Password);
+
+            if (!result.Succeeded)
+                throw new ArgumentNullException("User not created");
+
+            return userToCreate.ToUserResponse();
+        }
+
+        public async Task<UserResponse?> CreateIndividualUser(UserRegisterRequest request)
+        {
+            if (request.IndividualUserInfo is null)
+                return null;
+
+            var userToCreate = new IndividualUser
+            {
+                UserName = request.UserAuthInfo.Email,
+                Email = request.UserAuthInfo.Email,
+                Forename = request.IndividualUserInfo.Forename,
+                Surname = request.IndividualUserInfo.Surname,
+                CreatedOn = DateTime.Now,
+            };
+
+            var result = await _userManager.CreateAsync(userToCreate, request.UserAuthInfo.Password);
+
+            if (!result.Succeeded)
+                throw new ArgumentNullException("User not created");
+
+            return userToCreate.ToUserResponse();
         }
 
         public async Task<UserResponse?> UpdateUser(UserUpdateRequest request, string userId)
