@@ -3,6 +3,7 @@ using BreweryMaster.Tests.Models;
 using Microsoft.AspNetCore.WebUtilities;
 using Moq;
 using System.Net;
+using System.Net.Http.Json;
 
 namespace BreweryMaster.Tests.Controllers
 {
@@ -36,6 +37,33 @@ namespace BreweryMaster.Tests.Controllers
 
             // Act
             var httpResponse = await Client.GetAsync(url);
+
+            // Assert
+            Assert.Equal(expectedStatusCode, httpResponse.StatusCode);
+        }
+
+        [Theory]
+        [InlineData(1, 1, HttpStatusCode.OK)]
+        [InlineData(1, 0, HttpStatusCode.BadRequest)]
+        [InlineData(0, 1, HttpStatusCode.BadRequest)]
+        [InlineData(null, 1, HttpStatusCode.BadRequest)]
+        [InlineData(1, null, HttpStatusCode.BadRequest)]
+        public async Task CreateOrderStatusChange_ShouldReturnProperResponse(int? orderId, int? orderStatusId, HttpStatusCode expectedStatusCode)
+        {
+            // Arrange
+            var request = new
+            {
+                OrderId = orderId,
+                OrderStatusId = orderStatusId,
+            };
+
+            var response = new OrderStatusChangeResponse();
+
+            MockOrderService.Setup(s => s.CreateOrderStatusChange(It.IsAny<OrderStatusChangeRequest>()))
+                .ReturnsAsync(response);
+
+            // Act
+            var httpResponse = await Client.PostAsJsonAsync(EndpointsConst.OrderStatus, request);
 
             // Assert
             Assert.Equal(expectedStatusCode, httpResponse.StatusCode);

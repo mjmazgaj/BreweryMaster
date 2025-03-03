@@ -247,6 +247,12 @@ namespace BreweryMaster.API.OrderModule.Services
 
         public async Task<OrderStatusChangeResponse> CreateOrderStatusChange(OrderStatusChangeRequest request)
         {
+            var orderExists = await _context.Orders.AnyAsync(x => x.Id == request.OrderId);
+            var orderStatusExists = await _context.OrderStatuses.AnyAsync(x => x.Id == request.OrderStatusId);
+
+            if (!orderExists || !orderStatusExists)
+                throw new ArgumentNullException("Order or OrderStatus doesn't exist.");
+
             var orderStatusChangeToCreate = new OrderStatusChange()
             {
                 OrderId = request.OrderId,

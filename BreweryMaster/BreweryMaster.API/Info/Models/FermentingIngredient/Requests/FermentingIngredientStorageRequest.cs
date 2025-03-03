@@ -12,8 +12,11 @@ namespace BreweryMaster.API.Info.Models
 
         [Required]
         [Precision(9, 3)]
-        [Range(0, 1000000)]
+        [Range(0.001, 1000000)]
         public decimal Quantity { get; set; }
+
+        [Required]
+        public bool IsReducing { get; set; }
 
         public string? Info { get; set; }
     }

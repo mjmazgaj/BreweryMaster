@@ -122,6 +122,7 @@ export const apiEndpoints = {
   fermentingIngredientSummary: "FermentingIngredient/Summary",
   fermentingIngredientOrder: "FermentingIngredient/Order",
   fermentingIngredientReservation: "FermentingIngredient/Reservation",
+  fermentingIngredientStorage: "FermentingIngredient/Storage",
   fermentingIngredientType: "FermentingIngredient/Type",
   fermentingIngredientUnit: "FermentingIngredient/Unit",
 };

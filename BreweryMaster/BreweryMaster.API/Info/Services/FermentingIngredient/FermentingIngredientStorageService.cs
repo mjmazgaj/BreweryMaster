@@ -33,10 +33,12 @@ namespace BreweryMaster.API.Info.Services
 
         public async Task<FermentingIngredientStorageResponse?> CreateFermentingIngredientStorage(FermentingIngredientStorageRequest request)
         {
+            var storedQuantity = request.IsReducing ? -request.Quantity : request.Quantity;
+
             var ingredientStorageToCreate = new FermentingIngredientStored()
             {
                 FermentingIngredientUnitId = request.FermentingIngredientUnitId,
-                StoredQuantity = request.Quantity,
+                StoredQuantity = storedQuantity,
                 Info = request.Info,
             };
 

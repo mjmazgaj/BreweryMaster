@@ -40,6 +40,12 @@ namespace BreweryMaster.Tests.Services
             if (!_dbContext.Orders.Any())
                 _dbContext.Orders.AddRange(OrderDataProvider.GetOrders());
 
+            if (!_dbContext.OrderStatuses.Any())
+                _dbContext.OrderStatuses.AddRange(EntityDataProvider.GetOrderStatuses());
+
+            if (!_dbContext.OrderStatusChanges.Any())
+                _dbContext.OrderStatusChanges.AddRange(OrderDataProvider.GetOrderStatusChanges());
+
             _dbContext.SaveChanges();
         }
 
@@ -82,6 +88,28 @@ namespace BreweryMaster.Tests.Services
             // Assert
             Assert.NotNull(result);
             Assert.Equal(expectedResult.Count, result.Count());
+        }
+
+        [Fact]
+        public async Task CreateOrderStatusChange_ShouldAddItem()
+        {
+            // Arrange
+            var service = new OrderService(_dbContext, _userService.Object);
+
+
+            var request = new OrderStatusChangeRequest
+            {
+                OrderId = 1,
+                OrderStatusId = 1
+            };
+
+            // Act
+            var result = await service.CreateOrderStatusChange(request);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(result.OrderId, request.OrderId);
+            Assert.Equal(result.OrderStatusId, request.OrderStatusId);
         }
     }
 }

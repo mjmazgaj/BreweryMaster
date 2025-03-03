@@ -39,5 +39,36 @@ namespace BreweryMaster.Tests.Helpers
                 }
             };
         }
+
+        public static List<OrderStatusChange> GetOrderStatusChanges()
+        {
+            return new List<OrderStatusChange> {
+            
+                new OrderStatusChange()
+                {
+                    Id = 1,
+                    OrderId = 1,
+                    Order = null!,
+                    OrderStatusId = 1,
+                    OrderStatus = null!,
+                },
+                new OrderStatusChange()
+                {
+                    Id = 2,
+                    OrderId = 2,
+                    Order = null!,
+                    OrderStatusId = 1,
+                    OrderStatus = null!,
+                },
+                new OrderStatusChange()
+                {
+                    Id = 3,
+                    OrderId = 1,
+                    Order = null!,
+                    OrderStatusId = 2,
+                    OrderStatus = null!,
+                },
+            };
+        }
     }
 }

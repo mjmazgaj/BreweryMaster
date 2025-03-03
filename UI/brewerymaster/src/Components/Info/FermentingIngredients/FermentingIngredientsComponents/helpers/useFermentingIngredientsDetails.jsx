@@ -3,7 +3,12 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import fermentingIngredientFieldsProvider from "./fermentingIngredientFieldsProvider";
-import { apiEndpoints, fetchData, updateData } from "../../../../Shared/api";
+import {
+  addData,
+  apiEndpoints,
+  fetchData,
+  updateData,
+} from "../../../../Shared/api";
 
 export const useFermentingIngredientsDetails = ({
   setShowEditInfoModal,
@@ -26,12 +31,12 @@ export const useFermentingIngredientsDetails = ({
     setShowEditInfoModal(true);
   };
 
-  const handleQuantity = (action) =>{
+  const handleQuantity = (action) => {
     setCustomModalForm(action);
     setModalData({});
 
     setShowEditInfoModal(true);
-  }
+  };
 
   const setPageData = () => {
     fetchData(
@@ -56,7 +61,13 @@ export const useFermentingIngredientsDetails = ({
 
   const increaseModalObject = {
     submitFunction: async (data) => {
-      await updateData(apiEndpoints.fermentingIngredient, data.id, data);
+      const newData = {
+        fermentingIngredientUnitId: 1,
+        IsReducing: false,
+        ...data,
+      };
+
+      await addData(apiEndpoints.fermentingIngredientStorage, newData);
       setPageData();
     },
     buttons: [
@@ -70,7 +81,12 @@ export const useFermentingIngredientsDetails = ({
 
   const reduceModalObject = {
     submitFunction: async (data) => {
-      await updateData(apiEndpoints.fermentingIngredient, data.id, data);
+      const newData = {
+        fermentingIngredientUnitId: 1,
+        IsReducing: true,
+        ...data,
+      };
+      await addData(apiEndpoints.fermentingIngredientStorage, newData);
       setPageData();
     },
     buttons: [
@@ -129,7 +145,8 @@ export const useFermentingIngredientsDetails = ({
     control: fermentingIngredientFieldsProvider(t).reservationModalFields,
   };
 
-  const orderModalFields = fermentingIngredientFieldsProvider(t).orderModalFields;
+  const orderModalFields =
+    fermentingIngredientFieldsProvider(t).orderModalFields;
 
   const modalDataProvider = {
     editInfo: {

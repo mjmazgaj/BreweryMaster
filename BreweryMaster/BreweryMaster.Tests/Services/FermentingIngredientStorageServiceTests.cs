@@ -1,4 +1,7 @@
-﻿using BreweryMaster.API.Info.Services;
+﻿using BreweryMaster.API.Info.Models;
+using BreweryMaster.API.Info.Services;
+using BreweryMaster.API.OrderModule.Models;
+using BreweryMaster.API.OrderModule.Services;
 using BreweryMaster.API.Shared.Models.DB;
 using Microsoft.EntityFrameworkCore;
 
@@ -56,6 +59,30 @@ namespace BreweryMaster.Tests.Services
             Assert.NotNull(result);
             Assert.NotNull(expectedResult);
             Assert.Equal(expectedResult.Id, result.Id);
+        }
+
+        [Theory]
+        [InlineData(1, 1, true)]
+        [InlineData(2, 1, false)]
+        public async Task CreateFermentingIngredientStorage_ShouldAddProperItem(int fermentingIngredientUnitId, int quantity, bool isReducing)
+        {
+            // Arrange
+            var service = new FermentingIngredientStorageService(_dbContext);
+
+            var request = new FermentingIngredientStorageRequest
+            {
+                FermentingIngredientUnitId = fermentingIngredientUnitId,
+                Quantity = quantity,
+                IsReducing = isReducing,
+            };
+
+            // Act
+            var result = await service.CreateFermentingIngredientStorage(request);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(result.StoredQuantity < 0, isReducing);
+            Assert.Equal(result.FermentingIngredientUnit, fermentingIngredientUnitId);
         }
     }
 }
