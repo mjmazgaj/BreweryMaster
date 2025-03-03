@@ -24,7 +24,7 @@ const FormCarousel = ({steps, handleSave, isValid = true}) => {
 
       {currentStep === steps.length - 1 && (
         <Button variant="dark" onClick={handleSave}>
-          Submit
+          Zarejestruj
         </Button>
       )}
     </Form>

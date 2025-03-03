@@ -21,7 +21,7 @@ const UserInfo = ({
   return (
     <>
       <div className="register-companyValidatior">
-        <Form.Label>Do you want register as a company?</Form.Label>
+        <Form.Label>Czy chcesz zarejestrować się jako firma?</Form.Label>
         <Form.Check
           type="switch"
           className="register-companyValidatior_checkbox"

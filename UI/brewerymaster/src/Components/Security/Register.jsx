@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 
 import FormCarousel from "../Shared/FormCarousel";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Card } from "react-bootstrap";
 
 const Register = () => {
   const { t } = useTranslation();
@@ -19,11 +20,18 @@ const Register = () => {
 
   return (
     <Fragment>
-      <FormCarousel
-        steps={steps}
-        handleSave={handleRegister}
-        isValid={isValid}
-      />
+      <Card className="register_container">
+        <Card.Header>
+          <h2>Zarejestruj się:</h2>
+        </Card.Header>
+        <Card.Body>
+          <FormCarousel
+            steps={steps}
+            handleSave={handleRegister}
+            isValid={isValid}
+          />
+        </Card.Body>
+      </Card>
       {errorMessage && <p className="text-danger">{errorMessage}</p>}
     </Fragment>
   );

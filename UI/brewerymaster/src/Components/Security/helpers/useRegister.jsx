@@ -78,7 +78,7 @@ export const useRegister = ({ setErrorMessage, setIsValid }) => {
   const steps = [
     {
       key: "userAuthInfo",
-      name: "Dane użytkownika",
+      name: "Dane logowania",
       component: (
         <FormControls
           fields={securityFormFieldsProvider(t).userAuthInfo}
@@ -90,7 +90,7 @@ export const useRegister = ({ setErrorMessage, setIsValid }) => {
     },
     {
       key: "address",
-      name: "Address",
+      name: "Adres",
       component: (
         <FormControls
           fields={securityFormFieldsProvider(t).address}
@@ -102,7 +102,7 @@ export const useRegister = ({ setErrorMessage, setIsValid }) => {
     },
     {
       key: "userInfo",
-      name: "User Info",
+      name: "Informacje o użytkowniku",
       component: (
         <UserInfo
           individualUserInfo={individualUserInfo}
